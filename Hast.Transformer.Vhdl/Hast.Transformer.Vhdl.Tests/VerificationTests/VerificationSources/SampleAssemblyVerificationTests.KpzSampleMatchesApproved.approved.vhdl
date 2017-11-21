@@ -175,8 +175,8 @@ architecture Imp of Hast_IP is
         \gridRaw\: \unsigned32_Array\(0 to 63);
         \TestMode\: boolean;
         \NumberOfIterations\: unsigned(31 downto 0);
-        \randomState1\: unsigned(63 downto 0);
-        \randomState2\: unsigned(63 downto 0);
+        \prng1\: \Hast.Algorithms.PrngMWC64X\;
+        \prng2\: \Hast.Algorithms.PrngMWC64X\;
     end record;
     -- Custom inter-dependent type declarations end
 
@@ -265,39 +265,14 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Started\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\: boolean := false;
     -- System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
-
-
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1().0 declarations start
-    -- State machine states:
-    type \KpzKernels::GetNextRandom1().0._States\ is (
-        \KpzKernels::GetNextRandom1().0._State_0\, 
-        \KpzKernels::GetNextRandom1().0._State_1\, 
-        \KpzKernels::GetNextRandom1().0._State_2\);
-    -- Signals:
-    Signal \KpzKernels::GetNextRandom1().0._Finished\: boolean := false;
-    Signal \KpzKernels::GetNextRandom1().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \KpzKernels::GetNextRandom1().0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::GetNextRandom1().0._Started\: boolean := false;
-    Signal \KpzKernels::GetNextRandom1().0.this.parameter.In\: \Hast.Samples.Kpz.KpzKernels\;
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1().0 declarations end
-
-
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2().0 declarations start
-    -- State machine states:
-    type \KpzKernels::GetNextRandom2().0._States\ is (
-        \KpzKernels::GetNextRandom2().0._State_0\, 
-        \KpzKernels::GetNextRandom2().0._State_1\, 
-        \KpzKernels::GetNextRandom2().0._State_2\);
-    -- Signals:
-    Signal \KpzKernels::GetNextRandom2().0._Finished\: boolean := false;
-    Signal \KpzKernels::GetNextRandom2().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \KpzKernels::GetNextRandom2().0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::GetNextRandom2().0._Started\: boolean := false;
-    Signal \KpzKernels::GetNextRandom2().0.this.parameter.In\: \Hast.Samples.Kpz.KpzKernels\;
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2().0 declarations end
 
 
     -- System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32).0 declarations start
@@ -473,18 +448,17 @@ architecture Imp of Hast_IP is
         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\, 
         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\, 
         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\, 
-        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\);
+        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\, 
+        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\);
     -- Signals:
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\: boolean := false;
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).y.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\: boolean := false;
@@ -502,15 +476,12 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Started\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Finished.0\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\: boolean := false;
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Finished.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Finished.0\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).return.0\: boolean := false;
@@ -717,6 +688,21 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.Kpz.KpzKernelsGInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 declarations start
+    -- State machine states:
+    type \PrngMWC64X::.ctor(UInt64).0._States\ is (
+        \PrngMWC64X::.ctor(UInt64).0._State_0\, 
+        \PrngMWC64X::.ctor(UInt64).0._State_1\, 
+        \PrngMWC64X::.ctor(UInt64).0._State_2\);
+    -- Signals:
+    Signal \PrngMWC64X::.ctor(UInt64).0._Finished\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).0._Started\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 declarations end
+
+
     -- System.Void Hast.Algorithms.PrngMWC64X::.ctor().0 declarations start
     -- State machine states:
     type \PrngMWC64X::.ctor().0._States\ is (
@@ -869,8 +855,6 @@ begin
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\gridRaw\ := (others => to_unsigned(0, 32));
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\ := False;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\ := to_unsigned(1, 32);
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\randomState1\ := to_unsigned(0, 64);
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\randomState2\ := to_unsigned(0, 64);
                         -- The following section was transformed from the .NET statement below:
                         -- Hast.Samples.Kpz.KpzKernels.CopyFromSimpleMemoryToRawGrid (kpzKernels, memory);
                         -- 
@@ -1190,6 +1174,8 @@ begin
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= to_unsigned(0, 64);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 64);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 64);
@@ -1221,8 +1207,12 @@ begin
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_2\ => 
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.randomState1 = (ulong)memory.ReadUInt32 (2) << 32 | (ulong)memory.ReadUInt32 (3);
+                        -- @this.prng1 = new PrngMWC64X ((ulong)memory.ReadUInt32 (2) << 32 | (ulong)memory.ReadUInt32 (3));
                         -- 
+                        -- Initializing record fields to their defaults.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng1\.\IsNull\ := false;
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng1\.\state\ := to_unsigned(0, 64);
+                        -- Invoking the target's constructor.
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1252,19 +1242,30 @@ begin
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- @this.randomState2 = (ulong)memory.ReadUInt32 (4) << 32 | (ulong)memory.ReadUInt32 (5);
-                            -- 
-                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng1\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= true;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\ => 
-                        -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\) then 
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.prng2 = new PrngMWC64X ((ulong)memory.ReadUInt32 (4) << 32 | (ulong)memory.ReadUInt32 (5));
+                            -- 
+                            -- Initializing record fields to their defaults.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng2\.\IsNull\ := false;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng2\.\state\ := to_unsigned(0, 64);
+                            -- Invoking the target's constructor.
+                            -- Begin SimpleMemory read.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\ => 
                         -- Waiting for the SimpleMemory operation to finish.
@@ -1290,19 +1291,26 @@ begin
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- @this.TestMode = memory.ReadUInt32 (1) & 1u == 1u;
-                            -- 
-                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng2\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= true;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\ => 
-                        -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\) then 
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\prng2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.TestMode = memory.ReadUInt32 (1) & 1u == 1u;
+                            -- 
+                            -- Begin SimpleMemory read.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\ => 
                         -- Waiting for the SimpleMemory operation to finish.
@@ -1341,178 +1349,6 @@ begin
         end if;
     end process;
     -- System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
-
-
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1().0 state machine start
-    \KpzKernels::GetNextRandom1().0._StateMachine\: process (\Clock\) 
-        Variable \KpzKernels::GetNextRandom1().0._State\: \KpzKernels::GetNextRandom1().0._States\ := \KpzKernels::GetNextRandom1().0._State_0\;
-        Variable \KpzKernels::GetNextRandom1().0.this\: \Hast.Samples.Kpz.KpzKernels\;
-        Variable \KpzKernels::GetNextRandom1().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom1().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \KpzKernels::GetNextRandom1().0._Finished\ <= false;
-                \KpzKernels::GetNextRandom1().0.return\ <= to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_0\;
-                \KpzKernels::GetNextRandom1().0.num\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom1().0.num2\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := to_unsigned(0, 64);
-                \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\ := to_unsigned(0, 64);
-                \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := to_unsigned(0, 32);
-            else 
-                case \KpzKernels::GetNextRandom1().0._State\ is 
-                    when \KpzKernels::GetNextRandom1().0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\KpzKernels::GetNextRandom1().0._Started\ = true) then 
-                            \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::GetNextRandom1().0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\KpzKernels::GetNextRandom1().0._Started\ = true) then 
-                            \KpzKernels::GetNextRandom1().0._Finished\ <= true;
-                        else 
-                            \KpzKernels::GetNextRandom1().0._Finished\ <= false;
-                            \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \KpzKernels::GetNextRandom1().0.this.parameter.Out\ <= \KpzKernels::GetNextRandom1().0.this\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::GetNextRandom1().0._State_2\ => 
-                        \KpzKernels::GetNextRandom1().0.this\ := \KpzKernels::GetNextRandom1().0.this.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = (uint)(@this.randomState1 >> 32);
-                        -- 
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
-                        \KpzKernels::GetNextRandom1().0.num\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.0\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = (uint)(@this.randomState1 & 18446744073709551615uL);
-                        -- 
-                        -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
-                        \KpzKernels::GetNextRandom1().0.num2\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.1\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.randomState1 = (ulong)num2 * 18446744073709467675uL + (ulong)num;
-                        -- 
-                        -- Since the integer literal 18446744073709467675 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111101011100000011011).
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := SmartResize(SmartResize(\KpzKernels::GetNextRandom1().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\ := SmartResize(\KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ + SmartResize(\KpzKernels::GetNextRandom1().0.num\, 64), 64);
-                        \KpzKernels::GetNextRandom1().0.this\.\randomState1\ := \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num2 ^ num;
-                        -- 
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom1().0.num2\ xor \KpzKernels::GetNextRandom1().0.num\;
-                        \KpzKernels::GetNextRandom1().0.return\ <= \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\;
-                        \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1().0 state machine end
-
-
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2().0 state machine start
-    \KpzKernels::GetNextRandom2().0._StateMachine\: process (\Clock\) 
-        Variable \KpzKernels::GetNextRandom2().0._State\: \KpzKernels::GetNextRandom2().0._States\ := \KpzKernels::GetNextRandom2().0._State_0\;
-        Variable \KpzKernels::GetNextRandom2().0.this\: \Hast.Samples.Kpz.KpzKernels\;
-        Variable \KpzKernels::GetNextRandom2().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom2().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \KpzKernels::GetNextRandom2().0._Finished\ <= false;
-                \KpzKernels::GetNextRandom2().0.return\ <= to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_0\;
-                \KpzKernels::GetNextRandom2().0.num\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom2().0.num2\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := to_unsigned(0, 32);
-                \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := to_unsigned(0, 64);
-                \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\ := to_unsigned(0, 64);
-                \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := to_unsigned(0, 32);
-            else 
-                case \KpzKernels::GetNextRandom2().0._State\ is 
-                    when \KpzKernels::GetNextRandom2().0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\KpzKernels::GetNextRandom2().0._Started\ = true) then 
-                            \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::GetNextRandom2().0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\KpzKernels::GetNextRandom2().0._Started\ = true) then 
-                            \KpzKernels::GetNextRandom2().0._Finished\ <= true;
-                        else 
-                            \KpzKernels::GetNextRandom2().0._Finished\ <= false;
-                            \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \KpzKernels::GetNextRandom2().0.this.parameter.Out\ <= \KpzKernels::GetNextRandom2().0.this\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::GetNextRandom2().0._State_2\ => 
-                        \KpzKernels::GetNextRandom2().0.this\ := \KpzKernels::GetNextRandom2().0.this.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = (uint)(@this.randomState2 >> 32);
-                        -- 
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
-                        \KpzKernels::GetNextRandom2().0.num\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.0\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = (uint)(@this.randomState2 & 18446744073709551615uL);
-                        -- 
-                        -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
-                        \KpzKernels::GetNextRandom2().0.num2\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.1\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.randomState2 = (ulong)num2 * 18446744073709467675uL + (ulong)num;
-                        -- 
-                        -- Since the integer literal 18446744073709467675 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111101011100000011011).
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := SmartResize(SmartResize(\KpzKernels::GetNextRandom2().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\ := SmartResize(\KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ + SmartResize(\KpzKernels::GetNextRandom2().0.num\, 64), 64);
-                        \KpzKernels::GetNextRandom2().0.this\.\randomState2\ := \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num2 ^ num;
-                        -- 
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom2().0.num2\ xor \KpzKernels::GetNextRandom2().0.num\;
-                        \KpzKernels::GetNextRandom2().0.return\ <= \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\;
-                        \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2().0 state machine end
 
 
     -- System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32).0 state machine start
@@ -2301,17 +2137,17 @@ begin
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\: \KpzKernels::RandomlySwitchFourCells(Boolean).0._States\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_0\;
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\: \Hast.Samples.Kpz.KpzKernels\;
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch\: boolean := false;
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.flag\: boolean := false;
@@ -2362,11 +2198,10 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\ <= false;
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\ <= false;
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\ <= to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).y.parameter.Out.0\ <= to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\ <= false;
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\ <= false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= to_signed(0, 32);
@@ -2379,17 +2214,17 @@ begin
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ <= false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_0\;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch\ := false;
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ := to_unsigned(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := to_signed(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ := to_unsigned(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := to_unsigned(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := to_signed(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := to_unsigned(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.flag\ := false;
@@ -2460,37 +2295,37 @@ begin
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint nextRandom;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num;
+                        -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- int indexFromXY;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint nextRandom2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- uint num4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int num5;
+                        -- uint num5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int num6;
+                        -- uint num6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num7;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num10;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int index;
@@ -2502,38 +2337,38 @@ begin
                         -- bool flag;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- nextRandom = Hast.Samples.Kpz.KpzKernels.GetNextRandom1 (@this);
+                        -- num = Hast.Algorithms.PrngMWC64X.NextUInt32 (@this.prng1);
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1()
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\prng1\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1()
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Finished.0\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\ <= false;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().return.0\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.In.0\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().return.0\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\prng1\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num = (int)(nextRandom & 7u);
+                            -- num2 = (int)(num & 7u);
                             -- 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ and to_unsigned(7, 32));
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\);
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ and to_unsigned(7, 32));
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = (int)(nextRandom >> 16 & 7u);
+                            -- num3 = (int)(num >> 16 & 7u);
                             -- 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ and to_unsigned(7, 32));
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\);
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\);
                             -- The following section was transformed from the .NET statement below:
-                            -- indexFromXY = Hast.Samples.Kpz.KpzKernels.getIndexFromXY (@this, num, num2);
+                            -- indexFromXY = Hast.Samples.Kpz.KpzKernels.getIndexFromXY (@this, num2, num3);
                             -- 
                             -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32)
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).y.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).y.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\;
                         end if;
@@ -2546,196 +2381,200 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- nextRandom2 = Hast.Samples.Kpz.KpzKernels.GetNextRandom2 (@this);
+                            -- num4 = Hast.Algorithms.PrngMWC64X.NextUInt32 (@this.prng2);
                             -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2()
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\ <= true;
+                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2()
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Finished.0\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\ <= false;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().return.0\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.In.0\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\;
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\prng2\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().return.0\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\prng2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = nextRandom2 & 65535u;
+                            -- num5 = num4 & 65535u;
                             -- 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ and to_unsigned(65535, 32);
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ and to_unsigned(65535, 32);
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = nextRandom2 >> 16 & 65535u;
+                            -- num6 = num4 >> 16 & 65535u;
                             -- 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ and to_unsigned(65535, 32);
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (num < 7) {
-                            -- 	num5 = num + 1;
+                            -- if (num2 < 7) {
+                            -- 	num7 = num2 + 1;
                             -- }
                             -- else {
-                            -- 	num5 = 0;
+                            -- 	num7 = 0;
                             -- }
                             -- 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ < to_signed(7, 32);
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ < to_signed(7, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
-                            --     * The false branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\.
-                            --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                            --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\.
+                            --     * The false branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
+                            --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
 
                             if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\) then 
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\;
-                            else 
                                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\;
+                            else 
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\ => 
-                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
+                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num6 = num2;
+                        -- num8 = num3;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num7 = num;
+                        -- num9 = num2;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (num2 < 7) {
-                        -- 	num8 = num2 + 1;
+                        -- if (num3 < 7) {
+                        -- 	num10 = num3 + 1;
                         -- }
                         -- else {
-                        -- 	num8 = 0;
+                        -- 	num10 = 0;
                         -- }
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ < to_signed(7, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ < to_signed(7, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
-                        --     * The false branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
+                        --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\.
+                        --     * The false branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
 
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
-                        else 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
-                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num5 = num + 1;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num5 = num + 1;
-                        -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ + to_signed(1, 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\;
-                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\;
+                        else 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\ => 
-                        -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
+                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num5 = 0;
+                        -- 	num7 = num2 + 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = 0;
+                        -- num7 = num2 + 1;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ + to_signed(1, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\;
+                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\ => 
+                        -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num7 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num7 = 0;
+                        -- 
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\) then 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\ => 
-                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ => 
+                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- index = num6 * 8 + num5;
+                        -- index = num8 * 8 + num7;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ * to_signed(8, 32), 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.11\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ * to_signed(8, 32), 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.11\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.11\;
                         -- The following section was transformed from the .NET statement below:
-                        -- index2 = num8 * 8 + num7;
+                        -- index2 = num10 * 8 + num9;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ * to_signed(8, 32), 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ * to_signed(8, 32), 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index) && Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2) && forceSwitch || num3 < @this.integerProbabilityP || !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index) && !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2) && forceSwitch || num4 < @this.integerProbabilityQ;
+                        -- flag = Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index) && Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2) && forceSwitch || num5 < @this.integerProbabilityP || !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index) && !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2) && forceSwitch || num6 < @this.integerProbabilityQ;
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.4
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ => 
-                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ => 
+                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num8 = num2 + 1;
+                        -- 	num10 = num3 + 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num8 = num2 + 1;
+                        -- num10 = num3 + 1;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ + to_signed(1, 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\;
-                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ + to_signed(1, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\;
+                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\) then 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ => 
-                        -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\ => 
+                        -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num8 = 0;
+                        -- 	num10 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num8 = 0;
+                        -- num10 = 0;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\) then 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.In.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
@@ -2746,10 +2585,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= false;
@@ -2757,59 +2596,59 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.14\ and \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.5\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.16\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\ and not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.6\);
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ < \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\integerProbabilityP\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ < \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\integerProbabilityP\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.18\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch\ or \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.19\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.16\ and \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.18\;
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.In.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
@@ -2820,10 +2659,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= false;
@@ -2831,28 +2670,28 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.21\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.20\ and not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.9\);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.10\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.22\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.21\ and \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.10\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.23\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ < \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\integerProbabilityQ\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.23\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ < \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\integerProbabilityQ\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.24\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch\ or \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.23\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.25\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.22\ and \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.24\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.26\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.19\ or \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.25\;
@@ -2867,23 +2706,23 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\.
-                            --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
+                            --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\.
+                            --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\.
 
                             if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.flag\) then 
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\;
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\ => 
-                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ => 
+                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ => 
-                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ => 
+                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	Hast.Samples.Kpz.KpzKernels.setGridDx (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY));
@@ -2899,9 +2738,9 @@ begin
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
@@ -2912,10 +2751,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.11\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::setGridDx(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ <= false;
@@ -2927,10 +2766,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= false;
@@ -2941,10 +2780,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.12\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::setGridDy(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ <= false;
@@ -2956,10 +2795,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= false;
@@ -2970,10 +2809,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.13\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::setGridDx(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ <= false;
@@ -2985,10 +2824,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= false;
@@ -2999,17 +2838,17 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.14\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::setGridDy(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).this.parameter.In.0\;
-                            -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\.
-                            if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\) then 
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\;
+                            -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
+                            if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\) then 
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6561,6 +6400,55 @@ begin
     -- System.Void Hast.Samples.Kpz.KpzKernelsGInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 state machine start
+    \PrngMWC64X::.ctor(UInt64).0._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::.ctor(UInt64).0._State\: \PrngMWC64X::.ctor(UInt64).0._States\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+        Variable \PrngMWC64X::.ctor(UInt64).0.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::.ctor(UInt64).0.seed\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::.ctor(UInt64).0._Finished\ <= false;
+                \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+                \PrngMWC64X::.ctor(UInt64).0.seed\ := to_unsigned(0, 64);
+            else 
+                case \PrngMWC64X::.ctor(UInt64).0._State\ is 
+                    when \PrngMWC64X::.ctor(UInt64).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::.ctor(UInt64).0._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::.ctor(UInt64).0._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).0._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::.ctor(UInt64).0._Finished\ <= false;
+                            \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\ <= \PrngMWC64X::.ctor(UInt64).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).0._State_2\ => 
+                        \PrngMWC64X::.ctor(UInt64).0.this\ := \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\;
+                        \PrngMWC64X::.ctor(UInt64).0.seed\ := \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = seed;
+                        -- 
+                        \PrngMWC64X::.ctor(UInt64).0.this\.\state\ := \PrngMWC64X::.ctor(UInt64).0.seed\;
+                        \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 state machine end
+
+
     -- System.Void Hast.Algorithms.PrngMWC64X::.ctor().0 state machine start
     \PrngMWC64X::.ctor().0._StateMachine\: process (\Clock\) 
         Variable \PrngMWC64X::.ctor().0._State\: \PrngMWC64X::.ctor().0._States\ := \PrngMWC64X::.ctor().0._State_0\;
@@ -7025,85 +6913,21 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1() start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::GetNextRandom1().0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\;
-    \KpzKernels::GetNextRandom1().0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Finished.0\ <= \KpzKernels::GetNextRandom1().0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().return.0\ <= \KpzKernels::GetNextRandom1().0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.In.0\ <= \KpzKernels::GetNextRandom1().0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::getIndexFromXY(Int32,Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\;
-    \KpzKernels::getIndexFromXY(Int32,Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.Out.0\;
-    \KpzKernels::getIndexFromXY(Int32,Int32).0.x.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\;
-    \KpzKernels::getIndexFromXY(Int32,Int32).0.y.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).y.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Finished.0\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).return.0\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.In.0\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32) end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2() start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::GetNextRandom2().0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\;
-    \KpzKernels::GetNextRandom2().0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Finished.0\ <= \KpzKernels::GetNextRandom2().0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().return.0\ <= \KpzKernels::GetNextRandom2().0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.In.0\ <= \KpzKernels::GetNextRandom2().0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::getGridDx(Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\;
-    \KpzKernels::getGridDx(Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\;
-    \KpzKernels::getGridDx(Int32).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\ <= \KpzKernels::getGridDx(Int32).0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).return.0\ <= \KpzKernels::getGridDx(Int32).0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.In.0\ <= \KpzKernels::getGridDx(Int32).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32) end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::getGridDy(Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\;
-    \KpzKernels::getGridDy(Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\;
-    \KpzKernels::getGridDy(Int32).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\ <= \KpzKernels::getGridDy(Int32).0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).return.0\ <= \KpzKernels::getGridDy(Int32).0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.In.0\ <= \KpzKernels::getGridDy(Int32).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32) end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDx(System.Int32,System.Boolean) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::setGridDx(Int32,Boolean).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\;
-    \KpzKernels::setGridDx(Int32,Boolean).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).this.parameter.Out.0\;
-    \KpzKernels::setGridDx(Int32,Boolean).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).index.parameter.Out.0\;
-    \KpzKernels::setGridDx(Int32,Boolean).0.value.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).value.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Finished.0\ <= \KpzKernels::setGridDx(Int32,Boolean).0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).this.parameter.In.0\ <= \KpzKernels::setGridDx(Int32,Boolean).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDx(System.Int32,System.Boolean) end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDy(System.Int32,System.Boolean) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
-    \KpzKernels::setGridDy(Int32,Boolean).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\;
-    \KpzKernels::setGridDy(Int32,Boolean).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).this.parameter.Out.0\;
-    \KpzKernels::setGridDy(Int32,Boolean).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).index.parameter.Out.0\;
-    \KpzKernels::setGridDy(Int32,Boolean).0.value.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).value.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Finished.0\ <= \KpzKernels::setGridDy(Int32,Boolean).0._Finished\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).this.parameter.In.0\ <= \KpzKernels::setGridDy(Int32,Boolean).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDy(System.Int32,System.Boolean) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64) start
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \PrngMWC64X::.ctor(UInt64).0._Started\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\;
+    \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\;
+    \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\;
+    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\ <= \PrngMWC64X::.ctor(UInt64).0._Finished\;
+    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\ <= \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32() start
     \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
+        Variable \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\: integer range 0 to 2 := 0;
+        Variable \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\: integer range 0 to 2 := 0;
         Variable \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\: integer range 0 to 2 := 0;
@@ -7117,6 +6941,8 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\ := (others => false);
+                \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\ := 0;
@@ -7125,6 +6951,7 @@ begin
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := WaitingForStarted;
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\ <= false;
                 \KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.PrngMWC64X::NextUInt32()._Finished.0\ <= false;
                 \KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.PrngMWC64X::NextUInt32()._Finished.0\ <= false;
                 \KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.PrngMWC64X::NextUInt32()._Finished.0\ <= false;
@@ -7134,6 +6961,70 @@ begin
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\(0) := \PrngMWC64X::NextUInt32().1._Started\ = true and \PrngMWC64X::NextUInt32().2._Started\ = true and \PrngMWC64X::NextUInt32().0._Started\ = false;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\(1) := \PrngMWC64X::NextUInt32().2._Started\ = true and \PrngMWC64X::NextUInt32().1._Started\ = false;
                 \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\(2) := \PrngMWC64X::NextUInt32().2._Started\ = false;
+
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0
+                case \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\) then 
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\ <= false;
+                            case \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\ is 
+                                when (false, false, true) => 
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 0;
+                                    \PrngMWC64X::NextUInt32().0._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\(0) := false;
+                                    \PrngMWC64X::NextUInt32().0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+                                when (false, true, false) => 
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 1;
+                                    \PrngMWC64X::NextUInt32().1._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\(1) := false;
+                                    \PrngMWC64X::NextUInt32().1.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+                                when (true, false, false) => 
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 2;
+                                    \PrngMWC64X::NextUInt32().2._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().targetAvailableIndicator\(2) := false;
+                                    \PrngMWC64X::NextUInt32().2.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+                                when others => 
+                                    null;
+                            end case;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\PrngMWC64X::NextUInt32().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := AfterFinished;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\ <= true;
+                                    \PrngMWC64X::NextUInt32().0._Started\ <= false;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().0.return\;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().0.this.parameter.Out\;
+                                end if;
+                            when 1 => 
+                                if (\PrngMWC64X::NextUInt32().1._Finished\) then 
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := AfterFinished;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\ <= true;
+                                    \PrngMWC64X::NextUInt32().1._Started\ <= false;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().1.return\;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().1.this.parameter.Out\;
+                                end if;
+                            when 2 => 
+                                if (\PrngMWC64X::NextUInt32().2._Finished\) then 
+                                    \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := AfterFinished;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\ <= true;
+                                    \PrngMWC64X::NextUInt32().2._Started\ <= false;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().2.return\;
+                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().2.this.parameter.Out\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForStarted;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.PrngMWC64X::NextUInt32()._Finished.0\ <= false;
+                        end if;
+                end case;
+
 
                 -- Invocation handler #0 out of 1 corresponding to Hast.Samples.Kpz.KpzKernelsTaskState Hast.Samples.Kpz.KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.KpzKernelsTaskState).0
                 case \Hast::InternalInvocationProxy().PrngMWC64X::NextUInt32().KpzKernelsGInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ is 
@@ -7394,6 +7285,62 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32) start
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
+    \KpzKernels::getIndexFromXY(Int32,Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\;
+    \KpzKernels::getIndexFromXY(Int32,Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.Out.0\;
+    \KpzKernels::getIndexFromXY(Int32,Int32).0.x.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\;
+    \KpzKernels::getIndexFromXY(Int32,Int32).0.y.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).y.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Finished.0\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0._Finished\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).return.0\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0.return\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.In.0\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32) start
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
+    \KpzKernels::getGridDx(Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\;
+    \KpzKernels::getGridDx(Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\;
+    \KpzKernels::getGridDx(Int32).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\ <= \KpzKernels::getGridDx(Int32).0._Finished\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).return.0\ <= \KpzKernels::getGridDx(Int32).0.return\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.In.0\ <= \KpzKernels::getGridDx(Int32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32) start
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
+    \KpzKernels::getGridDy(Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\;
+    \KpzKernels::getGridDy(Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\;
+    \KpzKernels::getGridDy(Int32).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\ <= \KpzKernels::getGridDy(Int32).0._Finished\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).return.0\ <= \KpzKernels::getGridDy(Int32).0.return\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.In.0\ <= \KpzKernels::getGridDy(Int32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDx(System.Int32,System.Boolean) start
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
+    \KpzKernels::setGridDx(Int32,Boolean).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\;
+    \KpzKernels::setGridDx(Int32,Boolean).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).this.parameter.Out.0\;
+    \KpzKernels::setGridDx(Int32,Boolean).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).index.parameter.Out.0\;
+    \KpzKernels::setGridDx(Int32,Boolean).0.value.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).value.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Finished.0\ <= \KpzKernels::setGridDx(Int32,Boolean).0._Finished\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).this.parameter.In.0\ <= \KpzKernels::setGridDx(Int32,Boolean).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDx(System.Int32,System.Boolean) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDy(System.Int32,System.Boolean) start
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
+    \KpzKernels::setGridDy(Int32,Boolean).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\;
+    \KpzKernels::setGridDy(Int32,Boolean).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).this.parameter.Out.0\;
+    \KpzKernels::setGridDy(Int32,Boolean).0.index.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).index.parameter.Out.0\;
+    \KpzKernels::setGridDy(Int32,Boolean).0.value.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).value.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Finished.0\ <= \KpzKernels::setGridDy(Int32,Boolean).0._Finished\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).this.parameter.In.0\ <= \KpzKernels::setGridDy(Int32,Boolean).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::setGridDy(System.Int32,System.Boolean) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor() start
