@@ -129,8 +129,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            PrimitiveExpression valueExpression;
-            if (_constantValuesTable.RetrieveAndDeleteConstantValue(binaryOperatorExpression, out valueExpression))
+            if (_constantValuesTable.RetrieveAndDeleteConstantValue(binaryOperatorExpression, out var valueExpression))
             {
                 binaryOperatorExpression.ReplaceWith(valueExpression.Clone());
             }
@@ -179,8 +178,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (!(unaryOperatorExpression.Expression is PrimitiveExpression)) return;
 
-            PrimitiveExpression valueExpression;
-            if (_constantValuesTable.RetrieveAndDeleteConstantValue(unaryOperatorExpression, out valueExpression))
+            if (_constantValuesTable.RetrieveAndDeleteConstantValue(unaryOperatorExpression, out var valueExpression))
             {
                 unaryOperatorExpression.ReplaceWith(valueExpression.Clone());
             }

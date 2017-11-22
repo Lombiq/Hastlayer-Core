@@ -38,8 +38,7 @@ namespace Hast.Transformer.Services
         
             public TypeDeclaration Lookup(string fullName)
             {
-                TypeDeclaration declaration;
-                _typeDeclarations.TryGetValue(fullName, out declaration);
+                _typeDeclarations.TryGetValue(fullName, out var declaration);
                 return declaration;
             }
         }

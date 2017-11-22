@@ -525,8 +525,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // can happen:
                 // ushort = ushort + 1
                 // In this case let's cast the result to the type of the assignment's left.
-                AssignmentExpression parentAssignment;
-                if (expression.Parent.Is<AssignmentExpression>(out parentAssignment))
+                if (expression.Parent.Is<AssignmentExpression>(out var parentAssignment))
                 {
                     return _typeConversionTransformer.ImplementTypeConversion(
                         resultType,

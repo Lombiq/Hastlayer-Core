@@ -222,9 +222,8 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
                 // LiteralValue somehow is an empty string for PrimitiveExpressions.
                 var valueObject = ((PrimitiveExpression)expression.Right).Value;
                 var literalValue = valueObject != null ? valueObject.ToString() : string.Empty;
-                int intValue;
 
-                if (int.TryParse(literalValue, out intValue))
+                if (int.TryParse(literalValue, out var intValue))
                 {
                     var log = Math.Log(intValue, 2);
                     // If the logarithm is a whole number that means that the value can be expressed as a power of 2.
