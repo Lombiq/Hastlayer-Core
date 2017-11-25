@@ -79,9 +79,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     {
                         configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
 
-                        configuration.AddHardwareEntryPointType<KpzKernelsGInterface>();
+                        configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsGInterface>(p => p.ScheduleIterations(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
                             {
                                 MaxDegreeOfParallelism = 3
                             });
