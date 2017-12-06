@@ -115,8 +115,10 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 var stateWhen = new CaseWhen { Expression = this.CreateStateName(i).ToVhdlIdValue() };
                 stateWhen.Add(_states[i].Body);
                 stateWhen.Add(new LineComment(
-                    "Clock cycles needed to complete this state (approximation): " + 
-                    _states[i].RequiredClockCycles.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+                    "Clock cycles needed to complete this state (approximation): " +
+                    // The G29 format specifier will cut trailing zeros apart from x.0. See:
+                    // https://msdn.microsoft.com/en-us/library/dwhawy9k(v=VS.90).aspx
+                    _states[i].RequiredClockCycles.ToString("G29", System.Globalization.CultureInfo.InvariantCulture)));
                 stateCase.Whens.Add(stateWhen);
             }
 
