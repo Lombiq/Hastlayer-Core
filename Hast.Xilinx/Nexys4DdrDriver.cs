@@ -218,7 +218,6 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
             if ((binaryOperator == BinaryOperatorType.Multiply || binaryOperator == BinaryOperatorType.Divide) &&
                 expression.Right is PrimitiveExpression)
             {
-
                 // LiteralValue somehow is an empty string for PrimitiveExpressions.
                 var valueObject = ((PrimitiveExpression)expression.Right).Value;
                 var literalValue = valueObject != null ? valueObject.ToString() : string.Empty;
