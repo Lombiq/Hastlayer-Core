@@ -437,8 +437,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var key = "Hast.Transformer.Vhdl.AfterWhileStateIndexStack";
 
-            dynamic stack;
-            if (context.Scope.CustomProperties.TryGetValue(key, out stack)) return stack;
+            if (context.Scope.CustomProperties.TryGetValue(key, out var stack)) return stack;
 
             return context.Scope.CustomProperties[key] = new Stack<int>();
         }

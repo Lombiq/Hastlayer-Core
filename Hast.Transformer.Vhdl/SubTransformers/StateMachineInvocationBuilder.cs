@@ -57,8 +57,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     maxDegreeOfParallelism + ".");
             }
 
-            int previousMaxInvocationInstanceCount;
-            if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetDeclaration, out previousMaxInvocationInstanceCount) ||
+            if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetDeclaration, out var previousMaxInvocationInstanceCount) ||
                 previousMaxInvocationInstanceCount < instanceCount)
             {
                 stateMachine.OtherMemberMaxInvocationInstanceCounts[targetDeclaration] = instanceCount;
@@ -178,12 +177,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // any more the same state machine can be restarted in the second state counted from the await state at 
             // earliest. Thus adding a new state and also a wait state if necessary.
             var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
-            ISet<string> finishedComponents;
 
             // Would the invocation be restarted in the same state? We need to add a state just to wait, then a new state
             // for the new invocation start.
             if (finishedInvokedComponentsForStates
-                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex, out finishedComponents) &&
+                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex, out var finishedComponents) &&
                 finishedComponents.Contains(indexedStateMachineName))
             {
                 scope.CurrentBlock.Add(new LineComment(

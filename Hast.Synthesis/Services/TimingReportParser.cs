@@ -150,8 +150,7 @@ namespace Hast.Synthesis.Services
 
             private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned)
             {
-                decimal latency;
-                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned), out latency))
+                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned), out decimal latency))
                 {
                     return latency;
                 }

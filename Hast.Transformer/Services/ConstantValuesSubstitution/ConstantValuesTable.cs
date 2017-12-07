@@ -38,8 +38,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (disallowDifferentValues && expression != null)
             {
-                PrimitiveExpression existingExpression;
-                if (valueDescriptors.TryGetValue(scope, out existingExpression))
+                if (valueDescriptors.TryGetValue(scope, out var existingExpression))
                 {
                     // Simply using != would yield a reference equality check.
                     if (existingExpression == null || !expression.Value.Equals(existingExpression.Value))
@@ -63,17 +62,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public bool RetrieveAndDeleteConstantValue(AstNode valueHolder, out PrimitiveExpression valueExpression)
         {
-            Dictionary<AstNode, PrimitiveExpression> valueDescriptors;
-
-            if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullNameWithUnifiedPropertyName(), out valueDescriptors) &&
+            if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullNameWithUnifiedPropertyName(), out var valueDescriptors) &&
                 valueDescriptors.Any())
             {
                 // Finding the value defined for the scope which is closest.
                 var closestValueDescriptorWithHeight = valueDescriptors
                     .Select(valueDescriptor =>
                     {
-                        int height;
-                        var parent = valueHolder.FindFirstParentOfType((AstNode node) => node == valueDescriptor.Key, out height);
+                        var parent = valueHolder.FindFirstParentOfType((AstNode node) => node == valueDescriptor.Key, out var height);
 
                         return new
                         {
@@ -119,9 +115,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         private Dictionary<AstNode, PrimitiveExpression> GetOrCreateValueDescriptors(string holderName)
         {
-            Dictionary<AstNode, PrimitiveExpression> valueDescriptors;
-
-            if (!_valueHoldersAndValueDescriptors.TryGetValue(holderName, out valueDescriptors))
+            if (!_valueHoldersAndValueDescriptors.TryGetValue(holderName, out var valueDescriptors))
             {
                 valueDescriptors = new Dictionary<AstNode, PrimitiveExpression>();
                 _valueHoldersAndValueDescriptors[holderName] = valueDescriptors;
