@@ -3821,17 +3821,18 @@ begin
         Variable \BitMask::SetOne(UInt16).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.index2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.flag2\: boolean := false;
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.5\: boolean := false;
-        Variable \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.6\: boolean := false;
+        Variable \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3848,17 +3849,18 @@ begin
                 \BitMask::SetOne(UInt16).0.num\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.index2\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.flag2\ := false;
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := false;
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := false;
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := false;
-                \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\ := (others => to_unsigned(0, 32));
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := false;
+                \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\ := (others => to_unsigned(0, 32));
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.8\ := to_unsigned(0, 32);
             else 
                 case \BitMask::SetOne(UInt16).0._State\ is 
                     when \BitMask::SetOne(UInt16).0._State_0\ => 
@@ -3897,10 +3899,11 @@ begin
                         -- bool flag2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = index > @this.Size;
+                        -- flag = index > @this.SegmentCount * 32;
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := \BitMask::SetOne(UInt16).0.index\ > \BitMask::SetOne(UInt16).0.this\.\Size\;
-                        \BitMask::SetOne(UInt16).0.flag\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.0\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::SetOne(UInt16).0.this\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := \BitMask::SetOne(UInt16).0.index\ > \BitMask::SetOne(UInt16).0.binaryOperationResult.0\;
+                        \BitMask::SetOne(UInt16).0.flag\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	result = new BitMask (@this);
@@ -3910,11 +3913,11 @@ begin
                         -- 	index2 = index >> 5;
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 0u;
                         -- 	if (flag2) {
-                        -- 		uint[] array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391;
-                        -- 		array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, 1);
-                        -- 		array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 [index2] = @this.Segments [index2] | 1u << num;
-                        -- 		result = BitMask.FromImmutableArray (array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, @this.Size);
+                        -- 		uint[] array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444;
+                        -- 		array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 = new uint[1];
+                        -- 		System.Array.Copy (@this.Segments, array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, 1);
+                        -- 		array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 [index2] = @this.Segments [index2] | 1u << num;
+                        -- 		result = BitMask.FromImmutableArray (array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, @this.Size);
                         -- 	}
                         -- 	else {
                         -- 		result = new BitMask (@this);
@@ -3932,7 +3935,7 @@ begin
                         else 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::SetOne(UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::SetOne(UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -3983,11 +3986,11 @@ begin
                         -- 	index2 = index >> 5;
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 0u;
                         -- 	if (flag2) {
-                        -- 		uint[] array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391;
-                        -- 		array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, 1);
-                        -- 		array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 [index2] = @this.Segments [index2] | 1u << num;
-                        -- 		result = BitMask.FromImmutableArray (array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, @this.Size);
+                        -- 		uint[] array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444;
+                        -- 		array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 = new uint[1];
+                        -- 		System.Array.Copy (@this.Segments, array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, 1);
+                        -- 		array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 [index2] = @this.Segments [index2] | 1u << num;
+                        -- 		result = BitMask.FromImmutableArray (array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, @this.Size);
                         -- 	}
                         -- 	else {
                         -- 		result = new BitMask (@this);
@@ -4000,7 +4003,7 @@ begin
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::SetOne(UInt16).0._State_7\ => 
-                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_8\;
@@ -4008,23 +4011,23 @@ begin
                         else 
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::SetOne(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::SetOne(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetOne(UInt16).0._State_8\ => 
-                        \BitMask::SetOne(UInt16).0.num\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.1\);
+                        \BitMask::SetOne(UInt16).0.num\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
                         -- index2 = index >> 5;
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::SetOne(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::SetOne(UInt16).0.index2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.2\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := signed(SmartResize(shift_right(\BitMask::SetOne(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::SetOne(UInt16).0.index2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = @this.Segments [index2] >> num % 2u == 0u;
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := shift_right(\BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetOne(UInt16).0.num\), 5) and "11111")));
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := shift_right(\BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetOne(UInt16).0.num\), 5) and "11111")));
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \BitMask::SetOne(UInt16).0._State_9\ => 
-                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_10\;
@@ -4032,18 +4035,18 @@ begin
                         else 
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ mod to_unsigned(2, 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetOne(UInt16).0._State_10\ => 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ = to_unsigned(0, 32);
-                        \BitMask::SetOne(UInt16).0.flag2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.5\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ = to_unsigned(0, 32);
+                        \BitMask::SetOne(UInt16).0.flag2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.6\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
-                        -- 	uint[] array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391;
-                        -- 	array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, 1);
-                        -- 	array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 [index2] = @this.Segments [index2] | 1u << num;
-                        -- 	result = BitMask.FromImmutableArray (array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, @this.Size);
+                        -- 	uint[] array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444;
+                        -- 	array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 = new uint[1];
+                        -- 	System.Array.Copy (@this.Segments, array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, 1);
+                        -- 	array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 [index2] = @this.Segments [index2] | 1u << num;
+                        -- 	result = BitMask.FromImmutableArray (array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, @this.Size);
                         -- }
                         -- else {
                         -- 	result = new BitMask (@this);
@@ -4072,35 +4075,35 @@ begin
                         -- True branch of the if-else started in state \BitMask::SetOne(UInt16).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	uint[] array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391;
-                        -- 	array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, 1);
-                        -- 	array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 [index2] = @this.Segments [index2] | 1u << num;
-                        -- 	result = BitMask.FromImmutableArray (array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, @this.Size);
+                        -- 	uint[] array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444;
+                        -- 	array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 = new uint[1];
+                        -- 	System.Array.Copy (@this.Segments, array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, 1);
+                        -- 	array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 [index2] = @this.Segments [index2] | 1u << num;
+                        -- 	result = BitMask.FromImmutableArray (array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, @this.Size);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint[] array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391;
+                        -- uint[] array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 = new uint[1];
+                        -- array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 = new uint[1];
                         -- 
-                        \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\ := (others => to_unsigned(0, 32));
+                        \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (@this.Segments, array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, 1);
+                        -- System.Array.Copy (@this.Segments, array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, 1);
                         -- 
-                        \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(0 to 0);
+                        \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(0 to 0);
                         -- The following section was transformed from the .NET statement below:
-                        -- array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391 [index2] = @this.Segments [index2] | 1u << num;
+                        -- array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444 [index2] = @this.Segments [index2] | 1u << num;
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetOne(UInt16).0.num\, 5))));
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.7\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) or \BitMask::SetOne(UInt16).0.binaryOperationResult.6\;
-                        \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) := \BitMask::SetOne(UInt16).0.binaryOperationResult.7\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.7\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetOne(UInt16).0.num\, 5))));
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.8\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) or \BitMask::SetOne(UInt16).0.binaryOperationResult.7\;
+                        \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) := \BitMask::SetOne(UInt16).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
-                        -- result = BitMask.FromImmutableArray (array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391, @this.Size);
+                        -- result = BitMask.FromImmutableArray (array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444, @this.Size);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::FromImmutableArray(System.UInt32[],System.UInt16)
-                        \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\;
+                        \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\;
                         \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\ <= \BitMask::SetOne(UInt16).0.this\.\Size\;
                         \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= true;
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_13\;
@@ -4110,7 +4113,7 @@ begin
                         if (\BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ = \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\) then 
                             \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= false;
                             \BitMask::SetOne(UInt16).0.return.0\ := \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).return.0\;
-                            \BitMask::SetOne(UInt16).0.array88aae780c4d937d36de0a3dbebe53326bb8dcaf4e84ed6c612e78d3597f23391\ := \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\;
+                            \BitMask::SetOne(UInt16).0.array9e0317effd8288974e328b08f13f07a4fd89d449b45bdb7f91e465cca6224444\ := \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\;
                             \BitMask::SetOne(UInt16).0.result\ := \BitMask::SetOne(UInt16).0.return.0\;
                             -- Going to the state after the if-else which was started in state \BitMask::SetOne(UInt16).0._State_10\.
                             if (\BitMask::SetOne(UInt16).0._State\ = \BitMask::SetOne(UInt16).0._State_13\) then 
@@ -4169,17 +4172,18 @@ begin
         Variable \BitMask::SetZero(UInt16).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.index2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.flag2\: boolean := false;
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.5\: boolean := false;
-        Variable \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.6\: boolean := false;
+        Variable \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4196,17 +4200,18 @@ begin
                 \BitMask::SetZero(UInt16).0.num\ := to_signed(0, 32);
                 \BitMask::SetZero(UInt16).0.index2\ := to_signed(0, 32);
                 \BitMask::SetZero(UInt16).0.flag2\ := false;
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := false;
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := false;
                 \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := false;
-                \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\ := (others => to_unsigned(0, 32));
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := false;
+                \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\ := (others => to_unsigned(0, 32));
                 \BitMask::SetZero(UInt16).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.8\ := to_unsigned(0, 32);
             else 
                 case \BitMask::SetZero(UInt16).0._State\ is 
                     when \BitMask::SetZero(UInt16).0._State_0\ => 
@@ -4245,10 +4250,11 @@ begin
                         -- bool flag2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = index > @this.Size;
+                        -- flag = index > @this.SegmentCount * 32;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := \BitMask::SetZero(UInt16).0.index\ > \BitMask::SetZero(UInt16).0.this\.\Size\;
-                        \BitMask::SetZero(UInt16).0.flag\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.0\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::SetZero(UInt16).0.this\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := \BitMask::SetZero(UInt16).0.index\ > \BitMask::SetZero(UInt16).0.binaryOperationResult.0\;
+                        \BitMask::SetZero(UInt16).0.flag\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	result = new BitMask (@this);
@@ -4258,11 +4264,11 @@ begin
                         -- 	index2 = index >> 5;
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 1u;
                         -- 	if (flag2) {
-                        -- 		uint[] array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5;
-                        -- 		array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, 1);
-                        -- 		array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 		result = BitMask.FromImmutableArray (array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, @this.Size);
+                        -- 		uint[] array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b;
+                        -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
+                        -- 		System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
+                        -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
+                        -- 		result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- 	}
                         -- 	else {
                         -- 		result = new BitMask (@this);
@@ -4280,7 +4286,7 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::SetZero(UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::SetZero(UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -4331,11 +4337,11 @@ begin
                         -- 	index2 = index >> 5;
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 1u;
                         -- 	if (flag2) {
-                        -- 		uint[] array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5;
-                        -- 		array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, 1);
-                        -- 		array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 		result = BitMask.FromImmutableArray (array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, @this.Size);
+                        -- 		uint[] array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b;
+                        -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
+                        -- 		System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
+                        -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
+                        -- 		result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- 	}
                         -- 	else {
                         -- 		result = new BitMask (@this);
@@ -4348,7 +4354,7 @@ begin
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::SetZero(UInt16).0._State_7\ => 
-                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_8\;
@@ -4356,23 +4362,23 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetZero(UInt16).0._State_8\ => 
-                        \BitMask::SetZero(UInt16).0.num\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.1\);
+                        \BitMask::SetZero(UInt16).0.num\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
                         -- index2 = index >> 5;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::SetZero(UInt16).0.index2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.2\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := signed(SmartResize(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::SetZero(UInt16).0.index2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = @this.Segments [index2] >> num % 2u == 1u;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := shift_right(\BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetZero(UInt16).0.num\), 5) and "11111")));
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := shift_right(\BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetZero(UInt16).0.num\), 5) and "11111")));
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \BitMask::SetZero(UInt16).0._State_9\ => 
-                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_10\;
@@ -4380,18 +4386,18 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ mod to_unsigned(2, 32);
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetZero(UInt16).0._State_10\ => 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ = to_unsigned(1, 32);
-                        \BitMask::SetZero(UInt16).0.flag2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.5\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ = to_unsigned(1, 32);
+                        \BitMask::SetZero(UInt16).0.flag2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.6\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
-                        -- 	uint[] array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5;
-                        -- 	array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, 1);
-                        -- 	array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 	result = BitMask.FromImmutableArray (array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, @this.Size);
+                        -- 	uint[] array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b;
+                        -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
+                        -- 	System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
+                        -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
+                        -- 	result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- }
                         -- else {
                         -- 	result = new BitMask (@this);
@@ -4420,35 +4426,35 @@ begin
                         -- True branch of the if-else started in state \BitMask::SetZero(UInt16).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	uint[] array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5;
-                        -- 	array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, 1);
-                        -- 	array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 	result = BitMask.FromImmutableArray (array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, @this.Size);
+                        -- 	uint[] array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b;
+                        -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
+                        -- 	System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
+                        -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
+                        -- 	result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint[] array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5;
+                        -- uint[] array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 = new uint[1];
+                        -- array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
                         -- 
-                        \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\ := (others => to_unsigned(0, 32));
+                        \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (@this.Segments, array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, 1);
+                        -- System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
                         -- 
-                        \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(0 to 0);
+                        \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(0 to 0);
                         -- The following section was transformed from the .NET statement below:
-                        -- array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5 [index2] = @this.Segments [index2] & ~1u << num;
+                        -- array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetZero(UInt16).0.num\, 5))));
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.7\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) and not(\BitMask::SetZero(UInt16).0.binaryOperationResult.6\);
-                        \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) := \BitMask::SetZero(UInt16).0.binaryOperationResult.7\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.7\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetZero(UInt16).0.num\, 5))));
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.8\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) and not(\BitMask::SetZero(UInt16).0.binaryOperationResult.7\);
+                        \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) := \BitMask::SetZero(UInt16).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
-                        -- result = BitMask.FromImmutableArray (array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5, @this.Size);
+                        -- result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::FromImmutableArray(System.UInt32[],System.UInt16)
-                        \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\;
+                        \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\;
                         \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\ <= \BitMask::SetZero(UInt16).0.this\.\Size\;
                         \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= true;
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_13\;
@@ -4458,7 +4464,7 @@ begin
                         if (\BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ = \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\) then 
                             \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= false;
                             \BitMask::SetZero(UInt16).0.return.0\ := \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).return.0\;
-                            \BitMask::SetZero(UInt16).0.array8067212744a014c107bb7a1daef9d2df25c8185e6e96a8b702c3af5c63cd56b5\ := \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\;
+                            \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\ := \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\;
                             \BitMask::SetZero(UInt16).0.result\ := \BitMask::SetZero(UInt16).0.return.0\;
                             -- Going to the state after the if-else which was started in state \BitMask::SetZero(UInt16).0._State_10\.
                             if (\BitMask::SetZero(UInt16).0._State\ = \BitMask::SetZero(UInt16).0._State_13\) then 
