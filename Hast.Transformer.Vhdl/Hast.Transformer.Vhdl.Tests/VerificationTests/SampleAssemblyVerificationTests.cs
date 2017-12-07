@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Hast.Algorithms;
 using Hast.Layer;
+using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
@@ -60,6 +62,30 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task KpzSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(PrngMWC64X).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
+
+                        configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();

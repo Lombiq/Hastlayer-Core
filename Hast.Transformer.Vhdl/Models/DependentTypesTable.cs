@@ -20,9 +20,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// </summary>
         public void AddDependency(DataType type, string dependencyTypeName)
         {
-            HashSet<string> dependencies;
-
-            if (!_dependencies.TryGetValue(type, out dependencies))
+            if (!_dependencies.TryGetValue(type, out var dependencies))
             {
                 dependencies = _dependencies[type] = new HashSet<string>();
             }
@@ -52,8 +50,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// </summary>
         public IEnumerable<string> GetDependencies(DataType type)
         {
-            HashSet<string> dependencies;
-            if (!_dependencies.TryGetValue(type, out dependencies)) return Enumerable.Empty<string>();
+            if (!_dependencies.TryGetValue(type, out var dependencies)) return Enumerable.Empty<string>();
             return dependencies;
         }
 

@@ -74,10 +74,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-            AssignmentExpression parentAssignment;
-
             // We only care about cases where this member is assigned to.
-            if (!memberReferenceExpression.Parent.Is(assignment => assignment.Left == memberReferenceExpression, out parentAssignment))
+            if (!memberReferenceExpression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == memberReferenceExpression, out var parentAssignment))
             {
                 return;
             }
