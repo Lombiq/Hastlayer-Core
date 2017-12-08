@@ -17,6 +17,7 @@ namespace ICSharpCode.NRefactory.CSharp
             var privateImplementationType = member is MethodDeclaration ?
                 ((MethodDeclaration)(object)member).PrivateImplementationType : 
                 ((PropertyDeclaration)(object)member).PrivateImplementationType;
+
             // This is an explicitly implemented method so just returning the interface's type declaration directly.
             if (!privateImplementationType.IsNull)
             {
