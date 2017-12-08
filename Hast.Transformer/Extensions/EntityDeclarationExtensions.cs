@@ -1,4 +1,5 @@
 ﻿using System;
+using Hast.Transformer.Helpers;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
@@ -40,6 +41,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
                     var baseTypeDeclaration = lookupDeclaration(baseType);
+
+                    if (baseTypeDeclaration == null)
+                    {
+                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName());
+                    }
 
                     if (baseTypeDeclaration.ClassType == ClassType.Interface)
                     {
