@@ -42,7 +42,7 @@ namespace Hast.VhdlBuilder.Representation
         /// code for debugging, does not guarantee unique names. Be aware that using this can add significant overhead
         /// to VHDL generation (making it take 10 or even more times longer!).
         /// </summary>
-        public static NameShortener SimpleNameShortener = originalName =>
+        public static readonly NameShortener SimpleNameShortener = originalName =>
             {
                 if (string.IsNullOrEmpty(originalName))
                 {
@@ -123,13 +123,13 @@ namespace Hast.VhdlBuilder.Representation
                 return newName;
             };
 
-        private static VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
+        private static readonly VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
         {
             FormatCode = true,
             OmitComments = false,
             NameShortener = SimpleNameShortener
         };
-        public static VhdlGenerationOptions Debug { get { return _debugOptions; } }
+        public static VhdlGenerationOptions Debug => _debugOptions;
 
         public bool FormatCode { get; set; } = true;
         public bool OmitComments { get; set; } = true;
