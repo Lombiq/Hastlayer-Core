@@ -30,7 +30,7 @@ namespace Hast.Transformer.Services
                     !(assignment.Left is IdentifierExpression) ||
                     !(assignment.Parent is ExpressionStatement))
                 {
-                    var variableName = "conditional" + Sha2456Helper.ComputeHash(conditionalExpression.ToString());
+                    var variableName = "conditional" + Sha2456Helper.ComputeHash(conditionalExpression.GetFullName());
 
                     var typeInformation = conditionalExpression.Annotation<TypeInformation>();
                     if (typeInformation == null)
