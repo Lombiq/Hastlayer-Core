@@ -1,4 +1,5 @@
 ﻿using System;
+using Hast.Transformer.Helpers;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
@@ -17,6 +18,7 @@ namespace ICSharpCode.NRefactory.CSharp
             var privateImplementationType = member is MethodDeclaration ?
                 ((MethodDeclaration)(object)member).PrivateImplementationType : 
                 ((PropertyDeclaration)(object)member).PrivateImplementationType;
+
             // This is an explicitly implemented method so just returning the interface's type declaration directly.
             if (!privateImplementationType.IsNull)
             {
@@ -39,6 +41,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
                     var baseTypeDeclaration = lookupDeclaration(baseType);
+
+                    if (baseTypeDeclaration == null)
+                    {
+                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName());
+                    }
 
                     if (baseTypeDeclaration.ClassType == ClassType.Interface)
                     {

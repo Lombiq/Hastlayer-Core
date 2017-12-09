@@ -38,10 +38,21 @@ namespace Hast.Transformer.Vhdl.Services
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
             _vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
 
-            var vhdlGenerationOptions =
-                transformationContext.HardwareGenerationConfiguration.VhdlTransformerConfiguration().VhdlGenerationMode == VhdlGenerationMode.Debug ?
-                VhdlGenerationOptions.Debug :
-                new VhdlGenerationOptions();
+            var vhdlGenerationConfiguration = transformationContext
+                .HardwareGenerationConfiguration
+                .VhdlTransformerConfiguration()
+                .VhdlGenerationConfiguration;
+
+            var vhdlGenerationOptions = new VhdlGenerationOptions
+            {
+                OmitComments = !vhdlGenerationConfiguration.AddComments
+            };
+
+            if (vhdlGenerationConfiguration.ShortenNames)
+            {
+                vhdlGenerationOptions.NameShortener = VhdlGenerationOptions.SimpleNameShortener;
+            }
+
             var vhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions);
             var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
 

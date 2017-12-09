@@ -10,10 +10,8 @@ namespace Hast.Transformer.Services
     {
         public bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            if (member is MethodDeclaration)
+            if (member is MethodDeclaration method)
             {
-                var method = (MethodDeclaration)member;
-
                 if (method.Parent is TypeDeclaration &&
                         // If it's a public virtual method,
                         (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) ||
