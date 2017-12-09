@@ -91,7 +91,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
             });
         }
-        
+
         [Test]
         public async Task UnumSampleMatchesApproved()
         {
@@ -103,9 +103,31 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<UnumCalculator>();
+
                         configuration.TransformerConfiguration().AddLengthForMultipleArrays(
                             UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
                             UnumCalculatorExtensions.ManuallySizedArrays);
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task PositSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<PositCalculator>();
+
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                            PositCalculatorExtensions.ManuallySizedArrays);
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
