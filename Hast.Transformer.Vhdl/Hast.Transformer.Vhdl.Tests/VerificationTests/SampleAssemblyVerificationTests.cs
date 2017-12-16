@@ -124,10 +124,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<PositCalculator>();
-
-                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
-                            PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
-                            PositCalculatorExtensions.ManuallySizedArrays);
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
