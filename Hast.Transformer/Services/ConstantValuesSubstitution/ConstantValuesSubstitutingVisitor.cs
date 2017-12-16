@@ -206,7 +206,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
-            // If this is an value holder on the left side of an assignment then nothing to do. If it's in a while
+            // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
             // statement then it can't be safely substituted (due to e.g. loop variables).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
                 ConstantValueSubstitutionHelper.IsInWhile(expression))
