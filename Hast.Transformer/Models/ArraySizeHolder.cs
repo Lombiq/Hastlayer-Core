@@ -48,5 +48,7 @@ namespace Hast.Transformer.Models
 
             _arraySizes[holderName] = new ArraySize { Length = length };
         }
+
+        public IArraySizeHolder Clone() => new ArraySizeHolder(_arraySizes);
     }
 }

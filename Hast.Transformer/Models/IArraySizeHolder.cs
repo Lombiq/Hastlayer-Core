@@ -16,6 +16,7 @@ namespace Hast.Transformer.Models
     {
         IArraySize GetSize(AstNode arrayHolder);
         void SetSize(AstNode arrayHolder, int length);
+        IArraySizeHolder Clone();
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
 
@@ -65,8 +66,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 new ConstantValuesSubstitutingAstProcessor(
                     subConstantValuesTable,
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
-                    _constantValuesSubstitutingAstProcessor.ArraySizeHolder,
-                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings,
+                    _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
+                    new Dictionary<string, MethodDeclaration>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
                     _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator)
                 .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
 

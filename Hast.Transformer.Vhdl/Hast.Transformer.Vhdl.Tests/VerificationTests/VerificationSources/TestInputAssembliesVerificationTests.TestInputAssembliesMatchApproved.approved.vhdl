@@ -1928,7 +1928,7 @@ begin
                         -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(160, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Array = new uint[5];
+                        -- @this.Array = new uint[5u];
                         -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\Array\ := (others => to_unsigned(0, 32));
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_1\;
@@ -1998,7 +1998,7 @@ begin
                         -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(160, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Array = new uint[5];
+                        -- @this.Array = new uint[5u];
                         -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\Array\ := (others => to_unsigned(0, 32));
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_1\;
