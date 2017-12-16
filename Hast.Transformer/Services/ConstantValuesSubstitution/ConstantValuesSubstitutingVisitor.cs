@@ -307,16 +307,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 var right = assignmentExpression.Right as PrimitiveExpression;
 
-                if (right == null) return;
-
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
-                // another assignment in an if-else or while then that makes the value holder's constant value unusable.
+                // another assignment with a non-constant value or in an if-else or while then that makes the value 
+                // holder's constant value unusable.
 
-                if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
+                if (right == null || ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
                 {
                     ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
                 }
-                else
+                else if (right != null)
                 {
                     ConstantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, right, _constructor);
                 }
