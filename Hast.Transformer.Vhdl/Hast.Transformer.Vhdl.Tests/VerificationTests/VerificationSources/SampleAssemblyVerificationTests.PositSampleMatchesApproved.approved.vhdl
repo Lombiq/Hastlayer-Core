@@ -171,6 +171,7 @@ architecture Imp of Hast_IP is
         \MaxValueBitMask\: \Lombiq.Arithmetics.BitMask\;
         \MinValueBitMask\: \Lombiq.Arithmetics.BitMask\;
         \NaNBitMask\: \Lombiq.Arithmetics.BitMask\;
+        \QuireSize\: unsigned(31 downto 0);
     end record;
     type \Lombiq.Arithmetics.Posit\ is record 
         \IsNull\: boolean;
@@ -1949,7 +1950,9 @@ architecture Imp of Hast_IP is
         \PositEnvironment::.ctor(Byte,Byte).0._State_11\, 
         \PositEnvironment::.ctor(Byte,Byte).0._State_12\, 
         \PositEnvironment::.ctor(Byte,Byte).0._State_13\, 
-        \PositEnvironment::.ctor(Byte,Byte).0._State_14\);
+        \PositEnvironment::.ctor(Byte,Byte).0._State_14\, 
+        \PositEnvironment::.ctor(Byte,Byte).0._State_15\, 
+        \PositEnvironment::.ctor(Byte,Byte).0._State_16\);
     -- Signals:
     Signal \PositEnvironment::.ctor(Byte,Byte).0._Finished\: boolean := false;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.this.parameter.Out\: \Lombiq.Arithmetics.PositEnvironment\;
@@ -1966,6 +1969,12 @@ architecture Imp of Hast_IP is
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\: boolean := false;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\: boolean := false;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\: boolean := false;
     Signal \PositEnvironment::.ctor(Byte,Byte).0._Started\: boolean := false;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.this.parameter.In\: \Lombiq.Arithmetics.PositEnvironment\;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.size.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -1978,6 +1987,10 @@ architecture Imp of Hast_IP is
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_RightShift(BitMask,Int32).return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\: boolean := false;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\: boolean := false;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Finished.0\: boolean := false;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition().return.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     -- System.Void Lombiq.Arithmetics.PositEnvironment::.ctor(System.Byte,System.Byte).0 declarations end
 
 
@@ -2265,6 +2278,7 @@ begin
                         \PositCalculator::EnvironmentFactory().0.objectf21a700bdaa46d8d27601bb4af8551f02169863bbb09ff4e3aedf8be27b4cf30\.\Size\ := to_unsigned(0, 16);
                         \PositCalculator::EnvironmentFactory().0.objectf21a700bdaa46d8d27601bb4af8551f02169863bbb09ff4e3aedf8be27b4cf30\.\Useed\ := to_unsigned(0, 32);
                         \PositCalculator::EnvironmentFactory().0.objectf21a700bdaa46d8d27601bb4af8551f02169863bbb09ff4e3aedf8be27b4cf30\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
+                        \PositCalculator::EnvironmentFactory().0.objectf21a700bdaa46d8d27601bb4af8551f02169863bbb09ff4e3aedf8be27b4cf30\.\QuireSize\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.PositEnvironment::.ctor(System.Byte,System.Byte)
                         \PositCalculator::EnvironmentFactory().0.PositEnvironment::.ctor(Byte,Byte).this.parameter.Out.0\ <= \PositCalculator::EnvironmentFactory().0.objectf21a700bdaa46d8d27601bb4af8551f02169863bbb09ff4e3aedf8be27b4cf30\;
@@ -15180,6 +15194,8 @@ begin
         Variable \PositEnvironment::.ctor(Byte,Byte).0.objectc933731a1c8e1f9c1595fb4bee5d415d69e74d3de4df226197832b9556ea90bf\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.return.2\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.return.3\: \Lombiq.Arithmetics.BitMask\;
+        Variable \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\: \Lombiq.Arithmetics.BitMask\;
+        Variable \PositEnvironment::.ctor(Byte,Byte).0.return.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -15194,9 +15210,14 @@ begin
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= to_unsigned(0, 32);
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                 \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_0\;
                 \PositEnvironment::.ctor(Byte,Byte).0.size\ := to_unsigned(0, 8);
                 \PositEnvironment::.ctor(Byte,Byte).0.maximumExponentSize\ := to_unsigned(0, 8);
+                \PositEnvironment::.ctor(Byte,Byte).0.return.4\ := to_unsigned(0, 16);
             else 
                 case \PositEnvironment::.ctor(Byte,Byte).0._State\ is 
                     when \PositEnvironment::.ctor(Byte,Byte).0._State_0\ => 
@@ -15418,6 +15439,46 @@ begin
                             -- @this.NaNBitMask = @this.SignBitMask;
                             -- 
                             \PositEnvironment::.ctor(Byte,Byte).0.this\.\NaNBitMask\ := \PositEnvironment::.ctor(Byte,Byte).0.this\.\SignBitMask\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- BitMask object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb = new BitMask (245u, 32);
+                            -- 
+                            -- Initializing record fields to their defaults.
+                            \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\.\IsNull\ := false;
+                            \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\.\Size\ := to_unsigned(0, 16);
+                            \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\.\SegmentCount\ := to_unsigned(0, 16);
+                            \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\.\Segments\ := (others => to_unsigned(0, 32));
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16)
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\;
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= to_unsigned(245, 32);
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= true;
+                            \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PositEnvironment::.ctor(Byte,Byte).0._State_15\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16)
+                        if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\) then 
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
+                            \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\ := \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.QuireSize = (uint)Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object88ccd14e79b707ec45ea502c87dbbfc3847fc3d916503e3a10d1c411a1fcf5cb\;
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
+                            \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_16\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PositEnvironment::.ctor(Byte,Byte).0._State_16\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
+                        if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
+                            \PositEnvironment::.ctor(Byte,Byte).0.return.4\ := \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition().return.0\;
+                            \PositEnvironment::.ctor(Byte,Byte).0.this\.\QuireSize\ := SmartResize(\PositEnvironment::.ctor(Byte,Byte).0.return.4\, 32);
                             \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16085,6 +16146,8 @@ begin
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::EncodeRegimeBits(Int32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::op_Addition(Posit,Posit).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::op_Addition(Posit,Posit).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16099,11 +16162,14 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::EncodeRegimeBits(Int32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::op_Addition(Posit,Posit).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::op_Addition(Posit,Posit).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \BitMask::op_Addition(BitMask,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \BitMask::op_Subtraction(BitMask,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Posit::EncodeRegimeBits(Int32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,System.UInt32).0
@@ -16257,6 +16323,37 @@ begin
                         if (\Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Posit::op_Addition(Posit,Posit).0.runningState.0\ := WaitingForStarted;
                             \Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.PositEnvironment::.ctor(System.Byte,System.Byte).0
+                case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\) then 
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                            \BitMask::.ctor(UInt32,UInt16).0._Started\ <= true;
+                            \BitMask::.ctor(UInt32,UInt16).0.this.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\;
+                            \BitMask::.ctor(UInt32,UInt16).0.segment.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\;
+                            \BitMask::.ctor(UInt32,UInt16).0.size.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\BitMask::.ctor(UInt32,UInt16).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := AfterFinished;
+                                    \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= true;
+                                    \BitMask::.ctor(UInt32,UInt16).0._Started\ <= false;
+                                    \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\ <= \BitMask::.ctor(UInt32,UInt16).0.this.parameter.Out\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -17279,6 +17376,8 @@ begin
         Variable \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Addition(Posit,Posit).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Explicit(Posit).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Explicit(Posit).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17293,11 +17392,14 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Addition(Posit,Posit).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Explicit(Posit).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Explicit(Posit).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
                 \Posit::EncodeRegimeBits(Int32).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
                 \Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
                 \Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,System.UInt32).0
@@ -17441,6 +17543,35 @@ begin
                         if (\Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().Posit::op_Explicit(Posit).0.runningState.0\ := WaitingForStarted;
                             \Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.PositEnvironment::.ctor(System.Byte,System.Byte).0
+                case \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\) then 
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                            \BitMask::GetMostSignificantOnePosition().0._Started\ <= true;
+                            \BitMask::GetMostSignificantOnePosition().0.this.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\BitMask::GetMostSignificantOnePosition().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := AfterFinished;
+                                    \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= true;
+                                    \BitMask::GetMostSignificantOnePosition().0._Started\ <= false;
+                                    \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition().return.0\ <= \BitMask::GetMostSignificantOnePosition().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::GetMostSignificantOnePosition().PositEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask::GetMostSignificantOnePosition()._Finished.0\ <= false;
                         end if;
                 end case;
 
