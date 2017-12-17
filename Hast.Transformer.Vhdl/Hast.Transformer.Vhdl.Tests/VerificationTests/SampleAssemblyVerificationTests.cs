@@ -129,5 +129,22 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
             });
         }
+
+        [Test]
+        public async Task Posit32SampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32Calculator>();
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
     }
 }
