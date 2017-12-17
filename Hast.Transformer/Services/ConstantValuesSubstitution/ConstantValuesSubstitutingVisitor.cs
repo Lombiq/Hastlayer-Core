@@ -206,7 +206,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
-            // If this is an value holder on the left side of an assignment then nothing to do. If it's in a while
+            // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
             // statement then it can't be safely substituted (due to e.g. loop variables).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
                 ConstantValueSubstitutionHelper.IsInWhile(expression))
@@ -227,10 +227,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            PrimitiveExpression valueExpression;
             // First checking if there is a substitution for the expression; if not then if it's a member reference
             // then check whether there is a global substitution for the member.
-            if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression) ||
+            if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out PrimitiveExpression valueExpression) ||
                 expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                 {
                     var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
@@ -308,16 +307,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 var right = assignmentExpression.Right as PrimitiveExpression;
 
-                if (right == null) return;
-
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
-                // another assignment in an if-else or while then that makes the value holder's constant value unusable.
+                // another assignment with a non-constant value or in an if-else or while then that makes the value 
+                // holder's constant value unusable.
 
-                if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
+                if (right == null || ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
                 {
                     ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
                 }
-                else
+                else if (right != null)
                 {
                     ConstantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, right, _constructor);
                 }

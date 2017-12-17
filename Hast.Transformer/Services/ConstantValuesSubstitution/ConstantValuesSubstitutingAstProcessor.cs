@@ -59,6 +59,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             do
             {
                 codeOutput = rootNode.ToString();
+                // Uncomment the below line to get a debug output about the current state of this sub-tree.
+                //System.IO.File.WriteAllText("ConstantSubstitution.cs", codeOutput);
                 hiddenlyUpdatedNodesUpdatedCount = constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count;
 
                 rootNode.AcceptVisitor(constantValuesMarkingVisitor);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
 
@@ -26,10 +27,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // a field's value set in the ctor depends on a ctor argument, which in turn depends on the same field of
             // another instance).
 
-            AssignmentExpression parentAssignment;
-            if (objectCreateExpression.Parent.Is<AssignmentExpression>(assignment =>
+            if (objectCreateExpression.Parent.Is(assignment =>
                 assignment.Left.GetActualTypeReference()?.FullName == objectCreateExpression.Type.GetFullName(),
-                out parentAssignment))
+                out AssignmentExpression parentAssignment))
             {
                 var constructorName = objectCreateExpression.GetConstructorFullName();
 
@@ -66,8 +66,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 new ConstantValuesSubstitutingAstProcessor(
                     subConstantValuesTable,
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
-                    _constantValuesSubstitutingAstProcessor.ArraySizeHolder,
-                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings,
+                    _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
+                    new Dictionary<string, MethodDeclaration>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
                     _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator)
                 .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
 
