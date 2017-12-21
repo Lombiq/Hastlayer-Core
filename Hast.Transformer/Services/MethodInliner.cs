@@ -33,7 +33,9 @@ namespace Hast.Transformer.Services
                 {
                     if (method.ReturnType.Is<PrimitiveType>(type => type.KnownTypeCode == KnownTypeCode.Void))
                     {
-                        throw new NotSupportedException("Only non-void methods can be inlined.");
+                        throw new NotSupportedException(
+                            "The method " + method.GetFullName() + 
+                            " can't be inlined, because that's only available for non-void methods.");
                     }
 
                     inlinableMethods[method.GetFullName()] = (MethodDeclaration)method;
@@ -67,6 +69,7 @@ namespace Hast.Transformer.Services
         private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
             identifier + "_" + methodIdentifierNameSuffix;
 
+
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, MethodDeclaration> _inlinableMethods;
@@ -86,17 +89,17 @@ namespace Hast.Transformer.Services
 
                 if (targetMemberReference == null) return;
 
-                var memberFullName = targetMemberReference.GetMemberFullName();
+                var methodFullName = targetMemberReference.GetMemberFullName();
 
-                if (string.IsNullOrEmpty(memberFullName))
+                if (string.IsNullOrEmpty(methodFullName))
                 {
                     // Sometimes there is no annotation on targetMemberReference at all.
                     // MemberReferenceExpressionExtensions.FindMemberDeclaration() has logic to iteratively find the 
                     // first parent with a MemberReference annotation too, for the same reason.
-                    memberFullName = invocationExpression.Annotation<MemberReference>()?.FullName;
+                    methodFullName = invocationExpression.Annotation<MemberReference>()?.FullName;
                 }
 
-                if (string.IsNullOrEmpty(memberFullName) || !_inlinableMethods.TryGetValue(memberFullName, out var method))
+                if (string.IsNullOrEmpty(methodFullName) || !_inlinableMethods.TryGetValue(methodFullName, out var method))
                 {
                     return;
                 }
@@ -106,7 +109,7 @@ namespace Hast.Transformer.Services
                 // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once inlined.
                 // Since the same method can be inlined multiple times in another method we also need to distinguish per
                 // invocation.
-                var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(memberFullName + invocationExpression.CreateNameForUnnamedNode());
+                var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.CreateNameForUnnamedNode());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
                 // inlined method's body.
@@ -138,7 +141,7 @@ namespace Hast.Transformer.Services
 
                 // Preparing and adding the method's body inline.
                 var inlinedBody = (BlockStatement)method.Body.Clone();
-                inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference));
+                inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, methodFullName));
 
                 foreach (var statement in inlinedBody.Statements)
                 {
@@ -156,14 +159,19 @@ namespace Hast.Transformer.Services
         {
             private readonly string _methodIdentifierNameSuffix;
             private readonly IdentifierExpression _returnVariableReference;
+            private readonly string _methodFullName;
+
+            private bool _aReturnStatementWasVisited;
 
 
             public MethodBodyAdaptingVisitor(
                 string methodIdentifierNameSuffix, 
-                IdentifierExpression returnVariableReferenc)
+                IdentifierExpression returnVariableReferenc,
+                string methodFullName)
             {
                 _methodIdentifierNameSuffix = methodIdentifierNameSuffix;
                 _returnVariableReference = returnVariableReferenc;
+                _methodFullName = methodFullName;
             }
 
 
@@ -171,9 +179,18 @@ namespace Hast.Transformer.Services
             {
                 base.VisitReturnStatement(returnStatement);
 
+                if (_aReturnStatementWasVisited)
+                {
+                    throw new NotSupportedException(
+                        "Inlining methods with only a single return statement is supported. The method " +
+                        _methodFullName + " contains more than one return statement.");
+                }
+
                 returnStatement.ReplaceWith(new ExpressionStatement(new AssignmentExpression(
                     _returnVariableReference.Clone(),
                     returnStatement.Expression.Clone())));
+
+                _aReturnStatementWasVisited = true;
             }
 
             public override void VisitVariableInitializer(VariableInitializer variableInitializer)
