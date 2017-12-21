@@ -3,7 +3,7 @@
     public class InvalidHardwareEntryPoint
     {
         public int MyProperty { get; set; }
-        private int _myField;
+        private int _myField = 0;
 
 
         public InvalidHardwareEntryPoint()
