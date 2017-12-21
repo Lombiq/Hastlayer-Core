@@ -176,11 +176,18 @@ namespace Hast.Transformer.Services
                     returnStatement.Expression.Clone())));
             }
 
-            public override void VisitIdentifier(Identifier identifier)
+            public override void VisitVariableInitializer(VariableInitializer variableInitializer)
             {
-                base.VisitIdentifier(identifier);
+                base.VisitVariableInitializer(variableInitializer);
 
-                identifier.Name = SuffixMethodIdentifier(identifier.Name, _methodIdentifierNameSuffix);
+                variableInitializer.Name = SuffixMethodIdentifier(variableInitializer.Name, _methodIdentifierNameSuffix);
+            }
+
+            public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
+            {
+                base.VisitIdentifierExpression(identifierExpression);
+
+                identifierExpression.Identifier = SuffixMethodIdentifier(identifierExpression.Identifier, _methodIdentifierNameSuffix);
             }
         }
     }
