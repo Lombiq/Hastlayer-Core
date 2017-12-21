@@ -99,9 +99,8 @@ namespace ICSharpCode.NRefactory.CSharp
                 return CreateParentEntityBasedName(node, ((VariableInitializer)node).Name);
             }
 
-            if (node is AssignmentExpression)
+            if (node is AssignmentExpression assignment)
             {
-                var assignment = (AssignmentExpression)node;
                 return CreateNameForUnnamedNode(node) + assignment.Left.GetFullName() + assignment.Right.GetFullName();
             }
 
