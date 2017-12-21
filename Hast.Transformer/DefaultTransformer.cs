@@ -104,6 +104,8 @@ namespace Hast.Transformer
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
+            var transformerConfiguration = configuration.TransformerConfiguration();
+
             // When executed as a Windows service not all Hastlayer assemblies references from transformed assemblies
             // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote 
             // transformation needs multiple assemblies those will need to be loaded like this too.
@@ -260,7 +262,7 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
-            _methodInliner.InlineMethods(syntaxTree);
+            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
@@ -274,7 +276,7 @@ namespace Hast.Transformer
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
 
-            if (configuration.TransformerConfiguration().UseSimpleMemory)
+            if (transformerConfiguration.UseSimpleMemory)
             {
                 CheckSimpleMemoryUsage(syntaxTree);
             }
