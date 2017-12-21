@@ -46,6 +46,7 @@ namespace Hast.Transformer
         private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
         private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
         private readonly ITransformationContextCacheService _transformationContextCacheService;
+        private readonly IMethodInliner _methodInliner;
 
 
         public DefaultTransformer(
@@ -71,7 +72,8 @@ namespace Hast.Transformer
             IAppDataFolder appDataFolder,
             IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
             IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
-            ITransformationContextCacheService transformationContextCacheService)
+            ITransformationContextCacheService transformationContextCacheService,
+            IMethodInliner methodInliner)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -96,6 +98,7 @@ namespace Hast.Transformer
             _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
             _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
             _transformationContextCacheService = transformationContextCacheService;
+            _methodInliner = methodInliner;
         }
 
 
@@ -257,6 +260,7 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
+            _methodInliner.InlineMethods(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
