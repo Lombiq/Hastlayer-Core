@@ -29,6 +29,15 @@ namespace Hast.Transformer.Helpers
             var parentStatement = valueHolder.FindFirstParentStatement();
             var typeInformation = valueHolder.GetTypeInformationOrCreateFromActualTypeReference();
 
+            return DeclareAndReferenceVariable(variableName, typeInformation, type, parentStatement);
+        }
+
+        public static IdentifierExpression DeclareAndReferenceVariable(
+            string variableName,
+            TypeInformation typeInformation,
+            AstType type,
+            Statement parentStatement)
+        {
             var variableDeclaration = new VariableDeclarationStatement(type.Clone(), variableName)
                 .WithAnnotation(typeInformation);
             variableDeclaration.Variables.Single().AddAnnotation(typeInformation);
