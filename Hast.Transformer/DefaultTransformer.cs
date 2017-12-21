@@ -308,9 +308,7 @@ namespace Hast.Transformer
             {
                 foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
-                    var method = member as MethodDeclaration;
-
-                    if (method != null)
+                    if (member is MethodDeclaration method)
                     {
                         var methodName = member.GetFullName();
 
