@@ -141,6 +141,25 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<Posit32Calculator>();
+                        configuration.TransformerConfiguration().EnableMethodInlining = false;
+
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task Posit32SampleWithInliningMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32Calculator>();
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
