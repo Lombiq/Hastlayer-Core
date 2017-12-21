@@ -14,9 +14,8 @@ namespace ICSharpCode.NRefactory.CSharp
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
-            if (node is MemberReferenceExpression)
+            if (node is MemberReferenceExpression memberReferenceExpression)
             {
-                var memberReferenceExpression = (MemberReferenceExpression)node;
                 return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
             }
 
@@ -36,10 +35,8 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
-            if (node is ComposedType)
+            if (node is ComposedType composedType)
             {
-                var composedType = (ComposedType)node;
-
                 var name = composedType.BaseType.GetFullName();
 
                 if (composedType.ArraySpecifiers.Any())
