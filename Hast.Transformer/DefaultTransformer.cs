@@ -46,6 +46,7 @@ namespace Hast.Transformer
         private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
         private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
         private readonly ITransformationContextCacheService _transformationContextCacheService;
+        private readonly IMethodInliner _methodInliner;
 
 
         public DefaultTransformer(
@@ -71,7 +72,8 @@ namespace Hast.Transformer
             IAppDataFolder appDataFolder,
             IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
             IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
-            ITransformationContextCacheService transformationContextCacheService)
+            ITransformationContextCacheService transformationContextCacheService,
+            IMethodInliner methodInliner)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -96,11 +98,14 @@ namespace Hast.Transformer
             _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
             _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
             _transformationContextCacheService = transformationContextCacheService;
+            _methodInliner = methodInliner;
         }
 
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
+            var transformerConfiguration = configuration.TransformerConfiguration();
+
             // When executed as a Windows service not all Hastlayer assemblies references from transformed assemblies
             // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote 
             // transformation needs multiple assemblies those will need to be loaded like this too.
@@ -257,6 +262,7 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
+            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
@@ -270,7 +276,7 @@ namespace Hast.Transformer
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
 
-            if (configuration.TransformerConfiguration().UseSimpleMemory)
+            if (transformerConfiguration.UseSimpleMemory)
             {
                 CheckSimpleMemoryUsage(syntaxTree);
             }
@@ -302,9 +308,7 @@ namespace Hast.Transformer
             {
                 foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
-                    var method = member as MethodDeclaration;
-
-                    if (method != null)
+                    if (member is MethodDeclaration method)
                     {
                         var methodName = member.GetFullName();
 

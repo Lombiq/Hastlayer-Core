@@ -145,7 +145,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (primitiveCondition == null) return;
 
-            Action<Statement> replaceIfElse = branchStatement =>
+            void replaceIfElse(Statement branchStatement)
             {
                 // Moving all statements from the block up.
                 if (branchStatement is BlockStatement)
@@ -156,7 +156,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     }
                 }
                 else ifElseStatement.ReplaceWith(branchStatement.Clone());
-            };
+            }
 
             if (primitiveCondition.Value.Equals(true)) replaceIfElse(ifElseStatement.TrueStatement);
             else if (ifElseStatement.FalseStatement != Statement.Null) replaceIfElse(ifElseStatement.FalseStatement);

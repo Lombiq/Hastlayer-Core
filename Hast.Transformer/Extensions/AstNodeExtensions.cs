@@ -21,7 +21,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is ObjectCreateExpression)
             {
-                return CreateNameForUnnamedNode(node);
+                return node.CreateNameForUnnamedNode();
             }
 
             var memberDefinition = node.Annotation<IMemberDefinition>();
@@ -98,7 +98,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is AssignmentExpression assignment)
             {
-                return CreateNameForUnnamedNode(node) + assignment.Left.GetFullName() + assignment.Right.GetFullName();
+                return node.CreateNameForUnnamedNode() + assignment.Left.GetFullName() + assignment.Right.GetFullName();
             }
 
             if (node == Expression.Null || node == Statement.Null)
@@ -106,7 +106,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 return string.Empty;
             }
             
-            return CreateNameForUnnamedNode(node);
+            return node.CreateNameForUnnamedNode();
         }
 
         /// <summary>
@@ -279,11 +279,7 @@ namespace ICSharpCode.NRefactory.CSharp
             return node;
         }
 
-
-        private static string CreateParentEntityBasedName(AstNode node, string name) =>
-            node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
-
-        private static string CreateNameForUnnamedNode(AstNode node)
+        public static string CreateNameForUnnamedNode(this AstNode node)
         {
             // The node doesn't really have a name so give it one that is suitably unique.
             // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
@@ -294,5 +290,9 @@ namespace ICSharpCode.NRefactory.CSharp
                 node,
                 node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
         }
+
+
+        private static string CreateParentEntityBasedName(AstNode node, string name) =>
+            node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
     }
 }
