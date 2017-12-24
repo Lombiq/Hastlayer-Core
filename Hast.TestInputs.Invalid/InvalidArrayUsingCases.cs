@@ -34,6 +34,12 @@ namespace Hast.TestInputs.Invalid
             var immutableArray2 = ImmutableArray.CreateRange(immutableArray1, item => item);
         }
 
+        public void MultiDimensionalArray()
+        {
+            var array = new int[2, 3];
+            array[0, 1] = 10;
+        }
+
 
         private int GetItemValuePlusOne(int[] array, int itemIndex) => array[itemIndex] + 1;
     }

@@ -188,7 +188,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitArrayCreateExpression(arrayCreateExpression);
 
-            var lengthArgument = arrayCreateExpression.Arguments.Single();
+            var lengthArgument = arrayCreateExpression.Arguments.First();
             var parentAssignment = arrayCreateExpression.Parent as AssignmentExpression;
             var existingSize = parentAssignment != null ?
                 _arraySizeHolder.GetSize(parentAssignment.Left) :
