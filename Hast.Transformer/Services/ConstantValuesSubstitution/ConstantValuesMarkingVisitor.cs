@@ -136,7 +136,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return;
                 }
 
-                Action<AstNode> processParent = parent =>
+                void processParent(AstNode parent) =>
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
                     constructorDeclaration;
 
@@ -182,7 +182,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
         {
-            Action<AstNode> processParent = parent => _arraySizeHolder.SetSize(parent, arrayLength);
+            void processParent(AstNode parent) => _arraySizeHolder.SetSize(parent, arrayLength);
 
             ProcessParent(
                 node: arrayHolder,
@@ -218,7 +218,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             var parent = node.Parent;
 
-            Action<AstNode> updateHiddenlyUpdatedNodesUpdated = n => HiddenlyUpdatedNodesUpdated.Add(n.GetFullName());
+            void updateHiddenlyUpdatedNodesUpdated(AstNode n) => HiddenlyUpdatedNodesUpdated.Add(n.GetFullName());
 
             if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out var assignmentExpression) ||
                 parent.Is<InvocationExpression>(invocation => invocation.Target == node && invocation.Parent.Is(out assignmentExpression)))
