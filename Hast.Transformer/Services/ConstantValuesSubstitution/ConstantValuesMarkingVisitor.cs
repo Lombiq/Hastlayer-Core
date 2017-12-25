@@ -71,8 +71,16 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Assignments shouldn't be handled here, see ConstantValuesSubstitutingVisitor.
 
-            if (primitiveExpressionParent.Is<ArrayCreateExpression>(out var arrayCreateExpression) &&
-                arrayCreateExpression.Arguments.First() == primitiveExpression)
+            if (primitiveExpressionParent.Is<ArrayCreateExpression>(expression =>
+                {
+                    if (expression.Arguments.Count > 1)
+                    {
+                        ExceptionHelper.ThrowOnlySingleDimensionalArraysSupporterException(expression);
+                    }
+
+                    return true;
+                }, out var arrayCreateExpression) &&
+                arrayCreateExpression.Arguments.Single() == primitiveExpression)
             {
                 PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value));
             }
