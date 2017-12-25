@@ -714,6 +714,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // variable/field/property, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
+            else if (expression is DirectionExpression directionExpression)
+            {
+                // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be 
+                // handled specially: these are just out-flowing parameters.
+                return Transform(directionExpression.Expression, context);
+            }
             else
             {
                 throw new NotSupportedException(

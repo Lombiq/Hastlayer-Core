@@ -72,15 +72,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     binary.Right.GetFullName() == assignmentExpression.Left.GetFullName() &&
                         binary.Left is PrimitiveExpression))
             {
-                _constantValuesTable.MarkAsNonConstant(
-                    assignmentExpression.Left,
-                    parentBlock);
+                _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left,  parentBlock);
             }
         }
 
         public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
         {
             base.VisitIdentifierExpression(identifierExpression);
+
+            // If it's used as a ref or out parameter in a method invocation then it can't be substituted after this line.
+            if (identifierExpression.FindFirstNonParenthesizedExpressionParent() is DirectionExpression)
+            {
+                _constantValuesTable.MarkAsNonConstant(identifierExpression, identifierExpression.FindFirstParentBlockStatement());
+            }
 
             SubstituteValueHolderInExpressionIfInSuitableAssignment(identifierExpression);
         }
