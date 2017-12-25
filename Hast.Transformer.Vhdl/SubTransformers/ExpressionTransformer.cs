@@ -698,11 +698,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
-            else if (expression is DefaultValueExpression)
+            else if (expression is DefaultValueExpression defaultValueExpression)
             {
                 // The only case when a default() will remain in the syntax tree is for composed types. For primitives
                 // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
-                var initiailizationResult = InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
+                var initiailizationResult = InitializeRecord(expression, defaultValueExpression.Type, context);
 
                 context.Scope.CurrentBlock.Add(new Assignment
                 {

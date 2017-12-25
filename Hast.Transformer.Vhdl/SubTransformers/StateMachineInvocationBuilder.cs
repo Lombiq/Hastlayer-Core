@@ -40,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var targetMethodName = targetDeclaration.GetFullName();
 
 
-            Action addInvocationStartComment = () =>
+            void addInvocationStartComment() =>
                 currentBlock
                 .Add(new LineComment("Starting state machine invocation for the following method: " + targetMethodName));
 
@@ -223,7 +223,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var parameterSignalType = _declarableTypeCreator
                     .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
 
-                Func<ParameterFlowDirection, Assignment> createParameterAssignment = (flowDirection) =>
+                Assignment createParameterAssignment(ParameterFlowDirection flowDirection)
                 {
                     var parameterSignalName = stateMachine
                         .CreatePrefixedSegmentedObjectName(
@@ -282,7 +282,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         AssignTo = assignTo,
                         Expression = assignmentExpression
                     };
-                };
+                }
 
 
                 invocationBlock.Add(createParameterAssignment(ParameterFlowDirection.Out));
@@ -348,7 +348,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var returnVariableReferences = new List<IDataObject>();
 
-            Action<int> buildInvocationWaitBlock = targetIndex =>
+            void buildInvocationWaitBlock(int targetIndex)
             {
                 if (returnType != KnownDataTypes.Void)
                 {
@@ -388,7 +388,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         new HashSet<string>();
                 }
                 finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, targetIndex));
-            };
+            }
 
             if (index == -1)
             {
