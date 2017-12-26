@@ -19,9 +19,25 @@ namespace Hast.Transformer.Services
             {
                 base.VisitObjectCreateExpression(objectCreateExpression);
 
-                var typeName = objectCreateExpression.Type.GetFullName();
-                if (objectCreateExpression.Parent is AssignmentExpression ||
-                    typeName.IsDisplayClassName()||
+                HandleExpression(objectCreateExpression, objectCreateExpression.Type);
+            }
+
+            public override void VisitDefaultValueExpression(DefaultValueExpression defaultValueExpression)
+            {
+                base.VisitDefaultValueExpression(defaultValueExpression);
+
+                // Handling cases like the one below, where Fix64 is a struct without a parameterless ctor:
+                // public static Fix64 Zero() => new Fix64();
+
+                HandleExpression(defaultValueExpression, defaultValueExpression.Type);
+            }
+
+
+            private static void HandleExpression(Expression expression, AstType astType)
+            {
+                var typeName = astType.GetFullName();
+                if (expression.Parent is AssignmentExpression ||
+                    typeName.IsDisplayClassName() ||
                     // Omitting Funcs for now, as those are used in parallel code with Tasks and handled separately.
                     typeName == "System.Func`2")
                 {
@@ -29,16 +45,16 @@ namespace Hast.Transformer.Services
                 }
 
                 var variableIdentifier = VariableHelper
-                    .DeclareAndReferenceVariable("object", objectCreateExpression, objectCreateExpression.Type);
+                    .DeclareAndReferenceVariable("object", expression, astType);
 
-                var assignment = new AssignmentExpression(variableIdentifier, objectCreateExpression.Clone())
-                    .WithAnnotation(objectCreateExpression.Annotation<TypeInformation>());
+                var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())
+                    .WithAnnotation(expression.Annotation<TypeInformation>());
 
                 AstInsertionHelper.InsertStatementBefore(
-                    objectCreateExpression.FindFirstParentStatement(), 
+                    expression.FindFirstParentStatement(),
                     new ExpressionStatement(assignment));
 
-                objectCreateExpression.ReplaceWith(variableIdentifier.Clone());
+                expression.ReplaceWith(variableIdentifier.Clone());
             }
         }
     }
