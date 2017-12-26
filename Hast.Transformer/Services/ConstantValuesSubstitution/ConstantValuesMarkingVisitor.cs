@@ -171,6 +171,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
             else
             {
+                // Passing on array sizes.
+
                 var existingSize = _arraySizeHolder.GetSize(node);
 
                 if (existingSize == null && node is MemberReferenceExpression)
