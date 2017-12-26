@@ -90,5 +90,22 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
             });
         }
+
+        [Test]
+        public async Task Fix64SampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Fix64Calculator>();
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
     }
 }
