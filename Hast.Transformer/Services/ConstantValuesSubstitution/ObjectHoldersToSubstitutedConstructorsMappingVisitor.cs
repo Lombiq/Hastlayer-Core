@@ -2,6 +2,7 @@
 using System.Linq;
 using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
+using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -67,12 +68,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     subConstantValuesTable,
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
                     _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
-                    new Dictionary<string, MethodDeclaration>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
+                    new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
                     _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator)
                 .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
 
+                var constructorReference = new ConstructorReference
+                {
+                    Constructor = constructorDeclarationClone,
+                    OriginalAssignmentTarget = parentAssignment.Left
+                };
+
                 _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] =
-                    constructorDeclarationClone;
+                    constructorReference;
 
                 // Also pass the object initialization data to the "this" reference. So if methods are called from the
                 // constructor (or other objects created) then there the scope of the ctor will be accessible too.
@@ -81,7 +88,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 if (thisReference != null)
                 {
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[thisReference.GetFullName()] =
-                        constructorDeclarationClone;
+                        constructorReference;
                 }
             }
         }

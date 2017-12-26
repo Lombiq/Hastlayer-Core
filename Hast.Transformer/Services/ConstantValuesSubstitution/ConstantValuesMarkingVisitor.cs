@@ -139,14 +139,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // Passing on constructor mappings.
 
                 if (!_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                    .TryGetValue(node.GetFullName(), out var constructorDeclaration))
+                    .TryGetValue(node.GetFullName(), out var constructorReference))
                 {
                     return;
                 }
 
                 void processParent(AstNode parent) =>
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
-                    constructorDeclaration;
+                    constructorReference;
 
                 ProcessParent(
                     node: node,
@@ -154,11 +154,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     memberReferenceHandler: memberReference =>
                     {
                         var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
-                            .FindMemberReferenceInConstructor(constructorDeclaration, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
+                            .FindMemberReferenceInConstructor(constructorReference.Constructor, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
 
                         if (memberReferenceExpressionInConstructor != null &&
                             _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                                .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorDeclaration))
+                                .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
                         {
                             processParent(memberReference);
                         }

@@ -4,6 +4,7 @@ using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
+using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -214,8 +215,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         protected override void VisitChildren(AstNode node)
         {
-            // Deactivating constructor mappings for the identifier after this line if it's used in an if-else or a 
-            // while statement.
+            // Deactivating constructor mappings for the identifier after this line if it's again assigned to, e.g.:
+            // var x = new MyClass(); // OK
+            // x = GetValue(); // Starting with this line no more ctor mapping.
 
 
             if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
@@ -224,9 +226,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var fullName = node.GetFullName();
 
                 if (_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                        .TryGetValue(fullName, out var constructorDeclaration) &&
-                    (ConstantValueSubstitutionHelper.IsInIfElse(node) ||
-                        ConstantValueSubstitutionHelper.IsInWhile(node)))
+                        .TryGetValue(fullName, out var constructorReference) &&
+                    node.FindFirstNonParenthesizedExpressionParent()
+                        .Is<AssignmentExpression>(assignment =>
+                            assignment.Left == node ||
+                                assignment.Left.FindFirstChildOfType<AstNode>(child => child == node) != null) &&
+                    // Only if this is not the original assignment.
+                    node != constructorReference.OriginalAssignmentTarget)
                 {
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings.Remove(fullName);
                 }
@@ -268,7 +274,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                     if (member == null) return false;
 
-                    MethodDeclaration constructor = null;
+                    ConstructorReference constructorReference = null;
                     if (_constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
                     {
                         return true;
@@ -281,16 +287,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                         while (
                             !_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                                .TryGetValue(currentMemberReference.Target.GetFullName(), out constructor) &&
+                                .TryGetValue(currentMemberReference.Target.GetFullName(), out constructorReference) &&
                             currentMemberReference.Target is MemberReferenceExpression)
                         {
                             currentMemberReference = (MemberReferenceExpression)currentMemberReference.Target;
                         }
 
-                        if (constructor == null) return false;
+                        if (constructorReference == null) return false;
 
                         // Try to substitute this member reference's value with a value set in the corresponding
                         // constructor.
+
+                        var constructor = constructorReference.Constructor;
 
                         // Trying to find a place where the same member is references on the same ("this") instance.
                         var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
