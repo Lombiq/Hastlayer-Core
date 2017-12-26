@@ -1,7 +1,7 @@
 ﻿using System;
 using Hast.Transformer.Helpers;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class EntityDeclarationExtensions
     {

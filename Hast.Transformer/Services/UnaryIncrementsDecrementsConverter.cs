@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {

@@ -10,7 +10,7 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using NUnit.Framework;
 using Orchard.Services;

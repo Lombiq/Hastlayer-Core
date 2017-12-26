@@ -2,7 +2,8 @@
 using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
@@ -43,9 +44,9 @@ namespace Hast.Transformer.Services
                             _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable)
                         ))
                     {
-                        if (member is MethodDeclaration)
+                        if (member is MethodDeclaration methodDeclaration)
                         {
-                            var implementedInterfaceMethod = ((MethodDeclaration)member)
+                            var implementedInterfaceMethod = methodDeclaration
                                 .FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
                             if (implementedInterfaceMethod != null)
                             {

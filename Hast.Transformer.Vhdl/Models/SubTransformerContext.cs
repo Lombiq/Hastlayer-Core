@@ -3,7 +3,7 @@ using Hast.Layer;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Models
 {

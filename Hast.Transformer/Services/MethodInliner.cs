@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
 

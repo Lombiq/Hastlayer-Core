@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class TypeDeclarationExtensions
     {

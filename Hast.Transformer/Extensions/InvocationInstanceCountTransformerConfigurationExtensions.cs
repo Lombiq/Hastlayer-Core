@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Abstractions.Configuration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 
 namespace Hast.Common.Configuration

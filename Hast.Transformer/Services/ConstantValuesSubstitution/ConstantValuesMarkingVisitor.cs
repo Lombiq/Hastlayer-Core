@@ -4,7 +4,7 @@ using System.Linq;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution

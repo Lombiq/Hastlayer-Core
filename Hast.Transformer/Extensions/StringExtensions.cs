@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace System
 {

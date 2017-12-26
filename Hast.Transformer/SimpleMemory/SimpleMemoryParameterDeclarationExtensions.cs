@@ -1,7 +1,7 @@
 ﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class SimpleMemoryParameterDeclarationExtensions
     {

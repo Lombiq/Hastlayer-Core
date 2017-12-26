@@ -3,7 +3,7 @@ using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 
 namespace Hast.Transformer.Services

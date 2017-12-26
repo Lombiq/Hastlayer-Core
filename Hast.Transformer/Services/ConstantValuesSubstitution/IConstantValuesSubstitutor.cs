@@ -1,6 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution

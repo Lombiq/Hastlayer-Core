@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services

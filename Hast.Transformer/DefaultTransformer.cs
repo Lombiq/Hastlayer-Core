@@ -14,10 +14,11 @@ using Hast.Transformer.Services.ConstantValuesSubstitution;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 using Orchard.FileSystems.AppData;
 using Orchard.Services;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer
 {
@@ -156,20 +157,21 @@ namespace Hast.Transformer
             }
 
             var firstAssembly = assemblies.First();
-            var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
 
-            var decompilerSettings = decompiledContext.Settings;
-            decompilerSettings.AnonymousMethods = false;
+            var decompilerSettings = new DecompilerSettings
+            {
+                AnonymousMethods = false
+            };
 
-            var astBuilder = new AstBuilder(decompiledContext);
-            astBuilder.AddAssembly(firstAssembly);
+            var decompiler = new CSharpDecompiler(firstAssembly.MainModule, decompilerSettings);
+            //decompiler.AddAssembly(firstAssembly);
 
             foreach (var assembly in assemblies.Skip(1))
             {
-                astBuilder.AddAssembly(assembly);
+                decompiler.AddAssembly(assembly);
             }
 
-            var syntaxTree = astBuilder.SyntaxTree;
+            var syntaxTree = decompiler.Decompile();
 
             // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
             // any syntax tree-modifying logic and also to check what an assembly was decompiled into.

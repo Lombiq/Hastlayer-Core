@@ -14,7 +14,7 @@ using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Tests
 {

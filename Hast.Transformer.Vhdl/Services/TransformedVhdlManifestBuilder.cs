@@ -19,7 +19,7 @@ using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 using Orchard.Services;
 
