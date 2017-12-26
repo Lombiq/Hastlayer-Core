@@ -94,6 +94,7 @@
     <Compile Include="Extensions\EntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
+    <Compile Include="Extensions\MethodDeclarationExtensions.cs" />
     <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
