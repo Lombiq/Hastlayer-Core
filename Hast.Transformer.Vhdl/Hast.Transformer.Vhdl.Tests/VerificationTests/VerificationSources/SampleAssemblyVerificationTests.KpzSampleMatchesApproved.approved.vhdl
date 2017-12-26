@@ -6595,7 +6595,7 @@ begin
                         -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
                         -- 
                         -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
-                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().0.num2\, 64) * "11111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().0.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64), 64);
                         \PrngMWC64X::NextUInt32().0.this\.\state\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
@@ -6705,7 +6705,7 @@ begin
                         -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
                         -- 
                         -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
-                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().1.num2\, 64) * "11111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().1.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64), 64);
                         \PrngMWC64X::NextUInt32().1.this\.\state\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
@@ -6815,7 +6815,7 @@ begin
                         -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
                         -- 
                         -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
-                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().2.num2\, 64) * "11111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().2.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64), 64);
                         \PrngMWC64X::NextUInt32().2.this\.\state\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:

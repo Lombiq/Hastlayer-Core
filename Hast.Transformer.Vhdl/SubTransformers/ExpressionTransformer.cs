@@ -313,7 +313,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             " was out of the VHDL integer range it was substituted with a binary literal (" +
                             binaryLiteral + ")."));
 
-                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() });
+                        var size = type.GetSize();
+
+                        if (binaryLiteral.Length < size)
+                        {
+                            binaryLiteral = binaryLiteral.PadLeft(size, '0');
+                        }
+
+                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = size });
                     }
                 }
 
@@ -710,7 +717,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = Value.True
                 });
 
-                // There is no need for struct instantiation per se if the value was originally passed assigned to a
+                // There is no need for struct instantiation per se if the value was originally assigned to a
                 // variable/field/property, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
