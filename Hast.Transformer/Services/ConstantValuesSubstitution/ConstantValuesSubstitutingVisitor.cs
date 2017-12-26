@@ -44,7 +44,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
                         assignmentExpression.Left,
                         (PrimitiveExpression)assignmentExpression.Right,
-                        parentBlock); 
+                        parentBlock);
                 }
             }
 
@@ -72,7 +72,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     binary.Right.GetFullName() == assignmentExpression.Left.GetFullName() &&
                         binary.Left is PrimitiveExpression))
             {
-                _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left,  parentBlock);
+                _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left, parentBlock);
             }
         }
 
@@ -210,6 +210,29 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             lengthArgument.ReplaceWith(
                 new PrimitiveExpression(existingSize.Length)
                 .WithAnnotation(TypeHelper.CreateInt32TypeInformation()));
+        }
+
+        protected override void VisitChildren(AstNode node)
+        {
+            // Deactivating constructor mappings for the identifier after this line if it's used in an if-else or a 
+            // while statement.
+
+
+            if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
+                node.GetActualTypeReference()?.IsArray == false)
+            {
+                var fullName = node.GetFullName();
+
+                if (_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                        .TryGetValue(fullName, out var constructorDeclaration) &&
+                    (ConstantValueSubstitutionHelper.IsInIfElse(node) ||
+                        ConstantValueSubstitutionHelper.IsInWhile(node)))
+                {
+                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings.Remove(fullName);
+                }
+            }
+
+            base.VisitChildren(node);
         }
 
 

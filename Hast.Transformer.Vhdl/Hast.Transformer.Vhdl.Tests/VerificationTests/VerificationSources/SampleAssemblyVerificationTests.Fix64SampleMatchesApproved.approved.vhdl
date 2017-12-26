@@ -205,7 +205,12 @@ architecture Imp of Hast_IP is
         \Fix64::op_Addition(Fix64,Fix64).0._State_0\, 
         \Fix64::op_Addition(Fix64,Fix64).0._State_1\, 
         \Fix64::op_Addition(Fix64,Fix64).0._State_2\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_3\);
+        \Fix64::op_Addition(Fix64,Fix64).0._State_3\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_4\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_5\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_6\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_7\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_8\);
     -- Signals:
     Signal \Fix64::op_Addition(Fix64,Fix64).0._Finished\: boolean := false;
     Signal \Fix64::op_Addition(Fix64,Fix64).0.return\: \Hast.Algorithms.Fix64\;
@@ -510,6 +515,13 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.num\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.flag\: boolean := false;
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\: boolean := false;
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.6\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\: \Hast.Algorithms.Fix64\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -523,6 +535,13 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.num\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.flag\ := false;
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\ := false;
+                \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.6\ := false;
             else 
                 case \Fix64::op_Addition(Fix64,Fix64).0._State\ is 
                     when \Fix64::op_Addition(Fix64,Fix64).0._State_0\ => 
@@ -558,42 +577,143 @@ begin
                         -- bool flag;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- rawValue = 4294967296L;
+                        -- rawValue = x.m_rawValue;
                         -- 
-                        -- Since the integer literal 4294967296 was out of the VHDL integer range it was substituted with a binary literal (100000000000000000000000000000000).
-                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ := "0000000000000000000000000000000100000000000000000000000000000000";
+                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ := \Fix64::op_Addition(Fix64,Fix64).0.x\.\m_rawValue\;
                         -- The following section was transformed from the .NET statement below:
-                        -- rawValue2 = 4294967296L;
+                        -- rawValue2 = y.m_rawValue;
                         -- 
-                        -- Since the integer literal 4294967296 was out of the VHDL integer range it was substituted with a binary literal (100000000000000000000000000000000).
-                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\ := "0000000000000000000000000000000100000000000000000000000000000000";
+                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\ := \Fix64::op_Addition(Fix64,Fix64).0.y\.\m_rawValue\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num = 8589934592L;
+                        -- num = rawValue + rawValue2;
                         -- 
-                        -- Since the integer literal 8589934592 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000).
-                        \Fix64::op_Addition(Fix64,Fix64).0.num\ := "0000000000000000000000000000001000000000000000000000000000000000";
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ + \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.num\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = false;
+                        -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
-                        \Fix64::op_Addition(Fix64,Fix64).0.flag\ := False;
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.num\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\;
+                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ /= to_signed(0, 64);
+                        \Fix64::op_Addition(Fix64,Fix64).0.flag\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	if (rawValue > 0L) {
+                        -- 		num = 9223372036854775807L;
+                        -- 	}
+                        -- 	else {
+                        -- 		num = -9223372036854775808L;
+                        -- 	}
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Fix64::op_Addition(Fix64,Fix64).0._State_4\ and ends in state \Fix64::op_Addition(Fix64,Fix64).0._State_5\.
+                        --     * Execution after either branch will continue in the following state: \Fix64::op_Addition(Fix64,Fix64).0._State_3\.
+
+                        if (\Fix64::op_Addition(Fix64,Fix64).0.flag\) then 
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_3\ => 
+                        -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- Fix64 object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955 = new Fix64 (8589934592L);
+                        -- object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955 = new Fix64 (num);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\.\IsNull\ := false;
                         \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\.\m_rawValue\ := to_signed(0, 64);
                         -- Invoking the target's constructor.
-                        -- Since the integer literal 8589934592 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000).
                         -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.Fix64::.ctor(System.Int64)
                         \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).this.parameter.Out.0\ <= \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\;
-                        \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).rawValue.parameter.Out.0\ <= "0000000000000000000000000000001000000000000000000000000000000000";
+                        \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).rawValue.parameter.Out.0\ <= \Fix64::op_Addition(Fix64,Fix64).0.num\;
                         \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Started.0\ <= true;
-                        \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
+                        \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::op_Addition(Fix64,Fix64).0._State_3\ => 
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_4\ => 
+                        -- True branch of the if-else started in state \Fix64::op_Addition(Fix64,Fix64).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	if (rawValue > 0L) {
+                        -- 		num = 9223372036854775807L;
+                        -- 	}
+                        -- 	else {
+                        -- 		num = -9223372036854775808L;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (rawValue > 0L) {
+                        -- 	num = 9223372036854775807L;
+                        -- }
+                        -- else {
+                        -- 	num = -9223372036854775808L;
+                        -- }
+                        -- 
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.6\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ > to_signed(0, 64);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Fix64::op_Addition(Fix64,Fix64).0._State_6\ and ends in state \Fix64::op_Addition(Fix64,Fix64).0._State_6\.
+                        --     * The false branch starts in state \Fix64::op_Addition(Fix64,Fix64).0._State_7\ and ends in state \Fix64::op_Addition(Fix64,Fix64).0._State_7\.
+                        --     * Execution after either branch will continue in the following state: \Fix64::op_Addition(Fix64,Fix64).0._State_5\.
+
+                        if (\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.6\) then 
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_6\;
+                        else 
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_5\ => 
+                        -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_4\.
+                        -- Going to the state after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_2\.
+                        if (\Fix64::op_Addition(Fix64,Fix64).0._State\ = \Fix64::op_Addition(Fix64,Fix64).0._State_5\) then 
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_6\ => 
+                        -- True branch of the if-else started in state \Fix64::op_Addition(Fix64,Fix64).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 9223372036854775807L;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 9223372036854775807L;
+                        -- 
+                        -- Since the integer literal 9223372036854775807 was out of the VHDL integer range it was substituted with a binary literal (111111111111111111111111111111111111111111111111111111111111111).
+                        \Fix64::op_Addition(Fix64,Fix64).0.num\ := "0111111111111111111111111111111111111111111111111111111111111111";
+                        -- Going to the state after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_4\.
+                        if (\Fix64::op_Addition(Fix64,Fix64).0._State\ = \Fix64::op_Addition(Fix64,Fix64).0._State_6\) then 
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_7\ => 
+                        -- False branch of the if-else started in state \Fix64::op_Addition(Fix64,Fix64).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = -9223372036854775808L;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = -9223372036854775808L;
+                        -- 
+                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Fix64::op_Addition(Fix64,Fix64).0.num\ := "1000000000000000000000000000000000000000000000000000000000000000";
+                        -- Going to the state after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_4\.
+                        if (\Fix64::op_Addition(Fix64,Fix64).0._State\ = \Fix64::op_Addition(Fix64,Fix64).0._State_7\) then 
+                            \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.Fix64::.ctor(System.Int64)
                         if (\Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Started.0\ = \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Finished.0\) then 
                             \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Started.0\ <= false;
@@ -618,6 +738,8 @@ begin
         Variable \Fix64::ToIntegers().0.this\: \Hast.Algorithms.Fix64\;
         Variable \Fix64::ToIntegers().0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64::ToIntegers().0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64::ToIntegers().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64::ToIntegers().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
     begin 
         if (rising_edge(\Clock\)) then 
@@ -628,6 +750,8 @@ begin
                 \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_0\;
                 \Fix64::ToIntegers().0.num\ := to_signed(0, 32);
                 \Fix64::ToIntegers().0.num2\ := to_signed(0, 32);
+                \Fix64::ToIntegers().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Fix64::ToIntegers().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\ := (others => to_signed(0, 32));
             else 
                 case \Fix64::ToIntegers().0._State\ is 
@@ -657,13 +781,15 @@ begin
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = 0;
+                        -- num = (int)(@this.m_rawValue & -1L);
                         -- 
-                        \Fix64::ToIntegers().0.num\ := to_signed(0, 32);
+                        \Fix64::ToIntegers().0.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().0.this\.\m_rawValue\ and to_signed(-1, 64), 32);
+                        \Fix64::ToIntegers().0.num\ := (\Fix64::ToIntegers().0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = 1;
+                        -- num2 = (int)(@this.m_rawValue >> 32);
                         -- 
-                        \Fix64::ToIntegers().0.num2\ := to_signed(1, 32);
+                        \Fix64::ToIntegers().0.binaryOperationResult.1\ := SmartResize(shift_right(\Fix64::ToIntegers().0.this\.\m_rawValue\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \Fix64::ToIntegers().0.num2\ := (\Fix64::ToIntegers().0.binaryOperationResult.1\);
                         -- The following section was transformed from the .NET statement below:
                         -- int[] array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7;
                         -- 
@@ -674,19 +800,19 @@ begin
                         -- 
                         \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\ := (others => to_signed(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [0] = 0;
+                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [0] = num;
                         -- 
-                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(0, 32))) := to_signed(0, 32);
+                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(0, 32))) := \Fix64::ToIntegers().0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [1] = 1;
+                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [1] = num2;
                         -- 
-                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(1, 32))) := to_signed(1, 32);
+                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(1, 32))) := \Fix64::ToIntegers().0.num2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7;
                         -- 
                         \Fix64::ToIntegers().0.return\ <= \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                 end case;
             end if;
         end if;
@@ -731,10 +857,9 @@ begin
                         \Fix64::.ctor(Int64).0.this\ := \Fix64::.ctor(Int64).0.this.parameter.In\;
                         \Fix64::.ctor(Int64).0.rawValue\ := \Fix64::.ctor(Int64).0.rawValue.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.m_rawValue = 8589934592L;
+                        -- @this.m_rawValue = rawValue;
                         -- 
-                        -- Since the integer literal 8589934592 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000).
-                        \Fix64::.ctor(Int64).0.this\.\m_rawValue\ := "0000000000000000000000000000001000000000000000000000000000000000";
+                        \Fix64::.ctor(Int64).0.this\.\m_rawValue\ := \Fix64::.ctor(Int64).0.rawValue\;
                         \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
