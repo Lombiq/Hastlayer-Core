@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace ICSharpCode.NRefactory.CSharp
 {

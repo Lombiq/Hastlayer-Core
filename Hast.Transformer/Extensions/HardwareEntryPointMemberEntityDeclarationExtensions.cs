@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace ICSharpCode.NRefactory.CSharp
 {

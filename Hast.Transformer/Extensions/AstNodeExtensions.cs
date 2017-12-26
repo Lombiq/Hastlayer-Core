@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.Decompiler.ILAst;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
@@ -33,7 +34,7 @@ namespace ICSharpCode.NRefactory.CSharp
             var parameterReference = node.Annotation<ParameterReference>();
             if (parameterReference != null) return CreateParentEntityBasedName(node, parameterReference.Name);
 
-            if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
+            if (node is Decompiler.CSharp.Syntax.PrimitiveType primitiveType) return primitiveType.Keyword;
 
             if (node is ComposedType composedType)
             {
@@ -65,9 +66,9 @@ namespace ICSharpCode.NRefactory.CSharp
                 return ((Identifier)node).Name;
             }
 
-            if (node is Attribute)
+            if (node is Decompiler.CSharp.Syntax.Attribute attribute)
             {
-                return ((Attribute)node).Type.GetFullName();
+                return attribute.Type.GetFullName();
             }
 
             if (node is TypeReferenceExpression)

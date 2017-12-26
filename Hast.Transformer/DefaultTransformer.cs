@@ -12,8 +12,8 @@ using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Services.ConstantValuesSubstitution;
 using ICSharpCode.Decompiler;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.Ast.Transforms;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard.FileSystems.AppData;
@@ -346,26 +346,6 @@ namespace Hast.Transformer
                 try
                 {
                     return base.Resolve(name, parameters);
-                }
-                catch { }
-                return null;
-            }
-
-            public override AssemblyDefinition Resolve(string fullName)
-            {
-                try
-                {
-                    return base.Resolve(fullName);
-                }
-                catch { }
-                return null;
-            }
-
-            public override AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
-            {
-                try
-                {
-                    return base.Resolve(fullName, parameters);
                 }
                 catch { }
                 return null;
