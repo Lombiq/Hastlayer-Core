@@ -155,7 +155,7 @@ architecture Imp of Hast_IP is
     type \signed32_Array\ is array (integer range <>) of signed(31 downto 0);
     type \Hast.Algorithms.Fix64\ is record 
         \IsNull\: boolean;
-        \m_rawValue\: signed(63 downto 0);
+        \_rawValue\: signed(63 downto 0);
     end record;
     -- Custom inter-dependent type declarations end
 
@@ -199,46 +199,6 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64).0 declarations start
-    -- State machine states:
-    type \Fix64::op_Addition(Fix64,Fix64).0._States\ is (
-        \Fix64::op_Addition(Fix64,Fix64).0._State_0\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_1\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_2\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_3\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_4\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_5\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_6\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_7\, 
-        \Fix64::op_Addition(Fix64,Fix64).0._State_8\);
-    -- Signals:
-    Signal \Fix64::op_Addition(Fix64,Fix64).0._Finished\: boolean := false;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.return\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).rawValue.parameter.Out.0\: signed(63 downto 0) := to_signed(0, 64);
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Started.0\: boolean := false;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0._Started\: boolean := false;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.x.parameter.In\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.y.parameter.In\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Finished.0\: boolean := false;
-    -- Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64).0 declarations end
-
-
-    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 declarations start
-    -- State machine states:
-    type \Fix64::ToIntegers().0._States\ is (
-        \Fix64::ToIntegers().0._State_0\, 
-        \Fix64::ToIntegers().0._State_1\, 
-        \Fix64::ToIntegers().0._State_2\);
-    -- Signals:
-    Signal \Fix64::ToIntegers().0._Finished\: boolean := false;
-    Signal \Fix64::ToIntegers().0.return\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-    Signal \Fix64::ToIntegers().0._Started\: boolean := false;
-    Signal \Fix64::ToIntegers().0.this.parameter.In\: \Hast.Algorithms.Fix64\;
-    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 declarations end
-
-
     -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int64).0 declarations start
     -- State machine states:
     type \Fix64::.ctor(Int64).0._States\ is (
@@ -267,6 +227,46 @@ architecture Imp of Hast_IP is
     Signal \Fix64::.ctor(Int32).0.this.parameter.In\: \Hast.Algorithms.Fix64\;
     Signal \Fix64::.ctor(Int32).0.value.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int32).0 declarations end
+
+
+    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 declarations start
+    -- State machine states:
+    type \Fix64::ToIntegers().0._States\ is (
+        \Fix64::ToIntegers().0._State_0\, 
+        \Fix64::ToIntegers().0._State_1\, 
+        \Fix64::ToIntegers().0._State_2\);
+    -- Signals:
+    Signal \Fix64::ToIntegers().0._Finished\: boolean := false;
+    Signal \Fix64::ToIntegers().0.return\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+    Signal \Fix64::ToIntegers().0._Started\: boolean := false;
+    Signal \Fix64::ToIntegers().0.this.parameter.In\: \Hast.Algorithms.Fix64\;
+    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 declarations end
+
+
+    -- Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64).0 declarations start
+    -- State machine states:
+    type \Fix64::op_Addition(Fix64,Fix64).0._States\ is (
+        \Fix64::op_Addition(Fix64,Fix64).0._State_0\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_1\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_2\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_3\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_4\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_5\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_6\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_7\, 
+        \Fix64::op_Addition(Fix64,Fix64).0._State_8\);
+    -- Signals:
+    Signal \Fix64::op_Addition(Fix64,Fix64).0._Finished\: boolean := false;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.return\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).rawValue.parameter.Out.0\: signed(63 downto 0) := to_signed(0, 64);
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Started.0\: boolean := false;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0._Started\: boolean := false;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.x.parameter.In\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.y.parameter.In\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64)._Finished.0\: boolean := false;
+    -- Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64).0 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -374,7 +374,7 @@ begin
                             -- 
                             -- Initializing record fields to their defaults.
                             \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.fix\.\IsNull\ := false;
-                            \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.fix\.\m_rawValue\ := to_signed(0, 64);
+                            \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.fix\.\_rawValue\ := to_signed(0, 64);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
                             \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.fix\;
@@ -506,6 +506,193 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
+    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int64).0 state machine start
+    \Fix64::.ctor(Int64).0._StateMachine\: process (\Clock\) 
+        Variable \Fix64::.ctor(Int64).0._State\: \Fix64::.ctor(Int64).0._States\ := \Fix64::.ctor(Int64).0._State_0\;
+        Variable \Fix64::.ctor(Int64).0.this\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64::.ctor(Int64).0.rawValue\: signed(63 downto 0) := to_signed(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Fix64::.ctor(Int64).0._Finished\ <= false;
+                \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_0\;
+                \Fix64::.ctor(Int64).0.rawValue\ := to_signed(0, 64);
+            else 
+                case \Fix64::.ctor(Int64).0._State\ is 
+                    when \Fix64::.ctor(Int64).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Fix64::.ctor(Int64).0._Started\ = true) then 
+                            \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::.ctor(Int64).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Fix64::.ctor(Int64).0._Started\ = true) then 
+                            \Fix64::.ctor(Int64).0._Finished\ <= true;
+                        else 
+                            \Fix64::.ctor(Int64).0._Finished\ <= false;
+                            \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \Fix64::.ctor(Int64).0.this.parameter.Out\ <= \Fix64::.ctor(Int64).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::.ctor(Int64).0._State_2\ => 
+                        \Fix64::.ctor(Int64).0.this\ := \Fix64::.ctor(Int64).0.this.parameter.In\;
+                        \Fix64::.ctor(Int64).0.rawValue\ := \Fix64::.ctor(Int64).0.rawValue.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this._rawValue = rawValue;
+                        -- 
+                        \Fix64::.ctor(Int64).0.this\.\_rawValue\ := \Fix64::.ctor(Int64).0.rawValue\;
+                        \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int64).0 state machine end
+
+
+    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int32).0 state machine start
+    \Fix64::.ctor(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \Fix64::.ctor(Int32).0._State\: \Fix64::.ctor(Int32).0._States\ := \Fix64::.ctor(Int32).0._State_0\;
+        Variable \Fix64::.ctor(Int32).0.this\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64::.ctor(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Fix64::.ctor(Int32).0._Finished\ <= false;
+                \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_0\;
+                \Fix64::.ctor(Int32).0.value\ := to_signed(0, 32);
+            else 
+                case \Fix64::.ctor(Int32).0._State\ is 
+                    when \Fix64::.ctor(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Fix64::.ctor(Int32).0._Started\ = true) then 
+                            \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::.ctor(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Fix64::.ctor(Int32).0._Started\ = true) then 
+                            \Fix64::.ctor(Int32).0._Finished\ <= true;
+                        else 
+                            \Fix64::.ctor(Int32).0._Finished\ <= false;
+                            \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \Fix64::.ctor(Int32).0.this.parameter.Out\ <= \Fix64::.ctor(Int32).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::.ctor(Int32).0._State_2\ => 
+                        \Fix64::.ctor(Int32).0.this\ := \Fix64::.ctor(Int32).0.this.parameter.In\;
+                        \Fix64::.ctor(Int32).0.value\ := \Fix64::.ctor(Int32).0.value.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this._rawValue = 4294967296L;
+                        -- 
+                        -- Since the integer literal 4294967296 was out of the VHDL integer range it was substituted with a binary literal (100000000000000000000000000000000).
+                        \Fix64::.ctor(Int32).0.this\.\_rawValue\ := "0000000000000000000000000000000100000000000000000000000000000000";
+                        \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int32).0 state machine end
+
+
+    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 state machine start
+    \Fix64::ToIntegers().0._StateMachine\: process (\Clock\) 
+        Variable \Fix64::ToIntegers().0._State\: \Fix64::ToIntegers().0._States\ := \Fix64::ToIntegers().0._State_0\;
+        Variable \Fix64::ToIntegers().0.this\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64::ToIntegers().0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64::ToIntegers().0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64::ToIntegers().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64::ToIntegers().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Fix64::ToIntegers().0._Finished\ <= false;
+                \Fix64::ToIntegers().0.return\ <= (others => to_signed(0, 32));
+                \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_0\;
+                \Fix64::ToIntegers().0.num\ := to_signed(0, 32);
+                \Fix64::ToIntegers().0.num2\ := to_signed(0, 32);
+                \Fix64::ToIntegers().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Fix64::ToIntegers().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\ := (others => to_signed(0, 32));
+            else 
+                case \Fix64::ToIntegers().0._State\ is 
+                    when \Fix64::ToIntegers().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Fix64::ToIntegers().0._Started\ = true) then 
+                            \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::ToIntegers().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Fix64::ToIntegers().0._Started\ = true) then 
+                            \Fix64::ToIntegers().0._Finished\ <= true;
+                        else 
+                            \Fix64::ToIntegers().0._Finished\ <= false;
+                            \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64::ToIntegers().0._State_2\ => 
+                        \Fix64::ToIntegers().0.this\ := \Fix64::ToIntegers().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (int)(@this._rawValue & -1L);
+                        -- 
+                        \Fix64::ToIntegers().0.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().0.this\.\_rawValue\ and to_signed(-1, 64), 32);
+                        \Fix64::ToIntegers().0.num\ := (\Fix64::ToIntegers().0.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (int)(@this._rawValue >> 32);
+                        -- 
+                        \Fix64::ToIntegers().0.binaryOperationResult.1\ := SmartResize(shift_right(\Fix64::ToIntegers().0.this\.\_rawValue\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \Fix64::ToIntegers().0.num2\ := (\Fix64::ToIntegers().0.binaryOperationResult.1\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 = new int[2][] {
+                        -- 
+                        -- };
+                        -- 
+                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\ := (others => to_signed(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [0] = num;
+                        -- 
+                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(0, 32))) := \Fix64::ToIntegers().0.num\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [1] = num2;
+                        -- 
+                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(1, 32))) := \Fix64::ToIntegers().0.num2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7;
+                        -- 
+                        \Fix64::ToIntegers().0.return\ <= \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
+                        \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 state machine end
+
+
     -- Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64).0 state machine start
     \Fix64::op_Addition(Fix64,Fix64).0._StateMachine\: process (\Clock\) 
         Variable \Fix64::op_Addition(Fix64,Fix64).0._State\: \Fix64::op_Addition(Fix64,Fix64).0._States\ := \Fix64::op_Addition(Fix64,Fix64).0._State_0\;
@@ -577,13 +764,13 @@ begin
                         -- bool flag;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- rawValue = x.m_rawValue;
+                        -- rawValue = x._rawValue;
                         -- 
-                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ := \Fix64::op_Addition(Fix64,Fix64).0.x\.\m_rawValue\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ := \Fix64::op_Addition(Fix64,Fix64).0.x\.\_rawValue\;
                         -- The following section was transformed from the .NET statement below:
-                        -- rawValue2 = y.m_rawValue;
+                        -- rawValue2 = y._rawValue;
                         -- 
-                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\ := \Fix64::op_Addition(Fix64,Fix64).0.y\.\m_rawValue\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\ := \Fix64::op_Addition(Fix64,Fix64).0.y\.\_rawValue\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = rawValue + rawValue2;
                         -- 
@@ -631,7 +818,7 @@ begin
                         -- 
                         -- Initializing record fields to their defaults.
                         \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\.\IsNull\ := false;
-                        \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\.\m_rawValue\ := to_signed(0, 64);
+                        \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\.\_rawValue\ := to_signed(0, 64);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.Fix64::.ctor(System.Int64)
                         \Fix64::op_Addition(Fix64,Fix64).0.Fix64::.ctor(Int64).this.parameter.Out.0\ <= \Fix64::op_Addition(Fix64,Fix64).0.object76d08b1f285550672585c4e051331c4bba90fb407e05341f60f62d8728f6d955\;
@@ -730,193 +917,6 @@ begin
         end if;
     end process;
     -- Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64).0 state machine end
-
-
-    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 state machine start
-    \Fix64::ToIntegers().0._StateMachine\: process (\Clock\) 
-        Variable \Fix64::ToIntegers().0._State\: \Fix64::ToIntegers().0._States\ := \Fix64::ToIntegers().0._State_0\;
-        Variable \Fix64::ToIntegers().0.this\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64::ToIntegers().0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64::ToIntegers().0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64::ToIntegers().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64::ToIntegers().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Fix64::ToIntegers().0._Finished\ <= false;
-                \Fix64::ToIntegers().0.return\ <= (others => to_signed(0, 32));
-                \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_0\;
-                \Fix64::ToIntegers().0.num\ := to_signed(0, 32);
-                \Fix64::ToIntegers().0.num2\ := to_signed(0, 32);
-                \Fix64::ToIntegers().0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Fix64::ToIntegers().0.binaryOperationResult.1\ := to_signed(0, 32);
-                \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\ := (others => to_signed(0, 32));
-            else 
-                case \Fix64::ToIntegers().0._State\ is 
-                    when \Fix64::ToIntegers().0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Fix64::ToIntegers().0._Started\ = true) then 
-                            \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::ToIntegers().0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Fix64::ToIntegers().0._Started\ = true) then 
-                            \Fix64::ToIntegers().0._Finished\ <= true;
-                        else 
-                            \Fix64::ToIntegers().0._Finished\ <= false;
-                            \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::ToIntegers().0._State_2\ => 
-                        \Fix64::ToIntegers().0.this\ := \Fix64::ToIntegers().0.this.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = (int)(@this.m_rawValue & -1L);
-                        -- 
-                        \Fix64::ToIntegers().0.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().0.this\.\m_rawValue\ and to_signed(-1, 64), 32);
-                        \Fix64::ToIntegers().0.num\ := (\Fix64::ToIntegers().0.binaryOperationResult.0\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = (int)(@this.m_rawValue >> 32);
-                        -- 
-                        \Fix64::ToIntegers().0.binaryOperationResult.1\ := SmartResize(shift_right(\Fix64::ToIntegers().0.this\.\m_rawValue\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
-                        \Fix64::ToIntegers().0.num2\ := (\Fix64::ToIntegers().0.binaryOperationResult.1\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- int[] array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 = new int[2][] {
-                        -- 
-                        -- };
-                        -- 
-                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\ := (others => to_signed(0, 32));
-                        -- The following section was transformed from the .NET statement below:
-                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [0] = num;
-                        -- 
-                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(0, 32))) := \Fix64::ToIntegers().0.num\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7 [1] = num2;
-                        -- 
-                        \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\(to_integer(to_signed(1, 32))) := \Fix64::ToIntegers().0.num2\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7;
-                        -- 
-                        \Fix64::ToIntegers().0.return\ <= \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
-                        \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Int32[] Hast.Algorithms.Fix64::ToIntegers().0 state machine end
-
-
-    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int64).0 state machine start
-    \Fix64::.ctor(Int64).0._StateMachine\: process (\Clock\) 
-        Variable \Fix64::.ctor(Int64).0._State\: \Fix64::.ctor(Int64).0._States\ := \Fix64::.ctor(Int64).0._State_0\;
-        Variable \Fix64::.ctor(Int64).0.this\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64::.ctor(Int64).0.rawValue\: signed(63 downto 0) := to_signed(0, 64);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Fix64::.ctor(Int64).0._Finished\ <= false;
-                \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_0\;
-                \Fix64::.ctor(Int64).0.rawValue\ := to_signed(0, 64);
-            else 
-                case \Fix64::.ctor(Int64).0._State\ is 
-                    when \Fix64::.ctor(Int64).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Fix64::.ctor(Int64).0._Started\ = true) then 
-                            \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::.ctor(Int64).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Fix64::.ctor(Int64).0._Started\ = true) then 
-                            \Fix64::.ctor(Int64).0._Finished\ <= true;
-                        else 
-                            \Fix64::.ctor(Int64).0._Finished\ <= false;
-                            \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \Fix64::.ctor(Int64).0.this.parameter.Out\ <= \Fix64::.ctor(Int64).0.this\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::.ctor(Int64).0._State_2\ => 
-                        \Fix64::.ctor(Int64).0.this\ := \Fix64::.ctor(Int64).0.this.parameter.In\;
-                        \Fix64::.ctor(Int64).0.rawValue\ := \Fix64::.ctor(Int64).0.rawValue.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.m_rawValue = rawValue;
-                        -- 
-                        \Fix64::.ctor(Int64).0.this\.\m_rawValue\ := \Fix64::.ctor(Int64).0.rawValue\;
-                        \Fix64::.ctor(Int64).0._State\ := \Fix64::.ctor(Int64).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int64).0 state machine end
-
-
-    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int32).0 state machine start
-    \Fix64::.ctor(Int32).0._StateMachine\: process (\Clock\) 
-        Variable \Fix64::.ctor(Int32).0._State\: \Fix64::.ctor(Int32).0._States\ := \Fix64::.ctor(Int32).0._State_0\;
-        Variable \Fix64::.ctor(Int32).0.this\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64::.ctor(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Fix64::.ctor(Int32).0._Finished\ <= false;
-                \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_0\;
-                \Fix64::.ctor(Int32).0.value\ := to_signed(0, 32);
-            else 
-                case \Fix64::.ctor(Int32).0._State\ is 
-                    when \Fix64::.ctor(Int32).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Fix64::.ctor(Int32).0._Started\ = true) then 
-                            \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::.ctor(Int32).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Fix64::.ctor(Int32).0._Started\ = true) then 
-                            \Fix64::.ctor(Int32).0._Finished\ <= true;
-                        else 
-                            \Fix64::.ctor(Int32).0._Finished\ <= false;
-                            \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \Fix64::.ctor(Int32).0.this.parameter.Out\ <= \Fix64::.ctor(Int32).0.this\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64::.ctor(Int32).0._State_2\ => 
-                        \Fix64::.ctor(Int32).0.this\ := \Fix64::.ctor(Int32).0.this.parameter.In\;
-                        \Fix64::.ctor(Int32).0.value\ := \Fix64::.ctor(Int32).0.value.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.m_rawValue = 4294967296L;
-                        -- 
-                        -- Since the integer literal 4294967296 was out of the VHDL integer range it was substituted with a binary literal (100000000000000000000000000000000).
-                        \Fix64::.ctor(Int32).0.this\.\m_rawValue\ := "0000000000000000000000000000000100000000000000000000000000000000";
-                        \Fix64::.ctor(Int32).0._State\ := \Fix64::.ctor(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast.Algorithms.Fix64::.ctor(System.Int32).0 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
