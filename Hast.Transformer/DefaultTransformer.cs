@@ -166,20 +166,10 @@ namespace Hast.Transformer
             var decompiler = new CSharpDecompiler(firstAssembly.MainModule, decompilerSettings);
             //decompiler.AddAssembly(firstAssembly);
 
-            foreach (var assembly in assemblies.Skip(1))
-            {
-                decompiler.AddAssembly(assembly);
-            }
-
-            var syntaxTree = decompiler.Decompile();
-
-            // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
-            // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
-            var saveSyntaxTree = false;
-            if (saveSyntaxTree)
-            {
-                File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
-            }
+            //foreach (var assembly in assemblies.Skip(1))
+            //{
+            //    decompiler.AddAssembly(assembly);
+            //}
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
@@ -242,6 +232,17 @@ namespace Hast.Transformer
             foreach (var transform in pipeline)
             {
                 transform.Run(syntaxTree);
+            }
+
+
+            var syntaxTree = decompiler.Decompile();
+
+            // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
+            // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
+            var saveSyntaxTree = false;
+            if (saveSyntaxTree)
+            {
+                File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
             }
 
 
