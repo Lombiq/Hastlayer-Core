@@ -188,7 +188,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                    else if (assignment.Right.Is(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
                             member.Target.Is<IdentifierExpression>(identifier =>
@@ -215,7 +215,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     // Handling shorthand Task starts like:
                     // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                    else if (assignment.Right.Is(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(memberReference =>
                             memberReference.MemberName == "StartNew" &&
                             // Need unified property name because it can also be get_Factory().
