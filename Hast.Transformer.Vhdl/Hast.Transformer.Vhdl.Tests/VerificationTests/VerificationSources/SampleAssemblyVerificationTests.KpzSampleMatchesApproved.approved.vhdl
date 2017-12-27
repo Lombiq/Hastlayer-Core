@@ -4892,20 +4892,23 @@ begin
                             -- while (i < 8) {
                             -- 	PrngMWC64X object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed;
                             -- 	object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed = new PrngMWC64X {
-                            -- 		state = (ulong)memory.ReadUInt32 (1 + num3)
+                            -- 
                             -- 	};
+                            -- 	object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed.state = (ulong)memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i] = new KpzKernelsTaskState {
-                            -- 		bramDx = new bool[64],
-                            -- 		bramDy = new bool[64],
-                            -- 		prng1 = object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed
+                            -- 
                             -- 	};
+                            -- 	array [i].prng1 = object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed;
+                            -- 	array [i].bramDy = new bool[64];
+                            -- 	array [i].bramDx = new bool[64];
                             -- 	num4 = memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i].prng1.state = array [i].prng1.state | (ulong)num4 << 32;
                             -- 	array [i].prng2 = new PrngMWC64X {
-                            -- 		state = (ulong)memory.ReadUInt32 (1 + num3)
+                            -- 
                             -- 	};
+                            -- 	array [i].prng2.state = (ulong)memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	num4 = memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
@@ -4926,20 +4929,23 @@ begin
                             -- {
                             -- 	PrngMWC64X object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed;
                             -- 	object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed = new PrngMWC64X {
-                            -- 		state = (ulong)memory.ReadUInt32 (1 + num3)
+                            -- 
                             -- 	};
+                            -- 	object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed.state = (ulong)memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i] = new KpzKernelsTaskState {
-                            -- 		bramDx = new bool[64],
-                            -- 		bramDy = new bool[64],
-                            -- 		prng1 = object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed
+                            -- 
                             -- 	};
+                            -- 	array [i].prng1 = object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed;
+                            -- 	array [i].bramDy = new bool[64];
+                            -- 	array [i].bramDx = new bool[64];
                             -- 	num4 = memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i].prng1.state = array [i].prng1.state | (ulong)num4 << 32;
                             -- 	array [i].prng2 = new PrngMWC64X {
-                            -- 		state = (ulong)memory.ReadUInt32 (1 + num3)
+                            -- 
                             -- 	};
+                            -- 	array [i].prng2.state = (ulong)memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	num4 = memory.ReadUInt32 (1 + num3);
                             -- 	num3 = num3 + 1;
@@ -4952,7 +4958,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed = new PrngMWC64X {
-                            -- 	state = (ulong)memory.ReadUInt32 (1 + num3)
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
@@ -4987,6 +4993,9 @@ begin
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed.state = (ulong)memory.ReadUInt32 (1 + num3);
+                            -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- Begin SimpleMemory read.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\, 32);
@@ -5008,18 +5017,25 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [i] = new KpzKernelsTaskState {
-                            -- 	bramDx = new bool[64],
-                            -- 	bramDy = new bool[64],
-                            -- 	prng1 = object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\IsNull\ := false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDx\ := (others => false);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDy\ := (others => false);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDx\ := (others => false);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDy\ := (others => false);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].prng1 = object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed;
+                            -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\prng1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].bramDy = new bool[64];
+                            -- 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDy\ := (others => false);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].bramDx = new bool[64];
+                            -- 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDx\ := (others => false);
                             -- The following section was transformed from the .NET statement below:
                             -- num4 = memory.ReadUInt32 (1 + num3);
                             -- 
@@ -5054,7 +5070,7 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\prng1\.\state\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [i].prng2 = new PrngMWC64X {
-                            -- 	state = (ulong)memory.ReadUInt32 (1 + num3)
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
@@ -5072,6 +5088,9 @@ begin
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\prng2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].prng2.state = (ulong)memory.ReadUInt32 (1 + num3);
+                            -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- Begin SimpleMemory read.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\, 32);

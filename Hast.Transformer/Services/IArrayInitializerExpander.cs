@@ -4,7 +4,7 @@ using Orchard;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// Converts inline array initalizers into one-by-one array element assignments so these can be transformed in a
+    /// Converts inline array initializers into one-by-one array element assignments so these can be transformed in a
     /// simpler way.
     /// </summary>
     /// <example>

@@ -2787,9 +2787,10 @@ begin
                         -- 		pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
                         -- 		ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
                         -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
-                        -- 			PixelBytes = pixelBytes,
-                        -- 			ContrastValue = num3
+                        -- 
                         -- 		};
+                        -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.ContrastValue = num3;
+                        -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.PixelBytes = pixelBytes;
                         -- 		array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
                         -- 		j = j + 1;
                         -- 	}
@@ -2841,9 +2842,10 @@ begin
                             -- 		pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
                             -- 		ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
                             -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
-                            -- 			PixelBytes = pixelBytes,
-                            -- 			ContrastValue = num3
+                            -- 
                             -- 		};
+                            -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.ContrastValue = num3;
+                            -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.PixelBytes = pixelBytes;
                             -- 		array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
                             -- 		j = j + 1;
                             -- 	}
@@ -2872,9 +2874,10 @@ begin
                             -- 	pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
                             -- 	ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
                             -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
-                            -- 		PixelBytes = pixelBytes,
-                            -- 		ContrastValue = num3
+                            -- 
                             -- 	};
+                            -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.ContrastValue = num3;
+                            -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.PixelBytes = pixelBytes;
                             -- 	array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
                             -- 	j = j + 1;
                             -- }
@@ -2899,9 +2902,10 @@ begin
                             -- 	pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
                             -- 	ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
                             -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
-                            -- 		PixelBytes = pixelBytes,
-                            -- 		ContrastValue = num3
+                            -- 
                             -- 	};
+                            -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.ContrastValue = num3;
+                            -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.PixelBytes = pixelBytes;
                             -- 	array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
                             -- 	j = j + 1;
                             -- }
@@ -2939,16 +2943,21 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
-                            -- 	PixelBytes = pixelBytes,
-                            -- 	ContrastValue = num3
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\IsNull\ := false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := (others => to_unsigned(0, 8));
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\ContrastValue\ := to_signed(0, 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.ContrastValue = num3;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7.PixelBytes = pixelBytes;
+                            -- 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
                             -- 
@@ -3820,9 +3829,7 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a = new ImageContrastModifier.PixelProcessingTaskOutput {
-                        -- 	R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue),
-                        -- 	G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue),
-                        -- 	B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue)
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
@@ -3830,8 +3837,11 @@ begin
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := to_unsigned(0, 8);
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := to_unsigned(0, 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
-                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\ContrastValue\;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_3\;
@@ -3841,7 +3851,10 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue);
+                            -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_4\;
                         end if;
@@ -3863,6 +3876,9 @@ begin
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue);
+                            -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_7\;
                         end if;
@@ -3873,7 +3889,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_8\ => 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
-                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\ContrastValue\;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_9\;
@@ -3883,7 +3899,7 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
                             -- return objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
                             -- 
@@ -3954,9 +3970,7 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a = new ImageContrastModifier.PixelProcessingTaskOutput {
-                        -- 	R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue),
-                        -- 	G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue),
-                        -- 	B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue)
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
@@ -3964,8 +3978,11 @@ begin
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := to_unsigned(0, 8);
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := to_unsigned(0, 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
-                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\ContrastValue\;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_3\;
@@ -3975,7 +3992,10 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue);
+                            -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_4\;
                         end if;
@@ -3997,6 +4017,9 @@ begin
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue);
+                            -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_7\;
                         end if;
@@ -4007,7 +4030,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_8\ => 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
-                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\ContrastValue\;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_9\;
@@ -4017,7 +4040,7 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\;
                             -- The following section was transformed from the .NET statement below:
                             -- return objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
                             -- 
@@ -4088,9 +4111,7 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a = new ImageContrastModifier.PixelProcessingTaskOutput {
-                        -- 	R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue),
-                        -- 	G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue),
-                        -- 	B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue)
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
@@ -4098,8 +4119,11 @@ begin
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := to_unsigned(0, 8);
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := to_unsigned(0, 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
-                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\ContrastValue\;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_3\;
@@ -4109,7 +4133,10 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue);
+                            -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_4\;
                         end if;
@@ -4131,6 +4158,9 @@ begin
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a.R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue);
+                            -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_7\;
                         end if;
@@ -4141,7 +4171,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_8\ => 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
-                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\ContrastValue\;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_9\;
@@ -4151,7 +4181,7 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\;
                             -- The following section was transformed from the .NET statement below:
                             -- return objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
                             -- 
@@ -4336,7 +4366,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- array [0] = new NumberContainer {
-                            -- 	Number = num
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
@@ -4355,10 +4385,13 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [0].Number = num;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [1] = new NumberContainer {
-                            -- 	Number = num + 4u
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
@@ -4385,11 +4418,14 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [1].Number = num + 4u;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_unsigned(4, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [2] = new NumberContainer {
-                            -- 	Number = 24u
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
@@ -4416,6 +4452,9 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [2].Number = 24u;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(24, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- array [3] = new NumberContainer (9u);
@@ -4528,7 +4567,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- numberContainer = new NumberContainer {
-                            -- 	Number = 5u
+                            -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
@@ -4547,6 +4586,9 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- numberContainer.Number = 5u;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := to_unsigned(5, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- numberContainer.Number = Hast.Samples.SampleAssembly.NumberContainer.get_NumberPlusFive (numberContainer);

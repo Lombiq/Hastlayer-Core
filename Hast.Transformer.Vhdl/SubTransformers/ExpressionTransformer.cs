@@ -683,30 +683,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
-                if (objectCreateExpression.Initializer.Elements.Any())
-                {
-                    foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
-                    {
-                        var namedInitializerExpression = initializerElement as NamedExpression;
-                        if (namedInitializerExpression == null)
-                        {
-                            throw new NotSupportedException(
-                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."
-                                .AddParentEntityName(objectCreateExpression));
-                        }
-
-                        context.Scope.CurrentBlock.Add(new Assignment
-                        {
-                            AssignTo = new RecordFieldAccess
-                            {
-                                Instance = initiailizationResult.RecordInstanceReference,
-                                FieldName = namedInitializerExpression.Name.ToExtendedVhdlId()
-                            },
-                            Expression = Transform(namedInitializerExpression.Expression, context)
-                        });
-                    }
-                }
-
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
