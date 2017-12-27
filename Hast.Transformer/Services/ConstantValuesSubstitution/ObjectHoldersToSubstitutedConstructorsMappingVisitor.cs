@@ -32,21 +32,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 assignment.Left.GetActualTypeReference()?.FullName == objectCreateExpression.Type.GetFullName(),
                 out AssignmentExpression parentAssignment))
             {
-                var constructorName = objectCreateExpression.GetConstructorFullName();
-
-                if (string.IsNullOrEmpty(constructorName)) return;
-
-                var createdTypeName = objectCreateExpression.Type.GetFullName();
-
-                var constructorType =
-                    _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable
-                    .Lookup(createdTypeName);
-
-                if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName);
-
-                var constructorDeclaration = constructorType
-                    .Members
-                    .SingleOrDefault(member => member.GetFullName() == constructorName);
+                var constructorDeclaration = objectCreateExpression
+                    .FindConstructorDeclaration(_constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable);
 
                 if (constructorDeclaration == null) return;
 
