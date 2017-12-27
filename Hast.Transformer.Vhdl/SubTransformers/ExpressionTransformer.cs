@@ -62,7 +62,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = scope.StateMachine;
 
 
-            Func<DataObjectReference, IVhdlElement> implementTypeConversionForBinaryExpressionParent = reference =>
+            IVhdlElement implementTypeConversionForBinaryExpressionParent(DataObjectReference reference)
             {
                 var binaryExpression = (BinaryOperatorExpression)expression.Parent;
                 return _typeConversionTransformer.
@@ -71,14 +71,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         reference,
                         binaryExpression.Left == expression,
                         context);
-            };
+            }
 
 
-            if (expression is AssignmentExpression)
+            if (expression is AssignmentExpression assignment)
             {
-                var assignment = (AssignmentExpression)expression;
-
-                Func<Expression, Expression, IVhdlElement> transformSimpleAssignmentExpression = (left, right) =>
+                IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
                 {
                     if (left.GetActualTypeReference().IsSimpleMemory()) return Empty.Instance;
 
@@ -105,9 +103,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         AssignTo = (IDataObject)leftTransformed,
                         Expression = rightTransformed
                     };
-                };
+                }
 
-                Func<string> getTaskVariableIdentifier = () =>
+                string getTaskVariableIdentifier()
                 {
                     // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
                     if (assignment.Left is IndexerExpression)
@@ -118,9 +116,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         return ((IdentifierExpression)assignment.Left).Identifier;
                     }
-                };
+                }
 
-                Func<EntityDeclaration, int> getMaxDegreeOfParallelism = entity =>
+                int getMaxDegreeOfParallelism(EntityDeclaration entity) =>
                     context.TransformationContext
                         .GetTransformerConfiguration()
                         .GetMaxInvocationInstanceCountConfigurationForMember(entity)
@@ -159,7 +157,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     InvocationExpression invocationExpression = null;
 
-                    Func<IEnumerable<TransformedInvocationParameter>> transformFromSecondArgument = () =>
+                    IEnumerable<TransformedInvocationParameter> transformFromSecondArgument() =>
                         invocationExpression.Arguments.Skip(1).Select(argument =>
                             new TransformedInvocationParameter
                             {
@@ -170,15 +168,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
                     // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
-                    var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
                     string rightObjectFullName;
-                    if (rightObjectCreateExpression != null &&
+                    if (assignment.Right is ObjectCreateExpression rightObjectCreateExpression &&
                         (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayClassName())
                     {
                         context.TransformationContext.TypeDeclarationLookupTable.Lookup(rightObjectCreateExpression.Type);
-                        var leftIdentifierExpression = assignment.Left as IdentifierExpression;
 
-                        if (leftIdentifierExpression != null)
+                        if (assignment.Left is IdentifierExpression leftIdentifierExpression)
                         {
                             scope.VariableNameToDisplayClassNameMappings[leftIdentifierExpression.Identifier] = rightObjectFullName;
                         }
@@ -192,7 +188,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                    else if (assignment.Right.Is(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
                             member.Target.Is<IdentifierExpression>(identifier =>
@@ -219,7 +215,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     // Handling shorthand Task starts like:
                     // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                    else if (assignment.Right.Is(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(memberReference =>
                             memberReference.MemberName == "StartNew" &&
                             // Need unified property name because it can also be get_Factory().
@@ -262,9 +258,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return transformSimpleAssignmentExpression(assignment.Left, assignment.Right);
             }
-            else if (expression is IdentifierExpression)
+            else if (expression is IdentifierExpression identifierExpression)
             {
-                var identifierExpression = (IdentifierExpression)expression;
                 var reference = stateMachine.CreatePrefixedObjectName(identifierExpression.Identifier).ToVhdlVariableReference();
 
                 if (!(identifierExpression.Parent is BinaryOperatorExpression)) return reference;
@@ -272,10 +267,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return implementTypeConversionForBinaryExpressionParent(reference);
 
             }
-            else if (expression is PrimitiveExpression)
+            else if (expression is PrimitiveExpression primitive)
             {
-                var primitive = (PrimitiveExpression)expression;
-
                 var typeReference = expression.GetActualTypeReference();
 
                 if (typeReference == null)
@@ -320,17 +313,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             " was out of the VHDL integer range it was substituted with a binary literal (" +
                             binaryLiteral + ")."));
 
-                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() });
+                        var size = type.GetSize();
+
+                        if (binaryLiteral.Length < size)
+                        {
+                            binaryLiteral = binaryLiteral.PadLeft(size, '0');
+                        }
+
+                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = size });
                     }
                 }
 
                 return valueString.ToVhdlValue(type);
             }
-            else if (expression is BinaryOperatorExpression)
+            else if (expression is BinaryOperatorExpression binaryExpression)
             {
-                var binaryExpression = (BinaryOperatorExpression)expression;
-
-
                 IVhdlElement leftTransformed;
                 IVhdlElement rightTransformed;
 
@@ -359,9 +356,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     },
                     context);
             }
-            else if (expression is InvocationExpression)
+            else if (expression is InvocationExpression invocationExpression)
             {
-                var invocationExpression = (InvocationExpression)expression;
                 var transformedParameters = new List<ITransformedInvocationParameter>();
 
                 IEnumerable<Expression> arguments = invocationExpression.Arguments;
@@ -385,9 +381,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return _invocationExpressionTransformer
                     .TransformInvocationExpression(invocationExpression, transformedParameters, context);
             }
-            else if (expression is MemberReferenceExpression)
+            else if (expression is MemberReferenceExpression memberReference)
             {
-                var memberReference = (MemberReferenceExpression)expression;
 
                 // Handling array.Length with the VHDL length attribute.
                 if (memberReference.IsArrayLengthAccess())
@@ -441,8 +436,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // Is this reference to an enum's member?
-                var targetTypeReferenceExpression = memberReference.Target as TypeReferenceExpression;
-                if (targetTypeReferenceExpression != null &&
+                if (memberReference.Target is TypeReferenceExpression targetTypeReferenceExpression &&
                     context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
                 {
                     return memberFullName.ToExtendedVhdlIdValue();
@@ -566,10 +560,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
-            else if (expression is CastExpression)
+            else if (expression is CastExpression castExpression)
             {
-                var castExpression = (CastExpression)expression;
-
                 var innerExpressionResult = Transform(castExpression.Expression, context);
 
                 // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks
@@ -643,30 +635,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .ConvertedFromExpression
                 };
             }
-            else if (expression is ParenthesizedExpression)
+            else if (expression is ParenthesizedExpression parenthesizedExpression)
             {
-                var parenthesizedExpression = (ParenthesizedExpression)expression;
-
                 return new Parenthesized
                 {
                     Target = Transform(parenthesizedExpression.Expression, context)
                 };
             }
-            else if (expression is ObjectCreateExpression)
+            else if (expression is ObjectCreateExpression objectCreateExpression)
             {
-                var objectCreateExpression = (ObjectCreateExpression)expression;
-
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
 
                 // Running the constructor, which needs to be done before initializers.
                 var constructorFullName = objectCreateExpression.GetConstructorFullName();
                 if (!string.IsNullOrEmpty(constructorFullName))
                 {
-                    var constructor = context.TransformationContext.TypeDeclarationLookupTable
+                    if (context.TransformationContext.TypeDeclarationLookupTable
                         .Lookup(objectCreateExpression.Type)
                         .Members
-                        .SingleOrDefault(member => member.GetFullName() == constructorFullName) as MethodDeclaration;
-                    if (constructor != null)
+                        .SingleOrDefault(member => member.GetFullName() == constructorFullName) is MethodDeclaration constructor)
                     {
                         scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
 
@@ -682,47 +669,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         expression.CopyAnnotationsTo(constructorInvocation);
 
-                        // Temporarily replace the object creation to make the fake InvocationExpression realistic.
-                        expression.ReplaceWith(constructorInvocation);
+                        // Creating a clone of the expression's sub-tree where object creation is replaced to make the 
+                        // fake InvocationExpression realistic. A clone is needed not to cause concurrency issues if the
+                        // same expression is processed on multiple threads for multiple hardware copies.
+                        var expressionName = expression.GetFullName();
+
+                        var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
+                        var objectCreateExpressionClone = subTreeClone
+                            .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
+                        objectCreateExpressionClone.ReplaceWith(constructorInvocation);
 
                         Transform(constructorInvocation, context);
-
-                        constructorInvocation.ReplaceWith(expression);
-                    }
-                }
-
-                if (objectCreateExpression.Initializer.Elements.Any())
-                {
-                    foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
-                    {
-                        var namedInitializerExpression = initializerElement as NamedExpression;
-                        if (namedInitializerExpression == null)
-                        {
-                            throw new NotSupportedException(
-                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."
-                                .AddParentEntityName(objectCreateExpression));
-                        }
-
-                        context.Scope.CurrentBlock.Add(new Assignment
-                        {
-                            AssignTo = new RecordFieldAccess
-                            {
-                                Instance = initiailizationResult.RecordInstanceReference,
-                                FieldName = namedInitializerExpression.Name.ToExtendedVhdlId()
-                            },
-                            Expression = Transform(namedInitializerExpression.Expression, context)
-                        });
                     }
                 }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
-            else if (expression is DefaultValueExpression)
+            else if (expression is DefaultValueExpression defaultValueExpression)
             {
                 // The only case when a default() will remain in the syntax tree is for composed types. For primitives
                 // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
-                var initiailizationResult = InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
+                var initiailizationResult = InitializeRecord(expression, defaultValueExpression.Type, context);
 
                 context.Scope.CurrentBlock.Add(new Assignment
                 {
@@ -730,9 +698,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = Value.True
                 });
 
-                // There is no need for struct instantiation per se if the value was originally passed assigned to a
+                // There is no need for struct instantiation per se if the value was originally assigned to a
                 // variable/field/property, nothing should be on the right side of an assignment.
                 return Empty.Instance;
+            }
+            else if (expression is DirectionExpression directionExpression)
+            {
+                // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be 
+                // handled specially: these are just out-flowing parameters.
+                return Transform(directionExpression.Expression, context);
             }
             else
             {
@@ -782,11 +756,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var initializationValue = field.DataType.DefaultValue;
 
-                var fieldDeclaration = typeDeclaration.Members
+                if (typeDeclaration.Members
                     .SingleOrDefault(member =>
                         member.Is<FieldDeclaration>(f =>
-                            f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) as FieldDeclaration;
-                if (fieldDeclaration != null)
+                            f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) is FieldDeclaration fieldDeclaration)
                 {
                     var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
                     if (fieldInitializer != Expression.Null)

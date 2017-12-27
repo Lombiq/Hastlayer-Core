@@ -75,15 +75,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return SpecialTypes.Task;
             }
 
+            // This type is a value type but was passed as reference explicitly.
+            if (typeReference is Mono.Cecil.ByReferenceType && typeReference.Name.EndsWith("&"))
+            {
+                return ConvertTypeReference(typeReference.GetElementType(), context);
+            }
+
             return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, context);
         }
 
         public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)
         {
             if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
-            else if (type is ComposedType)
+            else if (type is ComposedType composedType)
             {
-                var composedType = (ComposedType)type;
 
                 // For inner classes (member types) the BaseType will contain the actual type (in a strange way the 
                 // actual type will be the BaseType of itself...).
@@ -93,7 +98,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    return ConvertComposed(composedType, context); 
+                    return ConvertComposed(composedType, context);
                 }
             }
             else if (type is SimpleType) return ConvertSimple((SimpleType)type, context);
@@ -241,6 +246,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
                 {
+                    if (IsTaskTypeReference(type.Annotation<TypeReference>()))
+                    {
+                        if (type.TypeArguments.Single().IsArray())
+                        {
+                            try
+                            {
+                                ExceptionHelper.ThrowOnlySingleDimensionalArraysSupporterException(type);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new NotSupportedException(
+                                    "Tasks can't return arrays as that would result in multi-dimensional arrays which is not supported. Affected type: " +
+                                    type.ToString() + ".",
+                                    ex);
+                            }
+                        }
+                    }
+
                     return ConvertAstType(type.TypeArguments.Single(), context);
                 }
 
@@ -286,6 +309,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
 
         private static bool IsTaskTypeReference(TypeReference typeReference) =>
-            typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
+            typeReference != null && typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }

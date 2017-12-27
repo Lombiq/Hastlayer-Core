@@ -94,6 +94,7 @@
     <Compile Include="Extensions\EntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
+    <Compile Include="Extensions\MethodDeclarationExtensions.cs" />
     <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IMethodInliner.cs" />
+    <Compile Include="Services\IObjectInitializerExpander.cs" />
     <Compile Include="Services\ITransformationContextCacheService.cs" />
     <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\MemberSuitabilityChecker.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\MethodInliner.cs" />
     <Compile Include="Services\NoForPatternStatementTransform.cs" />
+    <Compile Include="Services\ObjectInitializerExpander.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />

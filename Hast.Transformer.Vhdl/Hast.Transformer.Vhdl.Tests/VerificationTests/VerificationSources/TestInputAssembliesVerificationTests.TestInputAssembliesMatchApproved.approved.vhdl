@@ -3290,12 +3290,15 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- myClass = new ObjectUsingCases.MyClass {
-                        -- 	MyProperty = 5
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := false;
                         \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = 5;
+                        -- 
                         \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(5, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- flag = myClass == null;
@@ -3431,12 +3434,15 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- myClass = new ObjectUsingCases.MyClass {
-                        -- 	MyProperty = input
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\IsNull\ := false;
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = input;
+                        -- 
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::VoidReturn(Int32).0.input\;
                         -- The following section was transformed from the .NET statement below:
                         -- this.VoidMethod (myClass);
@@ -4123,12 +4129,15 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f = new ParallelCases.Calculator {
-                        -- 	Number = num
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f.Number = num;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\;
                         -- The following section was transformed from the .NET statement below:
                         -- return Hast.TestInputs.Various.ParallelCases/Calculator.IsEven (objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f);
@@ -4213,12 +4222,15 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f = new ParallelCases.Calculator {
-                        -- 	Number = num
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f.Number = num;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\;
                         -- The following section was transformed from the .NET statement below:
                         -- return Hast.TestInputs.Various.ParallelCases/Calculator.IsEven (objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f);
@@ -4303,12 +4315,15 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f = new ParallelCases.Calculator {
-                        -- 	Number = num
+                        -- 
                         -- };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f.Number = num;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\;
                         -- The following section was transformed from the .NET statement below:
                         -- return Hast.TestInputs.Various.ParallelCases/Calculator.IsEven (objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f);

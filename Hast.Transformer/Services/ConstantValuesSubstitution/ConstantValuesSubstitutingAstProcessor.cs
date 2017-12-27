@@ -16,8 +16,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly IArraySizeHolder _arraySizeHolder;
         public IArraySizeHolder ArraySizeHolder { get { return _arraySizeHolder; } }
 
-        private readonly Dictionary<string, MethodDeclaration> _objectHoldersToConstructorsMappings;
-        public Dictionary<string, MethodDeclaration> ObjectHoldersToConstructorsMappings { get { return _objectHoldersToConstructorsMappings; } }
+        private readonly Dictionary<string, ConstructorReference> _objectHoldersToConstructorsMappings;
+        public Dictionary<string, ConstructorReference> ObjectHoldersToConstructorsMappings { get { return _objectHoldersToConstructorsMappings; } }
 
         private readonly IAstExpressionEvaluator _astExpressionEvaluator;
         public IAstExpressionEvaluator AstExpressionEvaluator { get { return _astExpressionEvaluator; } }
@@ -27,7 +27,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             ConstantValuesTable constantValuesTable,
             ITypeDeclarationLookupTable typeDeclarationLookupTable,
             IArraySizeHolder arraySizeHolder,
-            Dictionary<string, MethodDeclaration> objectHoldersToConstructorsMappings,
+            Dictionary<string, ConstructorReference> objectHoldersToConstructorsMappings,
             IAstExpressionEvaluator astExpressionEvaluator)
         {
             _constantValuesTable = constantValuesTable;
@@ -83,6 +83,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     "passes through the syntax tree starting with the root node " + rootNode.GetFullName() +
                     ". This most possibly indicates some error or the assembly being processed is exceptionally big.");
             }
+        }
+
+
+        public class ConstructorReference
+        {
+            public MethodDeclaration Constructor { get; set; }
+            public Expression OriginalAssignmentTarget { get; set; }
         }
     }
 }

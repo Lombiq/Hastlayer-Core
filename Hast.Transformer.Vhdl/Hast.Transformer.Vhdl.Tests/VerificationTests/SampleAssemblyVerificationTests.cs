@@ -165,5 +165,28 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
             });
         }
+
+        [Test]
+        public async Task Fix64SampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Fix64Calculator>();
+
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumber(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
     }
 }

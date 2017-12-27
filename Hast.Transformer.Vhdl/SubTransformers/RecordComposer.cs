@@ -33,8 +33,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             // Using transient caching because when processing an assembly all references to a class or struct will 
             // result in the record being composed.
-            return _cacheManager.Get("ComposedRecord." + typeDeclaration.GetFullName(), true, ctx =>
+            var typeFullName = typeDeclaration.GetFullName();
+
+            return _cacheManager.Get("ComposedRecord." + typeFullName, true, ctx =>
             {
+                var recordName = typeFullName.ToExtendedVhdlId();
+
                 // Process only those fields that aren't backing fields of auto-properties (since those properties are 
                 // handled as properties).
                 var recordFields = typeDeclaration.Members
@@ -54,15 +58,29 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             arrayCreateExpression = variable.Initializer as ArrayCreateExpression;
                         }
 
+                        DataType fieldDataType;
+
+                        // If the field stores an instance of this type then we shouldn't declare that, otherwise we'd
+                        // get a stack overflow. This won't help against having a type that contains this type, so 
+                        // indirect circular type dependency.
+                        if (member.ReturnType.GetFullName() == typeFullName)
+                        {
+                            fieldDataType = new NullableRecord { Name = recordName }.ToReference();
+                        }
+                        else
+                        {
+                            fieldDataType = _declarableTypeCreatorLazy.Value.CreateDeclarableType(member, member.ReturnType, context);
+                        }
+
                         return new RecordField
                         {
-                            DataType = _declarableTypeCreatorLazy.Value.CreateDeclarableType(member, member.ReturnType, context),
+                            DataType = fieldDataType,
                             Name = name.ToExtendedVhdlId()
                         };
 
                     });
 
-                return RecordHelper.CreateNullableRecord(typeDeclaration.GetFullName().ToExtendedVhdlId(), recordFields);
+                return RecordHelper.CreateNullableRecord(recordName, recordFields);
             });
         }
     }
