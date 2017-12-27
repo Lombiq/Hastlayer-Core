@@ -248,8 +248,22 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     (Expression)node,
                     _typeDeclarationLookupTable);
 
-                // The parameter can be null for special invocations like Task.WhenAll().
-                if (parameter == null) return;
+                // There will be no parameter if the affected node is the invoked member itself. Also, the parameter 
+                // can be null for special invocations like Task.WhenAll().
+                if (parameter == null)
+                {
+                    ProcessParent(
+                        node: node.Parent,
+                        assignmentHandler: assignmentHandler,
+                        memberReferenceHandler: memberReferenceHandler,
+                        invocationParameterHandler: invocationParameterHandler,
+                        objectCreationParameterHandler: objectCreationParameterHandler,
+                        variableInitializerHandler: variableInitializerHandler,
+                        returnStatementHandler: returnStatementHandler,
+                        namedExpressionHandler: namedExpressionHandler);
+
+                    return;
+                }
 
                 invocationParameterHandler(parameter);
                 updateHiddenlyUpdatedNodesUpdated(parameter);
@@ -260,6 +274,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         (ObjectCreateExpression)parent,
                         (Expression)node,
                         _typeDeclarationLookupTable);
+
+                // The parameter will be null for a Task body's delegate invocation, e.g.:
+                // new Func<object, int[]> (<>c__DisplayClass6_.<ParallelizedCalculateIntegerSumUpToNumber>b__0)
+                if (parameter == null)
+                {
+                    return;
+                }
 
                 objectCreationParameterHandler(parameter);
                 updateHiddenlyUpdatedNodesUpdated(parameter);
