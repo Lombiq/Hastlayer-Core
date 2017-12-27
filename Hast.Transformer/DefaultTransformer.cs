@@ -47,6 +47,7 @@ namespace Hast.Transformer
         private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
         private readonly ITransformationContextCacheService _transformationContextCacheService;
         private readonly IMethodInliner _methodInliner;
+        private readonly IObjectInitializerExpander _objectInitializerExpander;
 
 
         public DefaultTransformer(
@@ -73,7 +74,8 @@ namespace Hast.Transformer
             IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
             IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
             ITransformationContextCacheService transformationContextCacheService,
-            IMethodInliner methodInliner)
+            IMethodInliner methodInliner,
+            IObjectInitializerExpander objectInitializerExpander)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -99,6 +101,7 @@ namespace Hast.Transformer
             _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
             _transformationContextCacheService = transformationContextCacheService;
             _methodInliner = methodInliner;
+            _objectInitializerExpander = objectInitializerExpander;
         }
 
 
@@ -260,6 +263,7 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
+            _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);

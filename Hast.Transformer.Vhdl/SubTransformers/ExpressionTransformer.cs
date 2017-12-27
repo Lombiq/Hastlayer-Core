@@ -188,7 +188,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                    else if (assignment.Right.Is(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
                             member.Target.Is<IdentifierExpression>(identifier =>
@@ -215,7 +215,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     // Handling shorthand Task starts like:
                     // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                    else if (assignment.Right.Is(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(memberReference =>
                             memberReference.MemberName == "StartNew" &&
                             // Need unified property name because it can also be get_Factory().
@@ -313,7 +313,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             " was out of the VHDL integer range it was substituted with a binary literal (" +
                             binaryLiteral + ")."));
 
-                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() });
+                        var size = type.GetSize();
+
+                        if (binaryLiteral.Length < size)
+                        {
+                            binaryLiteral = binaryLiteral.PadLeft(size, '0');
+                        }
+
+                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = size });
                     }
                 }
 
@@ -662,36 +669,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         expression.CopyAnnotationsTo(constructorInvocation);
 
-                        // Temporarily replace the object creation to make the fake InvocationExpression realistic.
-                        expression.ReplaceWith(constructorInvocation);
+                        // Creating a clone of the expression's sub-tree where object creation is replaced to make the 
+                        // fake InvocationExpression realistic. A clone is needed not to cause concurrency issues if the
+                        // same expression is processed on multiple threads for multiple hardware copies.
+                        var expressionName = expression.GetFullName();
+
+                        var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
+                        var objectCreateExpressionClone = subTreeClone
+                            .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
+                        objectCreateExpressionClone.ReplaceWith(constructorInvocation);
 
                         Transform(constructorInvocation, context);
-
-                        constructorInvocation.ReplaceWith(expression);
-                    }
-                }
-
-                if (objectCreateExpression.Initializer.Elements.Any())
-                {
-                    foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
-                    {
-                        var namedInitializerExpression = initializerElement as NamedExpression;
-                        if (namedInitializerExpression == null)
-                        {
-                            throw new NotSupportedException(
-                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."
-                                .AddParentEntityName(objectCreateExpression));
-                        }
-
-                        context.Scope.CurrentBlock.Add(new Assignment
-                        {
-                            AssignTo = new RecordFieldAccess
-                            {
-                                Instance = initiailizationResult.RecordInstanceReference,
-                                FieldName = namedInitializerExpression.Name.ToExtendedVhdlId()
-                            },
-                            Expression = Transform(namedInitializerExpression.Expression, context)
-                        });
                     }
                 }
 
@@ -710,9 +698,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = Value.True
                 });
 
-                // There is no need for struct instantiation per se if the value was originally passed assigned to a
+                // There is no need for struct instantiation per se if the value was originally assigned to a
                 // variable/field/property, nothing should be on the right side of an assignment.
                 return Empty.Instance;
+            }
+            else if (expression is DirectionExpression directionExpression)
+            {
+                // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be 
+                // handled specially: these are just out-flowing parameters.
+                return Transform(directionExpression.Expression, context);
             }
             else
             {

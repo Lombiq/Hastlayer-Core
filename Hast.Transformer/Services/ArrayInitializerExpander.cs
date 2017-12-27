@@ -56,6 +56,8 @@ namespace Hast.Transformer.Services
                     arrayCreateExpression = newArrayCreateExpression;
                 }
 
+                var parentStatement = arrayCreateExpression.FindFirstParentStatement();
+
                 for (int i = initializerElements.Length - 1; i >= 0; i--)
                 {
                     var elementAssignmentStatement = new ExpressionStatement(new AssignmentExpression(
@@ -68,9 +70,7 @@ namespace Hast.Transformer.Services
                         right: initializerElements[i]
                         ));
 
-                    AstInsertionHelper.InsertStatementAfter(
-                        arrayCreateExpression.FindFirstParentStatement(), 
-                        elementAssignmentStatement);
+                    AstInsertionHelper.InsertStatementAfter(parentStatement, elementAssignmentStatement);
                 }
             }
         }
