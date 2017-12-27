@@ -669,12 +669,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         expression.CopyAnnotationsTo(constructorInvocation);
 
-                        // Temporarily replace the object creation to make the fake InvocationExpression realistic.
-                        expression.ReplaceWith(constructorInvocation);
+                        // Creating a clone of the expression's sub-tree where object creation is replaced to make the 
+                        // fake InvocationExpression realistic. A clone is needed not to cause concurrency issues if the
+                        // same expression is processed on multiple threads for multiple hardware copies.
+                        var expressionName = expression.GetFullName();
+
+                        var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
+                        var objectCreateExpressionClone = subTreeClone
+                            .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
+                        objectCreateExpressionClone.ReplaceWith(constructorInvocation);
 
                         Transform(constructorInvocation, context);
-
-                        constructorInvocation.ReplaceWith(expression);
                     }
                 }
 
