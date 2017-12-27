@@ -302,7 +302,15 @@ architecture Imp of Hast_IP is
         \BitMask::.ctor(UInt16,Boolean).0._State_3\, 
         \BitMask::.ctor(UInt16,Boolean).0._State_4\, 
         \BitMask::.ctor(UInt16,Boolean).0._State_5\, 
-        \BitMask::.ctor(UInt16,Boolean).0._State_6\);
+        \BitMask::.ctor(UInt16,Boolean).0._State_6\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_7\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_8\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_9\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_10\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_11\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_12\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_13\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_14\);
     -- Signals:
     Signal \BitMask::.ctor(UInt16,Boolean).0._Finished\: boolean := false;
     Signal \BitMask::.ctor(UInt16,Boolean).0.this.parameter.Out\: \Lombiq.Arithmetics.BitMask\;
@@ -578,7 +586,13 @@ architecture Imp of Hast_IP is
         \BitMask::op_Addition(BitMask,BitMask).0._State_21\, 
         \BitMask::op_Addition(BitMask,BitMask).0._State_22\, 
         \BitMask::op_Addition(BitMask,BitMask).0._State_23\, 
-        \BitMask::op_Addition(BitMask,BitMask).0._State_24\);
+        \BitMask::op_Addition(BitMask,BitMask).0._State_24\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_25\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_26\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_27\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_28\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_29\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_30\);
     -- Signals:
     Signal \BitMask::op_Addition(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.return\: \Lombiq.Arithmetics.BitMask\;
@@ -2769,11 +2783,19 @@ begin
         Variable \BitMask::.ctor(UInt16,Boolean).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt16,Boolean).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
         Variable \BitMask::.ctor(UInt16,Boolean).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt16,Boolean).0.conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\: boolean := false;
-        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::.ctor(UInt16,Boolean).0.conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\: boolean := false;
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2785,11 +2807,19 @@ begin
                 \BitMask::.ctor(UInt16,Boolean).0.num\ := to_signed(0, 32);
                 \BitMask::.ctor(UInt16,Boolean).0.array\ := (others => to_unsigned(0, 32));
                 \BitMask::.ctor(UInt16,Boolean).0.num2\ := to_unsigned(0, 16);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \BitMask::.ctor(UInt16,Boolean).0.conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e\ := to_signed(0, 32);
-                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\ := false;
-                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\ := to_unsigned(0, 16);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.5\ := false;
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \BitMask::.ctor(UInt16,Boolean).0.conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615\ := to_unsigned(0, 32);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\ := false;
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.9\ := to_unsigned(0, 32);
             else 
                 case \BitMask::.ctor(UInt16,Boolean).0._State\ is 
                     when \BitMask::.ctor(UInt16,Boolean).0._State_0\ => 
@@ -2825,24 +2855,59 @@ begin
                         -- ushort num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = 0;
+                        -- num = (int)(size % 32);
                         -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.num\ := to_signed(0, 32);
+                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_3\ => 
+                        -- Waiting for the result to appear in \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_4\;
+                            \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := SmartResize(signed(\BitMask::.ctor(UInt16,Boolean).0.size\ mod to_unsigned(32, 16)), 32);
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_4\ => 
+                        \BitMask::.ctor(UInt16,Boolean).0.num\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- int conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 0;
+                        -- if (num == 0) {
+                        -- 	conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 0;
+                        -- }
+                        -- else {
+                        -- 	conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 1;
+                        -- }
                         -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e\ := to_signed(0, 32);
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\ := \BitMask::.ctor(UInt16,Boolean).0.num\ = to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_6\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_6\.
+                        --     * The false branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_7\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_7\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_5\.
+
+                        if (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_6\;
+                        else 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_5\ => 
+                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = 1;
+                        -- @this.SegmentCount = (ushort)(size >> 5 + conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e);
                         -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\ := to_unsigned(1, 16);
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::.ctor(UInt16,Boolean).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\ := SmartResize(unsigned(\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ + \BitMask::.ctor(UInt16,Boolean).0.conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e\), 16);
+                        \BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Size = 32;
+                        -- @this.Size = size;
                         -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.this\.\Size\ := to_unsigned(32, 16);
+                        \BitMask::.ctor(UInt16,Boolean).0.this\.\Size\ := \BitMask::.ctor(UInt16,Boolean).0.size\;
                         -- The following section was transformed from the .NET statement below:
                         -- array = new uint[1];
                         -- 
@@ -2855,32 +2920,69 @@ begin
                         -- 		num2 = num2 + 1;
                         -- 	}
                         -- 	uint conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615;
-                        -- 	conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
-                        -- 	array [(int)num2] = 4294967295u;
+                        -- 	if (num > 0) {
+                        -- 		conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 1u << num - 1u;
+                        -- 	}
+                        -- 	else {
+                        -- 		conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
+                        -- 	}
+                        -- 	array [(int)num2] = conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615;
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_4\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_6\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_3\.
+                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_9\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_12\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_8\.
 
                         if (\BitMask::.ctor(UInt16,Boolean).0.allOne\) then 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_4\;
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_9\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_3\;
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_6\ => 
+                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 0;
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_6\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_3\ => 
-                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_2\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_7\ => 
+                        -- False branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e = 1;
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.conditional6e1dfe44d3de058b787ef0ca4cc13dff4508968539f2f7321f43d75acf95902e\ := to_signed(1, 32);
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_7\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_8\ => 
+                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = array;
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.this\.\Segments\ := \BitMask::.ctor(UInt16,Boolean).0.array\;
                         \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_4\ => 
-                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_2\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_9\ => 
+                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = 0;
@@ -2889,8 +2991,13 @@ begin
                         -- 		num2 = num2 + 1;
                         -- 	}
                         -- 	uint conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615;
-                        -- 	conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
-                        -- 	array [(int)num2] = 4294967295u;
+                        -- 	if (num > 0) {
+                        -- 		conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 1u << num - 1u;
+                        -- 	}
+                        -- 	else {
+                        -- 		conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
+                        -- 	}
+                        -- 	array [(int)num2] = conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -2904,14 +3011,14 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_5\;
+                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_5\ => 
-                        -- Repeated state of the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_10\ => 
+                        -- Repeated state of the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_9\.
                         -- The while loop's condition:
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\ - to_unsigned(1, 16), 32));
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\ := \BitMask::.ctor(UInt16,Boolean).0.num2\ < \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\;
-                        if (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\) then 
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\ := unsigned(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\ - to_unsigned(1, 16), 32));
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.5\ := \BitMask::.ctor(UInt16,Boolean).0.num2\ < \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\;
+                        if (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.5\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	array [(int)num2] = 4294967295u;
@@ -2926,30 +3033,82 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num2 + 1;
                             -- 
-                            \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ := unsigned(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.num2\ + to_unsigned(1, 16), 32));
-                            \BitMask::.ctor(UInt16,Boolean).0.num2\ := SmartResize(\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\, 16);
+                            \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\ := unsigned(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.num2\ + to_unsigned(1, 16), 32));
+                            \BitMask::.ctor(UInt16,Boolean).0.num2\ := SmartResize(\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\, 16);
                         else 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_6\;
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_6\ => 
-                        -- State after the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_11\ => 
+                        -- State after the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- uint conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num > 0) {
+                        -- 	conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 1u << num - 1u;
+                        -- }
+                        -- else {
+                        -- 	conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
+                        -- }
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\ := \BitMask::.ctor(UInt16,Boolean).0.num\ > to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_13\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_13\.
+                        --     * The false branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_14\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_14\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_12\.
+
+                        if (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_13\;
+                        else 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_14\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_12\ => 
+                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [(int)num2] = conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615;
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.array\(to_integer(signed(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.num2\, 32)))) := \BitMask::.ctor(UInt16,Boolean).0.conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615\;
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_5\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_12\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_13\ => 
+                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 1u << num - 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 1u << num - 1u;
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.8\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.num\, 5))));
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.9\ := \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.8\ - to_unsigned(1, 32);
+                        \BitMask::.ctor(UInt16,Boolean).0.conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615\ := \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.9\;
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_13\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_12\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_14\ => 
+                        -- False branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
+                        -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615 = 4294967295u;
                         -- 
                         -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
                         \BitMask::.ctor(UInt16,Boolean).0.conditionalc0dd530537c97ea13354777682f6c1061719cefbe0b297b02e52790a9470b615\ := "11111111111111111111111111111111";
-                        -- The following section was transformed from the .NET statement below:
-                        -- array [(int)num2] = 4294967295u;
-                        -- 
-                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
-                        \BitMask::.ctor(UInt16,Boolean).0.array\(to_integer(signed(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.num2\, 32)))) := "11111111111111111111111111111111";
-                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_2\.
-                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_6\) then 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_3\;
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_14\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3075,7 +3234,7 @@ begin
                         -- BitMask objectd9dc79cc4b1d8d3c5c266c285dc3acb6d977503b4d121e053afe008efceebf9b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectd9dc79cc4b1d8d3c5c266c285dc3acb6d977503b4d121e053afe008efceebf9b = new BitMask (array, 32);
+                        -- objectd9dc79cc4b1d8d3c5c266c285dc3acb6d977503b4d121e053afe008efceebf9b = new BitMask (array, size);
                         -- 
                         -- Initializing record fields to their defaults.
                         \BitMask::FromImmutableArray(UInt32[],UInt16).0.objectd9dc79cc4b1d8d3c5c266c285dc3acb6d977503b4d121e053afe008efceebf9b\.\IsNull\ := false;
@@ -3086,7 +3245,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16)
                         \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\ <= \BitMask::FromImmutableArray(UInt32[],UInt16).0.objectd9dc79cc4b1d8d3c5c266c285dc3acb6d977503b4d121e053afe008efceebf9b\;
                         \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::FromImmutableArray(UInt32[],UInt16).0.array\;
-                        \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                        \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= \BitMask::FromImmutableArray(UInt32[],UInt16).0.size\;
                         \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= true;
                         \BitMask::FromImmutableArray(UInt32[],UInt16).0._State\ := \BitMask::FromImmutableArray(UInt32[],UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3468,17 +3627,18 @@ begin
         Variable \BitMask::SetZero(UInt16).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.index2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.flag2\: boolean := false;
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.6\: boolean := false;
         Variable \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
-        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3495,17 +3655,18 @@ begin
                 \BitMask::SetZero(UInt16).0.num\ := to_signed(0, 32);
                 \BitMask::SetZero(UInt16).0.index2\ := to_signed(0, 32);
                 \BitMask::SetZero(UInt16).0.flag2\ := false;
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := false;
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := false;
                 \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := false;
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := false;
                 \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\ := (others => to_unsigned(0, 32));
-                \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \BitMask::SetZero(UInt16).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \BitMask::SetZero(UInt16).0.binaryOperationResult.8\ := to_unsigned(0, 32);
             else 
                 case \BitMask::SetZero(UInt16).0._State\ is 
                     when \BitMask::SetZero(UInt16).0._State_0\ => 
@@ -3544,10 +3705,11 @@ begin
                         -- bool flag2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = index > 32;
+                        -- flag = index > @this.SegmentCount * 32;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := \BitMask::SetZero(UInt16).0.index\ > to_unsigned(32, 16);
-                        \BitMask::SetZero(UInt16).0.flag\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.0\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::SetZero(UInt16).0.this\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := \BitMask::SetZero(UInt16).0.index\ > \BitMask::SetZero(UInt16).0.binaryOperationResult.0\;
+                        \BitMask::SetZero(UInt16).0.flag\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	result = new BitMask (@this);
@@ -3561,7 +3723,7 @@ begin
                         -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
                         -- 		System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
                         -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 		result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 32);
+                        -- 		result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- 	}
                         -- 	else {
                         -- 		result = new BitMask (@this);
@@ -3579,7 +3741,7 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::SetZero(UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::SetZero(UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -3634,7 +3796,7 @@ begin
                         -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
                         -- 		System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
                         -- 		array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 		result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 32);
+                        -- 		result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- 	}
                         -- 	else {
                         -- 		result = new BitMask (@this);
@@ -3647,7 +3809,7 @@ begin
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::SetZero(UInt16).0._State_7\ => 
-                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_8\;
@@ -3655,23 +3817,23 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetZero(UInt16).0._State_8\ => 
-                        \BitMask::SetZero(UInt16).0.num\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.1\);
+                        \BitMask::SetZero(UInt16).0.num\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
                         -- index2 = index >> 5;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::SetZero(UInt16).0.index2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.2\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := signed(SmartResize(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::SetZero(UInt16).0.index2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = @this.Segments [index2] >> num % 2u == 1u;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := shift_right(\BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetZero(UInt16).0.num\), 5) and "11111")));
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := shift_right(\BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetZero(UInt16).0.num\), 5) and "11111")));
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \BitMask::SetZero(UInt16).0._State_9\ => 
-                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_10\;
@@ -3679,18 +3841,18 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ mod to_unsigned(2, 32);
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetZero(UInt16).0._State_10\ => 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ = to_unsigned(1, 32);
-                        \BitMask::SetZero(UInt16).0.flag2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.5\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ = to_unsigned(1, 32);
+                        \BitMask::SetZero(UInt16).0.flag2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.6\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
                         -- 	uint[] array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b;
                         -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
                         -- 	System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
                         -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 	result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 32);
+                        -- 	result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- }
                         -- else {
                         -- 	result = new BitMask (@this);
@@ -3723,7 +3885,7 @@ begin
                         -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b = new uint[1];
                         -- 	System.Array.Copy (@this.Segments, array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 1);
                         -- 	array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
-                        -- 	result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 32);
+                        -- 	result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -3740,15 +3902,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b [index2] = @this.Segments [index2] & ~1u << num;
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetZero(UInt16).0.num\, 5))));
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.7\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) and not(\BitMask::SetZero(UInt16).0.binaryOperationResult.6\);
-                        \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) := \BitMask::SetZero(UInt16).0.binaryOperationResult.7\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.7\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetZero(UInt16).0.num\, 5))));
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.8\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) and not(\BitMask::SetZero(UInt16).0.binaryOperationResult.7\);
+                        \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\(to_integer(\BitMask::SetZero(UInt16).0.index2\)) := \BitMask::SetZero(UInt16).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
-                        -- result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, 32);
+                        -- result = BitMask.FromImmutableArray (array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b, @this.Size);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::FromImmutableArray(System.UInt32[],System.UInt16)
                         \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::SetZero(UInt16).0.array661643a32331c1c17c90c8df2ce1363517913db0476b0fc66a6d6c14fc10738b\;
-                        \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                        \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\ <= \BitMask::SetZero(UInt16).0.this\.\Size\;
                         \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= true;
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
@@ -4483,35 +4645,39 @@ begin
         Variable \BitMask::op_Addition(BitMask,BitMask).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.flag5\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.flag6\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4532,35 +4698,39 @@ begin
                 \BitMask::op_Addition(BitMask,BitMask).0.b\ := to_unsigned(0, 8);
                 \BitMask::op_Addition(BitMask,BitMask).0.flag5\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\ := to_unsigned(0, 16);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\ := to_unsigned(0, 16);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83\ := to_signed(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb\ := to_signed(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := to_unsigned(0, 8);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := to_unsigned(0, 8);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := to_unsigned(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := to_unsigned(0, 32);
             else 
                 case \BitMask::op_Addition(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_0\ => 
@@ -4620,9 +4790,163 @@ begin
                         -- bool flag6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = false;
+                        -- flag = left.SegmentCount == 0 || right.SegmentCount == 0;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag\ := False;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.left\.\SegmentCount\ = to_unsigned(0, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_Addition(BitMask,BitMask).0.right\.\SegmentCount\ = to_unsigned(0, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ or \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = left;
+                        -- }
+                        -- else {
+                        -- 	flag2 = false;
+                        -- 	num = 0;
+                        -- 	num2 = 0;
+                        -- 	array = new uint[1];
+                        -- 	num3 = 0;
+                        -- 	ushort conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94;
+                        -- 	if (left.Size > right.Size) {
+                        -- 		conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = left.Size;
+                        -- 	}
+                        -- 	else {
+                        -- 		conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = right.Size;
+                        -- 	}
+                        -- 	while (num3 < conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94) {
+                        -- 		flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
+                        -- 		flag4 = num3 < right.Size && right.Segments [(int)num] >> (int)num2 % 2u == 1u;
+                        -- 		int conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83;
+                        -- 		if (flag3) {
+                        -- 			conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 1;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 0;
+                        -- 		}
+                        -- 		int conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb;
+                        -- 		if (flag4) {
+                        -- 			conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 1;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 0;
+                        -- 		}
+                        -- 		int conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d;
+                        -- 		if (flag2) {
+                        -- 			conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 1;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 0;
+                        -- 		}
+                        -- 		b = (byte)(conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 + conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb + conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d);
+                        -- 		flag5 = b % 2 == 1;
+                        -- 		if (flag5) {
+                        -- 			array [(int)num] = array [(int)num] + 1u << (int)num2;
+                        -- 		}
+                        -- 		flag2 = b >> 1 == 1;
+                        -- 		num2 = num2 + 1;
+                        -- 		flag6 = num2 >> 5 == 1;
+                        -- 		if (flag6) {
+                        -- 			num2 = 0;
+                        -- 			num = num + 1;
+                        -- 		}
+                        -- 		num3 = num3 + 1;
+                        -- 	}
+                        -- 	result = new BitMask (array, 0);
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_4\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_4\.
+                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_30\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_3\.
+
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.flag\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_4\;
+                        else 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_3\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
+                        \BitMask::op_Addition(BitMask,BitMask).0.return\ <= \BitMask::op_Addition(BitMask,BitMask).0.result\;
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_4\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = left;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = left;
+                        -- 
+                        \BitMask::op_Addition(BitMask,BitMask).0.result\ := \BitMask::op_Addition(BitMask,BitMask).0.left\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_4\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_5\ => 
+                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	flag2 = false;
+                        -- 	num = 0;
+                        -- 	num2 = 0;
+                        -- 	array = new uint[1];
+                        -- 	num3 = 0;
+                        -- 	ushort conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94;
+                        -- 	if (left.Size > right.Size) {
+                        -- 		conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = left.Size;
+                        -- 	}
+                        -- 	else {
+                        -- 		conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = right.Size;
+                        -- 	}
+                        -- 	while (num3 < conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94) {
+                        -- 		flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
+                        -- 		flag4 = num3 < right.Size && right.Segments [(int)num] >> (int)num2 % 2u == 1u;
+                        -- 		int conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83;
+                        -- 		if (flag3) {
+                        -- 			conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 1;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 0;
+                        -- 		}
+                        -- 		int conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb;
+                        -- 		if (flag4) {
+                        -- 			conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 1;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 0;
+                        -- 		}
+                        -- 		int conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d;
+                        -- 		if (flag2) {
+                        -- 			conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 1;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 0;
+                        -- 		}
+                        -- 		b = (byte)(conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 + conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb + conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d);
+                        -- 		flag5 = b % 2 == 1;
+                        -- 		if (flag5) {
+                        -- 			array [(int)num] = array [(int)num] + 1u << (int)num2;
+                        -- 		}
+                        -- 		flag2 = b >> 1 == 1;
+                        -- 		num2 = num2 + 1;
+                        -- 		flag6 = num2 >> 5 == 1;
+                        -- 		if (flag6) {
+                        -- 			num2 = 0;
+                        -- 			num = num + 1;
+                        -- 		}
+                        -- 		num3 = num3 + 1;
+                        -- 	}
+                        -- 	result = new BitMask (array, 0);
+                        -- }
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = false;
                         -- 
@@ -4647,9 +4971,28 @@ begin
                         -- ushort conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = 32;
+                        -- if (left.Size > right.Size) {
+                        -- 	conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = left.Size;
+                        -- }
+                        -- else {
+                        -- 	conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = right.Size;
+                        -- }
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\ := to_unsigned(32, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_Addition(BitMask,BitMask).0.left\.\Size\ > \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_7\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_7\.
+                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_6\.
+
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_7\;
+                        else 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_6\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- while (num3 < conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94) {
                         -- 	flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
@@ -4691,13 +5034,45 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_3\;
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_7\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = left.Size;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = left.Size;
+                        -- 
+                        \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\ := \BitMask::op_Addition(BitMask,BitMask).0.left\.\Size\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_7\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_8\ => 
+                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = right.Size;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94 = right.Size;
+                        -- 
+                        \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\ := \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_8\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_9\ => 
+                        -- Repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\;
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\) then 
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.conditional223a8ac00d93c7722ff11baf727d33d7a32cd25ba0c58d2b08c4aa539780ad94\;
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
@@ -4741,14 +5116,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
                             -- 
-                            \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\ := SmartResize(unsigned(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_5\;
+                            \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := SmartResize(unsigned(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_11\;
                         else 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_4\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_4\ => 
-                        -- State after the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_10\ => 
+                        -- State after the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- result = new BitMask (array, 0);
                         -- 
@@ -4763,44 +5138,44 @@ begin
                         \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::op_Addition(BitMask,BitMask).0.array\;
                         \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
                         \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= true;
-                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_24\;
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_30\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_5\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_11\ => 
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_6\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_12\;
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\ mod to_unsigned(2, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_6\ => 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ = to_unsigned(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\;
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_12\ => 
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag4 = num3 < right.Size && right.Segments [(int)num] >> (int)num2 % 2u == 1u;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := SmartResize(unsigned(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_7\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := SmartResize(unsigned(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.4
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_7\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_13\ => 
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_8\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_14\;
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_8\ => 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ and \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag4\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\;
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_14\ => 
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ = to_unsigned(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ and \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag4\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\;
                         -- The following section was transformed from the .NET statement below:
                         -- int conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83;
                         -- 
@@ -4814,18 +5189,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_10\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_10\.
-                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_11\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_11\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_9\.
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_16\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_16\.
+                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_17\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_17\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
 
                         if (\BitMask::op_Addition(BitMask,BitMask).0.flag3\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_10\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_16\;
                         else 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_11\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_17\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_9\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_15\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- int conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb;
                         -- 
@@ -4839,18 +5214,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_13\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_13\.
-                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_12\.
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_19\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_19\.
+                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_20\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_20\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
 
                         if (\BitMask::op_Addition(BitMask,BitMask).0.flag4\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_13\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_19\;
                         else 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_14\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_20\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_10\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_16\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 1;
@@ -4860,13 +5235,13 @@ begin
                         -- conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 1;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_10\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_16\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_11\ => 
-                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_17\ => 
+                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 0;
@@ -4876,13 +5251,13 @@ begin
                         -- conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 = 0;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_8\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_11\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_17\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_12\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_9\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_18\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
                         -- int conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d;
                         -- 
@@ -4896,18 +5271,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_16\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_16\.
-                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_17\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_17\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_22\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_22\.
+                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_23\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_23\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_21\.
 
                         if (\BitMask::op_Addition(BitMask,BitMask).0.flag2\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_16\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_22\;
                         else 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_17\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_23\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_13\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_9\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_19\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 1;
@@ -4917,13 +5292,13 @@ begin
                         -- conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 1;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_9\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_13\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_12\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_19\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_14\ => 
-                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_9\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_20\ => 
+                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 0;
@@ -4933,26 +5308,26 @@ begin
                         -- conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb = 0;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_9\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_14\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_12\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_15\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_20\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_15\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_12\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_21\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- b = (byte)(conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83 + conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb + conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d);
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := \BitMask::op_Addition(BitMask,BitMask).0.conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83\ + \BitMask::op_Addition(BitMask,BitMask).0.conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := SmartResize(unsigned(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ + \BitMask::op_Addition(BitMask,BitMask).0.conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d\), 8);
-                        \BitMask::op_Addition(BitMask,BitMask).0.b\ := (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := \BitMask::op_Addition(BitMask,BitMask).0.conditional5879828947396ed3697dc523a392190e5acca8aad18277de3cb8a8be5de05e83\ + \BitMask::op_Addition(BitMask,BitMask).0.conditionala328119b66b9d4ad863ec3231a2086b8d1d1497b20a29bb8b87ffa0aa2da35fb\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := SmartResize(unsigned(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ + \BitMask::op_Addition(BitMask,BitMask).0.conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d\), 8);
+                        \BitMask::op_Addition(BitMask,BitMask).0.b\ := (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\);
                         -- The following section was transformed from the .NET statement below:
                         -- flag5 = b % 2 == 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_18\;
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_16\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_12\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_22\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 1;
@@ -4962,13 +5337,13 @@ begin
                         -- conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 1;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_12\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_16\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_15\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_22\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_17\ => 
-                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_12\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_23\ => 
+                        -- False branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 0;
@@ -4978,25 +5353,25 @@ begin
                         -- conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d = 0;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.conditional0d4ef9e95ca5f732f867d2bdac8f5dbabb8127ae6cb7ba723f5ffeebea6f608d\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_12\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_17\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_15\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_23\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_18\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ (have to wait 7 clock cycles in this state).
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_24\ => 
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_19\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_25\;
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_19\ => 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ = to_unsigned(1, 8);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag5\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\;
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_25\ => 
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ = to_unsigned(1, 8);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag5\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag5) {
                         -- 	array [(int)num] = array [(int)num] + 1u << (int)num2;
@@ -5004,35 +5379,35 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_21\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_21\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_20\.
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_27\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_27\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
 
                         if (\BitMask::op_Addition(BitMask,BitMask).0.flag5\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_21\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_27\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_20\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_26\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_20\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_19\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_26\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = b >> 1 == 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ = to_signed(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ = to_signed(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 + 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\ + to_unsigned(1, 16), 32));
-                        \BitMask::op_Addition(BitMask,BitMask).0.num2\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\ + to_unsigned(1, 16), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.num2\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\, 16);
                         -- The following section was transformed from the .NET statement below:
                         -- flag6 = num2 >> 5 == 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ = to_signed(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ = to_signed(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag6) {
                         -- 	num2 = 0;
@@ -5041,18 +5416,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_23\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_23\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_22\.
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_29\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_29\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_28\.
 
                         if (\BitMask::op_Addition(BitMask,BitMask).0.flag6\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_23\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_29\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_22\;
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_21\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_19\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_27\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	array [(int)num] = array [(int)num] + 1u << (int)num2;
@@ -5061,28 +5436,28 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- array [(int)num] = array [(int)num] + 1u << (int)num2;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := SmartResize(unsigned(shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5))))), 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))) + \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\;
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_19\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_21\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_20\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := SmartResize(unsigned(shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5))))), 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))) + \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_27\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_26\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_22\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_20\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_28\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num3\ + to_unsigned(1, 16), 32));
-                        \BitMask::op_Addition(BitMask,BitMask).0.num3\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\, 16);
-                        -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_22\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_3\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num3\ + to_unsigned(1, 16), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.num3\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\, 16);
+                        -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\ if the loop wasn't exited with a state change.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_28\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_23\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_20\.
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_29\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = 0;
@@ -5096,24 +5471,23 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
-                        \BitMask::op_Addition(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\, 16);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_20\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_23\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_22\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\, 16);
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_29\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_24\ => 
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_30\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16)
                         if (\BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ = \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= false;
                             \BitMask::op_Addition(BitMask,BitMask).0.result\ := \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\;
                             \BitMask::op_Addition(BitMask,BitMask).0.array\ := \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- return result;
-                            -- 
-                            \BitMask::op_Addition(BitMask,BitMask).0.return\ <= \BitMask::op_Addition(BitMask,BitMask).0.result\;
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_1\;
+                            -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
+                            if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_30\) then 
+                                \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_3\;
+                            end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5142,37 +5516,38 @@ begin
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional22bfb8ac44cbc4917ee14440447b12540eceec7b3cd495084ef0cd420990276b\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional9d57ba50a30bb33afd6499b41b780cc730fced7e4d6846a878d4c184392b9041\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional410c72494e25aa69b39baa13ebf031c8dcea75aa2cf10de21e0c7dee364e4026\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5195,37 +5570,38 @@ begin
                 \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\ := to_unsigned(0, 16);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\ := to_unsigned(0, 16);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditional22bfb8ac44cbc4917ee14440447b12540eceec7b3cd495084ef0cd420990276b\ := to_signed(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditional9d57ba50a30bb33afd6499b41b780cc730fced7e4d6846a878d4c184392b9041\ := to_signed(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditional410c72494e25aa69b39baa13ebf031c8dcea75aa2cf10de21e0c7dee364e4026\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := to_unsigned(0, 8);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 8);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := to_unsigned(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := to_unsigned(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := to_unsigned(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := to_unsigned(0, 32);
             else 
                 case \BitMask::op_Subtraction(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_0\ => 
@@ -5285,11 +5661,12 @@ begin
                         -- bool flag6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = false || right.SegmentCount == 0;
+                        -- flag = left.SegmentCount == 0 || right.SegmentCount == 0;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\SegmentCount\ = to_unsigned(0, 16);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\ := False or \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left\.\SegmentCount\ = to_unsigned(0, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\SegmentCount\ = to_unsigned(0, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ or \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	result = left;
@@ -5301,8 +5678,8 @@ begin
                         -- 	array = new uint[1];
                         -- 	num3 = 0;
                         -- 	ushort conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97;
-                        -- 	if (32 > right.Size) {
-                        -- 		conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = 32;
+                        -- 	if (left.Size > right.Size) {
+                        -- 		conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = left.Size;
                         -- 	}
                         -- 	else {
                         -- 		conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = right.Size;
@@ -5359,7 +5736,7 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -5394,8 +5771,8 @@ begin
                         -- 	array = new uint[1];
                         -- 	num3 = 0;
                         -- 	ushort conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97;
-                        -- 	if (32 > right.Size) {
-                        -- 		conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = 32;
+                        -- 	if (left.Size > right.Size) {
+                        -- 		conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = left.Size;
                         -- 	}
                         -- 	else {
                         -- 		conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = right.Size;
@@ -5465,21 +5842,21 @@ begin
                         -- ushort conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (32 > right.Size) {
-                        -- 	conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = 32;
+                        -- if (left.Size > right.Size) {
+                        -- 	conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = left.Size;
                         -- }
                         -- else {
                         -- 	conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = right.Size;
                         -- }
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\ := to_unsigned(32, 16) > \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Size\ > \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_7\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_7\.
                         --     * The false branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_8\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_8\.
                         --     * Execution after either branch will continue in the following state: \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\.
 
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\) then 
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_7\;
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_8\;
@@ -5534,13 +5911,13 @@ begin
                         -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = 32;
+                        -- 	conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = left.Size;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = 32;
+                        -- conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97 = left.Size;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\ := to_unsigned(32, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Size\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_7\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\;
@@ -5565,8 +5942,8 @@ begin
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\;
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\) then 
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.conditional979532e99fc20921da9e8cfc432c3616d4d43a7334bd4a94ead544150a47ca97\;
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
@@ -5610,7 +5987,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag3 = left.Segments [(int)num] >> (int)num2 % 2u == 1u;
                             -- 
-                            \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := SmartResize(unsigned(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
+                            \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := SmartResize(unsigned(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_11\;
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_10\;
@@ -5635,7 +6012,7 @@ begin
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_12\;
@@ -5643,20 +6020,20 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ mod to_unsigned(2, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_12\ => 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ = to_unsigned(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag4 = num3 < right.Size && right.Segments [(int)num] >> (int)num2 % 2u == 1u;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := SmartResize(unsigned(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_13\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\;
@@ -5664,12 +6041,12 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ mod to_unsigned(2, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\ => 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ = to_unsigned(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ and \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ = to_unsigned(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ and \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\;
                         -- The following section was transformed from the .NET statement below:
                         -- int conditional22bfb8ac44cbc4917ee14440447b12540eceec7b3cd495084ef0cd420990276b;
                         -- 
@@ -5812,10 +6189,10 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- b = (byte)(2 + conditional22bfb8ac44cbc4917ee14440447b12540eceec7b3cd495084ef0cd420990276b - conditional9d57ba50a30bb33afd6499b41b780cc730fced7e4d6846a878d4c184392b9041 - conditional410c72494e25aa69b39baa13ebf031c8dcea75aa2cf10de21e0c7dee364e4026);
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := to_signed(2, 32) + \BitMask::op_Subtraction(BitMask,BitMask).0.conditional22bfb8ac44cbc4917ee14440447b12540eceec7b3cd495084ef0cd420990276b\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditional9d57ba50a30bb33afd6499b41b780cc730fced7e4d6846a878d4c184392b9041\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := SmartResize(unsigned(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditional410c72494e25aa69b39baa13ebf031c8dcea75aa2cf10de21e0c7dee364e4026\), 8);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.b\ := (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(2, 32) + \BitMask::op_Subtraction(BitMask,BitMask).0.conditional22bfb8ac44cbc4917ee14440447b12540eceec7b3cd495084ef0cd420990276b\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditional9d57ba50a30bb33afd6499b41b780cc730fced7e4d6846a878d4c184392b9041\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := SmartResize(unsigned(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditional410c72494e25aa69b39baa13ebf031c8dcea75aa2cf10de21e0c7dee364e4026\), 8);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.b\ := (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\);
                         -- The following section was transformed from the .NET statement below:
                         -- flag5 = b % 2 == 1;
                         -- 
@@ -5854,7 +6231,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_24\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\;
@@ -5862,11 +6239,11 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\ => 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ = to_unsigned(1, 8);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ = to_unsigned(1, 8);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag5) {
                         -- 	array [(int)num] = array [(int)num] + 1u << (int)num2;
@@ -5889,20 +6266,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = b >> 1 == 0;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ = to_signed(0, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ = to_signed(0, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 + 1;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\ + to_unsigned(1, 16), 32));
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\ + to_unsigned(1, 16), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\, 16);
                         -- The following section was transformed from the .NET statement below:
                         -- flag6 = num2 >> 5 == 1;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ = to_signed(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ = to_signed(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag6) {
                         -- 	num2 = 0;
@@ -5931,9 +6308,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- array [(int)num] = array [(int)num] + 1u << (int)num2;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := SmartResize(unsigned(shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5))))), 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))) + \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := SmartResize(unsigned(shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5))))), 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))) + \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\;
@@ -5944,8 +6321,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num3\ + to_unsigned(1, 16), 32));
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num3\ + to_unsigned(1, 16), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\, 16);
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\;
@@ -5966,8 +6343,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 1;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\, 16);
                         -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\;
@@ -6059,13 +6436,13 @@ begin
                         -- ushort num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = 1 != right.SegmentCount;
+                        -- flag = left.SegmentCount != right.SegmentCount;
                         -- 
-                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.0\ := to_unsigned(1, 16) /= \BitMask::op_BitwiseAnd(BitMask,BitMask).0.right\.\SegmentCount\;
+                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.left\.\SegmentCount\ /= \BitMask::op_BitwiseAnd(BitMask,BitMask).0.right\.\SegmentCount\;
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.flag\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	result = new BitMask (32, false);
+                        -- 	result = new BitMask (left.Size, false);
                         -- }
                         -- else {
                         -- 	array = new uint[1];
@@ -6101,11 +6478,11 @@ begin
                         -- True branch of the if-else started in state \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = new BitMask (32, false);
+                        -- 	result = new BitMask (left.Size, false);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = new BitMask (32, false);
+                        -- result = new BitMask (left.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.result\.\IsNull\ := false;
@@ -6115,7 +6492,7 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \BitMask::op_BitwiseAnd(BitMask,BitMask).0.result\;
-                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \BitMask::op_BitwiseAnd(BitMask,BitMask).0.left\.\Size\;
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_5\;
@@ -7520,7 +7897,11 @@ begin
         Variable \BitMask::GetTwosComplement(UInt16).0.input\: \Lombiq.Arithmetics.BitMask\;
         Variable \BitMask::GetTwosComplement(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
         Variable \BitMask::GetTwosComplement(UInt16).0.return.1\: \Lombiq.Arithmetics.BitMask\;
+        Variable \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::GetTwosComplement(UInt16).0.return.2\: \Lombiq.Arithmetics.BitMask\;
+        Variable \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::GetTwosComplement(UInt16).0.return.3\: \Lombiq.Arithmetics.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -7537,6 +7918,10 @@ begin
                 \BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
                 \BitMask::GetTwosComplement(UInt16).0._State\ := \BitMask::GetTwosComplement(UInt16).0._State_0\;
                 \BitMask::GetTwosComplement(UInt16).0.size\ := to_unsigned(0, 16);
+                \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\ := to_signed(0, 32);
             else 
                 case \BitMask::GetTwosComplement(UInt16).0._State\ is 
                     when \BitMask::GetTwosComplement(UInt16).0._State_0\ => 
@@ -7584,7 +7969,7 @@ begin
                             \BitMask::GetTwosComplement(UInt16).0.input\ := \BitMask::GetTwosComplement(UInt16).0.BitMask::.ctor(BitMask).this.parameter.In.0\;
                             \BitMask::GetTwosComplement(UInt16).0.this\ := \BitMask::GetTwosComplement(UInt16).0.BitMask::.ctor(BitMask).source.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_Addition (BitMask.op_OnesComplement (input), 1u), 0), 0);
+                            -- return BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_Addition (BitMask.op_OnesComplement (input), 1u), (int)(@this.SegmentCount * 32 - 32)), (int)(@this.SegmentCount * 32 - 32));
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_OnesComplement(Lombiq.Arithmetics.BitMask)
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_OnesComplement(BitMask).input.parameter.Out.0\ <= \BitMask::GetTwosComplement(UInt16).0.input\;
@@ -7609,25 +7994,29 @@ begin
                         if (\BitMask::GetTwosComplement(UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \BitMask::GetTwosComplement(UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
                             \BitMask::GetTwosComplement(UInt16).0.return.1\ := \BitMask::GetTwosComplement(UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\;
+                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::GetTwosComplement(UInt16).0.this\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\ - to_unsigned(32, 16)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::GetTwosComplement(UInt16).0.return.1\;
-                            \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
+                            \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\);
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \BitMask::GetTwosComplement(UInt16).0._State\ := \BitMask::GetTwosComplement(UInt16).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::GetTwosComplement(UInt16).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                             \BitMask::GetTwosComplement(UInt16).0.return.2\ := \BitMask::GetTwosComplement(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\ := unsigned(SmartResize(\BitMask::GetTwosComplement(UInt16).0.this\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\ := SmartResize(signed(\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\ - to_unsigned(32, 16)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::GetTwosComplement(UInt16).0.return.2\;
-                            \BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
+                            \BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\);
                             \BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \BitMask::GetTwosComplement(UInt16).0._State\ := \BitMask::GetTwosComplement(UInt16).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::GetTwosComplement(UInt16).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \BitMask::GetTwosComplement(UInt16).0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
@@ -7656,18 +8045,20 @@ begin
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.flag2\: boolean := false;
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.result\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.objectd79932c742a2f2351325bfd7adf891acc76d1fc3b56acef19497d27cf8455e5e\: \Lombiq.Arithmetics.BitMask\;
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\: boolean := false;
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\: boolean := false;
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\: boolean := false;
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\: boolean := false;
         Variable \BitMask::LengthOfRunOfBits(UInt16).0.return.2\: \Lombiq.Arithmetics.BitMask\;
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\: boolean := false;
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.10\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7685,14 +8076,16 @@ begin
                 \BitMask::LengthOfRunOfBits(UInt16).0.flag2\ := false;
                 \BitMask::LengthOfRunOfBits(UInt16).0.result\ := to_unsigned(0, 16);
                 \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\ := false;
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\ := false;
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\ := false;
                 \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.4\ := false;
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\ := false;
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\ := to_signed(0, 32);
-                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\ := false;
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\ := false;
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\ := false;
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.10\ := false;
             else 
                 case \BitMask::LengthOfRunOfBits(UInt16).0._State\ is 
                     when \BitMask::LengthOfRunOfBits(UInt16).0._State_0\ => 
@@ -7762,15 +8155,17 @@ begin
                             \BitMask::LengthOfRunOfBits(UInt16).0.objectd79932c742a2f2351325bfd7adf891acc76d1fc3b56acef19497d27cf8455e5e\ := \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::.ctor(BitMask).this.parameter.In.0\;
                             \BitMask::LengthOfRunOfBits(UInt16).0.this\ := \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::.ctor(BitMask).source.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- left = BitMask.op_LeftShift (objectd79932c742a2f2351325bfd7adf891acc76d1fc3b56acef19497d27cf8455e5e, 1);
+                            -- left = BitMask.op_LeftShift (objectd79932c742a2f2351325bfd7adf891acc76d1fc3b56acef19497d27cf8455e5e, (int)(@this.SegmentCount * 32 - 31));
                             -- 
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.this\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\ - to_unsigned(31, 16)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::LengthOfRunOfBits(UInt16).0.objectd79932c742a2f2351325bfd7adf891acc76d1fc3b56acef19497d27cf8455e5e\;
-                            \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(1, 32);
+                            \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\);
                             \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \BitMask::LengthOfRunOfBits(UInt16).0._State\ := \BitMask::LengthOfRunOfBits(UInt16).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::LengthOfRunOfBits(UInt16).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\BitMask::LengthOfRunOfBits(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
@@ -7780,9 +8175,9 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = left.Segments [0] >> 31 > 0u;
                             -- 
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\ := shift_right(\BitMask::LengthOfRunOfBits(UInt16).0.left\.\Segments\(to_integer(to_signed(0, 32))), to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\ > to_unsigned(0, 32);
-                            \BitMask::LengthOfRunOfBits(UInt16).0.flag\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\;
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\ := shift_right(\BitMask::LengthOfRunOfBits(UInt16).0.left\.\Segments\(to_integer(to_signed(0, 32))), to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\ > to_unsigned(0, 32);
+                            \BitMask::LengthOfRunOfBits(UInt16).0.flag\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
                             -- left = BitMask.op_LeftShift (left, 1);
                             -- 
@@ -7830,8 +8225,8 @@ begin
                     when \BitMask::LengthOfRunOfBits(UInt16).0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::LengthOfRunOfBits(UInt16).0._State_7\.
                         -- The while loop's condition:
-                        \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\ := \BitMask::LengthOfRunOfBits(UInt16).0.i\ < signed(SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.startingPosition\, 32));
-                        if (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.2\) then 
+                        \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.4\ := \BitMask::LengthOfRunOfBits(UInt16).0.i\ < signed(SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.startingPosition\, 32));
+                        if (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	flag2 = left.Segments [0] >> 31 > 0u != flag;
@@ -7847,10 +8242,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag2 = left.Segments [0] >> 31 > 0u != flag;
                             -- 
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\ := shift_right(\BitMask::LengthOfRunOfBits(UInt16).0.left\.\Segments\(to_integer(to_signed(0, 32))), to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.4\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.3\ > to_unsigned(0, 32);
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.4\ /= \BitMask::LengthOfRunOfBits(UInt16).0.flag\;
-                            \BitMask::LengthOfRunOfBits(UInt16).0.flag2\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\;
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\ := shift_right(\BitMask::LengthOfRunOfBits(UInt16).0.left\.\Segments\(to_integer(to_signed(0, 32))), to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.5\ > to_unsigned(0, 32);
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\ /= \BitMask::LengthOfRunOfBits(UInt16).0.flag\;
+                            \BitMask::LengthOfRunOfBits(UInt16).0.flag2\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag2) {
                             -- 	result = num;
@@ -7882,14 +8277,14 @@ begin
                         -- 	result = num;
                         -- }
                         -- 
-                        \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\ := \BitMask::LengthOfRunOfBits(UInt16).0.num\ > to_unsigned(31, 16);
+                        \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.10\ := \BitMask::LengthOfRunOfBits(UInt16).0.num\ > to_unsigned(31, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::LengthOfRunOfBits(UInt16).0._State_14\ and ends in state \BitMask::LengthOfRunOfBits(UInt16).0._State_14\.
                         --     * The false branch starts in state \BitMask::LengthOfRunOfBits(UInt16).0._State_15\ and ends in state \BitMask::LengthOfRunOfBits(UInt16).0._State_15\.
                         --     * Execution after either branch will continue in the following state: \BitMask::LengthOfRunOfBits(UInt16).0._State_13\.
 
-                        if (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\) then 
+                        if (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.10\) then 
                             \BitMask::LengthOfRunOfBits(UInt16).0._State\ := \BitMask::LengthOfRunOfBits(UInt16).0._State_14\;
                         else 
                             \BitMask::LengthOfRunOfBits(UInt16).0._State\ := \BitMask::LengthOfRunOfBits(UInt16).0._State_15\;
@@ -7937,13 +8332,13 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num = num + 1;
                             -- 
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\ := unsigned(SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.num\ + to_unsigned(1, 16), 32));
-                            \BitMask::LengthOfRunOfBits(UInt16).0.num\ := SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.6\, 16);
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\ := unsigned(SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.num\ + to_unsigned(1, 16), 32));
+                            \BitMask::LengthOfRunOfBits(UInt16).0.num\ := SmartResize(\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.8\, 16);
                             -- The following section was transformed from the .NET statement below:
                             -- i = i + 1;
                             -- 
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\ := \BitMask::LengthOfRunOfBits(UInt16).0.i\ + to_signed(1, 32);
-                            \BitMask::LengthOfRunOfBits(UInt16).0.i\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.7\;
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.9\ := \BitMask::LengthOfRunOfBits(UInt16).0.i\ + to_signed(1, 32);
+                            \BitMask::LengthOfRunOfBits(UInt16).0.i\ := \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.9\;
                             -- Returning to the repeated state of the while loop which was started in state \BitMask::LengthOfRunOfBits(UInt16).0._State_7\ if the loop wasn't exited with a state change.
                             if (\BitMask::LengthOfRunOfBits(UInt16).0._State\ = \BitMask::LengthOfRunOfBits(UInt16).0._State_12\) then 
                                 \BitMask::LengthOfRunOfBits(UInt16).0._State\ := \BitMask::LengthOfRunOfBits(UInt16).0._State_8\;
@@ -8950,41 +9345,45 @@ begin
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.4\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.5\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.6\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.7\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.8\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\: boolean := false;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.10\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.11\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.12\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.14\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.14\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.15\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.16\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\: boolean := false;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\: boolean := false;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.17\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.18\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.19\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.20\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.21\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\: boolean := false;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.18\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.23\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.24\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.25\: \Lombiq.Arithmetics.BitMask\;
@@ -9034,27 +9433,31 @@ begin
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.6\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.8\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\ := to_unsigned(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\ := to_unsigned(0, 16);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.19\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.21\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\ := to_unsigned(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := to_unsigned(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.18\ := false;
             else 
                 case \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ is 
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_0\ => 
@@ -9189,14 +9592,14 @@ begin
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.flag\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
-                            -- 	exponentBits = BitMask.op_LeftShift (exponentBits, 32 + num2);
+                            -- 	exponentBits = BitMask.op_LeftShift (exponentBits, (int)exponentBits.Size + num2);
                             -- 	BitMask objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d;
-                            -- 	objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d = new BitMask (32, false);
-                            -- 	flag2 = BitMask.op_GreaterThanOrEqual (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d, 31));
+                            -- 	objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d = new BitMask (exponentBits.Size, false);
+                            -- 	flag2 = BitMask.op_GreaterThanOrEqual (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d, exponentBits.Size - 1));
                             -- 	if (flag2) {
                             -- 		BitMask object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64;
-                            -- 		object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (32, false);
-                            -- 		flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, 31));
+                            -- 		object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (exponentBits.Size, false);
+                            -- 		flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, exponentBits.Size - 1));
                             -- 		if (flag3) {
                             -- 			uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
                             -- 			if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9225,14 +9628,14 @@ begin
                             -- 	bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (fractionBits, num4));
                             -- 	flag4 = num4 < 0;
                             -- 	if (flag4) {
-                            -- 		fractionBits = BitMask.op_LeftShift (fractionBits, 32 + num4);
+                            -- 		fractionBits = BitMask.op_LeftShift (fractionBits, (int)fractionBits.Size + num4);
                             -- 		BitMask object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752;
-                            -- 		object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (32, false);
-                            -- 		flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, 31));
+                            -- 		object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (fractionBits.Size, false);
+                            -- 		flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, fractionBits.Size - 1));
                             -- 		if (flag5) {
                             -- 			BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
-                            -- 			object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
-                            -- 			flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                            -- 			object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
+                            -- 			flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                             -- 			if (flag6) {
                             -- 				uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                             -- 				if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9281,14 +9684,14 @@ begin
                         -- True branch of the if-else started in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	exponentBits = BitMask.op_LeftShift (exponentBits, 32 + num2);
+                        -- 	exponentBits = BitMask.op_LeftShift (exponentBits, (int)exponentBits.Size + num2);
                         -- 	BitMask objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d;
-                        -- 	objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d = new BitMask (32, false);
-                        -- 	flag2 = BitMask.op_GreaterThanOrEqual (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d, 31));
+                        -- 	objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d = new BitMask (exponentBits.Size, false);
+                        -- 	flag2 = BitMask.op_GreaterThanOrEqual (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d, exponentBits.Size - 1));
                         -- 	if (flag2) {
                         -- 		BitMask object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64;
-                        -- 		object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (32, false);
-                        -- 		flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, 31));
+                        -- 		object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (exponentBits.Size, false);
+                        -- 		flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, exponentBits.Size - 1));
                         -- 		if (flag3) {
                         -- 			uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
                         -- 			if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9312,9 +9715,9 @@ begin
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = BitMask.op_LeftShift (exponentBits, 32 + num2);
+                        -- exponentBits = BitMask.op_LeftShift (exponentBits, (int)exponentBits.Size + num2);
                         -- 
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := to_signed(32, 32) + \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\;
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := signed(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\, 32)) + \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\;
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\;
@@ -9331,7 +9734,7 @@ begin
                             -- BitMask objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d = new BitMask (32, false);
+                            -- objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d = new BitMask (exponentBits.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d\.\IsNull\ := false;
@@ -9341,7 +9744,7 @@ begin
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_10\;
@@ -9353,15 +9756,16 @@ begin
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = BitMask.op_GreaterThanOrEqual (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d, 31));
+                            -- flag2 = BitMask.op_GreaterThanOrEqual (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d, exponentBits.Size - 1));
                             -- 
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := unsigned(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\ - to_unsigned(1, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objecte34250c36e43622035345051997b5ad982a97404ede9947739f012b4b991014d\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(31, 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\, 16);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -9383,8 +9787,8 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag2) {
                             -- 	BitMask object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64;
-                            -- 	object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (32, false);
-                            -- 	flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, 31));
+                            -- 	object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (exponentBits.Size, false);
+                            -- 	flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, exponentBits.Size - 1));
                             -- 	if (flag3) {
                             -- 		uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
                             -- 		if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9440,8 +9844,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	BitMask object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64;
-                        -- 	object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (32, false);
-                        -- 	flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, 31));
+                        -- 	object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (exponentBits.Size, false);
+                        -- 	flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, exponentBits.Size - 1));
                         -- 	if (flag3) {
                         -- 		uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
                         -- 		if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9461,7 +9865,7 @@ begin
                         -- BitMask object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (32, false);
+                        -- object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64 = new BitMask (exponentBits.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64\.\IsNull\ := false;
@@ -9471,7 +9875,7 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_15\;
@@ -9482,15 +9886,16 @@ begin
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, 31));
+                            -- flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, exponentBits.Size - 1));
                             -- 
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := unsigned(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\ - to_unsigned(1, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(31, 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\, 16);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_16\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -9583,7 +9988,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_21\ => 
-                        -- Waiting for the result to appear in \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_22\;
@@ -9591,17 +9996,17 @@ begin
                         else 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\ mod to_unsigned(2, 32);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_22\ => 
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ = to_unsigned(1, 32);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ = to_unsigned(1, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_24\ and ends in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_24\.
                         --     * The false branch starts in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_25\ and ends in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_25\.
                         --     * Execution after either branch will continue in the following state: \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_23\.
 
-                        if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\) then 
+                        if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_24\;
                         else 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_25\;
@@ -9755,14 +10160,14 @@ begin
                         -- 	bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (fractionBits, num4));
                         -- 	flag4 = num4 < 0;
                         -- 	if (flag4) {
-                        -- 		fractionBits = BitMask.op_LeftShift (fractionBits, 32 + num4);
+                        -- 		fractionBits = BitMask.op_LeftShift (fractionBits, (int)fractionBits.Size + num4);
                         -- 		BitMask object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752;
-                        -- 		object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (32, false);
-                        -- 		flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, 31));
+                        -- 		object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (fractionBits.Size, false);
+                        -- 		flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, fractionBits.Size - 1));
                         -- 		if (flag5) {
                         -- 			BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
-                        -- 			object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
-                        -- 			flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                        -- 			object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
+                        -- 			flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                         -- 			if (flag6) {
                         -- 				uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                         -- 				if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9799,8 +10204,8 @@ begin
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := SmartResize(signed(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\ - to_unsigned(1, 16)), 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := SmartResize(signed(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\ - to_unsigned(1, 16)), 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\);
                             -- The following section was transformed from the .NET statement below:
                             -- fractionBits = Lombiq.Arithmetics.BitMask.SetZero (fractionBits, (ushort)num3);
                             -- 
@@ -9820,10 +10225,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num4 = 30 - num3 - (int)num - 3;
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := to_signed(30, 32) - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ - signed(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\, 32)), 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ - to_signed(3, 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := to_signed(30, 32) - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ - signed(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\, 32)), 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ - to_signed(3, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\;
                             -- The following section was transformed from the .NET statement below:
                             -- bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (fractionBits, num4));
                             -- 
@@ -9855,18 +10260,18 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag4 = num4 < 0;
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ < to_signed(0, 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.flag4\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ < to_signed(0, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.flag4\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag4) {
-                            -- 	fractionBits = BitMask.op_LeftShift (fractionBits, 32 + num4);
+                            -- 	fractionBits = BitMask.op_LeftShift (fractionBits, (int)fractionBits.Size + num4);
                             -- 	BitMask object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752;
-                            -- 	object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (32, false);
-                            -- 	flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, 31));
+                            -- 	object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (fractionBits.Size, false);
+                            -- 	flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, fractionBits.Size - 1));
                             -- 	if (flag5) {
                             -- 		BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
-                            -- 		object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
-                            -- 		flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                            -- 		object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
+                            -- 		flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                             -- 		if (flag6) {
                             -- 			uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                             -- 			if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9922,14 +10327,14 @@ begin
                         -- True branch of the if-else started in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_38\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	fractionBits = BitMask.op_LeftShift (fractionBits, 32 + num4);
+                        -- 	fractionBits = BitMask.op_LeftShift (fractionBits, (int)fractionBits.Size + num4);
                         -- 	BitMask object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752;
-                        -- 	object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (32, false);
-                        -- 	flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, 31));
+                        -- 	object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (fractionBits.Size, false);
+                        -- 	flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, fractionBits.Size - 1));
                         -- 	if (flag5) {
                         -- 		BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
-                        -- 		object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
-                        -- 		flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                        -- 		object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
+                        -- 		flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                         -- 		if (flag6) {
                         -- 			uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                         -- 			if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -9947,12 +10352,12 @@ begin
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- fractionBits = BitMask.op_LeftShift (fractionBits, 32 + num4);
+                        -- fractionBits = BitMask.op_LeftShift (fractionBits, (int)fractionBits.Size + num4);
                         -- 
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := to_signed(32, 32) + \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\;
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := signed(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\, 32)) + \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\;
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\;
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_41\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -9966,7 +10371,7 @@ begin
                             -- BitMask object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (32, false);
+                            -- object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752 = new BitMask (fractionBits.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752\.\IsNull\ := false;
@@ -9976,7 +10381,7 @@ begin
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_42\;
@@ -9988,15 +10393,16 @@ begin
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, 31));
+                            -- flag5 = BitMask.op_GreaterThanOrEqual (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752, fractionBits.Size - 1));
                             -- 
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\ := unsigned(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\ - to_unsigned(1, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object57953e906f3c68a591d579318187b0879dee4459e2a6713b28a56f7e32a98752\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(31, 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\, 16);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_43\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_43\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -10018,8 +10424,8 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag5) {
                             -- 	BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
-                            -- 	object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
-                            -- 	flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                            -- 	object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
+                            -- 	flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                             -- 	if (flag6) {
                             -- 		uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                             -- 		if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -10060,8 +10466,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
-                        -- 	object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
-                        -- 	flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                        -- 	object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
+                        -- 	flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                         -- 	if (flag6) {
                         -- 		uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                         -- 		if (Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask) % 2u == 1u) {
@@ -10081,7 +10487,7 @@ begin
                         -- BitMask object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (32, false);
+                        -- object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af = new BitMask (fractionBits.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af\.\IsNull\ := false;
@@ -10091,7 +10497,7 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(32, 16);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_47\;
@@ -10102,15 +10508,16 @@ begin
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, 31));
+                            -- flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, fractionBits.Size - 1));
                             -- 
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\ := unsigned(SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\ - to_unsigned(1, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(31, 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\, 16);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_48\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_48\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -10203,7 +10610,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_53\ => 
-                        -- Waiting for the result to appear in \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_54\;
@@ -10211,17 +10618,17 @@ begin
                         else 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\ mod to_unsigned(2, 32);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_54\ => 
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ = to_unsigned(1, 32);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.18\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\ = to_unsigned(1, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_56\ and ends in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_56\.
                         --     * The false branch starts in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_57\ and ends in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_57\.
                         --     * Execution after either branch will continue in the following state: \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_55\.
 
-                        if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\) then 
+                        if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.18\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_56\;
                         else 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_57\;
@@ -10904,9 +11311,12 @@ begin
         Variable \Posit::GetExponentValue().0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::GetExponentValue().0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::GetExponentValue().0.return.5\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetExponentValue().0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit::GetExponentValue().0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::GetExponentValue().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::GetExponentValue().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::GetExponentValue().0.return.7\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetExponentValue().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::GetExponentValue().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::GetExponentValue().0.return.8\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetExponentValue().0.return.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -10932,8 +11342,11 @@ begin
                 \Posit::GetExponentValue().0.return.2\ := to_unsigned(0, 32);
                 \Posit::GetExponentValue().0.return.3\ := to_unsigned(0, 32);
                 \Posit::GetExponentValue().0.return.4\ := to_unsigned(0, 32);
+                \Posit::GetExponentValue().0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Posit::GetExponentValue().0.return.6\ := to_unsigned(0, 32);
-                \Posit::GetExponentValue().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit::GetExponentValue().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit::GetExponentValue().0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \Posit::GetExponentValue().0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Posit::GetExponentValue().0.return.9\ := to_unsigned(0, 32);
             else 
                 case \Posit::GetExponentValue().0._State\ is 
@@ -11072,7 +11485,7 @@ begin
                             \Posit::GetExponentValue().0.return.3\ := \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\;
                             \Posit::GetExponentValue().0.num2\ := \Posit::GetExponentValue().0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_RightShift (left, (int)Lombiq.Arithmetics.Posit.FractionSize (@this)), (int)(32L - (long)((ulong)Lombiq.Arithmetics.Posit.ExponentSize (@this)))), 29));
+                            -- return Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_RightShift (left, (int)Lombiq.Arithmetics.Posit.FractionSize (@this)), (int)((long)(@this.PositBits.SegmentCount * 32) - (long)((ulong)Lombiq.Arithmetics.Posit.ExponentSize (@this)))), (int)(@this.PositBits.SegmentCount * 32 - 3)));
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_10\;
@@ -11101,21 +11514,22 @@ begin
                         if (\Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
                             \Posit::GetExponentValue().0.return.5\ := \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32).return.0\;
+                            \Posit::GetExponentValue().0.binaryOperationResult.0\ := signed(SmartResize(\Posit::GetExponentValue().0.this\.\PositBits\.\SegmentCount\ * to_unsigned(32, 16), 64));
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::ExponentSize()
                             \Posit::GetExponentValue().0.Posit::ExponentSize().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\;
                             \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= true;
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::GetExponentValue().0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit::ExponentSize()
                         if (\Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ = \Posit::GetExponentValue().0.Posit::ExponentSize()._Finished.0\) then 
                             \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= false;
                             \Posit::GetExponentValue().0.return.6\ := \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\;
-                            \Posit::GetExponentValue().0.binaryOperationResult.0\ := SmartResize(to_signed(32, 64) - signed((SmartResize(\Posit::GetExponentValue().0.return.6\, 64))), 32);
+                            \Posit::GetExponentValue().0.binaryOperationResult.1\ := SmartResize((\Posit::GetExponentValue().0.binaryOperationResult.0\) - signed((SmartResize(\Posit::GetExponentValue().0.return.6\, 64))), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.5\;
-                            \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::GetExponentValue().0.binaryOperationResult.0\);
+                            \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::GetExponentValue().0.binaryOperationResult.1\);
                             \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_14\;
                         end if;
@@ -11125,13 +11539,15 @@ begin
                         if (\Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                             \Posit::GetExponentValue().0.return.7\ := \Posit::GetExponentValue().0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                            \Posit::GetExponentValue().0.binaryOperationResult.2\ := unsigned(SmartResize(\Posit::GetExponentValue().0.this\.\PositBits\.\SegmentCount\ * to_unsigned(32, 16), 32));
+                            \Posit::GetExponentValue().0.binaryOperationResult.3\ := SmartResize(signed(\Posit::GetExponentValue().0.binaryOperationResult.2\ - to_unsigned(3, 16)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.7\;
-                            \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(29, 32);
+                            \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::GetExponentValue().0.binaryOperationResult.3\);
                             \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_15\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \Posit::GetExponentValue().0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \Posit::GetExponentValue().0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
@@ -11394,11 +11810,13 @@ begin
         Variable \Posit::FractionWithHiddenBit().0.left\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::FractionWithHiddenBit().0.return.0\: boolean := false;
         Variable \Posit::FractionWithHiddenBit().0.return.1\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit::FractionWithHiddenBit().0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::FractionWithHiddenBit().0.return.3\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::FractionWithHiddenBit().0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::FractionWithHiddenBit().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::FractionWithHiddenBit().0.return.3\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::FractionWithHiddenBit().0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit::FractionWithHiddenBit().0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::FractionWithHiddenBit().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::FractionWithHiddenBit().0.return.5\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::FractionWithHiddenBit().0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::FractionWithHiddenBit().0.return.7\: \Lombiq.Arithmetics.BitMask\;
@@ -11419,10 +11837,12 @@ begin
                 \Posit::FractionWithHiddenBit().0.BitMask::SetOne(UInt16)._Started.0\ <= false;
                 \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_0\;
                 \Posit::FractionWithHiddenBit().0.return.0\ := false;
+                \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Posit::FractionWithHiddenBit().0.return.2\ := to_unsigned(0, 32);
-                \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Posit::FractionWithHiddenBit().0.return.4\ := to_unsigned(0, 32);
                 \Posit::FractionWithHiddenBit().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit::FractionWithHiddenBit().0.binaryOperationResult.2\ := to_signed(0, 64);
+                \Posit::FractionWithHiddenBit().0.return.4\ := to_unsigned(0, 32);
+                \Posit::FractionWithHiddenBit().0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Posit::FractionWithHiddenBit().0.return.6\ := to_unsigned(0, 32);
             else 
                 case \Posit::FractionWithHiddenBit().0._State\ is 
@@ -11482,13 +11902,14 @@ begin
                     when \Posit::FractionWithHiddenBit().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit::FractionWithHiddenBit().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.BitMask.SetOne (BitMask.op_RightShift (BitMask.op_LeftShift (left, (int)(32L - (long)((ulong)Lombiq.Arithmetics.Posit.FractionSize (@this)))), (int)(32L - (long)((ulong)Lombiq.Arithmetics.Posit.FractionSize (@this)))), (ushort)Lombiq.Arithmetics.Posit.FractionSize (@this));
+                        -- return Lombiq.Arithmetics.BitMask.SetOne (BitMask.op_RightShift (BitMask.op_LeftShift (left, (int)((long)(@this.PositBits.SegmentCount * 32) - (long)((ulong)Lombiq.Arithmetics.Posit.FractionSize (@this)))), (int)((long)(@this.PositBits.SegmentCount * 32) - (long)((ulong)Lombiq.Arithmetics.Posit.FractionSize (@this)))), (ushort)Lombiq.Arithmetics.Posit.FractionSize (@this));
                         -- 
+                        \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\ := signed(SmartResize(\Posit::FractionWithHiddenBit().0.this\.\PositBits\.\SegmentCount\ * to_unsigned(32, 16), 64));
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::FractionSize()
                         \Posit::FractionWithHiddenBit().0.Posit::FractionSize().this.parameter.Out.0\ <= \Posit::FractionWithHiddenBit().0.this\;
                         \Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Started.0\ <= true;
                         \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::FractionWithHiddenBit().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit::FractionWithHiddenBit().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -11538,10 +11959,10 @@ begin
                         if (\Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Started.0\ = \Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Finished.0\) then 
                             \Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Started.0\ <= false;
                             \Posit::FractionWithHiddenBit().0.return.2\ := \Posit::FractionWithHiddenBit().0.Posit::FractionSize().return.0\;
-                            \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\ := SmartResize(to_signed(32, 64) - signed((SmartResize(\Posit::FractionWithHiddenBit().0.return.2\, 64))), 32);
+                            \Posit::FractionWithHiddenBit().0.binaryOperationResult.1\ := SmartResize((\Posit::FractionWithHiddenBit().0.binaryOperationResult.0\) - signed((SmartResize(\Posit::FractionWithHiddenBit().0.return.2\, 64))), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::FractionWithHiddenBit().0.left\;
-                            \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::FractionWithHiddenBit().0.binaryOperationResult.0\);
+                            \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::FractionWithHiddenBit().0.binaryOperationResult.1\);
                             \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_9\;
                         end if;
@@ -11551,10 +11972,11 @@ begin
                         if (\Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                             \Posit::FractionWithHiddenBit().0.return.3\ := \Posit::FractionWithHiddenBit().0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                            \Posit::FractionWithHiddenBit().0.binaryOperationResult.2\ := signed(SmartResize(\Posit::FractionWithHiddenBit().0.this\.\PositBits\.\SegmentCount\ * to_unsigned(32, 16), 64));
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Posit::FractionWithHiddenBit().0._State_10\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::FractionSize()
                         \Posit::FractionWithHiddenBit().0.Posit::FractionSize().this.parameter.Out.0\ <= \Posit::FractionWithHiddenBit().0.this\;
@@ -11566,10 +11988,10 @@ begin
                         if (\Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Started.0\ = \Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Finished.0\) then 
                             \Posit::FractionWithHiddenBit().0.Posit::FractionSize()._Started.0\ <= false;
                             \Posit::FractionWithHiddenBit().0.return.4\ := \Posit::FractionWithHiddenBit().0.Posit::FractionSize().return.0\;
-                            \Posit::FractionWithHiddenBit().0.binaryOperationResult.1\ := SmartResize(to_signed(32, 64) - signed((SmartResize(\Posit::FractionWithHiddenBit().0.return.4\, 64))), 32);
+                            \Posit::FractionWithHiddenBit().0.binaryOperationResult.3\ := SmartResize((\Posit::FractionWithHiddenBit().0.binaryOperationResult.2\) - signed((SmartResize(\Posit::FractionWithHiddenBit().0.return.4\, 64))), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit::FractionWithHiddenBit().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::FractionWithHiddenBit().0.return.3\;
-                            \Posit::FractionWithHiddenBit().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::FractionWithHiddenBit().0.binaryOperationResult.1\);
+                            \Posit::FractionWithHiddenBit().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::FractionWithHiddenBit().0.binaryOperationResult.3\);
                             \Posit::FractionWithHiddenBit().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_12\;
                         end if;
@@ -12077,7 +12499,7 @@ begin
                             \Posit::op_Addition(Posit,Posit).0.return.1\ := \Posit::op_Addition(Posit,Posit).0.Posit::IsPositive().return.0\;
                             \Posit::op_Addition(Posit,Posit).0.flag2\ := \Posit::op_Addition(Posit,Posit).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (BitMask.op_Addition (left.PositBits, right.PositBits)) < 32) {
+                            -- if (Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (BitMask.op_Addition (left.PositBits, right.PositBits)) < left.PositBits.Size) {
                             -- 	signBit = !flag;
                             -- }
                             -- else {
@@ -12107,7 +12529,7 @@ begin
                         if (\Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit::op_Addition(Posit,Posit).0.return.3\ := \Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit::op_Addition(Posit,Posit).0.binaryOperationResult.0\ := \Posit::op_Addition(Posit,Posit).0.return.3\ < to_unsigned(32, 16);
+                            \Posit::op_Addition(Posit,Posit).0.binaryOperationResult.0\ := \Posit::op_Addition(Posit,Posit).0.return.3\ < \Posit::op_Addition(Posit,Posit).0.left\.\PositBits\.\Size\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit::op_Addition(Posit,Posit).0._State_10\ and ends in state \Posit::op_Addition(Posit,Posit).0._State_10\.

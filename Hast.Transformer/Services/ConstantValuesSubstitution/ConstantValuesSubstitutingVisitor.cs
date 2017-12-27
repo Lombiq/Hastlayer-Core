@@ -213,33 +213,33 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 .WithAnnotation(TypeHelper.CreateInt32TypeInformation()));
         }
 
-        //protected override void VisitChildren(AstNode node)
-        //{
-        //    // Deactivating constructor mappings for the identifier after this line if it's again assigned to, e.g.:
-        //    // var x = new MyClass(); // OK
-        //    // x = GetValue(); // Starting with this line no more ctor mapping.
+        protected override void VisitChildren(AstNode node)
+        {
+            // Deactivating constructor mappings for the identifier after this line if it's again assigned to, e.g.:
+            // var x = new MyClass(); // OK
+            // x = GetValue(); // Starting with this line no more ctor mapping.
 
 
-        //    if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
-        //        node.GetActualTypeReference()?.IsArray == false)
-        //    {
-        //        var fullName = node.GetFullName();
+            if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
+                node.GetActualTypeReference()?.IsArray == false)
+            {
+                var fullName = node.GetFullName();
 
-        //        if (_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-        //                .TryGetValue(fullName, out var constructorReference) &&
-        //            node.FindFirstNonParenthesizedExpressionParent()
-        //                .Is<AssignmentExpression>(assignment =>
-        //                    assignment.Left == node ||
-        //                        assignment.Left.FindFirstChildOfType<AstNode>(child => child == node) != null) &&
-        //            // Only if this is not the original assignment.
-        //            node != constructorReference.OriginalAssignmentTarget)
-        //        {
-        //            _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings.Remove(fullName);
-        //        }
-        //    }
+                if (_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                        .TryGetValue(fullName, out var constructorReference) &&
+                    node.FindFirstNonParenthesizedExpressionParent()
+                        .Is<AssignmentExpression>(assignment =>
+                            assignment.Left == node ||
+                                assignment.Left.FindFirstChildOfType<AstNode>(child => child == node) != null) &&
+                    // Only if this is not the original assignment.
+                    node != constructorReference.OriginalAssignmentTarget)
+                {
+                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings.Remove(fullName);
+                }
+            }
 
-        //    base.VisitChildren(node);
-        //}
+            base.VisitChildren(node);
+        }
 
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
