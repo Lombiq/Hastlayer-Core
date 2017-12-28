@@ -157,5 +157,9 @@ namespace ICSharpCode.NRefactory.CSharp
         /// </summary>
         public static bool IsArrayLengthAccess(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualTypeReference().IsArray;
+
+        public static bool IsTaskStartNew(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.MemberName == "StartNew" &&
+            memberReferenceExpression.Target.GetActualTypeReference().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
     }
 }
