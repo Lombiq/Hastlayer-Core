@@ -54,9 +54,9 @@ namespace Hast.Common.Configuration
                         .Where(member => member.GetFullName().IsInlineCompilerGeneratedMethodName());
                 }
 
-                var compilerGeneratedMembersictionary = compilerGeneratedMembers
+                var compilerGeneratedMembersDictionary = compilerGeneratedMembers
                     .ToDictionary(member => member.GetFullName());
-                parentType.AcceptVisitor(new IndexedNameHolderSettingVisitor(compilerGeneratedMembersictionary));
+                parentType.AcceptVisitor(new IndexedNameHolderSettingVisitor(compilerGeneratedMembersDictionary));
 
                 indexedNameHolder = entity.Annotation<LambdaExpressionIndexedNameHolder>();
 
