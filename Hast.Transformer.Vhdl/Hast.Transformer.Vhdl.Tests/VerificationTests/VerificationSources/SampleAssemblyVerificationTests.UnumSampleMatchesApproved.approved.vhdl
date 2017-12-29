@@ -522,7 +522,8 @@ architecture Imp of Hast_IP is
         \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\, 
         \BitMask::op_GreaterThan(BitMask,BitMask).0._State_4\, 
         \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\, 
-        \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\);
+        \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\, 
+        \BitMask::op_GreaterThan(BitMask,BitMask).0._State_7\);
     -- Signals:
     Signal \BitMask::op_GreaterThan(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_GreaterThan(BitMask,BitMask).0.return\: boolean := false;
@@ -541,7 +542,8 @@ architecture Imp of Hast_IP is
         \BitMask::op_LessThan(BitMask,BitMask).0._State_3\, 
         \BitMask::op_LessThan(BitMask,BitMask).0._State_4\, 
         \BitMask::op_LessThan(BitMask,BitMask).0._State_5\, 
-        \BitMask::op_LessThan(BitMask,BitMask).0._State_6\);
+        \BitMask::op_LessThan(BitMask,BitMask).0._State_6\, 
+        \BitMask::op_LessThan(BitMask,BitMask).0._State_7\);
     -- Signals:
     Signal \BitMask::op_LessThan(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_LessThan(BitMask,BitMask).0.return\: boolean := false;
@@ -682,7 +684,8 @@ architecture Imp of Hast_IP is
         \BitMask::op_Addition(BitMask,BitMask).0._State_27\, 
         \BitMask::op_Addition(BitMask,BitMask).0._State_28\, 
         \BitMask::op_Addition(BitMask,BitMask).0._State_29\, 
-        \BitMask::op_Addition(BitMask,BitMask).0._State_30\);
+        \BitMask::op_Addition(BitMask,BitMask).0._State_30\, 
+        \BitMask::op_Addition(BitMask,BitMask).0._State_31\);
     -- Signals:
     Signal \BitMask::op_Addition(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.return\: \Lombiq.Arithmetics.BitMask\;
@@ -732,7 +735,8 @@ architecture Imp of Hast_IP is
         \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\, 
         \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\, 
         \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\, 
-        \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\);
+        \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\, 
+        \BitMask::op_Subtraction(BitMask,BitMask).0._State_31\);
     -- Signals:
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.return\: \Lombiq.Arithmetics.BitMask\;
@@ -908,7 +912,8 @@ architecture Imp of Hast_IP is
         \BitMask::GetMostSignificantOnePosition().0._State_5\, 
         \BitMask::GetMostSignificantOnePosition().0._State_6\, 
         \BitMask::GetMostSignificantOnePosition().0._State_7\, 
-        \BitMask::GetMostSignificantOnePosition().0._State_8\);
+        \BitMask::GetMostSignificantOnePosition().0._State_8\, 
+        \BitMask::GetMostSignificantOnePosition().0._State_9\);
     -- Signals:
     Signal \BitMask::GetMostSignificantOnePosition().0._Finished\: boolean := false;
     Signal \BitMask::GetMostSignificantOnePosition().0.return\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -1276,7 +1281,8 @@ architecture Imp of Hast_IP is
         \Unum::FractionToUintArray().0._State_9\, 
         \Unum::FractionToUintArray().0._State_10\, 
         \Unum::FractionToUintArray().0._State_11\, 
-        \Unum::FractionToUintArray().0._State_12\);
+        \Unum::FractionToUintArray().0._State_12\, 
+        \Unum::FractionToUintArray().0._State_13\);
     -- Signals:
     Signal \Unum::FractionToUintArray().0._Finished\: boolean := false;
     Signal \Unum::FractionToUintArray().0.return\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
@@ -2776,7 +2782,7 @@ begin
                         else 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\ => 
                         -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
@@ -2827,7 +2833,7 @@ begin
                                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32[] Lombiq.Arithmetics.Unum::FractionToUintArray()
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Finished.0\) then 
@@ -2870,7 +2876,7 @@ begin
                         else 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\ => 
                         -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\.
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_1\;
@@ -2890,7 +2896,7 @@ begin
                                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -3046,16 +3052,16 @@ begin
                         \BitMask::.ctor(UInt32,UInt16).0._State\ := \BitMask::.ctor(UInt32,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::.ctor(UInt32,UInt16).0._State_3\ => 
-                        -- Waiting for the result to appear in \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ (have to wait 4 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::.ctor(UInt32,UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::.ctor(UInt32,UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(4, 32)) then 
                             \BitMask::.ctor(UInt32,UInt16).0._State\ := \BitMask::.ctor(UInt32,UInt16).0._State_4\;
                             \BitMask::.ctor(UInt32,UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::.ctor(UInt32,UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::.ctor(UInt32,UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := unsigned(SmartResize(\BitMask::.ctor(UInt32,UInt16).0.size\ mod to_unsigned(32, 16), 32));
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 4
                     when \BitMask::.ctor(UInt32,UInt16).0._State_4\ => 
                         \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ = to_unsigned(0, 16);
 
@@ -3069,7 +3075,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt32,UInt16).0._State\ := \BitMask::.ctor(UInt32,UInt16).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::.ctor(UInt32,UInt16).0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32,UInt16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -3091,7 +3097,7 @@ begin
                         -- 
                         \BitMask::.ctor(UInt32,UInt16).0.this\.\Segments\ := \BitMask::.ctor(UInt32,UInt16).0.array\;
                         \BitMask::.ctor(UInt32,UInt16).0._State\ := \BitMask::.ctor(UInt32,UInt16).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.5542
                     when \BitMask::.ctor(UInt32,UInt16).0._State_6\ => 
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32,UInt16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -3236,7 +3242,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -3289,16 +3295,16 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_6\ => 
-                        -- Waiting for the result to appear in \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ (have to wait 4 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::.ctor(UInt32[],UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::.ctor(UInt32[],UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(4, 32)) then 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_7\;
                             \BitMask::.ctor(UInt32[],UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::.ctor(UInt32[],UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::.ctor(UInt32[],UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ := unsigned(SmartResize(\BitMask::.ctor(UInt32[],UInt16).0.size\ mod to_unsigned(32, 16), 32));
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 4
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_7\ => 
                         \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.2\ := \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ = to_unsigned(0, 16);
 
@@ -3312,7 +3318,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_8\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -3338,7 +3344,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_9\ => 
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -3403,7 +3409,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_12\ => 
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
@@ -3421,7 +3427,7 @@ begin
                         if (\BitMask::.ctor(UInt32[],UInt16).0._State\ = \BitMask::.ctor(UInt32[],UInt16).0._State_12\) then 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.5542
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_13\ => 
                         -- False branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
@@ -3563,16 +3569,16 @@ begin
                         \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::.ctor(UInt16,Boolean).0._State_3\ => 
-                        -- Waiting for the result to appear in \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ (have to wait 4 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(4, 32)) then 
                             \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_4\;
                             \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := SmartResize(signed(\BitMask::.ctor(UInt16,Boolean).0.size\ mod to_unsigned(32, 16)), 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 4
                     when \BitMask::.ctor(UInt16,Boolean).0._State_4\ => 
                         \BitMask::.ctor(UInt16,Boolean).0.num\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
@@ -3598,7 +3604,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::.ctor(UInt16,Boolean).0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -3620,7 +3626,7 @@ begin
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.this\.\Segments\ := \BitMask::.ctor(UInt16,Boolean).0.array\;
                         \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.5542
                     when \BitMask::.ctor(UInt16,Boolean).0._State_6\ => 
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -3935,7 +3941,7 @@ begin
                         else 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3755
                     when \BitMask::SetOne(UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::SetOne(UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -4003,16 +4009,16 @@ begin
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::SetOne(UInt16).0._State_7\ => 
-                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ (have to wait 4 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(4, 32)) then 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_8\;
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::SetOne(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 4
                     when \BitMask::SetOne(UInt16).0._State_8\ => 
                         \BitMask::SetOne(UInt16).0.num\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
@@ -4025,18 +4031,18 @@ begin
                         -- 
                         \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := shift_right(\BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetOne(UInt16).0.num\), 5) and "11111")));
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.4772
                     when \BitMask::SetOne(UInt16).0._State_9\ => 
-                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
+                        if (\BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_10\;
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
                         \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::SetOne(UInt16).0._State_10\ => 
                         \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ = to_unsigned(0, 32);
                         \BitMask::SetOne(UInt16).0.flag2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.6\;
@@ -4063,7 +4069,7 @@ begin
                         else 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_14\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::SetOne(UInt16).0._State_11\ => 
                         -- State after the if-else which was started in state \BitMask::SetOne(UInt16).0._State_10\.
                         -- Going to the state after the if-else which was started in state \BitMask::SetOne(UInt16).0._State_2\.
@@ -4107,7 +4113,7 @@ begin
                         \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\ <= \BitMask::SetOne(UInt16).0.this\.\Size\;
                         \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= true;
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.2386
                     when \BitMask::SetOne(UInt16).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::FromImmutableArray(System.UInt32[],System.UInt16)
                         if (\BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ = \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\) then 
@@ -4286,7 +4292,7 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3755
                     when \BitMask::SetZero(UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::SetZero(UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -4354,16 +4360,16 @@ begin
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::SetZero(UInt16).0._State_7\ => 
-                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ (have to wait 4 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(4, 32)) then 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_8\;
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 4
                     when \BitMask::SetZero(UInt16).0._State_8\ => 
                         \BitMask::SetZero(UInt16).0.num\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
@@ -4376,18 +4382,18 @@ begin
                         -- 
                         \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ := shift_right(\BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetZero(UInt16).0.num\), 5) and "11111")));
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.4772
                     when \BitMask::SetZero(UInt16).0._State_9\ => 
-                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
+                        if (\BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_10\;
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
                         \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.4\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::SetZero(UInt16).0._State_10\ => 
                         \BitMask::SetZero(UInt16).0.binaryOperationResult.6\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ = to_unsigned(1, 32);
                         \BitMask::SetZero(UInt16).0.flag2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.6\;
@@ -4414,7 +4420,7 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_14\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::SetZero(UInt16).0._State_11\ => 
                         -- State after the if-else which was started in state \BitMask::SetZero(UInt16).0._State_10\.
                         -- Going to the state after the if-else which was started in state \BitMask::SetZero(UInt16).0._State_2\.
@@ -4458,7 +4464,7 @@ begin
                         \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\ <= \BitMask::SetZero(UInt16).0.this\.\Size\;
                         \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ <= true;
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.3386
                     when \BitMask::SetZero(UInt16).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::FromImmutableArray(System.UInt32[],System.UInt16)
                         if (\BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\ = \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\) then 
@@ -4634,7 +4640,7 @@ begin
                                 \BitMask::ShiftOutLeastSignificantZeros().0._State\ := \BitMask::ShiftOutLeastSignificantZeros().0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \BitMask::ShiftOutLeastSignificantZeros().0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::ShiftOutLeastSignificantZeros().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -4675,7 +4681,7 @@ begin
                         \BitMask::ShiftOutLeastSignificantZeros().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::ShiftOutLeastSignificantZeros().0.binaryOperationResult.1\);
                         \BitMask::ShiftOutLeastSignificantZeros().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                         \BitMask::ShiftOutLeastSignificantZeros().0._State\ := \BitMask::ShiftOutLeastSignificantZeros().0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::ShiftOutLeastSignificantZeros().0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\BitMask::ShiftOutLeastSignificantZeros().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \BitMask::ShiftOutLeastSignificantZeros().0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
@@ -4790,7 +4796,7 @@ begin
                         else 
                             \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2353
                     when \BitMask::op_Equality(BitMask,BitMask).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_Equality(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -4888,7 +4894,7 @@ begin
                         else 
                             \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4963
                     when \BitMask::op_Equality(BitMask,BitMask).0._State_7\ => 
                         -- State after the while loop which was started in state \BitMask::op_Equality(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
@@ -4911,7 +4917,7 @@ begin
                         if (\BitMask::op_Equality(BitMask,BitMask).0._State\ = \BitMask::op_Equality(BitMask,BitMask).0._State_8\) then 
                             \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::op_Equality(BitMask,BitMask).0._State_9\ => 
                         -- True branch of the if-else started in state \BitMask::op_Equality(BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -5037,29 +5043,11 @@ begin
                             -- 
                             \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_GreaterThan(BitMask,BitMask).0.num\), 32);
                             \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_GreaterThan(BitMask,BitMask).0.num\), 32);
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\))) > \BitMask::op_GreaterThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\)));
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0.flag\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
-                            -- 	result = true;
-                            -- 	return result;
-                            -- }
-                            -- 
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\ and ends in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\.
-                            --     * Execution after either branch will continue in the following state: \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\.
-
-                            if (\BitMask::op_GreaterThan(BitMask,BitMask).0.flag\) then 
-                                \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\;
-                            end if;
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\;
                         else 
                             \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.809
                     when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_4\ => 
                         -- State after the while loop which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -5073,19 +5061,41 @@ begin
                         \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\ => 
-                        -- State after the if-else which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\.
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\))) > \BitMask::op_GreaterThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\)));
+                        \BitMask::op_GreaterThan(BitMask,BitMask).0.flag\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = true;
+                        -- 	return result;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_7\ and ends in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_7\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\.
+
+                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0.flag\) then 
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_7\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\ => 
+                        -- State after the if-else which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 1;
                         -- 
                         \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\ := unsigned(SmartResize(\BitMask::op_GreaterThan(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
                         \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\, 16);
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0._State\ = \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\) then 
+                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0._State\ = \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\) then 
                             \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\ => 
-                        -- True branch of the if-else started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
+                    when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_7\ => 
+                        -- True branch of the if-else started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	result = true;
@@ -5101,9 +5111,9 @@ begin
                         -- 
                         \BitMask::op_GreaterThan(BitMask,BitMask).0.return\ <= \BitMask::op_GreaterThan(BitMask,BitMask).0.result\;
                         \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\.
-                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0._State\ = \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\) then 
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\.
+                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0._State\ = \BitMask::op_GreaterThan(BitMask,BitMask).0._State_7\) then 
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5209,29 +5219,11 @@ begin
                             -- 
                             \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := SmartResize(signed(\BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_LessThan(BitMask,BitMask).0.num\), 32);
                             \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\ := SmartResize(signed(\BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_LessThan(BitMask,BitMask).0.num\), 32);
-                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_LessThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\))) < \BitMask::op_LessThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\)));
-                            \BitMask::op_LessThan(BitMask,BitMask).0.flag\ := \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
-                            -- 	result = true;
-                            -- 	return result;
-                            -- }
-                            -- 
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \BitMask::op_LessThan(BitMask,BitMask).0._State_6\ and ends in state \BitMask::op_LessThan(BitMask,BitMask).0._State_6\.
-                            --     * Execution after either branch will continue in the following state: \BitMask::op_LessThan(BitMask,BitMask).0._State_5\.
-
-                            if (\BitMask::op_LessThan(BitMask,BitMask).0.flag\) then 
-                                \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_5\;
-                            end if;
+                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_5\;
                         else 
                             \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.809
                     when \BitMask::op_LessThan(BitMask,BitMask).0._State_4\ => 
                         -- State after the while loop which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -5245,19 +5237,41 @@ begin
                         \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_LessThan(BitMask,BitMask).0._State_5\ => 
-                        -- State after the if-else which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_3\.
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_LessThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\))) < \BitMask::op_LessThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\)));
+                        \BitMask::op_LessThan(BitMask,BitMask).0.flag\ := \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = true;
+                        -- 	return result;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::op_LessThan(BitMask,BitMask).0._State_7\ and ends in state \BitMask::op_LessThan(BitMask,BitMask).0._State_7\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_LessThan(BitMask,BitMask).0._State_6\.
+
+                        if (\BitMask::op_LessThan(BitMask,BitMask).0.flag\) then 
+                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_7\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \BitMask::op_LessThan(BitMask,BitMask).0._State_6\ => 
+                        -- State after the if-else which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 1;
                         -- 
                         \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\ := unsigned(SmartResize(\BitMask::op_LessThan(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
                         \BitMask::op_LessThan(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\, 16);
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\BitMask::op_LessThan(BitMask,BitMask).0._State\ = \BitMask::op_LessThan(BitMask,BitMask).0._State_5\) then 
+                        if (\BitMask::op_LessThan(BitMask,BitMask).0._State\ = \BitMask::op_LessThan(BitMask,BitMask).0._State_6\) then 
                             \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_LessThan(BitMask,BitMask).0._State_6\ => 
-                        -- True branch of the if-else started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
+                    when \BitMask::op_LessThan(BitMask,BitMask).0._State_7\ => 
+                        -- True branch of the if-else started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	result = true;
@@ -5273,9 +5287,9 @@ begin
                         -- 
                         \BitMask::op_LessThan(BitMask,BitMask).0.return\ <= \BitMask::op_LessThan(BitMask,BitMask).0.result\;
                         \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_3\.
-                        if (\BitMask::op_LessThan(BitMask,BitMask).0._State\ = \BitMask::op_LessThan(BitMask,BitMask).0._State_6\) then 
-                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_5\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_5\.
+                        if (\BitMask::op_LessThan(BitMask,BitMask).0._State\ = \BitMask::op_LessThan(BitMask,BitMask).0._State_7\) then 
+                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5330,7 +5344,7 @@ begin
                         \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0.BitMask::op_LessThan(BitMask,BitMask).right.parameter.Out.0\ <= \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0.right\;
                         \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0.BitMask::op_LessThan(BitMask,BitMask)._Started.0\ <= true;
                         \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_LessThan(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                         if (\BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0.BitMask::op_LessThan(BitMask,BitMask)._Started.0\ = \BitMask::op_GreaterThanOrEqual(BitMask,BitMask).0.BitMask::op_LessThan(BitMask,BitMask)._Finished.0\) then 
@@ -5392,7 +5406,7 @@ begin
                         \BitMask::op_Inequality(BitMask,BitMask).0.BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \BitMask::op_Inequality(BitMask,BitMask).0.right\;
                         \BitMask::op_Inequality(BitMask,BitMask).0.BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
                         \BitMask::op_Inequality(BitMask,BitMask).0._State\ := \BitMask::op_Inequality(BitMask,BitMask).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \BitMask::op_Inequality(BitMask,BitMask).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                         if (\BitMask::op_Inequality(BitMask,BitMask).0.BitMask::op_Equality(BitMask,BitMask)._Started.0\ = \BitMask::op_Inequality(BitMask,BitMask).0.BitMask::op_Equality(BitMask,BitMask)._Finished.0\) then 
@@ -5818,7 +5832,7 @@ begin
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_4\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_4\.
-                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_30\.
+                        --     * The false branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_31\.
                         --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_3\.
 
                         if (\BitMask::op_Addition(BitMask,BitMask).0.flag\) then 
@@ -5826,7 +5840,7 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.588
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -5951,7 +5965,7 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_6\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
@@ -6082,7 +6096,7 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.4598
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_10\ => 
                         -- State after the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -6099,19 +6113,19 @@ begin
                         \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::op_Addition(BitMask,BitMask).0.array\;
                         \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
                         \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= true;
-                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_30\;
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_31\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_12\;
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_12\ => 
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
                         \BitMask::op_Addition(BitMask,BitMask).0.flag3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\;
@@ -6121,18 +6135,18 @@ begin
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := SmartResize(unsigned(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
                         \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.7349
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_13\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_14\;
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_14\ => 
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ = to_unsigned(1, 32);
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ and \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\;
@@ -6159,7 +6173,7 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_17\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3751
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_15\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
@@ -6286,7 +6300,7 @@ begin
                         -- flag5 = b % 2 == 1;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_24\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6312
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_22\ => 
                         -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
@@ -6320,16 +6334,16 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_24\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ (have to wait 2 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(2, 32)) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_25\;
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 2
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_25\ => 
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ = to_unsigned(1, 8);
                         \BitMask::op_Addition(BitMask,BitMask).0.flag5\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\;
@@ -6349,7 +6363,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_26\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_26\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
@@ -6366,27 +6380,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag6 = num2 >> 5 == 1;
                         -- 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ = to_signed(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag6) {
-                        -- 	num2 = 0;
-                        -- 	num = num + 1;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_29\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_29\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_28\.
-
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.flag6\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_29\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_28\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_28\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8076
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_27\ => 
                         -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
@@ -6404,21 +6399,44 @@ begin
                         if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_27\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_26\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4156
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_28\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ = to_signed(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag6) {
+                        -- 	num2 = 0;
+                        -- 	num = num + 1;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_30\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_30\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Addition(BitMask,BitMask).0._State_29\.
+
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.flag6\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_30\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_29\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5137
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_29\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num3\ + to_unsigned(1, 16), 32));
                         \BitMask::op_Addition(BitMask,BitMask).0.num3\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\, 16);
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\ if the loop wasn't exited with a state change.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_28\) then 
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_29\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_29\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_30\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = 0;
@@ -6434,19 +6452,19 @@ begin
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := unsigned(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
                         \BitMask::op_Addition(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\, 16);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
-                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_29\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_28\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_28\.
+                        if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_30\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_29\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Addition(BitMask,BitMask).0._State_30\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
+                    when \BitMask::op_Addition(BitMask,BitMask).0._State_31\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16)
                         if (\BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ = \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= false;
                             \BitMask::op_Addition(BitMask,BitMask).0.result\ := \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\;
                             \BitMask::op_Addition(BitMask,BitMask).0.array\ := \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_2\.
-                            if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_30\) then 
+                            if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_31\) then 
                                 \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_3\;
                             end if;
                         end if;
@@ -6689,7 +6707,7 @@ begin
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_4\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_4\.
-                        --     * The false branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\.
+                        --     * The false branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_31\.
                         --     * Execution after either branch will continue in the following state: \BitMask::op_Subtraction(BitMask,BitMask).0._State_3\.
 
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.flag\) then 
@@ -6697,7 +6715,7 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.588
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -6822,7 +6840,7 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
@@ -6953,7 +6971,7 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.4598
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_10\ => 
                         -- State after the while loop which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -6970,19 +6988,19 @@ begin
                         \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\ <= \BitMask::op_Subtraction(BitMask,BitMask).0.array\;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
                         \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= true;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_31\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_12\;
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_12\ => 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
                         \BitMask::op_Subtraction(BitMask,BitMask).0.flag3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\;
@@ -6992,18 +7010,18 @@ begin
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := SmartResize(unsigned(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)), 5) and "11111")))), 32);
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.7349
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_13\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\;
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\ => 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ = to_unsigned(1, 32);
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ and \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\;
@@ -7030,7 +7048,7 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_17\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3751
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_15\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
@@ -7158,7 +7176,7 @@ begin
                         -- flag5 = b % 2 == 1;
                         -- 
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_24\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.9468
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_22\ => 
                         -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
@@ -7192,16 +7210,16 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_24\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ (have to wait 2 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(2, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\;
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 2
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\ => 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ = to_unsigned(1, 8);
                         \BitMask::op_Subtraction(BitMask,BitMask).0.flag5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\;
@@ -7221,7 +7239,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
@@ -7238,27 +7256,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag6 = num2 >> 5 == 1;
                         -- 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ = to_signed(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag6) {
-                        -- 	num2 = 0;
-                        -- 	num = num + 1;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\.
-
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.flag6\) then 
-                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7
+                        \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8076
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\ => 
                         -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
@@ -7276,21 +7275,44 @@ begin
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4156
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\ => 
-                        -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ = to_signed(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag6) {
+                        -- 	num2 = 0;
+                        -- 	num = num + 1;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\.
+
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.flag6\) then 
+                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5137
+                    when \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\ => 
+                        -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num3\ + to_unsigned(1, 16), 32));
                         \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\, 16);
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\ if the loop wasn't exited with a state change.
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\) then 
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\ => 
-                        -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
+                    when \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\ => 
+                        -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = 0;
@@ -7306,19 +7328,19 @@ begin
                         -- 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := unsigned(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\ + to_unsigned(1, 16), 32));
                         \BitMask::op_Subtraction(BitMask,BitMask).0.num\ := SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\, 16);
-                        -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\) then 
-                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\;
+                        -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\.
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\) then 
+                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
+                    when \BitMask::op_Subtraction(BitMask,BitMask).0._State_31\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16)
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ = \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= false;
                             \BitMask::op_Subtraction(BitMask,BitMask).0.result\ := \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\;
                             \BitMask::op_Subtraction(BitMask,BitMask).0.array\ := \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_2\.
-                            if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\) then 
+                            if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_31\) then 
                                 \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_3\;
                             end if;
                         end if;
@@ -7426,7 +7448,7 @@ begin
                         else 
                             \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2353
                     when \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -7523,7 +7545,7 @@ begin
                         else 
                             \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.6935
                     when \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_8\ => 
                         -- State after the while loop which was started in state \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -7657,7 +7679,7 @@ begin
                         else 
                             \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2353
                     when \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -7754,7 +7776,7 @@ begin
                         else 
                             \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.6935
                     when \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_8\ => 
                         -- State after the while loop which was started in state \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -7947,7 +7969,7 @@ begin
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -8098,7 +8120,7 @@ begin
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_8\ => 
                         -- State after the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -8147,7 +8169,7 @@ begin
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.5766
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_10\ => 
                         -- State after the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -8159,18 +8181,18 @@ begin
                         if (\BitMask::op_RightShift(BitMask,Int32).0._State\ = \BitMask::op_RightShift(BitMask,Int32).0._State_10\) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_12\;
                             \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ := \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num4\, 32)))) mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_12\ => 
                         \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ = to_unsigned(1, 32);
                         \BitMask::op_RightShift(BitMask,Int32).0.flag3\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\;
@@ -8199,7 +8221,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.5137
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_13\ => 
                         -- State after the if-else which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
@@ -8215,7 +8237,7 @@ begin
                         if (\BitMask::op_RightShift(BitMask,Int32).0._State\ = \BitMask::op_RightShift(BitMask,Int32).0._State_13\) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_14\ => 
                         -- True branch of the if-else started in state \BitMask::op_RightShift(BitMask,Int32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
@@ -8232,7 +8254,7 @@ begin
                         if (\BitMask::op_RightShift(BitMask,Int32).0._State\ = \BitMask::op_RightShift(BitMask,Int32).0._State_14\) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1386
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16)
                         if (\BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ = \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\) then 
@@ -8403,7 +8425,7 @@ begin
                         else 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -8555,7 +8577,7 @@ begin
                         else 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_8\ => 
                         -- State after the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -8625,7 +8647,7 @@ begin
                         else 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.7747
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_10\ => 
                         -- State after the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -8637,7 +8659,7 @@ begin
                         if (\BitMask::op_LeftShift(BitMask,Int32).0._State\ = \BitMask::op_LeftShift(BitMask,Int32).0._State_10\) then 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_11\ => 
                         -- State after the if-else which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
@@ -8653,7 +8675,7 @@ begin
                         if (\BitMask::op_LeftShift(BitMask,Int32).0._State\ = \BitMask::op_LeftShift(BitMask,Int32).0._State_11\) then 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_12\ => 
                         -- True branch of the if-else started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
@@ -8670,7 +8692,7 @@ begin
                         if (\BitMask::op_LeftShift(BitMask,Int32).0._State\ = \BitMask::op_LeftShift(BitMask,Int32).0._State_12\) then 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1386
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16)
                         if (\BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ = \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\) then 
@@ -8834,7 +8856,7 @@ begin
                         else 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.5151
                     when \BitMask::GetMostSignificantOnePosition().0._State_4\ => 
                         -- State after the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -8876,29 +8898,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = num3 == 0u;
                             -- 
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\ := \BitMask::GetMostSignificantOnePosition().0.num3\ = to_unsigned(0, 32);
-                            \BitMask::GetMostSignificantOnePosition().0.flag\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
-                            -- 	result = @this.SegmentCount - num2 * 32 + num;
-                            -- 	return result;
-                            -- }
-                            -- 
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \BitMask::GetMostSignificantOnePosition().0._State_8\ and ends in state \BitMask::GetMostSignificantOnePosition().0._State_8\.
-                            --     * Execution after either branch will continue in the following state: \BitMask::GetMostSignificantOnePosition().0._State_7\.
-
-                            if (\BitMask::GetMostSignificantOnePosition().0.flag\) then 
-                                \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_8\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_7\;
-                            end if;
+                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_7\;
                         else 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5
+                        -- Clock cycles needed to complete this state (approximation): 0.808
                     when \BitMask::GetMostSignificantOnePosition().0._State_6\ => 
                         -- State after the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -8910,16 +8914,38 @@ begin
                         if (\BitMask::GetMostSignificantOnePosition().0._State\ = \BitMask::GetMostSignificantOnePosition().0._State_6\) then 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::GetMostSignificantOnePosition().0._State_7\ => 
-                        -- State after the if-else which was started in state \BitMask::GetMostSignificantOnePosition().0._State_5\.
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\ := \BitMask::GetMostSignificantOnePosition().0.num3\ = to_unsigned(0, 32);
+                        \BitMask::GetMostSignificantOnePosition().0.flag\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = @this.SegmentCount - num2 * 32 + num;
+                        -- 	return result;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::GetMostSignificantOnePosition().0._State_9\ and ends in state \BitMask::GetMostSignificantOnePosition().0._State_9\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::GetMostSignificantOnePosition().0._State_8\.
+
+                        if (\BitMask::GetMostSignificantOnePosition().0.flag\) then 
+                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_9\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \BitMask::GetMostSignificantOnePosition().0._State_8\ => 
+                        -- State after the if-else which was started in state \BitMask::GetMostSignificantOnePosition().0._State_7\.
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_3\ if the loop wasn't exited with a state change.
-                        if (\BitMask::GetMostSignificantOnePosition().0._State\ = \BitMask::GetMostSignificantOnePosition().0._State_7\) then 
+                        if (\BitMask::GetMostSignificantOnePosition().0._State\ = \BitMask::GetMostSignificantOnePosition().0._State_8\) then 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::GetMostSignificantOnePosition().0._State_8\ => 
-                        -- True branch of the if-else started in state \BitMask::GetMostSignificantOnePosition().0._State_5\.
+                    when \BitMask::GetMostSignificantOnePosition().0._State_9\ => 
+                        -- True branch of the if-else started in state \BitMask::GetMostSignificantOnePosition().0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	result = @this.SegmentCount - num2 * 32 + num;
@@ -8938,11 +8964,11 @@ begin
                         -- 
                         \BitMask::GetMostSignificantOnePosition().0.return\ <= \BitMask::GetMostSignificantOnePosition().0.result\;
                         \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_1\;
-                        -- Going to the state after the if-else which was started in state \BitMask::GetMostSignificantOnePosition().0._State_5\.
-                        if (\BitMask::GetMostSignificantOnePosition().0._State\ = \BitMask::GetMostSignificantOnePosition().0._State_8\) then 
-                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_7\;
+                        -- Going to the state after the if-else which was started in state \BitMask::GetMostSignificantOnePosition().0._State_7\.
+                        if (\BitMask::GetMostSignificantOnePosition().0._State\ = \BitMask::GetMostSignificantOnePosition().0._State_9\) then 
+                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.7095
                 end case;
             end if;
         end if;
@@ -9133,7 +9159,7 @@ begin
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4963
                     when \BitMask::GetLeastSignificantOnePosition().0._State_4\ => 
                         -- State after the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -9157,7 +9183,7 @@ begin
                         if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_5\) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::GetLeastSignificantOnePosition().0._State_6\ => 
                         -- True branch of the if-else started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -9174,7 +9200,7 @@ begin
                         if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_6\) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \BitMask::GetLeastSignificantOnePosition().0._State_7\ => 
                         -- False branch of the if-else started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -9212,16 +9238,16 @@ begin
                         \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetLeastSignificantOnePosition().0._State_10\ => 
-                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_11\;
                             \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::GetLeastSignificantOnePosition().0._State_11\ => 
                         \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ = to_unsigned(0, 32);
                         if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\) then 
@@ -9248,18 +9274,18 @@ begin
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.8076
                     when \BitMask::GetLeastSignificantOnePosition().0._State_12\ => 
-                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
+                        if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_13\;
                             \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
                         \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \BitMask::GetLeastSignificantOnePosition().0._State_13\ => 
                         \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ = to_unsigned(1, 32);
                         \BitMask::GetLeastSignificantOnePosition().0.flag2\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\;
@@ -9280,7 +9306,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_14\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \BitMask::GetLeastSignificantOnePosition().0._State_14\ => 
                         -- State after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_13\.
                         -- Going to the state after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
@@ -9789,7 +9815,7 @@ begin
                                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_5\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_4\.
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_1\;
@@ -10183,7 +10209,7 @@ begin
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_Size()._Started.0\ <= true;
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_24\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_24\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::get_Size()
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_Size()._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_Size()._Finished.0\) then 
@@ -10271,7 +10297,7 @@ begin
                                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_31\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.7297
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_31\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_30\.
                         -- The following section was transformed from the .NET statement below:
@@ -10298,7 +10324,7 @@ begin
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_32\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_31\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_33\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Unum::get_ExponentSizeMax()
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_ExponentSizeMax()._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_ExponentSizeMax()._Finished.0\) then 
@@ -10367,7 +10393,7 @@ begin
                                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_43\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_34\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_33\.
                         -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_4\.
@@ -10564,7 +10590,7 @@ begin
                         else 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_46\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_44\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_43\.
                         -- The following section was transformed from the .NET statement below:
@@ -10610,7 +10636,7 @@ begin
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_46\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_44\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.7095
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_47\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,System.UInt32)
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
@@ -10715,7 +10741,7 @@ begin
                                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_53\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_53\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_52\.
                         -- The following section was transformed from the .NET statement below:
@@ -10747,7 +10773,7 @@ begin
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::SetZero(UInt16).index.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.num2\;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::SetZero(UInt16)._Started.0\ <= true;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_55\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_55\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetZero(System.UInt16)
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::SetZero(UInt16)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::SetZero(UInt16)._Finished.0\) then 
@@ -10785,7 +10811,7 @@ begin
                                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_57\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_57\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_56\.
                         -- The following section was transformed from the .NET statement below:
@@ -10811,7 +10837,7 @@ begin
                         else 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_63\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_58\ => 
                         -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_56\.
                         -- The following section was transformed from the .NET statement below:
@@ -10840,7 +10866,7 @@ begin
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_60\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_60\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
@@ -10882,7 +10908,7 @@ begin
                         else 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_66\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_62\ => 
                         -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_57\.
                         -- The following section was transformed from the .NET statement below:
@@ -10899,7 +10925,7 @@ begin
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_62\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_61\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_63\ => 
                         -- False branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_57\.
                         -- The following section was transformed from the .NET statement below:
@@ -10948,7 +10974,7 @@ begin
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_65\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_64\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_66\ => 
                         -- False branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_61\.
                         -- The following section was transformed from the .NET statement below:
@@ -11078,7 +11104,7 @@ begin
                         else 
                             \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                     when \Unum::.ctor(UnumEnvironment,Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,Int32).0._State_2\.
                         \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_1\;
@@ -11437,7 +11463,7 @@ begin
                             \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6095
                     when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
@@ -11663,7 +11689,7 @@ begin
                             \Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \Unum::FractionToUintArray().0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
@@ -11711,7 +11737,7 @@ begin
                         else 
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.5766
                     when \Unum::FractionToUintArray().0._State_8\ => 
                         -- State after the while loop which was started in state \Unum::FractionToUintArray().0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -11721,7 +11747,7 @@ begin
                         \Unum::FractionToUintArray().0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::FractionToUintArray().0.this\;
                         \Unum::FractionToUintArray().0.Unum::IsPositive()._Started.0\ <= true;
                         \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::FractionToUintArray().0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         if (\Unum::FractionToUintArray().0.Unum::IsPositive()._Started.0\ = \Unum::FractionToUintArray().0.Unum::IsPositive()._Finished.0\) then 
@@ -11740,7 +11766,7 @@ begin
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Unum::FractionToUintArray().0._State_11\ and ends in state \Unum::FractionToUintArray().0._State_11\.
-                            --     * The false branch starts in state \Unum::FractionToUintArray().0._State_12\ and ends in state \Unum::FractionToUintArray().0._State_12\.
+                            --     * The false branch starts in state \Unum::FractionToUintArray().0._State_12\ and ends in state \Unum::FractionToUintArray().0._State_13\.
                             --     * Execution after either branch will continue in the following state: \Unum::FractionToUintArray().0._State_10\.
 
                             if (\Unum::FractionToUintArray().0.flag\) then 
@@ -11777,7 +11803,7 @@ begin
                         if (\Unum::FractionToUintArray().0._State\ = \Unum::FractionToUintArray().0._State_11\) then 
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.7264
                     when \Unum::FractionToUintArray().0._State_12\ => 
                         -- False branch of the if-else started in state \Unum::FractionToUintArray().0._State_9\.
                         -- The following section was transformed from the .NET statement below:
@@ -11797,14 +11823,18 @@ begin
                         -- array [(int)(bitMask.SegmentCount - 1)] = array [(int)(bitMask.SegmentCount - 1)] >> 1;
                         -- 
                         \Unum::FractionToUintArray().0.binaryOperationResult.9\ := SmartResize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
+                        \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9817
+                    when \Unum::FractionToUintArray().0._State_13\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Unum::FractionToUintArray().0.binaryOperationResult.10\ := SmartResize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
                         \Unum::FractionToUintArray().0.binaryOperationResult.11\ := shift_right(\Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.10\))), to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                         \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.9\))) := \Unum::FractionToUintArray().0.binaryOperationResult.11\;
                         -- Going to the state after the if-else which was started in state \Unum::FractionToUintArray().0._State_9\.
-                        if (\Unum::FractionToUintArray().0._State\ = \Unum::FractionToUintArray().0._State_12\) then 
+                        if (\Unum::FractionToUintArray().0._State\ = \Unum::FractionToUintArray().0._State_13\) then 
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7
+                        -- Clock cycles needed to complete this state (approximation): 0.5325
                 end case;
             end if;
         end if;
@@ -12495,7 +12525,7 @@ begin
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::ExponentMask().0._State\ := \Unum::ExponentMask().0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::ExponentMask().0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
@@ -12598,7 +12628,7 @@ begin
                             \Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::Exponent().0._State\ := \Unum::Exponent().0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::Exponent().0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
@@ -12931,7 +12961,7 @@ begin
                             \Unum::Bias().0.return\ <= \Unum::Bias().0.binaryOperationResult.2\;
                             \Unum::Bias().0._State\ := \Unum::Bias().0._State_1\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.6432
                 end case;
             end if;
         end if;
@@ -13006,7 +13036,7 @@ begin
                             \Unum::HiddenBitIsOne().0.return\ <= \Unum::HiddenBitIsOne().0.binaryOperationResult.0\;
                             \Unum::HiddenBitIsOne().0._State\ := \Unum::HiddenBitIsOne().0._State_1\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                 end case;
             end if;
         end if;
@@ -13171,7 +13201,7 @@ begin
                             \Unum::ExponentValueWithBias().0.return\ <= (\Unum::ExponentValueWithBias().0.binaryOperationResult.1\);
                             \Unum::ExponentValueWithBias().0._State\ := \Unum::ExponentValueWithBias().0._State_1\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6312
                 end case;
             end if;
         end if;
@@ -15158,7 +15188,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_46\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \Unum::AddExactUnums(Unum,Unum).0._State_46\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
@@ -15252,7 +15282,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_94\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3989
                     when \Unum::AddExactUnums(Unum,Unum).0._State_50\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
@@ -15330,7 +15360,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_54\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_54\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
@@ -15345,7 +15375,7 @@ begin
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_55\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6095
                     when \Unum::AddExactUnums(Unum,Unum).0._State_55\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.Unum::get_FractionSizeMax()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -15363,7 +15393,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_57\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_57\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
@@ -15380,7 +15410,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_58\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6095
                     when \Unum::AddExactUnums(Unum,Unum).0._State_58\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
@@ -15479,7 +15509,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_91\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_64\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
@@ -15574,7 +15604,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_83\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1238
                     when \Unum::AddExactUnums(Unum,Unum).0._State_70\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_69\.
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
@@ -15677,7 +15707,7 @@ begin
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_79\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_79\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
@@ -15702,7 +15732,7 @@ begin
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_81\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_81\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
@@ -15785,7 +15815,7 @@ begin
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_87\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_87\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
@@ -15810,7 +15840,7 @@ begin
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_89\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_89\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
@@ -15841,7 +15871,7 @@ begin
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_92\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_92\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -15917,7 +15947,7 @@ begin
                         else 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_110\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                     when \Unum::AddExactUnums(Unum,Unum).0._State_95\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
@@ -15944,7 +15974,7 @@ begin
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_97\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_97\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
@@ -15986,7 +16016,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_100\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_100\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
@@ -16001,7 +16031,7 @@ begin
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_101\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6095
                     when \Unum::AddExactUnums(Unum,Unum).0._State_101\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.Unum::get_FractionSizeMax()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -16019,7 +16049,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_103\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_103\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
@@ -16037,7 +16067,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_104\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.9251
                     when \Unum::AddExactUnums(Unum,Unum).0._State_104\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
@@ -16125,7 +16155,7 @@ begin
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_111\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_111\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
@@ -16167,7 +16197,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_114\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_114\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
@@ -16182,7 +16212,7 @@ begin
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_115\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6095
                     when \Unum::AddExactUnums(Unum,Unum).0._State_115\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.Unum::get_FractionSizeMax()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -16200,7 +16230,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_117\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_117\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
@@ -16218,7 +16248,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_118\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.9251
                     when \Unum::AddExactUnums(Unum,Unum).0._State_118\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
@@ -16325,7 +16355,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_126\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6095
                     when \Unum::AddExactUnums(Unum,Unum).0._State_126\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
@@ -16340,7 +16370,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_127\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \Unum::AddExactUnums(Unum,Unum).0._State_127\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.Unum::get_Size()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Finished.0\) then 
@@ -16380,7 +16410,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentSize(Int32)._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_130\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \Unum::AddExactUnums(Unum,Unum).0._State_130\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Unum::ExponentValueToExponentSize(System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentSize(Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentSize(Int32)._Finished.0\) then 
@@ -16417,7 +16447,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_133\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4886
                     when \Unum::AddExactUnums(Unum,Unum).0._State_131\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
                         -- The following section was transformed from the .NET statement below:
@@ -16503,7 +16533,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_138\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \Unum::AddExactUnums(Unum,Unum).0._State_136\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_135\.
                         -- The following section was transformed from the .NET statement below:
@@ -16560,7 +16590,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_136\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_140\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.exponent\;
@@ -16597,7 +16627,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_142\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2212
                     when \Unum::AddExactUnums(Unum,Unum).0._State_142\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         -- The following section was transformed from the .NET statement below:
@@ -16607,7 +16637,7 @@ begin
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_149\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_143\ => 
                         -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         -- The following section was transformed from the .NET statement below:
@@ -16641,7 +16671,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_145\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_145\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetZero(System.UInt16)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Finished.0\) then 
@@ -16669,7 +16699,7 @@ begin
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_148\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \Unum::AddExactUnums(Unum,Unum).0._State_146\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
@@ -16709,7 +16739,7 @@ begin
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_148\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_146\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \Unum::AddExactUnums(Unum,Unum).0._State_149\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Unum::IsExact()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Finished.0\) then 
@@ -16718,7 +16748,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_150\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \Unum::AddExactUnums(Unum,Unum).0._State_150\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_151\;
@@ -16924,7 +16954,7 @@ begin
                         else 
                             \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State\ := \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -17007,7 +17037,7 @@ begin
                             \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
                             \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State\ := \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.6432
                     when \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,System.UInt32)
                         if (\Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
@@ -17036,7 +17066,7 @@ begin
                                 \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State\ := \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_9\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_9\ => 
                         -- State after the if-else which was started in state \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
@@ -17061,7 +17091,7 @@ begin
                         \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= (\Unum::ExponentValueToExponentBits(Int32,UInt16).0.binaryOperationResult.5\);
                         \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= true;
                         \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State\ := \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
                     when \Unum::ExponentValueToExponentBits(Int32,UInt16).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,System.UInt32)
                         if (\Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\) then 
@@ -17174,7 +17204,7 @@ begin
                         else 
                             \Unum::ExponentValueToExponentSize(Int32).0._State\ := \Unum::ExponentValueToExponentSize(Int32).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                     when \Unum::ExponentValueToExponentSize(Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \Unum::ExponentValueToExponentSize(Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -17220,7 +17250,7 @@ begin
                         else 
                             \Unum::ExponentValueToExponentSize(Int32).0._State\ := \Unum::ExponentValueToExponentSize(Int32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.8307
                     when \Unum::ExponentValueToExponentSize(Int32).0._State_6\ => 
                         -- State after the while loop which was started in state \Unum::ExponentValueToExponentSize(Int32).0._State_4\.
                         -- Going to the state after the if-else which was started in state \Unum::ExponentValueToExponentSize(Int32).0._State_2\.
@@ -17265,7 +17295,7 @@ begin
                         else 
                             \Unum::ExponentValueToExponentSize(Int32).0._State\ := \Unum::ExponentValueToExponentSize(Int32).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5
+                        -- Clock cycles needed to complete this state (approximation): 0.9307
                     when \Unum::ExponentValueToExponentSize(Int32).0._State_9\ => 
                         -- State after the while loop which was started in state \Unum::ExponentValueToExponentSize(Int32).0._State_7\.
                         -- Going to the state after the if-else which was started in state \Unum::ExponentValueToExponentSize(Int32).0._State_2\.
@@ -18176,7 +18206,7 @@ begin
                         \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ + to_signed(1, 32);
                         \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\;
                         \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.6432
                 end case;
             end if;
         end if;
@@ -18287,7 +18317,7 @@ begin
                                 \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3755
                     when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\ => 
                         -- State after the if-else which was started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -18355,7 +18385,7 @@ begin
                             \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.9588
                     when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
@@ -18546,7 +18576,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.8371
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
@@ -18761,7 +18791,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_23\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_23\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -18852,7 +18882,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_29\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_29\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -18918,7 +18948,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_33\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_33\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
@@ -19000,7 +19030,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_39\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3939
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_39\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,System.UInt32)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
