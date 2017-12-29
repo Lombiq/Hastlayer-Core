@@ -144,7 +144,7 @@ namespace Hast.Synthesis.Services
             {
                 // Debug code to test TWD.
                 //var timing = dpd + twd;
-                //var timing = dpd + twd < 0 ? twd : 0;
+                //var timing = dpd + (twd < 0 ? twd : 0);
                 var timing = dpd;
 
                 _timings[GetKey(operatorType, operandSizeBits, isSigned)] = timing;
