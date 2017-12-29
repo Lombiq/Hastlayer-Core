@@ -128,18 +128,18 @@ namespace Hast.Synthesis.Services
             private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
 
 
-            public void SetLatencyNs(dynamic operatorTyper, int operandSizeBits, bool isSigned, decimal timing)
+            public void SetLatencyNs(dynamic operatorType, int operandSizeBits, bool isSigned, decimal timing)
             {
-                _timings[GetKey(operatorTyper, operandSizeBits, isSigned)] = timing;
+                _timings[GetKey(operatorType, operandSizeBits, isSigned)] = timing;
 
-                // If the operand type is 1 that means that the operation also works with single-bit non-composite types
+                // If the operand size is 1 that means that the operation also works with single-bit non-composite types
                 // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as 
                 // std_logic but the latter is not a sized data type (and thus it's apparent size will be 0, despite it
-                // being stored in at least one bit).
+                // being stored on at least one bit).
                 // Therefore, saving a 0 bit version here too.
                 if (operandSizeBits == 1)
                 {
-                    SetLatencyNs(operatorTyper, 0, isSigned, timing);
+                    SetLatencyNs(operatorType, 0, isSigned, timing);
                 }
             }
 
