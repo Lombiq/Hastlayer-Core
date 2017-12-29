@@ -81,6 +81,12 @@ namespace Hast.Synthesis.Services
                         case "/=":
                             binaryOperator = BinaryOperatorType.InEquality;
                             break;
+                        case "shift_left":
+                            binaryOperator = BinaryOperatorType.ShiftLeft;
+                            break;
+                        case "shift_right":
+                            binaryOperator = BinaryOperatorType.ShiftRight;
+                            break;
                         case "not":
                             unaryOperator = UnaryOperatorType.Not;
                             break;
