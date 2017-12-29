@@ -183,6 +183,10 @@
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
       <Name>Hast.Samples.SampleAssembly</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Xilinx\Hast.Xilinx.csproj">
+      <Project>{02BE2213-F0E5-4107-BEA4-AE396525A644}</Project>
+      <Name>Hast.Xilinx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Transformer.Vhdl.csproj">
       <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
       <Name>Hast.Transformer.Vhdl</Name>
