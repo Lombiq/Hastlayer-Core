@@ -103,30 +103,30 @@ namespace Hast.Synthesis.Services
                     }
                     var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
 
-                    // For more info on DPD and TWD see the docs of Hastlayer Timing Tester.
+                    // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
                     // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
                     var dpd = decimal.Parse(
                         csvReader.GetField<string>("DPD").Replace(',', '.'), // Taking care of decimal commas.
                         NumberStyles.Any, 
                         CultureInfo.InvariantCulture);
 
-                    // Timing window, i.e.:
+                    // Timing window difference from requirement, i.e.:
                     // For Vivado:
-                    // TWD = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
+                    // TWDFR = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
                     // For Quartus Prime:
-                    // TWD = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
-                    var twd = decimal.Parse(
-                        csvReader.GetField<string>("TWD").Replace(',', '.'), // Taking care of decimal commas.
+                    // TWDFR = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
+                    var twdfr = decimal.Parse(
+                        csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
                         NumberStyles.Any,
                         CultureInfo.InvariantCulture);
 
                     if (binaryOperator.HasValue)
                     {
-                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, dpd, twd); 
+                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, dpd, twdfr); 
                     }
                     else if (unaryOperator.HasValue)
                     {
-                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, dpd, twd);
+                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, dpd, twdfr);
                     }
                 }
 
@@ -140,11 +140,11 @@ namespace Hast.Synthesis.Services
             private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
 
 
-            public void SetLatencyNs(dynamic operatorType, int operandSizeBits, bool isSigned, decimal dpd, decimal twd)
+            public void SetLatencyNs(dynamic operatorType, int operandSizeBits, bool isSigned, decimal dpd, decimal twdfr)
             {
-                // Debug code to test TWD.
-                //var timing = dpd + twd;
-                //var timing = dpd + (twd < 0 ? twd : 0);
+                // Debug code to test TWDFR.
+                //var timing = dpd + twdfr;
+                //var timing = dpd + (twdfr < 0 ? twdfr : 0);
                 var timing = dpd;
 
                 _timings[GetKey(operatorType, operandSizeBits, isSigned)] = timing;
@@ -156,7 +156,7 @@ namespace Hast.Synthesis.Services
                 // Therefore, saving a 0 bit version here too.
                 if (operandSizeBits == 1)
                 {
-                    SetLatencyNs(operatorType, 0, isSigned, dpd, twd);
+                    SetLatencyNs(operatorType, 0, isSigned, dpd, twdfr);
                 }
             }
 
