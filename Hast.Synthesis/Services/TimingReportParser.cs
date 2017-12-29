@@ -42,44 +42,41 @@ namespace Hast.Synthesis.Services
                         case "and":
                             binaryOperator = BinaryOperatorType.BitwiseAnd;
                             break;
-                        case "or":
-                            binaryOperator = BinaryOperatorType.BitwiseOr;
-                            break;
-                        case "xor":
-                            binaryOperator = BinaryOperatorType.ExclusiveOr;
-                            break;
-                        case "+":
+                        case "add":
                             binaryOperator = BinaryOperatorType.Add;
                             break;
-                        case "-":
-                            binaryOperator = BinaryOperatorType.Subtract;
-                            break;
-                        case "/":
+                        case "div":
                             binaryOperator = BinaryOperatorType.Divide;
                             break;
-                        case "*":
-                            binaryOperator = BinaryOperatorType.Multiply;
+                        case "eq":
+                            binaryOperator = BinaryOperatorType.Equality;
+                            break;
+                        case "ge":
+                            binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
+                            break;
+                        case "gt":
+                            binaryOperator = BinaryOperatorType.GreaterThan;
+                            break;
+                        case "le":
+                            binaryOperator = BinaryOperatorType.LessThanOrEqual;
+                            break;
+                        case "lt":
+                            binaryOperator = BinaryOperatorType.LessThan;
                             break;
                         case "mod":
                             binaryOperator = BinaryOperatorType.Modulus;
                             break;
-                        case ">":
-                            binaryOperator = BinaryOperatorType.GreaterThan;
+                        case "mul":
+                            binaryOperator = BinaryOperatorType.Multiply;
                             break;
-                        case "<":
-                            binaryOperator = BinaryOperatorType.LessThan;
-                            break;
-                        case ">=":
-                            binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
-                            break;
-                        case "<=":
-                            binaryOperator = BinaryOperatorType.LessThanOrEqual;
-                            break;
-                        case "=":
-                            binaryOperator = BinaryOperatorType.Equality;
-                            break;
-                        case "/=":
+                        case "neq":
                             binaryOperator = BinaryOperatorType.InEquality;
+                            break;
+                        case "not":
+                            unaryOperator = UnaryOperatorType.Not;
+                            break;
+                        case "or":
+                            binaryOperator = BinaryOperatorType.BitwiseOr;
                             break;
                         case "shift_left":
                             binaryOperator = BinaryOperatorType.ShiftLeft;
@@ -87,8 +84,11 @@ namespace Hast.Synthesis.Services
                         case "shift_right":
                             binaryOperator = BinaryOperatorType.ShiftRight;
                             break;
-                        case "not":
-                            unaryOperator = UnaryOperatorType.Not;
+                        case "sub":
+                            binaryOperator = BinaryOperatorType.Subtract;
+                            break;
+                        case "xor":
+                            binaryOperator = BinaryOperatorType.ExclusiveOr;
                             break;
                         default:
                             throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
