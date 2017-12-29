@@ -15,7 +15,7 @@ namespace Hast.Synthesis.Services
 
 
         public IDeviceDriver GetDriver(string deviceName) =>
-            _drivers.FirstOrDefault(driver => driver.DeviceManifest.Name == deviceName);
+            _drivers.FirstOrDefault(driver => driver.DeviceManifest?.Name == deviceName);
 
     }
 }

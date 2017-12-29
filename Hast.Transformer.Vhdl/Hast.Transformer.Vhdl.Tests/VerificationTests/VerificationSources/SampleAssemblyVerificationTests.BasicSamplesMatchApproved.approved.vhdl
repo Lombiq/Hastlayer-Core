@@ -327,7 +327,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\, 
         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\, 
         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\, 
-        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\);
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\);
     -- Signals:
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -473,7 +479,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -493,7 +505,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -513,7 +531,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -533,7 +557,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -553,7 +583,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -573,7 +609,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -593,7 +635,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -613,7 +661,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -633,7 +687,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -653,7 +713,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -673,7 +739,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -693,7 +765,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -713,7 +791,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -733,7 +817,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -753,7 +843,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -773,7 +869,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -793,7 +895,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -813,7 +921,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -833,7 +947,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -853,7 +973,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -873,7 +999,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -893,7 +1025,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -913,7 +1051,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -933,7 +1077,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -953,7 +1103,13 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\, 
         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\, 
-        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\);
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_9\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_10\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_13\);
     -- Signals:
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -2458,7 +2614,9 @@ architecture Imp of Hast_IP is
         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\, 
         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\, 
         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\, 
-        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\);
+        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\, 
+        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_20\, 
+        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_21\);
     -- Signals:
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._Finished\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -2735,7 +2893,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4156
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\.
                         -- The while loop's condition:
@@ -2780,7 +2938,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -2804,7 +2962,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4158
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -2821,7 +2979,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -2838,7 +2996,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -2949,7 +3107,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4156
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
                         -- The while loop's condition:
@@ -2994,7 +3152,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -3018,7 +3176,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4158
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -3035,7 +3193,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -3052,7 +3210,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -3163,7 +3321,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4156
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
                         -- The while loop's condition:
@@ -3208,7 +3366,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -3232,7 +3390,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.4158
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -3249,7 +3407,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -3266,7 +3424,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -3458,7 +3616,7 @@ begin
                         else 
                             \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.5766
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -3521,7 +3679,7 @@ begin
                         else 
                             \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_8\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -3572,10 +3730,12 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
@@ -3670,10 +3830,12 @@ begin
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := false;
@@ -3832,7 +3994,7 @@ begin
                                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -3840,26 +4002,8 @@ begin
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ := to_signed(100, 32) + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ / to_signed(100, 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- array = new Task<ImageContrastModifier.PixelProcessingTaskOutput>[25];
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num4 = (int)(num2 * num);
-                        -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(signed(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ * \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num5 = num4 / 25;
-                        -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(25, 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag3 = num4 % 25 != 0;
-                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -3907,7 +4051,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\.
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
@@ -3932,17 +4076,61 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\ => 
-                        -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ mod to_signed(25, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\ => 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new Task<ImageContrastModifier.PixelProcessingTaskOutput>[25];
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = (int)(num2 * num);
+                        -- 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(signed(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ * \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = num4 / 25;
+                        -- 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7488
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(25, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ => 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag3 = num4 % 25 != 0;
+                        -- 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ mod to_signed(25, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\ => 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ /= to_signed(0, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
@@ -3952,18 +4140,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
 
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = 0;
                         -- 
@@ -3999,10 +4187,10 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num5 = num5 + 1;
@@ -4013,13 +4201,13 @@ begin
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ + to_signed(1, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\;
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\ => 
-                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\.
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
                         -- The while loop's condition:
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ < \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\;
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\) then 
@@ -4071,17 +4259,17 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
                         else 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\ => 
-                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
-                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\.
                         -- The while loop's condition:
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(25, 32);
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\) then 
@@ -4102,24 +4290,28 @@ begin
                             -- pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
                             -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ + to_signed(3, 32);
-                            -- Begin SimpleMemory read.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\, 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
                         else 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ => 
-                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\.
+                        -- Clock cycles needed to complete this state (approximation): 0.8036
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- Task.WhenAll<ImageContrastModifier.PixelProcessingTaskOutput> (array).Wait ();
                         -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ => 
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ + to_signed(3, 32);
+                        -- Begin SimpleMemory read.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6312
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
@@ -4233,13 +4425,13 @@ begin
                             -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ + to_signed(1, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\;
-                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\ if the loop wasn't exited with a state change.
-                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\) then 
-                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ if the loop wasn't exited with a state change.
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.1\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.2\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.3\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.3\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.4\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.4\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.5\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.5\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.6\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.6\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.7\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.7\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.8\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.8\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.9\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.9\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.10\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.10\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.11\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.11\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.12\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.12\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.13\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.13\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.14\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.14\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.15\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.15\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.16\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.16\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.17\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.17\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.18\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.18\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.19\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.19\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.20\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.20\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.21\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.21\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.22\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.22\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.23\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.23\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.24\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.24\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.0\) then 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ <= false;
@@ -4336,11 +4528,11 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\ => 
-                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\.
                         -- The while loop's condition:
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(25, 32);
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\) then 
@@ -4382,32 +4574,36 @@ begin
                             -- memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
                             -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ + to_signed(3, 32);
-                            -- Begin SimpleMemory write.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\, 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(7 downto 0) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(0));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(15 downto 8) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(1));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(23 downto 16) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(2));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\;
                         else 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\ => 
-                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
+                        -- Clock cycles needed to complete this state (approximation): 0.8036
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ + to_signed(1, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\;
-                        -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ if the loop wasn't exited with a state change.
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
+                        -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ if the loop wasn't exited with a state change.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ + to_signed(3, 32);
+                        -- Begin SimpleMemory write.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(7 downto 0) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(0));
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(15 downto 8) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(1));
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(23 downto 16) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(2));
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6312
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -4417,12 +4613,12 @@ begin
                             -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ + to_signed(1, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\;
-                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ if the loop wasn't exited with a state change.
-                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\) then 
-                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
+                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\ if the loop wasn't exited with a state change.
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -4440,12 +4636,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\: boolean := false;
     begin 
@@ -4462,12 +4661,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\ := false;
             else 
@@ -4505,7 +4707,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -4520,7 +4735,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -4535,7 +4763,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -4555,26 +4796,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -4584,13 +4825,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -4611,25 +4852,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -4639,9 +4880,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -4661,12 +4902,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\: boolean := false;
     begin 
@@ -4683,12 +4927,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\ := false;
             else 
@@ -4726,7 +4973,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -4741,7 +5001,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -4756,7 +5029,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -4776,26 +5062,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -4805,13 +5091,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -4832,25 +5118,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -4860,9 +5146,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -4882,12 +5168,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\: boolean := false;
     begin 
@@ -4904,12 +5193,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\ := false;
             else 
@@ -4947,7 +5239,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -4962,7 +5267,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -4977,7 +5295,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -4997,26 +5328,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -5026,13 +5357,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -5053,25 +5384,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -5081,9 +5412,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5103,12 +5434,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.9\: boolean := false;
     begin 
@@ -5125,12 +5459,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.9\ := false;
             else 
@@ -5168,7 +5505,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -5183,7 +5533,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -5198,7 +5561,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -5218,26 +5594,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -5247,13 +5623,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -5274,25 +5650,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -5302,9 +5678,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5324,12 +5700,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.9\: boolean := false;
     begin 
@@ -5346,12 +5725,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.9\ := false;
             else 
@@ -5389,7 +5771,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -5404,7 +5799,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -5419,7 +5827,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -5439,26 +5860,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -5468,13 +5889,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -5495,25 +5916,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -5523,9 +5944,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5545,12 +5966,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.9\: boolean := false;
     begin 
@@ -5567,12 +5991,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.9\ := false;
             else 
@@ -5610,7 +6037,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -5625,7 +6065,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -5640,7 +6093,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -5660,26 +6126,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -5689,13 +6155,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -5716,25 +6182,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -5744,9 +6210,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5766,12 +6232,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.9\: boolean := false;
     begin 
@@ -5788,12 +6257,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.9\ := false;
             else 
@@ -5831,7 +6303,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -5846,7 +6331,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -5861,7 +6359,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -5881,26 +6392,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -5910,13 +6421,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -5937,25 +6448,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -5965,9 +6476,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -5987,12 +6498,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.9\: boolean := false;
     begin 
@@ -6009,12 +6523,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.9\ := false;
             else 
@@ -6052,7 +6569,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -6067,7 +6597,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -6082,7 +6625,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -6102,26 +6658,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -6131,13 +6687,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -6158,25 +6714,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -6186,9 +6742,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -6208,12 +6764,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.9\: boolean := false;
     begin 
@@ -6230,12 +6789,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.9\ := false;
             else 
@@ -6273,7 +6835,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -6288,7 +6863,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -6303,7 +6891,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -6323,26 +6924,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -6352,13 +6953,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -6379,25 +6980,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -6407,9 +7008,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -6429,12 +7030,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.9\: boolean := false;
     begin 
@@ -6451,12 +7055,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.9\ := false;
             else 
@@ -6494,7 +7101,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -6509,7 +7129,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -6524,7 +7157,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -6544,26 +7190,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -6573,13 +7219,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -6600,25 +7246,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -6628,9 +7274,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -6650,12 +7296,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.9\: boolean := false;
     begin 
@@ -6672,12 +7321,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.9\ := false;
             else 
@@ -6715,7 +7367,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -6730,7 +7395,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -6745,7 +7423,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -6765,26 +7456,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -6794,13 +7485,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -6821,25 +7512,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -6849,9 +7540,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -6871,12 +7562,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.9\: boolean := false;
     begin 
@@ -6893,12 +7587,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.9\ := false;
             else 
@@ -6936,7 +7633,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -6951,7 +7661,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -6966,7 +7689,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -6986,26 +7722,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -7015,13 +7751,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -7042,25 +7778,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -7070,9 +7806,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7092,12 +7828,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.9\: boolean := false;
     begin 
@@ -7114,12 +7853,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.9\ := false;
             else 
@@ -7157,7 +7899,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -7172,7 +7927,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -7187,7 +7955,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -7207,26 +7988,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -7236,13 +8017,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -7263,25 +8044,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -7291,9 +8072,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7313,12 +8094,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.9\: boolean := false;
     begin 
@@ -7335,12 +8119,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.9\ := false;
             else 
@@ -7378,7 +8165,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -7393,7 +8193,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -7408,7 +8221,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -7428,26 +8254,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -7457,13 +8283,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -7484,25 +8310,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -7512,9 +8338,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7534,12 +8360,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.9\: boolean := false;
     begin 
@@ -7556,12 +8385,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.9\ := false;
             else 
@@ -7599,7 +8431,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -7614,7 +8459,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -7629,7 +8487,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -7649,26 +8520,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -7678,13 +8549,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -7705,25 +8576,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -7733,9 +8604,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7755,12 +8626,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.9\: boolean := false;
     begin 
@@ -7777,12 +8651,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.9\ := false;
             else 
@@ -7820,7 +8697,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -7835,7 +8725,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -7850,7 +8753,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -7870,26 +8786,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -7899,13 +8815,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -7926,25 +8842,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -7954,9 +8870,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7976,12 +8892,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.9\: boolean := false;
     begin 
@@ -7998,12 +8917,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.9\ := false;
             else 
@@ -8041,7 +8963,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -8056,7 +8991,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -8071,7 +9019,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -8091,26 +9052,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -8120,13 +9081,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -8147,25 +9108,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -8175,9 +9136,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -8197,12 +9158,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.9\: boolean := false;
     begin 
@@ -8219,12 +9183,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.9\ := false;
             else 
@@ -8262,7 +9229,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -8277,7 +9257,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -8292,7 +9285,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -8312,26 +9318,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -8341,13 +9347,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -8368,25 +9374,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -8396,9 +9402,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -8418,12 +9424,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.9\: boolean := false;
     begin 
@@ -8440,12 +9449,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.9\ := false;
             else 
@@ -8483,7 +9495,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -8498,7 +9523,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -8513,7 +9551,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -8533,26 +9584,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -8562,13 +9613,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -8589,25 +9640,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -8617,9 +9668,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -8639,12 +9690,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.9\: boolean := false;
     begin 
@@ -8661,12 +9715,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.9\ := false;
             else 
@@ -8704,7 +9761,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -8719,7 +9789,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -8734,7 +9817,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -8754,26 +9850,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -8783,13 +9879,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -8810,25 +9906,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -8838,9 +9934,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -8860,12 +9956,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.9\: boolean := false;
     begin 
@@ -8882,12 +9981,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.9\ := false;
             else 
@@ -8925,7 +10027,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -8940,7 +10055,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -8955,7 +10083,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -8975,26 +10116,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -9004,13 +10145,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -9031,25 +10172,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -9059,9 +10200,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -9081,12 +10222,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.9\: boolean := false;
     begin 
@@ -9103,12 +10247,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.9\ := false;
             else 
@@ -9146,7 +10293,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -9161,7 +10321,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -9176,7 +10349,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -9196,26 +10382,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -9225,13 +10411,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -9252,25 +10438,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -9280,9 +10466,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -9302,12 +10488,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.9\: boolean := false;
     begin 
@@ -9324,12 +10513,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.9\ := false;
             else 
@@ -9367,7 +10559,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -9382,7 +10587,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -9397,7 +10615,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -9417,26 +10648,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -9446,13 +10677,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -9473,25 +10704,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -9501,9 +10732,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -9523,12 +10754,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.9\: boolean := false;
     begin 
@@ -9545,12 +10779,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.9\ := false;
             else 
@@ -9588,7 +10825,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -9603,7 +10853,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -9618,7 +10881,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -9638,26 +10914,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -9667,13 +10943,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -9694,25 +10970,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -9722,9 +10998,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -9744,12 +11020,15 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.flag2\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.9\: boolean := false;
     begin 
@@ -9766,12 +11045,15 @@ begin
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.flag2\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.3\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.5\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.6\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.8\ := false;
                 \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.9\ := false;
             else 
@@ -9809,7 +11091,20 @@ begin
                         -- num = (int)pixel * 1000 / 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.pixel\, 32)) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.0\ / to_signed(255, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num - 500;
@@ -9824,7 +11119,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + 500;
@@ -9839,7 +11147,20 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = num / 1000;
                         -- 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8582
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num < 0;
@@ -9859,26 +11180,26 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\.
-                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_10\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_10\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_9\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.flag\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_10\;
                         else 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_2\.
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_9\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- return (byte)num;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_10\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 0;
@@ -9888,13 +11209,13 @@ begin
                         -- num = 0;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_4\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_10\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\ => 
-                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_2\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag2 = num > 255;
@@ -9915,25 +11236,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_13\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_13\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\.
 
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.flag2\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\.
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_2\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2755
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_8\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\.
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_13\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 255;
@@ -9943,9 +11264,9 @@ begin
                         -- num = 255;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.num\ := to_signed(255, 32);
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\.
-                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\) then 
-                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_6\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_11\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_13\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -13720,7 +15041,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
@@ -13770,7 +15091,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Finished.0\) then 
@@ -13839,7 +15160,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
@@ -13911,7 +15232,7 @@ begin
                                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1002
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
                         -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
@@ -13978,7 +15299,7 @@ begin
                         else 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_25\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_25\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
@@ -14012,7 +15333,7 @@ begin
                                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_24\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_28\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\) then 
@@ -14132,7 +15453,7 @@ begin
                         else 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
                     when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -14297,7 +15618,7 @@ begin
                         \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\ := \NumberContainer::IncreaseNumber(UInt32).0.binaryOperationResult.0\;
                         \NumberContainer::IncreaseNumber(UInt32).0.return\ <= \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\;
                         \NumberContainer::IncreaseNumber(UInt32).0._State\ := \NumberContainer::IncreaseNumber(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -14435,7 +15756,7 @@ begin
                         \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.increaseBy\;
                         \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
                         \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0._State\ := \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.5558
                     when \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
@@ -14494,7 +15815,7 @@ begin
                         \NumberContainer::get_NumberPlusFive().0.binaryOperationResult.0\ := \NumberContainer::get_NumberPlusFive().0.this\.\Number\ + to_unsigned(5, 32);
                         \NumberContainer::get_NumberPlusFive().0.return\ <= \NumberContainer::get_NumberPlusFive().0.binaryOperationResult.0\;
                         \NumberContainer::get_NumberPlusFive().0._State\ := \NumberContainer::get_NumberPlusFive().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -14546,7 +15867,7 @@ begin
                         \NumberContainer::set_NumberPlusFive(UInt32).0.binaryOperationResult.0\ := \NumberContainer::set_NumberPlusFive(UInt32).0.value\ - to_unsigned(5, 32);
                         \NumberContainer::set_NumberPlusFive(UInt32).0.this\.\Number\ := \NumberContainer::set_NumberPlusFive(UInt32).0.binaryOperationResult.0\;
                         \NumberContainer::set_NumberPlusFive(UInt32).0._State\ := \NumberContainer::set_NumberPlusFive(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -14780,7 +16101,7 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -14794,16 +16115,16 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\;
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
@@ -14824,7 +16145,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -14836,7 +16157,7 @@ begin
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -14984,7 +16305,7 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -14998,16 +16319,16 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\;
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
@@ -15028,7 +16349,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -15040,7 +16361,7 @@ begin
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -15188,7 +16509,7 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -15202,16 +16523,16 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\;
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
@@ -15232,7 +16553,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -15244,7 +16565,7 @@ begin
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -15535,7 +16856,7 @@ begin
                         else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.6053
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_1\;
@@ -15556,7 +16877,7 @@ begin
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\) then 
@@ -15584,7 +16905,7 @@ begin
                                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_4\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -15798,7 +17119,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_1\;
@@ -15832,7 +17153,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_7\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -15885,7 +17206,7 @@ begin
                                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_6\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\) then 
@@ -15937,7 +17258,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
@@ -15949,7 +17270,7 @@ begin
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\) then 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_12\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -15965,7 +17286,7 @@ begin
                                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_10\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -16082,7 +17403,7 @@ begin
                         else 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -16096,16 +17417,16 @@ begin
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\;
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ mod \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\;
-                        -- Clock cycles needed to complete this state (approximation): 7
+                        -- Clock cycles needed to complete this state (approximation): 10
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\ => 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\;
@@ -16126,7 +17447,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -16138,7 +17459,7 @@ begin
                         if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\) then 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -16472,7 +17793,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -16505,7 +17826,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.588
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -16545,7 +17866,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -16555,7 +17876,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\;
@@ -16578,7 +17899,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -16674,7 +17995,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -16707,7 +18028,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.588
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -16747,7 +18068,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -16757,7 +18078,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\;
@@ -16780,7 +18101,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -16876,7 +18197,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -16909,7 +18230,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.588
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -16949,7 +18270,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -16959,7 +18280,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\;
@@ -16982,7 +18303,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -17078,7 +18399,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -17111,7 +18432,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.588
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17151,7 +18472,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -17161,7 +18482,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\;
@@ -17184,7 +18505,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
@@ -17272,7 +18593,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -17303,7 +18624,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17343,7 +18664,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -17356,7 +18677,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.7632
                 end case;
             end if;
         end if;
@@ -17444,7 +18765,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -17475,7 +18796,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17515,7 +18836,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -17528,7 +18849,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.7632
                 end case;
             end if;
         end if;
@@ -17616,7 +18937,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -17647,7 +18968,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17687,7 +19008,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -17700,7 +19021,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.7632
                 end case;
             end if;
         end if;
@@ -17788,7 +19109,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -17819,7 +19140,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.244
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17859,7 +19180,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\, 16);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.2939
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -17872,7 +19193,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.7632
                 end case;
             end if;
         end if;
@@ -18113,6 +19434,7 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\: std_logic_vector(31 downto 0);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\: signed(31 downto 0) := to_signed(0, 32);
@@ -18265,6 +19587,7 @@ begin
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\ := false;
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\ := to_signed(0, 32);
@@ -18444,7 +19767,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_5\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_3\.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_1\;
@@ -18472,7 +19795,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18505,7 +19828,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_6\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\.
                         -- The while loop's condition:
@@ -18522,15 +19845,11 @@ begin
                             -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\ := to_signed(1, 32) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\;
-                            -- Begin SimpleMemory read.
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\, 32);
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= true;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_11\;
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -18584,7 +19903,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\ => 
                                 -- The following section was transformed from the .NET statement below:
                                 -- array3 = SimdOperations.SubtractVectors (array, array2, 30);
@@ -18619,7 +19938,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\;
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\ => 
                                 -- The following section was transformed from the .NET statement below:
                                 -- array3 = SimdOperations.MultiplyVectors (array, array2, 30);
@@ -18654,45 +19973,23 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\;
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\ => 
                                 -- The following section was transformed from the .NET statement below:
                                 -- array3 = SimdOperations.DivideVectors (array, array2, 30);
                                 -- 
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(20) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(20);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(21) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(21);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(22) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(22);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(23) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(23);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(24) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(24);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(25) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(25);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(26) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(26);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\;
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\;
                         end case;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_11\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\;
+                        -- Begin SimpleMemory read.
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\, 32);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= true;
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
@@ -18705,12 +20002,12 @@ begin
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\ if the loop wasn't exited with a state change.
-                            if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_11\) then 
+                            if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\) then 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_9\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\ => 
                         -- State after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- l = 0;
@@ -18723,50 +20020,90 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\;
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\ => 
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.13\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.14\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.15\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.16\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.17\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.18\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.19\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.20\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.21\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.22\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.23\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.24\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.25\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.26\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.27\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.28\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.29\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
-                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\) then 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\) then 
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
-                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\) then 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\) then 
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.5426
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
-                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\) then 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\) then 
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\ => 
+                        -- Waiting for the result to appear in \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(20) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(20);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(21) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(21);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(22) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(22);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(23) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(23);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(24) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(24);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(25) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(25);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(26) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(26);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
-                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\) then 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\) then 
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\ => 
-                        -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\.
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\ => 
+                        -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\.
                         -- The while loop's condition:
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ < to_signed(30, 32);
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\) then 
@@ -18785,24 +20122,24 @@ begin
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ <= true;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\)));
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_21\;
                         else 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_20\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\ => 
-                        -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\.
+                        -- Clock cycles needed to complete this state (approximation): 0.8922
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_20\ => 
+                        -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 30;
                         -- 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ + to_signed(30, 32);
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\;
                         -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_3\ if the loop wasn't exited with a state change.
-                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\) then 
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_20\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_21\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -18812,12 +20149,12 @@ begin
                             -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\;
-                            -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\ if the loop wasn't exited with a state change.
-                            if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\) then 
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\;
+                            -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\ if the loop wasn't exited with a state change.
+                            if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_21\) then 
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
                 end case;
             end if;
         end if;
