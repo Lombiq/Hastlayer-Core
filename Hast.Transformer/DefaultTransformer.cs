@@ -48,6 +48,7 @@ namespace Hast.Transformer
         private readonly ITransformationContextCacheService _transformationContextCacheService;
         private readonly IMethodInliner _methodInliner;
         private readonly IObjectInitializerExpander _objectInitializerExpander;
+        private readonly ITaskBodyInvocationInstanceCountsSetter _taskBodyInvocationInstanceCountsSetter;
 
 
         public DefaultTransformer(
@@ -75,7 +76,8 @@ namespace Hast.Transformer
             IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
             ITransformationContextCacheService transformationContextCacheService,
             IMethodInliner methodInliner,
-            IObjectInitializerExpander objectInitializerExpander)
+            IObjectInitializerExpander objectInitializerExpander,
+            ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -102,6 +104,7 @@ namespace Hast.Transformer
             _transformationContextCacheService = transformationContextCacheService;
             _methodInliner = methodInliner;
             _objectInitializerExpander = objectInitializerExpander;
+            _taskBodyInvocationInstanceCountsSetter = taskBodyInvocationInstanceCountsSetter;
         }
 
 
@@ -251,7 +254,8 @@ namespace Hast.Transformer
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            // Conversions making the syntax tree easier to process.
+            // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
+            // services sometimes depend on each other.
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
@@ -268,6 +272,8 @@ namespace Hast.Transformer
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
+            // Needs to run after const substitution.
+            _taskBodyInvocationInstanceCountsSetter.SetaskBodyInvocationInstanceCounts(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);

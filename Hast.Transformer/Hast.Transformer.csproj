@@ -112,6 +112,7 @@
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IMethodInliner.cs" />
     <Compile Include="Services\IObjectInitializerExpander.cs" />
+    <Compile Include="Services\ITaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\ITransformationContextCacheService.cs" />
     <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\MemberSuitabilityChecker.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
+    <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\TransformationContextCacheService.cs" />
     <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />

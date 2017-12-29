@@ -30,12 +30,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         var transformerConfiguration = configuration.TransformerConfiguration();
 
+                        // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that
+                        // can figure it out.
                         configuration.AddHardwareEntryPointType<ImageContrastModifier>();
-                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<ImageContrastModifier>(p => p.ChangeContrast(null), 0)
-                            {
-                                MaxDegreeOfParallelism = 3 // Using a smaller degree because we don't need excess repetition.
-                            });
 
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
@@ -43,7 +40,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
                             {
-                                MaxDegreeOfParallelism = 3
+                                MaxDegreeOfParallelism = 3 // Using a smaller degree because we don't need excess repetition.
                             });
 
                         configuration.AddHardwareEntryPointType<PrimeCalculator>();

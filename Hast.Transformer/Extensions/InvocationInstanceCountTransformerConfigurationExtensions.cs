@@ -117,10 +117,8 @@ namespace Hast.Common.Configuration
 
                         member.AddAnnotation(new LambdaExpressionIndexedNameHolder
                         {
-                            IndexedName =
-                                parentMember.GetSimpleName() +
-                                ".LambdaExpression." +
-                                _lambdaCounts[parentMember].ToString()
+                            IndexedName = MemberInvocationInstanceCountConfiguration
+                                .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember])
                         });
 
                         _lambdaCounts[parentMember]++;
