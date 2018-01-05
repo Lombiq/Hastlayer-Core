@@ -1,5 +1,6 @@
 ﻿using System;
 using Hast.Synthesis;
+using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions;
@@ -223,44 +224,14 @@ mod	signed128	signed128	sync	synth	711,757	-0,738
 
         public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
         {
-            var binaryOperator = expression.Operator;
+            if (DeviceDriverHelper.IsInstantBinaryOperation(expression)) return 0.1M;
 
-            // If the Right expression results in 2^n then since the operations will be implemented with a very compact 
-            // circuit (just with wiring) we can assume that it's "instant".
-            if ((binaryOperator == BinaryOperatorType.Multiply || binaryOperator == BinaryOperatorType.Divide) &&
-                expression.Right is PrimitiveExpression)
-            {
-                // LiteralValue somehow is an empty string for PrimitiveExpressions.
-                var valueObject = ((PrimitiveExpression)expression.Right).Value;
-                var literalValue = valueObject != null ? valueObject.ToString() : string.Empty;
-
-                if (int.TryParse(literalValue, out var intValue))
-                {
-                    var log = Math.Log(intValue, 2);
-                    // If the logarithm is a whole number that means that the value can be expressed as a power of 2.
-                    if (log == Math.Floor(log))
-                    {
-                        return 0.1M;
-                    }
-                }
-            }
-
-            return ComputeClockCyclesFromLatency(TimingReport.GetLatencyNs(binaryOperator, operandSizeBits, isSigned));
+            return DeviceDriverHelper
+                .ComputeClockCyclesFromLatency(DeviceManifest, TimingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned));
         }
 
         public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            ComputeClockCyclesFromLatency(TimingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned));
-
-
-        private decimal ComputeClockCyclesFromLatency(decimal latencyNs)
-        {
-            var latencyClockCycles = latencyNs * (DeviceManifest.ClockFrequencyHz * 0.000000001M);
-
-            // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
-            // be latency data).
-            if (latencyClockCycles < 0) return 0.1M;
-
-            return latencyClockCycles;
-        }
+            DeviceDriverHelper
+                .ComputeClockCyclesFromLatency(DeviceManifest, TimingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned));
     }
 }
