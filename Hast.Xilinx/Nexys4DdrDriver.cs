@@ -12,14 +12,18 @@ namespace Hast.Xilinx
     {
         private readonly ITimingReportParser _timingReportParser;
 
+        private readonly object _timingReportParserLock = new object();
+
         private ITimingReport _timingReport;
         private ITimingReport TimingReport
         {
             get
             {
-                if (_timingReport == null)
+                lock (_timingReportParserLock)
                 {
-                    var timingReport =
+                    if (_timingReport == null)
+                    {
+                        var timingReport =
 @"Op	InType	OutType	Template	DesignStat	DPD	TWDFR
 shift_left	std_logic_vector1	std_logic_vector1	sync	synth	0	0
 shift_left	std_logic_vector8	std_logic_vector8	sync	impl	1,070	-0,139
@@ -208,10 +212,11 @@ mod	signed64	signed64	sync	impl	273,871	-0,505
 mod	unsigned128	unsigned128	sync	synth	684,217	-0,137
 mod	signed128	signed128	sync	synth	711,757	-0,738
 ";
-                    _timingReport = _timingReportParser.Parse(timingReport);
-                }
+                        _timingReport = _timingReportParser.Parse(timingReport);
+                    }
 
-                return _timingReport;
+                    return _timingReport;
+                }
             }
         }
 
