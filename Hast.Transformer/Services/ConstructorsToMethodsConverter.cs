@@ -24,11 +24,12 @@ namespace Hast.Transformer.Services
                 base.VisitConstructorDeclaration(constructorDeclaration);
 
                 var method = MethodDeclarationFactory.CreateMethod(
-                    constructorDeclaration.Name,
-                    constructorDeclaration.Annotations,
-                    constructorDeclaration.Parameters,
-                    constructorDeclaration.Body,
-                    new PrimitiveType("void"));
+                    name: constructorDeclaration.Name,
+                    annotations: constructorDeclaration.Annotations,
+                    attributes: constructorDeclaration.Attributes,
+                    parameters: constructorDeclaration.Parameters,
+                    body: constructorDeclaration.Body,
+                    returnType: new PrimitiveType("void"));
 
                 // If the type has no base type then remove the automatically added base.ctor() call from the 
                 // constructor as it won't reference anything transformable.

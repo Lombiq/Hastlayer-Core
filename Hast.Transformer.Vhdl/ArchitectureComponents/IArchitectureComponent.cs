@@ -53,7 +53,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IVhdlElement BuildDeclarations();
 
         /// <summary>
-        /// Produces the body of the componentthat should be inserted into the body of the architecture element.
+        /// Produces the body of the component that should be inserted into the body of the architecture element.
         /// </summary>
         IVhdlElement BuildBody();
     }

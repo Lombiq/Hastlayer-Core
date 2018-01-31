@@ -139,14 +139,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // Passing on constructor mappings.
 
                 if (!_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                    .TryGetValue(node.GetFullName(), out var constructorDeclaration))
+                    .TryGetValue(node.GetFullName(), out var constructorReference))
                 {
                     return;
                 }
 
                 void processParent(AstNode parent) =>
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
-                    constructorDeclaration;
+                    constructorReference;
 
                 ProcessParent(
                     node: node,
@@ -154,11 +154,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     memberReferenceHandler: memberReference =>
                     {
                         var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
-                            .FindMemberReferenceInConstructor(constructorDeclaration, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
+                            .FindMemberReferenceInConstructor(constructorReference.Constructor, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
 
                         if (memberReferenceExpressionInConstructor != null &&
                             _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                                .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorDeclaration))
+                                .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
                         {
                             processParent(memberReference);
                         }
@@ -171,6 +171,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
             else
             {
+                // Passing on array sizes.
+
                 var existingSize = _arraySizeHolder.GetSize(node);
 
                 if (existingSize == null && node is MemberReferenceExpression)
@@ -246,8 +248,22 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     (Expression)node,
                     _typeDeclarationLookupTable);
 
-                // The parameter can be null for special invocations like Task.WhenAll().
-                if (parameter == null) return;
+                // There will be no parameter if the affected node is the invoked member itself. Also, the parameter 
+                // can be null for special invocations like Task.WhenAll().
+                if (parameter == null)
+                {
+                    ProcessParent(
+                        node: node.Parent,
+                        assignmentHandler: assignmentHandler,
+                        memberReferenceHandler: memberReferenceHandler,
+                        invocationParameterHandler: invocationParameterHandler,
+                        objectCreationParameterHandler: objectCreationParameterHandler,
+                        variableInitializerHandler: variableInitializerHandler,
+                        returnStatementHandler: returnStatementHandler,
+                        namedExpressionHandler: namedExpressionHandler);
+
+                    return;
+                }
 
                 invocationParameterHandler(parameter);
                 updateHiddenlyUpdatedNodesUpdated(parameter);
@@ -258,6 +274,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         (ObjectCreateExpression)parent,
                         (Expression)node,
                         _typeDeclarationLookupTable);
+
+                // The parameter will be null for a Task body's delegate invocation, e.g.:
+                // new Func<object, int[]> (<>c__DisplayClass6_.<ParallelizedCalculateIntegerSumUpToNumber>b__0)
+                if (parameter == null)
+                {
+                    return;
+                }
 
                 objectCreationParameterHandler(parameter);
                 updateHiddenlyUpdatedNodesUpdated(parameter);

@@ -18,11 +18,12 @@ namespace Hast.Transformer.Services
                 base.VisitOperatorDeclaration(operatorDeclaration);
 
                 var method = MethodDeclarationFactory.CreateMethod(
-                    operatorDeclaration.Name,
-                    operatorDeclaration.Annotations,
-                    operatorDeclaration.Parameters,
-                    operatorDeclaration.Body,
-                    operatorDeclaration.ReturnType);
+                    name: operatorDeclaration.Name,
+                    annotations: operatorDeclaration.Annotations,
+                    attributes: operatorDeclaration.Attributes,
+                    parameters: operatorDeclaration.Parameters,
+                    body: operatorDeclaration.Body,
+                    returnType: operatorDeclaration.ReturnType);
 
                 method.Modifiers = operatorDeclaration.Modifiers;
 

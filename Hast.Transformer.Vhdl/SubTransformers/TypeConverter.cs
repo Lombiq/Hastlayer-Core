@@ -246,6 +246,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
                 {
+                    if (IsTaskTypeReference(type.Annotation<TypeReference>()))
+                    {
+                        if (type.TypeArguments.Single().IsArray())
+                        {
+                            try
+                            {
+                                ExceptionHelper.ThrowOnlySingleDimensionalArraysSupporterException(type);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new NotSupportedException(
+                                    "Tasks can't return arrays as that would result in multi-dimensional arrays which is not supported. Affected type: " +
+                                    type.ToString() + ".",
+                                    ex);
+                            }
+                        }
+                    }
+
                     return ConvertAstType(type.TypeArguments.Single(), context);
                 }
 
@@ -291,6 +309,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
 
         private static bool IsTaskTypeReference(TypeReference typeReference) =>
-            typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
+            typeReference != null && typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }

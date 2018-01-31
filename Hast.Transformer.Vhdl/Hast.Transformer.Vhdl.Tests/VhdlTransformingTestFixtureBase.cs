@@ -15,6 +15,7 @@ using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Hast.Xilinx;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -25,14 +26,20 @@ namespace Hast.Transformer.Vhdl.Tests
 
         protected VhdlTransformingTestFixtureBase()
         {
-            _requiredExtension.AddRange(new[] { typeof(DefaultTransformer).Assembly, typeof(MemberIdTable).Assembly });
+            _requiredExtension.AddRange(new[]
+            {
+                typeof(DefaultTransformer).Assembly,
+                typeof(MemberIdTable).Assembly,
+                typeof(IDeviceDriverSelector).Assembly,
+                typeof(Nexys4DdrDriver).Assembly
+            });
 
             _shellRegistrationBuilder = builder =>
             {
                 if (UseStubMemberSuitabilityChecker)
                 {
                     // We need to override MemberSuitabilityChecker in Hast.Transformer. Since that registration happens
-                    // after this one we need to use this hackish way over circumventing that.
+                    // after this one we need to use this hackish way of circumventing that.
                     builder.RegisterCallback(componentRegistry =>
                     {
                         var memberSuitabilityCheckerRegistration = componentRegistry
@@ -50,8 +57,6 @@ namespace Hast.Transformer.Vhdl.Tests
                         };
                     }); 
                 }
-
-                builder.RegisterInstance(new StubDeviceDriverSelector()).As<IDeviceDriverSelector>();
             };
         }
 
@@ -74,43 +79,6 @@ namespace Hast.Transformer.Vhdl.Tests
                 ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
                 (member.HasModifier(Modifiers.Public) && member.FindFirstParentTypeDeclaration().HasModifier(Modifiers.Public)) ||
                 member.Modifiers == Modifiers.None;
-        }
-
-        private class StubDeviceDriverSelector : IDeviceDriverSelector
-        {
-            public IDeviceDriver GetDriver(string deviceName) => new StubDeviceDriver();
-
-            public IEnumerable<IDeviceManifest> GetSupporteDevices()
-            {
-                throw new NotImplementedException();
-            }
-
-
-            private class StubDeviceDriver : IDeviceDriver
-            {
-                public IDeviceManifest DeviceManifest
-                {
-                    get
-                    {
-                        return new DeviceManifest
-                        {
-                            Name = "Nexys4 DDR",
-                            ClockFrequencyHz = 100000000, // 100 Mhz
-                            SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
-                            AvailableMemoryBytes = 115343360 // 110MB
-                        };
-                    }
-                }
-
-                public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
-                {
-                    if (expression.Operator == BinaryOperatorType.Modulus) return 7M;
-
-                    return 0.1M;
-                }
-
-                public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) => 0.1M;
-            }
         }
     }
 }

@@ -48,6 +48,7 @@ namespace Hast.Transformer.Services
                     var getterMethod = MethodDeclarationFactory.CreateMethod(
                         name: getter.Annotation<MethodDefinition>().Name,
                         annotations: getter.Annotations,
+                        attributes: getter.Attributes,
                         parameters: Enumerable.Empty<ParameterDeclaration>(),
                         body: getter.Body,
                         returnType: propertyDeclaration.ReturnType);
@@ -63,6 +64,7 @@ namespace Hast.Transformer.Services
                     var setterMethod = MethodDeclarationFactory.CreateMethod(
                         name: setter.Annotation<MethodDefinition>().Name,
                         annotations: setter.Annotations,
+                        attributes: setter.Attributes,
                         parameters: new[] { valueParameter },
                         body: setter.Body,
                         returnType: new PrimitiveType("void"));

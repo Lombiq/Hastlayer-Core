@@ -42,7 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;;
 
-            Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
+            string stateNameGenerator(int index, IVhdlGenerationOptions vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
 
             currentBlock.Add(new LineComment("The following section was transformed from the .NET statement below:"));
@@ -185,7 +185,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "."));
                     var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
 
-                    Func<IVhdlElement> createConditionalStateChangeToAfterIfElseState = () =>
+                    IVhdlElement createConditionalStateChangeToAfterIfElseState() =>
                         new InlineBlock(
                             new GeneratedComment(vhdlGenerationOptions =>
                                 "Going to the state after the if-else which was started in state " +
@@ -263,7 +263,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var whileStatement = statement as WhileStatement;
 
                 var whileStartStateIndex = currentBlock.StateMachineStateIndex;
-                Func<IVhdlGenerationOptions, string> whileStartStateIndexNameGenerator = vhdlGenerationOptions =>
+                string whileStartStateIndexNameGenerator(IVhdlGenerationOptions vhdlGenerationOptions) =>
                     vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(whileStartStateIndex));
 
                 var repeatedStateStart = new InlineBlock(
@@ -348,7 +348,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         "."));
                 var aftercaseStateIndex = stateMachine.AddState(afterCaseStateBlock);
 
-                Func<IVhdlElement> createConditionalStateChangeToAfterCaseState = () =>
+                IVhdlElement createConditionalStateChangeToAfterCaseState() =>
                     new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
                             "Going to the state after the case statement which was started in state " +

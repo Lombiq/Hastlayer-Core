@@ -203,11 +203,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>(n => true);
 
-        public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
-        {
-            int height;
-            return node.FindFirstParentOfType<T>(predicate, out height);
-        }
+        public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode => 
+            node.FindFirstParentOfType(predicate, out int height);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate, out int height) where T : AstNode
         {
@@ -234,8 +231,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             {
                 var currentChild = children.Dequeue();
 
-                var castCurrentChild = currentChild as T;
-                if (castCurrentChild != null && predicate(castCurrentChild)) return castCurrentChild;
+                if (currentChild is T castCurrentChild && predicate(castCurrentChild)) return castCurrentChild;
 
                 foreach (var child in currentChild.Children)
                 {
@@ -246,11 +242,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             return null;
         }
 
-        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
-        {
-            T castNode;
-            return node.Is(predicate, out castNode);
-        }
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode => 
+            node.Is(predicate, out T castNode);
 
         public static bool Is<T>(this AstNode node, out T castNode) where T : AstNode =>
             node.Is(n => true, out castNode);

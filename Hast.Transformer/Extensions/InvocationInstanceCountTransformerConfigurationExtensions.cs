@@ -54,9 +54,9 @@ namespace Hast.Common.Configuration
                         .Where(member => member.GetFullName().IsInlineCompilerGeneratedMethodName());
                 }
 
-                var compilerGeneratedMembersictionary = compilerGeneratedMembers
+                var compilerGeneratedMembersDictionary = compilerGeneratedMembers
                     .ToDictionary(member => member.GetFullName());
-                parentType.AcceptVisitor(new IndexedNameHolderSettingVisitor(compilerGeneratedMembersictionary));
+                parentType.AcceptVisitor(new IndexedNameHolderSettingVisitor(compilerGeneratedMembersDictionary));
 
                 indexedNameHolder = entity.Annotation<LambdaExpressionIndexedNameHolder>();
 
@@ -117,10 +117,8 @@ namespace Hast.Common.Configuration
 
                         member.AddAnnotation(new LambdaExpressionIndexedNameHolder
                         {
-                            IndexedName =
-                                parentMember.GetSimpleName() +
-                                ".LambdaExpression." +
-                                _lambdaCounts[parentMember].ToString()
+                            IndexedName = MemberInvocationInstanceCountConfiguration
+                                .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember])
                         });
 
                         _lambdaCounts[parentMember]++;

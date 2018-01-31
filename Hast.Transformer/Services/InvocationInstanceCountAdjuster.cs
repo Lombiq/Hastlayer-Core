@@ -20,7 +20,7 @@ namespace Hast.Transformer.Services
         public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
-                _typeDeclarationLookupTableFactory.Create(syntaxTree), 
+                _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 configuration));
         }
 
@@ -48,16 +48,36 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                var referencedMember = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
+                AdjustInstanceCount(
+                    memberReferenceExpression, 
+                    memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable));
+            }
 
+            public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
+            {
+                base.VisitObjectCreateExpression(objectCreateExpression);
+
+                // Funcs are only needed for Task-based parallelism, omitting them for now.
+                if (objectCreateExpression.Type.GetFullName().StartsWith("System.Func"))
+                {
+                    return;
+                }
+
+                AdjustInstanceCount(
+                    objectCreateExpression,
+                    objectCreateExpression.FindConstructorDeclaration(_typeDeclarationLookupTable));
+            }
+
+
+            private void AdjustInstanceCount(Expression referencingExpression, EntityDeclaration referencedMember)
+            {
                 if (referencedMember == null) return;
 
                 var referencedMemberMaxInvocationConfiguration = _transformerConfiguration
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencedMember);
 
                 var invokingMemberMaxInvocationConfiguration = _transformerConfiguration
-                    .GetMaxInvocationInstanceCountConfigurationForMember(memberReferenceExpression
-                    .FindFirstParentOfType<EntityDeclaration>());
+                    .GetMaxInvocationInstanceCountConfigurationForMember(referencingExpression.FindFirstParentOfType<EntityDeclaration>());
 
                 if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount > referencedMemberMaxInvocationConfiguration.MaxInvocationInstanceCount)
                 {

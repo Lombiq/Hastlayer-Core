@@ -188,10 +188,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
-                        invocation.Target.Is<MemberReferenceExpression>(member =>
-                            member.MemberName == "StartNew" &&
-                            member.Target.Is<IdentifierExpression>(identifier =>
+                    else if (assignment.Right.Is(invocation =>
+                        invocation.Target.Is<MemberReferenceExpression>(memberReference =>
+                            memberReference.IsTaskStartNew() &&
+                            memberReference.Target.Is<IdentifierExpression>(identifier =>
                                 scope.TaskFactoryVariableNames.Contains(identifier.Identifier))),
                         out invocationExpression))
                     {
@@ -200,7 +200,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         var funcVariablename = ((IdentifierExpression)invocationExpression.Arguments.First()).Identifier;
                         var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
 
-                        // We only need to care about he invocation here. Since this is a Task start there will be
+                        // We only need to care about the invocation here. Since this is a Task start there will be
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,
@@ -215,11 +215,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     // Handling shorthand Task starts like:
                     // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
-                        invocation.Target.Is<MemberReferenceExpression>(memberReference =>
-                            memberReference.MemberName == "StartNew" &&
-                            // Need unified property name because it can also be get_Factory().
-                            memberReference.Target.GetFullNameWithUnifiedPropertyName().Contains("System.Threading.Tasks.Task.Factory")) &&
+                    else if (assignment.Right.Is(invocation =>
+                        invocation.Target.Is<MemberReferenceExpression>(memberReference => memberReference.IsTaskStartNew()) &&
                         invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
                             objectCreate.Type.GetFullName().Contains("Func")),
                         out invocationExpression))
@@ -669,36 +666,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         expression.CopyAnnotationsTo(constructorInvocation);
 
-                        // Temporarily replace the object creation to make the fake InvocationExpression realistic.
-                        expression.ReplaceWith(constructorInvocation);
+                        // Creating a clone of the expression's sub-tree where object creation is replaced to make the 
+                        // fake InvocationExpression realistic. A clone is needed not to cause concurrency issues if the
+                        // same expression is processed on multiple threads for multiple hardware copies.
+                        var expressionName = expression.GetFullName();
+
+                        var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
+                        var objectCreateExpressionClone = subTreeClone
+                            .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
+                        objectCreateExpressionClone.ReplaceWith(constructorInvocation);
 
                         Transform(constructorInvocation, context);
-
-                        constructorInvocation.ReplaceWith(expression);
-                    }
-                }
-
-                if (objectCreateExpression.Initializer.Elements.Any())
-                {
-                    foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
-                    {
-                        var namedInitializerExpression = initializerElement as NamedExpression;
-                        if (namedInitializerExpression == null)
-                        {
-                            throw new NotSupportedException(
-                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."
-                                .AddParentEntityName(objectCreateExpression));
-                        }
-
-                        context.Scope.CurrentBlock.Add(new Assignment
-                        {
-                            AssignTo = new RecordFieldAccess
-                            {
-                                Instance = initiailizationResult.RecordInstanceReference,
-                                FieldName = namedInitializerExpression.Name.ToExtendedVhdlId()
-                            },
-                            Expression = Transform(namedInitializerExpression.Expression, context)
-                        });
                     }
                 }
 

@@ -121,52 +121,51 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes");
 
-            Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion =
-                (variableToConvert, directionIsLogicVectorToType) =>
+            IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
+            {
+                string dataConversionInvocationTarget = null;
+                var operation = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
+
+                // Using the built-in conversion functions to handle known data types.
+                if (operation == "UInt32" ||
+                    operation == "Int32" ||
+                    operation == "Boolean" ||
+                    operation == "Char")
                 {
-                    string dataConversionInvocationTarget = null;
-                    var operation = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
-
-                    // Using the built-in conversion functions to handle known data types.
-                    if (operation == "UInt32" ||
-                        operation == "Int32" ||
-                        operation == "Boolean" ||
-                        operation == "Char")
+                    if (directionIsLogicVectorToType)
                     {
-                        if (directionIsLogicVectorToType)
-                        {
-                            dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operation;
-                        }
-                        else
-                        {
-                            dataConversionInvocationTarget = "Convert" + operation + "ToStdLogicVector";
-                        }
-
-                        return new Invocation(dataConversionInvocationTarget, variableToConvert);
+                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operation;
                     }
-                    else if (is4BytesOperation)
+                    else
                     {
-                        Func<int, int, Invocation> createSlice = (indexFrom, indexTo) =>
-                            new Invocation(
-                                "unsigned",
-                                new ArraySlice
-                                {
-                                    ArrayReference = (IDataObject)variableToConvert,
-                                    IsDownTo = true,
-                                    IndexFrom = indexFrom,
-                                    IndexTo = indexTo
-                                });
-
-                        return new Value
-                        {
-                            DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
-                            EvaluatedContent = new InlineBlock(
-                                createSlice(7, 0), createSlice(15, 8), createSlice(23, 16), createSlice(31, 24))
-                        };
+                        dataConversionInvocationTarget = "Convert" + operation + "ToStdLogicVector";
                     }
 
-                    throw new InvalidOperationException("Invalid SimpleMemory operation: " + operation + ".");
-                };
+                    return new Invocation(dataConversionInvocationTarget, variableToConvert);
+                }
+                else if (is4BytesOperation)
+                {
+                    Invocation createSlice(int indexFrom, int indexTo) =>
+                        new Invocation(
+                            "unsigned",
+                            new ArraySlice
+                            {
+                                ArrayReference = (IDataObject)variableToConvert,
+                                IsDownTo = true,
+                                IndexFrom = indexFrom,
+                                IndexTo = indexTo
+                            });
+
+                    return new Value
+                    {
+                        DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
+                        EvaluatedContent = new InlineBlock(
+                            createSlice(7, 0), createSlice(15, 8), createSlice(23, 16), createSlice(31, 24))
+                    };
+                }
+
+                throw new InvalidOperationException("Invalid SimpleMemory operation: " + operation + ".");
+            }
 
             if (isWrite)
             {
@@ -175,7 +174,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     var arrayReference = (IDataObject)invocationParameters[1].Reference;
 
-                    Action<int> addSlice = elementIndex =>
+                    void addSlice(int elementIndex) =>
                         currentBlock.Add(new Assignment
                         {
                             AssignTo = new ArraySlice
@@ -296,7 +295,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // Is it a Task.Something().Wait() call?
                 MemberReferenceExpression memberReference = null;
                 if (waitTarget.Is<InvocationExpression>(invocation =>
-                    invocation.Target.Is<MemberReferenceExpression>(member =>
+                    invocation.Target.Is(member =>
                         member.Target.Is<TypeReferenceExpression>(type =>
                             _typeConverter.ConvertAstType(
                                 type.Type,
@@ -367,8 +366,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     .GetSizeOrThrow(expression.Arguments.Skip(1).First()).Length;
                 var sourceArrayLength = 0;
 
-                PrimitiveExpression lengthExpression;
-                if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out lengthExpression))
+                if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out PrimitiveExpression lengthExpression))
                 {
                     if (lengthExpression.Value.ToString() == "0")
                     {

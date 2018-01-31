@@ -33,7 +33,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 new ConstantValuesTable(),
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 arraySizeHolder,
-                new Dictionary<string, MethodDeclaration>(),
+                new Dictionary<string, ConstantValuesSubstitutingAstProcessor.ConstructorReference>(),
                 _astExpressionEvaluator)
                 .SubstituteConstantValuesInSubTree(syntaxTree, false);
 
