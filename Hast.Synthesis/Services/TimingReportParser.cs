@@ -35,6 +35,14 @@ namespace Hast.Synthesis.Services
                         continue;
                     }
 
+                    var dpdString = csvReader.GetField<string>("DPD");
+
+                    // If the DPD is not specified then nothing to do.
+                    if (string.IsNullOrEmpty(dpdString))
+                    {
+                        continue;
+                    }
+
                     BinaryOperatorType? binaryOperator = null;
                     UnaryOperatorType? unaryOperator = null;
                     switch (operatorString)
@@ -106,7 +114,7 @@ namespace Hast.Synthesis.Services
                     // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
                     // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
                     var dpd = decimal.Parse(
-                        csvReader.GetField<string>("DPD").Replace(',', '.'), // Taking care of decimal commas.
+                        dpdString.Replace(',', '.'), // Taking care of decimal commas.
                         NumberStyles.Any, 
                         CultureInfo.InvariantCulture);
 
