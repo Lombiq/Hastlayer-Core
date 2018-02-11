@@ -150,12 +150,7 @@ namespace Hast.Synthesis.Services
 
             public void SetLatencyNs(dynamic operatorType, int operandSizeBits, bool isSigned, decimal dpd, decimal twdfr)
             {
-                // Debug code to test TWDFR.
-                //var timing = dpd + twdfr;
-                //var timing = dpd + (twdfr < 0 ? twdfr : 0);
-                var timing = dpd;
-
-                _timings[GetKey(operatorType, operandSizeBits, isSigned)] = timing;
+                _timings[GetKey(operatorType, operandSizeBits, isSigned)] = dpd;
 
                 // If the operand size is 1 that means that the operation also works with single-bit non-composite types
                 // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as 
