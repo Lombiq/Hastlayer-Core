@@ -20,50 +20,50 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 package TypeConversion is
-	function SmartResize(input: unsigned; size: natural) return unsigned;
-	function SmartResize(input: signed; size: natural) return signed;
-	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
+    function SmartResize(input: unsigned; size: natural) return unsigned;
+    function SmartResize(input: signed; size: natural) return signed;
+    function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
 end TypeConversion;
-		
+        
 package body TypeConversion is
 
-	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
-	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
-	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
-	-- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
-	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
-	function SmartResize(input: unsigned; size: natural) return unsigned is
-	begin
-		if (size < input'LENGTH) then
-			return input(size - 1 downto 0);
-		else
-			-- Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
+    -- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
+    -- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
+    -- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
+    -- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
+    -- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+    function SmartResize(input: unsigned; size: natural) return unsigned is
+    begin
+        if (size < input'LENGTH) then
+            return input(size - 1 downto 0);
+        else
+            -- Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
             -- along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
             -- dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
-			return resize(input, size);
-		end if;
-	end SmartResize;
+            return resize(input, size);
+        end if;
+    end SmartResize;
 
-	function SmartResize(input: signed; size: natural) return signed is
-	begin
-		if (size < input'LENGTH) then
-			return input(size - 1 downto 0);
-		else
-			return resize(input, size);
-		end if;
-	end SmartResize;
+    function SmartResize(input: signed; size: natural) return signed is
+    begin
+        if (size < input'LENGTH) then
+            return input(size - 1 downto 0);
+        else
+            return resize(input, size);
+        end if;
+    end SmartResize;
 
-	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
-		variable result: unsigned(size - 1 downto 0);
-	begin
-		if (input >= 0) then
-			return resize(unsigned(input), size);
-		else 
-			result := (others => '1');
-			result(input'LENGTH - 1 downto 0) := unsigned(input);
-			return result;
-		end if;
-	end ToUnsignedAndExpand;
+    function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
+        variable result: unsigned(size - 1 downto 0);
+    begin
+        if (input >= 0) then
+            return resize(unsigned(input), size);
+        else 
+            result := (others => '1');
+            result(input'LENGTH - 1 downto 0) := unsigned(input);
+            return result;
+        end if;
+    end ToUnsignedAndExpand;
 
 end TypeConversion;
 
@@ -71,55 +71,55 @@ end TypeConversion;
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-		
+        
 package SimpleMemory is
-	-- Data conversion functions:
-	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector;
-	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned;
-		
-	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector;
-	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean;
-		
-	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector;
-	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed;
+    -- Data conversion functions:
+    function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector;
+    function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned;
+        
+    function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector;
+    function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean;
+        
+    function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector;
+    function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed;
 end SimpleMemory;
-		
+        
 package body SimpleMemory is
 
-	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector is
-	begin
-		return std_logic_vector(input);
-	end ConvertUInt32ToStdLogicVector;
-	
-	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned is
-	begin
-		return unsigned(input);
-	end ConvertStdLogicVectorToUInt32;
-	
-	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector is 
-	begin
-		case input is
-			when true => return X"FFFFFFFF";
-			when false => return X"00000000";
-			when others => return X"00000000";
-		end case;
-	end ConvertBooleanToStdLogicVector;
+    function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector is
+    begin
+        return std_logic_vector(input);
+    end ConvertUInt32ToStdLogicVector;
+    
+    function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned is
+    begin
+        return unsigned(input);
+    end ConvertStdLogicVectorToUInt32;
+    
+    function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector is 
+    begin
+        case input is
+            when true => return X"FFFFFFFF";
+            when false => return X"00000000";
+            when others => return X"00000000";
+        end case;
+    end ConvertBooleanToStdLogicVector;
 
-	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean is 
-	begin
-		-- In .NET a false is all zeros while a true is at least one 1 bit (or more), so using the same logic here.
-		return not(input = X"00000000");
-	end ConvertStdLogicVectorToBoolean;
+    function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean is 
+    begin
+        -- In .NET a false is all zeros while a true is at least one 1 bit (or more), so using the same logic here.
+        return not(input = X"00000000");
+    end ConvertStdLogicVectorToBoolean;
 
-	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector is
-	begin
-		return std_logic_vector(input);
-	end ConvertInt32ToStdLogicVector;
+    function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector is
+    begin
+        return std_logic_vector(input);
+    end ConvertInt32ToStdLogicVector;
 
-	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed is
-	begin
-		return signed(input);
-	end ConvertStdLogicVectorToInt32;
+    function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed is
+    begin
+        return signed(input);
+    end ConvertStdLogicVectorToInt32;
 
 end SimpleMemory;
 
@@ -2062,66 +2062,6 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput().0 declarations end
 
 
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 declarations start
-    -- State machine states:
-    type \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._States\ is (
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\);
-    -- Signals:
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 declarations end
-
-
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 declarations start
-    -- State machine states:
-    type \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._States\ is (
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\);
-    -- Signals:
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 declarations end
-
-
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 declarations start
-    -- State machine states:
-    type \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._States\ is (
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\);
-    -- Signals:
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\: boolean := false;
-    Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 declarations end
-
-
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ is (
@@ -2130,18 +2070,17 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_2\, 
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\, 
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\);
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\);
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\: boolean := false;
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -2171,18 +2110,17 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\, 
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\, 
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\, 
-        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\);
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\, 
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\, 
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\, 
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\);
     -- Signals:
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Started\: boolean := false;
-    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\: boolean := false;
-    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\: boolean := false;
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -2208,40 +2146,74 @@ architecture Imp of Hast_IP is
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._Started\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\: boolean := false;
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\: boolean := false;
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\: boolean := false;
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 declarations start
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 declarations start
     -- State machine states:
-    type \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._States\ is (
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_0\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\);
+    type \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._States\ is (
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\);
     -- Signals:
-    Signal \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 declarations end
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 declarations end
+
+
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 declarations start
+    -- State machine states:
+    type \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._States\ is (
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\);
+    -- Signals:
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 declarations end
+
+
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 declarations start
+    -- State machine states:
+    type \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._States\ is (
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\);
+    -- Signals:
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\: boolean := false;
+    Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 declarations end
 
 
     -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -15983,624 +15955,24 @@ begin
     -- System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput().0 state machine end
 
 
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 state machine start
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._StateMachine\: process (\Clock\) 
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._States\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\ <= false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
-            else 
-                case \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ is 
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ = true) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ = true) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\ <= true;
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\ <= false;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ => 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = numberObject;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = num / 2u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ / to_unsigned(2, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 2u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ := to_unsigned(2, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (num3 <= num2) {
-                        -- 	flag = num % num3 == 0u;
-                        -- 	if (flag) {
-                        -- 		result = false;
-                        -- 		return result;
-                        -- 	}
-                        -- 	num3 = num3 + 1u;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
-                        -- The while loop's condition:
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\;
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	flag = num % num3 == 0u;
-                            -- 	if (flag) {
-                            -- 		result = false;
-                            -- 		return result;
-                            -- 	}
-                            -- 	num3 = num3 + 1u;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- flag = num % num3 == 0u;
-                            -- 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = true;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := True;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return true;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
-                        end if;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\;
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ = to_unsigned(0, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\.
-                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\.
-
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2751
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = num3 + 1u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ + to_unsigned(1, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\;
-                        -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = false;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := False;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 state machine end
-
-
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 state machine start
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._StateMachine\: process (\Clock\) 
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._States\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\ <= false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := to_unsigned(0, 32);
-            else 
-                case \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ is 
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ = true) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ = true) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\ <= true;
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\ <= false;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ => 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = numberObject;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = num / 2u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ / to_unsigned(2, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 2u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ := to_unsigned(2, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (num3 <= num2) {
-                        -- 	flag = num % num3 == 0u;
-                        -- 	if (flag) {
-                        -- 		result = false;
-                        -- 		return result;
-                        -- 	}
-                        -- 	num3 = num3 + 1u;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
-                        -- The while loop's condition:
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\;
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	flag = num % num3 == 0u;
-                            -- 	if (flag) {
-                            -- 		result = false;
-                            -- 		return result;
-                            -- 	}
-                            -- 	num3 = num3 + 1u;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- flag = num % num3 == 0u;
-                            -- 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = true;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := True;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return true;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
-                        end if;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\;
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ = to_unsigned(0, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\.
-                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\.
-
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2751
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = num3 + 1u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ + to_unsigned(1, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\;
-                        -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = false;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := False;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 state machine end
-
-
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 state machine start
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._StateMachine\: process (\Clock\) 
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._States\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\ <= false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := false;
-                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := to_unsigned(0, 32);
-            else 
-                case \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ is 
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ = true) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ = true) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\ <= true;
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\ <= false;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ => 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = numberObject;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = num / 2u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ / to_unsigned(2, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 2u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ := to_unsigned(2, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (num3 <= num2) {
-                        -- 	flag = num % num3 == 0u;
-                        -- 	if (flag) {
-                        -- 		result = false;
-                        -- 		return result;
-                        -- 	}
-                        -- 	num3 = num3 + 1u;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
-                        -- The while loop's condition:
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\;
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	flag = num % num3 == 0u;
-                            -- 	if (flag) {
-                            -- 		result = false;
-                            -- 		return result;
-                            -- 	}
-                            -- 	num3 = num3 + 1u;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- flag = num % num3 == 0u;
-                            -- 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = true;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := True;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return true;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                        else 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
-                        end if;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\;
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ = to_unsigned(0, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\.
-                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\.
-
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2751
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = num3 + 1u;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ + to_unsigned(1, 32);
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\;
-                        -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = false;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := False;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 state machine end
-
-
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16609,11 +15981,21 @@ begin
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := false;
             else 
                 case \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ is 
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\ => 
@@ -16653,27 +16035,96 @@ begin
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteBoolean (0, this.IsPrimeNumberInternal (number));
+                            -- uint number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207;
                             -- 
-                            -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
+                            -- The following section was transformed from the .NET statement below:
+                            -- number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = number;
+                            -- 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- bool return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 / 2u;
+                            -- 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ / to_unsigned(2, 32);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = 2u;
+                            -- 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(2, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 <= num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 && number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 % num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 > 0u) {
+                            -- 	num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
+                            -- }
+                            -- 
+                            -- Starting a while loop.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= false;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\;
-                            -- Begin SimpleMemory write.
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\);
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
+                        -- The while loop's condition:
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 == num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
+                        -- 
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ + to_unsigned(1, 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteBoolean (0, return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207);
+                        -- 
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5907
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ mod \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\;
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\ => 
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ > to_unsigned(0, 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ and \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\;
+                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
+                            -- 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ + to_unsigned(1, 32);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\) then 
+                                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
+                            end if;
+                        else 
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.6911
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16752,9 +16203,21 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return.0\: boolean := false;
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16763,17 +16226,27 @@ begin
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= to_unsigned(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_0\;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return.0\ := false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
             else 
                 case \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ is 
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_0\ => 
@@ -16825,7 +16298,18 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while ((long)num2 < (long)((ulong)num)) {
                             -- 	number = memory.ReadUInt32 (1 + num2);
-                            -- 	memory.WriteBoolean (1 + num2, this.IsPrimeNumberInternal (number));
+                            -- 	uint number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number;
+                            -- 	bool return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	uint num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	uint num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / 2u;
+                            -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
+                            -- 	while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a % num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
+                            -- 		num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- 	}
+                            -- 	return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- 	memory.WriteBoolean (1 + num2, return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
@@ -16841,7 +16325,18 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	number = memory.ReadUInt32 (1 + num2);
-                            -- 	memory.WriteBoolean (1 + num2, this.IsPrimeNumberInternal (number));
+                            -- 	uint number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number;
+                            -- 	bool return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	uint num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	uint num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 	num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / 2u;
+                            -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
+                            -- 	while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a % num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
+                            -- 		num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- 	}
+                            -- 	return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- 	memory.WriteBoolean (1 + num2, return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
@@ -16869,28 +16364,97 @@ begin
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteBoolean (1 + num2, this.IsPrimeNumberInternal (number));
+                            -- uint number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
-                            -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
+                            -- The following section was transformed from the .NET statement below:
+                            -- number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number;
+                            -- 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- bool return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / 2u;
+                            -- 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ / to_unsigned(2, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
+                            -- 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(2, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a % num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
+                            -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- }
+                            -- 
+                            -- Starting a while loop.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
-                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\) then 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= false;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return.0\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\;
-                            -- Begin SimpleMemory write.
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\, 32);
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return.0\);
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\.
+                        -- The while loop's condition:
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                        -- 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ + to_unsigned(1, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteBoolean (1 + num2, return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a);
+                        -- 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9063
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ mod \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\ => 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ > to_unsigned(0, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ and \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\;
+                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                            -- 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ + to_unsigned(1, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\) then 
+                                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\;
+                            end if;
+                        else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.6911
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16898,10 +16462,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num2 + 1;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\;
                             -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\) then 
+                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\) then 
                                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_4\;
                             end if;
                         end if;
@@ -16921,7 +16485,6 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.arg_5D_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
@@ -16929,7 +16492,7 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\: boolean := false;
@@ -16947,25 +16510,24 @@ begin
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\ <= to_unsigned(0, 32);
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ <= false;
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\ <= to_unsigned(0, 32);
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ <= false;
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\ <= to_unsigned(0, 32);
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= false;
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\ <= to_unsigned(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ <= false;
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\ <= to_unsigned(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ <= false;
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\ <= to_unsigned(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_0\;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\ := (others => false);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := to_unsigned(0, 32);
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.arg_5D_1\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := 0;
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := 0;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\ := false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\ := false;
@@ -17011,15 +16573,6 @@ begin
                         -- uint num3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int arg_5D_1;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- TaskFactory arg_58_0;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Func<object, bool> arg_58_1;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- int j;
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -17050,12 +16603,7 @@ begin
                             -- 	i = 0;
                             -- 	while (i < 30) {
                             -- 		num3 = memory.ReadUInt32 (1 + num2 + i);
-                            -- 		arg_5D_1 = i;
-                            -- 		arg_58_0 = Task.Factory;
-                            -- 		if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
-                            -- 			arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
-                            -- 		}
-                            -- 		array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 		array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 		i = i + 1;
                             -- 	}
                             -- 	Task.WhenAll<bool> (array).Wait ();
@@ -17081,12 +16629,7 @@ begin
                             -- 	i = 0;
                             -- 	while (i < 30) {
                             -- 		num3 = memory.ReadUInt32 (1 + num2 + i);
-                            -- 		arg_5D_1 = i;
-                            -- 		arg_58_0 = Task.Factory;
-                            -- 		if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
-                            -- 			arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
-                            -- 		}
-                            -- 		array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 		array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 		i = i + 1;
                             -- 	}
                             -- 	Task.WhenAll<bool> (array).Wait ();
@@ -17105,12 +16648,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (i < 30) {
                             -- 	num3 = memory.ReadUInt32 (1 + num2 + i);
-                            -- 	arg_5D_1 = i;
-                            -- 	arg_58_0 = Task.Factory;
-                            -- 	if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
-                            -- 		arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
-                            -- 	}
-                            -- 	array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 	array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 	i = i + 1;
                             -- }
                             -- 
@@ -17132,12 +16670,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num3 = memory.ReadUInt32 (1 + num2 + i);
-                            -- 	arg_5D_1 = i;
-                            -- 	arg_58_0 = Task.Factory;
-                            -- 	if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
-                            -- 		arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
-                            -- 	}
-                            -- 	array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 	array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 	i = i + 1;
                             -- }
                             -- 
@@ -17169,33 +16702,21 @@ begin
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             -- The following section was transformed from the .NET statement below:
-                            -- arg_5D_1 = i;
+                            -- array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.arg_5D_1\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- arg_58_0 = Task.Factory;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
-                            -- 	arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
-                            -- 
-                            -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
-                            case \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ is 
+                            -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
+                            case \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ is 
                                 when 0 => 
-                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\;
-                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ <= true;
+                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\;
+                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ <= true;
                                 when 1 => 
-                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\;
-                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ <= true;
+                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\;
+                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ <= true;
                                 when 2 => 
-                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\;
-                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= true;
+                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\;
+                                    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= true;
                             end case;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ + 1;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ + 1;
                             -- The following section was transformed from the .NET statement below:
                             -- i = i + 1;
                             -- 
@@ -17208,15 +16729,15 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3156
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
-                        if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\) then 
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ <= false;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ <= false;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= false;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := 0;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.2\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
+                        if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\) then 
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ <= false;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ <= false;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= false;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := 0;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.2\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(0) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(1) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(2) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.2\;
@@ -17294,199 +16815,460 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 state machine start
-    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._StateMachine\: process (\Clock\) 
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\: \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._States\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_0\;
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 state machine start
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._StateMachine\: process (\Clock\) 
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\: \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._States\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\ <= false;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= false;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_0\;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\ := false;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := false;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\ := false;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := false;
-                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\ <= false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\ := false;
             else 
-                case \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ is 
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_0\ => 
+                case \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ is 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ = true) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ = true) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\ => 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ = true) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\ <= true;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ = true) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\ <= true;
                         else 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\ <= false;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_0\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\ <= false;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\ => 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\;
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num;
+                        -- uint number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
+                        -- number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = numberObject;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
+                        -- uint num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bool result;
+                        -- uint num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = number / 2u;
+                        -- num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / 2u;
                         -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ / to_unsigned(2, 32);
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.0\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / to_unsigned(2, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = 2u;
+                        -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = 2u;
                         -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ := to_unsigned(2, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2 <= num) {
-                        -- 	flag = number % num2 == 0u;
-                        -- 	if (flag) {
-                        -- 		result = false;
-                        -- 		return result;
-                        -- 	}
-                        -- 	num2 = num2 + 1u;
+                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 % num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
+                        -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
                         -- The while loop's condition:
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\;
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\) then 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 == num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5907
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ mod \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ > to_unsigned(0, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	flag = number % num2 == 0u;
-                            -- 	if (flag) {
-                            -- 		result = false;
-                            -- 		return result;
-                            -- 	}
-                            -- 	num2 = num2 + 1u;
+                            -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number % num2 == 0u;
+                            -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                             -- 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\) then 
+                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
+                            end if;
                         else 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = true;
-                        -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := True;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return true;
-                        -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= True;
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                        else 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
-                        end if;
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ mod \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\;
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\ => 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ = to_unsigned(0, 32);
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ and ends in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\.
-                        --     * Execution after either branch will continue in the following state: \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\.
-
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2751
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = num2 + 1u;
-                        -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ + to_unsigned(1, 32);
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\;
-                        -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = false;
-                        -- 	return result;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = false;
-                        -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := False;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\;
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.6911
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 state machine end
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).0 state machine end
+
+
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 state machine start
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._StateMachine\: process (\Clock\) 
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\: \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._States\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\ <= false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\ := false;
+            else 
+                case \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ is 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ = true) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ = true) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\ <= true;
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\ <= false;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = numberObject;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / 2u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / to_unsigned(2, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = 2u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 % num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
+                        -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
+                        -- The while loop's condition:
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 == num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5907
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ mod \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ > to_unsigned(0, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                            -- 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\) then 
+                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
+                            end if;
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6911
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).1 state machine end
+
+
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 state machine start
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._StateMachine\: process (\Clock\) 
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\: \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._States\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\ <= false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\ := false;
+            else 
+                case \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ is 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ = true) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ = true) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\ <= true;
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\ <= false;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = numberObject;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / 2u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / to_unsigned(2, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = 2u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 % num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
+                        -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
+                        -- The while loop's condition:
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.261
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 == num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
+                        -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5907
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ mod \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ > to_unsigned(0, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
+                            -- 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\) then 
+                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
+                            end if;
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6911
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).2 state machine end
 
 
     -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -20832,87 +20614,6 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) start
-    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-            else 
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
-                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\ := 0;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= true;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= true;
-                                    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= false;
-                                    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
-                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\) then 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\ := 0;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= true;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= true;
-                                    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= false;
-                                    \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) end
-
-
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -20990,23 +20691,23 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) start
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) start
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\;
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\;
-    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\;
-    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\;
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\;
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\;
+    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\;
+    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\;
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\;
-    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\;
-    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\;
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\;
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\;
+    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\;
+    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\;
-    \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\;
-    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\;
-    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) end
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\;
+    \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\;
+    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\;
+    \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16) start
