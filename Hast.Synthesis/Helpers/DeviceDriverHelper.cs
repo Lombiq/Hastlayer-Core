@@ -1,29 +1,38 @@
 ﻿using System;
 using Hast.Layer;
+using Hast.Synthesis.Models;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Synthesis.Helpers
 {
     public static class DeviceDriverHelper
     {
-        public static bool IsInstantBinaryOperation(BinaryOperatorExpression expression)
+        public static decimal GetLatencyForBinaryOperation(ITimingReport timingReport, BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
+        {
+            var latencyNs = timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned);
+
+            if (IsRightOperandConstant(expression, out var constantValue))
+            {
+                var constantLatencyNs = timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned, constantValue);
+                if (constantLatencyNs > 0) return constantLatencyNs;
+            }
+
+            return latencyNs;
+        }
+
+        public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
         {
             var binaryOperator = expression.Operator;
+            constantValue = string.Empty;
 
-            // If the Right expression results in 2^n then since the operations will be implemented with a very compact 
-            // circuit (just with wiring) we can assume that it's "instant".
-            if ((binaryOperator == BinaryOperatorType.Multiply || binaryOperator == BinaryOperatorType.Divide) &&
-                expression.Right is PrimitiveExpression)
+            if (expression.Right is PrimitiveExpression primitiveExpression)
             {
                 // LiteralValue somehow is an empty string for PrimitiveExpressions.
-                var valueObject = ((PrimitiveExpression)expression.Right).Value;
-                var literalValue = valueObject != null ? valueObject.ToString() : string.Empty;
-
-                if (int.TryParse(literalValue, out var intValue))
+                var valueObject = primitiveExpression.Value;
+                if (valueObject != null)
                 {
-                    var log = Math.Log(intValue, 2);
-                    // If the logarithm is a whole number that means that the value can be expressed as a power of 2.
-                    return log == Math.Floor(log);
+                    constantValue = valueObject.ToString();
+                    return true; 
                 }
             }
 

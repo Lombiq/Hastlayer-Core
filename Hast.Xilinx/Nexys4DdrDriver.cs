@@ -227,13 +227,10 @@ mod	signed128	signed128	sync	synth	711,757	-0,738
         }
 
 
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
-        {
-            if (DeviceDriverHelper.IsInstantBinaryOperation(expression)) return 0.1M;
-
-            return DeviceDriverHelper
-                .ComputeClockCyclesFromLatency(DeviceManifest, TimingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned));
-        }
+        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
+            DeviceDriverHelper.ComputeClockCyclesFromLatency(
+                DeviceManifest, 
+                DeviceDriverHelper.GetLatencyForBinaryOperation(TimingReport, expression, operandSizeBits, isSigned));
 
         public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper
