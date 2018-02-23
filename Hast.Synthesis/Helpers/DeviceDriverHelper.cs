@@ -7,7 +7,8 @@ namespace Hast.Synthesis.Helpers
 {
     public static class DeviceDriverHelper
     {
-        public static decimal GetLatencyForBinaryOperation(ITimingReport timingReport, BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
+        public static decimal ComputeClockCyclesForBinaryOperation(
+            IDeviceManifest deviceManifest, ITimingReport timingReport, BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
         {
             var latencyNs = timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned);
 
@@ -17,10 +18,14 @@ namespace Hast.Synthesis.Helpers
                 if (constantLatencyNs > 0) return constantLatencyNs;
             }
 
-            return latencyNs;
+            return ComputeClockCyclesFromLatency(deviceManifest, latencyNs);
         }
 
-        public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
+        public static decimal ComputeClockCyclesForUnaryOperation(
+            IDeviceManifest deviceManifest, ITimingReport timingReport, UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
+            ComputeClockCyclesFromLatency(deviceManifest, timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned));
+
+            public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
         {
             var binaryOperator = expression.Operator;
             constantValue = string.Empty;
