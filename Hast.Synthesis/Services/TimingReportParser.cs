@@ -35,6 +35,24 @@ namespace Hast.Synthesis.Services
                         continue;
                     }
 
+                    // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
+                    // surrounding SmartResize() call into account.
+                    if (operatorString.StartsWith("shift_left") || operatorString.StartsWith("shift_right"))
+                    {
+                        continue;
+                    }
+
+                    var dpdString = csvReader.GetField<string>("DPD");
+
+                    // If the DPD is not specified then nothing to do.
+                    if (string.IsNullOrEmpty(dpdString))
+                    {
+                        continue;
+                    }
+
+                    // Operators can be simple ones (like and and add) or ones that can also take a constant operand
+                    // (like div). This is so that if one operand is a const that's a power of two we have a different
+                    // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
                     BinaryOperatorType? binaryOperator = null;
                     UnaryOperatorType? unaryOperator = null;
                     switch (operatorString)
@@ -42,56 +60,63 @@ namespace Hast.Synthesis.Services
                         case "and":
                             binaryOperator = BinaryOperatorType.BitwiseAnd;
                             break;
-                        case "or":
-                            binaryOperator = BinaryOperatorType.BitwiseOr;
-                            break;
-                        case "xor":
-                            binaryOperator = BinaryOperatorType.ExclusiveOr;
-                            break;
-                        case "+":
+                        case "add":
                             binaryOperator = BinaryOperatorType.Add;
                             break;
-                        case "-":
-                            binaryOperator = BinaryOperatorType.Subtract;
-                            break;
-                        case "/":
+                        case var op when (op.StartsWith("div")):
                             binaryOperator = BinaryOperatorType.Divide;
                             break;
-                        case "*":
-                            binaryOperator = BinaryOperatorType.Multiply;
+                        case "eq":
+                            binaryOperator = BinaryOperatorType.Equality;
+                            break;
+                        case "ge":
+                            binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
+                            break;
+                        case "gt":
+                            binaryOperator = BinaryOperatorType.GreaterThan;
+                            break;
+                        case "le":
+                            binaryOperator = BinaryOperatorType.LessThanOrEqual;
+                            break;
+                        case "lt":
+                            binaryOperator = BinaryOperatorType.LessThan;
                             break;
                         case "mod":
                             binaryOperator = BinaryOperatorType.Modulus;
                             break;
-                        case ">":
-                            binaryOperator = BinaryOperatorType.GreaterThan;
+                        case var op when (op.StartsWith("mul")):
+                            binaryOperator = BinaryOperatorType.Multiply;
                             break;
-                        case "<":
-                            binaryOperator = BinaryOperatorType.LessThan;
-                            break;
-                        case ">=":
-                            binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
-                            break;
-                        case "<=":
-                            binaryOperator = BinaryOperatorType.LessThanOrEqual;
-                            break;
-                        case "=":
-                            binaryOperator = BinaryOperatorType.Equality;
-                            break;
-                        case "/=":
+                        case "neq":
                             binaryOperator = BinaryOperatorType.InEquality;
-                            break;
-                        case "shift_left":
-                            binaryOperator = BinaryOperatorType.ShiftLeft;
-                            break;
-                        case "shift_right":
-                            binaryOperator = BinaryOperatorType.ShiftRight;
                             break;
                         case "not":
                             unaryOperator = UnaryOperatorType.Not;
                             break;
+                        case "or":
+                            binaryOperator = BinaryOperatorType.BitwiseOr;
+                            break;
+                        case var op when(op.StartsWith("dotnet_shift_left")):
+                            binaryOperator = BinaryOperatorType.ShiftLeft;
+                            break;
+                        case var op when (op.StartsWith("dotnet_shift_right")):
+                            binaryOperator = BinaryOperatorType.ShiftRight;
+                            break;
+                        case "sub":
+                            binaryOperator = BinaryOperatorType.Subtract;
+                            break;
+                        case "xor":
+                            binaryOperator = BinaryOperatorType.ExclusiveOr;
+                            break;
                         default:
                             throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
+                    }
+
+                    var constantOperand = string.Empty;
+                    var byStartIndex = operatorString.IndexOf("_by_");
+                    if (byStartIndex != -1)
+                    {
+                        constantOperand = operatorString.Substring(byStartIndex + 4);
                     }
 
                     var operandType = csvReader.GetField<string>("InType");
@@ -103,18 +128,30 @@ namespace Hast.Synthesis.Services
                     }
                     var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
 
+                    // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
+                    // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
                     var dpd = decimal.Parse(
-                        csvReader.GetField<string>("DPD").Replace(',', '.'), // Taking care of decimal commas.
+                        dpdString.Replace(',', '.'), // Taking care of decimal commas.
                         NumberStyles.Any, 
+                        CultureInfo.InvariantCulture);
+
+                    // Timing window difference from requirement, i.e.:
+                    // For Vivado:
+                    // TWDFR = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
+                    // For Quartus Prime:
+                    // TWDFR = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
+                    var twdfr = decimal.Parse(
+                        csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
+                        NumberStyles.Any,
                         CultureInfo.InvariantCulture);
 
                     if (binaryOperator.HasValue)
                     {
-                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, dpd); 
+                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr); 
                     }
                     else if (unaryOperator.HasValue)
                     {
-                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, dpd);
+                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
                     }
                 }
 
@@ -128,35 +165,37 @@ namespace Hast.Synthesis.Services
             private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
 
 
-            public void SetLatencyNs(dynamic operatorTyper, int operandSizeBits, bool isSigned, decimal timing)
+            public void SetLatencyNs(
+                dynamic operatorType, 
+                int operandSizeBits, 
+                bool isSigned, 
+                string constantOperand, 
+                decimal dpd, 
+                decimal twdfr)
             {
-                _timings[GetKey(operatorTyper, operandSizeBits, isSigned)] = timing;
+                _timings[GetKey(operatorType, operandSizeBits, isSigned, constantOperand)] = dpd;
 
-                // If the operand type is 1 that means that the operation also works with single-bit non-composite types
+                // If the operand size is 1 that means that the operation also works with single-bit non-composite types
                 // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as 
                 // std_logic but the latter is not a sized data type (and thus it's apparent size will be 0, despite it
-                // being stored in at least one bit).
+                // being stored on at least one bit).
                 // Therefore, saving a 0 bit version here too.
                 if (operandSizeBits == 1)
                 {
-                    SetLatencyNs(operatorTyper, 0, isSigned, timing);
+                    SetLatencyNs(operatorType, 0, isSigned, constantOperand, dpd, twdfr);
                 }
             }
 
-            public decimal GetLatencyNs(BinaryOperatorType binaryOperator, int operandSizeBits, bool isSigned)
-            {
-                return GetLatencyNsInternal(binaryOperator, operandSizeBits, isSigned);
-            }
+            public decimal GetLatencyNs(BinaryOperatorType binaryOperator, int operandSizeBits, bool isSigned, string constantOperand) =>
+                GetLatencyNsInternal(binaryOperator, operandSizeBits, isSigned, constantOperand);
 
-            public decimal GetLatencyNs(UnaryOperatorType unaryOperator, int operandSizeBits, bool isSigned)
-            {
-                return GetLatencyNsInternal(unaryOperator, operandSizeBits, isSigned);
-            }
+            public decimal GetLatencyNs(UnaryOperatorType unaryOperator, int operandSizeBits, bool isSigned) =>
+                GetLatencyNsInternal(unaryOperator, operandSizeBits, isSigned, string.Empty);
 
 
-            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned)
+            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand)
             {
-                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned), out decimal latency))
+                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned, constantOperand), out decimal latency))
                 {
                     return latency;
                 }
@@ -164,10 +203,11 @@ namespace Hast.Synthesis.Services
                 return -1;
             }
 
-            private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned)
-            {
-                return operatorType.ToString() + operandSizeBits.ToString() + isSigned.ToString();
-            }
+            private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
+                    operatorType.ToString() + 
+                    operandSizeBits.ToString() + 
+                    isSigned.ToString() + 
+                    (string.IsNullOrEmpty(constantOperand) ? "-" : constantOperand);
         }
     }
 }
