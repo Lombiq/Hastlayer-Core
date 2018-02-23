@@ -1626,7 +1626,7 @@ begin
                         else 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumber(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3753
+                        -- Clock cycles needed to complete this state (approximation): 0.8189
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumber(SimpleMemory).0._State_8\ => 
                         -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumber(SimpleMemory).0._State_6\.
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumber(SimpleMemory).0._State_1\;

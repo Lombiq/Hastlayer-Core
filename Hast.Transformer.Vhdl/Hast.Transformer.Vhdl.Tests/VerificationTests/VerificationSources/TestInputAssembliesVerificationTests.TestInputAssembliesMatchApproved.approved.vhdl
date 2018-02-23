@@ -2178,7 +2178,7 @@ begin
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional4f0682ff3695c263fb6b002073825a08a835a5ca4ea15bda27f6437bdbf4e3a4\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5887
+                        -- Clock cycles needed to complete this state (approximation): 0.5649
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
