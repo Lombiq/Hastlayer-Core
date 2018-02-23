@@ -38,6 +38,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
             }
+
+            if (SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var cellCount))
+            {
+                _arraySizeHolder.SetSize(assignmentExpression.Left, cellCount);
+            }
         }
 
         public override void VisitPrimitiveExpression(PrimitiveExpression primitiveExpression)

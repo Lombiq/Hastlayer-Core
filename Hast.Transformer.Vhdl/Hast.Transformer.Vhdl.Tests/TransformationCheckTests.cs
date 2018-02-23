@@ -74,17 +74,29 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
+        [Test]
+        public async Task InvalidSimpleMemoryUsageIsPrevented()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidSimpleMemoryUsingCases>(transformer, c => c.BatchedReadCountIsNotConstant(null), true),
+                    typeof(NotSupportedException));
+            });
+        }
+
 
         private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
             ITransformer transformer,
-            Expression<Action<T>> expression)
+            Expression<Action<T>> expression,
+            bool useSimpleMemory = false)
         {
             return TransformAssembliesToVhdl(
                 transformer,
                 new[] { typeof(InvalidParallelCases).Assembly },
                 configuration =>
                 {
-                    configuration.TransformerConfiguration().UseSimpleMemory = false;
+                    configuration.TransformerConfiguration().UseSimpleMemory = useSimpleMemory;
                     configuration.AddHardwareEntryPointMethod(expression);
                 });
         }
