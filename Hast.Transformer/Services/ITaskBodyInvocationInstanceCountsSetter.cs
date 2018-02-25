@@ -31,6 +31,6 @@ namespace Hast.Transformer.Services
     /// </example>
     public interface ITaskBodyInvocationInstanceCountsSetter : IDependency
     {
-        void SetaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        void SetTaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
     }
 }
