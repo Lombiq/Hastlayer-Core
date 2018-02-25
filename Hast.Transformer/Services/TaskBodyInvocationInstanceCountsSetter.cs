@@ -11,7 +11,7 @@ namespace Hast.Transformer.Services
 {
     public class TaskBodyInvocationInstanceCountsSetter : ITaskBodyInvocationInstanceCountsSetter
     {
-        public void SetaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public void SetTaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             syntaxTree.AcceptVisitor(new TaskBodyInvocationInstanceCountsSetterVisitor(configuration.TransformerConfiguration()));
         }
