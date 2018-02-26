@@ -18,17 +18,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTransformer
     {
-        private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public BinaryOperatorExpressionTransformer(
-            IDeviceDriverSelector deviceDriverSelector,
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer)
         {
-            _deviceDriverSelector = deviceDriverSelector;
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
         }
@@ -315,7 +312,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
             if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
 
-            var deviceDriver = _deviceDriverSelector.GetDriver(context);
+            var deviceDriver = context.TransformationContext.DeviceDriver;
             decimal clockCyclesNeededForOperation;
             var clockCyclesNeededForSignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);

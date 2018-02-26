@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Common.Helpers;
 using Hast.Layer;
+using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
@@ -50,6 +51,7 @@ namespace Hast.Transformer
         private readonly IObjectInitializerExpander _objectInitializerExpander;
         private readonly ITaskBodyInvocationInstanceCountsSetter _taskBodyInvocationInstanceCountsSetter;
         private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
+        private readonly IDeviceDriverSelector _deviceDriverSelector;
 
 
         public DefaultTransformer(
@@ -79,7 +81,8 @@ namespace Hast.Transformer
             IMethodInliner methodInliner,
             IObjectInitializerExpander objectInitializerExpander,
             ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
-            ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier)
+            ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
+            IDeviceDriverSelector deviceDriverSelector)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -108,6 +111,7 @@ namespace Hast.Transformer
             _objectInitializerExpander = objectInitializerExpander;
             _taskBodyInvocationInstanceCountsSetter = taskBodyInvocationInstanceCountsSetter;
             _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
+            _deviceDriverSelector = deviceDriverSelector;
         }
 
 
@@ -301,7 +305,8 @@ namespace Hast.Transformer
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
-                ArraySizeHolder = arraySizeHolder
+                ArraySizeHolder = arraySizeHolder,
+                DeviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName)
             };
 
             _eventHandler.SyntaxTreeBuilt(context);

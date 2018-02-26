@@ -212,7 +212,8 @@ namespace Hast.Transformer.Vhdl.Services
             {
                 _simpleMemoryComponentBuilderLazy.Value.AddSimpleMemoryComponentsToArchitecture(
                     potentiallyInvokingArchitectureComponents,
-                    hastIpArchitecture);
+                    hastIpArchitecture,
+                    transformationContext);
             }
 
 

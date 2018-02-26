@@ -26,7 +26,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConversionTransformer _typeConversionTransformer;
         private readonly IInvocationExpressionTransformer _invocationExpressionTransformer;
         private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
-        private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly IRecordComposer _recordComposer;
@@ -38,7 +37,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             ITypeConversionTransformer typeConversionTransformer,
             IInvocationExpressionTransformer invocationExpressionTransformer,
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer,
-            IDeviceDriverSelector deviceDriverSelector,
             IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             IStateMachineInvocationBuilder stateMachineInvocationBuilder,
             IRecordComposer recordComposer,
@@ -48,7 +46,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConversionTransformer = typeConversionTransformer;
             _invocationExpressionTransformer = invocationExpressionTransformer;
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
-            _deviceDriverSelector = deviceDriverSelector;
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _recordComposer = recordComposer;
@@ -480,8 +477,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var expressionSize = _typeConverter
                     .ConvertTypeReference(unary.Expression.GetActualTypeReference(), context.TransformationContext)
                     .GetSize();
-                var clockCyclesNeededForOperation = _deviceDriverSelector
-                    .GetDriver(context)
+                var clockCyclesNeededForOperation = context.TransformationContext.DeviceDriver
                     .GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
 
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);

@@ -1,4 +1,5 @@
 ﻿using Hast.Layer;
+using Hast.Synthesis;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Models
@@ -32,5 +33,10 @@ namespace Hast.Transformer.Models
         /// Container for the sizes of statically sized arrays. 
         /// </summary>
         IArraySizeHolder ArraySizeHolder { get; }
+
+        /// <summary>
+        /// The driver of the currently targeted hardware device.
+        /// </summary>
+        IDeviceDriver DeviceDriver { get; }
     }
 }

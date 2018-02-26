@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Hast.Catapult;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
@@ -71,7 +72,8 @@ namespace Hast.Remote.Worker
                             typeof(DefaultTransformer).Assembly,
                             typeof(VhdlTransformingEngine).Assembly,
                             typeof(Nexys4DdrDriver).Assembly,
-                            typeof(TimingReportParser).Assembly
+                            typeof(TimingReportParser).Assembly,
+                            typeof(CatapultDriver).Assembly
                         }
                     };
                     _hastlayer = await Hastlayer.Create(hastlayerConfiguration);

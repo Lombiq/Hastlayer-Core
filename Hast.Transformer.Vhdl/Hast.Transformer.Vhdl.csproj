@@ -93,7 +93,6 @@
     <Compile Include="Events\IVhdlTransformationEventHandler.cs" />
     <Compile Include="Extensions\ArrayCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
-    <Compile Include="Extensions\DeviceDriverSelectorExtensions.cs" />
     <Compile Include="Extensions\ParameterDeclarationExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TransformationWarningEnumerableExtensions.cs" />

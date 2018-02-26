@@ -74,7 +74,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             const string lastWriteFinishedKey = "SimpleMemory.LastWriteFinsihedStateIndex";
             const string lastReadFinishedKey = "SimpleMemory.LastReadFinsihedStateIndex";
 
-            stateMachine.AddSimpleMemorySignalsIfNew();
+            var dataBusWidthBytes = context.TransformationContext.DeviceDriver.DeviceManifest.DataBusWidthBytes;
+            stateMachine.AddSimpleMemorySignalsIfNew(dataBusWidthBytes);
 
             var memberName = targetMemberReference.MemberName;
 
@@ -258,7 +259,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
 
                 var dataInTemporaryVariableReference = stateMachine
-                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType)
+                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType(dataBusWidthBytes))
                         .ToReference();
                 currentBlock.Add(new Assignment
                 {

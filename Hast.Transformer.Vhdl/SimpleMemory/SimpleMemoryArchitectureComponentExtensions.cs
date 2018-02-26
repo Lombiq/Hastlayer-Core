@@ -20,7 +20,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             return component.InternallyDrivenSignals.Any(signal => signal.Name == signalName);
         }
 
-        public static void AddSimpleMemorySignalsIfNew(this IArchitectureComponent component)
+        public static void AddSimpleMemorySignalsIfNew(this IArchitectureComponent component, uint dataBusWidthBytes)
         {
             if (component.AreSimpleMemorySignalsAdded()) return;
 
@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 });
             component.InternallyDrivenSignals.Add(new Signal
                 {
-                    DataType = SimpleMemoryTypes.DataSignalsDataType,
+                    DataType = SimpleMemoryTypes.DataSignalsDataType(dataBusWidthBytes),
                     Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
                 });
             component.InternallyDrivenSignals.Add(new Signal
