@@ -102,13 +102,14 @@ namespace System
         public static bool IsConstructorName(this string name) => name.Contains(".ctor");
 
         /// <summary>
-        /// Adds the full name of the given node's parent entity to the message string.
+        /// Adds the full name of the given node's parent entity to the message string. Useful in exception message for
+        /// example.
         /// </summary>
-        public static string AddParentEntityName(this string exceptionMessage, AstNode node)
+        public static string AddParentEntityName(this string message, AstNode node)
         {
             var parentEntity = node.FindFirstParentEntityDeclaration();
-            if (parentEntity == null) return exceptionMessage;
-            return exceptionMessage + " Parent entity where the affected code is: " + parentEntity.GetFullName();
+            if (parentEntity == null) return message;
+            return message + " Parent entity where the affected code is: " + parentEntity.GetFullName();
         }
     }
 }
