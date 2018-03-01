@@ -34,6 +34,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         // can figure it out.
                         configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
+                        configuration.AddHardwareEntryPointType<Loopback>();
+
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
                         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
