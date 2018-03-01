@@ -298,6 +298,13 @@ namespace Hast.Transformer
                 _simpleMemoryUsageVerifier.VerifySimpleMemoryUsage(syntaxTree);
             }
 
+            var deviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName);
+
+            if (deviceDriver == null)
+            {
+                throw new InvalidOperationException(
+                    "No device driver with the name " + configuration.DeviceName + " was found.");
+            }
 
             var context = new TransformationContext
             {
@@ -306,7 +313,7 @@ namespace Hast.Transformer
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 ArraySizeHolder = arraySizeHolder,
-                DeviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName)
+                DeviceDriver = deviceDriver
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
