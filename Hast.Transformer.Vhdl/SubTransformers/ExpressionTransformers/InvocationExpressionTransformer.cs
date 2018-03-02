@@ -102,7 +102,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.Add(new LineComment("Begin SimpleMemory read."));
             }
 
-            // Setting SimpleMemory control signals:
+            // Setting CellIndex, aligned to the platform's data bus width.
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
@@ -111,12 +111,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = Invocation.Resize(invocationParameters[0].Reference, SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
             });
 
-            var enablePortReference = isWrite ?
+            // Setting the write/read enable signal.
+            var enableSignalReference = isWrite ?
                 stateMachine.CreateSimpleMemoryWriteEnableSignalReference() :
                 stateMachine.CreateSimpleMemoryReadEnableSignalReference();
             currentBlock.Add(new Assignment
             {
-                AssignTo = enablePortReference,
+                AssignTo = enableSignalReference,
                 Expression = Value.True
             });
 
@@ -235,7 +236,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             memoryOperationFinishedBlock.Add(new Assignment
             {
-                AssignTo = enablePortReference,
+                AssignTo = enableSignalReference,
                 Expression = Value.False
             });
 
