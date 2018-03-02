@@ -254,7 +254,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
 
-
                 currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
                 customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
 
