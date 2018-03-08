@@ -179,7 +179,7 @@ namespace Hast.Transformer
 
             // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
             // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
-            var saveSyntaxTree = true;
+            var saveSyntaxTree = false;
             if (saveSyntaxTree)
             {
                 File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
