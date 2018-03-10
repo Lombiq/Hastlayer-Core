@@ -13,7 +13,7 @@ namespace ICSharpCode.NRefactory.CSharp
         /// <param name="parameter"></param>
         /// <returns></returns>
         public static bool IsOutFlowing(this ParameterDeclaration parameter) =>
-            // If the parameter is a value type then still it need to be out-flowing if this is a constructor.
+            // If the parameter is a value type then still it needs to be out-flowing if this is a constructor.
             (!parameter.Annotation<ParameterDefinition>().ParameterType.IsValueType || 
                 (parameter.FindFirstParentEntityDeclaration().GetFullName().IsConstructorName() && 
                 parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.Annotation<ParameterDefinition>().ParameterType.FullName)) ||
