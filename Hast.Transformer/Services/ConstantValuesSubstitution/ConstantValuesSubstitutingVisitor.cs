@@ -49,8 +49,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect
-            // anything in the outer scope after this. Neither if this is assigning a non-constant value.
+            // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything 
+            // in the outer scope after this. Neither if this is assigning a non-constant value. Note that the 
+            // expression can be both in a while or if (in which case it can't affect the parent scopes) or have a non-
+            // constant assignment (and thus can't have a const value for the current scope).
 
             if (!(assignmentExpression.Left is IdentifierExpression)) return;
 
@@ -66,7 +68,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     currentParentBlock = currentParentBlock.FindFirstParentBlockStatement();
                 }
             }
-            else if (!(assignmentExpression.Right is PrimitiveExpression) &&
+
+            if (!(assignmentExpression.Right is PrimitiveExpression) &&
                 !assignmentExpression.Right.Is<BinaryOperatorExpression>(binary =>
                     binary.Left.GetFullName() == assignmentExpression.Left.GetFullName() &&
                         binary.Right is PrimitiveExpression ||
