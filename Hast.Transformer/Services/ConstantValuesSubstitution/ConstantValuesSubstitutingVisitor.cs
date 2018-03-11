@@ -274,7 +274,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                     if (member == null) return false;
 
-                    ConstructorReference constructorReference = null;
                     if (_constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
                     {
                         return true;
@@ -284,6 +283,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
                         // first member that has a corresponding ctor.
                         var currentMemberReference = memberReferenceExpression;
+                        ConstructorReference constructorReference = null;
 
                         while (
                             !_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
@@ -306,9 +306,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                         if (memberReferenceExpressionInConstructor == null) return false;
 
-                        // Using the substitution also used in the constructor. This should be safe to do even if
-                        // in the ctor there are multiple assignments because an unretrieved constant will only
-                        // remain in the ConstantValuesTable if there are no more substitutions needed in the ctor.
+                        // Using the substitution also used in the constructor. This should be safe to do even if in 
+                        // the ctor there are multiple assignments because an unretrieved constant will only remain in 
+                        // the ConstantValuesTable if there are no more substitutions needed in the ctor.
                         // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the
                         // ctor should be fully substituted so we only need to care about primitive expressions.
 
