@@ -185,14 +185,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             Func<string, Invocation> createCastInvocationForFromExpression = target =>
                 new Invocation(target, fromExpression);
 
-            Func<IVhdlElement, IVhdlElement> createResizeExpression = parameter =>
+            IVhdlElement createResizeExpression(IVhdlElement parameter)
             {
                 result.IsResized = true;
 
                 // There needs to be some decision logic on size in SmartResize() because sometimes the sizes in VHDL
                 // won't be the same as in .NET due to type handling.
                 return ResizeHelper.SmartResize(parameter, toSize);
-            };
+            }
 
 
             // Trying supported cast scenarios:
