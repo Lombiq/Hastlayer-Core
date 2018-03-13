@@ -199,20 +199,34 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var resultTypeReference = expression.GetResultTypeReference();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
+
+            TypeReference preCastTypeReference = null;
+            // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
+            // to a smaller type here, then a resize to a bigger type as a result of the cast.
+            var hasExplicitCast = firstNonParenthesizedExpressionParent is CastExpression;
+            if (hasExplicitCast)
+            {
+                preCastTypeReference = resultTypeReference;
+                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
+            }
+
+
             // Is the result type smaller than it should be? It seems that (u)short +-*/ (u)short which results in an 
             // int in .NET can be (u)short in the AST. The same is with (s)byte.
             // This is wrong and we need to force the int type for the result.
-            Predicate<TypeReference> isAnyShort = typeReference =>
+            // This here is only needed if an explicit cast doesn't take care of it already.
+            bool isAnyShort(TypeReference typeReference) =>
                 typeReference.FullName == typeof(ushort).FullName || typeReference.FullName == typeof(short).FullName;
-            Predicate<TypeReference> isAnyByte = typeReference =>
+            bool isAnyByte(TypeReference typeReference) =>
                 typeReference.FullName == typeof(byte).FullName || typeReference.FullName == typeof(sbyte).FullName;
             var resultNeedsForcedIntCast =
-                (isAnyShort(resultTypeReference) && (isAnyShort(leftTypeReference) || isAnyShort(rightTypeReference))) ||
-                (isAnyByte(resultTypeReference) && (isAnyByte(leftTypeReference) || isAnyByte(rightTypeReference)));
+                !hasExplicitCast &&
+                ((isAnyShort(resultTypeReference) && (isAnyShort(leftTypeReference) || isAnyShort(rightTypeReference))) ||
+                (isAnyByte(resultTypeReference) && (isAnyByte(leftTypeReference) || isAnyByte(rightTypeReference))));
             var forcedResultIntCastIsSigned = false;
             if (resultNeedsForcedIntCast)
             {
-                // Sign information is needed so if the result can be cast if necessary if there was also a cast expression.
+                // Sign information is needed so the result can be cast if necessary if there was also a cast expression.
                 forcedResultIntCastIsSigned =
                     new[] { typeof(short).FullName, typeof(sbyte).FullName }.Contains(resultTypeReference.FullName);
                 var intTypeInformation = forcedResultIntCastIsSigned ?
@@ -224,15 +238,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 expression.AddAnnotation(intTypeInformation);
 
                 resultTypeReference = intTypeInformation.ExpectedType;
-            }
-
-            TypeReference preCastTypeReference = null;
-            // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
-            // to a smaller type here, then a resize to a bigger type as a result of the cast.
-            if (firstNonParenthesizedExpressionParent is CastExpression)
-            {
-                preCastTypeReference = resultTypeReference;
-                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
             }
 
             var resultType = _typeConverter.ConvertTypeReference(resultTypeReference, context.TransformationContext);
@@ -386,9 +391,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
-            if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
+            if (hasExplicitCast || isShift)
             {
-                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression) ?
+                var fromType = isShift && !hasExplicitCast ?
                     leftType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 

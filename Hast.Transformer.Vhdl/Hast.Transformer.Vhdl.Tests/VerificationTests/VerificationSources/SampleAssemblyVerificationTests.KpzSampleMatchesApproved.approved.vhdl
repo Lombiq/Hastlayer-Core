@@ -21,7 +21,8 @@ package body TypeConversion is
     -- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
     -- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
     -- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
-    -- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+    -- treated as a value of the destination type." Thus we need to simply truncate when casting down. See:
+    -- https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions
     function SmartResize(input: unsigned; size: natural) return unsigned is
     begin
         if (size < input'LENGTH) then

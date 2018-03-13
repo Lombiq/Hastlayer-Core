@@ -257,6 +257,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     var expandInvocation = createCastInvocationForFromExpression("ToUnsignedAndExpand");
                     expandInvocation.Parameters.Add(toSize.ToVhdlValue(KnownDataTypes.UnrangedInt));
                     result.ConvertedFromExpression = expandInvocation;
+                    result.IsResized = true;
                 }
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
