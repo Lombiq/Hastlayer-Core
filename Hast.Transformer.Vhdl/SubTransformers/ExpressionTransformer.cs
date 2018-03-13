@@ -494,7 +494,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     case UnaryOperatorType.Minus:
                         // Casting if the result type is not what the parent expects.
                         var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        if (parentTypeInformation != null && parentTypeInformation.ExpectedType != parentTypeInformation.InferredType)
+                        if (parentTypeInformation != null && 
+                            parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
+                            parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
                         {
                             var fromType = _typeConverter
                                 .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
