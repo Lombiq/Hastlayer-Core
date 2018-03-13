@@ -273,7 +273,7 @@ namespace Hast.Transformer
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
             // Needs to run after const substitution.
-            _taskBodyInvocationInstanceCountsSetter.SetaskBodyInvocationInstanceCounts(syntaxTree, configuration);
+            _taskBodyInvocationInstanceCountsSetter.SetTaskBodyInvocationInstanceCounts(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
