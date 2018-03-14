@@ -272,6 +272,20 @@ namespace ICSharpCode.NRefactory.CSharp
             return node;
         }
 
+        /// <summary>
+        /// Replaces all annotations with the type of the given new annotation with the supplied instance of the new
+        /// annotation.
+        /// </summary>
+        public static TNode ReplaceAnnotations<TNode, TAnnotation>(this TNode node, TAnnotation annotation)
+            where TNode : AstNode
+            where TAnnotation : class
+        {
+            node.RemoveAnnotations<TAnnotation>();
+            node.AddAnnotation(annotation);
+
+            return node;
+        }
+
         public static string CreateNameForUnnamedNode(this AstNode node)
         {
             // The node doesn't really have a name so give it one that is suitably unique.
