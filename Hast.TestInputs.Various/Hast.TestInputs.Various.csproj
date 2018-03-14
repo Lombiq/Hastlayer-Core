@@ -44,6 +44,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ArrayUsingCases.cs" />
+    <Compile Include="BinaryAndUnaryOperatorExpressionCases.cs" />
     <Compile Include="CastingCases.cs" />
     <Compile Include="ConstantsUsingCases.cs" />
     <Compile Include="LoopCases.cs" />

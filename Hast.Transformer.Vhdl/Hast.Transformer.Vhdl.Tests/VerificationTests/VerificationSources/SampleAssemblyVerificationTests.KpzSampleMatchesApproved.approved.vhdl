@@ -21,7 +21,8 @@ package body TypeConversion is
     -- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
     -- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
     -- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
-    -- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+    -- treated as a value of the destination type." Thus we need to simply truncate when casting down. See:
+    -- https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions
     function SmartResize(input: unsigned; size: natural) return unsigned is
     begin
         if (size < input'LENGTH) then
@@ -1251,7 +1252,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64);
                             -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Prng1\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
@@ -1300,7 +1301,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64);
                             -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Prng2\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
@@ -6669,7 +6670,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7632
                     when \PrngMWC64X::NextUInt32().0._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64), 64);
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64);
                         \PrngMWC64X::NextUInt32().0.this\.\state\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return num2 ^ num;
@@ -6787,7 +6788,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7632
                     when \PrngMWC64X::NextUInt32().1._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64), 64);
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64);
                         \PrngMWC64X::NextUInt32().1.this\.\state\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return num2 ^ num;
@@ -6905,7 +6906,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7632
                     when \PrngMWC64X::NextUInt32().2._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64), 64);
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64);
                         \PrngMWC64X::NextUInt32().2.this\.\state\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return num2 ^ num;
