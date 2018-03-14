@@ -95,8 +95,6 @@ namespace Hast.Transformer.Services
 
             public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
             {
-                var z = binaryOperatorExpression.ToString().Contains("Posit32.GetMostSignificantOnePosition (@this.PositBits) - 1");
-
                 base.VisitBinaryOperatorExpression(binaryOperatorExpression);
 
                 if (!_binaryOperatorsWithNumericPromotions.Contains(binaryOperatorExpression.Operator)) return;
