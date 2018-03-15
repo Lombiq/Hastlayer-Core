@@ -200,7 +200,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
 
-            var z = expression.ToString().Contains("32 - (System.Int32)(System.Int32)b + 2");
             TypeReference preCastTypeReference = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
             // to a smaller type here, then a resize to a bigger type as a result of the cast.

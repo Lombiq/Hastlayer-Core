@@ -266,12 +266,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is PrimitiveExpression primitive)
             {
-                var typeReference = expression.GetActualTypeReference();
-
-                if (typeReference == null)
-                {
-                    typeReference = Transformer.Helpers.TypeHelper.CreatePrimitiveTypeReference(primitive.Value.GetType().Name);
-                }
+                var typeReference = primitive.GetActualTypeReference();
 
                 var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
                 var valueString = primitive.Value.ToString();
@@ -494,7 +489,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     case UnaryOperatorType.Minus:
                         // Casting if the result type is not what the parent expects.
                         var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        if (!(unary.Parent is CastExpression) &&
+                        if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
                             parentTypeInformation != null && 
                             parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
                             parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
@@ -562,7 +557,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is CastExpression castExpression)
             {
-                var z = castExpression.ToString().Contains("(sbyte)-(System.Int32)(sbyte)b") && castExpression.Parent.ToString().Contains("conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74");
                 var innerExpressionResult = Transform(castExpression.Expression, context);
 
                 // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks
