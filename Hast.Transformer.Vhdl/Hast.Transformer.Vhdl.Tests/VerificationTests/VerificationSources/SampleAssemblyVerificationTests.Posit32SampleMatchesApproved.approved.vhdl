@@ -1852,11 +1852,11 @@ begin
                         \Posit32::.ctor(UInt32).0.flag\ := \Posit32::.ctor(UInt32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (!flag) {
-                        -- 	b = (System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (@this.PositBits) - 1;
+                        -- 	b = (System.Byte)((System.Int32)(Posit32.GetMostSignificantOnePosition (@this.PositBits)) - 1);
                         -- 	b2 = 0;
-                        -- 	while ((System.Int32)b >= 4 && (System.Int32)b2 < 31) {
-                        -- 		b = (System.Byte)(System.Int32)b - 4;
-                        -- 		b2 = (System.Byte)(System.Int32)b2 + 1;
+                        -- 	while ((System.Int32)(b) >= 4 && (System.Int32)(b2) < 31) {
+                        -- 		b = (System.Byte)((System.Int32)(b) - 4);
+                        -- 		b2 = (System.Byte)((System.Int32)(b2) + 1);
                         -- 	}
                         -- 	@this.PositBits = Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (@this, false, (int)b2, (uint)b, @this.PositBits);
                         -- }
@@ -1881,17 +1881,17 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	b = (System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (@this.PositBits) - 1;
+                        -- 	b = (System.Byte)((System.Int32)(Posit32.GetMostSignificantOnePosition (@this.PositBits)) - 1);
                         -- 	b2 = 0;
-                        -- 	while ((System.Int32)b >= 4 && (System.Int32)b2 < 31) {
-                        -- 		b = (System.Byte)(System.Int32)b - 4;
-                        -- 		b2 = (System.Byte)(System.Int32)b2 + 1;
+                        -- 	while ((System.Int32)(b) >= 4 && (System.Int32)(b2) < 31) {
+                        -- 		b = (System.Byte)((System.Int32)(b) - 4);
+                        -- 		b2 = (System.Byte)((System.Int32)(b2) + 1);
                         -- 	}
                         -- 	@this.PositBits = Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (@this, false, (int)b2, (uint)b, @this.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (@this.PositBits) - 1;
+                        -- b = (System.Byte)((System.Int32)(Posit32.GetMostSignificantOnePosition (@this.PositBits)) - 1);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         \Posit32::.ctor(UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(UInt32).0.this\.\PositBits\;
@@ -1903,16 +1903,16 @@ begin
                         if (\Posit32::.ctor(UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::.ctor(UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::.ctor(UInt32).0.return.0\ := \Posit32::.ctor(UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::.ctor(UInt32).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize(\Posit32::.ctor(UInt32).0.return.0\, 32)) - to_signed(1, 32)), 8);
-                            \Posit32::.ctor(UInt32).0.b\ := \Posit32::.ctor(UInt32).0.binaryOperationResult.1\;
+                            \Posit32::.ctor(UInt32).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\Posit32::.ctor(UInt32).0.return.0\), 32)) - to_signed(1, 32)), 8);
+                            \Posit32::.ctor(UInt32).0.b\ := (\Posit32::.ctor(UInt32).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- b2 = 0;
                             -- 
                             \Posit32::.ctor(UInt32).0.b2\ := to_unsigned(0, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((System.Int32)b >= 4 && (System.Int32)b2 < 31) {
-                            -- 	b = (System.Byte)(System.Int32)b - 4;
-                            -- 	b2 = (System.Byte)(System.Int32)b2 + 1;
+                            -- while ((System.Int32)(b) >= 4 && (System.Int32)(b2) < 31) {
+                            -- 	b = (System.Byte)((System.Int32)(b) - 4);
+                            -- 	b2 = (System.Byte)((System.Int32)(b2) + 1);
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -1922,23 +1922,23 @@ begin
                     when \Posit32::.ctor(UInt32).0._State_6\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::.ctor(UInt32).0._State_5\.
                         -- The while loop's condition:
-                        \Posit32::.ctor(UInt32).0.binaryOperationResult.2\ := signed(SmartResize(\Posit32::.ctor(UInt32).0.b\, 32)) >= to_signed(4, 32);
-                        \Posit32::.ctor(UInt32).0.binaryOperationResult.3\ := signed(SmartResize(\Posit32::.ctor(UInt32).0.b2\, 32)) < to_signed(31, 32);
+                        \Posit32::.ctor(UInt32).0.binaryOperationResult.2\ := signed(SmartResize((\Posit32::.ctor(UInt32).0.b\), 32)) >= to_signed(4, 32);
+                        \Posit32::.ctor(UInt32).0.binaryOperationResult.3\ := signed(SmartResize((\Posit32::.ctor(UInt32).0.b2\), 32)) < to_signed(31, 32);
                         \Posit32::.ctor(UInt32).0.binaryOperationResult.4\ := \Posit32::.ctor(UInt32).0.binaryOperationResult.2\ and \Posit32::.ctor(UInt32).0.binaryOperationResult.3\;
                         if (\Posit32::.ctor(UInt32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	b = (System.Byte)(System.Int32)b - 4;
-                            -- 	b2 = (System.Byte)(System.Int32)b2 + 1;
+                            -- 	b = (System.Byte)((System.Int32)(b) - 4);
+                            -- 	b2 = (System.Byte)((System.Int32)(b2) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- b = (System.Byte)(System.Int32)b - 4;
+                            -- b = (System.Byte)((System.Int32)(b) - 4);
                             -- 
-                            \Posit32::.ctor(UInt32).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize(\Posit32::.ctor(UInt32).0.b\, 32)) - to_signed(4, 32)), 8);
-                            \Posit32::.ctor(UInt32).0.b\ := \Posit32::.ctor(UInt32).0.binaryOperationResult.5\;
+                            \Posit32::.ctor(UInt32).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\Posit32::.ctor(UInt32).0.b\), 32)) - to_signed(4, 32)), 8);
+                            \Posit32::.ctor(UInt32).0.b\ := (\Posit32::.ctor(UInt32).0.binaryOperationResult.5\);
                             -- The following section was transformed from the .NET statement below:
-                            -- b2 = (System.Byte)(System.Int32)b2 + 1;
+                            -- b2 = (System.Byte)((System.Int32)(b2) + 1);
                             -- 
                             \Posit32::.ctor(UInt32).0._State\ := \Posit32::.ctor(UInt32).0._State_8\;
                         else 
@@ -1961,8 +1961,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::.ctor(UInt32).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::.ctor(UInt32).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize(\Posit32::.ctor(UInt32).0.b2\, 32)) + to_signed(1, 32)), 8);
-                        \Posit32::.ctor(UInt32).0.b2\ := \Posit32::.ctor(UInt32).0.binaryOperationResult.6\;
+                        \Posit32::.ctor(UInt32).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize((\Posit32::.ctor(UInt32).0.b2\), 32)) + to_signed(1, 32)), 8);
+                        \Posit32::.ctor(UInt32).0.b2\ := (\Posit32::.ctor(UInt32).0.binaryOperationResult.6\);
                         -- Returning to the repeated state of the while loop which was started in state \Posit32::.ctor(UInt32).0._State_5\ if the loop wasn't exited with a state change.
                         if (\Posit32::.ctor(UInt32).0._State\ = \Posit32::.ctor(UInt32).0._State_8\) then 
                             \Posit32::.ctor(UInt32).0._State\ := \Posit32::.ctor(UInt32).0._State_6\;
@@ -2334,8 +2334,8 @@ begin
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -2355,8 +2355,8 @@ begin
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.return.0\ := to_unsigned(0, 8);
-                \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ := to_unsigned(0, 8);
-                \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\ := to_unsigned(0, 8);
+                \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.7\ := to_unsigned(0, 32);
             else 
@@ -2395,7 +2395,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	num = 1u << regimeKValue + 1 - 1u;
-                        -- 	num = num << (int)((System.Byte)(System.Int32)(System.Byte)32 - (System.Int32)Posit32.GetMostSignificantOnePosition (num) - 1);
+                        -- 	num = num << (int)((System.Int32)(32 - (System.Int32)(Posit32.GetMostSignificantOnePosition (num))) - 1);
                         -- }
                         -- else {
                         -- 	num = 1073741824u >> -regimeKValue;
@@ -2426,7 +2426,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 1u << regimeKValue + 1 - 1u;
-                        -- 	num = num << (int)((System.Byte)(System.Int32)(System.Byte)32 - (System.Int32)Posit32.GetMostSignificantOnePosition (num) - 1);
+                        -- 	num = num << (int)((System.Int32)(32 - (System.Int32)(Posit32.GetMostSignificantOnePosition (num))) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -2437,7 +2437,7 @@ begin
                         \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ - to_unsigned(1, 32);
                         \Posit32::EncodeRegimeBits(Int32).0.num\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num = num << (int)((System.Byte)(System.Int32)(System.Byte)32 - (System.Int32)Posit32.GetMostSignificantOnePosition (num) - 1);
+                        -- num = num << (int)((System.Int32)(32 - (System.Int32)(Posit32.GetMostSignificantOnePosition (num))) - 1);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::EncodeRegimeBits(Int32).0.num\;
@@ -2449,9 +2449,9 @@ begin
                         if (\Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::EncodeRegimeBits(Int32).0.return.0\ := \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.return.0\, 32))), 8);
-                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\, 32)) - to_signed(1, 32)), 8);
-                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\ := shift_left(\Posit32::EncodeRegimeBits(Int32).0.num\, to_integer(unsigned(SmartResize(signed(SmartResize((\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\), 32)), 5))));
+                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ := to_signed(32, 32) - signed(SmartResize((\Posit32::EncodeRegimeBits(Int32).0.return.0\), 32));
+                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\ := (\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\) - to_signed(1, 32);
+                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\ := shift_left(\Posit32::EncodeRegimeBits(Int32).0.num\, to_integer(unsigned(SmartResize((\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\), 5))));
                             \Posit32::EncodeRegimeBits(Int32).0.num\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\;
                             -- Going to the state after the if-else which was started in state \Posit32::EncodeRegimeBits(Int32).0._State_2\.
                             if (\Posit32::EncodeRegimeBits(Int32).0._State\ = \Posit32::EncodeRegimeBits(Int32).0._State_5\) then 
@@ -2507,7 +2507,7 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag8\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc6a2582d25fe7a959128cb3608f4b4ae03dba0548b9269055bbb5feecfd29bcf\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2530,7 +2530,7 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
@@ -2594,7 +2594,7 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag8\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.0\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc6a2582d25fe7a959128cb3608f4b4ae03dba0548b9269055bbb5feecfd29bcf\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
@@ -2617,7 +2617,7 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.5\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\ := to_signed(0, 32);
@@ -2741,10 +2741,10 @@ begin
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = (int)((System.Byte)28 - (System.Int32)b);
+                            -- num2 = (int)(28 - (System.Int32)(b));
                             -- 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(to_signed(28, 32) - signed(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\, 32))), 8);
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\), 32));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := to_signed(28, 32) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\), 32));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- uint conditionalc6a2582d25fe7a959128cb3608f4b4ae03dba0548b9269055bbb5feecfd29bcf;
                             -- 
@@ -2824,7 +2824,7 @@ begin
                         -- 	}
                         -- }
                         -- else {
-                        -- 	num3 = (int)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (fractionBits) - 1);
+                        -- 	num3 = (int)((System.Int32)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
                         -- 	fractionBits = Lombiq.Arithmetics.Posit32.SetZero (@this, fractionBits, (ushort)num3);
                         -- 	num4 = 28 - num3 - (int)b;
                         -- 	uint conditionald4fd162a4a0b26fe38670534a1e91cb3009200b22a6451708636f9790186fb5f;
@@ -3418,7 +3418,7 @@ begin
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num3 = (int)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (fractionBits) - 1);
+                        -- 	num3 = (int)((System.Int32)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
                         -- 	fractionBits = Lombiq.Arithmetics.Posit32.SetZero (@this, fractionBits, (ushort)num3);
                         -- 	num4 = 28 - num3 - (int)b;
                         -- 	uint conditionald4fd162a4a0b26fe38670534a1e91cb3009200b22a6451708636f9790186fb5f;
@@ -3465,7 +3465,7 @@ begin
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (int)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (fractionBits) - 1);
+                        -- num3 = (int)((System.Int32)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
@@ -3477,8 +3477,8 @@ begin
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := SmartResize(unsigned(signed(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\, 32)) - to_signed(1, 32)), 8);
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\), 32));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\), 32)) - to_signed(1, 32);
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\);
                             -- The following section was transformed from the .NET statement below:
                             -- fractionBits = Lombiq.Arithmetics.Posit32.SetZero (@this, fractionBits, (ushort)num3);
                             -- 
@@ -4011,10 +4011,10 @@ begin
         Variable \Posit32::GetRegimeKValue().0.return.0\: boolean := false;
         Variable \Posit32::GetRegimeKValue().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetRegimeKValue().0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::GetRegimeKValue().0.conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\: signed(7 downto 0) := to_signed(0, 8);
         Variable \Posit32::GetRegimeKValue().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetRegimeKValue().0.binaryOperationResult.1\: boolean := false;
-        Variable \Posit32::GetRegimeKValue().0.binaryOperationResult.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetRegimeKValue().0.binaryOperationResult.2\: signed(7 downto 0) := to_signed(0, 8);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4033,10 +4033,10 @@ begin
                 \Posit32::GetRegimeKValue().0.return.0\ := false;
                 \Posit32::GetRegimeKValue().0.return.1\ := to_unsigned(0, 32);
                 \Posit32::GetRegimeKValue().0.return.2\ := to_unsigned(0, 8);
-                \Posit32::GetRegimeKValue().0.conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74\ := to_signed(0, 8);
+                \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\ := to_signed(0, 8);
                 \Posit32::GetRegimeKValue().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::GetRegimeKValue().0.binaryOperationResult.1\ := false;
-                \Posit32::GetRegimeKValue().0.binaryOperationResult.2\ := to_unsigned(0, 8);
+                \Posit32::GetRegimeKValue().0.binaryOperationResult.2\ := to_signed(0, 8);
             else 
                 case \Posit32::GetRegimeKValue().0._State\ is 
                     when \Posit32::GetRegimeKValue().0._State_0\ => 
@@ -4156,14 +4156,14 @@ begin
                             \Posit32::GetRegimeKValue().0.return.2\ := \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::GetRegimeKValue().0.b\ := \Posit32::GetRegimeKValue().0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- sbyte conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74;
+                            -- sbyte conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if (num & 1073741824u == 0u) {
-                            -- 	conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74 = (sbyte)-(System.Int32)(sbyte)b;
+                            -- 	conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)-(System.Int32)((sbyte)b);
                             -- }
                             -- else {
-                            -- 	conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74 = (sbyte)((System.Byte)(System.Int32)b - 1);
+                            -- 	conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)((System.Int32)(b) - 1);
                             -- }
                             -- 
                             \Posit32::GetRegimeKValue().0.binaryOperationResult.0\ := \Posit32::GetRegimeKValue().0.num\ and to_unsigned(1073741824, 32);
@@ -4180,26 +4180,26 @@ begin
                                 \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_11\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2624
+                        -- Clock cycles needed to complete this state (approximation): 0.4137
                     when \Posit32::GetRegimeKValue().0._State_9\ => 
                         -- State after the if-else which was started in state \Posit32::GetRegimeKValue().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74;
+                        -- return conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65;
                         -- 
-                        \Posit32::GetRegimeKValue().0.return\ <= \Posit32::GetRegimeKValue().0.conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74\;
+                        \Posit32::GetRegimeKValue().0.return\ <= \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\;
                         \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetRegimeKValue().0._State_10\ => 
                         -- True branch of the if-else started in state \Posit32::GetRegimeKValue().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74 = (sbyte)-(System.Int32)(sbyte)b;
+                        -- 	conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)-(System.Int32)((sbyte)b);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74 = (sbyte)-(System.Int32)(sbyte)b;
+                        -- conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)-(System.Int32)((sbyte)b);
                         -- 
-                        \Posit32::GetRegimeKValue().0.conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74\ := SmartResize(-signed(SmartResize(signed(\Posit32::GetRegimeKValue().0.b\), 32)), 8);
+                        \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\ := SmartResize(-signed(SmartResize((signed(\Posit32::GetRegimeKValue().0.b\)), 32)), 8);
                         -- Going to the state after the if-else which was started in state \Posit32::GetRegimeKValue().0._State_8\.
                         if (\Posit32::GetRegimeKValue().0._State\ = \Posit32::GetRegimeKValue().0._State_10\) then 
                             \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_9\;
@@ -4209,14 +4209,14 @@ begin
                         -- False branch of the if-else started in state \Posit32::GetRegimeKValue().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74 = (sbyte)((System.Byte)(System.Int32)b - 1);
+                        -- 	conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)((System.Int32)(b) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74 = (sbyte)((System.Byte)(System.Int32)b - 1);
+                        -- conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)((System.Int32)(b) - 1);
                         -- 
-                        \Posit32::GetRegimeKValue().0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize(\Posit32::GetRegimeKValue().0.b\, 32)) - to_signed(1, 32)), 8);
-                        \Posit32::GetRegimeKValue().0.conditional6134cde94cf098f4b7bf66d1921cd52c48d87a7ac00a42314fe76385e9764c74\ := signed((\Posit32::GetRegimeKValue().0.binaryOperationResult.2\));
+                        \Posit32::GetRegimeKValue().0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\Posit32::GetRegimeKValue().0.b\), 32)) - to_signed(1, 32), 8);
+                        \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\ := (\Posit32::GetRegimeKValue().0.binaryOperationResult.2\);
                         -- Going to the state after the if-else which was started in state \Posit32::GetRegimeKValue().0._State_8\.
                         if (\Posit32::GetRegimeKValue().0._State\ = \Posit32::GetRegimeKValue().0._State_11\) then 
                             \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_9\;
@@ -4235,10 +4235,10 @@ begin
         Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91\: signed(7 downto 0) := to_signed(0, 8);
         Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.1\: boolean := false;
-        Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\: signed(7 downto 0) := to_signed(0, 8);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4251,10 +4251,10 @@ begin
                 \Posit32::GetRegimeKValueWithoutSignCheck().0._State\ := \Posit32::GetRegimeKValueWithoutSignCheck().0._State_0\;
                 \Posit32::GetRegimeKValueWithoutSignCheck().0.b\ := to_unsigned(0, 8);
                 \Posit32::GetRegimeKValueWithoutSignCheck().0.return.0\ := to_unsigned(0, 8);
-                \Posit32::GetRegimeKValueWithoutSignCheck().0.conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845\ := to_signed(0, 8);
+                \Posit32::GetRegimeKValueWithoutSignCheck().0.conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91\ := to_signed(0, 8);
                 \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.1\ := false;
-                \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\ := to_unsigned(0, 8);
+                \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\ := to_signed(0, 8);
             else 
                 case \Posit32::GetRegimeKValueWithoutSignCheck().0._State\ is 
                     when \Posit32::GetRegimeKValueWithoutSignCheck().0._State_0\ => 
@@ -4295,14 +4295,14 @@ begin
                             \Posit32::GetRegimeKValueWithoutSignCheck().0.return.0\ := \Posit32::GetRegimeKValueWithoutSignCheck().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::GetRegimeKValueWithoutSignCheck().0.b\ := \Posit32::GetRegimeKValueWithoutSignCheck().0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- sbyte conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845;
+                            -- sbyte conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if (@this.PositBits & 1073741824u == 0u) {
-                            -- 	conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845 = (sbyte)-(System.Int32)(sbyte)b;
+                            -- 	conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91 = (sbyte)-(System.Int32)((sbyte)b);
                             -- }
                             -- else {
-                            -- 	conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845 = (sbyte)((System.Byte)(System.Int32)b - 1);
+                            -- 	conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91 = (sbyte)((System.Int32)(b) - 1);
                             -- }
                             -- 
                             \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.0\ := \Posit32::GetRegimeKValueWithoutSignCheck().0.this\.\PositBits\ and to_unsigned(1073741824, 32);
@@ -4319,26 +4319,26 @@ begin
                                 \Posit32::GetRegimeKValueWithoutSignCheck().0._State\ := \Posit32::GetRegimeKValueWithoutSignCheck().0._State_6\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2624
+                        -- Clock cycles needed to complete this state (approximation): 0.4137
                     when \Posit32::GetRegimeKValueWithoutSignCheck().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::GetRegimeKValueWithoutSignCheck().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845;
+                        -- return conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91;
                         -- 
-                        \Posit32::GetRegimeKValueWithoutSignCheck().0.return\ <= \Posit32::GetRegimeKValueWithoutSignCheck().0.conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845\;
+                        \Posit32::GetRegimeKValueWithoutSignCheck().0.return\ <= \Posit32::GetRegimeKValueWithoutSignCheck().0.conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91\;
                         \Posit32::GetRegimeKValueWithoutSignCheck().0._State\ := \Posit32::GetRegimeKValueWithoutSignCheck().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetRegimeKValueWithoutSignCheck().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit32::GetRegimeKValueWithoutSignCheck().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845 = (sbyte)-(System.Int32)(sbyte)b;
+                        -- 	conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91 = (sbyte)-(System.Int32)((sbyte)b);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845 = (sbyte)-(System.Int32)(sbyte)b;
+                        -- conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91 = (sbyte)-(System.Int32)((sbyte)b);
                         -- 
-                        \Posit32::GetRegimeKValueWithoutSignCheck().0.conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845\ := SmartResize(-signed(SmartResize(signed(\Posit32::GetRegimeKValueWithoutSignCheck().0.b\), 32)), 8);
+                        \Posit32::GetRegimeKValueWithoutSignCheck().0.conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91\ := SmartResize(-signed(SmartResize((signed(\Posit32::GetRegimeKValueWithoutSignCheck().0.b\)), 32)), 8);
                         -- Going to the state after the if-else which was started in state \Posit32::GetRegimeKValueWithoutSignCheck().0._State_3\.
                         if (\Posit32::GetRegimeKValueWithoutSignCheck().0._State\ = \Posit32::GetRegimeKValueWithoutSignCheck().0._State_5\) then 
                             \Posit32::GetRegimeKValueWithoutSignCheck().0._State\ := \Posit32::GetRegimeKValueWithoutSignCheck().0._State_4\;
@@ -4348,14 +4348,14 @@ begin
                         -- False branch of the if-else started in state \Posit32::GetRegimeKValueWithoutSignCheck().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845 = (sbyte)((System.Byte)(System.Int32)b - 1);
+                        -- 	conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91 = (sbyte)((System.Int32)(b) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845 = (sbyte)((System.Byte)(System.Int32)b - 1);
+                        -- conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91 = (sbyte)((System.Int32)(b) - 1);
                         -- 
-                        \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize(\Posit32::GetRegimeKValueWithoutSignCheck().0.b\, 32)) - to_signed(1, 32)), 8);
-                        \Posit32::GetRegimeKValueWithoutSignCheck().0.conditional3f2458986e3b9a8cc714b058e6a7091859972fdc1dc0c7dd66f4e1a51e601845\ := signed((\Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\));
+                        \Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\Posit32::GetRegimeKValueWithoutSignCheck().0.b\), 32)) - to_signed(1, 32), 8);
+                        \Posit32::GetRegimeKValueWithoutSignCheck().0.conditionalf3b526647ac793df91ae9bec493ac0e2113c6cf09908e6874568efd032f98a91\ := (\Posit32::GetRegimeKValueWithoutSignCheck().0.binaryOperationResult.2\);
                         -- Going to the state after the if-else which was started in state \Posit32::GetRegimeKValueWithoutSignCheck().0._State_3\.
                         if (\Posit32::GetRegimeKValueWithoutSignCheck().0._State\ = \Posit32::GetRegimeKValueWithoutSignCheck().0._State_6\) then 
                             \Posit32::GetRegimeKValueWithoutSignCheck().0._State\ := \Posit32::GetRegimeKValueWithoutSignCheck().0._State_4\;
@@ -4377,11 +4377,11 @@ begin
         Variable \Posit32::ExponentSize().0.return.0\: boolean := false;
         Variable \Posit32::ExponentSize().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::ExponentSize().0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::ExponentSize().0.conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.2\: boolean := false;
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: unsigned(7 downto 0) := to_unsigned(0, 8);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4401,11 +4401,11 @@ begin
                 \Posit32::ExponentSize().0.return.0\ := false;
                 \Posit32::ExponentSize().0.return.1\ := to_unsigned(0, 32);
                 \Posit32::ExponentSize().0.return.2\ := to_unsigned(0, 8);
-                \Posit32::ExponentSize().0.conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493\ := to_unsigned(0, 8);
-                \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_unsigned(0, 8);
-                \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.2\ := false;
-                \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.4\ := to_unsigned(0, 8);
             else 
                 case \Posit32::ExponentSize().0._State\ is 
@@ -4526,19 +4526,19 @@ begin
                             \Posit32::ExponentSize().0.return.2\ := \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::ExponentSize().0.b\ := \Posit32::ExponentSize().0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- byte conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493;
+                            -- byte conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((System.Int32)(System.Byte)32 - (System.Int32)(System.Byte)(System.Int32)b + 2 > 2) {
-                            -- 	conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493 = 2;
+                            -- if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
+                            -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = 2;
                             -- }
                             -- else {
-                            -- 	conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493 = (System.Byte)32 - (System.Int32)(System.Byte)(System.Int32)b + 2;
+                            -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
                             -- }
                             -- 
-                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize(\Posit32::ExponentSize().0.b\, 32)) + to_signed(2, 32)), 8);
-                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::ExponentSize().0.binaryOperationResult.0\, 32))), 8);
-                            \Posit32::ExponentSize().0.binaryOperationResult.2\ := signed(SmartResize(\Posit32::ExponentSize().0.binaryOperationResult.1\, 32)) > to_signed(2, 32);
+                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
+                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.0\);
+                            \Posit32::ExponentSize().0.binaryOperationResult.2\ := (\Posit32::ExponentSize().0.binaryOperationResult.1\) > to_signed(2, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit32::ExponentSize().0._State_10\ and ends in state \Posit32::ExponentSize().0._State_10\.
@@ -4555,22 +4555,22 @@ begin
                     when \Posit32::ExponentSize().0._State_9\ => 
                         -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493;
+                        -- return conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6;
                         -- 
-                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493\;
+                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\;
                         \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::ExponentSize().0._State_10\ => 
                         -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493 = 2;
+                        -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493 = 2;
+                        -- conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = 2;
                         -- 
-                        \Posit32::ExponentSize().0.conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493\ := to_unsigned(2, 8);
+                        \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\ := to_unsigned(2, 8);
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_10\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
@@ -4580,15 +4580,15 @@ begin
                         -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493 = (System.Byte)32 - (System.Int32)(System.Byte)(System.Int32)b + 2;
+                        -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493 = (System.Byte)32 - (System.Int32)(System.Byte)(System.Int32)b + 2;
+                        -- conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
                         -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize(\Posit32::ExponentSize().0.b\, 32)) + to_signed(2, 32)), 8);
-                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::ExponentSize().0.binaryOperationResult.3\, 32))), 8);
-                        \Posit32::ExponentSize().0.conditional337ab9be8a3322e31b957d766908ea1dad4b672875cd21e45d8d39453e2a8493\ := \Posit32::ExponentSize().0.binaryOperationResult.4\;
+                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.3\)), 8);
+                        \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\ := (\Posit32::ExponentSize().0.binaryOperationResult.4\);
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_11\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
@@ -4611,7 +4611,7 @@ begin
         Variable \Posit32::GetExponentValue().0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::GetExponentValue().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -4632,7 +4632,7 @@ begin
                 \Posit32::GetExponentValue().0.return.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.return.3\ := to_unsigned(0, 8);
-                \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.3\ := to_unsigned(0, 32);
             else 
@@ -4693,7 +4693,7 @@ begin
                     when \Posit32::GetExponentValue().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::GetExponentValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)((System.Byte)32 - (System.Int32)Lombiq.Arithmetics.Posit32.ExponentSize (@this)) >> 30;
+                        -- return num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(Lombiq.Arithmetics.Posit32.ExponentSize (@this))) >> 30;
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
                         \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
@@ -4760,8 +4760,8 @@ begin
                         if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ = \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\) then 
                             \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= false;
                             \Posit32::GetExponentValue().0.return.3\ := \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\;
-                            \Posit32::GetExponentValue().0.binaryOperationResult.1\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::GetExponentValue().0.return.3\, 32))), 8);
-                            \Posit32::GetExponentValue().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize(signed(SmartResize((\Posit32::GetExponentValue().0.binaryOperationResult.1\), 32)), 5))));
+                            \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().0.return.3\), 32));
+                            \Posit32::GetExponentValue().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize((\Posit32::GetExponentValue().0.binaryOperationResult.1\), 5))));
                             \Posit32::GetExponentValue().0.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValue().0.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
                             \Posit32::GetExponentValue().0.return\ <= \Posit32::GetExponentValue().0.binaryOperationResult.3\;
                             \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_1\;
@@ -4781,7 +4781,7 @@ begin
         Variable \Posit32::GetExponentValueWithoutSignCheck().0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValueWithoutSignCheck().0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -4796,7 +4796,7 @@ begin
                 \Posit32::GetExponentValueWithoutSignCheck().0.return.0\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValueWithoutSignCheck().0.return.1\ := to_unsigned(0, 8);
-                \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.3\ := to_unsigned(0, 32);
             else 
@@ -4821,7 +4821,7 @@ begin
                     when \Posit32::GetExponentValueWithoutSignCheck().0._State_2\ => 
                         \Posit32::GetExponentValueWithoutSignCheck().0.this\ := \Posit32::GetExponentValueWithoutSignCheck().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return @this.PositBits >> (int)Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (@this) << (int)((System.Byte)32 - (System.Int32)Lombiq.Arithmetics.Posit32.ExponentSize (@this)) >> 30;
+                        -- return @this.PositBits >> (int)Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (@this) << (int)(32 - (System.Int32)(Lombiq.Arithmetics.Posit32.ExponentSize (@this))) >> 30;
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSizeWithoutSignCheck()
                         \Posit32::GetExponentValueWithoutSignCheck().0.Posit32::FractionSizeWithoutSignCheck().this.parameter.Out.0\ <= \Posit32::GetExponentValueWithoutSignCheck().0.this\;
@@ -4845,8 +4845,8 @@ begin
                         if (\Posit32::GetExponentValueWithoutSignCheck().0.Posit32::ExponentSize()._Started.0\ = \Posit32::GetExponentValueWithoutSignCheck().0.Posit32::ExponentSize()._Finished.0\) then 
                             \Posit32::GetExponentValueWithoutSignCheck().0.Posit32::ExponentSize()._Started.0\ <= false;
                             \Posit32::GetExponentValueWithoutSignCheck().0.return.1\ := \Posit32::GetExponentValueWithoutSignCheck().0.Posit32::ExponentSize().return.0\;
-                            \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::GetExponentValueWithoutSignCheck().0.return.1\, 32))), 8);
-                            \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize(signed(SmartResize((\Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\), 32)), 5))));
+                            \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValueWithoutSignCheck().0.return.1\), 32));
+                            \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize((\Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.1\), 5))));
                             \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
                             \Posit32::GetExponentValueWithoutSignCheck().0.return\ <= \Posit32::GetExponentValueWithoutSignCheck().0.binaryOperationResult.3\;
                             \Posit32::GetExponentValueWithoutSignCheck().0._State\ := \Posit32::GetExponentValueWithoutSignCheck().0._State_1\;
@@ -4868,9 +4868,9 @@ begin
         Variable \Posit32::FractionSize().0.return.0\: boolean := false;
         Variable \Posit32::FractionSize().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionSize().0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::FractionSize().0.binaryOperationResult.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::FractionSize().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::FractionSize().0.binaryOperationResult.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.3\: boolean := false;
     begin 
@@ -4891,9 +4891,9 @@ begin
                 \Posit32::FractionSize().0.return.0\ := false;
                 \Posit32::FractionSize().0.return.1\ := to_unsigned(0, 32);
                 \Posit32::FractionSize().0.return.2\ := to_unsigned(0, 8);
-                \Posit32::FractionSize().0.binaryOperationResult.0\ := to_unsigned(0, 8);
-                \Posit32::FractionSize().0.binaryOperationResult.1\ := to_unsigned(0, 8);
-                \Posit32::FractionSize().0.binaryOperationResult.2\ := to_unsigned(0, 8);
+                \Posit32::FractionSize().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.3\ := false;
             else 
@@ -4957,7 +4957,7 @@ begin
                     when \Posit32::FractionSize().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::FractionSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)((System.Byte)32 - (System.Int32)(System.Byte)(System.Int32)(System.Byte)(System.Int32)Posit32.LengthOfRunOfBits (bits, 31) + 2 + 2);
+                        -- num = (int)(32 - (System.Int32)((System.Int32)((System.Int32)(Posit32.LengthOfRunOfBits (bits, 31)) + 2) + 2));
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
                         \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= \Posit32::FractionSize().0.bits\;
@@ -5013,10 +5013,10 @@ begin
                         if (\Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
                             \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
                             \Posit32::FractionSize().0.return.2\ := \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
-                            \Posit32::FractionSize().0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize(\Posit32::FractionSize().0.return.2\, 32)) + to_signed(2, 32)), 8);
-                            \Posit32::FractionSize().0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize(\Posit32::FractionSize().0.binaryOperationResult.0\, 32)) + to_signed(2, 32)), 8);
-                            \Posit32::FractionSize().0.binaryOperationResult.2\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::FractionSize().0.binaryOperationResult.1\, 32))), 8);
-                            \Posit32::FractionSize().0.num\ := signed(SmartResize((\Posit32::FractionSize().0.binaryOperationResult.2\), 32));
+                            \Posit32::FractionSize().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit32::FractionSize().0.return.2\), 32)) + to_signed(2, 32), 32);
+                            \Posit32::FractionSize().0.binaryOperationResult.1\ := SmartResize((\Posit32::FractionSize().0.binaryOperationResult.0\) + to_signed(2, 32), 32);
+                            \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSize().0.binaryOperationResult.1\);
+                            \Posit32::FractionSize().0.num\ := (\Posit32::FractionSize().0.binaryOperationResult.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- int conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4;
                             -- 
@@ -5099,9 +5099,9 @@ begin
         Variable \Posit32::FractionSizeWithoutSignCheck().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::FractionSizeWithoutSignCheck().0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSizeWithoutSignCheck().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSizeWithoutSignCheck().0.conditionald7ac243f635bdf2cbd7df4de28525d3129c10fd3c3126ba54534613dcb7b9671\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.3\: boolean := false;
     begin 
@@ -5116,9 +5116,9 @@ begin
                 \Posit32::FractionSizeWithoutSignCheck().0._State\ := \Posit32::FractionSizeWithoutSignCheck().0._State_0\;
                 \Posit32::FractionSizeWithoutSignCheck().0.num\ := to_signed(0, 32);
                 \Posit32::FractionSizeWithoutSignCheck().0.return.0\ := to_unsigned(0, 8);
-                \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\ := to_unsigned(0, 8);
-                \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\ := to_unsigned(0, 8);
-                \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\ := to_unsigned(0, 8);
+                \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionSizeWithoutSignCheck().0.conditionald7ac243f635bdf2cbd7df4de28525d3129c10fd3c3126ba54534613dcb7b9671\ := to_signed(0, 32);
                 \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.3\ := false;
             else 
@@ -5146,7 +5146,7 @@ begin
                         -- int num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)((System.Byte)32 - (System.Int32)(System.Byte)(System.Int32)(System.Byte)(System.Int32)Posit32.LengthOfRunOfBits (@this.PositBits, 31) + 2 + 2);
+                        -- num = (int)(32 - (System.Int32)((System.Int32)((System.Int32)(Posit32.LengthOfRunOfBits (@this.PositBits, 31)) + 2) + 2));
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
                         \Posit32::FractionSizeWithoutSignCheck().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= \Posit32::FractionSizeWithoutSignCheck().0.this\.\PositBits\;
@@ -5159,10 +5159,10 @@ begin
                         if (\Posit32::FractionSizeWithoutSignCheck().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::FractionSizeWithoutSignCheck().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
                             \Posit32::FractionSizeWithoutSignCheck().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
                             \Posit32::FractionSizeWithoutSignCheck().0.return.0\ := \Posit32::FractionSizeWithoutSignCheck().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
-                            \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize(\Posit32::FractionSizeWithoutSignCheck().0.return.0\, 32)) + to_signed(2, 32)), 8);
-                            \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize(\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\, 32)) + to_signed(2, 32)), 8);
-                            \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\ := SmartResize(unsigned(to_signed(32, 32) - signed(SmartResize(\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\, 32))), 8);
-                            \Posit32::FractionSizeWithoutSignCheck().0.num\ := signed(SmartResize((\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\), 32));
+                            \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit32::FractionSizeWithoutSignCheck().0.return.0\), 32)) + to_signed(2, 32), 32);
+                            \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\ := SmartResize((\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\) + to_signed(2, 32), 32);
+                            \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\);
+                            \Posit32::FractionSizeWithoutSignCheck().0.num\ := (\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- int conditionald7ac243f635bdf2cbd7df4de28525d3129c10fd3c3126ba54534613dcb7b9671;
                             -- 
@@ -5815,7 +5815,7 @@ begin
                         \Posit32::CountLeadingZeroes(UInt32).0.flag2\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
-                        -- 	b = (System.Byte)(System.Int32)b + 8;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 8);
                         -- 	input = input << 8;
                         -- }
                         -- 
@@ -5864,7 +5864,7 @@ begin
                         \Posit32::CountLeadingZeroes(UInt32).0.flag3\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag3) {
-                        -- 	b = (System.Byte)(System.Int32)b + 4;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 4);
                         -- 	input = input << 4;
                         -- }
                         -- 
@@ -5884,15 +5884,15 @@ begin
                         -- True branch of the if-else started in state \Posit32::CountLeadingZeroes(UInt32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	b = (System.Byte)(System.Int32)b + 8;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 8);
                         -- 	input = input << 8;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)(System.Int32)b + 8;
+                        -- b = (System.Byte)((System.Int32)(b) + 8);
                         -- 
-                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize(\Posit32::CountLeadingZeroes(UInt32).0.b\, 32)) + to_signed(8, 32)), 8);
-                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.5\;
+                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\Posit32::CountLeadingZeroes(UInt32).0.b\), 32)) + to_signed(8, 32)), 8);
+                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := (\Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- input = input << 8;
                         -- 
@@ -5914,7 +5914,7 @@ begin
                         \Posit32::CountLeadingZeroes(UInt32).0.flag4\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.12\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag4) {
-                        -- 	b = (System.Byte)(System.Int32)b + 2;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 2);
                         -- 	input = input << 2;
                         -- }
                         -- 
@@ -5934,15 +5934,15 @@ begin
                         -- True branch of the if-else started in state \Posit32::CountLeadingZeroes(UInt32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	b = (System.Byte)(System.Int32)b + 4;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 4);
                         -- 	input = input << 4;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)(System.Int32)b + 4;
+                        -- b = (System.Byte)((System.Int32)(b) + 4);
                         -- 
-                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize(\Posit32::CountLeadingZeroes(UInt32).0.b\, 32)) + to_signed(4, 32)), 8);
-                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.9\;
+                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\Posit32::CountLeadingZeroes(UInt32).0.b\), 32)) + to_signed(4, 32)), 8);
+                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := (\Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
                         -- input = input << 4;
                         -- 
@@ -5964,7 +5964,7 @@ begin
                         \Posit32::CountLeadingZeroes(UInt32).0.flag5\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.16\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag5) {
-                        -- 	b = (System.Byte)(System.Int32)b + 1;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
                         -- 	input = input << 1;
                         -- }
                         -- 
@@ -5984,15 +5984,15 @@ begin
                         -- True branch of the if-else started in state \Posit32::CountLeadingZeroes(UInt32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	b = (System.Byte)(System.Int32)b + 2;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 2);
                         -- 	input = input << 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)(System.Int32)b + 2;
+                        -- b = (System.Byte)((System.Int32)(b) + 2);
                         -- 
-                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize(\Posit32::CountLeadingZeroes(UInt32).0.b\, 32)) + to_signed(2, 32)), 8);
-                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.13\;
+                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\Posit32::CountLeadingZeroes(UInt32).0.b\), 32)) + to_signed(2, 32)), 8);
+                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := (\Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
                         -- input = input << 2;
                         -- 
@@ -6012,7 +6012,7 @@ begin
                         \Posit32::CountLeadingZeroes(UInt32).0.flag6\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.19\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag6) {
-                        -- 	b = (System.Byte)(System.Int32)b + 1;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
                         -- }
                         -- 
 
@@ -6031,15 +6031,15 @@ begin
                         -- True branch of the if-else started in state \Posit32::CountLeadingZeroes(UInt32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	b = (System.Byte)(System.Int32)b + 1;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
                         -- 	input = input << 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)(System.Int32)b + 1;
+                        -- b = (System.Byte)((System.Int32)(b) + 1);
                         -- 
-                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.17\ := SmartResize(unsigned(signed(SmartResize(\Posit32::CountLeadingZeroes(UInt32).0.b\, 32)) + to_signed(1, 32)), 8);
-                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.17\;
+                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.17\ := SmartResize(unsigned(signed(SmartResize((\Posit32::CountLeadingZeroes(UInt32).0.b\), 32)) + to_signed(1, 32)), 8);
+                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := (\Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.17\);
                         -- The following section was transformed from the .NET statement below:
                         -- input = input << 1;
                         -- 
@@ -6062,14 +6062,14 @@ begin
                         -- True branch of the if-else started in state \Posit32::CountLeadingZeroes(UInt32).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	b = (System.Byte)(System.Int32)b + 1;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)(System.Int32)b + 1;
+                        -- b = (System.Byte)((System.Int32)(b) + 1);
                         -- 
-                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.20\ := SmartResize(unsigned(signed(SmartResize(\Posit32::CountLeadingZeroes(UInt32).0.b\, 32)) + to_signed(1, 32)), 8);
-                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.20\;
+                        \Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.20\ := SmartResize(unsigned(signed(SmartResize((\Posit32::CountLeadingZeroes(UInt32).0.b\), 32)) + to_signed(1, 32)), 8);
+                        \Posit32::CountLeadingZeroes(UInt32).0.b\ := (\Posit32::CountLeadingZeroes(UInt32).0.binaryOperationResult.20\);
                         -- Going to the state after the if-else which was started in state \Posit32::CountLeadingZeroes(UInt32).0._State_11\.
                         if (\Posit32::CountLeadingZeroes(UInt32).0._State\ = \Posit32::CountLeadingZeroes(UInt32).0._State_14\) then 
                             \Posit32::CountLeadingZeroes(UInt32).0._State\ := \Posit32::CountLeadingZeroes(UInt32).0._State_13\;
@@ -6133,7 +6133,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- while (bits > 0u) {
                         -- 	bits = bits >> 1;
-                        -- 	b = (System.Byte)(System.Int32)b + 1;
+                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -6147,7 +6147,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bits = bits >> 1;
-                            -- 	b = (System.Byte)(System.Int32)b + 1;
+                            -- 	b = (System.Byte)((System.Int32)(b) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -6156,10 +6156,10 @@ begin
                             \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.1\ := shift_right(\Posit32::GetMostSignificantOnePosition(UInt32).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                             \Posit32::GetMostSignificantOnePosition(UInt32).0.bits\ := \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b = (System.Byte)(System.Int32)b + 1;
+                            -- b = (System.Byte)((System.Int32)(b) + 1);
                             -- 
-                            \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize(\Posit32::GetMostSignificantOnePosition(UInt32).0.b\, 32)) + to_signed(1, 32)), 8);
-                            \Posit32::GetMostSignificantOnePosition(UInt32).0.b\ := \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.2\;
+                            \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize((\Posit32::GetMostSignificantOnePosition(UInt32).0.b\), 32)) + to_signed(1, 32)), 8);
+                            \Posit32::GetMostSignificantOnePosition(UInt32).0.b\ := (\Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.2\);
                         else 
                             \Posit32::GetMostSignificantOnePosition(UInt32).0._State\ := \Posit32::GetMostSignificantOnePosition(UInt32).0._State_4\;
                         end if;
@@ -6500,7 +6500,7 @@ begin
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.16\: boolean := false;
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.17\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.18\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.2\: boolean := false;
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.19\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.20\: signed(15 downto 0) := to_signed(0, 16);
@@ -6523,7 +6523,7 @@ begin
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.29\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.30\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.31\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.12\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.13\: boolean := false;
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.32\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -6533,7 +6533,7 @@ begin
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.36\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
@@ -6552,7 +6552,7 @@ begin
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.27\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.28\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.41\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.30\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.42\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.43\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -6561,7 +6561,7 @@ begin
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.32\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.45\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.46\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.34\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
@@ -6590,11 +6590,11 @@ begin
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.55\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.56\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.51\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.58\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.59\: boolean := false;
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Addition(Posit32,Posit32).0.return.52\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -6681,7 +6681,7 @@ begin
                 \Posit32::op_Addition(Posit32,Posit32).0.return.16\ := false;
                 \Posit32::op_Addition(Posit32,Posit32).0.return.17\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.18\ := to_signed(0, 16);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\ := to_signed(0, 16);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.2\ := false;
                 \Posit32::op_Addition(Posit32,Posit32).0.return.19\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.20\ := to_signed(0, 16);
@@ -6704,7 +6704,7 @@ begin
                 \Posit32::op_Addition(Posit32,Posit32).0.return.29\ := to_unsigned(0, 8);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.30\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.31\ := to_unsigned(0, 8);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\ := to_unsigned(0, 8);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.12\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.13\ := false;
                 \Posit32::op_Addition(Posit32,Posit32).0.return.32\ := to_unsigned(0, 32);
@@ -6714,7 +6714,7 @@ begin
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.15\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.35\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.36\ := to_unsigned(0, 8);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\ := to_unsigned(0, 8);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.17\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.19\ := to_signed(0, 32);
@@ -6733,7 +6733,7 @@ begin
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.27\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.28\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.41\ := to_unsigned(0, 8);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\ := to_unsigned(0, 8);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.30\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.42\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.43\ := to_unsigned(0, 32);
@@ -6742,7 +6742,7 @@ begin
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.32\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.45\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.46\ := to_unsigned(0, 8);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\ := to_unsigned(0, 8);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\ := to_signed(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.34\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.35\ := to_signed(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.36\ := to_signed(0, 32);
@@ -6771,11 +6771,11 @@ begin
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.55\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.56\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.51\ := to_unsigned(0, 8);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\ := to_unsigned(0, 8);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.58\ := to_signed(0, 16);
                 \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.59\ := false;
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\ := to_signed(0, 16);
-                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\ := to_signed(0, 16);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\ := to_signed(0, 32);
+                \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\ := to_unsigned(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::op_Addition(Posit32,Posit32).0.return.52\ := to_unsigned(0, 32);
             else 
@@ -6969,7 +6969,7 @@ begin
                             -- 					signBit = !flag6;
                             -- 				}
                             -- 				num = 0u;
-                            -- 				num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                            -- 				num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                             -- 				if (num2 >= 0) {
                             -- 					num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                             -- 				}
@@ -6991,14 +6991,14 @@ begin
                             -- 							num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                             -- 						}
                             -- 					}
-                            -- 					num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                            -- 					num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                             -- 				}
                             -- 				else {
                             -- 					flag13 = num2 > 0;
                             -- 					if (flag13) {
                             -- 						num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                             -- 						num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                            -- 						num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                            -- 						num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                             -- 						num = num << num5;
                             -- 						num6 = num5 - num2 + num4;
                             -- 						flag14 = flag7;
@@ -7021,12 +7021,12 @@ begin
                             -- 							}
                             -- 							num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                             -- 						}
-                            -- 						num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 						num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 					}
                             -- 					else {
                             -- 						num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                             -- 						num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                            -- 						num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                            -- 						num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                             -- 						num = num << num8;
                             -- 						flag16 = flag7;
                             -- 						if (flag16) {
@@ -7047,7 +7047,7 @@ begin
                             -- 								num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                             -- 							}
                             -- 						}
-                            -- 						num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 						num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 					}
                             -- 				}
                             -- 				flag19 = num == 0u;
@@ -7055,8 +7055,8 @@ begin
                             -- 					result = new Posit32 (0);
                             -- 				}
                             -- 				else {
-                            -- 					regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                            -- 					exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                            -- 					regimeKValue = (int)((System.Int32)(num3) / 4);
+                            -- 					exponentBits = (uint)((System.Int32)(num3) % 4);
                             -- 					result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                             -- 				}
                             -- 			}
@@ -7150,7 +7150,7 @@ begin
                         -- 					signBit = !flag6;
                         -- 				}
                         -- 				num = 0u;
-                        -- 				num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                        -- 				num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                         -- 				if (num2 >= 0) {
                         -- 					num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                         -- 				}
@@ -7172,14 +7172,14 @@ begin
                         -- 							num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                         -- 						}
                         -- 					}
-                        -- 					num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- 					num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- 				}
                         -- 				else {
                         -- 					flag13 = num2 > 0;
                         -- 					if (flag13) {
                         -- 						num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 						num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 						num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 						num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 						num = num << num5;
                         -- 						num6 = num5 - num2 + num4;
                         -- 						flag14 = flag7;
@@ -7202,12 +7202,12 @@ begin
                         -- 							}
                         -- 							num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 						}
-                        -- 						num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 						num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 					}
                         -- 					else {
                         -- 						num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 						num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 						num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 						num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 						num = num << num8;
                         -- 						flag16 = flag7;
                         -- 						if (flag16) {
@@ -7228,7 +7228,7 @@ begin
                         -- 								num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 							}
                         -- 						}
-                        -- 						num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 						num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 					}
                         -- 				}
                         -- 				flag19 = num == 0u;
@@ -7236,8 +7236,8 @@ begin
                         -- 					result = new Posit32 (0);
                         -- 				}
                         -- 				else {
-                        -- 					regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                        -- 					exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- 					regimeKValue = (int)((System.Int32)(num3) / 4);
+                        -- 					exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 					result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- 				}
                         -- 			}
@@ -7304,7 +7304,7 @@ begin
                             -- 				signBit = !flag6;
                             -- 			}
                             -- 			num = 0u;
-                            -- 			num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                            -- 			num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                             -- 			if (num2 >= 0) {
                             -- 				num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                             -- 			}
@@ -7326,14 +7326,14 @@ begin
                             -- 						num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                             -- 					}
                             -- 				}
-                            -- 				num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                            -- 				num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                             -- 			}
                             -- 			else {
                             -- 				flag13 = num2 > 0;
                             -- 				if (flag13) {
                             -- 					num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                             -- 					num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                            -- 					num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                            -- 					num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                             -- 					num = num << num5;
                             -- 					num6 = num5 - num2 + num4;
                             -- 					flag14 = flag7;
@@ -7356,12 +7356,12 @@ begin
                             -- 						}
                             -- 						num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                             -- 					}
-                            -- 					num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 					num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 				}
                             -- 				else {
                             -- 					num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                             -- 					num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                            -- 					num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                            -- 					num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                             -- 					num = num << num8;
                             -- 					flag16 = flag7;
                             -- 					if (flag16) {
@@ -7382,7 +7382,7 @@ begin
                             -- 							num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                             -- 						}
                             -- 					}
-                            -- 					num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 					num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 				}
                             -- 			}
                             -- 			flag19 = num == 0u;
@@ -7390,8 +7390,8 @@ begin
                             -- 				result = new Posit32 (0);
                             -- 			}
                             -- 			else {
-                            -- 				regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                            -- 				exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                            -- 				regimeKValue = (int)((System.Int32)(num3) / 4);
+                            -- 				exponentBits = (uint)((System.Int32)(num3) % 4);
                             -- 				result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                             -- 			}
                             -- 		}
@@ -7478,7 +7478,7 @@ begin
                         -- 				signBit = !flag6;
                         -- 			}
                         -- 			num = 0u;
-                        -- 			num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                        -- 			num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                         -- 			if (num2 >= 0) {
                         -- 				num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                         -- 			}
@@ -7500,14 +7500,14 @@ begin
                         -- 						num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                         -- 					}
                         -- 				}
-                        -- 				num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- 				num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- 			}
                         -- 			else {
                         -- 				flag13 = num2 > 0;
                         -- 				if (flag13) {
                         -- 					num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 					num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 					num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 					num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 					num = num << num5;
                         -- 					num6 = num5 - num2 + num4;
                         -- 					flag14 = flag7;
@@ -7530,12 +7530,12 @@ begin
                         -- 						}
                         -- 						num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 					}
-                        -- 					num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 					num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 				}
                         -- 				else {
                         -- 					num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 					num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 					num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 					num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 					num = num << num8;
                         -- 					flag16 = flag7;
                         -- 					if (flag16) {
@@ -7556,7 +7556,7 @@ begin
                         -- 							num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 						}
                         -- 					}
-                        -- 					num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 					num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 				}
                         -- 			}
                         -- 			flag19 = num == 0u;
@@ -7564,8 +7564,8 @@ begin
                         -- 				result = new Posit32 (0);
                         -- 			}
                         -- 			else {
-                        -- 				regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                        -- 				exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- 				regimeKValue = (int)((System.Int32)(num3) / 4);
+                        -- 				exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 				result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- 			}
                         -- 		}
@@ -7626,7 +7626,7 @@ begin
                             -- 			signBit = !flag6;
                             -- 		}
                             -- 		num = 0u;
-                            -- 		num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                            -- 		num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                             -- 		if (num2 >= 0) {
                             -- 			num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                             -- 		}
@@ -7648,14 +7648,14 @@ begin
                             -- 					num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                             -- 				}
                             -- 			}
-                            -- 			num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                            -- 			num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                             -- 		}
                             -- 		else {
                             -- 			flag13 = num2 > 0;
                             -- 			if (flag13) {
                             -- 				num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                             -- 				num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                            -- 				num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                            -- 				num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                             -- 				num = num << num5;
                             -- 				num6 = num5 - num2 + num4;
                             -- 				flag14 = flag7;
@@ -7678,12 +7678,12 @@ begin
                             -- 					}
                             -- 					num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                             -- 				}
-                            -- 				num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 				num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 			}
                             -- 			else {
                             -- 				num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                             -- 				num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                            -- 				num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                            -- 				num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                             -- 				num = num << num8;
                             -- 				flag16 = flag7;
                             -- 				if (flag16) {
@@ -7704,7 +7704,7 @@ begin
                             -- 						num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                             -- 					}
                             -- 				}
-                            -- 				num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 				num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 			}
                             -- 		}
                             -- 		flag19 = num == 0u;
@@ -7712,8 +7712,8 @@ begin
                             -- 			result = new Posit32 (0);
                             -- 		}
                             -- 		else {
-                            -- 			regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                            -- 			exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                            -- 			regimeKValue = (int)((System.Int32)(num3) / 4);
+                            -- 			exponentBits = (uint)((System.Int32)(num3) % 4);
                             -- 			result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                             -- 		}
                             -- 	}
@@ -7794,7 +7794,7 @@ begin
                         -- 			signBit = !flag6;
                         -- 		}
                         -- 		num = 0u;
-                        -- 		num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                        -- 		num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                         -- 		if (num2 >= 0) {
                         -- 			num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                         -- 		}
@@ -7816,14 +7816,14 @@ begin
                         -- 					num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                         -- 				}
                         -- 			}
-                        -- 			num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- 			num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- 		}
                         -- 		else {
                         -- 			flag13 = num2 > 0;
                         -- 			if (flag13) {
                         -- 				num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 				num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 				num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 				num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 				num = num << num5;
                         -- 				num6 = num5 - num2 + num4;
                         -- 				flag14 = flag7;
@@ -7846,12 +7846,12 @@ begin
                         -- 					}
                         -- 					num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 				}
-                        -- 				num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 				num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 			}
                         -- 			else {
                         -- 				num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 				num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 				num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 				num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 				num = num << num8;
                         -- 				flag16 = flag7;
                         -- 				if (flag16) {
@@ -7872,7 +7872,7 @@ begin
                         -- 						num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 					}
                         -- 				}
-                        -- 				num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 				num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 			}
                         -- 		}
                         -- 		flag19 = num == 0u;
@@ -7880,8 +7880,8 @@ begin
                         -- 			result = new Posit32 (0);
                         -- 		}
                         -- 		else {
-                        -- 			regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                        -- 			exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- 			regimeKValue = (int)((System.Int32)(num3) / 4);
+                        -- 			exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 			result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- 		}
                         -- 	}
@@ -7936,7 +7936,7 @@ begin
                             -- 		signBit = !flag6;
                             -- 	}
                             -- 	num = 0u;
-                            -- 	num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                            -- 	num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                             -- 	if (num2 >= 0) {
                             -- 		num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                             -- 	}
@@ -7958,14 +7958,14 @@ begin
                             -- 				num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                             -- 			}
                             -- 		}
-                            -- 		num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                            -- 		num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                             -- 	}
                             -- 	else {
                             -- 		flag13 = num2 > 0;
                             -- 		if (flag13) {
                             -- 			num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                             -- 			num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                            -- 			num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                            -- 			num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                             -- 			num = num << num5;
                             -- 			num6 = num5 - num2 + num4;
                             -- 			flag14 = flag7;
@@ -7988,12 +7988,12 @@ begin
                             -- 				}
                             -- 				num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                             -- 			}
-                            -- 			num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 			num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 		}
                             -- 		else {
                             -- 			num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                             -- 			num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                            -- 			num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                            -- 			num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                             -- 			num = num << num8;
                             -- 			flag16 = flag7;
                             -- 			if (flag16) {
@@ -8014,7 +8014,7 @@ begin
                             -- 					num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                             -- 				}
                             -- 			}
-                            -- 			num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                            -- 			num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                             -- 		}
                             -- 	}
                             -- 	flag19 = num == 0u;
@@ -8022,8 +8022,8 @@ begin
                             -- 		result = new Posit32 (0);
                             -- 	}
                             -- 	else {
-                            -- 		regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                            -- 		exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                            -- 		regimeKValue = (int)((System.Int32)(num3) / 4);
+                            -- 		exponentBits = (uint)((System.Int32)(num3) % 4);
                             -- 		result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                             -- 	}
                             -- }
@@ -8098,7 +8098,7 @@ begin
                         -- 		signBit = !flag6;
                         -- 	}
                         -- 	num = 0u;
-                        -- 	num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                        -- 	num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                         -- 	if (num2 >= 0) {
                         -- 		num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
                         -- 	}
@@ -8120,14 +8120,14 @@ begin
                         -- 				num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                         -- 			}
                         -- 		}
-                        -- 		num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- 		num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- 	}
                         -- 	else {
                         -- 		flag13 = num2 > 0;
                         -- 		if (flag13) {
                         -- 			num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 			num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 			num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 			num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 			num = num << num5;
                         -- 			num6 = num5 - num2 + num4;
                         -- 			flag14 = flag7;
@@ -8150,12 +8150,12 @@ begin
                         -- 				}
                         -- 				num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 			}
-                        -- 			num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 			num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 		}
                         -- 		else {
                         -- 			num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 			num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 			num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 			num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 			num = num << num8;
                         -- 			flag16 = flag7;
                         -- 			if (flag16) {
@@ -8176,7 +8176,7 @@ begin
                         -- 					num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 				}
                         -- 			}
-                        -- 			num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 			num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 		}
                         -- 	}
                         -- 	flag19 = num == 0u;
@@ -8184,8 +8184,8 @@ begin
                         -- 		result = new Posit32 (0);
                         -- 	}
                         -- 	else {
-                        -- 		regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                        -- 		exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- 		regimeKValue = (int)((System.Int32)(num3) / 4);
+                        -- 		exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 		result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- 	}
                         -- }
@@ -8534,7 +8534,7 @@ begin
                         -- 
                         \Posit32::op_Addition(Posit32,Posit32).0.num\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (int)((System.Int16)(System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2) - (System.Int32)Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2));
+                        -- num2 = (int)((System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2)) - (System.Int32)(Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck2, exponentValueWithoutSignCheck2, 2)));
                         -- 
                         -- Starting state machine invocation for the following method: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor(System.SByte,System.UInt32,System.Byte)
                         \Posit32::op_Addition(Posit32,Posit32).0.Posit32::CalculateScaleFactor(SByte,UInt32,Byte).regimeKValue.parameter.Out.0\ <= \Posit32::op_Addition(Posit32,Posit32).0.regimeKValueWithoutSignCheck\;
@@ -8601,8 +8601,8 @@ begin
                         if (\Posit32::op_Addition(Posit32,Posit32).0.Posit32::CalculateScaleFactor(SByte,UInt32,Byte)._Started.0\ = \Posit32::op_Addition(Posit32,Posit32).0.Posit32::CalculateScaleFactor(SByte,UInt32,Byte)._Finished.0\) then 
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::CalculateScaleFactor(SByte,UInt32,Byte)._Started.0\ <= false;
                             \Posit32::op_Addition(Posit32,Posit32).0.return.18\ := \Posit32::op_Addition(Posit32,Posit32).0.Posit32::CalculateScaleFactor(SByte,UInt32,Byte).return.0\;
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\ := SmartResize(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.17\, 32) - SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.18\, 32), 16);
-                            \Posit32::op_Addition(Posit32,Posit32).0.num2\ := SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\), 32);
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\ := SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.17\), 32) - SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.18\), 32);
+                            \Posit32::op_Addition(Posit32,Posit32).0.num2\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- if (num2 >= 0) {
                             -- 	num3 = Posit32.CalculateScaleFactor (regimeKValueWithoutSignCheck, exponentValueWithoutSignCheck, 2);
@@ -8647,14 +8647,14 @@ begin
                         -- 			num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                         -- 		}
                         -- 	}
-                        -- 	num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- 	num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- }
                         -- else {
                         -- 	flag13 = num2 > 0;
                         -- 	if (flag13) {
                         -- 		num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 		num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 		num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 		num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 		num = num << num5;
                         -- 		num6 = num5 - num2 + num4;
                         -- 		flag14 = flag7;
@@ -8677,12 +8677,12 @@ begin
                         -- 			}
                         -- 			num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 		}
-                        -- 		num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 		num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 	}
                         -- 	else {
                         -- 		num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 		num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 		num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 		num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 		num = num << num8;
                         -- 		flag16 = flag7;
                         -- 		if (flag16) {
@@ -8703,7 +8703,7 @@ begin
                         -- 				num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 			}
                         -- 		}
-                        -- 		num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 		num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 	}
                         -- }
                         -- 
@@ -8793,8 +8793,8 @@ begin
                         -- 	result = new Posit32 (0);
                         -- }
                         -- else {
-                        -- 	regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                        -- 	exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- 	regimeKValue = (int)((System.Int32)(num3) / 4);
+                        -- 	exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 	result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- }
                         -- 
@@ -8827,7 +8827,7 @@ begin
                         -- 			num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
                         -- 		}
                         -- 	}
-                        -- 	num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- 	num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -8863,7 +8863,7 @@ begin
                     when \Posit32::op_Addition(Posit32,Posit32).0._State_55\ => 
                         -- State after the if-else which was started in state \Posit32::op_Addition(Posit32,Posit32).0._State_54\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left)));
+                        -- num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left))))));
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::op_Addition(Posit32,Posit32).0.num\;
@@ -9128,9 +9128,9 @@ begin
                         if (\Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::op_Addition(Posit32,Posit32).0.return.31\ := \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.29\, 32)) - signed(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.31\, 32))), 8);
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.12\ := SmartResize(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.num3\, 32) + signed(SmartResize(signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\), 16)), 32)), 16);
-                            \Posit32::op_Addition(Posit32,Posit32).0.num3\ := \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.12\;
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\ := SmartResize(signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.29\), 32)) - signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.31\), 32)), 16);
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.12\ := SmartResize(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.num3\), 32) + signed(SmartResize(((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.11\)), 32)), 16);
+                            \Posit32::op_Addition(Posit32,Posit32).0.num3\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.12\);
                             -- Going to the state after the if-else which was started in state \Posit32::op_Addition(Posit32,Posit32).0._State_47\.
                             if (\Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32::op_Addition(Posit32,Posit32).0._State_82\) then 
                                 \Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32::op_Addition(Posit32,Posit32).0._State_53\;
@@ -9145,7 +9145,7 @@ begin
                         -- 	if (flag13) {
                         -- 		num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 		num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 		num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 		num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 		num = num << num5;
                         -- 		num6 = num5 - num2 + num4;
                         -- 		flag14 = flag7;
@@ -9168,12 +9168,12 @@ begin
                         -- 			}
                         -- 			num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 		}
-                        -- 		num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 		num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 	}
                         -- 	else {
                         -- 		num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 		num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 		num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 		num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 		num = num << num8;
                         -- 		flag16 = flag7;
                         -- 		if (flag16) {
@@ -9194,7 +9194,7 @@ begin
                         -- 				num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 			}
                         -- 		}
-                        -- 		num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 		num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 	}
                         -- }
                         -- 
@@ -9207,7 +9207,7 @@ begin
                         -- if (flag13) {
                         -- 	num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 	num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 	num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 	num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 	num = num << num5;
                         -- 	num6 = num5 - num2 + num4;
                         -- 	flag14 = flag7;
@@ -9230,12 +9230,12 @@ begin
                         -- 		}
                         -- 		num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 	}
-                        -- 	num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 	num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- }
                         -- else {
                         -- 	num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 	num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 	num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 	num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 	num = num << num8;
                         -- 	flag16 = flag7;
                         -- 	if (flag16) {
@@ -9256,7 +9256,7 @@ begin
                         -- 			num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 		}
                         -- 	}
-                        -- 	num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 	num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- }
                         -- 
 
@@ -9284,7 +9284,7 @@ begin
                         -- {
                         -- 	num4 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right));
                         -- 	num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left);
-                        -- 	num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                        -- 	num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                         -- 	num = num << num5;
                         -- 	num6 = num5 - num2 + num4;
                         -- 	flag14 = flag7;
@@ -9307,7 +9307,7 @@ begin
                         -- 		}
                         -- 		num = num - conditional3d20771b06057863e77a8c836d545c9c900ae721dce34f49ca386bb071cfecfe;
                         -- 	}
-                        -- 	num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 	num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -9361,7 +9361,7 @@ begin
                             \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.15\ := \Posit32::op_Addition(Posit32,Posit32).0.num\ + \Posit32::op_Addition(Posit32,Posit32).0.return.34\;
                             \Posit32::op_Addition(Posit32,Posit32).0.num\ := \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.15\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num5 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left)));
+                            -- num5 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (left))));
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Posit32::op_Addition(Posit32,Posit32).0.left\;
@@ -9385,8 +9385,8 @@ begin
                         if (\Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::op_Addition(Posit32,Posit32).0.return.36\ := \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\ := SmartResize(unsigned(to_signed(31, 32) - signed(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.36\, 32))), 8);
-                            \Posit32::op_Addition(Posit32,Posit32).0.num5\ := signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\), 32));
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\ := to_signed(31, 32) - signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.36\), 32));
+                            \Posit32::op_Addition(Posit32,Posit32).0.num5\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.16\);
                             -- The following section was transformed from the .NET statement below:
                             -- num = num << num5;
                             -- 
@@ -9443,7 +9443,7 @@ begin
                     when \Posit32::op_Addition(Posit32,Posit32).0._State_94\ => 
                         -- State after the if-else which was started in state \Posit32::op_Addition(Posit32,Posit32).0._State_93\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::op_Addition(Posit32,Posit32).0.num\;
@@ -9672,9 +9672,9 @@ begin
                         if (\Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::op_Addition(Posit32,Posit32).0.return.41\ := \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\ := SmartResize(unsigned(signed(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.41\, 32)) - to_signed(31, 32)), 8);
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.30\ := SmartResize(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.num3\, 32) + signed(SmartResize(signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\), 16)), 32)), 16);
-                            \Posit32::op_Addition(Posit32,Posit32).0.num3\ := \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.30\;
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\ := SmartResize(signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.41\), 32)) - to_signed(31, 32), 16);
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.30\ := SmartResize(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.num3\), 32) + signed(SmartResize(((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.29\)), 32)), 16);
+                            \Posit32::op_Addition(Posit32,Posit32).0.num3\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.30\);
                             -- Going to the state after the if-else which was started in state \Posit32::op_Addition(Posit32,Posit32).0._State_83\.
                             if (\Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32::op_Addition(Posit32,Posit32).0._State_109\) then 
                                 \Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32::op_Addition(Posit32,Posit32).0._State_84\;
@@ -9687,7 +9687,7 @@ begin
                         -- {
                         -- 	num7 = (int)(Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (right) - Lombiq.Arithmetics.Posit32.FractionSizeWithoutSignCheck (left));
                         -- 	num = num + Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right);
-                        -- 	num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                        -- 	num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                         -- 	num = num << num8;
                         -- 	flag16 = flag7;
                         -- 	if (flag16) {
@@ -9708,7 +9708,7 @@ begin
                         -- 			num = num - Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (left) >> -num8 + num2 + num7;
                         -- 		}
                         -- 	}
-                        -- 	num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- 	num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -9762,7 +9762,7 @@ begin
                             \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.32\ := \Posit32::op_Addition(Posit32,Posit32).0.num\ + \Posit32::op_Addition(Posit32,Posit32).0.return.44\;
                             \Posit32::op_Addition(Posit32,Posit32).0.num\ := \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.32\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num8 = (int)((System.Byte)31 - (System.Int32)Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right)));
+                            -- num8 = (int)(31 - (System.Int32)(Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBitWithoutSignCheck (right))));
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32::op_Addition(Posit32,Posit32).0._State_116\;
@@ -9794,8 +9794,8 @@ begin
                         if (\Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::op_Addition(Posit32,Posit32).0.return.46\ := \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\ := SmartResize(unsigned(to_signed(31, 32) - signed(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.46\, 32))), 8);
-                            \Posit32::op_Addition(Posit32,Posit32).0.num8\ := signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\), 32));
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\ := to_signed(31, 32) - signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.46\), 32));
+                            \Posit32::op_Addition(Posit32,Posit32).0.num8\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.33\);
                             -- The following section was transformed from the .NET statement below:
                             -- num = num << num8;
                             -- 
@@ -9841,7 +9841,7 @@ begin
                     when \Posit32::op_Addition(Posit32,Posit32).0._State_120\ => 
                         -- State after the if-else which was started in state \Posit32::op_Addition(Posit32,Posit32).0._State_119\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (System.Int16)(System.Int32)num3 + (System.Int32)(short)((System.Byte)(System.Int32)Posit32.GetMostSignificantOnePosition (num) - 31);
+                        -- num3 = (System.Int16)((System.Int32)(num3) + (System.Int32)((short)((System.Int32)(Posit32.GetMostSignificantOnePosition (num)) - 31)));
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32::op_Addition(Posit32,Posit32).0._State_137\;
@@ -10091,9 +10091,9 @@ begin
                         if (\Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::op_Addition(Posit32,Posit32).0.return.51\ := \Posit32::op_Addition(Posit32,Posit32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\ := SmartResize(unsigned(signed(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.return.51\, 32)) - to_signed(31, 32)), 8);
-                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.58\ := SmartResize(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.num3\, 32) + signed(SmartResize(signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\), 16)), 32)), 16);
-                            \Posit32::op_Addition(Posit32,Posit32).0.num3\ := \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.58\;
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\ := SmartResize(signed(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.return.51\), 32)) - to_signed(31, 32), 16);
+                            \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.58\ := SmartResize(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.num3\), 32) + signed(SmartResize(((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.57\)), 32)), 16);
+                            \Posit32::op_Addition(Posit32,Posit32).0.num3\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.58\);
                             -- Going to the state after the if-else which was started in state \Posit32::op_Addition(Posit32,Posit32).0._State_83\.
                             if (\Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32::op_Addition(Posit32,Posit32).0._State_138\) then 
                                 \Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32::op_Addition(Posit32,Posit32).0._State_84\;
@@ -10142,18 +10142,18 @@ begin
                         -- False branch of the if-else started in state \Posit32::op_Addition(Posit32,Posit32).0._State_53\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
-                        -- 	exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- 	regimeKValue = (int)((System.Int32)(num3) / 4);
+                        -- 	exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 	result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue = (int)((System.Int16)(System.Int32)num3 / 4);
+                        -- regimeKValue = (int)((System.Int32)(num3) / 4);
                         -- 
-                        \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\ := SmartResize(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.num3\, 32) / to_signed(4, 32), 16);
-                        \Posit32::op_Addition(Posit32,Posit32).0.regimeKValue\ := SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\), 32);
+                        \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\ := SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.num3\), 32) / to_signed(4, 32);
+                        \Posit32::op_Addition(Posit32,Posit32).0.regimeKValue\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.60\);
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = (uint)((System.Int16)(System.Int32)num3 % 4);
+                        -- exponentBits = (uint)((System.Int32)(num3) % 4);
                         -- 
                         \Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32::op_Addition(Posit32,Posit32).0._State_143\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -10166,10 +10166,10 @@ begin
                         else 
                             \Posit32::op_Addition(Posit32,Posit32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \Posit32::op_Addition(Posit32,Posit32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\ := SmartResize(SmartResize(\Posit32::op_Addition(Posit32,Posit32).0.num3\, 32) mod to_signed(4, 32), 16);
+                        \Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\ := unsigned(SmartResize((\Posit32::op_Addition(Posit32,Posit32).0.num3\), 32) mod to_signed(4, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \Posit32::op_Addition(Posit32,Posit32).0._State_144\ => 
-                        \Posit32::op_Addition(Posit32,Posit32).0.exponentBits\ := ToUnsignedAndExpand((\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\), 32);
+                        \Posit32::op_Addition(Posit32,Posit32).0.exponentBits\ := (\Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.61\);
                         -- The following section was transformed from the .NET statement below:
                         -- result = new Posit32 (Lombiq.Arithmetics.Posit32.AssemblePositBitsWithRounding (left, signBit, regimeKValue, exponentBits, num), true);
                         -- 
@@ -10668,7 +10668,7 @@ begin
         Variable \Posit32::op_Explicit(Posit32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Explicit(Posit32).0.result\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::op_Explicit(Posit32).0.return.0\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::op_Explicit(Posit32).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
@@ -10712,7 +10712,7 @@ begin
                 \Posit32::op_Explicit(Posit32).0.num2\ := to_unsigned(0, 32);
                 \Posit32::op_Explicit(Posit32).0.result\ := to_signed(0, 32);
                 \Posit32::op_Explicit(Posit32).0.return.0\ := to_signed(0, 8);
-                \Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_signed(0, 8);
+                \Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Posit32::op_Explicit(Posit32).0.return.1\ := to_unsigned(0, 32);
                 \Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := to_signed(0, 64);
                 \Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := to_signed(0, 64);
@@ -10774,7 +10774,7 @@ begin
                         -- int result;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (long)((System.SByte)(System.Int32)Lombiq.Arithmetics.Posit32.GetRegimeKValue (x) * 4) + (long)((ulong)Lombiq.Arithmetics.Posit32.GetExponentValue (x));
+                        -- num = (long)((System.Int32)(Lombiq.Arithmetics.Posit32.GetRegimeKValue (x)) * 4) + (long)((ulong)Lombiq.Arithmetics.Posit32.GetExponentValue (x));
                         -- 
                         -- Starting state machine invocation for the following method: System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue()
                         \Posit32::op_Explicit(Posit32).0.Posit32::GetRegimeKValue().this.parameter.Out.0\ <= \Posit32::op_Explicit(Posit32).0.x\;
@@ -10786,7 +10786,7 @@ begin
                         if (\Posit32::op_Explicit(Posit32).0.Posit32::GetRegimeKValue()._Started.0\ = \Posit32::op_Explicit(Posit32).0.Posit32::GetRegimeKValue()._Finished.0\) then 
                             \Posit32::op_Explicit(Posit32).0.Posit32::GetRegimeKValue()._Started.0\ <= false;
                             \Posit32::op_Explicit(Posit32).0.return.0\ := \Posit32::op_Explicit(Posit32).0.Posit32::GetRegimeKValue().return.0\;
-                            \Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := SmartResize(SmartResize(\Posit32::op_Explicit(Posit32).0.return.0\, 32) * to_signed(4, 32), 8);
+                            \Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := SmartResize(SmartResize((\Posit32::op_Explicit(Posit32).0.return.0\), 32) * to_signed(4, 32), 64);
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue()
                             \Posit32::op_Explicit(Posit32).0.Posit32::GetExponentValue().this.parameter.Out.0\ <= \Posit32::op_Explicit(Posit32).0.x\;
                             \Posit32::op_Explicit(Posit32).0.Posit32::GetExponentValue()._Started.0\ <= true;
@@ -10798,7 +10798,7 @@ begin
                         if (\Posit32::op_Explicit(Posit32).0.Posit32::GetExponentValue()._Started.0\ = \Posit32::op_Explicit(Posit32).0.Posit32::GetExponentValue()._Finished.0\) then 
                             \Posit32::op_Explicit(Posit32).0.Posit32::GetExponentValue()._Started.0\ <= false;
                             \Posit32::op_Explicit(Posit32).0.return.1\ := \Posit32::op_Explicit(Posit32).0.Posit32::GetExponentValue().return.0\;
-                            \Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := SmartResize((\Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\), 64) + signed((SmartResize(\Posit32::op_Explicit(Posit32).0.return.1\, 64)));
+                            \Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := (\Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\) + signed((SmartResize(\Posit32::op_Explicit(Posit32).0.return.1\, 64)));
                             \Posit32::op_Explicit(Posit32).0.num\ := \Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- flag = num + 1L < 31L;
