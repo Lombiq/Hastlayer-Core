@@ -99,8 +99,6 @@ namespace Hast.Transformer.Services
 
                 if (!_binaryOperatorsWithNumericPromotions.Contains(binaryOperatorExpression.Operator)) return;
 
-                // If either type reference is null then most possibly that operand is a primitive value.
-
                 var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
                 if (binaryOperatorExpression.Left is CastExpression)
                 {
@@ -132,13 +130,13 @@ namespace Hast.Transformer.Services
 
                 void replaceLeft(TypeReference typeReference)
                 {
-                    binaryOperatorExpression.Left.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Left));
+                    binaryOperatorExpression.Left.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Left, out var _));
                     setResultTypeReference(typeReference);
                 }
 
                 void replaceRight(TypeReference typeReference)
                 {
-                    binaryOperatorExpression.Right.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Right));
+                    binaryOperatorExpression.Right.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Right, out var _));
                     setResultTypeReference(typeReference);
                 }
 
@@ -155,12 +153,19 @@ namespace Hast.Transformer.Services
                         return;
                     }
 
-                    // We should also put a cast around it if necessary so it produces the same type as before.
-                    if (!(binaryOperatorExpression.Parent is CastExpression))
+                    // We should also put a cast around it if necessary so it produces the same type as before. But only
+                    // if this binary operator expression is not also in another binary operator expression, when it 
+                    // will be cast again.
+                    var firstNonParenthesizedExpressionParent = binaryOperatorExpression.FindFirstNonParenthesizedExpressionParent();
+                    if (!(firstNonParenthesizedExpressionParent is CastExpression) && 
+                        !(firstNonParenthesizedExpressionParent is BinaryOperatorExpression))
                     {
-                        var castExpression = CreateCast(binaryOperatorExpression.GetResultTypeReference(), binaryOperatorExpression);
+                        var castExpression = CreateCast(
+                            binaryOperatorExpression.GetResultTypeReference(), 
+                            binaryOperatorExpression,
+                            out var clonedBinaryOperatorExpression);
                         binaryOperatorExpression.ReplaceWith(castExpression);
-                        binaryOperatorExpression = (BinaryOperatorExpression)castExpression.Expression;
+                        binaryOperatorExpression = clonedBinaryOperatorExpression;
                     }
 
                     binaryOperatorExpression.ReplaceAnnotations(typeReference.ToTypeInformation());
@@ -222,14 +227,14 @@ namespace Hast.Transformer.Services
 
                 void replace(TypeReference newTypeReference)
                 {
-                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newTypeReference, unaryOperatorExpression.Expression));
+                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newTypeReference, unaryOperatorExpression.Expression, out var _));
 
                     // We should also put a cast around it if necessary so it produces the same type as before.
-                    if (!(unaryOperatorExpression.Parent is CastExpression))
+                    if (!(unaryOperatorExpression.FindFirstNonParenthesizedExpressionParent() is CastExpression))
                     {
-                        var castExpression = CreateCast(typeReference, unaryOperatorExpression);
+                        var castExpression = CreateCast(typeReference, unaryOperatorExpression, out var clonedUnaryOperatorExpression);
                         unaryOperatorExpression.ReplaceWith(castExpression);
-                        unaryOperatorExpression = (UnaryOperatorExpression)castExpression.Expression;
+                        unaryOperatorExpression = clonedUnaryOperatorExpression;
                     }
                 }
 
@@ -254,11 +259,15 @@ namespace Hast.Transformer.Services
             }
 
 
-            private static CastExpression CreateCast(TypeReference toTypeReference, Expression expression)
+            private static CastExpression CreateCast<T>(TypeReference toTypeReference, T expression, out T clonedExpression)
+                where T : Expression
             {
                 var castExpression = new CastExpression { Type = AstType.Create(toTypeReference.FullName) };
 
-                castExpression.Expression = expression.Clone();
+                clonedExpression = (T)expression.Clone();
+                castExpression.Expression = new ParenthesizedExpression(clonedExpression);
+                var expressionTypeInformation = expression.GetTypeInformationOrCreateFromActualTypeReference();
+                if (expressionTypeInformation != null) castExpression.Expression.AddAnnotation(expressionTypeInformation);
                 castExpression.AddAnnotation(toTypeReference.ToTypeInformation());
 
                 return castExpression;
