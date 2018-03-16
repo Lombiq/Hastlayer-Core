@@ -38,6 +38,7 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IEnumTypesCreator _enumTypesCreator;
         private readonly IPocoTransformer _pocoTransformer;
+        private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
 
 
         public TransformedVhdlManifestBuilder(
@@ -51,7 +52,8 @@ namespace Hast.Transformer.Vhdl.Services
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
-            IPocoTransformer pocoTransformer)
+            IPocoTransformer pocoTransformer,
+            IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
@@ -64,6 +66,7 @@ namespace Hast.Transformer.Vhdl.Services
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _enumTypesCreator = enumTypesCreator;
             _pocoTransformer = pocoTransformer;
+            _remainderOperatorExpressionsExpander = remainderOperatorExpressionsExpander;
         }
 
 
@@ -71,8 +74,12 @@ namespace Hast.Transformer.Vhdl.Services
         {
             var syntaxTree = transformationContext.SyntaxTree;
 
+            // Running verifications.
             _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
             _hardwareEntryPointsVerifier.VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
+
+            // Running AST changes.
+            _remainderOperatorExpressionsExpander.ExpandRemainderOperatorExpressions(syntaxTree);
 
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
@@ -103,7 +110,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             var dependentTypesTables = new List<DependentTypesTable>();
 
-            // Adding array types for any arrays created in code
+            // Adding array types for any arrays created in code.
             // This is necessary in a separate step because in VHDL the array types themselves should be created too
             // (like in C# we'd need to first define what an int[] is before being able to create one).
             var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree, vhdlTransformationContext);
@@ -118,7 +125,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
-            // Adding enum types
+            // Adding enum types.
             var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
             if (enumDeclarations.Any())
             {
@@ -129,7 +136,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
-            // Doing transformations
+            // Doing transformations.
             var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var warnings = new List<ITransformationWarning>();
             var potentiallyInvokingArchitectureComponents = transformerResults
@@ -182,7 +189,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
-            // Proxying external invocations
+            // Proxying external invocations.
             var hardwareEntryPointMemberResults = transformerResults.Where(result => result.IsHardwareEntryPointMember);
             if (!hardwareEntryPointMemberResults.Any())
             {
@@ -196,7 +203,7 @@ namespace Hast.Transformer.Vhdl.Services
             hastIpArchitecture.Add(externalInvocationProxy.BuildBody());
 
 
-            // Proxying internal invocations
+            // Proxying internal invocations.
             var internaInvocationProxies = _internalInvocationProxyBuilder.BuildProxy(
                 potentiallyInvokingArchitectureComponents,
                 vhdlTransformationContext);
@@ -207,7 +214,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
-            // Proxying SimpleMemory operations
+            // Proxying SimpleMemory operations.
             if (useSimpleMemory)
             {
                 _simpleMemoryComponentBuilderLazy.Value.AddSimpleMemoryComponentsToArchitecture(
@@ -216,7 +223,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
-            // Adding common ports
+            // Adding common ports.
             var ports = hastIpEntity.Ports;
             ports.Add(new Port
             {
