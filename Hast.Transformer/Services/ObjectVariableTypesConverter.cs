@@ -38,10 +38,13 @@ namespace Hast.Transformer.Services
                     var castExpression = castExpressionFindingVisitor.Expression;
                     if (castExpression != null)
                     {
+                        var actualTypeReference = castExpression.GetActualTypeReference(true);
                         objectParameter.Type = castExpression.Type.Clone();
-                        objectParameter.Annotation<ParameterDefinition>().ParameterType = castExpression.GetActualTypeReference(true);
+                        objectParameter.Annotation<ParameterDefinition>().ParameterType = actualTypeReference;
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
+
+                        methodDeclaration.Body.AcceptVisitor(new ParameterReferencesTypeChangingVisitor(objectParameter.Name, actualTypeReference));
                     }
                 }
             }
@@ -77,6 +80,29 @@ namespace Hast.Transformer.Services
                             Expression = null;
                         }
                     }
+                }
+            }
+
+            private class ParameterReferencesTypeChangingVisitor : DepthFirstAstVisitor
+            {
+                private readonly string _parameterName;
+                private readonly TypeReference _typeReference;
+
+
+                public ParameterReferencesTypeChangingVisitor(string parameterName, TypeReference typeReference)
+                {
+                    _parameterName = parameterName;
+                    _typeReference = typeReference;
+                }
+
+
+                public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
+                {
+                    base.VisitIdentifierExpression(identifierExpression);
+
+                    if (identifierExpression.Identifier != _parameterName) return;
+
+                    identifierExpression.ReplaceAnnotations(_typeReference.ToTypeInformation());
                 }
             }
         }
