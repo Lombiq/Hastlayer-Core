@@ -9487,7 +9487,7 @@ begin
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.7\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.8\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -9516,7 +9516,7 @@ begin
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.20\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.21\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.19\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -9576,7 +9576,7 @@ begin
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.8\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead\ := to_unsigned(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ := to_unsigned(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := to_unsigned(0, 32);
@@ -9594,7 +9594,7 @@ begin
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.18\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.21\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138\ := to_unsigned(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ := to_unsigned(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.19\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.20\ := to_unsigned(0, 32);
@@ -9744,9 +9744,9 @@ begin
                             -- 		flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, (System.UInt16)((System.Int32)(exponentBits.Size) - 1)));
                             -- 		if (flag3) {
                             -- 			uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
-                            -- 			System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 			remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 			if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 			System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
+                            -- 			remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 			if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                             -- 				conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                             -- 			}
                             -- 			else {
@@ -9782,9 +9782,9 @@ begin
                             -- 			flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, (System.UInt16)((System.Int32)(fractionBits.Size) - 1)));
                             -- 			if (flag6) {
                             -- 				uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                            -- 				System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 				remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 				if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 				System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                            -- 				remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 				if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                             -- 					conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                             -- 				}
                             -- 				else {
@@ -9840,9 +9840,9 @@ begin
                         -- 		flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, (System.UInt16)((System.Int32)(exponentBits.Size) - 1)));
                         -- 		if (flag3) {
                         -- 			uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
-                        -- 			System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 			remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 			if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 			System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
+                        -- 			remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 			if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                         -- 				conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                         -- 			}
                         -- 			else {
@@ -9939,9 +9939,9 @@ begin
                             -- 	flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, (System.UInt16)((System.Int32)(exponentBits.Size) - 1)));
                             -- 	if (flag3) {
                             -- 		uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
-                            -- 		System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 		remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 		if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 		System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
+                            -- 		remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 		if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                             -- 			conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                             -- 		}
                             -- 		else {
@@ -9998,9 +9998,9 @@ begin
                         -- 	flag3 = BitMask.op_Equality (exponentBits, Lombiq.Arithmetics.BitMask.SetOne (object3f55db8a5525201dfd948eff04e8c01adc995a994819ecb564d7c507f969bc64, (System.UInt16)((System.Int32)(exponentBits.Size) - 1)));
                         -- 	if (flag3) {
                         -- 		uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
-                        -- 		System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 		remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 		if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 		System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
+                        -- 		remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 		if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                         -- 			conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                         -- 		}
                         -- 		else {
@@ -10069,9 +10069,9 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag3) {
                             -- 	uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
-                            -- 	System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 	remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 	if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 	System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
+                            -- 	remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 	if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                             -- 		conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                             -- 	}
                             -- 	else {
@@ -10108,9 +10108,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
-                        -- 	System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 	remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 	if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 	System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
+                        -- 	remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 	if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                         -- 		conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                         -- 	}
                         -- 	else {
@@ -10123,10 +10123,10 @@ begin
                         -- uint conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
+                        -- System.UInt32 remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.BitMask::GetLowest32Bits()
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits().this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.bitMask\;
@@ -10138,18 +10138,18 @@ begin
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits().return.0\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- if (remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba - remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba / 2u * 2u == 1u) {
                             -- 	conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 1u;
                             -- }
                             -- else {
                             -- 	conditional426ab363dd998a57150772a7f005c526757641367825492366232e2bbc3fdead = 0u;
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ / to_unsigned(2, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba\ / to_unsigned(2, 32);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ * to_unsigned(2, 32), 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand3a0fee58af5b3dfadb0b9f5f0a40c7b2a49a566a63ec08634c07465606ff8fba\ - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ = to_unsigned(1, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -10322,9 +10322,9 @@ begin
                         -- 			flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, (System.UInt16)((System.Int32)(fractionBits.Size) - 1)));
                         -- 			if (flag6) {
                         -- 				uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                        -- 				System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 				remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 				if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 				System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                        -- 				remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 				if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                         -- 					conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                         -- 				}
                         -- 				else {
@@ -10428,9 +10428,9 @@ begin
                             -- 		flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, (System.UInt16)((System.Int32)(fractionBits.Size) - 1)));
                             -- 		if (flag6) {
                             -- 			uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                            -- 			System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 			remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 			if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 			System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                            -- 			remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 			if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                             -- 				conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                             -- 			}
                             -- 			else {
@@ -10493,9 +10493,9 @@ begin
                         -- 		flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, (System.UInt16)((System.Int32)(fractionBits.Size) - 1)));
                         -- 		if (flag6) {
                         -- 			uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                        -- 			System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 			remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 			if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 			System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                        -- 			remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 			if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                         -- 				conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                         -- 			}
                         -- 			else {
@@ -10586,9 +10586,9 @@ begin
                             -- 	flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, (System.UInt16)((System.Int32)(fractionBits.Size) - 1)));
                             -- 	if (flag6) {
                             -- 		uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                            -- 		System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 		remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 		if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 		System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                            -- 		remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 		if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                             -- 			conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                             -- 		}
                             -- 		else {
@@ -10630,9 +10630,9 @@ begin
                         -- 	flag6 = BitMask.op_Equality (fractionBits, Lombiq.Arithmetics.BitMask.SetOne (object3c82b1b9f766d747034df984563ff6ce6623e93e4c8875c78dfb5da8091645af, (System.UInt16)((System.Int32)(fractionBits.Size) - 1)));
                         -- 	if (flag6) {
                         -- 		uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                        -- 		System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 		remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 		if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 		System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                        -- 		remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 		if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                         -- 			conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                         -- 		}
                         -- 		else {
@@ -10701,9 +10701,9 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag6) {
                             -- 	uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                            -- 	System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                            -- 	remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                            -- 	if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- 	System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                            -- 	remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                            -- 	if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                             -- 		conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                             -- 	}
                             -- 	else {
@@ -10740,9 +10740,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
-                        -- 	System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
-                        -- 	remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
-                        -- 	if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                        -- 	System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
+                        -- 	remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- 	if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                         -- 		conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                         -- 	}
                         -- 	else {
@@ -10755,10 +10755,10 @@ begin
                         -- uint conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt32 remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f;
+                        -- System.UInt32 remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
+                        -- remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 = Lombiq.Arithmetics.BitMask.GetLowest32Bits (bitMask);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.BitMask::GetLowest32Bits()
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits().this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.bitMask\;
@@ -10770,18 +10770,18 @@ begin
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits().return.0\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f - remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f / 2u * 2u == 1u) {
+                            -- if (remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 - remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700 / 2u * 2u == 1u) {
                             -- 	conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 1u;
                             -- }
                             -- else {
                             -- 	conditionalf77308fd3a820616c5c66e465e2ac0f72c7623bf781436956b43cac6351c2138 = 0u;
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.19\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ / to_unsigned(2, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.19\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700\ / to_unsigned(2, 32);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.20\ := SmartResize(\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.19\ * to_unsigned(2, 32), 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.21\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperandbbe7011158445a00834745105d37be174671c9a335eb59e6880d42a92731bd8f\ - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.20\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.21\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.remainderOperand9050fde6c4bcaa1de6315f8b8e47381110975a9dadb2be210b6e07790a334700\ - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.20\;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.22\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.21\ = to_unsigned(1, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
