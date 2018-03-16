@@ -25,7 +25,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (binaryOperatorExpression.Operator != BinaryOperatorType.Modulus) return;
 
-                var z = binaryOperatorExpression.FindFirstParentEntityDeclaration().GetFullName().Contains("System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32");
                 // Changing a % b to a – a / b * b.
                 // At this point the operands should have the same type, so it's safe just clone around.
 

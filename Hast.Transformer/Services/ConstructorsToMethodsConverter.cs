@@ -38,13 +38,9 @@ namespace Hast.Transformer.Services
                     method.Body
                         .OfType<ExpressionStatement>()
                         .SingleOrDefault(statement =>
-                        {
-                            var invocation = statement.Expression as InvocationExpression;
-
-                            return
-                                invocation != null &&
-                                invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName.IsConstructorName());
-                        })?.Remove(); 
+                            statement.Expression is InvocationExpression invocation &&
+                            invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName.IsConstructorName())
+                        )?.Remove(); 
                 }
 
                 // If there is a constructor initializer (like Ctor() : this(bla)) then handle that too by adding an

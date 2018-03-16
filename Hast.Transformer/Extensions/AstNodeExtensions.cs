@@ -24,11 +24,13 @@ namespace ICSharpCode.NRefactory.CSharp
                 return node.CreateNameForUnnamedNode();
             }
 
-            var memberDefinition = node.Annotation<IMemberDefinition>();
-            if (memberDefinition != null) return memberDefinition.FullName;
+            if (node is InvocationExpression)
+            {
+                return node.CreateNameForUnnamedNode();
+            }
 
-            var memberReference = node.Annotation<MemberReference>();
-            if (memberReference != null) return memberReference.FullName;
+            var referencedMemberFullName = node.GetReferencedMemberFullName();
+            if (!string.IsNullOrEmpty(referencedMemberFullName)) return referencedMemberFullName;
 
             var parameterReference = node.Annotation<ParameterReference>();
             if (parameterReference != null) return CreateParentEntityBasedName(node, parameterReference.Name);
@@ -286,7 +288,20 @@ namespace ICSharpCode.NRefactory.CSharp
             return node;
         }
 
-        public static string CreateNameForUnnamedNode(this AstNode node)
+
+        internal static string GetReferencedMemberFullName(this AstNode node)
+        {
+            var memberDefinition = node.Annotation<IMemberDefinition>();
+            if (memberDefinition != null) return memberDefinition.FullName;
+
+            var memberReference = node.Annotation<MemberReference>();
+            if (memberReference != null) return memberReference.FullName;
+
+            return null;
+        }
+
+
+        private static string CreateNameForUnnamedNode(this AstNode node)
         {
             // The node doesn't really have a name so give it one that is suitably unique.
             // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
@@ -297,7 +312,6 @@ namespace ICSharpCode.NRefactory.CSharp
                 node,
                 node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
         }
-
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;

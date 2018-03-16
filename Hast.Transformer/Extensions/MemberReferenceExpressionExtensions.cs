@@ -141,16 +141,8 @@ namespace ICSharpCode.NRefactory.CSharp
             return memberReferenceExpression.FindFirstParentTypeDeclaration();
         }
 
-        public static string GetMemberFullName(this MemberReferenceExpression memberReferenceExpression)
-        {
-            var memberDefinition = memberReferenceExpression.Annotation<IMemberDefinition>();
-            if (memberDefinition != null) return memberDefinition.FullName;
-
-            var memberReference = memberReferenceExpression.Annotation<MemberReference>();
-            if (memberReference != null) return memberReference.FullName;
-
-            return null;
-        }
+        public static string GetMemberFullName(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.GetReferencedMemberFullName();
 
         /// <summary>
         /// Determines if the member reference is an access to an array's Length property.
