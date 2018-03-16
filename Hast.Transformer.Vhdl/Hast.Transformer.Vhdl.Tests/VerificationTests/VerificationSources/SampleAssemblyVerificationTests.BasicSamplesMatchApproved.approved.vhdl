@@ -2794,7 +2794,7 @@ begin
     \Loopback::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \Loopback::Run(SimpleMemory).0._State\: \Loopback::Run(SimpleMemory).0._States\ := \Loopback::Run(SimpleMemory).0._State_0\;
         Variable \Loopback::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2804,7 +2804,7 @@ begin
                 \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \Loopback::Run(SimpleMemory).0._State\ := \Loopback::Run(SimpleMemory).0._State_0\;
-                \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \Loopback::Run(SimpleMemory).0._State\ is 
                     when \Loopback::Run(SimpleMemory).0._State_0\ => 
@@ -2826,7 +2826,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Loopback::Run(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteUInt32 (0, memory.ReadUInt32 (0) + 1u);
+                        -- memory.WriteInt32 (0, memory.ReadInt32 (0) + 1);
                         -- 
                         -- Begin SimpleMemory read.
                         \Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
@@ -2839,11 +2839,11 @@ begin
                             -- SimpleMemory read finished.
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Loopback::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\Loopback::Run(SimpleMemory).0.dataIn.0\) + to_unsigned(1, 32);
+                            \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToInt32(\Loopback::Run(SimpleMemory).0.dataIn.0\) + to_signed(1, 32);
                             -- Begin SimpleMemory write.
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Loopback::Run(SimpleMemory).0.binaryOperationResult.0\);
+                            \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Loopback::Run(SimpleMemory).0.binaryOperationResult.0\);
                             \Loopback::Run(SimpleMemory).0._State\ := \Loopback::Run(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3156
