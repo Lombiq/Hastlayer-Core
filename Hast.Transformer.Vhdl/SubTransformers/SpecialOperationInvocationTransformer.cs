@@ -29,12 +29,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public bool IsSpecialOperationInvocation(InvocationExpression expression)
-        {
-            var targetMethodName = expression.GetFullName();
-
-            return TryGetSimdOperation(targetMethodName) != null;
-        }
+        public bool IsSpecialOperationInvocation(InvocationExpression expression) =>
+            TryGetSimdOperation(expression.GetTargetMemberFullName()) != null;
 
         public IVhdlElement TransformSpecialOperationInvocation(
             InvocationExpression expression,
