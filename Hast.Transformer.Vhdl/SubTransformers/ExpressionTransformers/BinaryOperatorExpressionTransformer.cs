@@ -171,7 +171,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     binary.Operator = BinaryOperator.LessThanOrEqual;
                     break;
                 case BinaryOperatorType.Modulus:
-                    binary.Operator = BinaryOperator.Modulus;
+                    // The % operator in .NET, called modulus in the AST, is in reality a different remainder operator.
+                    binary.Operator = BinaryOperator.Remainder;
                     break;
                 case BinaryOperatorType.Multiply:
                     binary.Operator = BinaryOperator.Multiply;
