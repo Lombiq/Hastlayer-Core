@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     "The given expression (" + expression.ToString() + ") is not a special operation invocation.");
             }
 
-            var targetMethodName = expression.GetFullName();
+            var targetMethodName = expression.GetTargetMemberFullName();
 
             var simdOperation = TryGetSimdOperation(targetMethodName);
 

@@ -20,5 +20,8 @@ namespace ICSharpCode.NRefactory.CSharp
 
             return currentNode.GetActualTypeReference();
         }
+
+        public static string GetTargetMemberFullName(this InvocationExpression expression) =>
+            expression.GetReferencedMemberFullName();
     }
 }

@@ -90,14 +90,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 _constantValuesTable.MarkAsNonConstant(identifierExpression, identifierExpression.FindFirstParentBlockStatement());
             }
 
-            SubstituteValueHolderInExpressionIfInSuitableAssignment(identifierExpression);
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(identifierExpression);
         }
 
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
         {
             base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-            // If this is a member reference to a method then nothing to do.
+            // Method invocations that have a constant value are substituted in VisitInvocationExpression(), not to
+            // mess up the AST upwards.
             if (ConstantValueSubstitutionHelper.IsMethodInvocation(memberReferenceExpression)) return;
 
             if (memberReferenceExpression.IsArrayLengthAccess())
@@ -124,7 +125,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            SubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
         }
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -177,7 +178,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitInvocationExpression(invocationExpression);
 
             // Substituting method invocations that have a constant return value.
-            SubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression);
+
+            // This shouldn't really happen, all targets should be member reference expressions.
+            if (!(invocationExpression.Target is MemberReferenceExpression)) return;
+
+            // If the member reference was substituted then we should also substitute the whole invocation.
+            if (TrySubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression.Target))
+            {
+                invocationExpression.ReplaceWith(invocationExpression.Target);
+            }
         }
 
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
@@ -245,14 +254,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
+        private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
             // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
             // statement then it can't be safely substituted (due to e.g. loop variables).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
                 ConstantValueSubstitutionHelper.IsInWhile(expression))
             {
-                return;
+                return false;
             }
 
             // If the value holder is inside a unary operator that can mutate its state then it can't be substituted.
@@ -265,7 +274,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             };
             if (expression.Parent.Is<UnaryOperatorExpression>(unary => mutatingUnaryOperators.Contains(unary.Operator)))
             {
-                return;
+                return false;
             }
 
             // First checking if there is a substitution for the expression; if not then if it's a member reference
@@ -327,7 +336,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }))
             {
                 expression.ReplaceWith(valueExpression.Clone());
+                return true;
             }
+
+            return false;
         }
 
 
