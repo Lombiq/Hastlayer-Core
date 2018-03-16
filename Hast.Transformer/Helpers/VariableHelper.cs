@@ -6,7 +6,7 @@ using Mono.Cecil;
 
 namespace Hast.Transformer.Helpers
 {
-    internal static class VariableHelper
+    public static class VariableHelper
     {
         public static IdentifierExpression DeclareAndReferenceArrayVariable(
             Expression valueHolder,

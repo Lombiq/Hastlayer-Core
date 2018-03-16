@@ -2,7 +2,7 @@
 
 namespace Hast.Transformer.Helpers
 {
-    internal static class AstInsertionHelper
+    public static class AstInsertionHelper
     {
         public static void InsertStatementBefore<T>(Statement nextSibling, T statement) where T : Statement
         {

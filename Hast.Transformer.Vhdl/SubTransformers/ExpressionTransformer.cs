@@ -266,12 +266,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is PrimitiveExpression primitive)
             {
-                var typeReference = expression.GetActualTypeReference();
-
-                if (typeReference == null)
-                {
-                    typeReference = Transformer.Helpers.TypeHelper.CreatePrimitiveTypeReference(primitive.Value.GetType().Name);
-                }
+                var typeReference = primitive.GetActualTypeReference();
 
                 var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
                 var valueString = primitive.Value.ToString();
@@ -494,7 +489,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     case UnaryOperatorType.Minus:
                         // Casting if the result type is not what the parent expects.
                         var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        if (parentTypeInformation != null && parentTypeInformation.ExpectedType != parentTypeInformation.InferredType)
+                        if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
+                            parentTypeInformation != null && 
+                            parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
+                            parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
                         {
                             var fromType = _typeConverter
                                 .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
