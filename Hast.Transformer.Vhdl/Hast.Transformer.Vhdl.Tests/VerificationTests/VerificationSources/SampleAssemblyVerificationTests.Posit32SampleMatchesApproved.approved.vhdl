@@ -1134,12 +1134,12 @@ begin
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.right\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.number\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.0\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -1155,10 +1155,10 @@ begin
                 \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Posit32::op_Explicit(Posit32)._Started.0\ <= false;
                 \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_0\;
                 \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num\ := to_unsigned(0, 32);
-                \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ := to_signed(0, 32);
+                \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                 \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.number\ := to_signed(0, 32);
                 \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.1\ := to_signed(0, 32);
             else 
                 case \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ is 
@@ -1190,7 +1190,7 @@ begin
                         -- Posit32 right;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int num2;
+                        -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int number;
@@ -1234,13 +1234,13 @@ begin
                             -- 
                             \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.right\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = 1;
+                            -- num2 = 1u;
                             -- 
-                            \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ := to_signed(1, 32);
+                            \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ := to_unsigned(1, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((long)num2 < (long)((ulong)num)) {
+                            -- while (num2 < num) {
                             -- 	posit = Posit32.op_Addition (posit, right);
-                            -- 	num2 = num2 + 1;
+                            -- 	num2 = num2 + 1u;
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -1250,12 +1250,12 @@ begin
                     when \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_4\.
                         -- The while loop's condition:
-                        \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\, 64) < signed((SmartResize(\Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num\, 64)));
+                        \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ < \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num\;
                         if (\Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	posit = Posit32.op_Addition (posit, right);
-                            -- 	num2 = num2 + 1;
+                            -- 	num2 = num2 + 1u;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -1269,7 +1269,7 @@ begin
                         else 
                             \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -1287,9 +1287,9 @@ begin
                             \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.0\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Posit32::op_Addition(Posit32,Posit32).return.0\;
                             \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
+                            -- num2 = num2 + 1u;
                             -- 
-                            \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ + to_signed(1, 32);
+                            \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ + to_unsigned(1, 32);
                             \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num2\ := \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\;
                             -- Returning to the repeated state of the while loop which was started in state \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_4\ if the loop wasn't exited with a state change.
                             if (\Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ = \Posit32Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_7\) then 
