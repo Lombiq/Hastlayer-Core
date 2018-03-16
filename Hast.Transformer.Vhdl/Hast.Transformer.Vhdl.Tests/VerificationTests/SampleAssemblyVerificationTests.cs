@@ -8,6 +8,7 @@ using Hast.Transformer.Abstractions.Configuration;
 using Lombiq.OrchardAppHost;
 using Lombiq.Arithmetics;
 using NUnit.Framework;
+using System.Collections.Immutable;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
@@ -98,7 +99,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly, typeof(ImmutableArray).Assembly },
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<UnumCalculator>();
@@ -119,7 +120,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly, typeof(ImmutableArray).Assembly },
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<PositCalculator>();
