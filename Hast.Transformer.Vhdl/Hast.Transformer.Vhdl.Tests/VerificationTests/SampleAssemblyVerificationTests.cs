@@ -146,6 +146,11 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.AddHardwareEntryPointType<Posit32Calculator>();
                         configuration.TransformerConfiguration().EnableMethodInlining = false;
 
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
@@ -163,6 +168,12 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<Posit32Calculator>();
+
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
