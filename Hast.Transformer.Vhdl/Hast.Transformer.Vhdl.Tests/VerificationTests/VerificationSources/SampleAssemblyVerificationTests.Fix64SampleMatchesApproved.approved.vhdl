@@ -320,9 +320,7 @@ architecture Imp of Hast_IP is
         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\, 
         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\, 
         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\, 
-        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\, 
-        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_12\, 
-        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_13\);
+        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\);
     -- Signals:
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -1365,26 +1363,23 @@ begin
     \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\: \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._States\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_0\;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\: \signed32_Array\(0 to 9) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult_Array\(0 to 9);
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_67_1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_4F_1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\: integer range 0 to 2 := 0;
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult\;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.1\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult\;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.2\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult\;
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1402,20 +1397,17 @@ begin
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_0\;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\ := (others => to_signed(0, 32));
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\ := to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_67_1\ := to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\ := to_signed(0, 32);
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_4F_1\ := to_signed(0, 32);
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\ := 0;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := false;
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\ := 0;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\ := false;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
             else 
                 case \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ is 
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_0\ => 
@@ -1440,28 +1432,25 @@ begin
                         -- int[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- Task<Fix64Calculator.TaskResult>[] array2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int j;
+                        -- int i;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int arg_67_1;
+                        -- int arg_4F_1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- TaskFactory arg_62_0;
+                        -- TaskFactory arg_4A_0;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Func<object, Fix64Calculator.TaskResult> arg_62_1;
+                        -- Func<object, Fix64Calculator.TaskResult> arg_4A_1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int k;
+                        -- int j;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num2;
@@ -1471,11 +1460,21 @@ begin
                         -- 
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\ := (others => to_signed(0, 32));
                         -- The following section was transformed from the .NET statement below:
+                        -- array2 = new Task<Fix64Calculator.TaskResult>[10];
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- i = 0;
                         -- 
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 10) {
+                        -- 	num = memory.ReadInt32 (i);
+                        -- 	arg_4F_1 = i;
+                        -- 	arg_4A_0 = Task.Factory;
+                        -- 	if (arg_4A_1 = Fix64Calculator.<>c.<>9__6_0 == null) {
+                        -- 		arg_4A_1 = Fix64Calculator.<>c.<>9__6_0 = new Func<object, Fix64Calculator.TaskResult> (Fix64Calculator.<>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0);
+                        -- 	}
+                        -- 	array2 [arg_4F_1] = arg_4A_0.StartNew<Fix64Calculator.TaskResult> (arg_4A_1, num);
                         -- 	i = i + 1;
                         -- }
                         -- 
@@ -1489,78 +1488,35 @@ begin
                         if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
+                            -- 	num = memory.ReadInt32 (i);
+                            -- 	arg_4F_1 = i;
+                            -- 	arg_4A_0 = Task.Factory;
+                            -- 	if (arg_4A_1 = Fix64Calculator.<>c.<>9__6_0 == null) {
+                            -- 		arg_4A_1 = Fix64Calculator.<>c.<>9__6_0 = new Func<object, Fix64Calculator.TaskResult> (Fix64Calculator.<>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0);
+                            -- 	}
+                            -- 	array2 [arg_4F_1] = arg_4A_0.StartNew<Fix64Calculator.TaskResult> (arg_4A_1, num);
                             -- 	i = i + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- i = i + 1;
+                            -- num = memory.ReadInt32 (i);
                             -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ + to_signed(1, 32);
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\;
+                            -- Begin SimpleMemory read.
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\, 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\;
                         else 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5766
+                        -- Clock cycles needed to complete this state (approximation): 0.261
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\ => 
                         -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- array2 = new Task<Fix64Calculator.TaskResult>[10];
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- j = 0;
-                        -- 
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (j < 10) {
-                        -- 	num = memory.ReadInt32 (j);
-                        -- 	arg_67_1 = j;
-                        -- 	arg_62_0 = Task.Factory;
-                        -- 	if (arg_62_1 = Fix64Calculator.<>c.<>9__6_0 == null) {
-                        -- 		arg_62_1 = Fix64Calculator.<>c.<>9__6_0 = new Func<object, Fix64Calculator.TaskResult> (Fix64Calculator.<>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0);
-                        -- 	}
-                        -- 	array2 [arg_67_1] = arg_62_0.StartNew<Fix64Calculator.TaskResult> (arg_62_1, num);
-                        -- 	j = j + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\ => 
-                        -- Repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\.
-                        -- The while loop's condition:
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ < to_signed(10, 32);
-                        if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	num = memory.ReadInt32 (j);
-                            -- 	arg_67_1 = j;
-                            -- 	arg_62_0 = Task.Factory;
-                            -- 	if (arg_62_1 = Fix64Calculator.<>c.<>9__6_0 == null) {
-                            -- 		arg_62_1 = Fix64Calculator.<>c.<>9__6_0 = new Func<object, Fix64Calculator.TaskResult> (Fix64Calculator.<>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0);
-                            -- 	}
-                            -- 	array2 [arg_67_1] = arg_62_0.StartNew<Fix64Calculator.TaskResult> (arg_62_1, num);
-                            -- 	j = j + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num = memory.ReadInt32 (j);
-                            -- 
-                            -- Begin SimpleMemory read.
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\, 32);
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\;
-                        else 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\ => 
-                        -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\.
-                        -- The following section was transformed from the .NET statement below:
                         -- Task.WhenAll<Fix64Calculator.TaskResult> (array2).Wait ();
                         -- 
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\;
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\ => 
+                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
@@ -1568,19 +1524,19 @@ begin
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- arg_67_1 = j;
+                            -- arg_4F_1 = i;
                             -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_67_1\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_4F_1\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\;
                             -- The following section was transformed from the .NET statement below:
-                            -- arg_62_0 = Task.Factory;
+                            -- arg_4A_0 = Task.Factory;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (arg_62_1 = Fix64Calculator.<>c.<>9__6_0 == null) {
-                            -- 	arg_62_1 = Fix64Calculator.<>c.<>9__6_0 = new Func<object, Fix64Calculator.TaskResult> (Fix64Calculator.<>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0);
+                            -- if (arg_4A_1 = Fix64Calculator.<>c.<>9__6_0 == null) {
+                            -- 	arg_4A_1 = Fix64Calculator.<>c.<>9__6_0 = new Func<object, Fix64Calculator.TaskResult> (Fix64Calculator.<>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- array2 [arg_67_1] = arg_62_0.StartNew<Fix64Calculator.TaskResult> (arg_62_1, num);
+                            -- array2 [arg_4F_1] = arg_4A_0.StartNew<Fix64Calculator.TaskResult> (arg_4A_1, num);
                             -- 
                             -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult Hast.Samples.SampleAssembly.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Int32)
                             case \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\ is 
@@ -1596,17 +1552,17 @@ begin
                             end case;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\ + 1;
                             -- The following section was transformed from the .NET statement below:
-                            -- j = j + 1;
+                            -- i = i + 1;
                             -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\;
-                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\ if the loop wasn't exited with a state change.
-                            if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\) then 
-                                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ + to_signed(1, 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\;
+                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_2\ if the loop wasn't exited with a state change.
+                            if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\) then 
+                                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_3\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3156
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\ => 
+                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult Hast.Samples.SampleAssembly.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Int32)
                         if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.1\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Finished.1\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.2\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Finished.2\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.0\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Finished.0\) then 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.0\ <= false;
@@ -1620,54 +1576,74 @@ begin
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(1) := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.1\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(2) := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- k = 0;
+                            -- j = 0;
                             -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\ := to_signed(0, 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (k < 10) {
-                            -- 	num2 = k * 2;
-                            -- 	memory.WriteInt32 (num2, array2 [k].Result.Fix64Low);
-                            -- 	memory.WriteInt32 (num2 + 1, array2 [k].Result.Fix64High);
-                            -- 	k = k + 1;
+                            -- while (j < 10) {
+                            -- 	num2 = j * 2;
+                            -- 	memory.WriteInt32 (num2, array2 [j].Result.Fix64Low);
+                            -- 	memory.WriteInt32 (num2 + 1, array2 [j].Result.Fix64High);
+                            -- 	j = j + 1;
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\ => 
-                        -- Repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\.
+                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\ => 
+                        -- Repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\ < to_signed(10, 32);
-                        if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\) then 
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ < to_signed(10, 32);
+                        if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num2 = k * 2;
-                            -- 	memory.WriteInt32 (num2, array2 [k].Result.Fix64Low);
-                            -- 	memory.WriteInt32 (num2 + 1, array2 [k].Result.Fix64High);
-                            -- 	k = k + 1;
+                            -- 	num2 = j * 2;
+                            -- 	memory.WriteInt32 (num2, array2 [j].Result.Fix64Low);
+                            -- 	memory.WriteInt32 (num2 + 1, array2 [j].Result.Fix64High);
+                            -- 	j = j + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = k * 2;
+                            -- num2 = j * 2;
                             -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\ * to_signed(2, 32), 32);
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.5\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ * to_signed(2, 32), 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteInt32 (num2, array2 [k].Result.Fix64Low);
+                            -- memory.WriteInt32 (num2, array2 [j].Result.Fix64Low);
                             -- 
                             -- Begin SimpleMemory write.
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\, 32);
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\)).\Fix64Low\);
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\)).\Fix64Low\);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\;
                         else 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.361
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\ => 
-                        -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\.
+                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\ => 
+                        -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\.
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (num2 + 1, array2 [j].Result.Fix64High);
+                            -- 
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\ => 
+                        -- Begin SimpleMemory write.
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\, 32);
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\)).\Fix64High\);
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\ => 
                         -- Waiting for the SimpleMemory operation to finish.
@@ -1675,33 +1651,13 @@ begin
                             -- SimpleMemory write finished.
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteInt32 (num2 + 1, array2 [k].Result.Fix64High);
+                            -- j = j + 1;
                             -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.6\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_12\ => 
-                        -- Begin SimpleMemory write.
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.6\, 32);
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\)).\Fix64High\);
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_13\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- The following section was transformed from the .NET statement below:
-                            -- k = k + 1;
-                            -- 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.7\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\ + to_signed(1, 32);
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.k\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.7\;
-                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
-                            if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_13\) then 
-                                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.5\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ + to_signed(1, 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.5\;
+                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
+                            if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\) then 
+                                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3156
