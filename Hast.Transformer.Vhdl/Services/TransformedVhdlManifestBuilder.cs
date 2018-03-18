@@ -39,6 +39,7 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IEnumTypesCreator _enumTypesCreator;
         private readonly IPocoTransformer _pocoTransformer;
         private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
+        private readonly IUnsupportedConstructsVerifier _unsupportedConstructsVerifier;
 
 
         public TransformedVhdlManifestBuilder(
@@ -53,7 +54,8 @@ namespace Hast.Transformer.Vhdl.Services
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
             IPocoTransformer pocoTransformer,
-            IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander)
+            IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander,
+            IUnsupportedConstructsVerifier unsupportedConstructsVerifier)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
@@ -67,6 +69,7 @@ namespace Hast.Transformer.Vhdl.Services
             _enumTypesCreator = enumTypesCreator;
             _pocoTransformer = pocoTransformer;
             _remainderOperatorExpressionsExpander = remainderOperatorExpressionsExpander;
+            _unsupportedConstructsVerifier = unsupportedConstructsVerifier;
         }
 
 
@@ -75,6 +78,7 @@ namespace Hast.Transformer.Vhdl.Services
             var syntaxTree = transformationContext.SyntaxTree;
 
             // Running verifications.
+            _unsupportedConstructsVerifier.ThrowIfUnsupportedConstructsFound(syntaxTree);
             _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
             _hardwareEntryPointsVerifier.VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
 

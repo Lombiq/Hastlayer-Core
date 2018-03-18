@@ -20,10 +20,7 @@ namespace ICSharpCode.NRefactory.CSharp
             }
         }
 
-        public static bool IsArray(this AstType type)
-        {
-            var composedType = type as ComposedType;
-            return composedType != null && composedType.ArraySpecifiers.Count != 0;
-        }
+        public static bool IsArray(this AstType type) =>
+            type is ComposedType composedType && composedType.ArraySpecifiers.Count != 0;
     }
 }

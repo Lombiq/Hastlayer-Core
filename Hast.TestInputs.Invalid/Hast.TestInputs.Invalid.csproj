@@ -50,6 +50,7 @@
     <Compile Include="InvalidArrayUsingCases.cs" />
     <Compile Include="InvalidHardwareEntryPoint.cs" />
     <Compile Include="InvalidLanguageConstructCases.cs" />
+    <Compile Include="InvalidModel.cs" />
     <Compile Include="InvalidParallelCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

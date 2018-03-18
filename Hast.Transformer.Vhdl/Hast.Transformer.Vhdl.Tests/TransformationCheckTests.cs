@@ -49,6 +49,10 @@ namespace Hast.Transformer.Vhdl.Tests
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.MultiDimensionalArray()),
                     typeof(NotSupportedException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.NullAssignment()),
+                    typeof(NotSupportedException));
             });
         }
 
@@ -60,6 +64,10 @@ namespace Hast.Transformer.Vhdl.Tests
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
                     typeof(InvalidOperationException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.InvalidModelUsage()),
+                    typeof(NotSupportedException));
             });
         }
 
