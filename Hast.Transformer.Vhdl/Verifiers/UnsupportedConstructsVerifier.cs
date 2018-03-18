@@ -1,4 +1,5 @@
-﻿using ICSharpCode.NRefactory.CSharp;
+﻿using Hast.Transformer.Vhdl.SubTransformers;
+using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,38 @@ namespace Hast.Transformer.Vhdl.Verifiers
 {
     public class UnsupportedConstructsVerifier : IUnsupportedConstructsVerifier
     {
+        private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
+
+
+        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer)
+        {
+            _displayClassFieldTransformer = displayClassFieldTransformer;
+        }
+
+
         public void ThrowIfUnsupportedConstructsFound(SyntaxTree syntaxTree)
         {
-            syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor());
+            syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
         }
 
 
         private class UnsupportedConstructsFindingVisitor : DepthFirstAstVisitor
         {
+            private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
+
+
+            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer)
+            {
+                _displayClassFieldTransformer = displayClassFieldTransformer;
+            }
+
+
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {
                 base.VisitFieldDeclaration(fieldDeclaration);
 
-                if (fieldDeclaration.HasModifier(Modifiers.Static))
+                if (fieldDeclaration.HasModifier(Modifiers.Static) &&
+                    !_displayClassFieldTransformer.IsDisplayClassField(fieldDeclaration))
                 {
                     throw new NotSupportedException(
                         fieldDeclaration.GetFullName() + " is a static field. " +
