@@ -185,6 +185,8 @@
     <Compile Include="Services\VhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="Services\VhdlTransformingEngine.cs" />
     <Compile Include="Verifiers\IHardwareEntryPointsVerifier.cs" />
+    <Compile Include="Verifiers\IUnsupportedConstructsVerifier.cs" />
+    <Compile Include="Verifiers\UnsupportedConstructsVerifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
