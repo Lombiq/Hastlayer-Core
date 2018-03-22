@@ -32,7 +32,8 @@ package body TypeConversion is
     -- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
     -- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
     -- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
-    -- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+    -- treated as a value of the destination type." Thus we need to simply truncate when casting down. See:
+    -- https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions
     function SmartResize(input: unsigned; size: natural) return unsigned is
     begin
         if (size < input'LENGTH) then
@@ -352,7 +353,8 @@ architecture Imp of Hast_IP is
         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\, 
         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\, 
         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\, 
-        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\);
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_32\);
     -- Signals:
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -2092,7 +2094,10 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\, 
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\, 
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\);
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_11\);
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -2132,7 +2137,10 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\, 
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\, 
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\, 
-        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\);
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\, 
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_12\, 
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\, 
+        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_14\);
     -- Signals:
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -2190,7 +2198,10 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\, 
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\, 
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\, 
-        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\);
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_9\);
     -- Signals:
     Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\: boolean := false;
     Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\: boolean := false;
@@ -2208,7 +2219,10 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\, 
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\, 
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\, 
-        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\);
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_9\);
     -- Signals:
     Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\: boolean := false;
     Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\: boolean := false;
@@ -2226,7 +2240,10 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\, 
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\, 
         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\, 
-        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\);
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\, 
+        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_9\);
     -- Signals:
     Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\: boolean := false;
     Signal \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\: boolean := false;
@@ -2787,7 +2804,7 @@ begin
     \Loopback::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \Loopback::Run(SimpleMemory).0._State\: \Loopback::Run(SimpleMemory).0._States\ := \Loopback::Run(SimpleMemory).0._State_0\;
         Variable \Loopback::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2797,7 +2814,7 @@ begin
                 \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \Loopback::Run(SimpleMemory).0._State\ := \Loopback::Run(SimpleMemory).0._State_0\;
-                \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \Loopback::Run(SimpleMemory).0._State\ is 
                     when \Loopback::Run(SimpleMemory).0._State_0\ => 
@@ -2819,7 +2836,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Loopback::Run(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteUInt32 (0, memory.ReadUInt32 (0) + 1u);
+                        -- memory.WriteInt32 (0, memory.ReadInt32 (0) + 1);
                         -- 
                         -- Begin SimpleMemory read.
                         \Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
@@ -2832,14 +2849,14 @@ begin
                             -- SimpleMemory read finished.
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Loopback::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\Loopback::Run(SimpleMemory).0.dataIn.0\) + to_unsigned(1, 32);
+                            \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToInt32(\Loopback::Run(SimpleMemory).0.dataIn.0\) + to_signed(1, 32);
                             -- Begin SimpleMemory write.
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Loopback::Run(SimpleMemory).0.binaryOperationResult.0\);
+                            \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Loopback::Run(SimpleMemory).0.binaryOperationResult.0\);
                             \Loopback::Run(SimpleMemory).0._State\ := \Loopback::Run(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Loopback::Run(SimpleMemory).0._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -2958,7 +2975,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4263
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\.
                         -- The while loop's condition:
@@ -3172,7 +3189,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4263
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
                         -- The while loop's condition:
@@ -3386,7 +3403,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4263
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
                         -- The while loop's condition:
@@ -3801,17 +3818,19 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\: boolean := false;
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\: boolean := false;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\: integer range 0 to 24 := 0;
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.1\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.2\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
@@ -3837,13 +3856,13 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.22\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.23\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.24\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\: boolean := false;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\: \unsigned8_Array\(0 to 2) := (others => to_unsigned(0, 8));
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3901,22 +3920,24 @@ begin
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := false;
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := false;
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := false;
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := 0;
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := false;
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\ := (others => to_unsigned(0, 8));
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := 0;
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 32);
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\ := (others => to_unsigned(0, 8));
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.22\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.23\ := to_signed(0, 32);
             else 
                 case \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ is 
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_0\ => 
@@ -4157,15 +4178,15 @@ begin
                         -- array = new Task<ImageContrastModifier.PixelProcessingTaskOutput>[25];
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = (int)(num2 * num);
+                        -- num4 = (int)((System.Int32)(num2) * (System.Int32)(num));
                         -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(signed(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ * \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(signed(SmartResize((\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\), 32)) * signed(SmartResize((\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32)), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- num5 = num4 / 25;
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7488
+                        -- Clock cycles needed to complete this state (approximation): 0.5436
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -4180,7 +4201,7 @@ begin
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ => 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag3 = num4 % 25 != 0;
+                        -- flag3 = num4 - num4 / 25 * 25 != 0;
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4193,11 +4214,17 @@ begin
                         else 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ mod to_signed(25, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(25, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\ => 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ /= to_signed(0, 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ * to_signed(25, 32), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ - \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ /= to_signed(0, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag3) {
                         -- 	num5 = num5 + 1;
@@ -4205,18 +4232,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\.
-                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
+                        --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\.
 
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.264
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
-                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = 0;
                         -- 
@@ -4252,10 +4279,10 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ => 
-                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num5 = num5 + 1;
@@ -4264,18 +4291,18 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num5 = num5 + 1;
                         -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ + to_signed(1, 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\;
-                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\.
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ + to_signed(1, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ => 
-                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\.
                         -- The while loop's condition:
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ < \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\;
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\) then 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ < \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\;
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	j = 0;
@@ -4324,20 +4351,20 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
                         else 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ => 
-                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\.
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\ => 
-                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
                         -- The while loop's condition:
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(25, 32);
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\) then 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(25, 32);
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
@@ -4354,29 +4381,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\;
                         else 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.8189
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\ => 
-                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
                         -- The following section was transformed from the .NET statement below:
                         -- Task.WhenAll<ImageContrastModifier.PixelProcessingTaskOutput> (array).Wait ();
                         -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ + to_signed(3, 32);
-                        -- Begin SimpleMemory read.
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\, 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ + to_signed(3, 32);
+                        -- Begin SimpleMemory read.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
@@ -4488,15 +4515,15 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- j = j + 1;
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\;
-                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ if the loop wasn't exited with a state change.
-                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_26\) then 
-                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ + to_signed(1, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\;
+                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ if the loop wasn't exited with a state change.
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\ => 
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.1\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.2\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.3\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.3\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.4\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.4\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.5\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.5\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.6\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.6\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.7\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.7\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.8\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.8\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.9\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.9\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.10\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.10\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.11\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.11\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.12\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.12\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.13\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.13\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.14\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.14\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.15\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.15\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.16\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.16\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.17\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.17\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.18\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.18\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.19\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.19\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.20\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.20\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.21\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.21\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.22\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.22\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.23\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.23\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.24\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.24\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.0\) then 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ <= false;
@@ -4593,14 +4620,14 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\ => 
-                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\.
                         -- The while loop's condition:
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(25, 32);
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\) then 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(25, 32);
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	byte[] array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0;
@@ -4638,37 +4665,37 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\;
                         else 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.8189
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\ => 
-                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\.
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ + to_signed(1, 32);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\;
-                        -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ if the loop wasn't exited with a state change.
-                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.23\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ + to_signed(1, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.23\;
+                        -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ if the loop wasn't exited with a state change.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\ => 
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ + to_signed(3, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ + to_signed(3, 32);
                         -- Begin SimpleMemory write.
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(7 downto 0) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(0));
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(15 downto 8) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(1));
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(23 downto 16) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(2));
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_32\;
                         -- Clock cycles needed to complete this state (approximation): 0.6526
-                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\ => 
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_32\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -4676,11 +4703,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- k = k + 1;
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ + to_signed(1, 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\;
-                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_27\ if the loop wasn't exited with a state change.
-                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_31\) then 
-                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.22\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ + to_signed(1, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.22\;
+                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\ if the loop wasn't exited with a state change.
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_32\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_29\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -16058,14 +16085,17 @@ begin
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16081,14 +16111,17 @@ begin
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\ := false;
             else 
                 case \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ is 
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\ => 
@@ -16146,35 +16179,48 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 / 2u;
                             -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ / to_unsigned(2, 32);
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = 2u;
-                            -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(2, 32);
-                            -- The following section was transformed from the .NET statement below:
-                            -- while (num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 <= num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 && number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 % num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 > 0u) {
-                            -- 	num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
-                            -- }
-                            -- 
-                            -- Starting a while loop.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ / to_unsigned(2, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = 2u;
+                        -- 
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 <= num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 && number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 - number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 / num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 * num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 > 0u) {
+                        -- 	num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\.
                         -- The while loop's condition:
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 == num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
                         -- 
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ + to_unsigned(1, 32);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ + to_unsigned(1, 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteBoolean (0, return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207);
                         -- 
@@ -16182,23 +16228,29 @@ begin
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.5903
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ mod \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ / \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\;
                         -- Clock cycles needed to complete this state (approximation): 9
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\ => 
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ > to_unsigned(0, 32);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ and \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\;
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\) then 
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\ => 
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ * \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\, 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ - \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ > to_unsigned(0, 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ and \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\;
+                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
@@ -16207,17 +16259,17 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 = num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207 + 1u;
                             -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ + to_unsigned(1, 32);
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\;
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\) then 
-                                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ + to_unsigned(1, 32);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\) then 
+                                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
                             end if;
                         else 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7016
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\ => 
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_11\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16301,16 +16353,19 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\: boolean := false;
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16330,16 +16385,19 @@ begin
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := to_unsigned(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := to_signed(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
             else 
                 case \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ is 
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_0\ => 
@@ -16398,7 +16456,7 @@ begin
                             -- 	uint num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
                             -- 	num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / 2u;
                             -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
-                            -- 	while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a % num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
+                            -- 	while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a - number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a * num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
                             -- 		num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
                             -- 	}
                             -- 	return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
@@ -16425,7 +16483,7 @@ begin
                             -- 	uint num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
                             -- 	num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / 2u;
                             -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
-                            -- 	while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a % num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
+                            -- 	while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a - number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a * num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
                             -- 		num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
                             -- 	}
                             -- 	return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
@@ -16475,60 +16533,79 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / 2u;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ / to_unsigned(2, 32);
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
-                            -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(2, 32);
-                            -- The following section was transformed from the .NET statement below:
-                            -- while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a % num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
-                            -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
-                            -- }
-                            -- 
-                            -- Starting a while loop.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\.
-                        -- The while loop's condition:
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
-                        -- 
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ + to_unsigned(1, 32);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteBoolean (1 + num2, return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a);
-                        -- 
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
-                        -- Begin SimpleMemory write.
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\, 32);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9166
-                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ (have to wait 9 clock cycles in this state).
+                        -- Waiting for the result to appear in \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ mod \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ / to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 9
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\ => 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = 2u;
+                        -- 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a <= num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a && number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a - number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a / num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a * num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a > 0u) {
+                        -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\.
+                        -- The while loop's condition:
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\ => 
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ > to_unsigned(0, 32);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ and \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\;
-                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\) then 
+                        -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a == num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
+                        -- 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ + to_unsigned(1, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteBoolean (1 + num2, return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a);
+                        -- 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9166
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_12\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ / \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_12\ => 
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ * \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ - \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ > to_unsigned(0, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ and \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\;
+                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
@@ -16537,17 +16614,17 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a = num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a + 1u;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ + to_unsigned(1, 32);
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\;
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\) then 
-                                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ + to_unsigned(1, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\) then 
+                                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\;
                             end if;
                         else 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7016
-                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\ => 
+                    when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_14\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16555,10 +16632,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num2 + 1;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.13\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.13\;
                             -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\) then 
+                            if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_14\) then 
                                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_4\;
                             end if;
                         end if;
@@ -16917,14 +16994,17 @@ begin
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\: boolean := false;
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.9\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16938,14 +17018,17 @@ begin
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := false;
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := false;
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.9\ := false;
             else 
                 case \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ is 
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_0\ => 
@@ -16986,55 +17069,74 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / 2u;
                         -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / to_unsigned(2, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = 2u;
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 % num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
+                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 - number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 * num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
                         -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\.
                         -- The while loop's condition:
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 == num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- 
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.8\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.9\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.8\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- return return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.5903
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ mod \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         -- Clock cycles needed to complete this state (approximation): 9
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ > to_unsigned(0, 32);
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
-                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\) then 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ * \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ - \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ > to_unsigned(0, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
@@ -17043,14 +17145,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                             -- 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\;
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\) then 
-                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.7\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_9\) then 
+                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
                             end if;
                         else 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7016
                 end case;
@@ -17069,14 +17171,17 @@ begin
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\: boolean := false;
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.9\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17090,14 +17195,17 @@ begin
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := false;
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := false;
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := false;
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.9\ := false;
             else 
                 case \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ is 
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_0\ => 
@@ -17138,55 +17246,74 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / 2u;
                         -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / to_unsigned(2, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = 2u;
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 % num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
+                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 - number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 * num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
                         -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\.
                         -- The while loop's condition:
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 == num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- 
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.8\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.9\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.8\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- return return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.5903
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ mod \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         -- Clock cycles needed to complete this state (approximation): 9
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ > to_unsigned(0, 32);
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
-                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\) then 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ * \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ - \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ > to_unsigned(0, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
@@ -17195,14 +17322,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                             -- 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\;
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\) then 
-                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.7\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_9\) then 
+                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
                             end if;
                         else 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7016
                 end case;
@@ -17221,14 +17348,17 @@ begin
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\: boolean := false;
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\: boolean := false;
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\: boolean := false;
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.9\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17242,14 +17372,17 @@ begin
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := false;
                 \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := false;
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := false;
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\ := false;
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.9\ := false;
             else 
                 case \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ is 
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_0\ => 
@@ -17290,55 +17423,74 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / 2u;
                         -- 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / to_unsigned(2, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = 2u;
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := to_unsigned(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 % num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
+                        -- while (num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 <= num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 && number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 - number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 / num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 * num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 > 0u) {
                         -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\.
                         -- The while loop's condition:
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 == num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                         -- 
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.8\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.9\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.8\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- return return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083;
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.5903
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                         else 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ mod \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ / \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         -- Clock cycles needed to complete this state (approximation): 9
-                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ > to_unsigned(0, 32);
-                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
-                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\) then 
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ => 
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ * \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ - \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                    when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ > to_unsigned(0, 32);
+                        \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ and \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\;
+                        if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
@@ -17347,14 +17499,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 = num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083 + 1u;
                             -- 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\;
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\) then 
-                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ + to_unsigned(1, 32);
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.7\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_9\) then 
+                                \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
                             end if;
                         else 
-                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
+                            \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7016
                 end case;
@@ -17591,9 +17743,9 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -17615,9 +17767,9 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
             else 
@@ -17675,10 +17827,10 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0 || number == 1;
+                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ = to_signed(0, 16);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ = to_signed(1, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) = to_signed(0, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) = to_signed(1, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
@@ -17686,7 +17838,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -17701,7 +17853,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6068
+                        -- Clock cycles needed to complete this state (approximation): 0.628
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17730,35 +17882,35 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := signed(SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ - to_signed(2, 16), 32));
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\ := signed(SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ - to_signed(1, 16), 32));
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17793,9 +17945,9 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -17817,9 +17969,9 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.6\ := to_unsigned(0, 32);
             else 
@@ -17877,10 +18029,10 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0 || number == 1;
+                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ = to_signed(0, 16);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ = to_signed(1, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) = to_signed(0, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) = to_signed(1, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
@@ -17888,7 +18040,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -17903,7 +18055,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6068
+                        -- Clock cycles needed to complete this state (approximation): 0.628
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17932,35 +18084,35 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ - to_signed(2, 16), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ - to_signed(1, 16), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17995,9 +18147,9 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -18019,9 +18171,9 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.6\ := to_unsigned(0, 32);
             else 
@@ -18079,10 +18231,10 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0 || number == 1;
+                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ = to_signed(0, 16);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ = to_signed(1, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) = to_signed(0, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) = to_signed(1, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
@@ -18090,7 +18242,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -18105,7 +18257,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6068
+                        -- Clock cycles needed to complete this state (approximation): 0.628
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18134,35 +18286,35 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ - to_signed(2, 16), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ - to_signed(1, 16), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18197,9 +18349,9 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -18221,9 +18373,9 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := false;
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.6\ := to_unsigned(0, 32);
             else 
@@ -18281,10 +18433,10 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0 || number == 1;
+                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ = to_signed(0, 16);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ = to_signed(1, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) = to_signed(0, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) = to_signed(1, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
@@ -18292,7 +18444,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -18307,7 +18459,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6068
+                        -- Clock cycles needed to complete this state (approximation): 0.628
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18336,35 +18488,35 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ - to_signed(2, 16), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ - to_signed(1, 16), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18397,7 +18549,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -18417,7 +18569,7 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\ := to_unsigned(0, 32);
             else 
@@ -18475,16 +18627,16 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0;
+                            -- flag = (System.Int32)(number) == 0;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\ = to_signed(0, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -18499,7 +18651,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2534
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18528,18 +18680,18 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := signed(SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\ - to_signed(1, 16), 32));
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -18569,7 +18721,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -18589,7 +18741,7 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\ := to_unsigned(0, 32);
             else 
@@ -18647,16 +18799,16 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0;
+                            -- flag = (System.Int32)(number) == 0;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\ = to_signed(0, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -18671,7 +18823,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2534
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18700,18 +18852,18 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\ - to_signed(1, 16), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -18741,7 +18893,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -18761,7 +18913,7 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\ := to_unsigned(0, 32);
             else 
@@ -18819,16 +18971,16 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0;
+                            -- flag = (System.Int32)(number) == 0;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\ = to_signed(0, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -18843,7 +18995,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2534
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18872,18 +19024,18 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\ - to_signed(1, 16), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -18913,7 +19065,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -18933,7 +19085,7 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := to_signed(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\ := to_unsigned(0, 32);
             else 
@@ -18991,16 +19143,16 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = number == 0;
+                            -- flag = (System.Int32)(number) == 0;
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\ = to_signed(0, 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -19015,7 +19167,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2534
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -19044,18 +19196,18 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\ - to_signed(1, 16), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= SmartResize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\, 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2661
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 

@@ -21,7 +21,8 @@ package body TypeConversion is
     -- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
     -- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
     -- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
-    -- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+    -- treated as a value of the destination type." Thus we need to simply truncate when casting down. See:
+    -- https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions
     function SmartResize(input: unsigned; size: natural) return unsigned is
     begin
         if (size < input'LENGTH) then
@@ -362,7 +363,8 @@ architecture Imp of Hast_IP is
         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\, 
         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\, 
         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\, 
-        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\);
+        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\, 
+        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_39\);
     -- Signals:
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
@@ -515,7 +517,9 @@ architecture Imp of Hast_IP is
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\, 
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\, 
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\, 
-        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\);
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\, 
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\, 
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_19\);
     -- Signals:
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.return\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
@@ -550,7 +554,9 @@ architecture Imp of Hast_IP is
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\, 
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\, 
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\, 
-        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\);
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\, 
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\, 
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_19\);
     -- Signals:
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.return\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
@@ -585,7 +591,9 @@ architecture Imp of Hast_IP is
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\, 
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\, 
         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\, 
-        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\);
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\, 
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\, 
+        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_19\);
     -- Signals:
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.return\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
@@ -661,7 +669,22 @@ architecture Imp of Hast_IP is
         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\, 
         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\, 
         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\, 
-        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\);
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_59\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_60\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_61\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_62\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_63\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_64\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_67\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_68\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_69\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_70\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_71\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_72\, 
+        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_73\);
     -- Signals:
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -1240,7 +1263,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1047
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
@@ -1253,7 +1276,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64);
                             -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Prng1\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
@@ -1289,7 +1312,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1047
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(5, 32), 32);
@@ -1302,7 +1325,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64);
                             -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Prng2\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
@@ -1499,16 +1522,11 @@ begin
                             -- num = i * 8 + j;
                             -- 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ * to_signed(8, 32), 32);
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\;
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (6 + num, @this._gridRaw [num]);
-                            -- 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_7\;
                         else 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.8189
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -1523,13 +1541,18 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\;
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (6 + num, @this._gridRaw [num]);
+                        -- 
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(6, 32) + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\;
                         -- Begin SimpleMemory write.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\)));
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -1690,16 +1713,11 @@ begin
                             -- num = j * 8 + i;
                             -- 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ * to_signed(8, 32), 32);
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\;
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- @this._gridRaw [num] = memory.ReadUInt32 (6 + num);
-                            -- 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_7\;
                         else 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.8189
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -1714,12 +1732,17 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\;
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this._gridRaw [num] = memory.ReadUInt32 (6 + num);
+                        -- 
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(6, 32) + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\;
                         -- Begin SimpleMemory read.
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_8\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
@@ -1985,7 +2008,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5396
+                        -- Clock cycles needed to complete this state (approximation): 0.5158
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::GetIndexFromXY(System.Int32,System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\) then 
@@ -2045,7 +2068,7 @@ begin
                                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8149
+                        -- Clock cycles needed to complete this state (approximation): 0.7911
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
@@ -2121,18 +2144,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- index2 = num10 * 8 + num9;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ * to_signed(8, 32), 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, index) && Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, index2) && forceSwitch || num5 < 32767u || !Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, index) && !Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, index2) && forceSwitch || num6 < 32767u;
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8526
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ => 
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -2167,27 +2180,41 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ * to_signed(8, 32), 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, index) && Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, index2) && forceSwitch || num5 < 32767u || !Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, index) && !Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.GetGridDy (@this, index2) && forceSwitch || num6 < 32767u;
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.In.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= false;
@@ -2198,10 +2225,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= false;
@@ -2209,21 +2236,21 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.14\ and \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.5\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= false;
@@ -2237,31 +2264,31 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6755
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.In.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_22\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_23\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= false;
@@ -2272,10 +2299,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= false;
@@ -2283,21 +2310,21 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.21\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.20\ and not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.9\);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= false;
@@ -2319,23 +2346,23 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\.
-                            --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\.
+                            --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_39\.
+                            --     * Execution after either branch will continue in the following state: \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\.
 
                             if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.flag\) then 
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\;
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6753
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ => 
-                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ => 
+                        -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ => 
-                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\ => 
+                        -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	Hast.Samples.Kpz.KpzKernels.SetGridDx (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.GetGridDx (@this, indexFromXY));
@@ -2351,9 +2378,9 @@ begin
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\;
                         -- Clock cycles needed to complete this state (approximation): 0.1002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_31\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= false;
@@ -2364,10 +2391,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.11\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::SetGridDx(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Started.0\ <= false;
@@ -2379,10 +2406,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_33\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= false;
@@ -2393,10 +2420,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.12\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::SetGridDy(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Started.0\ <= false;
@@ -2408,10 +2435,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_35\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= false;
@@ -2422,10 +2449,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.13\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::SetGridDx(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDx(Int32,Boolean)._Started.0\ <= false;
@@ -2437,10 +2464,10 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1002
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= false;
@@ -2451,17 +2478,17 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean).value.parameter.Out.0\ <= not(\KpzKernels::RandomlySwitchFourCells(Boolean).0.return.14\);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Started.0\ <= true;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\;
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_39\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\ => 
+                    when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_39\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::SetGridDy(System.Int32,System.Boolean)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::SetGridDy(Int32,Boolean).this.parameter.In.0\;
-                            -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
-                            if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_38\) then 
-                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
+                            -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\.
+                            if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_39\) then 
+                                \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2523,7 +2550,7 @@ begin
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0.binaryOperationResult.1\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.x\ + \KpzKernels::GetIndexFromXY(Int32,Int32).0.binaryOperationResult.0\;
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0.return\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.binaryOperationResult.1\;
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0._State\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4263
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
                 end case;
             end if;
         end if;
@@ -3197,16 +3224,20 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num5 = num3 + num4 * 8;
                             -- 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.4\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num4\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num3\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.4\;
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.5\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num6 = num2 & 65535u;
-                            -- 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9659
+                        -- Clock cycles needed to complete this state (approximation): 0.5158
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.4\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num4\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num3\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.4\;
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num2 & 65535u;
+                        -- 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.6\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num2\ and to_unsigned(65535, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num6\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.6\;
@@ -3220,9 +3251,9 @@ begin
                         -- flag = num3 >= 7 || num4 >= 7;
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.9\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num3\ >= to_signed(7, 32);
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8149
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7911
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.10\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num4\ >= to_signed(7, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.11\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.9\ or \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.10\;
@@ -3246,30 +3277,30 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_13\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\.
 
                         if (not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.flag\)) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4755
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.29\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.i\ + to_signed(1, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.i\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.29\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\) then 
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_13\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num8 = num3 + 1;
@@ -3308,35 +3339,39 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num12 = num9 * 8 + num8;
                         -- 
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.14\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num9\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7526
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_13\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.14\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num9\ * to_signed(8, 32), 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.15\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.14\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num8\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num12\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.15\;
                         -- The following section was transformed from the .NET statement below:
                         -- num13 = num11 * 8 + num10;
                         -- 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.16\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num11\ * to_signed(8, 32), 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.17\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.16\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num10\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num13\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = kpzKernelsTaskState.bramDx [num5] && !kpzKernelsTaskState.bramDx [num12] && kpzKernelsTaskState.bramDy [num5] && !kpzKernelsTaskState.bramDy [num13] && num6 < 32767u || !kpzKernelsTaskState.bramDx [num5] && kpzKernelsTaskState.bramDx [num12] && !kpzKernelsTaskState.bramDy [num5] && kpzKernelsTaskState.bramDy [num13] && num7 < 32767u;
                         -- 
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num12\)));
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9528
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9701
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num12\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.19\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.18\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.20\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.19\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num13\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.21\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num6\ < to_unsigned(32767, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.22\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.20\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.21\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.23\ := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\))) and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num12\));
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9759
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9757
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.24\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.23\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.25\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.24\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num13\));
@@ -3354,25 +3389,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_19\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_19\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\.
 
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.flag2\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_19\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\.
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7755
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\.
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\.
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\) then 
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_19\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	kpzKernelsTaskState.bramDx [num5] = !kpzKernelsTaskState.bramDx [num5];
@@ -3397,9 +3432,9 @@ begin
                         -- kpzKernelsTaskState.bramDy [num13] = !kpzKernelsTaskState.bramDy [num13];
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num13\)) := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num13\)));
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_17\.
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_19\) then 
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4008
                 end case;
@@ -3727,16 +3762,20 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num5 = num3 + num4 * 8;
                             -- 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.4\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num4\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num3\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.4\;
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.5\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num6 = num2 & 65535u;
-                            -- 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9659
+                        -- Clock cycles needed to complete this state (approximation): 0.5158
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.4\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num4\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num3\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.4\;
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num2 & 65535u;
+                        -- 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.6\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num2\ and to_unsigned(65535, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num6\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.6\;
@@ -3750,9 +3789,9 @@ begin
                         -- flag = num3 >= 7 || num4 >= 7;
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.9\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num3\ >= to_signed(7, 32);
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8149
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7911
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.10\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num4\ >= to_signed(7, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.11\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.9\ or \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.10\;
@@ -3776,30 +3815,30 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_13\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\.
 
                         if (not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.flag\)) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4755
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.29\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.i\ + to_signed(1, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.i\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.29\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_2\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\) then 
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_13\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num8 = num3 + 1;
@@ -3838,35 +3877,39 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num12 = num9 * 8 + num8;
                         -- 
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.14\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num9\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7526
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_13\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.14\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num9\ * to_signed(8, 32), 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.15\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.14\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num8\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num12\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.15\;
                         -- The following section was transformed from the .NET statement below:
                         -- num13 = num11 * 8 + num10;
                         -- 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.16\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num11\ * to_signed(8, 32), 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.17\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.16\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num10\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num13\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = kpzKernelsTaskState.bramDx [num5] && !kpzKernelsTaskState.bramDx [num12] && kpzKernelsTaskState.bramDy [num5] && !kpzKernelsTaskState.bramDy [num13] && num6 < 32767u || !kpzKernelsTaskState.bramDx [num5] && kpzKernelsTaskState.bramDx [num12] && !kpzKernelsTaskState.bramDy [num5] && kpzKernelsTaskState.bramDy [num13] && num7 < 32767u;
                         -- 
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num12\)));
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9528
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9701
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num12\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.19\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.18\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.20\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.19\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num13\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.21\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num6\ < to_unsigned(32767, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.22\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.20\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.21\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.23\ := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\))) and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num12\));
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9759
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9757
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.24\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.23\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.25\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.24\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num13\));
@@ -3884,25 +3927,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_19\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_19\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\.
 
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.flag2\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_19\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\.
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7755
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\.
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\.
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\) then 
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_19\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	kpzKernelsTaskState.bramDx [num5] = !kpzKernelsTaskState.bramDx [num5];
@@ -3927,9 +3970,9 @@ begin
                         -- kpzKernelsTaskState.bramDy [num13] = !kpzKernelsTaskState.bramDy [num13];
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num13\)) := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num13\)));
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_17\.
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_19\) then 
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4008
                 end case;
@@ -4257,16 +4300,20 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num5 = num3 + num4 * 8;
                             -- 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.4\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num4\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num3\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.4\;
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.5\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num6 = num2 & 65535u;
-                            -- 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9659
+                        -- Clock cycles needed to complete this state (approximation): 0.5158
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.4\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num4\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num3\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.4\;
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num2 & 65535u;
+                        -- 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.6\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num2\ and to_unsigned(65535, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num6\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.6\;
@@ -4280,9 +4327,9 @@ begin
                         -- flag = num3 >= 7 || num4 >= 7;
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.9\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num3\ >= to_signed(7, 32);
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8149
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7911
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.10\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num4\ >= to_signed(7, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.11\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.9\ or \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.10\;
@@ -4306,30 +4353,30 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_13\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\.
 
                         if (not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.flag\)) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_13\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4755
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.29\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.i\ + to_signed(1, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.i\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.29\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_2\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\) then 
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_13\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num8 = num3 + 1;
@@ -4368,35 +4415,39 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num12 = num9 * 8 + num8;
                         -- 
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.14\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num9\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7526
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_13\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.14\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num9\ * to_signed(8, 32), 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.15\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.14\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num8\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num12\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.15\;
                         -- The following section was transformed from the .NET statement below:
                         -- num13 = num11 * 8 + num10;
                         -- 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.16\ := SmartResize(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num11\ * to_signed(8, 32), 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.17\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.16\ + \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num10\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num13\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = kpzKernelsTaskState.bramDx [num5] && !kpzKernelsTaskState.bramDx [num12] && kpzKernelsTaskState.bramDy [num5] && !kpzKernelsTaskState.bramDy [num13] && num6 < 32767u || !kpzKernelsTaskState.bramDx [num5] && kpzKernelsTaskState.bramDx [num12] && !kpzKernelsTaskState.bramDy [num5] && kpzKernelsTaskState.bramDy [num13] && num7 < 32767u;
                         -- 
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num12\)));
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9528
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9701
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num12\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.19\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.18\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.20\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.19\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num13\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.21\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num6\ < to_unsigned(32767, 32);
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.22\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.20\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.21\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.23\ := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\))) and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num12\));
-                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9759
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\ => 
+                        \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9757
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.24\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.23\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.25\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.24\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num13\));
@@ -4414,25 +4465,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_19\ and ends in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_19\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\.
 
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.flag2\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_19\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\;
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\.
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7755
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\.
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\.
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\) then 
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\.
+                    when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_19\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	kpzKernelsTaskState.bramDx [num5] = !kpzKernelsTaskState.bramDx [num5];
@@ -4457,9 +4508,9 @@ begin
                         -- kpzKernelsTaskState.bramDy [num13] = !kpzKernelsTaskState.bramDy [num13];
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num13\)) := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num13\)));
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_17\.
+                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_19\) then 
+                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4008
                 end case;
@@ -4551,68 +4602,86 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(31 downto 0);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.return.1\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.return.2\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.return.3\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\: boolean := false;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.83\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.86\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.88\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.90\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.91\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4695,64 +4764,82 @@ begin
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := false;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ := false;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := to_unsigned(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := false;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ := to_unsigned(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).invocationIndex\ := 0;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ := to_unsigned(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\ := false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ := to_unsigned(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\ := false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).invocationIndex\ := 0;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\ := false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := false;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\ := to_unsigned(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\ := to_unsigned(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := to_unsigned(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := false;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := false;
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\ := to_unsigned(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.83\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\ := to_unsigned(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.84\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.85\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.86\ := to_unsigned(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.88\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.90\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.91\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.92\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.94\ := to_signed(0, 32);
             else 
                 case \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ is 
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_0\ => 
@@ -4923,7 +5010,7 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ <= true;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.5436
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor()
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Finished.0\) then 
@@ -5130,7 +5217,7 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ <= true;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6044
+                        -- Clock cycles needed to complete this state (approximation): 0.5997
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor()
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Finished.0\) then 
@@ -5200,7 +5287,7 @@ begin
                                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9307
+                        -- Clock cycles needed to complete this state (approximation): 0.926
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_16\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
@@ -5260,7 +5347,7 @@ begin
                             -- 		l = 0;
                             -- 		while (l < 8) {
                             -- 			num8 = l + k * 8;
-                            -- 			num9 = num8 % 8;
+                            -- 			num9 = num8 - num8 / 8 * 8;
                             -- 			num10 = num8 / 8;
                             -- 			num11 = num9 * 8 + num6;
                             -- 			num12 = num10 * 8 + num7;
@@ -5268,8 +5355,12 @@ begin
                             -- 			while (m < 8) {
                             -- 				n = 0;
                             -- 				while (n < 8) {
-                            -- 					num13 = num11 + m % 64;
-                            -- 					num14 = num12 + n % 64;
+                            -- 					System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 					remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 					num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 					System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 					remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 					num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 					num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 					array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 					array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5289,7 +5380,7 @@ begin
                             -- 		num16 = 0;
                             -- 		while (num16 < 8) {
                             -- 			num17 = num16 + k * 8;
-                            -- 			num18 = num17 % 8;
+                            -- 			num18 = num17 - num17 / 8 * 8;
                             -- 			num19 = num17 / 8;
                             -- 			num20 = num18 * 8 + num6;
                             -- 			num21 = num19 * 8 + num7;
@@ -5297,8 +5388,12 @@ begin
                             -- 			while (num22 < 8) {
                             -- 				num23 = 0;
                             -- 				while (num23 < 8) {
-                            -- 					num24 = num20 + num22 % 64;
-                            -- 					num25 = num21 + num23 % 64;
+                            -- 					System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 					remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 					num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 					System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 					remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 					num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 					uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 					if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 						conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -5331,7 +5426,7 @@ begin
                             -- Starting a while loop.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_19\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6044
+                        -- Clock cycles needed to complete this state (approximation): 0.5997
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_19\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_18\.
                         -- The while loop's condition:
@@ -5348,7 +5443,7 @@ begin
                             -- 		l = 0;
                             -- 		while (l < 8) {
                             -- 			num8 = l + k * 8;
-                            -- 			num9 = num8 % 8;
+                            -- 			num9 = num8 - num8 / 8 * 8;
                             -- 			num10 = num8 / 8;
                             -- 			num11 = num9 * 8 + num6;
                             -- 			num12 = num10 * 8 + num7;
@@ -5356,8 +5451,12 @@ begin
                             -- 			while (m < 8) {
                             -- 				n = 0;
                             -- 				while (n < 8) {
-                            -- 					num13 = num11 + m % 64;
-                            -- 					num14 = num12 + n % 64;
+                            -- 					System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 					remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 					num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 					System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 					remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 					num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 					num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 					array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 					array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5377,7 +5476,7 @@ begin
                             -- 		num16 = 0;
                             -- 		while (num16 < 8) {
                             -- 			num17 = num16 + k * 8;
-                            -- 			num18 = num17 % 8;
+                            -- 			num18 = num17 - num17 / 8 * 8;
                             -- 			num19 = num17 / 8;
                             -- 			num20 = num18 * 8 + num6;
                             -- 			num21 = num19 * 8 + num7;
@@ -5385,8 +5484,12 @@ begin
                             -- 			while (num22 < 8) {
                             -- 				num23 = 0;
                             -- 				while (num23 < 8) {
-                            -- 					num24 = num20 + num22 % 64;
-                            -- 					num25 = num21 + num23 % 64;
+                            -- 					System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 					remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 					num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 					System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 					remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 					num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 					uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 					if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 						conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -5459,7 +5562,7 @@ begin
                             -- 	l = 0;
                             -- 	while (l < 8) {
                             -- 		num8 = l + k * 8;
-                            -- 		num9 = num8 % 8;
+                            -- 		num9 = num8 - num8 / 8 * 8;
                             -- 		num10 = num8 / 8;
                             -- 		num11 = num9 * 8 + num6;
                             -- 		num12 = num10 * 8 + num7;
@@ -5467,8 +5570,12 @@ begin
                             -- 		while (m < 8) {
                             -- 			n = 0;
                             -- 			while (n < 8) {
-                            -- 				num13 = num11 + m % 64;
-                            -- 				num14 = num12 + n % 64;
+                            -- 				System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 				remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 				num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 				System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 				remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 				num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 				num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 				array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 				array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5488,7 +5595,7 @@ begin
                             -- 	num16 = 0;
                             -- 	while (num16 < 8) {
                             -- 		num17 = num16 + k * 8;
-                            -- 		num18 = num17 % 8;
+                            -- 		num18 = num17 - num17 / 8 * 8;
                             -- 		num19 = num17 / 8;
                             -- 		num20 = num18 * 8 + num6;
                             -- 		num21 = num19 * 8 + num7;
@@ -5496,8 +5603,12 @@ begin
                             -- 		while (num22 < 8) {
                             -- 			num23 = 0;
                             -- 			while (num23 < 8) {
-                            -- 				num24 = num20 + num22 % 64;
-                            -- 				num25 = num21 + num23 % 64;
+                            -- 				System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 				remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 				num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 				System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 				remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 				num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 				uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 				if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 					conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -5528,7 +5639,7 @@ begin
                             -- Starting a while loop.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_22\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5396
+                        -- Clock cycles needed to complete this state (approximation): 0.5158
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_22\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_21\.
                         -- The while loop's condition:
@@ -5540,7 +5651,7 @@ begin
                             -- 	l = 0;
                             -- 	while (l < 8) {
                             -- 		num8 = l + k * 8;
-                            -- 		num9 = num8 % 8;
+                            -- 		num9 = num8 - num8 / 8 * 8;
                             -- 		num10 = num8 / 8;
                             -- 		num11 = num9 * 8 + num6;
                             -- 		num12 = num10 * 8 + num7;
@@ -5548,8 +5659,12 @@ begin
                             -- 		while (m < 8) {
                             -- 			n = 0;
                             -- 			while (n < 8) {
-                            -- 				num13 = num11 + m % 64;
-                            -- 				num14 = num12 + n % 64;
+                            -- 				System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 				remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 				num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 				System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 				remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 				num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 				num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 				array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 				array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5569,7 +5684,7 @@ begin
                             -- 	num16 = 0;
                             -- 	while (num16 < 8) {
                             -- 		num17 = num16 + k * 8;
-                            -- 		num18 = num17 % 8;
+                            -- 		num18 = num17 - num17 / 8 * 8;
                             -- 		num19 = num17 / 8;
                             -- 		num20 = num18 * 8 + num6;
                             -- 		num21 = num19 * 8 + num7;
@@ -5577,8 +5692,12 @@ begin
                             -- 		while (num22 < 8) {
                             -- 			num23 = 0;
                             -- 			while (num23 < 8) {
-                            -- 				num24 = num20 + num22 % 64;
-                            -- 				num25 = num21 + num23 % 64;
+                            -- 				System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 				remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 				num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 				System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 				remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 				num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 				uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 				if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 					conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -5616,7 +5735,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (l < 8) {
                             -- 	num8 = l + k * 8;
-                            -- 	num9 = num8 % 8;
+                            -- 	num9 = num8 - num8 / 8 * 8;
                             -- 	num10 = num8 / 8;
                             -- 	num11 = num9 * 8 + num6;
                             -- 	num12 = num10 * 8 + num7;
@@ -5624,8 +5743,12 @@ begin
                             -- 	while (m < 8) {
                             -- 		n = 0;
                             -- 		while (n < 8) {
-                            -- 			num13 = num11 + m % 64;
-                            -- 			num14 = num12 + n % 64;
+                            -- 			System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 			remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 			num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 			System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 			remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 			num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 			num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 			array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 			array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5653,8 +5776,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- j = j + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.j\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.j\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.94\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.j\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.j\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.94\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_18\ if the loop wasn't exited with a state change.
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_23\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_19\;
@@ -5668,7 +5791,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num8 = l + k * 8;
-                            -- 	num9 = num8 % 8;
+                            -- 	num9 = num8 - num8 / 8 * 8;
                             -- 	num10 = num8 / 8;
                             -- 	num11 = num9 * 8 + num6;
                             -- 	num12 = num10 * 8 + num7;
@@ -5676,8 +5799,12 @@ begin
                             -- 	while (m < 8) {
                             -- 		n = 0;
                             -- 		while (n < 8) {
-                            -- 			num13 = num11 + m % 64;
-                            -- 			num14 = num12 + n % 64;
+                            -- 			System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 			remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 			num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 			System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 			remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 			num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 			num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 			array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 			array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5698,53 +5825,76 @@ begin
                             -- num8 = l + k * 8;
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.27\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.28\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.27\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.28\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num9 = num8 % 8;
-                            -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_26\;
                         else 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_25\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.8189
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_25\ => 
                         -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_22\.
                         -- The following section was transformed from the .NET statement below:
                         -- Task.WhenAll<KpzKernelsTaskState> (array2).Wait ();
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_26\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.28\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.27\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.28\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num9 = num8 - num8 / 8 * 8;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\ => 
                         -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ mod to_signed(8, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ / to_signed(8, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\ => 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\;
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\;
                         -- The following section was transformed from the .NET statement below:
                         -- num10 = num8 / 8;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ / to_signed(8, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num10\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_29\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_29\ => 
+                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_30\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num8\ / to_signed(8, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_30\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num10\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\;
                         -- The following section was transformed from the .NET statement below:
                         -- num11 = num9 * 8 + num6;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num6\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num6\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\;
                         -- The following section was transformed from the .NET statement below:
                         -- num12 = num10 * 8 + num7;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num10\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num7\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num12\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num10\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num7\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num12\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\;
                         -- The following section was transformed from the .NET statement below:
                         -- m = 0;
                         -- 
@@ -5753,8 +5903,12 @@ begin
                         -- while (m < 8) {
                         -- 	n = 0;
                         -- 	while (n < 8) {
-                        -- 		num13 = num11 + m % 64;
-                        -- 		num14 = num12 + n % 64;
+                        -- 		System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                        -- 		remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                        -- 		num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                        -- 		System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                        -- 		remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                        -- 		num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                         -- 		num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                         -- 		array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                         -- 		array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5764,19 +5918,23 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9526
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\.
                         -- The while loop's condition:
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ < to_signed(8, 32);
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\) then 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ < to_signed(8, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	n = 0;
                             -- 	while (n < 8) {
-                            -- 		num13 = num11 + m % 64;
-                            -- 		num14 = num12 + n % 64;
+                            -- 		System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 		remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 		num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 		System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 		remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 		num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 		num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 		array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 		array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5791,8 +5949,12 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (n < 8) {
-                            -- 	num13 = num11 + m % 64;
-                            -- 	num14 = num12 + n % 64;
+                            -- 	System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 	remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 	num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 	System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 	remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 	num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 	num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 	array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 	array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5800,13 +5962,13 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_30\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_29\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_29\ => 
-                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\ => 
+                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\.
                         -- The following section was transformed from the .NET statement below:
                         -- arg_251_1 = l;
                         -- 
@@ -5838,22 +6000,26 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- l = l + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_22\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_29\) then 
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_30\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\.
                         -- The while loop's condition:
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ < to_signed(8, 32);
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\) then 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ < to_signed(8, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num13 = num11 + m % 64;
-                            -- 	num14 = num12 + n % 64;
+                            -- 	System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 	remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 	num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 	System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 	remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 	num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 	num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 	array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 	array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5861,70 +6027,100 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num13 = num11 + m % 64;
+                            -- System.Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_36\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_35\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\ => 
-                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_35\ => 
+                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\.
                         -- The following section was transformed from the .NET statement below:
                         -- m = m + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\;
-                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_27\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\;
+                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\ if the loop wasn't exited with a state change.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_35\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\ => 
-                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                        else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
-                        end if;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ mod to_signed(64, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\ => 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num13\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num14 = num12 + n % 64;
-                        -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num12\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\ => 
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_36\ => 
                         -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_35\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_37\;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
                         else 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ mod to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ / to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_35\ => 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num14\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\;
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_37\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ * to_signed(64, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num13\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- System.Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_38\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_38\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num12\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\ => 
+                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ >= to_signed(10, 32)) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_40\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
+                        else 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
+                        end if;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ / to_signed(64, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_40\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ * to_signed(64, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num14\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\;
                         -- The following section was transformed from the .NET statement below:
                         -- num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ := to_signed(35, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num13\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num14\ * to_signed(64, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_41\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_41\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := to_signed(35, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num13\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num14\ * to_signed(64, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_42\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_42\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_36\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7526
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_36\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
@@ -5934,39 +6130,43 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- array [l].bramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ and to_unsigned(1, 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ = to_unsigned(1, 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\)).\bramDx\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\)) := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
-                            -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_37\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ * to_signed(8, 32), 32);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9289
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_37\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ and to_unsigned(2, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ = to_unsigned(2, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\)).\bramDy\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\)) := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ and to_unsigned(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ = to_unsigned(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\)).\bramDx\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\)) := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [l].bramDy [m + n * 8] = num15 & 2u == 2u;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_45\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9462
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_45\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ and to_unsigned(2, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ = to_unsigned(2, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.l\)).\bramDy\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\)) := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\;
                         -- The following section was transformed from the .NET statement below:
                         -- n = n + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_38\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_46\;
                         -- Clock cycles needed to complete this state (approximation): 0.7289
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_38\ => 
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_46\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\;
-                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_28\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_38\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_30\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\;
+                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\ if the loop wasn't exited with a state change.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_46\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\ => 
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.Kpz.KpzKernelsTaskState Hast.Samples.Kpz.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.KpzKernelsTaskState)
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Started.1\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Finished.1\ and \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Started.2\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Finished.2\ and \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Started.0\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Finished.0\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Started.0\ <= false;
@@ -5986,7 +6186,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (num16 < 8) {
                             -- 	num17 = num16 + k * 8;
-                            -- 	num18 = num17 % 8;
+                            -- 	num18 = num17 - num17 / 8 * 8;
                             -- 	num19 = num17 / 8;
                             -- 	num20 = num18 * 8 + num6;
                             -- 	num21 = num19 * 8 + num7;
@@ -5994,8 +6194,12 @@ begin
                             -- 	while (num22 < 8) {
                             -- 		num23 = 0;
                             -- 		while (num23 < 8) {
-                            -- 			num24 = num20 + num22 % 64;
-                            -- 			num25 = num21 + num23 % 64;
+                            -- 			System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 			remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 			num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 			System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 			remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 			num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 			uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 			if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 				conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6022,18 +6226,18 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_40\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_48\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_40\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_48\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\.
                         -- The while loop's condition:
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ < to_signed(8, 32);
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\) then 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ < to_signed(8, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num17 = num16 + k * 8;
-                            -- 	num18 = num17 % 8;
+                            -- 	num18 = num17 - num17 / 8 * 8;
                             -- 	num19 = num17 / 8;
                             -- 	num20 = num18 * 8 + num6;
                             -- 	num21 = num19 * 8 + num7;
@@ -6041,8 +6245,12 @@ begin
                             -- 	while (num22 < 8) {
                             -- 		num23 = 0;
                             -- 		while (num23 < 8) {
-                            -- 			num24 = num20 + num22 % 64;
-                            -- 			num25 = num21 + num23 % 64;
+                            -- 			System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 			remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 			num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 			System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 			remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 			num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 			uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 			if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 				conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6071,59 +6279,82 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num17 = num16 + k * 8;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ * to_signed(8, 32), 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num18 = num17 % 8;
-                            -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_42\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ * to_signed(8, 32), 32);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_50\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_41\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_49\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_41\ => 
-                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\.
+                        -- Clock cycles needed to complete this state (approximation): 0.8189
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_49\ => 
+                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\.
                         -- The following section was transformed from the .NET statement below:
                         -- k = k + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.k\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_21\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_41\) then 
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_49\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_42\ => 
-                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\ (have to wait 10 clock cycles in this state).
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_50\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num17 - num17 / 8 * 8;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\ => 
+                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ >= to_signed(10, 32)) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ >= to_signed(10, 32)) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ mod to_signed(8, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ / to_signed(8, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\ => 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num18\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\;
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num18\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\;
                         -- The following section was transformed from the .NET statement below:
                         -- num19 = num17 / 8;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ / to_signed(8, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num19\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\ => 
+                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ >= to_signed(10, 32)) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
+                        else 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
+                        end if;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num17\ / to_signed(8, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num19\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\;
                         -- The following section was transformed from the .NET statement below:
                         -- num20 = num18 * 8 + num6;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num18\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num6\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num20\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num18\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num6\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num20\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\;
                         -- The following section was transformed from the .NET statement below:
                         -- num21 = num19 * 8 + num7;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num19\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num7\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num21\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num19\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num7\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num21\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\;
                         -- The following section was transformed from the .NET statement below:
                         -- num22 = 0;
                         -- 
@@ -6132,8 +6363,12 @@ begin
                         -- while (num22 < 8) {
                         -- 	num23 = 0;
                         -- 	while (num23 < 8) {
-                        -- 		num24 = num20 + num22 % 64;
-                        -- 		num25 = num21 + num23 % 64;
+                        -- 		System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                        -- 		remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                        -- 		num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                        -- 		System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                        -- 		remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                        -- 		num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                         -- 		uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                         -- 		if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                         -- 			conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6156,19 +6391,23 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9526
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\.
                         -- The while loop's condition:
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ < to_signed(8, 32);
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\) then 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ < to_signed(8, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num23 = 0;
                             -- 	while (num23 < 8) {
-                            -- 		num24 = num20 + num22 % 64;
-                            -- 		num25 = num21 + num23 % 64;
+                            -- 		System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 		remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 		num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 		System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 		remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 		num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 		uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 		if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 			conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6196,8 +6435,12 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num23 < 8) {
-                            -- 	num24 = num20 + num22 % 64;
-                            -- 	num25 = num21 + num23 % 64;
+                            -- 	System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 	remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 	num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 	System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 	remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 	num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 	uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 	if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 		conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6218,13 +6461,13 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_46\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_45\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_45\ => 
-                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\ => 
+                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\.
                         -- The following section was transformed from the .NET statement below:
                         -- array [num16].prng1.state = array2 [num16].Result.prng1.state;
                         -- 
@@ -6236,22 +6479,26 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num16 = num16 + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\;
-                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_39\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_45\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_40\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.92\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.92\;
+                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\ if the loop wasn't exited with a state change.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_48\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_46\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\.
                         -- The while loop's condition:
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ < to_signed(8, 32);
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\) then 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ < to_signed(8, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num24 = num20 + num22 % 64;
-                            -- 	num25 = num21 + num23 % 64;
+                            -- 	System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 	remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 	num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 	System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 	remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 	num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 	uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                             -- 	if (array2 [num16].Result.bramDx [num22 + num23 * 8]) {
                             -- 		conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6272,58 +6519,80 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num24 = num20 + num22 % 64;
+                            -- System.Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num20\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_48\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num20\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_60\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_59\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\ => 
-                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_59\ => 
+                        -- State after the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\.
                         -- The following section was transformed from the .NET statement below:
                         -- num22 = num22 + 1;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ + to_signed(1, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\;
-                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_43\ if the loop wasn't exited with a state change.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_47\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.91\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ + to_signed(1, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.91\;
+                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\ if the loop wasn't exited with a state change.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_59\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_48\ => 
-                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\ (have to wait 10 clock cycles in this state).
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_60\ => 
+                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ >= to_signed(10, 32)) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_49\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ >= to_signed(10, 32)) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_61\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ + to_signed(1, 32);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\ mod to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ / to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_49\ => 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\;
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_61\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ * to_signed(64, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num25 = num21 + num23 % 64;
+                        -- System.Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num21\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_50\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_62\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_62\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num21\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                        -- 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_63\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_50\ => 
-                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\ (have to wait 10 clock cycles in this state).
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_63\ => 
+                        -- Waiting for the result to appear in \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ >= to_signed(10, 32)) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ >= to_signed(10, 32)) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_64\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ mod to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ / to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\ => 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\;
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_64\ => 
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ * to_signed(64, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b;
                         -- 
@@ -6335,22 +6604,26 @@ begin
                         -- 	conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 0u;
                         -- }
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.83\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\.
-                        --     * The false branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_67\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_67\.
+                        --     * The false branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_68\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_68\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\.
 
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array2\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\)).\bramDx\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\))) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\;
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array2\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\)).\bramDx\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.83\))) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_67\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_68\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\.
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\.
                         -- The following section was transformed from the .NET statement below:
                         -- uint conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d;
                         -- 
@@ -6362,22 +6635,22 @@ begin
                         -- 	conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d = 0u;
                         -- }
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ * to_signed(8, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.84\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ * to_signed(8, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.85\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.84\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\.
-                        --     * The false branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\.
-                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\.
+                        --     * The true branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_70\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_70\.
+                        --     * The false branch starts in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_71\ and ends in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_71\.
+                        --     * Execution after either branch will continue in the following state: \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_69\.
 
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array2\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\)).\bramDy\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\))) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\;
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array2\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num16\)).\bramDy\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.85\))) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_70\;
                         else 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_71\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4263
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\.
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_67\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
@@ -6387,13 +6660,13 @@ begin
                         -- conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 1u;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\ := to_unsigned(1, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_67\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\ => 
-                        -- False branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_68\ => 
+                        -- False branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 0u;
@@ -6403,32 +6676,26 @@ begin
                         -- conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b = 0u;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_54\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_65\.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_68\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\ => 
-                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_69\ => 
+                        -- State after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\.
                         -- The following section was transformed from the .NET statement below:
                         -- number = conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b | conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d;
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\ or \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.86\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditional80815c178537f934f18b2e7805c027a153db3699c5c202d48e59efb1aa2b702b\ or \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.86\;
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (35 + num24 + num25 * 64, number);
                         -- 
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(35, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\ * to_signed(64, 32), 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\;
-                        -- Begin SimpleMemory write.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\, 32);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8912
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\ => 
-                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\ := to_signed(35, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_72\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4649
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_70\ => 
+                        -- True branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d = 2u;
@@ -6438,13 +6705,13 @@ begin
                         -- conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d = 2u;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\ := to_unsigned(2, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_70\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_69\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\ => 
-                        -- False branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\.
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_71\ => 
+                        -- False branch of the if-else started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d = 0u;
@@ -6454,12 +6721,22 @@ begin
                         -- conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d = 0u;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.conditionalbe7501c16bc7a586d3a0b901bd91770248526d45632e278bc089ab180764697d\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_57\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_55\;
+                        -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_66\.
+                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_71\) then 
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_69\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\ => 
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_72\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.88\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\ * to_signed(64, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.88\;
+                        -- Begin SimpleMemory write.
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_73\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                    when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_73\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -6467,11 +6744,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num23 = num23 + 1;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ + to_signed(1, 32);
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\;
-                            -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_44\ if the loop wasn't exited with a state change.
-                            if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\) then 
-                                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_46\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.90\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ + to_signed(1, 32);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.90\;
+                            -- Returning to the repeated state of the while loop which was started in state \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_56\ if the loop wasn't exited with a state change.
+                            if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_73\) then 
+                                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_58\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -6671,7 +6948,7 @@ begin
                         -- 
                         -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
                         \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2771
+                        -- Clock cycles needed to complete this state (approximation): 0.2734
                     when \PrngMWC64X::NextUInt32().0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().0.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
@@ -6679,7 +6956,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7632
                     when \PrngMWC64X::NextUInt32().0._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64), 64);
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64);
                         \PrngMWC64X::NextUInt32().0.this\.\state\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return num2 ^ num;
@@ -6789,7 +7066,7 @@ begin
                         -- 
                         -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
                         \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2771
+                        -- Clock cycles needed to complete this state (approximation): 0.2734
                     when \PrngMWC64X::NextUInt32().1._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().1.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
@@ -6797,7 +7074,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7632
                     when \PrngMWC64X::NextUInt32().1._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64), 64);
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64);
                         \PrngMWC64X::NextUInt32().1.this\.\state\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return num2 ^ num;
@@ -6907,7 +7184,7 @@ begin
                         -- 
                         -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
                         \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2771
+                        -- Clock cycles needed to complete this state (approximation): 0.2734
                     when \PrngMWC64X::NextUInt32().2._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().2.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
@@ -6915,7 +7192,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7632
                     when \PrngMWC64X::NextUInt32().2._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := SmartResize(\PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64), 64);
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64);
                         \PrngMWC64X::NextUInt32().2.this\.\state\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- return num2 ^ num;
