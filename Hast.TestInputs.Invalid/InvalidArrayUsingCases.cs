@@ -40,6 +40,14 @@ namespace Hast.TestInputs.Invalid
             array[0, 1] = 10;
         }
 
+        public void NullAssignment()
+        {
+            var array1 = new int[5];
+            array1 = null;
+            var x = array1.Length;
+            var y = -x;
+        }
+
 
         private int GetItemValuePlusOne(int[] array, int itemIndex) => array[itemIndex] + 1;
     }

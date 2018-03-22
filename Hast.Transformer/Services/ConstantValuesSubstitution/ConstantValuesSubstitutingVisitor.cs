@@ -49,8 +49,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect
-            // anything in the outer scope after this. Neither if this is assigning a non-constant value.
+            // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything 
+            // in the outer scope after this. Neither if this is assigning a non-constant value. Note that the 
+            // expression can be both in a while or if (in which case it can't affect the parent scopes) or have a non-
+            // constant assignment (and thus can't have a const value for the current scope).
 
             if (!(assignmentExpression.Left is IdentifierExpression)) return;
 
@@ -66,7 +68,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     currentParentBlock = currentParentBlock.FindFirstParentBlockStatement();
                 }
             }
-            else if (!(assignmentExpression.Right is PrimitiveExpression) &&
+
+            if (!(assignmentExpression.Right is PrimitiveExpression) &&
                 !assignmentExpression.Right.Is<BinaryOperatorExpression>(binary =>
                     binary.Left.GetFullName() == assignmentExpression.Left.GetFullName() &&
                         binary.Right is PrimitiveExpression ||
@@ -87,14 +90,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 _constantValuesTable.MarkAsNonConstant(identifierExpression, identifierExpression.FindFirstParentBlockStatement());
             }
 
-            SubstituteValueHolderInExpressionIfInSuitableAssignment(identifierExpression);
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(identifierExpression);
         }
 
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
         {
             base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-            // If this is a member reference to a method then nothing to do.
+            // Method invocations that have a constant value are substituted in VisitInvocationExpression(), not to
+            // mess up the AST upwards.
             if (ConstantValueSubstitutionHelper.IsMethodInvocation(memberReferenceExpression)) return;
 
             if (memberReferenceExpression.IsArrayLengthAccess())
@@ -121,7 +125,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            SubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
         }
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -174,7 +178,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitInvocationExpression(invocationExpression);
 
             // Substituting method invocations that have a constant return value.
-            SubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression);
+
+            // This shouldn't really happen, all targets should be member reference expressions.
+            if (!(invocationExpression.Target is MemberReferenceExpression)) return;
+
+            // If the member reference was substituted then we should also substitute the whole invocation.
+            if (TrySubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression.Target))
+            {
+                invocationExpression.ReplaceWith(invocationExpression.Target);
+            }
         }
 
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
@@ -242,14 +254,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
+        private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
             // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
             // statement then it can't be safely substituted (due to e.g. loop variables).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
                 ConstantValueSubstitutionHelper.IsInWhile(expression))
             {
-                return;
+                return false;
             }
 
             // If the value holder is inside a unary operator that can mutate its state then it can't be substituted.
@@ -262,7 +274,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             };
             if (expression.Parent.Is<UnaryOperatorExpression>(unary => mutatingUnaryOperators.Contains(unary.Operator)))
             {
-                return;
+                return false;
             }
 
             // First checking if there is a substitution for the expression; if not then if it's a member reference
@@ -274,7 +286,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                     if (member == null) return false;
 
-                    ConstructorReference constructorReference = null;
                     if (_constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
                     {
                         return true;
@@ -284,6 +295,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
                         // first member that has a corresponding ctor.
                         var currentMemberReference = memberReferenceExpression;
+                        ConstructorReference constructorReference = null;
 
                         while (
                             !_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
@@ -306,9 +318,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                         if (memberReferenceExpressionInConstructor == null) return false;
 
-                        // Using the substitution also used in the constructor. This should be safe to do even if
-                        // in the ctor there are multiple assignments because an unretrieved constant will only
-                        // remain in the ConstantValuesTable if there are no more substitutions needed in the ctor.
+                        // Using the substitution also used in the constructor. This should be safe to do even if in 
+                        // the ctor there are multiple assignments because an unretrieved constant will only remain in 
+                        // the ConstantValuesTable if there are no more substitutions needed in the ctor.
                         // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the
                         // ctor should be fully substituted so we only need to care about primitive expressions.
 
@@ -324,7 +336,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }))
             {
                 expression.ReplaceWith(valueExpression.Clone());
+                return true;
             }
+
+            return false;
         }
 
 

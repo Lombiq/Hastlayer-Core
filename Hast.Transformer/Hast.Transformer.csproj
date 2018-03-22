@@ -108,7 +108,9 @@
     <Compile Include="Helpers\VariableHelper.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Services\BinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
     <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
+    <Compile Include="Services\IBinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IMethodInliner.cs" />
     <Compile Include="Services\IObjectInitializerExpander.cs" />

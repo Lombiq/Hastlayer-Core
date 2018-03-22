@@ -51,6 +51,7 @@ namespace Hast.Transformer
         private readonly IObjectInitializerExpander _objectInitializerExpander;
         private readonly ITaskBodyInvocationInstanceCountsSetter _taskBodyInvocationInstanceCountsSetter;
         private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
+        private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
         private readonly IDeviceDriverSelector _deviceDriverSelector;
 
 
@@ -82,6 +83,7 @@ namespace Hast.Transformer
             IObjectInitializerExpander objectInitializerExpander,
             ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
             ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
+            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster)
             IDeviceDriverSelector deviceDriverSelector)
         {
             _eventHandler = eventHandler;
@@ -111,6 +113,7 @@ namespace Hast.Transformer
             _objectInitializerExpander = objectInitializerExpander;
             _taskBodyInvocationInstanceCountsSetter = taskBodyInvocationInstanceCountsSetter;
             _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
+            _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
             _deviceDriverSelector = deviceDriverSelector;
         }
 
@@ -196,10 +199,10 @@ namespace Hast.Transformer
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
             // also transform some low-level constructs that are useful to have as simple as possible (e.g. it's OK if
             // we only have while statements in the AST, not for statements mixed in). So we need to remove the not 
-            // useful pipeline steps and run them by hand.
+            // useful pipeline steps and run the rest by hand.
 
             IEnumerable<IAstTransform> pipeline = TransformationPipeline.CreatePipeline(decompiledContext);
-            // We allow the commented out pipeline steps. Must revisit after ILSpy update.
+            // We allow the commented out pipeline steps. Must revisit after an ILSpy update.
             pipeline = pipeline
                 // Converts e.g. !num6 == 0 expression to num6 != 0 and other simplifications.
                 //.Without("PushNegation")
@@ -264,6 +267,7 @@ namespace Hast.Transformer
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
+            _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);

@@ -290,8 +290,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             MemberReferenceExpression targetMemberReference,
             ISubTransformerContext context)
         {
-            var targetMethodName = expression.GetFullName();
-
+            var targetMethodName = expression.GetTargetMemberFullName();
 
             // This is a Task.FromResult() method call.
             if (targetMethodName.IsTaskFromResultMethodName())

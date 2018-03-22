@@ -83,6 +83,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     IVhdlElement rightTransformed;
                     if (right is NullReferenceExpression)
                     {
+                        ArrayHelper.ThrowArraysCantBeNullIfArray(right);
                         leftTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)leftTransformed);
                         rightTransformed = Value.True;
                     }
@@ -263,12 +264,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is PrimitiveExpression primitive)
             {
-                var typeReference = expression.GetActualTypeReference();
-
-                if (typeReference == null)
-                {
-                    typeReference = Transformer.Helpers.TypeHelper.CreatePrimitiveTypeReference(primitive.Value.GetType().Name);
-                }
+                var typeReference = primitive.GetActualTypeReference();
 
                 var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
                 var valueString = primitive.Value.ToString();
@@ -327,11 +323,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (binaryExpression.Left is NullReferenceExpression)
                 {
+                    ArrayHelper.ThrowArraysCantBeNullIfArray(binaryExpression.Right);
                     rightTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)Transform(binaryExpression.Right, context));
                     leftTransformed = Value.True;
                 }
                 else if (binaryExpression.Right is NullReferenceExpression)
                 {
+                    ArrayHelper.ThrowArraysCantBeNullIfArray(binaryExpression.Left);
                     leftTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)Transform(binaryExpression.Left, context));
                     rightTransformed = Value.True;
                 }
@@ -490,7 +488,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     case UnaryOperatorType.Minus:
                         // Casting if the result type is not what the parent expects.
                         var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        if (parentTypeInformation != null && parentTypeInformation.ExpectedType != parentTypeInformation.InferredType)
+                        if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
+                            parentTypeInformation != null && 
+                            parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
+                            parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
                         {
                             var fromType = _typeConverter
                                 .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
@@ -684,6 +685,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // The only case when a default() will remain in the syntax tree is for composed types. For primitives
                 // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
                 var initiailizationResult = InitializeRecord(expression, defaultValueExpression.Type, context);
+
+                ArrayHelper.ThrowArraysCantBeNullIfArray(defaultValueExpression);
 
                 context.Scope.CurrentBlock.Add(new Assignment
                 {

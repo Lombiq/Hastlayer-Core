@@ -85,19 +85,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitInvocationExpression(invocationExpression);
 
-                var targetMemberReference = invocationExpression.Target as MemberReferenceExpression;
-
-                if (targetMemberReference == null) return;
-
-                var methodFullName = targetMemberReference.GetMemberFullName();
-
-                if (string.IsNullOrEmpty(methodFullName))
-                {
-                    // Sometimes there is no annotation on targetMemberReference at all.
-                    // MemberReferenceExpressionExtensions.FindMemberDeclaration() has logic to iteratively find the 
-                    // first parent with a MemberReference annotation too, for the same reason.
-                    methodFullName = invocationExpression.Annotation<MemberReference>()?.FullName;
-                }
+                var methodFullName = invocationExpression.GetTargetMemberFullName();
 
                 if (string.IsNullOrEmpty(methodFullName) || !_inlinableMethods.TryGetValue(methodFullName, out var method))
                 {
@@ -109,7 +97,7 @@ namespace Hast.Transformer.Services
                 // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once inlined.
                 // Since the same method can be inlined multiple times in another method we also need to distinguish per
                 // invocation.
-                var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.CreateNameForUnnamedNode());
+                var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
                 // inlined method's body.

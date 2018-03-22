@@ -144,6 +144,8 @@
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
     <Compile Include="SubTransformers\DeclarableTypeCreator.cs" />
     <Compile Include="SubTransformers\IDeclarableTypeCreator.cs" />
+    <Compile Include="SubTransformers\IRemainderOperatorExpressionsExpander.cs" />
+    <Compile Include="SubTransformers\RemainderOperatorExpressionsExpander.cs" />
     <Compile Include="Verifiers\CompilerGeneratedClassesVerifier.cs" />
     <Compile Include="SubTransformers\DisplayClassFieldTransformer.cs" />
     <Compile Include="SubTransformers\EnumTypesCreator.cs" />
@@ -182,6 +184,8 @@
     <Compile Include="Services\VhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="Services\VhdlTransformingEngine.cs" />
     <Compile Include="Verifiers\IHardwareEntryPointsVerifier.cs" />
+    <Compile Include="Verifiers\IUnsupportedConstructsVerifier.cs" />
+    <Compile Include="Verifiers\UnsupportedConstructsVerifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

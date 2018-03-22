@@ -8,6 +8,12 @@
             var y = !x;
         }
 
+        public void InvalidModelUsage()
+        {
+            var x = InvalidModel.StaticField;
+            var y = -x;
+        }
+
 
         private struct CustomValueType
         {

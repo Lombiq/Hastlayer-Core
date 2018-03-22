@@ -106,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var rightTypeReference = expression.Right.GetActualTypeReference();
             if (expression.Right is CastExpression)
             {
-                leftTypeReference = expression.Right.GetActualTypeReference(true);
+                rightTypeReference = expression.Right.GetActualTypeReference(true);
             }
 
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
@@ -168,7 +168,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     binary.Operator = BinaryOperator.LessThanOrEqual;
                     break;
                 case BinaryOperatorType.Modulus:
-                    binary.Operator = BinaryOperator.Modulus;
+                    // The % operator in .NET, called modulus in the AST, is in reality a different remainder operator.
+                    binary.Operator = BinaryOperator.Remainder;
                     break;
                 case BinaryOperatorType.Multiply:
                     binary.Operator = BinaryOperator.Multiply;
@@ -196,37 +197,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var resultTypeReference = expression.GetResultTypeReference();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
-            // Is the result type smaller than it should be? It seems that (u)short +-*/ (u)short which results in an 
-            // int in .NET can be (u)short in the AST. The same is with (s)byte.
-            // This is wrong and we need to force the int type for the result.
-            Predicate<TypeReference> isAnyShort = typeReference =>
-                typeReference.FullName == typeof(ushort).FullName || typeReference.FullName == typeof(short).FullName;
-            Predicate<TypeReference> isAnyByte = typeReference =>
-                typeReference.FullName == typeof(byte).FullName || typeReference.FullName == typeof(sbyte).FullName;
-            var resultNeedsForcedIntCast =
-                (isAnyShort(resultTypeReference) && (isAnyShort(leftTypeReference) || isAnyShort(rightTypeReference))) ||
-                (isAnyByte(resultTypeReference) && (isAnyByte(leftTypeReference) || isAnyByte(rightTypeReference)));
-            var forcedResultIntCastIsSigned = false;
-            if (resultNeedsForcedIntCast)
-            {
-                // Sign information is needed so if the result can be cast if necessary if there was also a cast expression.
-                forcedResultIntCastIsSigned =
-                    new[] { typeof(short).FullName, typeof(sbyte).FullName }.Contains(resultTypeReference.FullName);
-                var intTypeInformation = forcedResultIntCastIsSigned ?
-                    TypeHelper.CreateInt32TypeInformation() :
-                    TypeHelper.CreateUInt32TypeInformation();
-
-                // Not nice, but the node needs to be modified too so anything else will see the same type as well.
-                expression.RemoveAnnotations<TypeInformation>();
-                expression.AddAnnotation(intTypeInformation);
-
-                resultTypeReference = intTypeInformation.ExpectedType;
-            }
 
             TypeReference preCastTypeReference = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
             // to a smaller type here, then a resize to a bigger type as a result of the cast.
-            if (firstNonParenthesizedExpressionParent is CastExpression)
+            var hasExplicitCast = firstNonParenthesizedExpressionParent is CastExpression;
+            if (hasExplicitCast)
             {
                 preCastTypeReference = resultTypeReference;
                 resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
@@ -383,9 +359,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
-            if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
+            if (hasExplicitCast || isShift)
             {
-                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression) ?
+                var fromType = isShift && !hasExplicitCast ?
                     leftType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 
@@ -398,7 +374,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // Most of the time due to the cast no resize is necessary, but sometimes it is.
                 shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;
-                resultNeedsForcedIntCast = false;
             }
 
             if (shouldResizeResult)
@@ -414,12 +389,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 };
             }
 
-            if (resultNeedsForcedIntCast)
-            {
-                // This needs to be after resize() because otherwise casting an unsigned to signed can result in data
-                // loss due to the range change. 
-                binaryElement = new Invocation(forcedResultIntCastIsSigned ? "signed" : "unsigned", binaryElement);
-            }
 
             var operationResultAssignment = new Assignment
             {
@@ -512,23 +481,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     // It should be the last state added above.
                     currentBlock.ChangeBlockToDifferentState(stateMachine.States.Last().Body, stateMachine.States.Count - 1);
-                }
-            }
-
-            if (resultNeedsForcedIntCast)
-            {
-                // If the parent is not a cast or anything else but an assignment despite having needed a forced int
-                // cast then this was most possibly decompiled from a unary variable increment/decrement where this 
-                // can happen:
-                // ushort = ushort + 1
-                // In this case let's cast the result to the type of the assignment's left.
-                if (expression.Parent.Is<AssignmentExpression>(out var parentAssignment))
-                {
-                    return _typeConversionTransformer.ImplementTypeConversion(
-                        resultType,
-                        _typeConverter.ConvertTypeReference(parentAssignment.Left.GetActualTypeReference(), context.TransformationContext),
-                        operationResultDataObjectReference)
-                        .ConvertedFromExpression;
                 }
             }
 
