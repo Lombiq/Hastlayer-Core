@@ -103,7 +103,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.AddHardwareEntryPointType<Fix64Calculator>();
 
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumber(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
                             {
                                 MaxDegreeOfParallelism = 3
                             });

@@ -29,12 +29,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public bool IsSpecialOperationInvocation(InvocationExpression expression)
-        {
-            var targetMethodName = expression.GetFullName();
-
-            return TryGetSimdOperation(targetMethodName) != null;
-        }
+        public bool IsSpecialOperationInvocation(InvocationExpression expression) =>
+            TryGetSimdOperation(expression.GetTargetMemberFullName()) != null;
 
         public IVhdlElement TransformSpecialOperationInvocation(
             InvocationExpression expression,
@@ -47,7 +43,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     "The given expression (" + expression.ToString() + ") is not a special operation invocation.");
             }
 
-            var targetMethodName = expression.GetFullName();
+            var targetMethodName = expression.GetTargetMemberFullName();
 
             var simdOperation = TryGetSimdOperation(targetMethodName);
 
@@ -124,7 +120,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .TransformParallelBinaryOperatorExpressions(binaryOperations, context);
 
             // If no new states were added, i.e. the operation wasn't a multi-cycle one with wait states, then we add
-            // a new state here: this is needed because accessing the results (since they are assigned to signales) 
+            // a new state here: this is needed because accessing the results (since they are assigned to signals) 
             // should always happen in a separate state.
             if (stateMachine.States.Count == preTransformationStateCount)
             {

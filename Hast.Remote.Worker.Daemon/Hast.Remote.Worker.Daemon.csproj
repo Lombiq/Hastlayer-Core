@@ -62,6 +62,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="HastlayerRemoteWorkerDaemonInstallHelper.bat" />
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>

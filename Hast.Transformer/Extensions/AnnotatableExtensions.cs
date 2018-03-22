@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.Ast;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.ILAst;
 using Mono.Cecil;
 
@@ -33,19 +34,24 @@ namespace ICSharpCode.NRefactory.CSharp
             var parameterReference = annotable.Annotation<ParameterReference>();
             if (parameterReference != null) return parameterReference.ParameterType;
 
-            if (annotable is IndexerExpression)
+            if (annotable is IndexerExpression indexerExpression)
             {
-                return ((IndexerExpression)annotable).Target.GetActualTypeReference()?.GetElementType();
+                return indexerExpression.Target.GetActualTypeReference()?.GetElementType();
             }
 
-            if (annotable is AssignmentExpression)
+            if (annotable is AssignmentExpression assignmentExpression)
             {
-                return ((AssignmentExpression)annotable).Left.GetActualTypeReference();
+                return assignmentExpression.Left.GetActualTypeReference();
             }
 
-            if (annotable is UnaryOperatorExpression)
+            if (annotable is UnaryOperatorExpression unaryOperatorExpression)
             {
-                return ((UnaryOperatorExpression)annotable).Expression.GetActualTypeReference();
+                return unaryOperatorExpression.Expression.GetActualTypeReference();
+            }
+
+            if (annotable is PrimitiveExpression primitiveExpression)
+            {
+                return TypeHelper.CreatePrimitiveTypeReference(primitiveExpression.Value.GetType().Name);
             }
 
             return null;

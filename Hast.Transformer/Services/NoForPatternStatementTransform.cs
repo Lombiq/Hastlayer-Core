@@ -5,7 +5,7 @@ using ICSharpCode.NRefactory.CSharp;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// An composition of <see cref="PatternStatementTransform"/> with the sole purpose of not transforming simple while
+    /// A composition of <see cref="PatternStatementTransform"/> with the sole purpose of not transforming simple while
     /// statements back to more complex for statements like it would do if executed directly. Other parts of that
     /// transform, like auto-property re-creation is useful.
     /// </summary>

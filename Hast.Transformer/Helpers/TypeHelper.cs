@@ -7,11 +7,17 @@ namespace Hast.Transformer.Helpers
 {
     public static class TypeHelper
     {
-        public static TypeInformation CreateInt32TypeInformation() =>
-            CreatePrimitiveTypeReference("Int32").ToTypeInformation();
+        public static TypeReference CreateInt32TypeReference() => CreatePrimitiveTypeReference("Int32");
 
-        public static TypeInformation CreateUInt32TypeInformation() =>
-            CreatePrimitiveTypeReference("UInt32").ToTypeInformation();
+        public static TypeInformation CreateInt32TypeInformation() => CreateInt32TypeReference().ToTypeInformation();
+
+        public static TypeReference CreateUInt32TypeReference() => CreatePrimitiveTypeReference("UInt32");
+
+        public static TypeInformation CreateUInt32TypeInformation() => CreateUInt32TypeReference().ToTypeInformation();
+
+        public static TypeReference CreateInt64TypeReference() => CreatePrimitiveTypeReference("Int64");
+
+        public static TypeInformation CreateInt64TypeInformation() => CreateInt64TypeReference().ToTypeInformation();
 
         public static TypeReference CreatePrimitiveTypeReference(string typeName)
         {

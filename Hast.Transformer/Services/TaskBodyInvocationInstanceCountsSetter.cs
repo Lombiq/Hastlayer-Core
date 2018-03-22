@@ -61,8 +61,11 @@ namespace Hast.Transformer.Services
                     return;
                 }
 
-                var primitiveExpression = condition.Left as PrimitiveExpression;
-                if (primitiveExpression == null) primitiveExpression = condition.Right as PrimitiveExpression;
+                var primitiveExpression = condition.Left as PrimitiveExpression ?? condition.Left.FindFirstChildOfType<PrimitiveExpression>();
+                if (primitiveExpression == null)
+                {
+                    primitiveExpression = condition.Right as PrimitiveExpression ?? condition.Right.FindFirstChildOfType<PrimitiveExpression>();
+                }
 
                 if (primitiveExpression == null) return;
 
