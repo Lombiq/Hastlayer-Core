@@ -2206,7 +2206,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1238
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
@@ -2217,7 +2217,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2002
+                        -- Clock cycles needed to complete this state (approximation): 0.224
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_19\;
@@ -2245,7 +2245,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6755
+                        -- Clock cycles needed to complete this state (approximation): 0.7469
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_21\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32)._Finished.0\) then 
@@ -2280,7 +2280,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2002
+                        -- Clock cycles needed to complete this state (approximation): 0.224
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::GetGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDy(Int32)._Finished.0\) then 
@@ -2291,7 +2291,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.1238
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\;
@@ -2335,7 +2335,7 @@ begin
                                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
+                        -- Clock cycles needed to complete this state (approximation): 0.7705
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_1\;
@@ -3261,7 +3261,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7508
+                        -- Clock cycles needed to complete this state (approximation): 0.7746
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_11\ => 
                         -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
@@ -3332,7 +3332,7 @@ begin
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num12\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9749
+                        -- Clock cycles needed to complete this state (approximation): 0.9987
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.19\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.18\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\));
@@ -3341,7 +3341,7 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.22\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.20\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.21\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.23\ := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\))) and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num12\));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9759
+                        -- Clock cycles needed to complete this state (approximation): 0.9709
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.24\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.23\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num5\)));
@@ -3369,7 +3369,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
+                        -- Clock cycles needed to complete this state (approximation): 0.8707
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_16\ => 
                         -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_15\.
                         -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_10\.
@@ -3791,7 +3791,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7508
+                        -- Clock cycles needed to complete this state (approximation): 0.7746
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_11\ => 
                         -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\.
                         -- The following section was transformed from the .NET statement below:
@@ -3862,7 +3862,7 @@ begin
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num12\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9749
+                        -- Clock cycles needed to complete this state (approximation): 0.9987
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.19\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.18\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\));
@@ -3871,7 +3871,7 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.22\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.20\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.21\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.23\ := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\))) and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num12\));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9759
+                        -- Clock cycles needed to complete this state (approximation): 0.9709
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.24\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.23\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num5\)));
@@ -3899,7 +3899,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
+                        -- Clock cycles needed to complete this state (approximation): 0.8707
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_16\ => 
                         -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_15\.
                         -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_10\.
@@ -4321,7 +4321,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7508
+                        -- Clock cycles needed to complete this state (approximation): 0.7746
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_11\ => 
                         -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\.
                         -- The following section was transformed from the .NET statement below:
@@ -4392,7 +4392,7 @@ begin
                         -- 
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.18\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\)) and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num12\)));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9749
+                        -- Clock cycles needed to complete this state (approximation): 0.9987
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.19\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.18\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\));
@@ -4401,7 +4401,7 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.22\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.20\ and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.21\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.23\ := not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\))) and \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDx\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num12\));
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9759
+                        -- Clock cycles needed to complete this state (approximation): 0.9709
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.24\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.23\ and not(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\bramDy\(to_integer(\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num5\)));
@@ -4429,7 +4429,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6753
+                        -- Clock cycles needed to complete this state (approximation): 0.8707
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_16\ => 
                         -- State after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_15\.
                         -- Going to the state after the if-else which was started in state \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_10\.

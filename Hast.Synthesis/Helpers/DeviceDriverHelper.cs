@@ -18,12 +18,14 @@ namespace Hast.Synthesis.Helpers
                 if (constantLatencyNs > 0) latencyNs = constantLatencyNs;
             }
 
-            return ComputeClockCyclesFromLatency(deviceManifest, latencyNs);
+            return ComputeClockCyclesFromLatency(deviceManifest, ReturnLatencyOrThrowIfInvalid(latencyNs, expression));
         }
 
         public static decimal ComputeClockCyclesForUnaryOperation(
             IDeviceManifest deviceManifest, ITimingReport timingReport, UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            ComputeClockCyclesFromLatency(deviceManifest, timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned));
+            ComputeClockCyclesFromLatency(
+                deviceManifest, 
+                ReturnLatencyOrThrowIfInvalid(timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned), expression));
 
             public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
         {
@@ -53,6 +55,15 @@ namespace Hast.Synthesis.Helpers
             if (latencyClockCycles < 0) return 0.1M;
 
             return latencyClockCycles;
+        }
+
+        public static decimal ReturnLatencyOrThrowIfInvalid(decimal latency, Expression expression)
+        {
+            if (latency >= 0) return latency;
+
+            throw new InvalidOperationException(
+                "No latency data found for the expression " + expression.ToString() + 
+                ". This is most possibly a bug in Hastlayer, please submit a bug report with the affected code snippet: https://github.com/Lombiq/Hastlayer-SDK/issues.");
         }
     }
 }

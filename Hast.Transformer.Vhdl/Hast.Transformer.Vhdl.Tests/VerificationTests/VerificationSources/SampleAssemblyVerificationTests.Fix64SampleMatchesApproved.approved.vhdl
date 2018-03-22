@@ -2045,7 +2045,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().0.return\ <= \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5454
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
                 end case;
             end if;
         end if;
@@ -2133,7 +2133,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().1.return\ <= \Fix64::ToIntegers().1.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().1._State\ := \Fix64::ToIntegers().1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5454
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
                 end case;
             end if;
         end if;
@@ -2221,7 +2221,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().2.return\ <= \Fix64::ToIntegers().2.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().2._State\ := \Fix64::ToIntegers().2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5454
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
                 end case;
             end if;
         end if;
@@ -2317,13 +2317,13 @@ begin
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\;
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.num\;
+                        \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8807
+                    when \Fix64::op_Addition(Fix64,Fix64).0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\;
                         -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
-                        \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8898
-                    when \Fix64::op_Addition(Fix64,Fix64).0._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ /= to_signed(0, 64);
                         \Fix64::op_Addition(Fix64,Fix64).0.flag\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
@@ -2347,7 +2347,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
+                        -- Clock cycles needed to complete this state (approximation): 0.6285
                     when \Fix64::op_Addition(Fix64,Fix64).0._State_4\ => 
                         -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -2547,13 +2547,13 @@ begin
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).1.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).1.rawValue2\;
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).1.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).1.num\;
+                        \Fix64::op_Addition(Fix64,Fix64).1._State\ := \Fix64::op_Addition(Fix64,Fix64).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8807
+                    when \Fix64::op_Addition(Fix64,Fix64).1._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\;
                         -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
-                        \Fix64::op_Addition(Fix64,Fix64).1._State\ := \Fix64::op_Addition(Fix64,Fix64).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8898
-                    when \Fix64::op_Addition(Fix64,Fix64).1._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ /= to_signed(0, 64);
                         \Fix64::op_Addition(Fix64,Fix64).1.flag\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
@@ -2577,7 +2577,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Fix64::op_Addition(Fix64,Fix64).1._State\ := \Fix64::op_Addition(Fix64,Fix64).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
+                        -- Clock cycles needed to complete this state (approximation): 0.6285
                     when \Fix64::op_Addition(Fix64,Fix64).1._State_4\ => 
                         -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -2777,13 +2777,13 @@ begin
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).2.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).2.rawValue2\;
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).2.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).2.num\;
+                        \Fix64::op_Addition(Fix64,Fix64).2._State\ := \Fix64::op_Addition(Fix64,Fix64).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8807
+                    when \Fix64::op_Addition(Fix64,Fix64).2._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\;
                         -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
-                        \Fix64::op_Addition(Fix64,Fix64).2._State\ := \Fix64::op_Addition(Fix64,Fix64).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8898
-                    when \Fix64::op_Addition(Fix64,Fix64).2._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ /= to_signed(0, 64);
                         \Fix64::op_Addition(Fix64,Fix64).2.flag\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
@@ -2807,7 +2807,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Fix64::op_Addition(Fix64,Fix64).2._State\ := \Fix64::op_Addition(Fix64,Fix64).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
+                        -- Clock cycles needed to complete this state (approximation): 0.6285
                     when \Fix64::op_Addition(Fix64,Fix64).2._State_4\ => 
                         -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).2._State_3\.
                         -- The following section was transformed from the .NET statement below:

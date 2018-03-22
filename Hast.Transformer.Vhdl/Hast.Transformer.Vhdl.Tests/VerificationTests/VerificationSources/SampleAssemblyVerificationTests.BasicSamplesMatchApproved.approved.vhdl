@@ -16243,7 +16243,7 @@ begin
                         else 
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.7254
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -16583,7 +16583,7 @@ begin
                         else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.7254
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_12\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -17099,7 +17099,7 @@ begin
                         else 
                             \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.7254
                 end case;
             end if;
         end if;
@@ -17261,7 +17261,7 @@ begin
                         else 
                             \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.7254
                 end case;
             end if;
         end if;
@@ -17423,7 +17423,7 @@ begin
                         else 
                             \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7016
+                        -- Clock cycles needed to complete this state (approximation): 0.7254
                 end case;
             end if;
         end if;
@@ -17768,7 +17768,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.628
+                        -- Clock cycles needed to complete this state (approximation): 0.6518
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -17970,7 +17970,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.628
+                        -- Clock cycles needed to complete this state (approximation): 0.6518
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18172,7 +18172,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.628
+                        -- Clock cycles needed to complete this state (approximation): 0.6518
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -18374,7 +18374,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.628
+                        -- Clock cycles needed to complete this state (approximation): 0.6518
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
