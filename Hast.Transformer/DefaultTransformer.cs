@@ -83,7 +83,7 @@ namespace Hast.Transformer
             IObjectInitializerExpander objectInitializerExpander,
             ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
             ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
-            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster)
+            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
             IDeviceDriverSelector deviceDriverSelector)
         {
             _eventHandler = eventHandler;
