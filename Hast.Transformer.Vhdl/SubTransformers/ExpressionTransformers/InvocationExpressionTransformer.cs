@@ -103,6 +103,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             // Setting CellIndex, aligned to the platform's data bus width.
+            // This alignment needs the following arithmetic: 
+            //   alignedIndex = cellIndex / dataBusCellCount
+            // Then if less data is read/written than the full bus width then the affected 32b cell(s) need to be selected:
+            //    dataInStartBitIndex = cellIndex % dataBusCellCount * SimpleMemory.MemoryCellSizeBytes
+            // This is trivial in VHDL:
+            // - Getting alignedIndex can be made with a bitmask, having 1s all to the left starting with the bit of the 
+            //   dataBusCellCount. E.g. if MemoryCellSizeBytes is 4 (32b), dataBusWidthBytes is 16 (128b) and thus 
+            //   dataBusCellCount is 4 then this mask will provide an index aligned to be a multiple of 4:
+            //   cellIndex & 1111 1111 1111 1111 1111 1111 1111 0100
+            // - Getting dataInStartBitIndex: 
+            //   cellIndex & 0000 0000 0000 0000 0000 0000 0000 0011 * 32
+            // This will work if dataBusCellCount can be expressed with a single bit, which is always the case.
+            var dataBusCellCount = dataBusWidthBytes / Transformer.Abstractions.SimpleMemory.SimpleMemory.MemoryCellSizeBytes;
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
