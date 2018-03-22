@@ -82,7 +82,8 @@ namespace Hast.Synthesis.Services
                             binaryOperator = BinaryOperatorType.LessThan;
                             break;
                         case "mod":
-                            binaryOperator = BinaryOperatorType.Modulus;
+                            // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
+                            // VHDL operator rem, see below.
                             break;
                         case var op when (op.StartsWith("mul")):
                             binaryOperator = BinaryOperatorType.Multiply;
@@ -101,6 +102,9 @@ namespace Hast.Synthesis.Services
                             break;
                         case var op when (op.StartsWith("dotnet_shift_right")):
                             binaryOperator = BinaryOperatorType.ShiftRight;
+                            break;
+                        case "rem":
+                            binaryOperator = BinaryOperatorType.Modulus;
                             break;
                         case "sub":
                             binaryOperator = BinaryOperatorType.Subtract;
