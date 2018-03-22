@@ -15,7 +15,7 @@ namespace Hast.Synthesis.Helpers
             if (IsRightOperandConstant(expression, out var constantValue))
             {
                 var constantLatencyNs = timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned, constantValue);
-                if (constantLatencyNs > 0) return constantLatencyNs;
+                if (constantLatencyNs > 0) latencyNs = constantLatencyNs;
             }
 
             return ComputeClockCyclesFromLatency(deviceManifest, latencyNs);
