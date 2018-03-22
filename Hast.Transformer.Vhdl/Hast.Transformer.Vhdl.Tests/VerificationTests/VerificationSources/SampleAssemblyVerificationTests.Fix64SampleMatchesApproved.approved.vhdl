@@ -1620,7 +1620,7 @@ begin
                         else 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8189
+                        -- Clock cycles needed to complete this state (approximation): 0.3974
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\ => 
                         -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\.
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_1\;
@@ -2045,7 +2045,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().0.return\ <= \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3734
+                        -- Clock cycles needed to complete this state (approximation): 0.5454
                 end case;
             end if;
         end if;
@@ -2133,7 +2133,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().1.return\ <= \Fix64::ToIntegers().1.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().1._State\ := \Fix64::ToIntegers().1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3734
+                        -- Clock cycles needed to complete this state (approximation): 0.5454
                 end case;
             end if;
         end if;
@@ -2221,7 +2221,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().2.return\ <= \Fix64::ToIntegers().2.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().2._State\ := \Fix64::ToIntegers().2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3734
+                        -- Clock cycles needed to complete this state (approximation): 0.5454
                 end case;
             end if;
         end if;
