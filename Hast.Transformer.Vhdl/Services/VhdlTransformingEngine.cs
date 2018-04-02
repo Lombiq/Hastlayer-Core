@@ -28,10 +28,12 @@ namespace Hast.Transformer.Vhdl.Services
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
+            var cacheKey = _vhdlHardwareDescriptionCachingService.GetCacheKey(transformationContext);
+
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {
                 var cachedHardwareDescription = await _vhdlHardwareDescriptionCachingService
-                    .GetHardwareDescription(transformationContext);
+                    .GetHardwareDescription(cacheKey);
                 if (cachedHardwareDescription != null) return cachedHardwareDescription; 
             }
 
@@ -58,7 +60,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {
-                await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(transformationContext, hardwareDescription); 
+                await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(cacheKey, hardwareDescription); 
             }
 
             return hardwareDescription;
