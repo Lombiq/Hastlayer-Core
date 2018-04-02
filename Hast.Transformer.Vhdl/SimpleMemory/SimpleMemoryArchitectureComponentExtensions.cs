@@ -7,7 +7,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     /// <summary>
-    /// Handles intermediay signals for using SimpleMemory ports. Such signals are only needed for Out or InOut ports,
+    /// Handles intermediary signals for using SimpleMemory ports. Such signals are only needed for Out or InOut ports,
     /// In ports can be simply read from multiple places; so intermediary signals are only needed for the CellIndex,
     /// DataOut, ReadEnable and WriteEnable ports.
     /// </summary>
