@@ -112,6 +112,7 @@
     <Compile Include="Services\ITransformedVhdlManifestBuilder.cs" />
     <Compile Include="Services\IVhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="Services\TransformedVhdlManifestBuilder.cs" />
+    <Compile Include="SimpleMemory\LongGeneratedSimpleMemoryCodeComments.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
     <Compile Include="Constants\CommonPortNames.cs" />
     <Compile Include="Constants\LongGeneratedCodeComments.cs" />
