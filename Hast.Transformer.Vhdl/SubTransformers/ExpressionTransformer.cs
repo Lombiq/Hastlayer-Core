@@ -475,12 +475,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var unary = expression as UnaryOperatorExpression;
 
 
-                var expressionSize = _typeConverter
-                    .ConvertTypeReference(unary.Expression.GetActualTypeReference(), context.TransformationContext)
-                    .GetSize();
+                var expressionType = _typeConverter
+                    .ConvertTypeReference(
+                        unary.Expression is CastExpression ? unary.Expression.GetActualTypeReference(true) : unary.Expression.GetActualTypeReference(),
+                        context.TransformationContext);
+                var expressionSize = expressionType.GetSize();
                 var clockCyclesNeededForOperation = _deviceDriverSelector
                     .GetDriver(context)
-                    .GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
+                    .GetClockCyclesNeededForUnaryOperation(unary, expressionSize, expressionType.Name == "signed");
 
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
                 scope.CurrentBlock.RequiredClockCycles += clockCyclesNeededForOperation;

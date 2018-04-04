@@ -135,6 +135,9 @@ namespace Hast.Synthesis.Services
                         case "sub":
                             binaryOperator = BinaryOperatorType.Subtract;
                             break;
+                        case "unary_minus":
+                            unaryOperator = UnaryOperatorType.Minus;
+                            break;
                         case "xor":
                             // There is no separate bitwise and conditional version for XOR.
                             isSignAgnosticBinaryOperatorType = true;
