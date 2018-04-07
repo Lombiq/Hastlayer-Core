@@ -6836,7 +6836,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().0.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_4\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \PrngMWC64X::NextUInt32().0._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64);
@@ -6954,7 +6954,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().1.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_4\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \PrngMWC64X::NextUInt32().1._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64);
@@ -7072,7 +7072,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().2.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_4\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \PrngMWC64X::NextUInt32().2._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64);

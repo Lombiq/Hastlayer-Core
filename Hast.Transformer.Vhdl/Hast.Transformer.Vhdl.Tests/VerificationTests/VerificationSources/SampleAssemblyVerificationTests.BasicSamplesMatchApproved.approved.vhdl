@@ -4103,7 +4103,7 @@ begin
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ := to_signed(100, 32) + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\;
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -4200,7 +4200,7 @@ begin
                         -- num5 = num4 / 25;
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -4234,7 +4234,7 @@ begin
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ * to_signed(25, 32), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ - \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\;
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ /= to_signed(0, 32);
@@ -4400,7 +4400,7 @@ begin
                         else 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8189
+                        -- Clock cycles needed to complete this state (approximation): 0.6961
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\ => 
                         -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
                         -- The following section was transformed from the .NET statement below:
@@ -4684,7 +4684,7 @@ begin
                         else 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8189
+                        -- Clock cycles needed to complete this state (approximation): 0.6961
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_30\ => 
                         -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
@@ -4814,7 +4814,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -4842,7 +4842,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -4870,7 +4870,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5080,7 +5080,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5108,7 +5108,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5136,7 +5136,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5346,7 +5346,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5374,7 +5374,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5402,7 +5402,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5612,7 +5612,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).3.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5640,7 +5640,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5668,7 +5668,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).3._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5878,7 +5878,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).4.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5906,7 +5906,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -5934,7 +5934,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).4._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6144,7 +6144,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).5.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6172,7 +6172,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6200,7 +6200,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).5._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6410,7 +6410,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).6.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6438,7 +6438,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6466,7 +6466,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).6._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6676,7 +6676,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).7.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6704,7 +6704,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6732,7 +6732,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).7._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6942,7 +6942,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).8.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6970,7 +6970,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -6998,7 +6998,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).8._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7208,7 +7208,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).9.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7236,7 +7236,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7264,7 +7264,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).9._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7474,7 +7474,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).10.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7502,7 +7502,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7530,7 +7530,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).10._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7740,7 +7740,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).11.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7768,7 +7768,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7796,7 +7796,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).11._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8006,7 +8006,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).12.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8034,7 +8034,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8062,7 +8062,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).12._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8272,7 +8272,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).13.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8300,7 +8300,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8328,7 +8328,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).13._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8538,7 +8538,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).14.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8566,7 +8566,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8594,7 +8594,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).14._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8804,7 +8804,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).15.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8832,7 +8832,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8860,7 +8860,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).15._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9070,7 +9070,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).16.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9098,7 +9098,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9126,7 +9126,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).16._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9336,7 +9336,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).17.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9364,7 +9364,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9392,7 +9392,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).17._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9602,7 +9602,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).18.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9630,7 +9630,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9658,7 +9658,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).18._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9868,7 +9868,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).19.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9896,7 +9896,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9924,7 +9924,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).19._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10134,7 +10134,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).20.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10162,7 +10162,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10190,7 +10190,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).20._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10400,7 +10400,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).21.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10428,7 +10428,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10456,7 +10456,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).21._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10666,7 +10666,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).22.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10694,7 +10694,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10722,7 +10722,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).22._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10932,7 +10932,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).23.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10960,7 +10960,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10988,7 +10988,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).23._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11198,7 +11198,7 @@ begin
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.0\ := SmartResize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).24.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_3\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11226,7 +11226,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_5\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11254,7 +11254,7 @@ begin
                         -- num = num / 1000;
                         -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._State_7\ => 
                         -- Waiting for the result to appear in \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -15862,7 +15862,7 @@ begin
                         \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.increaseBy\;
                         \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
                         \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0._State\ := \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5358
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
@@ -16244,7 +16244,7 @@ begin
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ * \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\, 32);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ - \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\;
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ > to_unsigned(0, 32);
@@ -16584,7 +16584,7 @@ begin
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ * \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\, 32);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ - \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\;
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ > to_unsigned(0, 32);
@@ -17100,7 +17100,7 @@ begin
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ * \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\, 32);
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ - \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ > to_unsigned(0, 32);
@@ -17262,7 +17262,7 @@ begin
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ * \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\, 32);
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ - \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ > to_unsigned(0, 32);
@@ -17424,7 +17424,7 @@ begin
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ * \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\, 32);
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.number_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ - \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8621
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ > to_unsigned(0, 32);
@@ -18643,7 +18643,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                 end case;
             end if;
         end if;
@@ -18815,7 +18815,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                 end case;
             end if;
         end if;
@@ -18987,7 +18987,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                 end case;
             end if;
         end if;
@@ -19159,7 +19159,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                 end case;
             end if;
         end if;
@@ -20007,7 +20007,7 @@ begin
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\);
                         -- The following section was transformed from the .NET statement below:

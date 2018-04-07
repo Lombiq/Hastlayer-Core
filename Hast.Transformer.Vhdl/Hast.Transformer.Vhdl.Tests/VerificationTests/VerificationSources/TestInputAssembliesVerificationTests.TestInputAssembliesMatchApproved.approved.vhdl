@@ -865,7 +865,9 @@ architecture Imp of Hast_IP is
         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_0\, 
         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_1\, 
         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_2\, 
-        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\);
+        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\, 
+        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_4\, 
+        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_5\);
     -- Signals:
     Signal \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._Finished\: boolean := false;
     Signal \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._Started\: boolean := false;
@@ -879,8 +881,7 @@ architecture Imp of Hast_IP is
         \CastingCases::NumberCasting(Int16,Int16).0._State_0\, 
         \CastingCases::NumberCasting(Int16,Int16).0._State_1\, 
         \CastingCases::NumberCasting(Int16,Int16).0._State_2\, 
-        \CastingCases::NumberCasting(Int16,Int16).0._State_3\, 
-        \CastingCases::NumberCasting(Int16,Int16).0._State_4\);
+        \CastingCases::NumberCasting(Int16,Int16).0._State_3\);
     -- Signals:
     Signal \CastingCases::NumberCasting(Int16,Int16).0._Finished\: boolean := false;
     Signal \CastingCases::NumberCasting(Int16,Int16).0._Started\: boolean := false;
@@ -7036,7 +7037,7 @@ begin
                         -- num6 = (int)((System.Int32)(b) / (System.Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_5\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.5\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7093,7 +7094,7 @@ begin
                         -- num9 = (int)((System.Int32)(b) | (System.Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.10\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
@@ -7116,7 +7117,7 @@ begin
                         -- num12 = b >> (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.13\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32));
@@ -7144,7 +7145,7 @@ begin
                         -- num16 = (int)((System.Int32)(b) / (System.Int32)((byte)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_12\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.17\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7201,7 +7202,7 @@ begin
                         -- num19 = (int)((System.Int32)(b) | (System.Int32)((byte)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_16\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.22\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) or SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
@@ -7224,7 +7225,7 @@ begin
                         -- num23 = b >> (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_17\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_17\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.25\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32));
@@ -7252,7 +7253,7 @@ begin
                         -- num27 = (int)((System.Int32)((short)b) / (System.Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_19\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_19\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.29\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7309,7 +7310,7 @@ begin
                         -- num30 = (int)((System.Int32)((short)b) | (System.Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_23\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_23\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.34\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
@@ -7332,7 +7333,7 @@ begin
                         -- num34 = b >> (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_24\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_24\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.37\ := signed(SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32));
@@ -7360,7 +7361,7 @@ begin
                         -- num38 = (int)((System.Int32)((ushort)b) / (System.Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_26\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.41\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7417,7 +7418,7 @@ begin
                         -- num41 = (int)((System.Int32)((ushort)b) | (System.Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_30\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_30\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.46\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
@@ -7436,7 +7437,7 @@ begin
                         -- num44 = b >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_31\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_31\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.49\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32));
@@ -7464,7 +7465,7 @@ begin
                         -- num48 = (int)b / input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_33\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_33\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.53\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7499,11 +7500,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ := SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_36\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.56\ := SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.56\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num49\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.56\;
                         -- The following section was transformed from the .NET statement below:
                         -- num50 = (int)b & input;
@@ -7514,7 +7515,7 @@ begin
                         -- num51 = (int)b | input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_37\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_37\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.58\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32)) or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
@@ -7533,7 +7534,7 @@ begin
                         -- num54 = b >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_38\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_38\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.61\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32));
@@ -7561,7 +7562,7 @@ begin
                         -- num58 = (uint)((int)b / input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_40\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_40\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.65\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7596,11 +7597,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 8), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 8);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_43\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 8), 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.68\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.68\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num59\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.68\);
                         -- The following section was transformed from the .NET statement below:
                         -- num60 = (uint)((int)b & input);
@@ -7610,15 +7611,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num61 = (uint)((int)b | input);
                         -- 
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_44\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
+                    when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_44\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.70\ := unsigned(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32)) or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num61\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.70\);
                         -- The following section was transformed from the .NET statement below:
                         -- num62 = (uint)((int)b ^ input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_44\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9869
-                    when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_44\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.71\ := unsigned(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32)) xor \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num62\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.71\);
                         -- The following section was transformed from the .NET statement below:
@@ -7634,7 +7635,7 @@ begin
                         -- num65 = b >> (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_45\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_45\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.73\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 64)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 5) and "11111"))), 32));
@@ -7666,7 +7667,7 @@ begin
                         -- num69 = (long)((ulong)b / (ulong)num63);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_48\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_48\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.77\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7700,23 +7701,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_50\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_50\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_51\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_51\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_52\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_52\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.80\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.80\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num70\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.80\);
                         -- The following section was transformed from the .NET statement below:
                         -- num71 = (long)((ulong)b & (ulong)num63);
@@ -7741,7 +7742,7 @@ begin
                         -- num75 = (int)b << (int)num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_53\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7635
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_53\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.84\ := shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 5))));
@@ -7782,7 +7783,7 @@ begin
                         -- num80 = (ulong)b / num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_57\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_57\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.89\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7817,15 +7818,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.15\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_60\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_61\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_61\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.92\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.92\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num81\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.92\;
                         -- The following section was transformed from the .NET statement below:
                         -- num82 = (ulong)b & num74;
@@ -7887,7 +7888,7 @@ begin
                         -- num90 = (int)((System.Int32)(b4) / (System.Int32)((sbyte)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_65\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_65\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.101\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -7944,7 +7945,7 @@ begin
                         -- num93 = (int)((System.Int32)(b4) | (System.Int32)((sbyte)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_69\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_69\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.106\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) or signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
@@ -7963,7 +7964,7 @@ begin
                         -- num96 = b4 >> (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_70\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_70\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.109\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32);
@@ -7991,7 +7992,7 @@ begin
                         -- num100 = (int)((System.Int32)(b4) / (System.Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_72\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_72\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.113\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8048,7 +8049,7 @@ begin
                         -- num103 = (int)((System.Int32)(b4) | (System.Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_76\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_76\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.118\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
@@ -8067,7 +8068,7 @@ begin
                         -- num106 = b4 >> (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_77\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_77\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.121\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32);
@@ -8095,7 +8096,7 @@ begin
                         -- num110 = (int)((System.Int32)((short)b4) / (System.Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_79\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_79\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.125\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8152,7 +8153,7 @@ begin
                         -- num113 = (int)((System.Int32)((short)b4) | (System.Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_83\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_83\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.130\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
@@ -8171,7 +8172,7 @@ begin
                         -- num116 = b4 >> (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_84\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_84\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.133\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32);
@@ -8199,7 +8200,7 @@ begin
                         -- num120 = (int)((System.Int32)((ushort)b4) / (System.Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_86\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_86\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.137\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8256,7 +8257,7 @@ begin
                         -- num123 = (int)((System.Int32)((ushort)b4) | (System.Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_90\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_90\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.142\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
@@ -8275,7 +8276,7 @@ begin
                         -- num126 = b4 >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_91\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_91\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.145\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32);
@@ -8303,7 +8304,7 @@ begin
                         -- num130 = (int)b4 / input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_93\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_93\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.149\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8338,11 +8339,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.25\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.25\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_96\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.152\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.152\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num131\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.152\;
                         -- The following section was transformed from the .NET statement below:
                         -- num132 = (int)b4 & input;
@@ -8353,7 +8354,7 @@ begin
                         -- num133 = (int)b4 | input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_97\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_97\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.154\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32) or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
@@ -8372,7 +8373,7 @@ begin
                         -- num136 = b4 >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_98\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.157\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32);
@@ -8404,7 +8405,7 @@ begin
                         -- num140 = (long)b4 / (long)((ulong)input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_101\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_101\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.161\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8446,15 +8447,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.27\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.27\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\, 8)), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\, 8));
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_104\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_105\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_105\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.164\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.164\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num141\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.164\;
                         -- The following section was transformed from the .NET statement below:
                         -- num142 = (long)b4 & (long)((ulong)input);
@@ -8475,7 +8476,7 @@ begin
                         -- num145 = (int)b4 << (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_106\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_106\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.168\ := shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 5))));
@@ -8516,7 +8517,7 @@ begin
                         -- num150 = (long)b4 / num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_110\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_110\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.173\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8551,15 +8552,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.29\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.29\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_113\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_114\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_114\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.176\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.176\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num151\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.176\;
                         -- The following section was transformed from the .NET statement below:
                         -- num152 = (long)b4 & num63;
@@ -8580,7 +8581,7 @@ begin
                         -- num155 = (int)b4 << (int)num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_115\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_115\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.180\ := shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 5))));
@@ -8639,7 +8640,7 @@ begin
                         -- num163 = (int)((System.Int32)(num157) / (System.Int32)((short)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_120\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_120\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.187\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8696,7 +8697,7 @@ begin
                         -- num166 = (int)((System.Int32)(num157) | (System.Int32)((short)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_124\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_124\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.192\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
@@ -8715,7 +8716,7 @@ begin
                         -- num169 = num157 >> (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_125\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_125\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.195\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32);
@@ -8743,7 +8744,7 @@ begin
                         -- num173 = (int)((System.Int32)(num157) / (System.Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_127\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_127\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.199\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8800,7 +8801,7 @@ begin
                         -- num176 = (int)((System.Int32)(num157) | (System.Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_131\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_131\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.204\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
@@ -8819,7 +8820,7 @@ begin
                         -- num179 = num157 >> (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_132\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_132\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.207\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32);
@@ -8847,7 +8848,7 @@ begin
                         -- num183 = (int)((System.Int32)(num157) / (System.Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_134\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_134\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.211\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -8904,7 +8905,7 @@ begin
                         -- num186 = (int)((System.Int32)(num157) | (System.Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_138\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_138\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.216\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
@@ -8923,7 +8924,7 @@ begin
                         -- num189 = num157 >> (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_139\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_139\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.219\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32);
@@ -8951,7 +8952,7 @@ begin
                         -- num193 = (int)((System.Int32)(num157) / (System.Int32)((short)num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_141\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_141\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.223\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9008,7 +9009,7 @@ begin
                         -- num196 = (int)((System.Int32)(num157) | (System.Int32)((short)num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_145\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_145\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.228\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
@@ -9027,7 +9028,7 @@ begin
                         -- num199 = num157 >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_146\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_146\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.231\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32);
@@ -9055,7 +9056,7 @@ begin
                         -- num203 = (int)num157 / input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_148\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_148\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.235\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9090,11 +9091,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.39\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.39\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_151\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.238\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.238\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num204\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.238\;
                         -- The following section was transformed from the .NET statement below:
                         -- num205 = (int)num157 & input;
@@ -9105,7 +9106,7 @@ begin
                         -- num206 = (int)num157 | input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_152\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_152\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.240\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32) or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
@@ -9124,7 +9125,7 @@ begin
                         -- num209 = num157 >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_153\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_153\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.243\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32);
@@ -9156,7 +9157,7 @@ begin
                         -- num213 = (long)num157 / (long)((ulong)input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_156\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_156\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.247\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9198,15 +9199,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.41\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.41\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\, 16)), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\, 16));
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_159\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_160\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_160\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.250\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.250\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num214\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.250\;
                         -- The following section was transformed from the .NET statement below:
                         -- num215 = (long)num157 & (long)((ulong)input);
@@ -9227,7 +9228,7 @@ begin
                         -- num218 = (int)num157 << (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_161\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_161\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.254\ := shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 5))));
@@ -9268,7 +9269,7 @@ begin
                         -- num223 = (long)num157 / num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_165\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_165\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.259\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9303,15 +9304,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.43\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.43\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_168\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_169\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_169\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.262\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.262\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num224\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.262\;
                         -- The following section was transformed from the .NET statement below:
                         -- num225 = (long)num157 & num63;
@@ -9332,7 +9333,7 @@ begin
                         -- num228 = (int)num157 << (int)num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_170\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_170\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.266\ := shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 5))));
@@ -9391,7 +9392,7 @@ begin
                         -- num236 = (int)((System.Int32)(num230) / (System.Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_175\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_175\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.273\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9448,7 +9449,7 @@ begin
                         -- num239 = (int)((System.Int32)(num230) | (System.Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_179\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_179\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.278\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
@@ -9467,7 +9468,7 @@ begin
                         -- num242 = num230 >> (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_180\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_180\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.281\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32));
@@ -9495,7 +9496,7 @@ begin
                         -- num246 = (int)((System.Int32)(num230) / (System.Int32)((ushort)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_182\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_182\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.285\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9552,7 +9553,7 @@ begin
                         -- num249 = (int)((System.Int32)(num230) | (System.Int32)((ushort)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_186\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_186\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.290\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
@@ -9571,7 +9572,7 @@ begin
                         -- num252 = num230 >> (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_187\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_187\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.293\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32));
@@ -9599,7 +9600,7 @@ begin
                         -- num256 = (int)((System.Int32)(num230) / (System.Int32)((ushort)num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_189\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_189\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.297\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9656,7 +9657,7 @@ begin
                         -- num259 = (int)((System.Int32)(num230) | (System.Int32)((ushort)num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_193\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_193\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.302\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
@@ -9675,7 +9676,7 @@ begin
                         -- num262 = num230 >> (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_194\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_194\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.305\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32));
@@ -9703,7 +9704,7 @@ begin
                         -- num266 = (int)((System.Int32)(num230) / (System.Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_196\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_196\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.309\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9760,7 +9761,7 @@ begin
                         -- num269 = (int)((System.Int32)(num230) | (System.Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_200\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_200\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.314\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
@@ -9779,7 +9780,7 @@ begin
                         -- num272 = num230 >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_201\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_201\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.317\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32));
@@ -9807,7 +9808,7 @@ begin
                         -- num276 = (int)num230 / input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_203\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_203\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.321\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9842,11 +9843,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.53\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.53\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ := SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_206\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.324\ := SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.324\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num277\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.324\;
                         -- The following section was transformed from the .NET statement below:
                         -- num278 = (int)num230 & input;
@@ -9857,7 +9858,7 @@ begin
                         -- num279 = (int)num230 | input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_207\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_207\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.326\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32)) or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
@@ -9876,7 +9877,7 @@ begin
                         -- num282 = num230 >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_208\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_208\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.329\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111"))), 32));
@@ -9904,7 +9905,7 @@ begin
                         -- num286 = (uint)((int)num230 / input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_210\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_210\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.333\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -9939,11 +9940,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.55\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.55\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 16), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 16);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_213\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 16), 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.336\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.336\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num287\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.336\);
                         -- The following section was transformed from the .NET statement below:
                         -- num288 = (uint)((int)num230 & input);
@@ -9954,7 +9955,7 @@ begin
                         -- num289 = (uint)((int)num230 | input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_214\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9097
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_214\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.338\ := unsigned(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32)) or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\);
@@ -9973,7 +9974,7 @@ begin
                         -- num292 = num230 >> (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_215\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_215\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.341\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 64)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 5) and "11111"))), 32));
@@ -10005,7 +10006,7 @@ begin
                         -- num296 = (long)((ulong)num230 / (ulong)num63);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_218\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_218\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.345\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10039,23 +10040,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_220\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_220\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_221\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_221\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_222\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_222\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.348\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.348\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num297\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.348\);
                         -- The following section was transformed from the .NET statement below:
                         -- num298 = (long)((ulong)num230 & (ulong)num63);
@@ -10076,7 +10077,7 @@ begin
                         -- num301 = (int)num230 << (int)num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_223\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7863
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_223\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.352\ := shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 5))));
@@ -10117,7 +10118,7 @@ begin
                         -- num306 = (ulong)num230 / num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_227\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_227\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.357\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10152,15 +10153,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.59\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.59\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_230\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_231\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_231\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.360\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.360\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num307\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.360\;
                         -- The following section was transformed from the .NET statement below:
                         -- num308 = (ulong)num230 & num74;
@@ -10218,7 +10219,7 @@ begin
                         -- num316 = input / (int)b2;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_235\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_235\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.369\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10253,7 +10254,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.61\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.61\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_238\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.371\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32)), 32);
@@ -10268,7 +10269,7 @@ begin
                         -- num319 = input | (int)b2;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_239\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_239\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.374\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32));
@@ -10287,7 +10288,7 @@ begin
                         -- num322 = input >> (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_240\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_240\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.377\ := shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111")));
@@ -10315,7 +10316,7 @@ begin
                         -- num326 = input / (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_242\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_242\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.381\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10350,7 +10351,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.63\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.63\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_245\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.383\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32), 32);
@@ -10365,7 +10366,7 @@ begin
                         -- num329 = input | (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_246\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_246\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.386\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32);
@@ -10384,7 +10385,7 @@ begin
                         -- num332 = input >> (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_247\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_247\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.389\ := shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111")));
@@ -10412,7 +10413,7 @@ begin
                         -- num336 = input / (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_249\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_249\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.393\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10447,7 +10448,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.65\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.65\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_252\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.395\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32), 32);
@@ -10462,7 +10463,7 @@ begin
                         -- num339 = input | (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_253\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_253\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.398\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32);
@@ -10481,7 +10482,7 @@ begin
                         -- num342 = input >> (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_254\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_254\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.401\ := shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111")));
@@ -10509,7 +10510,7 @@ begin
                         -- num346 = input / (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_256\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_256\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.405\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10544,7 +10545,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.67\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.67\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_259\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.407\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32)), 32);
@@ -10559,7 +10560,7 @@ begin
                         -- num349 = input | (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_260\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_260\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.410\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32));
@@ -10578,7 +10579,7 @@ begin
                         -- num352 = input >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_261\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_261\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.413\ := shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111")));
@@ -10606,7 +10607,7 @@ begin
                         -- num356 = input / input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_263\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_263\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.417\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10649,7 +10650,7 @@ begin
                         -- num359 = input | input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_267\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_267\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.422\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
@@ -10668,7 +10669,7 @@ begin
                         -- num362 = input >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_268\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_268\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.425\ := shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111")));
@@ -10700,7 +10701,7 @@ begin
                         -- num366 = (long)input / (long)((ulong)input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_271\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_271\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.429\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10742,15 +10743,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.71\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.71\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\, 32)), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\, 32));
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_274\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_275\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_275\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.432\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.432\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num367\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.432\;
                         -- The following section was transformed from the .NET statement below:
                         -- num368 = (long)input & (long)((ulong)input);
@@ -10771,7 +10772,7 @@ begin
                         -- num371 = input << (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_276\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_276\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.436\ := shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 5))));
@@ -10812,7 +10813,7 @@ begin
                         -- num376 = (long)input / num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_280\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_280\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.441\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10847,15 +10848,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.73\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.73\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_283\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_284\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_284\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.444\ := SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.444\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num377\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.444\;
                         -- The following section was transformed from the .NET statement below:
                         -- num378 = (long)input & num63;
@@ -10876,7 +10877,7 @@ begin
                         -- num381 = input << (int)num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_285\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_285\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.448\ := shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 5))));
@@ -10931,7 +10932,7 @@ begin
                         -- num388 = (uint)(input / (int)b2);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_290\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_290\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.455\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -10966,7 +10967,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.75\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.75\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_293\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.457\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32)), 32);
@@ -10981,7 +10982,7 @@ begin
                         -- num391 = (uint)(input | (int)b2);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_294\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_294\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.460\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32)));
@@ -11000,7 +11001,7 @@ begin
                         -- num394 = (uint)input >> (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_295\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_295\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.463\ := shift_right(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111")));
@@ -11032,7 +11033,7 @@ begin
                         -- num398 = (long)((ulong)input / (ulong)((long)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_298\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_298\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.467\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11066,23 +11067,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_300\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_300\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_301\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_301\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_302\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_302\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.470\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.470\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num399\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.470\);
                         -- The following section was transformed from the .NET statement below:
                         -- num400 = (long)((ulong)input & (ulong)((long)b3));
@@ -11103,7 +11104,7 @@ begin
                         -- num403 = (uint)((uint)input << (int)num21);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_303\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8465
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_303\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.474\ := unsigned(shift_left(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5)))));
@@ -11144,7 +11145,7 @@ begin
                         -- num408 = (long)((ulong)input / (ulong)((long)num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_307\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_307\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.479\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11178,23 +11179,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_309\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_309\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_310\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_310\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_311\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_311\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.482\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.482\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num409\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.482\);
                         -- The following section was transformed from the .NET statement below:
                         -- num410 = (long)((ulong)input & (ulong)((long)num21));
@@ -11215,7 +11216,7 @@ begin
                         -- num413 = (uint)((uint)input << (int)num32);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_312\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8465
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_312\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.486\ := unsigned(shift_left(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5)))));
@@ -11252,7 +11253,7 @@ begin
                         -- num418 = (uint)(input / (int)num32);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_315\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_315\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.491\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11287,7 +11288,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.81\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.81\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_318\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.493\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32)), 32);
@@ -11302,7 +11303,7 @@ begin
                         -- num421 = (uint)(input | (int)num32);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_319\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_319\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.496\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)));
@@ -11321,7 +11322,7 @@ begin
                         -- num424 = (uint)input >> input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_320\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_320\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.499\ := shift_right(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5) and "11111")));
@@ -11353,7 +11354,7 @@ begin
                         -- num428 = (long)((ulong)input / (ulong)((long)input));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_323\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_323\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.503\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11387,23 +11388,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_325\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_325\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_326\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_326\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_327\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_327\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.506\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.506\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num429\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.506\);
                         -- The following section was transformed from the .NET statement below:
                         -- num430 = (long)((ulong)input & (ulong)((long)input));
@@ -11424,7 +11425,7 @@ begin
                         -- num433 = (uint)((uint)input << input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_328\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8465
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_328\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.510\ := unsigned(shift_left(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 5)))));
@@ -11461,7 +11462,7 @@ begin
                         -- num438 = (uint)(input / input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_331\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8699
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_331\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.515\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11504,7 +11505,7 @@ begin
                         -- num441 = (uint)(input | input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_335\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9699
+                        -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_335\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.520\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ or \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\);
@@ -11523,7 +11524,7 @@ begin
                         -- num444 = (uint)input >> (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_336\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7244
+                        -- Clock cycles needed to complete this state (approximation): 0.8016
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_336\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.523\ := shift_right(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 5) and "11111")));
@@ -11555,7 +11556,7 @@ begin
                         -- num448 = (long)((ulong)input / (ulong)num63);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_339\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_339\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.527\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11589,23 +11590,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_341\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_341\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_342\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_342\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_343\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_343\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.530\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.530\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num449\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.530\);
                         -- The following section was transformed from the .NET statement below:
                         -- num450 = (long)((ulong)input & (ulong)num63);
@@ -11626,7 +11627,7 @@ begin
                         -- num453 = (uint)((uint)input << (int)num74);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_344\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8465
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_344\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.534\ := unsigned(shift_left(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 5)))));
@@ -11667,7 +11668,7 @@ begin
                         -- num458 = (ulong)input / num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_348\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_348\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.539\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11694,23 +11695,23 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_350\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_350\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_351\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ := SmartResize(ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_351\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_352\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_352\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.542\ := SmartResize(ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.542\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num459\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.542\;
                         -- The following section was transformed from the .NET statement below:
                         -- num460 = (ulong)input & num74;
@@ -11776,7 +11777,7 @@ begin
                         -- num469 = num463 / (long)((ulong)b2);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_357\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_357\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.551\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11816,7 +11817,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_360\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.553\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_361\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_361\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.554\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.553\;
@@ -11840,7 +11841,7 @@ begin
                         -- num474 = num463 << (int)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_362\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_362\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.558\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 6)))), 64);
@@ -11881,7 +11882,7 @@ begin
                         -- num479 = num463 / (long)b3;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_366\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_366\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.563\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -11916,12 +11917,12 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.93\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.93\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_369\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.565\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_370\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_370\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.566\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.565\;
@@ -11945,7 +11946,7 @@ begin
                         -- num484 = num463 << (int)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_371\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_371\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.570\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 6)))), 64);
@@ -11986,7 +11987,7 @@ begin
                         -- num489 = num463 / (long)num21;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_375\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_375\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.575\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12021,12 +12022,12 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.95\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.95\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_378\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.577\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_379\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_379\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.578\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.577\;
@@ -12050,7 +12051,7 @@ begin
                         -- num494 = num463 << (int)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_380\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_380\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.582\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 6)))), 64);
@@ -12091,7 +12092,7 @@ begin
                         -- num499 = num463 / (long)((ulong)num32);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_384\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_384\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.587\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12131,7 +12132,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_387\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.589\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_388\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_388\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.590\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.589\;
@@ -12155,7 +12156,7 @@ begin
                         -- num504 = num463 << input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_389\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_389\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.594\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64), 6)))), 64);
@@ -12196,7 +12197,7 @@ begin
                         -- num509 = num463 / (long)input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_393\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_393\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.599\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12231,12 +12232,12 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.99\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.99\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_396\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.601\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_397\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_397\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.602\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.601\;
@@ -12260,7 +12261,7 @@ begin
                         -- num514 = num463 << input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_398\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_398\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.606\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64), 6)))), 64);
@@ -12301,7 +12302,7 @@ begin
                         -- num519 = num463 / (long)((ulong)input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_402\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_402\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.611\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12341,7 +12342,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_405\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.613\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_406\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_406\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.614\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.613\;
@@ -12365,7 +12366,7 @@ begin
                         -- num524 = num463 << (int)num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_407\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_407\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.618\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 32), 6)))), 64);
@@ -12406,7 +12407,7 @@ begin
                         -- num529 = num463 / num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_411\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_411\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.623\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12439,7 +12440,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_414\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.625\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.624\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_415\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_415\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.626\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.625\;
@@ -12463,7 +12464,7 @@ begin
                         -- num534 = num463 << (int)num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_416\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6898
+                        -- Clock cycles needed to complete this state (approximation): 0.91
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_416\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.630\ := SmartResize(shift_left(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 32)), 6)))), 64);
@@ -12526,7 +12527,7 @@ begin
                         -- num542 = num536 / (ulong)b2;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_422\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_422\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.637\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12561,12 +12562,12 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.105\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.105\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_425\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.639\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_426\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_426\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.640\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.639\;
@@ -12667,7 +12668,7 @@ begin
                         -- num556 = num536 / (ulong)num32;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_435\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_435\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.653\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12702,12 +12703,12 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.107\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.107\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_438\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.655\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_439\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_439\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.656\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.655\;
@@ -12790,7 +12791,7 @@ begin
                         -- num568 = num536 / (ulong)input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_446\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_446\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.667\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12817,20 +12818,20 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_448\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_448\ => 
-                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ (have to wait 27 clock cycles in this state).
+                        -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ >= to_signed(27, 32)) then 
+                        if (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ >= to_signed(26, 32)) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_449\;
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ := to_signed(0, 32);
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64), 64);
-                        -- Clock cycles needed to complete this state (approximation): 27
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64);
+                        -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_449\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.669\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ * ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_450\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_450\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.670\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.669\;
@@ -12913,7 +12914,7 @@ begin
                         -- num580 = num536 / num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_457\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_457\ => 
                         -- Waiting for the result to appear in \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.681\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -12946,7 +12947,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_460\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.683\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.682\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_461\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_461\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.684\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.683\;
@@ -13143,6 +13144,10 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num6 = (int)-(int)num5;
                         -- 
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9134
+                    when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num6\ := SmartResize(-SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num5\, 32), 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num7 = (int)~(int)num5;
@@ -13163,6 +13168,10 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num11 = -input;
                         -- 
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9134
+                    when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num11\ := -\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\;
                         -- The following section was transformed from the .NET statement below:
                         -- num12 = ~input;
@@ -13171,10 +13180,6 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num13 = (long)-(long)((ulong)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 1
-                    when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num13\ := signed(-signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\, 64))));
                         -- The following section was transformed from the .NET statement below:
                         -- num14 = (uint)~(uint)input;
@@ -13187,6 +13192,10 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num16 = -num15;
                         -- 
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9618
+                    when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_5\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num16\ := -\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num15\;
                         -- The following section was transformed from the .NET statement below:
                         -- num17 = ~num15;
@@ -13201,7 +13210,7 @@ begin
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num19\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num18\);
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5
+                        -- Clock cycles needed to complete this state (approximation): 0.6485
                 end case;
             end if;
         end if;
@@ -13288,10 +13297,6 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (int)((System.Int32)(a) * (System.Int32)(b));
                         -- 
-                        \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
-                    when \CastingCases::NumberCasting(Int16,Int16).0._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := SmartResize(SmartResize((\CastingCases::NumberCasting(Int16,Int16).0.a\), 32) * SmartResize((\CastingCases::NumberCasting(Int16,Int16).0.b\), 32), 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
                         -- The following section was transformed from the .NET statement below:
@@ -13309,14 +13314,14 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = (long)((ulong)a * (ulong)((long)a));
                         -- 
-                        \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_4\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5436
-                    when \CastingCases::NumberCasting(Int16,Int16).0._State_4\ => 
+                        \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8416
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := SmartResize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
                         \CastingCases::NumberCasting(Int16,Int16).0.num4\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7632
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
                 end case;
             end if;
         end if;
@@ -14759,7 +14764,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.264
+                        -- Clock cycles needed to complete this state (approximation): 0.1238
                     when \ObjectUsingCases::NullUsage().0._State_3\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -14787,7 +14792,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.264
+                        -- Clock cycles needed to complete this state (approximation): 0.1238
                     when \ObjectUsingCases::NullUsage().0._State_4\ => 
                         -- True branch of the if-else started in state \ObjectUsingCases::NullUsage().0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -15025,7 +15030,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8076
+                        -- Clock cycles needed to complete this state (approximation): 0.6848
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
                         -- Going to the state after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
