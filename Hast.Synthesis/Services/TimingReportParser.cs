@@ -53,12 +53,34 @@ namespace Hast.Synthesis.Services
                     // Operators can be simple ones (like and and add) or ones that can also take a constant operand
                     // (like div). This is so that if one operand is a const that's a power of two we have a different
                     // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
+
+                    var constantOperand = string.Empty;
+                    var byStartIndex = operatorString.IndexOf("_by_");
+                    if (byStartIndex != -1)
+                    {
+                        constantOperand = operatorString.Substring(byStartIndex + 4);
+                    }
+
+                    var operandType = csvReader.GetField<string>("InType");
+                    var isSigned = operandType.StartsWith("signed");
+                    var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
+                    if (!operandSizeMatch.Success)
+                    {
+                        throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
+                    }
+                    var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
+
+                    var isSignAgnosticBinaryOperatorType = false;
+                    var isSignAgnosticUnaryOperatorType = false;
+
                     BinaryOperatorType? binaryOperator = null;
                     UnaryOperatorType? unaryOperator = null;
                     switch (operatorString)
                     {
                         case "and":
-                            binaryOperator = BinaryOperatorType.BitwiseAnd;
+                            isSignAgnosticBinaryOperatorType = true;
+                            if (operandSizeBits == 1) binaryOperator = BinaryOperatorType.ConditionalAnd;
+                            else binaryOperator = BinaryOperatorType.BitwiseAnd;
                             break;
                         case "add":
                             binaryOperator = BinaryOperatorType.Add;
@@ -82,7 +104,8 @@ namespace Hast.Synthesis.Services
                             binaryOperator = BinaryOperatorType.LessThan;
                             break;
                         case "mod":
-                            binaryOperator = BinaryOperatorType.Modulus;
+                            // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
+                            // VHDL operator rem, see below.
                             break;
                         case var op when (op.StartsWith("mul")):
                             binaryOperator = BinaryOperatorType.Multiply;
@@ -91,10 +114,14 @@ namespace Hast.Synthesis.Services
                             binaryOperator = BinaryOperatorType.InEquality;
                             break;
                         case "not":
-                            unaryOperator = UnaryOperatorType.Not;
+                            isSignAgnosticUnaryOperatorType = true;
+                            if (operandSizeBits == 1) unaryOperator = UnaryOperatorType.Not;
+                            else unaryOperator = UnaryOperatorType.BitNot;
                             break;
                         case "or":
-                            binaryOperator = BinaryOperatorType.BitwiseOr;
+                            isSignAgnosticBinaryOperatorType = true;
+                            if (operandSizeBits == 1) binaryOperator = BinaryOperatorType.ConditionalOr;
+                            else binaryOperator = BinaryOperatorType.BitwiseOr;
                             break;
                         case var op when(op.StartsWith("dotnet_shift_left")):
                             binaryOperator = BinaryOperatorType.ShiftLeft;
@@ -102,31 +129,23 @@ namespace Hast.Synthesis.Services
                         case var op when (op.StartsWith("dotnet_shift_right")):
                             binaryOperator = BinaryOperatorType.ShiftRight;
                             break;
+                        case "rem":
+                            binaryOperator = BinaryOperatorType.Modulus;
+                            break;
                         case "sub":
                             binaryOperator = BinaryOperatorType.Subtract;
                             break;
+                        case "unary_minus":
+                            unaryOperator = UnaryOperatorType.Minus;
+                            break;
                         case "xor":
+                            // There is no separate bitwise and conditional version for XOR.
+                            isSignAgnosticBinaryOperatorType = true;
                             binaryOperator = BinaryOperatorType.ExclusiveOr;
                             break;
                         default:
                             throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
                     }
-
-                    var constantOperand = string.Empty;
-                    var byStartIndex = operatorString.IndexOf("_by_");
-                    if (byStartIndex != -1)
-                    {
-                        constantOperand = operatorString.Substring(byStartIndex + 4);
-                    }
-
-                    var operandType = csvReader.GetField<string>("InType");
-                    var isSigned = operandType.StartsWith("signed");
-                    var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
-                    if (!operandSizeMatch.Success)
-                    {
-                        throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
-                    }
-                    var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
 
                     // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
                     // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
@@ -147,11 +166,21 @@ namespace Hast.Synthesis.Services
 
                     if (binaryOperator.HasValue)
                     {
-                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr); 
+                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
+
+                        if (isSignAgnosticBinaryOperatorType)
+                        {
+                            timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                        }
                     }
                     else if (unaryOperator.HasValue)
                     {
                         timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
+
+                        if (isSignAgnosticUnaryOperatorType)
+                        {
+                            timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                        }
                     }
                 }
 
