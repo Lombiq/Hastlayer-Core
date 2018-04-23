@@ -4,6 +4,8 @@
 
 Component containing implementations for transforming .NET assemblies into VHDL hardware description.
 
+Note that when editing the VHDL libraries the changes should also be added to the Timing Tester too.
+
 
 ## Hierarchy of transformers
 
