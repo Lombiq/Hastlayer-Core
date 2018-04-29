@@ -13001,6 +13001,21 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num17\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num18\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num19\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.10\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.12\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.13\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.14\: unsigned(63 downto 0) := to_unsigned(0, 64);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13029,6 +13044,21 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num17\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num18\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num19\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.0\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.1\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.2\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.3\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.4\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.5\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.6\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.7\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.8\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.9\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.10\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.11\ := to_unsigned(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.12\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.13\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.14\ := to_unsigned(0, 64);
             else 
                 case \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ is 
                     when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_0\ => 
@@ -13120,11 +13150,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = (int)-(int)b;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num\ := signed(SmartResize(-signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b\, 32)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.0\ := -signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.0\, 32));
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (int)~(int)b;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num2\ := signed(SmartResize(not(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b\, 32))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.1\ := not(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b\, 32)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num2\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.1\, 32));
                         -- The following section was transformed from the .NET statement below:
                         -- b2 = (sbyte)input;
                         -- 
@@ -13132,11 +13164,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = (int)-(int)b2;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num3\ := SmartResize(-SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b2\, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.2\ := -SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b2\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num3\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.2\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = (int)~(int)b2;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num4\ := SmartResize(not(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b2\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.3\ := not(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.b2\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num4\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.3\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num5 = (short)input;
                         -- 
@@ -13148,11 +13182,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9134
                     when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num6\ := SmartResize(-SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num5\, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.4\ := -SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num5\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num6\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.4\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num7 = (int)~(int)num5;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num7\ := SmartResize(not(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num5\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.5\ := not(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num5\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.5\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num8 = (ushort)input;
                         -- 
@@ -13160,11 +13196,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num9 = (int)-(int)num8;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num9\ := signed(SmartResize(-signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num8\, 32)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.6\ := -signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num8\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num9\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.6\, 32));
                         -- The following section was transformed from the .NET statement below:
                         -- num10 = (int)~(int)num8;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num10\ := signed(SmartResize(not(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num8\, 32))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.7\ := not(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num8\, 32)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num10\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.7\, 32));
                         -- The following section was transformed from the .NET statement below:
                         -- num11 = -input;
                         -- 
@@ -13172,19 +13210,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9134
                     when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num11\ := -\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.8\ := -\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num11\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- num12 = ~input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num12\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.9\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num12\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- num13 = (long)-(long)((ulong)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num13\ := signed(-signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\, 64))));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.10\ := -signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num13\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.10\);
                         -- The following section was transformed from the .NET statement below:
                         -- num14 = (uint)~(uint)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num14\ := unsigned(not(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.11\ := not(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.input\));
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num14\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
                         -- num15 = (long)input;
                         -- 
@@ -13196,11 +13238,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9618
                     when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num16\ := -\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num15\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.12\ := -\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num15\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num16\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.12\;
                         -- The following section was transformed from the .NET statement below:
                         -- num17 = ~num15;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num17\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num15\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.13\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num15\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num17\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.13\;
                         -- The following section was transformed from the .NET statement below:
                         -- num18 = (ulong)((long)input);
                         -- 
@@ -13208,7 +13252,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num19 = ~num18;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num19\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num18\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.14\ := not(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num18\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.num19\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0.unaryOperationResult.14\;
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.6485
                 end case;

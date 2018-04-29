@@ -2264,6 +2264,7 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).0.flag\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
@@ -2284,6 +2285,7 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).0.flag\ := false;
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := to_signed(0, 64);
@@ -2340,12 +2342,13 @@ begin
                         -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\ := not(\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\);
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.num\;
                         \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.8807
                     when \Fix64::op_Addition(Fix64,Fix64).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\ and \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\;
                         -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ /= to_signed(0, 64);
@@ -2494,6 +2497,7 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).1.flag\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
@@ -2514,6 +2518,7 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).1.flag\ := false;
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ := to_signed(0, 64);
@@ -2570,12 +2575,13 @@ begin
                         -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).1.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).1.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\ := not(\Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\);
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).1.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).1.num\;
                         \Fix64::op_Addition(Fix64,Fix64).1._State\ := \Fix64::op_Addition(Fix64,Fix64).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.8807
                     when \Fix64::op_Addition(Fix64,Fix64).1._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\;
+                        \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\ and \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\;
                         -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ /= to_signed(0, 64);
@@ -2724,6 +2730,7 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).2.flag\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
@@ -2744,6 +2751,7 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).2.flag\ := false;
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ := to_signed(0, 64);
@@ -2800,12 +2808,13 @@ begin
                         -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).2.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).2.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\ := not(\Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\);
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).2.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).2.num\;
                         \Fix64::op_Addition(Fix64,Fix64).2._State\ := \Fix64::op_Addition(Fix64,Fix64).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.8807
                     when \Fix64::op_Addition(Fix64,Fix64).2._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\;
+                        \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\ and \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\;
                         -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ /= to_signed(0, 64);
