@@ -85,7 +85,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private IVhdlElement TransformBinaryOperatorExpressionInner(
             IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
             bool operationResultDataObjectIsVariable,
-            bool isFirstOfSimdOperations,
+            bool isFirstOfSimdOperationsOrIsSingleOperation,
             bool isLastOfSimdOperations,
             ISubTransformerContext context)
         {
@@ -100,17 +100,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // If the left and/or right expressions are cast then the type that matters here is the result type of that
             // cast, so also checking for that.
 
-            var leftTypeReference = expression.Left.GetActualTypeReference();
-            if (expression.Left is CastExpression)
-            {
-                leftTypeReference = expression.Left.GetActualTypeReference(true);
-            }
+            var leftTypeReference = expression.Left.GetActualTypeReference(true) ?? expression.Left.GetActualTypeReference();
 
-            var rightTypeReference = expression.Right.GetActualTypeReference();
-            if (expression.Right is CastExpression)
-            {
-                rightTypeReference = expression.Right.GetActualTypeReference(true);
-            }
+            var rightTypeReference = expression.Right.GetActualTypeReference(true) ?? expression.Right.GetActualTypeReference();
 
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
             // types either without the equality operator defined or they are custom value types and a
@@ -403,7 +395,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             // If the current state takes more than one clock cycle we add a new state and follow up there.
-            if (isFirstOfSimdOperations && !operationIsMultiCycle)
+            if (isFirstOfSimdOperationsOrIsSingleOperation && !operationIsMultiCycle)
             {
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
             }
@@ -413,7 +405,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (!operationIsMultiCycle)
             {
                 currentBlock.Add(operationResultAssignment);
-                if (isFirstOfSimdOperations)
+                if (isFirstOfSimdOperationsOrIsSingleOperation)
                 {
                     currentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
                 }
@@ -424,7 +416,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
                 // single operation).
-                if (isFirstOfSimdOperations)
+                if (isFirstOfSimdOperationsOrIsSingleOperation)
                 {
                     var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                         "clockCyclesWaitedForBinaryOperationResult",
