@@ -25,7 +25,7 @@ namespace Hast.Transformer.Services
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
             var noIncludedMembers = !configuration.HardwareEntryPointMemberFullNames.Any() && !configuration.HardwareEntryPointMemberNamePrefixes.Any();
-            var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
+            var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable, configuration);
 
             // Starting with hardware entry point members we walk through the references to see which declarations are 
             // used (e.g. which methods are called at least once).
@@ -91,11 +91,15 @@ namespace Hast.Transformer.Services
         private class ReferencedNodesFlaggingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
+            private readonly IHardwareGenerationConfiguration _configuration;
 
 
-            public ReferencedNodesFlaggingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable)
+            public ReferencedNodesFlaggingVisitor(
+                ITypeDeclarationLookupTable typeDeclarationLookupTable,
+                IHardwareGenerationConfiguration configuration)
             {
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
+                _configuration = configuration;
             }
 
 
@@ -175,7 +179,8 @@ namespace Hast.Transformer.Services
                 member.FindFirstParentTypeDeclaration().AddReference(memberReferenceExpression);
 
                 // And also the interfaces implemented by it.
-                if (member is MethodDeclaration || member is PropertyDeclaration)
+                if (_configuration.TransformerConfiguration().ProcessImplementedInterfaces &&
+                    (member is MethodDeclaration || member is PropertyDeclaration))
                 {
                     var implementedInterfaceMethod = member.FindImplementedInterfaceMethod(_typeDeclarationLookupTable.Lookup);
                     if (implementedInterfaceMethod != null)
