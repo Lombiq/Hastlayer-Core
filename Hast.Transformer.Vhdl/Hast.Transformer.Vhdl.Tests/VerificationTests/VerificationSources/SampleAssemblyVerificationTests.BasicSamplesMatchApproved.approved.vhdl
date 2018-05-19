@@ -2900,6 +2900,7 @@ begin
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.2\: boolean := false;
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.unaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2919,6 +2920,7 @@ begin
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.2\ := false;
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.unaryOperationResult.0\ := false;
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.5\ := to_signed(0, 32);
             else 
                 case \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ is 
@@ -3048,7 +3050,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
-                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\);
+                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.unaryOperationResult.0\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\);
+                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.unaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
@@ -3114,6 +3117,7 @@ begin
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\: boolean := false;
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.unaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3133,6 +3137,7 @@ begin
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\ := false;
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.unaryOperationResult.0\ := false;
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\ := to_signed(0, 32);
             else 
                 case \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ is 
@@ -3262,7 +3267,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
-                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\);
+                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.unaryOperationResult.0\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\);
+                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.unaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
@@ -3328,6 +3334,7 @@ begin
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\: boolean := false;
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.unaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3347,6 +3354,7 @@ begin
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\ := false;
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.unaryOperationResult.0\ := false;
                 \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\ := to_signed(0, 32);
             else 
                 case \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ is 
@@ -3476,7 +3484,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
-                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\);
+                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.unaryOperationResult.0\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\);
+                        \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.unaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
@@ -14928,6 +14937,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -14970,6 +14980,7 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\ := to_unsigned(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := to_unsigned(0, 32);
@@ -15320,7 +15331,8 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = !numberContainer.WasIncreased;
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\ := not(\ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := not(\ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
                             -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);

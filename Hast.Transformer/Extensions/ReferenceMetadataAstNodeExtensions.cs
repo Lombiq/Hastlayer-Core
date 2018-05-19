@@ -4,11 +4,7 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     internal static class ReferenceMetadataAstNodeExtensions
     {
-        public static bool IsReferenced(this AstNode node)
-        {
-            var metadata = node.GetReferenceMetadata();
-            return metadata != null && metadata.IsReferenced;
-        }
+        public static bool IsReferenced(this AstNode node) => node.GetReferenceMetadata()?.IsReferenced == true;
 
         public static void AddReference(this AstNode node, AstNode from)
         {
@@ -20,20 +16,12 @@ namespace ICSharpCode.NRefactory.CSharp
             node.GetOrAddReferenceMetadata().WasVisited = true;
         }
 
-        public static bool WasVisited(this AstNode node)
-        {
-            return node.GetOrAddReferenceMetadata().WasVisited;
-        }
+        public static bool WasVisited(this AstNode node) => node.GetOrAddReferenceMetadata().WasVisited;
 
-        public static bool HasReferenceMetadata(this AstNode node)
-        {
-            return node.GetReferenceMetadata() != null;
-        }
+        public static bool HasReferenceMetadata(this AstNode node) => node.GetReferenceMetadata() != null;
 
-        public static DeclarationReferenceMetadata GetReferenceMetadata(this AstNode node)
-        {
-            return node.Annotation<DeclarationReferenceMetadata>();
-        }
+        public static DeclarationReferenceMetadata GetReferenceMetadata(this AstNode node) => 
+            node?.Annotation<DeclarationReferenceMetadata>();
 
         public static DeclarationReferenceMetadata GetOrAddReferenceMetadata(this AstNode node)
         {

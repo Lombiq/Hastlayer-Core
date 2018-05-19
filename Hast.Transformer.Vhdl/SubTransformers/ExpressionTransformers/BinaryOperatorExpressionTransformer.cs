@@ -82,7 +82,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private IVhdlElement TransformBinaryOperatorExpressionInner(
             IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
             bool operationResultDataObjectIsVariable,
-            bool isFirstOfSimdOperations,
+            bool isFirstOfSimdOperationsOrIsSingleOperation,
             bool isLastOfSimdOperations,
             ISubTransformerContext context)
         {
@@ -392,7 +392,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             // If the current state takes more than one clock cycle we add a new state and follow up there.
-            if (isFirstOfSimdOperations && !operationIsMultiCycle)
+            if (isFirstOfSimdOperationsOrIsSingleOperation && !operationIsMultiCycle)
             {
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
             }
@@ -402,7 +402,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (!operationIsMultiCycle)
             {
                 currentBlock.Add(operationResultAssignment);
-                if (isFirstOfSimdOperations)
+                if (isFirstOfSimdOperationsOrIsSingleOperation)
                 {
                     currentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
                 }
@@ -413,7 +413,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
                 // single operation).
-                if (isFirstOfSimdOperations)
+                if (isFirstOfSimdOperationsOrIsSingleOperation)
                 {
                     var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                         "clockCyclesWaitedForBinaryOperationResult",

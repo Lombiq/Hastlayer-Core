@@ -469,6 +469,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Increment/decrement unary operators that are in their own statements are compiled into binary operators 
                 // (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
+                // Since unary operations can also take significant time (but they can't be multi-cycle) to complete 
+                // they're also assigned to result variables as with binary operator expressions.
+
                 var unary = expression as UnaryOperatorExpression;
 
 
@@ -484,6 +487,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 scope.CurrentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
 
                 var transformedExpression = Transform(unary.Expression, context);
+                IVhdlElement transformedOperation;
 
                 switch (unary.Operator)
                 {
@@ -502,7 +506,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                             if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
                             {
-                                return _typeConversionTransformer.ImplementTypeConversion(
+                                transformedOperation = _typeConversionTransformer.ImplementTypeConversion(
                                     fromType,
                                     toType,
                                     new Binary
@@ -513,30 +517,48 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                     })
                                     .ConvertedFromExpression;
                             }
+                            else
+                            {
+                                transformedOperation = new Unary
+                                {
+                                    Operator = UnaryOperator.Negation,
+                                    Expression = transformedExpression
+                                };
+                            }
                         }
 
-                        return new Unary
+                        else
                         {
-                            Operator = UnaryOperator.Negation,
-                            Expression = transformedExpression
-                        };
+                            transformedOperation = new Unary
+                            {
+                                Operator = UnaryOperator.Negation,
+                                Expression = transformedExpression
+                            };
+                        }
+
+                        break;
                     case UnaryOperatorType.Not:
                     case UnaryOperatorType.BitNot:
                         // In VHDL there is no boolean negation operator, just the not() function. This will bitwise
                         // negate the value, so for bools it will work as the .NET NOT operator, for other types as a 
                         // bitwise NOT.
-                        return new Invocation("not", transformedExpression);
+                        transformedOperation = new Invocation("not", transformedExpression);
+
+                        break;
                     case UnaryOperatorType.Plus:
-                        return new Unary
+                        transformedOperation = new Unary
                         {
                             Operator = UnaryOperator.Identity,
                             Expression = transformedExpression
                         };
+
+                        break;
                     case UnaryOperatorType.Await:
                         if (unary.Expression is InvocationExpression &&
                             unary.Expression.GetFullName().IsTaskFromResultMethodName())
                         {
-                            return transformedExpression;
+                            transformedOperation = transformedExpression;
+                            break;
                         }
 
                         // Otherwise nothing to do.
@@ -546,6 +568,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "Transformation of the unary operation " + unary.Operator + " is not supported."
                             .AddParentEntityName(unary));
                 }
+
+                var operationResultDataObjectReference = stateMachine
+                        .CreateVariableWithNextUnusedIndexedName("unaryOperationResult", expressionType)
+                        .ToReference();
+                scope.CurrentBlock.Add(new Assignment
+                {
+                    AssignTo = operationResultDataObjectReference,
+                    Expression = transformedOperation
+                });
+
+                return operationResultDataObjectReference;
             }
             else if (expression is TypeReferenceExpression)
             {
