@@ -1288,7 +1288,10 @@ architecture Imp of Hast_IP is
         \Posit32::ExponentSize().0._State_8\, 
         \Posit32::ExponentSize().0._State_9\, 
         \Posit32::ExponentSize().0._State_10\, 
-        \Posit32::ExponentSize().0._State_11\);
+        \Posit32::ExponentSize().0._State_11\, 
+        \Posit32::ExponentSize().0._State_12\, 
+        \Posit32::ExponentSize().0._State_13\, 
+        \Posit32::ExponentSize().0._State_14\);
     -- Signals:
     Signal \Posit32::ExponentSize().0._Finished\: boolean := false;
     Signal \Posit32::ExponentSize().0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -1322,7 +1325,11 @@ architecture Imp of Hast_IP is
         \Posit32::GetExponentValue().0._State_6\, 
         \Posit32::GetExponentValue().0._State_7\, 
         \Posit32::GetExponentValue().0._State_8\, 
-        \Posit32::GetExponentValue().0._State_9\);
+        \Posit32::GetExponentValue().0._State_9\, 
+        \Posit32::GetExponentValue().0._State_10\, 
+        \Posit32::GetExponentValue().0._State_11\, 
+        \Posit32::GetExponentValue().0._State_12\, 
+        \Posit32::GetExponentValue().0._State_13\);
     -- Signals:
     Signal \Posit32::GetExponentValue().0._Finished\: boolean := false;
     Signal \Posit32::GetExponentValue().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1330,20 +1337,20 @@ architecture Imp of Hast_IP is
     Signal \Posit32::GetExponentValue().0.Posit32::IsPositive()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Started.0\: boolean := false;
-    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0._Started\: boolean := false;
     Signal \Posit32::GetExponentValue().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::GetExponentValue().0.Posit32::IsPositive()._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0.Posit32::IsPositive().return.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\: boolean := false;
-    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0 declarations end
 
 
@@ -1359,7 +1366,11 @@ architecture Imp of Hast_IP is
         \Posit32::GetExponentValue().1._State_6\, 
         \Posit32::GetExponentValue().1._State_7\, 
         \Posit32::GetExponentValue().1._State_8\, 
-        \Posit32::GetExponentValue().1._State_9\);
+        \Posit32::GetExponentValue().1._State_9\, 
+        \Posit32::GetExponentValue().1._State_10\, 
+        \Posit32::GetExponentValue().1._State_11\, 
+        \Posit32::GetExponentValue().1._State_12\, 
+        \Posit32::GetExponentValue().1._State_13\);
     -- Signals:
     Signal \Posit32::GetExponentValue().1._Finished\: boolean := false;
     Signal \Posit32::GetExponentValue().1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1367,20 +1378,20 @@ architecture Imp of Hast_IP is
     Signal \Posit32::GetExponentValue().1.Posit32::IsPositive()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Started.0\: boolean := false;
-    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1.Posit32::ExponentSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1._Started\: boolean := false;
     Signal \Posit32::GetExponentValue().1.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::GetExponentValue().1.Posit32::IsPositive()._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1.Posit32::IsPositive().return.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize()._Finished.0\: boolean := false;
-    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().1.Posit32::ExponentSize().return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize()._Finished.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().1.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().1 declarations end
 
 
@@ -1396,7 +1407,11 @@ architecture Imp of Hast_IP is
         \Posit32::GetExponentValue().2._State_6\, 
         \Posit32::GetExponentValue().2._State_7\, 
         \Posit32::GetExponentValue().2._State_8\, 
-        \Posit32::GetExponentValue().2._State_9\);
+        \Posit32::GetExponentValue().2._State_9\, 
+        \Posit32::GetExponentValue().2._State_10\, 
+        \Posit32::GetExponentValue().2._State_11\, 
+        \Posit32::GetExponentValue().2._State_12\, 
+        \Posit32::GetExponentValue().2._State_13\);
     -- Signals:
     Signal \Posit32::GetExponentValue().2._Finished\: boolean := false;
     Signal \Posit32::GetExponentValue().2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1404,20 +1419,20 @@ architecture Imp of Hast_IP is
     Signal \Posit32::GetExponentValue().2.Posit32::IsPositive()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Started.0\: boolean := false;
-    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2.Posit32::ExponentSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2._Started\: boolean := false;
     Signal \Posit32::GetExponentValue().2.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::GetExponentValue().2.Posit32::IsPositive()._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2.Posit32::IsPositive().return.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize()._Finished.0\: boolean := false;
-    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\: boolean := false;
     Signal \Posit32::GetExponentValue().2.Posit32::ExponentSize().return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize()._Finished.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().2.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().2 declarations end
 
 
@@ -1733,7 +1748,11 @@ architecture Imp of Hast_IP is
         \Posit32::FractionWithHiddenBit().0._State_6\, 
         \Posit32::FractionWithHiddenBit().0._State_7\, 
         \Posit32::FractionWithHiddenBit().0._State_8\, 
-        \Posit32::FractionWithHiddenBit().0._State_9\);
+        \Posit32::FractionWithHiddenBit().0._State_9\, 
+        \Posit32::FractionWithHiddenBit().0._State_10\, 
+        \Posit32::FractionWithHiddenBit().0._State_11\, 
+        \Posit32::FractionWithHiddenBit().0._State_12\, 
+        \Posit32::FractionWithHiddenBit().0._State_13\);
     -- Signals:
     Signal \Posit32::FractionWithHiddenBit().0._Finished\: boolean := false;
     Signal \Posit32::FractionWithHiddenBit().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1772,7 +1791,11 @@ architecture Imp of Hast_IP is
         \Posit32::FractionWithHiddenBit().1._State_6\, 
         \Posit32::FractionWithHiddenBit().1._State_7\, 
         \Posit32::FractionWithHiddenBit().1._State_8\, 
-        \Posit32::FractionWithHiddenBit().1._State_9\);
+        \Posit32::FractionWithHiddenBit().1._State_9\, 
+        \Posit32::FractionWithHiddenBit().1._State_10\, 
+        \Posit32::FractionWithHiddenBit().1._State_11\, 
+        \Posit32::FractionWithHiddenBit().1._State_12\, 
+        \Posit32::FractionWithHiddenBit().1._State_13\);
     -- Signals:
     Signal \Posit32::FractionWithHiddenBit().1._Finished\: boolean := false;
     Signal \Posit32::FractionWithHiddenBit().1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1811,7 +1834,11 @@ architecture Imp of Hast_IP is
         \Posit32::FractionWithHiddenBit().2._State_6\, 
         \Posit32::FractionWithHiddenBit().2._State_7\, 
         \Posit32::FractionWithHiddenBit().2._State_8\, 
-        \Posit32::FractionWithHiddenBit().2._State_9\);
+        \Posit32::FractionWithHiddenBit().2._State_9\, 
+        \Posit32::FractionWithHiddenBit().2._State_10\, 
+        \Posit32::FractionWithHiddenBit().2._State_11\, 
+        \Posit32::FractionWithHiddenBit().2._State_12\, 
+        \Posit32::FractionWithHiddenBit().2._State_13\);
     -- Signals:
     Signal \Posit32::FractionWithHiddenBit().2._Finished\: boolean := false;
     Signal \Posit32::FractionWithHiddenBit().2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -11782,15 +11809,20 @@ begin
         Variable \Posit32::ExponentSize().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::ExponentSize().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::ExponentSize().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.flag\: boolean := false;
+        Variable \Posit32::ExponentSize().0.result\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.return.0\: boolean := false;
         Variable \Posit32::ExponentSize().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::ExponentSize().0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.2\: boolean := false;
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: boolean := false;
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: boolean := false;
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.6\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.8\: unsigned(7 downto 0) := to_unsigned(0, 8);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11806,15 +11838,20 @@ begin
                 \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_0\;
                 \Posit32::ExponentSize().0.bits\ := to_unsigned(0, 32);
                 \Posit32::ExponentSize().0.b\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.flag\ := false;
+                \Posit32::ExponentSize().0.result\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.return.0\ := false;
                 \Posit32::ExponentSize().0.return.1\ := to_unsigned(0, 32);
                 \Posit32::ExponentSize().0.return.2\ := to_unsigned(0, 8);
-                \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.2\ := false;
+                \Posit32::ExponentSize().0.binaryOperationResult.1\ := false;
+                \Posit32::ExponentSize().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.4\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.4\ := false;
+                \Posit32::ExponentSize().0.binaryOperationResult.5\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.6\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.8\ := to_unsigned(0, 8);
             else 
                 case \Posit32::ExponentSize().0._State\ is 
                     when \Posit32::ExponentSize().0._State_0\ => 
@@ -11841,6 +11878,12 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- byte b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte result;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (@this)) {
@@ -11934,71 +11977,136 @@ begin
                             \Posit32::ExponentSize().0.return.2\ := \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::ExponentSize().0.b\ := \Posit32::ExponentSize().0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- byte conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
-                            -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = 2;
-                            -- }
-                            -- else {
-                            -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
-                            -- }
+                            -- flag = (System.Int32)((System.Int32)(b) + 2) <= 32;
                             -- 
                             \Posit32::ExponentSize().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
-                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.0\);
-                            \Posit32::ExponentSize().0.binaryOperationResult.2\ := (\Posit32::ExponentSize().0.binaryOperationResult.1\) > to_signed(2, 32);
+                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := (\Posit32::ExponentSize().0.binaryOperationResult.0\) <= to_signed(32, 32);
+                            \Posit32::ExponentSize().0.flag\ := \Posit32::ExponentSize().0.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
+                            -- 		result = 2;
+                            -- 	}
+                            -- 	else {
+                            -- 		result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                            -- 	}
+                            -- }
+                            -- else {
+                            -- 	result = (System.Byte)((System.Int32)(32 - (System.Int32)(b)) - 1);
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit32::ExponentSize().0._State_10\ and ends in state \Posit32::ExponentSize().0._State_10\.
-                            --     * The false branch starts in state \Posit32::ExponentSize().0._State_11\ and ends in state \Posit32::ExponentSize().0._State_11\.
+                            --     * The true branch starts in state \Posit32::ExponentSize().0._State_10\ and ends in state \Posit32::ExponentSize().0._State_11\.
+                            --     * The false branch starts in state \Posit32::ExponentSize().0._State_14\ and ends in state \Posit32::ExponentSize().0._State_14\.
                             --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_9\.
 
-                            if (\Posit32::ExponentSize().0.binaryOperationResult.2\) then 
+                            if (\Posit32::ExponentSize().0.flag\) then 
                                 \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_10\;
                             else 
-                                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_11\;
+                                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_14\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9067
+                        -- Clock cycles needed to complete this state (approximation): 0.5766
                     when \Posit32::ExponentSize().0._State_9\ => 
                         -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6;
+                        -- return result;
                         -- 
-                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\;
+                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.result\;
                         \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::ExponentSize().0._State_10\ => 
                         -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = 2;
+                        -- 	if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
+                        -- 		result = 2;
+                        -- 	}
+                        -- 	else {
+                        -- 		result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- 	}
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = 2;
+                        -- if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
+                        -- 	result = 2;
+                        -- }
+                        -- else {
+                        -- 	result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- }
                         -- 
-                        \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\ := to_unsigned(2, 8);
+                        \Posit32::ExponentSize().0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.2\);
+                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := (\Posit32::ExponentSize().0.binaryOperationResult.3\) > to_signed(2, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::ExponentSize().0._State_12\ and ends in state \Posit32::ExponentSize().0._State_12\.
+                        --     * The false branch starts in state \Posit32::ExponentSize().0._State_13\ and ends in state \Posit32::ExponentSize().0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_11\.
+
+                        if (\Posit32::ExponentSize().0.binaryOperationResult.4\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_12\;
+                        else 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.9067
+                    when \Posit32::ExponentSize().0._State_11\ => 
+                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_10\.
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
-                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_10\) then 
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_11\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::ExponentSize().0._State_11\ => 
-                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_8\.
+                    when \Posit32::ExponentSize().0._State_12\ => 
+                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- 	result = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6 = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- result = 2;
                         -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
-                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.3\)), 8);
-                        \Posit32::ExponentSize().0.conditional03da98ff73affa516bb493a80ccad9836d51c3e8d7dfd430ee58f7e5245442a6\ := (\Posit32::ExponentSize().0.binaryOperationResult.4\);
+                        \Posit32::ExponentSize().0.result\ := to_unsigned(2, 8);
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_10\.
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_12\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_13\ => 
+                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- 
+                        \Posit32::ExponentSize().0.binaryOperationResult.5\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.5\)), 8);
+                        \Posit32::ExponentSize().0.result\ := (\Posit32::ExponentSize().0.binaryOperationResult.6\);
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_10\.
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_13\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6312
+                    when \Posit32::ExponentSize().0._State_14\ => 
+                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_8\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (System.Byte)((System.Int32)(32 - (System.Int32)(b)) - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (System.Byte)((System.Int32)(32 - (System.Int32)(b)) - 1);
+                        -- 
+                        \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(32, 32) - signed(SmartResize((\Posit32::ExponentSize().0.b\), 32));
+                        \Posit32::ExponentSize().0.binaryOperationResult.8\ := SmartResize(unsigned((\Posit32::ExponentSize().0.binaryOperationResult.7\) - to_signed(1, 32)), 8);
+                        \Posit32::ExponentSize().0.result\ := (\Posit32::ExponentSize().0.binaryOperationResult.8\);
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
-                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_11\) then 
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_14\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6312
@@ -12014,14 +12122,17 @@ begin
         Variable \Posit32::GetExponentValue().0._State\: \Posit32::GetExponentValue().0._States\ := \Posit32::GetExponentValue().0._State_0\;
         Variable \Posit32::GetExponentValue().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::GetExponentValue().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().0.return.0\: boolean := false;
         Variable \Posit32::GetExponentValue().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValue().0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().0.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.4\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12031,18 +12142,21 @@ begin
                 \Posit32::GetExponentValue().0.Posit32::IsPositive()._Started.0\ <= false;
                 \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
-                \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= false;
+                \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_0\;
                 \Posit32::GetExponentValue().0.num\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.b\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().0.return.0\ := false;
                 \Posit32::GetExponentValue().0.return.1\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().0.return.2\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.return.2\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValue().0.return.3\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().0.return.3\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.binaryOperationResult.4\ := false;
             else 
                 case \Posit32::GetExponentValue().0._State\ is 
                     when \Posit32::GetExponentValue().0._State_0\ => 
@@ -12066,6 +12180,9 @@ begin
                         \Posit32::GetExponentValue().0.this\ := \Posit32::GetExponentValue().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (@this)) {
@@ -12101,11 +12218,11 @@ begin
                     when \Posit32::GetExponentValue().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::GetExponentValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(Lombiq.Arithmetics.Posit32.ExponentSize (@this))) >> 30;
+                        -- b = Lombiq.Arithmetics.Posit32.ExponentSize (@this);
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
-                        \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
-                        \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
+                        \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
+                        \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= true;
                         \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().0._State_5\ => 
@@ -12152,29 +12269,99 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().0._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
-                        if (\Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\) then 
-                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
-                            \Posit32::GetExponentValue().0.return.2\ := \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\;
-                            \Posit32::GetExponentValue().0.binaryOperationResult.0\ := shift_right(\Posit32::GetExponentValue().0.num\, to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().0.return.2\), 5) and "11111")));
-                            -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
-                            \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
-                            \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= true;
-                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2386
-                    when \Posit32::GetExponentValue().0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
                         if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ = \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\) then 
                             \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= false;
-                            \Posit32::GetExponentValue().0.return.3\ := \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\;
-                            \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().0.return.3\), 32));
+                            \Posit32::GetExponentValue().0.return.2\ := \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\;
+                            \Posit32::GetExponentValue().0.b\ := \Posit32::GetExponentValue().0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(b)) >> 30;
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= true;
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        if (\Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\) then 
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
+                            \Posit32::GetExponentValue().0.return.3\ := \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\;
+                            \Posit32::GetExponentValue().0.binaryOperationResult.0\ := shift_right(\Posit32::GetExponentValue().0.num\, to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().0.return.3\), 5) and "11111")));
+                            \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().0.b\), 32));
                             \Posit32::GetExponentValue().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize((\Posit32::GetExponentValue().0.binaryOperationResult.1\), 5))));
                             \Posit32::GetExponentValue().0.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValue().0.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
-                            \Posit32::GetExponentValue().0.return\ <= \Posit32::GetExponentValue().0.binaryOperationResult.3\;
-                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_1\;
+                            \Posit32::GetExponentValue().0.num\ := \Posit32::GetExponentValue().0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if ((System.Int32)(b) == 0) {
+                            -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                            -- }
+                            -- else {
+                            -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                            -- }
+                            -- 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6542
+                        -- Clock cycles needed to complete this state (approximation): 0.8928
+                    when \Posit32::GetExponentValue().0._State_10\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::GetExponentValue().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::GetExponentValue().0.b\), 32)) = to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::GetExponentValue().0._State_12\ and ends in state \Posit32::GetExponentValue().0._State_12\.
+                        --     * The false branch starts in state \Posit32::GetExponentValue().0._State_13\ and ends in state \Posit32::GetExponentValue().0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::GetExponentValue().0._State_11\.
+
+                        if (\Posit32::GetExponentValue().0.binaryOperationResult.4\) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_12\;
+                        else 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \Posit32::GetExponentValue().0._State_11\ => 
+                        -- State after the if-else which was started in state \Posit32::GetExponentValue().0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                        -- 
+                        \Posit32::GetExponentValue().0.return\ <= \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\;
+                        \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_12\ => 
+                        -- True branch of the if-else started in state \Posit32::GetExponentValue().0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().0._State_10\.
+                        if (\Posit32::GetExponentValue().0._State\ = \Posit32::GetExponentValue().0._State_12\) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_13\ => 
+                        -- False branch of the if-else started in state \Posit32::GetExponentValue().0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- 
+                        \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := \Posit32::GetExponentValue().0.num\;
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().0._State_10\.
+                        if (\Posit32::GetExponentValue().0._State\ = \Posit32::GetExponentValue().0._State_13\) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
@@ -12187,14 +12374,17 @@ begin
         Variable \Posit32::GetExponentValue().1._State\: \Posit32::GetExponentValue().1._States\ := \Posit32::GetExponentValue().1._State_0\;
         Variable \Posit32::GetExponentValue().1.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::GetExponentValue().1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().1.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().1.return.0\: boolean := false;
         Variable \Posit32::GetExponentValue().1.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().1.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().1.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValue().1.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().1.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::GetExponentValue().1.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().1.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().1.binaryOperationResult.4\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12204,18 +12394,21 @@ begin
                 \Posit32::GetExponentValue().1.Posit32::IsPositive()._Started.0\ <= false;
                 \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                 \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
-                \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ <= false;
+                \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_0\;
                 \Posit32::GetExponentValue().1.num\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().1.b\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().1.return.0\ := false;
                 \Posit32::GetExponentValue().1.return.1\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().1.return.2\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().1.return.2\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValue().1.return.3\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().1.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().1.return.3\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().1.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::GetExponentValue().1.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().1.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().1.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().1.binaryOperationResult.4\ := false;
             else 
                 case \Posit32::GetExponentValue().1._State\ is 
                     when \Posit32::GetExponentValue().1._State_0\ => 
@@ -12239,6 +12432,9 @@ begin
                         \Posit32::GetExponentValue().1.this\ := \Posit32::GetExponentValue().1.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (@this)) {
@@ -12274,11 +12470,11 @@ begin
                     when \Posit32::GetExponentValue().1._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::GetExponentValue().1._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(Lombiq.Arithmetics.Posit32.ExponentSize (@this))) >> 30;
+                        -- b = Lombiq.Arithmetics.Posit32.ExponentSize (@this);
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
-                        \Posit32::GetExponentValue().1.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().1.this\;
-                        \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
+                        \Posit32::GetExponentValue().1.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().1.this\;
+                        \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ <= true;
                         \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().1._State_5\ => 
@@ -12325,29 +12521,99 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().1._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
-                        if (\Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().1.Posit32::FractionSize()._Finished.0\) then 
-                            \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ <= false;
-                            \Posit32::GetExponentValue().1.return.2\ := \Posit32::GetExponentValue().1.Posit32::FractionSize().return.0\;
-                            \Posit32::GetExponentValue().1.binaryOperationResult.0\ := shift_right(\Posit32::GetExponentValue().1.num\, to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().1.return.2\), 5) and "11111")));
-                            -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
-                            \Posit32::GetExponentValue().1.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().1.this\;
-                            \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ <= true;
-                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2386
-                    when \Posit32::GetExponentValue().1._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
                         if (\Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ = \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\) then 
                             \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ <= false;
-                            \Posit32::GetExponentValue().1.return.3\ := \Posit32::GetExponentValue().1.Posit32::ExponentSize().return.0\;
-                            \Posit32::GetExponentValue().1.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().1.return.3\), 32));
+                            \Posit32::GetExponentValue().1.return.2\ := \Posit32::GetExponentValue().1.Posit32::ExponentSize().return.0\;
+                            \Posit32::GetExponentValue().1.b\ := \Posit32::GetExponentValue().1.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(b)) >> 30;
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                            \Posit32::GetExponentValue().1.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().1.this\;
+                            \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ <= true;
+                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().1._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        if (\Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().1.Posit32::FractionSize()._Finished.0\) then 
+                            \Posit32::GetExponentValue().1.Posit32::FractionSize()._Started.0\ <= false;
+                            \Posit32::GetExponentValue().1.return.3\ := \Posit32::GetExponentValue().1.Posit32::FractionSize().return.0\;
+                            \Posit32::GetExponentValue().1.binaryOperationResult.0\ := shift_right(\Posit32::GetExponentValue().1.num\, to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().1.return.3\), 5) and "11111")));
+                            \Posit32::GetExponentValue().1.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().1.b\), 32));
                             \Posit32::GetExponentValue().1.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().1.binaryOperationResult.0\, to_integer(unsigned(SmartResize((\Posit32::GetExponentValue().1.binaryOperationResult.1\), 5))));
                             \Posit32::GetExponentValue().1.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValue().1.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
-                            \Posit32::GetExponentValue().1.return\ <= \Posit32::GetExponentValue().1.binaryOperationResult.3\;
-                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_1\;
+                            \Posit32::GetExponentValue().1.num\ := \Posit32::GetExponentValue().1.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if ((System.Int32)(b) == 0) {
+                            -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                            -- }
+                            -- else {
+                            -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                            -- }
+                            -- 
+                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6542
+                        -- Clock cycles needed to complete this state (approximation): 0.8928
+                    when \Posit32::GetExponentValue().1._State_10\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::GetExponentValue().1.binaryOperationResult.4\ := signed(SmartResize((\Posit32::GetExponentValue().1.b\), 32)) = to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::GetExponentValue().1._State_12\ and ends in state \Posit32::GetExponentValue().1._State_12\.
+                        --     * The false branch starts in state \Posit32::GetExponentValue().1._State_13\ and ends in state \Posit32::GetExponentValue().1._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::GetExponentValue().1._State_11\.
+
+                        if (\Posit32::GetExponentValue().1.binaryOperationResult.4\) then 
+                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_12\;
+                        else 
+                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \Posit32::GetExponentValue().1._State_11\ => 
+                        -- State after the if-else which was started in state \Posit32::GetExponentValue().1._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                        -- 
+                        \Posit32::GetExponentValue().1.return\ <= \Posit32::GetExponentValue().1.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\;
+                        \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().1._State_12\ => 
+                        -- True branch of the if-else started in state \Posit32::GetExponentValue().1._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().1.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().1._State_10\.
+                        if (\Posit32::GetExponentValue().1._State\ = \Posit32::GetExponentValue().1._State_12\) then 
+                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().1._State_13\ => 
+                        -- False branch of the if-else started in state \Posit32::GetExponentValue().1._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- 
+                        \Posit32::GetExponentValue().1.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := \Posit32::GetExponentValue().1.num\;
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().1._State_10\.
+                        if (\Posit32::GetExponentValue().1._State\ = \Posit32::GetExponentValue().1._State_13\) then 
+                            \Posit32::GetExponentValue().1._State\ := \Posit32::GetExponentValue().1._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
@@ -12360,14 +12626,17 @@ begin
         Variable \Posit32::GetExponentValue().2._State\: \Posit32::GetExponentValue().2._States\ := \Posit32::GetExponentValue().2._State_0\;
         Variable \Posit32::GetExponentValue().2.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::GetExponentValue().2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().2.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().2.return.0\: boolean := false;
         Variable \Posit32::GetExponentValue().2.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().2.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().2.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValue().2.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().2.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::GetExponentValue().2.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().2.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().2.binaryOperationResult.4\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12377,18 +12646,21 @@ begin
                 \Posit32::GetExponentValue().2.Posit32::IsPositive()._Started.0\ <= false;
                 \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                 \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
-                \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ <= false;
+                \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_0\;
                 \Posit32::GetExponentValue().2.num\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().2.b\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().2.return.0\ := false;
                 \Posit32::GetExponentValue().2.return.1\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().2.return.2\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().2.return.2\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValue().2.return.3\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().2.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().2.return.3\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().2.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::GetExponentValue().2.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().2.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().2.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().2.binaryOperationResult.4\ := false;
             else 
                 case \Posit32::GetExponentValue().2._State\ is 
                     when \Posit32::GetExponentValue().2._State_0\ => 
@@ -12412,6 +12684,9 @@ begin
                         \Posit32::GetExponentValue().2.this\ := \Posit32::GetExponentValue().2.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (@this)) {
@@ -12447,11 +12722,11 @@ begin
                     when \Posit32::GetExponentValue().2._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::GetExponentValue().2._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(Lombiq.Arithmetics.Posit32.ExponentSize (@this))) >> 30;
+                        -- b = Lombiq.Arithmetics.Posit32.ExponentSize (@this);
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
-                        \Posit32::GetExponentValue().2.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().2.this\;
-                        \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
+                        \Posit32::GetExponentValue().2.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().2.this\;
+                        \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ <= true;
                         \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().2._State_5\ => 
@@ -12498,29 +12773,99 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().2._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
-                        if (\Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().2.Posit32::FractionSize()._Finished.0\) then 
-                            \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ <= false;
-                            \Posit32::GetExponentValue().2.return.2\ := \Posit32::GetExponentValue().2.Posit32::FractionSize().return.0\;
-                            \Posit32::GetExponentValue().2.binaryOperationResult.0\ := shift_right(\Posit32::GetExponentValue().2.num\, to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().2.return.2\), 5) and "11111")));
-                            -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
-                            \Posit32::GetExponentValue().2.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().2.this\;
-                            \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ <= true;
-                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2386
-                    when \Posit32::GetExponentValue().2._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
                         if (\Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ = \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\) then 
                             \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ <= false;
-                            \Posit32::GetExponentValue().2.return.3\ := \Posit32::GetExponentValue().2.Posit32::ExponentSize().return.0\;
-                            \Posit32::GetExponentValue().2.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().2.return.3\), 32));
+                            \Posit32::GetExponentValue().2.return.2\ := \Posit32::GetExponentValue().2.Posit32::ExponentSize().return.0\;
+                            \Posit32::GetExponentValue().2.b\ := \Posit32::GetExponentValue().2.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(b)) >> 30;
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                            \Posit32::GetExponentValue().2.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().2.this\;
+                            \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ <= true;
+                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().2._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        if (\Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().2.Posit32::FractionSize()._Finished.0\) then 
+                            \Posit32::GetExponentValue().2.Posit32::FractionSize()._Started.0\ <= false;
+                            \Posit32::GetExponentValue().2.return.3\ := \Posit32::GetExponentValue().2.Posit32::FractionSize().return.0\;
+                            \Posit32::GetExponentValue().2.binaryOperationResult.0\ := shift_right(\Posit32::GetExponentValue().2.num\, to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().2.return.3\), 5) and "11111")));
+                            \Posit32::GetExponentValue().2.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().2.b\), 32));
                             \Posit32::GetExponentValue().2.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().2.binaryOperationResult.0\, to_integer(unsigned(SmartResize((\Posit32::GetExponentValue().2.binaryOperationResult.1\), 5))));
                             \Posit32::GetExponentValue().2.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValue().2.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
-                            \Posit32::GetExponentValue().2.return\ <= \Posit32::GetExponentValue().2.binaryOperationResult.3\;
-                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_1\;
+                            \Posit32::GetExponentValue().2.num\ := \Posit32::GetExponentValue().2.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if ((System.Int32)(b) == 0) {
+                            -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                            -- }
+                            -- else {
+                            -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                            -- }
+                            -- 
+                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6542
+                        -- Clock cycles needed to complete this state (approximation): 0.8928
+                    when \Posit32::GetExponentValue().2._State_10\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::GetExponentValue().2.binaryOperationResult.4\ := signed(SmartResize((\Posit32::GetExponentValue().2.b\), 32)) = to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::GetExponentValue().2._State_12\ and ends in state \Posit32::GetExponentValue().2._State_12\.
+                        --     * The false branch starts in state \Posit32::GetExponentValue().2._State_13\ and ends in state \Posit32::GetExponentValue().2._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::GetExponentValue().2._State_11\.
+
+                        if (\Posit32::GetExponentValue().2.binaryOperationResult.4\) then 
+                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_12\;
+                        else 
+                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \Posit32::GetExponentValue().2._State_11\ => 
+                        -- State after the if-else which was started in state \Posit32::GetExponentValue().2._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                        -- 
+                        \Posit32::GetExponentValue().2.return\ <= \Posit32::GetExponentValue().2.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\;
+                        \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().2._State_12\ => 
+                        -- True branch of the if-else started in state \Posit32::GetExponentValue().2._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().2.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().2._State_10\.
+                        if (\Posit32::GetExponentValue().2._State\ = \Posit32::GetExponentValue().2._State_12\) then 
+                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().2._State_13\ => 
+                        -- False branch of the if-else started in state \Posit32::GetExponentValue().2._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- 
+                        \Posit32::GetExponentValue().2.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := \Posit32::GetExponentValue().2.num\;
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().2._State_10\.
+                        if (\Posit32::GetExponentValue().2._State\ = \Posit32::GetExponentValue().2._State_13\) then 
+                            \Posit32::GetExponentValue().2._State\ := \Posit32::GetExponentValue().2._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
@@ -14300,6 +14645,8 @@ begin
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::FractionWithHiddenBit().0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -14325,6 +14672,8 @@ begin
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := false;
                 \Posit32::FractionWithHiddenBit().0.return.3\ := to_unsigned(0, 32);
             else 
                 case \Posit32::FractionWithHiddenBit().0._State\ is 
@@ -14413,13 +14762,16 @@ begin
                         \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\), 5) and "11111")));
                         \Posit32::FractionWithHiddenBit().0.bits\ := \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- uint conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
-                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.this\;
-                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.bits\;
-                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().0.num\, 16);
-                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num == 0u) {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- }
+                        -- else {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- }
+                        -- 
                         \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.9698
                     when \Posit32::FractionWithHiddenBit().0._State_6\ => 
@@ -14466,12 +14818,71 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionWithHiddenBit().0._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := \Posit32::FractionWithHiddenBit().0.num\ = to_unsigned(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::FractionWithHiddenBit().0._State_11\ and ends in state \Posit32::FractionWithHiddenBit().0._State_11\.
+                        --     * The false branch starts in state \Posit32::FractionWithHiddenBit().0._State_12\ and ends in state \Posit32::FractionWithHiddenBit().0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::FractionWithHiddenBit().0._State_10\.
+
+                        if (\Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\) then 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_11\;
+                        else 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_12\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \Posit32::FractionWithHiddenBit().0._State_10\ => 
+                        -- State after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\;
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_11\ => 
+                        -- True branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(1, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_9\.
+                        if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_11\) then 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_12\ => 
+                        -- False branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.this\;
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.bits\;
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().0.num\, 16);
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
                         if (\Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ = \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
                             \Posit32::FractionWithHiddenBit().0.return.3\ := \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).return.0\;
-                            \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.return.3\;
-                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_1\;
+                            \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := \Posit32::FractionWithHiddenBit().0.return.3\;
+                            -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_9\.
+                            if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_13\) then 
+                                \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_10\;
+                            end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -14495,6 +14906,8 @@ begin
         Variable \Posit32::FractionWithHiddenBit().1.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().1.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionWithHiddenBit().1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().1.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().1.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::FractionWithHiddenBit().1.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -14520,6 +14933,8 @@ begin
                 \Posit32::FractionWithHiddenBit().1.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().1.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionWithHiddenBit().1.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().1.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().1.binaryOperationResult.4\ := false;
                 \Posit32::FractionWithHiddenBit().1.return.3\ := to_unsigned(0, 32);
             else 
                 case \Posit32::FractionWithHiddenBit().1._State\ is 
@@ -14608,13 +15023,16 @@ begin
                         \Posit32::FractionWithHiddenBit().1.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBit().1.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().1.binaryOperationResult.2\), 5) and "11111")));
                         \Posit32::FractionWithHiddenBit().1.bits\ := \Posit32::FractionWithHiddenBit().1.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- uint conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
-                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().1.this\;
-                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().1.bits\;
-                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().1.num\, 16);
-                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num == 0u) {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- }
+                        -- else {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- }
+                        -- 
                         \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.9698
                     when \Posit32::FractionWithHiddenBit().1._State_6\ => 
@@ -14661,12 +15079,71 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionWithHiddenBit().1._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionWithHiddenBit().1.binaryOperationResult.4\ := \Posit32::FractionWithHiddenBit().1.num\ = to_unsigned(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::FractionWithHiddenBit().1._State_11\ and ends in state \Posit32::FractionWithHiddenBit().1._State_11\.
+                        --     * The false branch starts in state \Posit32::FractionWithHiddenBit().1._State_12\ and ends in state \Posit32::FractionWithHiddenBit().1._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::FractionWithHiddenBit().1._State_10\.
+
+                        if (\Posit32::FractionWithHiddenBit().1.binaryOperationResult.4\) then 
+                            \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_11\;
+                        else 
+                            \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_12\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \Posit32::FractionWithHiddenBit().1._State_10\ => 
+                        -- State after the if-else which was started in state \Posit32::FractionWithHiddenBit().1._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().1.return\ <= \Posit32::FractionWithHiddenBit().1.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\;
+                        \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().1._State_11\ => 
+                        -- True branch of the if-else started in state \Posit32::FractionWithHiddenBit().1._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().1.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(1, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().1._State_9\.
+                        if (\Posit32::FractionWithHiddenBit().1._State\ = \Posit32::FractionWithHiddenBit().1._State_11\) then 
+                            \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().1._State_12\ => 
+                        -- False branch of the if-else started in state \Posit32::FractionWithHiddenBit().1._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
+                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().1.this\;
+                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().1.bits\;
+                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().1.num\, 16);
+                        \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().1._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
                         if (\Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16)._Started.0\ = \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
                             \Posit32::FractionWithHiddenBit().1.return.3\ := \Posit32::FractionWithHiddenBit().1.Posit32::SetOne(UInt32,UInt16).return.0\;
-                            \Posit32::FractionWithHiddenBit().1.return\ <= \Posit32::FractionWithHiddenBit().1.return.3\;
-                            \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_1\;
+                            \Posit32::FractionWithHiddenBit().1.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := \Posit32::FractionWithHiddenBit().1.return.3\;
+                            -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().1._State_9\.
+                            if (\Posit32::FractionWithHiddenBit().1._State\ = \Posit32::FractionWithHiddenBit().1._State_13\) then 
+                                \Posit32::FractionWithHiddenBit().1._State\ := \Posit32::FractionWithHiddenBit().1._State_10\;
+                            end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -14690,6 +15167,8 @@ begin
         Variable \Posit32::FractionWithHiddenBit().2.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().2.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionWithHiddenBit().2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().2.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().2.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::FractionWithHiddenBit().2.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -14715,6 +15194,8 @@ begin
                 \Posit32::FractionWithHiddenBit().2.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().2.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionWithHiddenBit().2.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().2.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().2.binaryOperationResult.4\ := false;
                 \Posit32::FractionWithHiddenBit().2.return.3\ := to_unsigned(0, 32);
             else 
                 case \Posit32::FractionWithHiddenBit().2._State\ is 
@@ -14803,13 +15284,16 @@ begin
                         \Posit32::FractionWithHiddenBit().2.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBit().2.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().2.binaryOperationResult.2\), 5) and "11111")));
                         \Posit32::FractionWithHiddenBit().2.bits\ := \Posit32::FractionWithHiddenBit().2.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- uint conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
-                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().2.this\;
-                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().2.bits\;
-                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().2.num\, 16);
-                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num == 0u) {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- }
+                        -- else {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- }
+                        -- 
                         \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.9698
                     when \Posit32::FractionWithHiddenBit().2._State_6\ => 
@@ -14856,12 +15340,71 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionWithHiddenBit().2._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionWithHiddenBit().2.binaryOperationResult.4\ := \Posit32::FractionWithHiddenBit().2.num\ = to_unsigned(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::FractionWithHiddenBit().2._State_11\ and ends in state \Posit32::FractionWithHiddenBit().2._State_11\.
+                        --     * The false branch starts in state \Posit32::FractionWithHiddenBit().2._State_12\ and ends in state \Posit32::FractionWithHiddenBit().2._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::FractionWithHiddenBit().2._State_10\.
+
+                        if (\Posit32::FractionWithHiddenBit().2.binaryOperationResult.4\) then 
+                            \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_11\;
+                        else 
+                            \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_12\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2751
+                    when \Posit32::FractionWithHiddenBit().2._State_10\ => 
+                        -- State after the if-else which was started in state \Posit32::FractionWithHiddenBit().2._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().2.return\ <= \Posit32::FractionWithHiddenBit().2.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\;
+                        \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().2._State_11\ => 
+                        -- True branch of the if-else started in state \Posit32::FractionWithHiddenBit().2._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().2.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(1, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().2._State_9\.
+                        if (\Posit32::FractionWithHiddenBit().2._State\ = \Posit32::FractionWithHiddenBit().2._State_11\) then 
+                            \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().2._State_12\ => 
+                        -- False branch of the if-else started in state \Posit32::FractionWithHiddenBit().2._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
+                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().2.this\;
+                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().2.bits\;
+                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().2.num\, 16);
+                        \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().2._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
                         if (\Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16)._Started.0\ = \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
                             \Posit32::FractionWithHiddenBit().2.return.3\ := \Posit32::FractionWithHiddenBit().2.Posit32::SetOne(UInt32,UInt16).return.0\;
-                            \Posit32::FractionWithHiddenBit().2.return\ <= \Posit32::FractionWithHiddenBit().2.return.3\;
-                            \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_1\;
+                            \Posit32::FractionWithHiddenBit().2.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := \Posit32::FractionWithHiddenBit().2.return.3\;
+                            -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().2._State_9\.
+                            if (\Posit32::FractionWithHiddenBit().2._State\ = \Posit32::FractionWithHiddenBit().2._State_13\) then 
+                                \Posit32::FractionWithHiddenBit().2._State\ := \Posit32::FractionWithHiddenBit().2._State_10\;
+                            end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -37624,6 +38167,223 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Lombiq.Arithmetics.Posit32::IsPositive() end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::ExponentSize() start
+    \Hast::InternalInvocationProxy().Posit32::ExponentSize()\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := WaitingForStarted;
+                \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= false;
+                \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= false;
+                \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= false;
+                \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= false;
+                \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= false;
+                \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= false;
+            else 
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0
+                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\) then 
+                            \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
+                            \Posit32::ExponentSize().0._Started\ <= true;
+                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::ExponentSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= true;
+                                    \Posit32::ExponentSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().1
+                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\) then 
+                            \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\ := 0;
+                            \Posit32::ExponentSize().0._Started\ <= true;
+                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::ExponentSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::ExponentSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= true;
+                                    \Posit32::ExponentSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValue().1.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().2
+                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\) then 
+                            \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\ := 0;
+                            \Posit32::ExponentSize().0._Started\ <= true;
+                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::ExponentSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::ExponentSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= true;
+                                    \Posit32::ExponentSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValue().2.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValueWithoutSignCheck(System.UInt32).0
+                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Started.0\) then 
+                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\ := 0;
+                            \Posit32::ExponentSize().0._Started\ <= true;
+                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::ExponentSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= true;
+                                    \Posit32::ExponentSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValueWithoutSignCheck(System.UInt32).1
+                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Started.0\) then 
+                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\ := 0;
+                            \Posit32::ExponentSize().0._Started\ <= true;
+                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::ExponentSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= true;
+                                    \Posit32::ExponentSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValueWithoutSignCheck(System.UInt32).2
+                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Started.0\) then 
+                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\ := 0;
+                            \Posit32::ExponentSize().0._Started\ <= true;
+                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::ExponentSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= true;
+                                    \Posit32::ExponentSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::ExponentSize() end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize() start
     \Hast::InternalInvocationProxy().Posit32::FractionSize()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
@@ -38037,223 +38797,6 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::ExponentSize() start
-    \Hast::InternalInvocationProxy().Posit32::ExponentSize()\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := WaitingForStarted;
-                \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= false;
-                \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= false;
-                \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= false;
-                \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= false;
-                \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= false;
-                \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= false;
-            else 
-
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0
-                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\) then 
-                            \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
-                            \Posit32::ExponentSize().0._Started\ <= true;
-                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::ExponentSize().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= true;
-                                    \Posit32::ExponentSize().0._Started\ <= false;
-                                    \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForStarted;
-                            \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().1
-                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\) then 
-                            \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\ := 0;
-                            \Posit32::ExponentSize().0._Started\ <= true;
-                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::ExponentSize().this.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::ExponentSize().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= true;
-                                    \Posit32::ExponentSize().0._Started\ <= false;
-                                    \Posit32::GetExponentValue().1.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Posit32::GetExponentValue().1.Posit32::ExponentSize()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().1.runningState.0\ := WaitingForStarted;
-                            \Posit32::GetExponentValue().1.Posit32::ExponentSize()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().2
-                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\) then 
-                            \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\ := 0;
-                            \Posit32::ExponentSize().0._Started\ <= true;
-                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::ExponentSize().this.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::ExponentSize().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= true;
-                                    \Posit32::ExponentSize().0._Started\ <= false;
-                                    \Posit32::GetExponentValue().2.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Posit32::GetExponentValue().2.Posit32::ExponentSize()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValue().2.runningState.0\ := WaitingForStarted;
-                            \Posit32::GetExponentValue().2.Posit32::ExponentSize()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValueWithoutSignCheck(System.UInt32).0
-                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Started.0\) then 
-                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\ := 0;
-                            \Posit32::ExponentSize().0._Started\ <= true;
-                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize().this.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::ExponentSize().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= true;
-                                    \Posit32::ExponentSize().0._Started\ <= false;
-                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).0.runningState.0\ := WaitingForStarted;
-                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).0.Posit32::ExponentSize()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValueWithoutSignCheck(System.UInt32).1
-                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Started.0\) then 
-                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\ := 0;
-                            \Posit32::ExponentSize().0._Started\ <= true;
-                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize().this.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::ExponentSize().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= true;
-                                    \Posit32::ExponentSize().0._Started\ <= false;
-                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).1.runningState.0\ := WaitingForStarted;
-                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).1.Posit32::ExponentSize()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValueWithoutSignCheck(System.UInt32).2
-                case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Started.0\) then 
-                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\ := 0;
-                            \Posit32::ExponentSize().0._Started\ <= true;
-                            \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize().this.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::ExponentSize().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= true;
-                                    \Posit32::ExponentSize().0._Started\ <= false;
-                                    \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::ExponentSize().Posit32::GetExponentValueWithoutSignCheck(UInt32).2.runningState.0\ := WaitingForStarted;
-                            \Posit32::GetExponentValueWithoutSignCheck(UInt32).2.Posit32::ExponentSize()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::ExponentSize() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16) start
