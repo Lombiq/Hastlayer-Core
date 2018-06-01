@@ -35,7 +35,8 @@ namespace ICSharpCode.NRefactory.CSharp
 
             // Searching for an implemented interface with the same member.
             var parent = (TypeDeclaration)member.Parent;
-            foreach (var baseType in parent.BaseTypes) // BaseTypes are flattened, so interface inheritance is taken into account.
+            // BaseTypes are flattened, so interface inheritance is taken into account.
+            foreach (var baseType in parent.BaseTypes)
             {
                 if (baseType.NodeType == NodeType.TypeReference)
                 {

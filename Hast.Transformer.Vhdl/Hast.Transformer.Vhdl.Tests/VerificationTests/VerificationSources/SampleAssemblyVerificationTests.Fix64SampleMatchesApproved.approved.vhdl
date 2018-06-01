@@ -720,7 +720,7 @@ begin
                         else 
                             \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State\ := \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State_5\ => 
                         -- State after the while loop which was started in state \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -747,7 +747,7 @@ begin
                                 \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State\ := \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State_4\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
                         if (\Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).0.Fix64::ToIntegers()._Finished.0\) then 
@@ -908,7 +908,7 @@ begin
                         else 
                             \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State\ := \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State_5\ => 
                         -- State after the while loop which was started in state \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -935,7 +935,7 @@ begin
                                 \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State\ := \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State_4\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
                         if (\Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).1.Fix64::ToIntegers()._Finished.0\) then 
@@ -1096,7 +1096,7 @@ begin
                         else 
                             \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State\ := \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State_5\ => 
                         -- State after the while loop which was started in state \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -1123,7 +1123,7 @@ begin
                                 \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State\ := \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State_4\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
                         if (\Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).2.Fix64::ToIntegers()._Finished.0\) then 
@@ -1305,7 +1305,7 @@ begin
                         else 
                             \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -1332,7 +1332,7 @@ begin
                                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
                         if (\Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::ToIntegers()._Finished.0\) then 
@@ -1386,8 +1386,8 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\: \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._States\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_0\;
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\: \signed32_Array\(0 to 9) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult_Array\(0 to 9);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\: \signed32_Array\(0 to 12) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult_Array\(0 to 12);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.arg_4F_1\: signed(31 downto 0) := to_signed(0, 32);
@@ -1480,18 +1480,18 @@ begin
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new int[10];
+                        -- array = new int[13];
                         -- 
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\ := (others => to_signed(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- array2 = new Task<Fix64Calculator.TaskResult>[10];
+                        -- array2 = new Task<Fix64Calculator.TaskResult>[13];
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- i = 0;
                         -- 
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (i < 10) {
+                        -- while (i < 13) {
                         -- 	num = memory.ReadInt32 (i);
                         -- 	arg_4F_1 = i;
                         -- 	arg_4A_0 = Task.Factory;
@@ -1508,7 +1508,7 @@ begin
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_2\.
                         -- The while loop's condition:
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ < to_signed(10, 32);
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.i\ < to_signed(13, 32);
                         if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -1532,7 +1532,7 @@ begin
                         else 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.261
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_4\ => 
                         -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -1585,7 +1585,7 @@ begin
                                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_3\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult Hast.Samples.SampleAssembly.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Int32)
                         if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.1\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Finished.1\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.2\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Finished.2\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Started.0\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32)._Finished.0\) then 
@@ -1604,7 +1604,7 @@ begin
                             -- 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (j < 10) {
+                            -- while (j < 13) {
                             -- 	num2 = j * 2;
                             -- 	memory.WriteInt32 (num2, array2 [j].Result.Fix64Low);
                             -- 	memory.WriteInt32 (num2 + 1, array2 [j].Result.Fix64High);
@@ -1618,7 +1618,7 @@ begin
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ < to_signed(10, 32);
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ < to_signed(13, 32);
                         if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -1644,7 +1644,7 @@ begin
                         else 
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.361
+                        -- Clock cycles needed to complete this state (approximation): 0.3974
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_8\ => 
                         -- State after the while loop which was started in state \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\.
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_1\;
@@ -1661,7 +1661,7 @@ begin
                             -- The last SimpleMemory write just finished, so need to start the next one in the next state.
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\ => 
                         -- Begin SimpleMemory write.
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\, 32);
@@ -1684,7 +1684,7 @@ begin
                                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3156
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
                 end case;
             end if;
         end if;
@@ -2069,7 +2069,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().0.return\ <= \Fix64::ToIntegers().0.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().0._State\ := \Fix64::ToIntegers().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3734
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
                 end case;
             end if;
         end if;
@@ -2157,7 +2157,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().1.return\ <= \Fix64::ToIntegers().1.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().1._State\ := \Fix64::ToIntegers().1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3734
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
                 end case;
             end if;
         end if;
@@ -2245,7 +2245,7 @@ begin
                         -- 
                         \Fix64::ToIntegers().2.return\ <= \Fix64::ToIntegers().2.array2c4ab0a3081c31f771a30fd96794fc885b2d80b81a8c0e07d7b68b42a9b0b6b7\;
                         \Fix64::ToIntegers().2._State\ := \Fix64::ToIntegers().2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3734
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
                 end case;
             end if;
         end if;
@@ -2264,6 +2264,7 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).0.flag\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
@@ -2284,6 +2285,7 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).0.flag\ := false;
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := to_signed(0, 64);
@@ -2340,14 +2342,15 @@ begin
                         -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\ := not(\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\);
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).0.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).0.num\;
-                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\;
-                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
-                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8898
+                        -- Clock cycles needed to complete this state (approximation): 0.8807
                     when \Fix64::op_Addition(Fix64,Fix64).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ := \Fix64::op_Addition(Fix64,Fix64).0.unaryOperationResult.0\ and \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.2\;
+                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.4\ /= to_signed(0, 64);
                         \Fix64::op_Addition(Fix64,Fix64).0.flag\ := \Fix64::op_Addition(Fix64,Fix64).0.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
@@ -2371,7 +2374,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Fix64::op_Addition(Fix64,Fix64).0._State\ := \Fix64::op_Addition(Fix64,Fix64).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2891
+                        -- Clock cycles needed to complete this state (approximation): 0.6285
                     when \Fix64::op_Addition(Fix64,Fix64).0._State_4\ => 
                         -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -2494,6 +2497,7 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).1.flag\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
@@ -2514,6 +2518,7 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).1.flag\ := false;
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ := to_signed(0, 64);
@@ -2570,14 +2575,15 @@ begin
                         -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).1.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).1.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\ := not(\Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\);
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).1.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).1.num\;
-                        \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\;
-                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
-                        \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).1._State\ := \Fix64::op_Addition(Fix64,Fix64).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8898
+                        -- Clock cycles needed to complete this state (approximation): 0.8807
                     when \Fix64::op_Addition(Fix64,Fix64).1._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ := \Fix64::op_Addition(Fix64,Fix64).1.unaryOperationResult.0\ and \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.2\;
+                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.4\ /= to_signed(0, 64);
                         \Fix64::op_Addition(Fix64,Fix64).1.flag\ := \Fix64::op_Addition(Fix64,Fix64).1.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
@@ -2601,7 +2607,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Fix64::op_Addition(Fix64,Fix64).1._State\ := \Fix64::op_Addition(Fix64,Fix64).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2891
+                        -- Clock cycles needed to complete this state (approximation): 0.6285
                     when \Fix64::op_Addition(Fix64,Fix64).1._State_4\ => 
                         -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -2724,6 +2730,7 @@ begin
         Variable \Fix64::op_Addition(Fix64,Fix64).2.flag\: boolean := false;
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
@@ -2744,6 +2751,7 @@ begin
                 \Fix64::op_Addition(Fix64,Fix64).2.flag\ := false;
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\ := to_signed(0, 64);
+                \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := to_signed(0, 64);
                 \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ := to_signed(0, 64);
@@ -2800,14 +2808,15 @@ begin
                         -- flag = ~rawValue ^ rawValue2 & rawValue ^ num & -9223372036854775808L != 0L;
                         -- 
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\ := \Fix64::op_Addition(Fix64,Fix64).2.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).2.rawValue2\;
+                        \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\ := not(\Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\);
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\ := \Fix64::op_Addition(Fix64,Fix64).2.rawValue\ xor \Fix64::op_Addition(Fix64,Fix64).2.num\;
-                        \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := not(\Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.1\) and \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\;
-                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
-                        \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).2._State\ := \Fix64::op_Addition(Fix64,Fix64).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8898
+                        -- Clock cycles needed to complete this state (approximation): 0.8807
                     when \Fix64::op_Addition(Fix64,Fix64).2._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ := \Fix64::op_Addition(Fix64,Fix64).2.unaryOperationResult.0\ and \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.2\;
+                        -- Since the integer literal -9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.3\ and "1000000000000000000000000000000000000000000000000000000000000000";
                         \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.5\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.4\ /= to_signed(0, 64);
                         \Fix64::op_Addition(Fix64,Fix64).2.flag\ := \Fix64::op_Addition(Fix64,Fix64).2.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
@@ -2831,7 +2840,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Fix64::op_Addition(Fix64,Fix64).2._State\ := \Fix64::op_Addition(Fix64,Fix64).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2891
+                        -- Clock cycles needed to complete this state (approximation): 0.6285
                     when \Fix64::op_Addition(Fix64,Fix64).2._State_4\ => 
                         -- State after the if-else which was started in state \Fix64::op_Addition(Fix64,Fix64).2._State_3\.
                         -- The following section was transformed from the .NET statement below:

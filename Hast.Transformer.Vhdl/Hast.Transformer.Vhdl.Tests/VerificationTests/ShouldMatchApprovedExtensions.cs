@@ -23,9 +23,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
     public static class ShouldMatchConfigurationBuilderExtensions
     {
-        public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder)
-        {
-            return configurationBuilder
+        public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder) =>
+            configurationBuilder
                 .SubFolder(System.IO.Path.Combine("VerificationSources"))
                 .WithFileExtension("vhdl")
                 .WithScrubber(source =>
@@ -39,6 +38,5 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                     return source;
                 });
-        }
     }
 }
