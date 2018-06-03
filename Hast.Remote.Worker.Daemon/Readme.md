@@ -17,7 +17,7 @@ First build the project in Release mode. Then according to your case:
 5. Check the logs for any issues.
 
 ### If you're updating the service
-To minimize downtime and have the ability to roll back to the previously installed version of the service do the below steps, or copy the `HastlayerRemoteWorkerDaemonInstallHelper.bat` script to the installation folder and follow its directions.
+To minimize downtime and have the ability to roll back to the previously installed version of the service do the below steps, or copy the `HastlayerRemoteWorkerDaemonInstallHelper.bat` script to the installation folder (i.e. the root folder where you want the Daemon's folder to be created, e.g. *C:\\*) and run it, follow its directions (no other steps needed before that).
 
 1. Copy the service exe and its dependencies (basically the whole Release bin folder) onto the server in a desired temporary location (e.g. *C:\HastlayerRemoteWorkerDaemonNew*).
 2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class) and the Application Insights instrumentation key in *ApplicationInsights.config*. You can copy the configuration files of the running service over too, if the configuration formats haven't changed.
