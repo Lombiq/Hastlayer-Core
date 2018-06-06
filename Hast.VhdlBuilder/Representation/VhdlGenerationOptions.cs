@@ -68,10 +68,13 @@ namespace Hast.VhdlBuilder.Representation
                         {
                             var originalMatch = match.Groups[0].Value;
                             var shortName = originalMatch;
+                            var isOperator = shortName.Contains("::op_");
 
-                            // Cutting off return type name.
+                            // Cutting off return type name, but not for operators (operators, unlike normal 
+                            // methods /properties can have the same name, like op_Explicit, with a different return
+                            // type).
                             var firstSpaceIndex = shortName.IndexOf(' ');
-                            if (firstSpaceIndex != -1)
+                            if (firstSpaceIndex != -1 && !isOperator)
                             {
                                 shortName = shortName.Substring(firstSpaceIndex + 1);
                             }
@@ -81,7 +84,18 @@ namespace Hast.VhdlBuilder.Representation
                             if (doubleColonIndex != -1)
                             {
                                 var namespaceAndClassName = shortName.Substring(0, doubleColonIndex);
+
+                                // Re-adding return type name for operators.
+                                var returnType = string.Empty;
+                                var spaceIndex = namespaceAndClassName.IndexOf(' ');
+                                if (isOperator && spaceIndex != -1)
+                                {
+                                    var returnTypeFullName = namespaceAndClassName.Substring(0, spaceIndex);
+                                    returnType = returnTypeFullName.Substring(returnTypeFullName.LastIndexOf('.') + 1) + " ";
+                                }
+
                                 shortName =
+                                    returnType +
                                     namespaceAndClassName.Substring(namespaceAndClassName.LastIndexOf('.') + 1) +
                                     shortName.Substring(doubleColonIndex);
                             }
