@@ -48,17 +48,29 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "An array should have a length greater than 1.".AddParentEntityName(expression));
             }
 
-            var elementType = _typeConverter.ConvertAstType(
-                expression.GetElementType(),
-                context.TransformationContext);
+            var elementType = expression.GetElementType();
+            var elementAstType = _typeConverter.ConvertAstType(elementType, context.TransformationContext);
 
-            if (elementType.DefaultValue != null)
+            if (length > 500 && elementAstType is Record)
+            {
+                context.Scope.Warnings.AddWarning(
+                    "NonPrimitiveArrayTooLarge",
+                    "You've created a large array (length: " +
+                        length + 
+                        ") with non-primitive items (type: " +
+                        elementType.GetFullName() +
+                        "). The resulting hardware implementation might not fit on the FPGA and/or will take a very long time to complete. Consider using a smaller array (below 500 items)."
+                        .AddParentEntityName(expression));
+            }
+
+
+            if (elementAstType.DefaultValue != null)
             {
                 // Initializing the array with the .NET default values (so there are no surprises when reading values
                 // without setting them previously).
                 return ArrayType.CreateDefaultInitialization(
-                    ArrayHelper.CreateArrayInstantiation(elementType, length), 
-                    elementType);
+                    ArrayHelper.CreateArrayInstantiation(elementAstType, length),
+                    elementAstType);
             }
             else
             {
