@@ -7,7 +7,7 @@ namespace ICSharpCode.NRefactory.CSharp
     {
         public static int GetStaticLength(this ArrayCreateExpression expression)
         {
-            // The array has its length explicitly specified, i.e. new int[5]-stlye.
+            // The array has its length explicitly specified, i.e. new int[5]-style.
             if (expression.Arguments.Any())
             {
                 var lengthArgument = expression.Arguments.Single();
