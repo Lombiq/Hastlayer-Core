@@ -2462,7 +2462,9 @@ architecture Imp of Hast_IP is
         \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_97\, 
         \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\, 
         \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\, 
-        \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\);
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\, 
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_101\, 
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_102\);
     -- Signals:
     Signal \Posit32 Posit32::op_Addition(Posit32,Posit32).0._Finished\: boolean := false;
     Signal \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return\: \Lombiq.Arithmetics.Posit32\;
@@ -2636,7 +2638,9 @@ architecture Imp of Hast_IP is
         \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_97\, 
         \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\, 
         \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\, 
-        \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\);
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\, 
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_101\, 
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_102\);
     -- Signals:
     Signal \Posit32 Posit32::op_Addition(Posit32,Posit32).1._Finished\: boolean := false;
     Signal \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return\: \Lombiq.Arithmetics.Posit32\;
@@ -2810,7 +2814,9 @@ architecture Imp of Hast_IP is
         \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_97\, 
         \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\, 
         \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\, 
-        \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\);
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\, 
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_101\, 
+        \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_102\);
     -- Signals:
     Signal \Posit32 Posit32::op_Addition(Posit32,Posit32).2._Finished\: boolean := false;
     Signal \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return\: \Lombiq.Arithmetics.Posit32\;
@@ -3021,7 +3027,9 @@ architecture Imp of Hast_IP is
         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_38\, 
         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_39\, 
         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\, 
-        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\);
+        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\, 
+        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_42\, 
+        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_43\);
     -- Signals:
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._Finished\: boolean := false;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return\: \Lombiq.Arithmetics.Posit32\;
@@ -18147,8 +18155,9 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag13\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag14\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag15\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.regimeKValue\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.exponentBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag16\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.0\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.1\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.2\: boolean := false;
@@ -18251,7 +18260,10 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.77\: boolean := false;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -18327,8 +18339,9 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag13\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag14\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag15\ := false;
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.regimeKValue\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.exponentBits\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag16\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.0\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.1\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.2\ := false;
@@ -18431,7 +18444,10 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.74\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.75\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.77\ := false;
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.78\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.79\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.20\ := to_unsigned(0, 32);
             else 
                 case \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ is 
@@ -18585,10 +18601,13 @@ begin
                         -- bool flag15;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int regimeKValue;
+                        -- int num19;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint exponentBits;
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag16;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- flag = Lombiq.Arithmetics.Posit32.IsNaN (left);
@@ -18736,11 +18755,16 @@ begin
                             -- 					result = new Posit32 (0u, true);
                             -- 				}
                             -- 				else {
-                            -- 					regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 					num19 = (int)((System.Int32)(num11) / 4);
                             -- 					System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 					remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 					exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 					num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 					flag16 = num20 < 0;
+                            -- 					if (flag16) {
+                            -- 						num19 = num19 - 1;
+                            -- 						num20 = num20 + 4;
+                            -- 					}
+                            -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 				}
                             -- 			}
                             -- 		}
@@ -18915,11 +18939,16 @@ begin
                         -- 					result = new Posit32 (0u, true);
                         -- 				}
                         -- 				else {
-                        -- 					regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 					num19 = (int)((System.Int32)(num11) / 4);
                         -- 					System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 					remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 					exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 					num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 					flag16 = num20 < 0;
+                        -- 					if (flag16) {
+                        -- 						num19 = num19 - 1;
+                        -- 						num20 = num20 + 4;
+                        -- 					}
+                        -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 				}
                         -- 			}
                         -- 		}
@@ -19067,11 +19096,16 @@ begin
                             -- 				result = new Posit32 (0u, true);
                             -- 			}
                             -- 			else {
-                            -- 				regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 				num19 = (int)((System.Int32)(num11) / 4);
                             -- 				System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 				remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 				exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 				num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 				flag16 = num20 < 0;
+                            -- 				if (flag16) {
+                            -- 					num19 = num19 - 1;
+                            -- 					num20 = num20 + 4;
+                            -- 				}
+                            -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 			}
                             -- 		}
                             -- 	}
@@ -19239,11 +19273,16 @@ begin
                         -- 				result = new Posit32 (0u, true);
                         -- 			}
                         -- 			else {
-                        -- 				regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 				num19 = (int)((System.Int32)(num11) / 4);
                         -- 				System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 				remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 				exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 				num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 				flag16 = num20 < 0;
+                        -- 				if (flag16) {
+                        -- 					num19 = num19 - 1;
+                        -- 					num20 = num20 + 4;
+                        -- 				}
+                        -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 			}
                         -- 		}
                         -- 	}
@@ -19385,11 +19424,16 @@ begin
                             -- 			result = new Posit32 (0u, true);
                             -- 		}
                             -- 		else {
-                            -- 			regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 			num19 = (int)((System.Int32)(num11) / 4);
                             -- 			System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 			remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 			exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 			num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 			flag16 = num20 < 0;
+                            -- 			if (flag16) {
+                            -- 				num19 = num19 - 1;
+                            -- 				num20 = num20 + 4;
+                            -- 			}
+                            -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 		}
                             -- 	}
                             -- }
@@ -19551,11 +19595,16 @@ begin
                         -- 			result = new Posit32 (0u, true);
                         -- 		}
                         -- 		else {
-                        -- 			regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 			num19 = (int)((System.Int32)(num11) / 4);
                         -- 			System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 			remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 			exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 			num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 			flag16 = num20 < 0;
+                        -- 			if (flag16) {
+                        -- 				num19 = num19 - 1;
+                        -- 				num20 = num20 + 4;
+                        -- 			}
+                        -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 		}
                         -- 	}
                         -- }
@@ -19691,11 +19740,16 @@ begin
                             -- 		result = new Posit32 (0u, true);
                             -- 	}
                             -- 	else {
-                            -- 		regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 		num19 = (int)((System.Int32)(num11) / 4);
                             -- 		System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 		remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 		exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 		num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 		flag16 = num20 < 0;
+                            -- 		if (flag16) {
+                            -- 			num19 = num19 - 1;
+                            -- 			num20 = num20 + 4;
+                            -- 		}
+                            -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 	}
                             -- }
                             -- 
@@ -19851,11 +19905,16 @@ begin
                         -- 		result = new Posit32 (0u, true);
                         -- 	}
                         -- 	else {
-                        -- 		regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 		num19 = (int)((System.Int32)(num11) / 4);
                         -- 		System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 		remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 		exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 		num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 		flag16 = num20 < 0;
+                        -- 		if (flag16) {
+                        -- 			num19 = num19 - 1;
+                        -- 			num20 = num20 + 4;
+                        -- 		}
+                        -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 	}
                         -- }
                         -- 
@@ -20406,17 +20465,22 @@ begin
                         -- 	result = new Posit32 (0u, true);
                         -- }
                         -- else {
-                        -- 	regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 	num19 = (int)((System.Int32)(num11) / 4);
                         -- 	System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 	remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 	exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 	num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 	flag16 = num20 < 0;
+                        -- 	if (flag16) {
+                        -- 		num19 = num19 - 1;
+                        -- 		num20 = num20 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_94\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_95\.
-                        --     * The false branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_96\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\.
+                        --     * The false branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_96\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_102\.
                         --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_93\.
 
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag15\) then 
@@ -21389,18 +21453,23 @@ begin
                         -- False branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_52\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 	num19 = (int)((System.Int32)(num11) / 4);
                         -- 	System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 	remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 	exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 	num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 	flag16 = num20 < 0;
+                        -- 	if (flag16) {
+                        -- 		num19 = num19 - 1;
+                        -- 		num20 = num20 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- num19 = (int)((System.Int32)(num11) / 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).0.num11\), 32) / to_signed(4, 32);
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.regimeKValue\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 
@@ -21409,7 +21478,7 @@ begin
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).0.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -21421,10 +21490,35 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\ := unsigned(\Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.75\);
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.exponentBits\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.75\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\);
                         -- The following section was transformed from the .NET statement below:
-                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- flag16 = num20 < 0;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.77\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ < to_signed(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag16\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.77\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag16) {
+                        -- 	num19 = num19 - 1;
+                        -- 	num20 = num20 + 4;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\.
+                        --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\.
+
+                        if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.flag16\) then 
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6016
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\ => 
+                        -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.result\.\IsNull\ := false;
@@ -21432,13 +21526,36 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.signBit\;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.regimeKValue\;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.exponentBits\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= unsigned(\Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).fractionBits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num7\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= true;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\ => 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_101\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\ => 
+                        -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num19 = num19 - 1;
+                        -- 	num20 = num20 + 4;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num19 - 1;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.78\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\ - to_signed(1, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.78\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num20 + 4;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.79\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ + to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.79\;
+                        -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\.
+                        if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\) then 
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_101\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
@@ -21448,16 +21565,16 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_102\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\ => 
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_102\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.result\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_52\.
-                            if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_100\) then 
+                            if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_102\) then 
                                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_93\;
                             end if;
                         end if;
@@ -21517,8 +21634,9 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag13\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag14\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag15\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.regimeKValue\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.exponentBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag16\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.0\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.1\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.2\: boolean := false;
@@ -21621,7 +21739,10 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.77\: boolean := false;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -21697,8 +21818,9 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag13\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag14\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag15\ := false;
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.regimeKValue\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.exponentBits\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag16\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.0\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.1\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.2\ := false;
@@ -21801,7 +21923,10 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.74\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.75\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.77\ := false;
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.78\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.79\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.20\ := to_unsigned(0, 32);
             else 
                 case \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ is 
@@ -21955,10 +22080,13 @@ begin
                         -- bool flag15;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int regimeKValue;
+                        -- int num19;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint exponentBits;
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag16;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- flag = Lombiq.Arithmetics.Posit32.IsNaN (left);
@@ -22106,11 +22234,16 @@ begin
                             -- 					result = new Posit32 (0u, true);
                             -- 				}
                             -- 				else {
-                            -- 					regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 					num19 = (int)((System.Int32)(num11) / 4);
                             -- 					System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 					remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 					exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 					num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 					flag16 = num20 < 0;
+                            -- 					if (flag16) {
+                            -- 						num19 = num19 - 1;
+                            -- 						num20 = num20 + 4;
+                            -- 					}
+                            -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 				}
                             -- 			}
                             -- 		}
@@ -22285,11 +22418,16 @@ begin
                         -- 					result = new Posit32 (0u, true);
                         -- 				}
                         -- 				else {
-                        -- 					regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 					num19 = (int)((System.Int32)(num11) / 4);
                         -- 					System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 					remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 					exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 					num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 					flag16 = num20 < 0;
+                        -- 					if (flag16) {
+                        -- 						num19 = num19 - 1;
+                        -- 						num20 = num20 + 4;
+                        -- 					}
+                        -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 				}
                         -- 			}
                         -- 		}
@@ -22437,11 +22575,16 @@ begin
                             -- 				result = new Posit32 (0u, true);
                             -- 			}
                             -- 			else {
-                            -- 				regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 				num19 = (int)((System.Int32)(num11) / 4);
                             -- 				System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 				remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 				exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 				num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 				flag16 = num20 < 0;
+                            -- 				if (flag16) {
+                            -- 					num19 = num19 - 1;
+                            -- 					num20 = num20 + 4;
+                            -- 				}
+                            -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 			}
                             -- 		}
                             -- 	}
@@ -22609,11 +22752,16 @@ begin
                         -- 				result = new Posit32 (0u, true);
                         -- 			}
                         -- 			else {
-                        -- 				regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 				num19 = (int)((System.Int32)(num11) / 4);
                         -- 				System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 				remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 				exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 				num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 				flag16 = num20 < 0;
+                        -- 				if (flag16) {
+                        -- 					num19 = num19 - 1;
+                        -- 					num20 = num20 + 4;
+                        -- 				}
+                        -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 			}
                         -- 		}
                         -- 	}
@@ -22755,11 +22903,16 @@ begin
                             -- 			result = new Posit32 (0u, true);
                             -- 		}
                             -- 		else {
-                            -- 			regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 			num19 = (int)((System.Int32)(num11) / 4);
                             -- 			System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 			remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 			exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 			num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 			flag16 = num20 < 0;
+                            -- 			if (flag16) {
+                            -- 				num19 = num19 - 1;
+                            -- 				num20 = num20 + 4;
+                            -- 			}
+                            -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 		}
                             -- 	}
                             -- }
@@ -22921,11 +23074,16 @@ begin
                         -- 			result = new Posit32 (0u, true);
                         -- 		}
                         -- 		else {
-                        -- 			regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 			num19 = (int)((System.Int32)(num11) / 4);
                         -- 			System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 			remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 			exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 			num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 			flag16 = num20 < 0;
+                        -- 			if (flag16) {
+                        -- 				num19 = num19 - 1;
+                        -- 				num20 = num20 + 4;
+                        -- 			}
+                        -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 		}
                         -- 	}
                         -- }
@@ -23061,11 +23219,16 @@ begin
                             -- 		result = new Posit32 (0u, true);
                             -- 	}
                             -- 	else {
-                            -- 		regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 		num19 = (int)((System.Int32)(num11) / 4);
                             -- 		System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 		remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 		exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 		num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 		flag16 = num20 < 0;
+                            -- 		if (flag16) {
+                            -- 			num19 = num19 - 1;
+                            -- 			num20 = num20 + 4;
+                            -- 		}
+                            -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 	}
                             -- }
                             -- 
@@ -23221,11 +23384,16 @@ begin
                         -- 		result = new Posit32 (0u, true);
                         -- 	}
                         -- 	else {
-                        -- 		regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 		num19 = (int)((System.Int32)(num11) / 4);
                         -- 		System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 		remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 		exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 		num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 		flag16 = num20 < 0;
+                        -- 		if (flag16) {
+                        -- 			num19 = num19 - 1;
+                        -- 			num20 = num20 + 4;
+                        -- 		}
+                        -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 	}
                         -- }
                         -- 
@@ -23776,17 +23944,22 @@ begin
                         -- 	result = new Posit32 (0u, true);
                         -- }
                         -- else {
-                        -- 	regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 	num19 = (int)((System.Int32)(num11) / 4);
                         -- 	System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 	remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 	exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 	num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 	flag16 = num20 < 0;
+                        -- 	if (flag16) {
+                        -- 		num19 = num19 - 1;
+                        -- 		num20 = num20 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_94\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_95\.
-                        --     * The false branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_96\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\.
+                        --     * The false branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_96\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_102\.
                         --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_93\.
 
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag15\) then 
@@ -24759,18 +24932,23 @@ begin
                         -- False branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_52\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 	num19 = (int)((System.Int32)(num11) / 4);
                         -- 	System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 	remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 	exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 	num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 	flag16 = num20 < 0;
+                        -- 	if (flag16) {
+                        -- 		num19 = num19 - 1;
+                        -- 		num20 = num20 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- num19 = (int)((System.Int32)(num11) / 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).1.num11\), 32) / to_signed(4, 32);
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.regimeKValue\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 
@@ -24779,7 +24957,7 @@ begin
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).1.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -24791,10 +24969,35 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\ := unsigned(\Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.75\);
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.exponentBits\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.75\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\);
                         -- The following section was transformed from the .NET statement below:
-                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- flag16 = num20 < 0;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.77\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ < to_signed(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag16\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.77\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag16) {
+                        -- 	num19 = num19 - 1;
+                        -- 	num20 = num20 + 4;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\.
+                        --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\.
+
+                        if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.flag16\) then 
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6016
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\ => 
+                        -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.result\.\IsNull\ := false;
@@ -24802,13 +25005,36 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.signBit\;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.regimeKValue\;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.exponentBits\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= unsigned(\Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).fractionBits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num7\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= true;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\ => 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_101\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\ => 
+                        -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num19 = num19 - 1;
+                        -- 	num20 = num20 + 4;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num19 - 1;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.78\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\ - to_signed(1, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.78\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num20 + 4;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.79\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ + to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.79\;
+                        -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\.
+                        if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\) then 
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_101\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
@@ -24818,16 +25044,16 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_102\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\ => 
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_102\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.result\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_52\.
-                            if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_100\) then 
+                            if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_102\) then 
                                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_93\;
                             end if;
                         end if;
@@ -24887,8 +25113,9 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag13\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag14\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag15\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.regimeKValue\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.exponentBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag16\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.0\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.1\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.2\: boolean := false;
@@ -24991,7 +25218,10 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.77\: boolean := false;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -25067,8 +25297,9 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag13\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag14\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag15\ := false;
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.regimeKValue\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.exponentBits\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag16\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.0\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.1\ := false;
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.2\ := false;
@@ -25171,7 +25402,10 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.74\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.75\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.77\ := false;
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.78\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.79\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.20\ := to_unsigned(0, 32);
             else 
                 case \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ is 
@@ -25325,10 +25559,13 @@ begin
                         -- bool flag15;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int regimeKValue;
+                        -- int num19;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint exponentBits;
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag16;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- flag = Lombiq.Arithmetics.Posit32.IsNaN (left);
@@ -25476,11 +25713,16 @@ begin
                             -- 					result = new Posit32 (0u, true);
                             -- 				}
                             -- 				else {
-                            -- 					regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 					num19 = (int)((System.Int32)(num11) / 4);
                             -- 					System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 					remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 					exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 					num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 					flag16 = num20 < 0;
+                            -- 					if (flag16) {
+                            -- 						num19 = num19 - 1;
+                            -- 						num20 = num20 + 4;
+                            -- 					}
+                            -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 				}
                             -- 			}
                             -- 		}
@@ -25655,11 +25897,16 @@ begin
                         -- 					result = new Posit32 (0u, true);
                         -- 				}
                         -- 				else {
-                        -- 					regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 					num19 = (int)((System.Int32)(num11) / 4);
                         -- 					System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 					remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 					exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 					num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 					flag16 = num20 < 0;
+                        -- 					if (flag16) {
+                        -- 						num19 = num19 - 1;
+                        -- 						num20 = num20 + 4;
+                        -- 					}
+                        -- 					result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 				}
                         -- 			}
                         -- 		}
@@ -25807,11 +26054,16 @@ begin
                             -- 				result = new Posit32 (0u, true);
                             -- 			}
                             -- 			else {
-                            -- 				regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 				num19 = (int)((System.Int32)(num11) / 4);
                             -- 				System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 				remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 				exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 				num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 				flag16 = num20 < 0;
+                            -- 				if (flag16) {
+                            -- 					num19 = num19 - 1;
+                            -- 					num20 = num20 + 4;
+                            -- 				}
+                            -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 			}
                             -- 		}
                             -- 	}
@@ -25979,11 +26231,16 @@ begin
                         -- 				result = new Posit32 (0u, true);
                         -- 			}
                         -- 			else {
-                        -- 				regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 				num19 = (int)((System.Int32)(num11) / 4);
                         -- 				System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 				remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 				exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 				num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 				flag16 = num20 < 0;
+                        -- 				if (flag16) {
+                        -- 					num19 = num19 - 1;
+                        -- 					num20 = num20 + 4;
+                        -- 				}
+                        -- 				result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 			}
                         -- 		}
                         -- 	}
@@ -26125,11 +26382,16 @@ begin
                             -- 			result = new Posit32 (0u, true);
                             -- 		}
                             -- 		else {
-                            -- 			regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 			num19 = (int)((System.Int32)(num11) / 4);
                             -- 			System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 			remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 			exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 			num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 			flag16 = num20 < 0;
+                            -- 			if (flag16) {
+                            -- 				num19 = num19 - 1;
+                            -- 				num20 = num20 + 4;
+                            -- 			}
+                            -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 		}
                             -- 	}
                             -- }
@@ -26291,11 +26553,16 @@ begin
                         -- 			result = new Posit32 (0u, true);
                         -- 		}
                         -- 		else {
-                        -- 			regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 			num19 = (int)((System.Int32)(num11) / 4);
                         -- 			System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 			remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 			exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 			num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 			flag16 = num20 < 0;
+                        -- 			if (flag16) {
+                        -- 				num19 = num19 - 1;
+                        -- 				num20 = num20 + 4;
+                        -- 			}
+                        -- 			result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 		}
                         -- 	}
                         -- }
@@ -26431,11 +26698,16 @@ begin
                             -- 		result = new Posit32 (0u, true);
                             -- 	}
                             -- 	else {
-                            -- 		regimeKValue = (int)((System.Int32)(num11) / 4);
+                            -- 		num19 = (int)((System.Int32)(num11) / 4);
                             -- 		System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                             -- 		remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                            -- 		exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                            -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                            -- 		num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                            -- 		flag16 = num20 < 0;
+                            -- 		if (flag16) {
+                            -- 			num19 = num19 - 1;
+                            -- 			num20 = num20 + 4;
+                            -- 		}
+                            -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                             -- 	}
                             -- }
                             -- 
@@ -26591,11 +26863,16 @@ begin
                         -- 		result = new Posit32 (0u, true);
                         -- 	}
                         -- 	else {
-                        -- 		regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 		num19 = (int)((System.Int32)(num11) / 4);
                         -- 		System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 		remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 		exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 		num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 		flag16 = num20 < 0;
+                        -- 		if (flag16) {
+                        -- 			num19 = num19 - 1;
+                        -- 			num20 = num20 + 4;
+                        -- 		}
+                        -- 		result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 	}
                         -- }
                         -- 
@@ -27146,17 +27423,22 @@ begin
                         -- 	result = new Posit32 (0u, true);
                         -- }
                         -- else {
-                        -- 	regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 	num19 = (int)((System.Int32)(num11) / 4);
                         -- 	System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 	remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 	exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 	num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 	flag16 = num20 < 0;
+                        -- 	if (flag16) {
+                        -- 		num19 = num19 - 1;
+                        -- 		num20 = num20 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_94\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_95\.
-                        --     * The false branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_96\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\.
+                        --     * The false branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_96\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_102\.
                         --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_93\.
 
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag15\) then 
@@ -28129,18 +28411,23 @@ begin
                         -- False branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_52\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- 	num19 = (int)((System.Int32)(num11) / 4);
                         -- 	System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 	remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 = (System.Int32)(num11);
-                        -- 	exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- 	num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- 	flag16 = num20 < 0;
+                        -- 	if (flag16) {
+                        -- 		num19 = num19 - 1;
+                        -- 		num20 = num20 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue = (int)((System.Int32)(num11) / 4);
+                        -- num19 = (int)((System.Int32)(num11) / 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).2.num11\), 32) / to_signed(4, 32);
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.regimeKValue\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- System.Int32 remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467;
                         -- 
@@ -28149,7 +28436,7 @@ begin
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).2.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = (uint)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
+                        -- num20 = (int)(remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 - remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -28161,10 +28448,35 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\ := unsigned(\Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.75\);
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.exponentBits\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperandc0c8cd63c23feb19b8c0e2c926c3416c2ee07f9db160f1920a9143835788e467\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.75\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\);
                         -- The following section was transformed from the .NET statement below:
-                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, num7), true);
+                        -- flag16 = num20 < 0;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.77\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ < to_signed(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag16\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.77\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag16) {
+                        -- 	num19 = num19 - 1;
+                        -- 	num20 = num20 + 4;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\ and ends in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\.
+                        --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\.
+
+                        if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.flag16\) then 
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6016
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\ => 
+                        -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.result\.\IsNull\ := false;
@@ -28172,13 +28484,36 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.signBit\;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.regimeKValue\;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.exponentBits\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= unsigned(\Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).fractionBits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num7\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= true;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\ => 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_101\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\ => 
+                        -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num19 = num19 - 1;
+                        -- 	num20 = num20 + 4;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num19 - 1;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.78\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\ - to_signed(1, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.78\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num20 + 4;
+                        -- 
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.79\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ + to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.79\;
+                        -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\.
+                        if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\) then 
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_101\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
@@ -28188,16 +28523,16 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_102\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\ => 
+                    when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_102\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.result\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_52\.
-                            if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_100\) then 
+                            if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_102\) then 
                                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_93\;
                             end if;
                         end if;
@@ -28972,8 +29307,9 @@ begin
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.fractionBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.regimeKValue\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.exponentBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag4\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.0\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.1\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.0\: boolean := false;
@@ -29007,7 +29343,10 @@ begin
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.17\: boolean := false;
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -29048,8 +29387,9 @@ begin
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num4\ := to_unsigned(0, 32);
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.fractionBits\ := to_unsigned(0, 32);
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.regimeKValue\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.exponentBits\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num6\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag4\ := false;
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.0\ := false;
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.1\ := false;
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.0\ := false;
@@ -29081,7 +29421,10 @@ begin
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.15\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\ := to_unsigned(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.17\ := false;
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.18\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.19\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.17\ := to_unsigned(0, 32);
             else 
                 case \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ is 
@@ -29139,10 +29482,13 @@ begin
                         -- int num5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int regimeKValue;
+                        -- int num6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint exponentBits;
+                        -- int num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- flag = Lombiq.Arithmetics.Posit32.IsZero (left) || Lombiq.Arithmetics.Posit32.IsZero (right);
@@ -29195,15 +29541,20 @@ begin
                             -- 	fractionBits = (uint)(num3 >> (int)(num + 1u + num2 + 1u - 32u));
                             -- 	num5 = (int)((System.Int32)(Posit32.CalculateScaleFactor (Lombiq.Arithmetics.Posit32.GetRegimeKValue (left), Lombiq.Arithmetics.Posit32.GetExponentValue (left), 2)) + (System.Int32)(Posit32.CalculateScaleFactor (Lombiq.Arithmetics.Posit32.GetRegimeKValue (right), Lombiq.Arithmetics.Posit32.GetExponentValue (right), 2)));
                             -- 	num5 = num5 + (int)num4;
-                            -- 	regimeKValue = num5 / 4;
-                            -- 	exponentBits = (uint)(num5 - num5 / 4 * 4);
-                            -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, fractionBits), true);
+                            -- 	num6 = num5 / 4;
+                            -- 	num7 = num5 - num5 / 4 * 4;
+                            -- 	flag4 = num7 < 0;
+                            -- 	if (flag4) {
+                            -- 		num6 = num6 - 1;
+                            -- 		num7 = num7 + 4;
+                            -- 	}
+                            -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num6, (uint)num7, fractionBits), true);
                             -- }
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_8\ and ends in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_9\.
-                            --     * The false branch starts in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_10\ and ends in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\.
+                            --     * The false branch starts in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_10\ and ends in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_43\.
                             --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_7\.
 
                             if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag\) then 
@@ -29268,9 +29619,14 @@ begin
                         -- 	fractionBits = (uint)(num3 >> (int)(num + 1u + num2 + 1u - 32u));
                         -- 	num5 = (int)((System.Int32)(Posit32.CalculateScaleFactor (Lombiq.Arithmetics.Posit32.GetRegimeKValue (left), Lombiq.Arithmetics.Posit32.GetExponentValue (left), 2)) + (System.Int32)(Posit32.CalculateScaleFactor (Lombiq.Arithmetics.Posit32.GetRegimeKValue (right), Lombiq.Arithmetics.Posit32.GetExponentValue (right), 2)));
                         -- 	num5 = num5 + (int)num4;
-                        -- 	regimeKValue = num5 / 4;
-                        -- 	exponentBits = (uint)(num5 - num5 / 4 * 4);
-                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, fractionBits), true);
+                        -- 	num6 = num5 / 4;
+                        -- 	num7 = num5 - num5 / 4 * 4;
+                        -- 	flag4 = num7 < 0;
+                        -- 	if (flag4) {
+                        -- 		num6 = num6 - 1;
+                        -- 		num7 = num7 + 4;
+                        -- 	}
+                        -- 	result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num6, (uint)num7, fractionBits), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -29546,7 +29902,7 @@ begin
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.12\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\ + signed(\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num4\);
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.12\;
                             -- The following section was transformed from the .NET statement below:
-                            -- regimeKValue = num5 / 4;
+                            -- num6 = num5 / 4;
                             -- 
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_37\;
                         end if;
@@ -29554,9 +29910,9 @@ begin
                     when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_37\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.13\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\ / to_signed(4, 32);
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.regimeKValue\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.13\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num6\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.13\;
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = (uint)(num5 - num5 / 4 * 4);
+                        -- num7 = num5 - num5 / 4 * 4;
                         -- 
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_38\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -29568,10 +29924,35 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_39\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\ := unsigned(\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\ - \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.15\);
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.exponentBits\ := (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\);
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num5\ - \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.15\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.16\;
                         -- The following section was transformed from the .NET statement below:
-                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, regimeKValue, exponentBits, fractionBits), true);
+                        -- flag4 = num7 < 0;
+                        -- 
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.17\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\ < to_signed(0, 32);
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag4\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.17\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag4) {
+                        -- 	num6 = num6 - 1;
+                        -- 	num7 = num7 + 4;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\ and ends in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\.
+                        --     * Execution after either branch will continue in the following state: \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\.
+
+                        if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag4\) then 
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6016
+                    when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\ => 
+                        -- State after the if-else which was started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_39\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num6, (uint)num7, fractionBits), true);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.result\.\IsNull\ := false;
@@ -29579,13 +29960,36 @@ begin
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.signBit\;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.regimeKValue\;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.exponentBits\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num6\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= unsigned(\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\);
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).fractionBits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.fractionBits\;
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= true;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\ => 
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_42\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\ => 
+                        -- True branch of the if-else started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_39\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num6 = num6 - 1;
+                        -- 	num7 = num7 + 4;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num6 - 1;
+                        -- 
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.18\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num6\ - to_signed(1, 32);
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num6\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.18\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num7 = num7 + 4;
+                        -- 
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.19\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\ + to_signed(4, 32);
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.num7\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.19\;
+                        -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_39\.
+                        if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\) then 
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                    when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_42\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Finished.0\) then 
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
@@ -29595,16 +29999,16 @@ begin
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.17\;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_43\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\ => 
+                    when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_43\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.result\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_6\.
-                            if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_41\) then 
+                            if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_43\) then 
                                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_7\;
                             end if;
                         end if;
