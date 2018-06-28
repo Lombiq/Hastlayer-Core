@@ -181,6 +181,27 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         [Test]
+        public async Task Posit32FusedSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32FusedCalculator>();
+                        configuration.TransformerConfiguration().EnableMethodInlining = false;
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            Posit32.QuireSize >> 6,
+                            Posit32FusedCalculatorExtensions.ManuallySizedArrays);
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
         public async Task Fix64SampleMatchesApproved()
         {
             await _host.Run<ITransformer>(async transformer =>
