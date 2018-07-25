@@ -3,6 +3,11 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
         
 package SimpleMemory is
+    -- Declaring necessary array types (these need to be excluded in ArrayTypesCreator):
+    type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \boolean_Array\ is array (integer range <>) of boolean;
+    type \signed32_Array\ is array (integer range <>) of signed(31 downto 0);
+
     -- Data conversion functions:
     function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector;
     function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned;

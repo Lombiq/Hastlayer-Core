@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -34,6 +35,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             private readonly ITypeConverter _typeConverter;
             private readonly Dictionary<string, ArrayType> _arrayDeclarations;
             private readonly IVhdlTransformationContext _context;
+            private readonly HashSet<string> _simpleMemoryArrayTypeNames = new HashSet<string>();
 
 
             public ArrayCreationCheckingVisitor(
@@ -44,6 +46,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _typeConverter = typeConverter;
                 _arrayDeclarations = arrayDeclarations;
                 _context = context;
+
+                // Excluding array types already added by the SimpleMemory package.
+                if (context.GetTransformerConfiguration().UseSimpleMemory)
+                {
+                    _simpleMemoryArrayTypeNames.Add(ArrayHelper.CreateArrayTypeName(KnownDataTypes.Int32));
+                    _simpleMemoryArrayTypeNames.Add(ArrayHelper.CreateArrayTypeName(KnownDataTypes.UInt32));
+                    _simpleMemoryArrayTypeNames.Add(ArrayHelper.CreateArrayTypeName(KnownDataTypes.Boolean));
+                }
             }
 
 
@@ -72,7 +82,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var typeName = ArrayHelper.CreateArrayTypeName(elementType);
 
-                if (_arrayDeclarations.ContainsKey(typeName)) return;
+                if (_arrayDeclarations.ContainsKey(typeName) || _simpleMemoryArrayTypeNames.Contains(typeName)) return;
 
                 _arrayDeclarations[typeName] = new ArrayType
                 {
