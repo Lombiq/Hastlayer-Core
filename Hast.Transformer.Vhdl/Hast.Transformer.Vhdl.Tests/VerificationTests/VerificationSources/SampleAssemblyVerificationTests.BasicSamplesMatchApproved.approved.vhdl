@@ -16651,6 +16651,7 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array2\: \unsigned32_Array\(0 to 29) := (others => to_unsigned(0, 32));
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array3\: \boolean_Array\(0 to 29) := (others => false);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
@@ -16666,7 +16667,6 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16687,6 +16687,7 @@ begin
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array2\ := (others => to_unsigned(0, 32));
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array3\ := (others => false);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
@@ -16700,7 +16701,6 @@ begin
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
-                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 32);
             else 
                 case \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ is 
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_0\ => 
@@ -16737,6 +16737,9 @@ begin
                         -- int i;
                         -- 
                         -- The following section was transformed from the .NET statement below:
+                        -- bool[] array3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- int j;
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -16771,11 +16774,13 @@ begin
                             -- 		i = i + 1;
                             -- 	}
                             -- 	Task.WhenAll<bool> (array).Wait ();
+                            -- 	array3 = new bool[30];
                             -- 	j = 0;
                             -- 	while (j < 30) {
-                            -- 		memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 		array3 [j] = array [j].Result;
                             -- 		j = j + 1;
                             -- 	}
+                            -- 	memory.WriteBoolean (1 + num2, array3);
                             -- 	num2 = num2 + 30;
                             -- }
                             -- 
@@ -16797,11 +16802,13 @@ begin
                             -- 		i = i + 1;
                             -- 	}
                             -- 	Task.WhenAll<bool> (array).Wait ();
+                            -- 	array3 = new bool[30];
                             -- 	j = 0;
                             -- 	while (j < 30) {
-                            -- 		memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 		array3 [j] = array [j].Result;
                             -- 		j = j + 1;
                             -- 	}
+                            -- 	memory.WriteBoolean (1 + num2, array3);
                             -- 	num2 = num2 + 30;
                             -- }
                             -- 
@@ -16899,12 +16906,16 @@ begin
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(1) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(2) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
+                            -- array3 = new bool[30];
+                            -- 
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array3\ := (others => false);
+                            -- The following section was transformed from the .NET statement below:
                             -- j = 0;
                             -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (j < 30) {
-                            -- 	memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 	array3 [j] = array [j].Result;
                             -- 	j = j + 1;
                             -- }
                             -- 
@@ -16919,35 +16930,34 @@ begin
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 	array3 [j] = array [j].Result;
                             -- 	j = j + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- array3 [j] = array [j].Result;
                             -- 
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := to_signed(1, 32) + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\;
-                            -- Begin SimpleMemory write.
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\, 32);
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\)));
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_12\;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array3\(to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\)) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\));
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = j + 1;
+                            -- 
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ + to_signed(1, 32);
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\;
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9279
+                        -- Clock cycles needed to complete this state (approximation): 0.6016
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = num2 + 30;
+                        -- memory.WriteBoolean (1 + num2, array3);
                         -- 
-                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(30, 32);
-                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\;
-                        -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\) then 
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\;
-                        end if;
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := to_signed(1, 32) + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\;
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\, 32);
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array3\);
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_12\ => 
                         -- Waiting for the SimpleMemory operation to finish.
@@ -16955,13 +16965,13 @@ begin
                             -- SimpleMemory write finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- j = j + 1;
+                            -- num2 = num2 + 30;
                             -- 
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\;
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\ if the loop wasn't exited with a state change.
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(30, 32);
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\;
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
                             if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_12\) then 
-                                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_10\;
+                                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263

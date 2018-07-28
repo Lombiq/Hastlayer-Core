@@ -102,7 +102,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 binaryOperatorExpression.AddAnnotation(resultElementTypeInformation);
 
-                var indexValue = new Value { DataType = KnownDataTypes.UnrangedInt, Content = i.ToString() };
+                var indexValue = Value.UnrangedInt(i);
 
                 binaryOperations.Add(new PartiallyTransformedBinaryOperatorExpression
                 {

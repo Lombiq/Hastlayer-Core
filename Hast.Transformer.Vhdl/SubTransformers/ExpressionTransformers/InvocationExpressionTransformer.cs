@@ -210,7 +210,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         });
 
                     // Arrays smaller than 4 elements can be written with Write4Bytes(), so need to take care of them.
-                    var arrayLength = 
+                    var arrayLength =
                         context.TransformationContext.ArraySizeHolder.GetSizeOrThrow(expression.Arguments.Skip(1).First())
                         .Length;
                     for (int i = 0; i < arrayLength; i++)
@@ -220,12 +220,77 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
                 else
                 {
-                    currentBlock.Add(new Assignment
+                    // The data to write is conventionally the second parameter.
+                    var dataArgument = expression.Arguments.Skip(1).Single();
+                    var arrayLength = dataArgument.GetActualTypeReference().IsArray ?
+                        context.TransformationContext.ArraySizeHolder.GetSizeOrThrow(dataArgument).Length :
+                        -1;
+
+                    if (arrayLength == -1)
                     {
-                        AssignTo = dataOutReference,
-                        // The data to write is conventionally the second parameter.
-                        Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
-                    });
+                        // The data to write is a NOT an array.
+
+                        if (dataBusCellCount == 1)
+                        {
+                            // The platform doesn't support simultaneous read/write of multiple cells, so nothing to do,
+                            // one cell will be written.
+
+                            currentBlock.Add(new Assignment
+                            {
+                                AssignTo = dataOutReference,
+                                // The data to write is conventionally the second parameter.
+                                Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
+                            });
+                        }
+                        else
+                        {
+                            // The platform supports simultaneous read/write of multiple cells but since the data is a
+                            // single cell first the whole segment needs to be read, then the affected cell overwritten,
+                            // and finally the whole segment written.
+                        }
+                    }
+                    else
+                    {
+                        // The data to write is an array.
+                        var arrayReference = (IDataObject)invocationParameters[1].Reference;
+
+                        if (dataBusCellCount == 1)
+                        {
+                            // The platform doesn't support simultaneous read/write of multiple cells, but the data to 
+                            // write is an array. It needs to be written item by item.
+
+                            for (int i = 0; i < arrayLength; i++)
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            // The platform supports simultaneous read/write of multiple cells and the data to write is 
+                            // an array. All items need to be run through SimpleMemory type conversion one by one.
+
+                            for (int i = 0; i < arrayLength; i++)
+                            {
+                                var indexer = Value.UnrangedInt(i);
+
+                                currentBlock.Add(new Assignment
+                                {
+                                    AssignTo = new ArrayElementAccess
+                                    {
+                                        ArrayReference = dataOutReference,
+                                        IndexExpression = indexer
+                                    },
+                                    Expression = implementSimpleMemoryTypeConversion(
+                                        new ArrayElementAccess
+                                        {
+                                            ArrayReference = arrayReference,
+                                            IndexExpression = indexer
+                                        },
+                                        false)
+                                });
+                            }
+                        }
+                    }
                 }
             }
 
