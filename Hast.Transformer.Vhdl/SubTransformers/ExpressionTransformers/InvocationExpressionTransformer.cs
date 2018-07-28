@@ -135,25 +135,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             });
 
             var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes");
+            var operationDataType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
 
             IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
             {
                 string dataConversionInvocationTarget = null;
-                var operation = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
 
                 // Using the built-in conversion functions to handle known data types.
-                if (operation == "UInt32" ||
-                    operation == "Int32" ||
-                    operation == "Boolean" ||
-                    operation == "Char")
+                if (operationDataType == "UInt32" ||
+                    operationDataType == "Int32" ||
+                    operationDataType == "Boolean" ||
+                    operationDataType == "Char")
                 {
                     if (directionIsLogicVectorToType)
                     {
-                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operation;
+                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operationDataType;
                     }
                     else
                     {
-                        dataConversionInvocationTarget = "Convert" + operation + "ToStdLogicVector";
+                        dataConversionInvocationTarget = "Convert" + operationDataType + "ToStdLogicVector";
                     }
 
                     return new Invocation(dataConversionInvocationTarget, variableToConvert);
@@ -179,7 +179,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
                 }
 
-                throw new InvalidOperationException("Invalid SimpleMemory operation: " + operation + ".");
+                throw new InvalidOperationException("Invalid SimpleMemory operation: " + memberName + ".");
             }
 
             if (isWrite)
