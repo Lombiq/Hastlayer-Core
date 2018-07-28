@@ -513,7 +513,6 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.7359
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
@@ -908,7 +907,6 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\, 32);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\ => 
