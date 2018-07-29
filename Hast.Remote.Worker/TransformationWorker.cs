@@ -336,7 +336,7 @@ namespace Hast.Remote.Worker
 
                     // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise 
                     // it's not an issue, this loop barely uses any CPU).
-                    await Task.Delay(500);
+                    await Task.Delay(1000);
                     _restartCount = 0;
                 }
             }
