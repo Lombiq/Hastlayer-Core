@@ -328,8 +328,7 @@ namespace Hast.Remote.Worker
                         }, jobBlob, cancellationToken)
                         .ContinueWith((task, blobNameObject) =>
                         {
-                            Task dummy;
-                            _transformationTasks.TryRemove((string)blobNameObject, out dummy);
+                            _transformationTasks.TryRemove((string)blobNameObject, out Task dummy);
                         }, jobBlob.Name);
                     }
 
