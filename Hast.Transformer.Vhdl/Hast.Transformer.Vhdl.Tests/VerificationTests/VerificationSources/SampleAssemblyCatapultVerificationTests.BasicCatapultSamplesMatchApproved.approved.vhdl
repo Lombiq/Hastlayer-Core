@@ -458,7 +458,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\(31 downto 0));
                             -- The following section was transformed from the .NET statement below:
                             -- uint number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207;
                             -- 
@@ -513,6 +513,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.7359
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
@@ -728,7 +729,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\(31 downto 0));
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = 0;
                             -- 
@@ -804,7 +805,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\(31 downto 0));
                             -- The following section was transformed from the .NET statement below:
                             -- uint number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
                             -- 
@@ -907,6 +908,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\, 32);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\ => 
@@ -1044,7 +1046,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\);
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\(31 downto 0));
                             -- The following section was transformed from the .NET statement below:
                             -- array = new Task<bool>[30];
                             -- 
@@ -1159,7 +1161,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\);
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\(31 downto 0));
                             -- The following section was transformed from the .NET statement below:
                             -- array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 
@@ -1252,6 +1254,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\, 32);
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\)));
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_14\ => 

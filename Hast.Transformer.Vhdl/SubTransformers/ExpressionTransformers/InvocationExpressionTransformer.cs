@@ -150,6 +150,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     if (directionIsLogicVectorToType)
                     {
                         dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operationDataType;
+
+                        if (dataBusCellCount != 1)
+                        {
+                            // NOTE: this is here temporarily until we actually support multi-cell read/writes.
+                            variableToConvert = new ArraySlice
+                            {
+                                ArrayReference = (IDataObject)variableToConvert,
+                                IsDownTo = true,
+                                IndexFrom = 31,
+                                IndexTo = 0
+                            }; 
+                        }
                     }
                     else
                     {
@@ -247,6 +259,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             // The platform supports simultaneous read/write of multiple cells but since the data is a
                             // single cell first the whole segment needs to be read, then the affected cell overwritten,
                             // and finally the whole segment written.
+
+                            // NOTE: this is here temporarily until we actually support multi-cell read/writes.
+                            currentBlock.Add(new Assignment
+                            {
+                                AssignTo = new ArraySlice
+                                {
+                                    ArrayReference = dataOutReference,
+                                    IsDownTo = true,
+                                    IndexFrom = 31,
+                                    IndexTo = 0
+                                },
+                                // The data to write is conventionally the second parameter.
+                                Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
+                            });
                         }
                     }
                     else
