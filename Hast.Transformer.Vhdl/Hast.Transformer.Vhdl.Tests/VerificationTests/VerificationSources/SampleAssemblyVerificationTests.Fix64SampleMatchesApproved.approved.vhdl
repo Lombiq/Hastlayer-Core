@@ -309,7 +309,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._Finished\: boolean := false;
     Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
@@ -348,7 +348,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).upToNumberObject.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -1172,7 +1172,7 @@ begin
         Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.y\: \Hast.Algorithms.Fix64\;
         Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
+        Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.0\: \Hast.Algorithms.Fix64\;
         Variable \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
@@ -1183,6 +1183,7 @@ begin
                 -- Synchronous reset
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._Finished\ <= false;
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
@@ -1193,6 +1194,7 @@ begin
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.num\ := to_signed(0, 32);
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.i\ := to_signed(0, 32);
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.array\ := (others => to_signed(0, 32));
+                \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.return.1\ := (others => to_signed(0, 32));
@@ -1394,7 +1396,7 @@ begin
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.Fix64Calculator/TaskResult\;
@@ -1410,6 +1412,7 @@ begin
                 -- Synchronous reset
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._Finished\ <= false;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).upToNumberObject.parameter.Out.0\ <= to_signed(0, 32);
@@ -1426,6 +1429,7 @@ begin
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator/<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Int32).invocationIndex\ := 0;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := false;
@@ -3925,7 +3929,7 @@ begin
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
     \CellIndex\ <= to_integer(\Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else "00000000000000000000000000000000";
+    \DataOut\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
     \ReadEnable\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.ReadEnable\;
     \WriteEnable\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end

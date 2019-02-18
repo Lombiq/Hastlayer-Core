@@ -112,10 +112,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         };
 
         private static StdLogicVector _stdLogicVector32 = new StdLogicVector { Size = 32 };
-        public static StdLogicVector StdLogicVector32 = new StdLogicVector(_stdLogicVector32)
-        {
-            DefaultValue = "00000000000000000000000000000000".ToVhdlValue(_stdLogicVector32)
-        };
+        public static StdLogicVector StdLogicVector32 = new StdLogicVector(_stdLogicVector32);
 
         private static DataType _string = new String { Length = 256 };
         public static DataType String = new DataType(_string)

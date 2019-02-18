@@ -201,7 +201,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0);
+    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\: boolean := false;
@@ -245,7 +245,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0);
+    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Started\: boolean := false;
@@ -273,7 +273,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0);
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -380,7 +380,7 @@ begin
     \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -402,10 +402,12 @@ begin
                 -- Synchronous reset
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ := to_unsigned(0, 32);
@@ -634,10 +636,10 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -661,14 +663,17 @@ begin
                 -- Synchronous reset
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Finished\ <= false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_0\;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ := to_unsigned(0, 32);
@@ -943,12 +948,12 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0);
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0);
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\: boolean := false;
@@ -965,6 +970,7 @@ begin
                 -- Synchronous reset
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._Finished\ <= false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\ <= to_unsigned(0, 32);
@@ -980,10 +986,12 @@ begin
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := to_unsigned(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := 0;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\ := false;
@@ -1956,7 +1964,7 @@ begin
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
     \CellIndex\ <= to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else "00000000000000000000000000000000";
+    \DataOut\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
     \ReadEnable\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\;
     \WriteEnable\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
