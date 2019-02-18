@@ -23,14 +23,13 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             ITransformationContext transformationContext)
         {
             // Proxying SimpleMemory operations
-            var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilder.BuildProxy(invokingComponents);
+            var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilder.BuildProxy(invokingComponents, transformationContext);
             architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
             architecture.Add(simpleMemoryProxyComponent.BuildBody());
 
 
             // Adding common ports
-            var dataSignalsDataType = SimpleMemoryTypes
-                .DataSignalsDataType(transformationContext.DeviceDriver.DeviceManifest.DataBusWidthBytes);
+            var dataSignalsDataType = SimpleMemoryTypes.DataSignalsDataTypeFromContext(transformationContext);
             var ports = architecture.Entity.Ports;
             ports.Add(new Port
             {

@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+﻿using Hast.Transformer.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
@@ -9,6 +10,9 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         public static readonly DataType EnableSignalsDataType = KnownDataTypes.Boolean;
         public static readonly DataType DoneSignalsDataType = KnownDataTypes.Boolean;
 
+
+        public static DataType DataSignalsDataTypeFromContext(ITransformationContext transformationContext) =>
+            DataSignalsDataType(transformationContext.DeviceDriver.DeviceManifest.DataBusWidthBytes);
 
         public static DataType DataSignalsDataType(uint dataBusWidthBytes) => 
             new StdLogicVector { Size = (int)dataBusWidthBytes * 8 };
