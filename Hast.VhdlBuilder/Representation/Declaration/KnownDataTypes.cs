@@ -5,6 +5,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public static class KnownDataTypes
     {
+        // There is a private field and a public one for each type because the DefaultValue construction needs the type
+        // itself too.
+
         private static DataType _bit = new DataType { TypeCategory = DataTypeCategory.Character, Name = "bit" };
         public static DataType Bit = new DataType(_bit)
         {
