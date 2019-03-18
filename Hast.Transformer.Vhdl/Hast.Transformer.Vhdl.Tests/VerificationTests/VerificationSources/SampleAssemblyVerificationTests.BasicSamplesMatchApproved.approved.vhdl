@@ -1955,16 +1955,16 @@ architecture Imp of Hast_IP is
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Started.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).power.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._Started\: boolean := false;
-    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Finished.0\: boolean := false;
-    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Finished.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Finished.0\: boolean := false;
@@ -1994,25 +1994,25 @@ architecture Imp of Hast_IP is
     -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32).0 declarations end
 
 
-    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32).0 declarations start
+    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32).0 declarations start
     -- State machine states:
-    type \MonteCarloAlgorithm::Log(Int32).0._States\ is (
-        \MonteCarloAlgorithm::Log(Int32).0._State_0\, 
-        \MonteCarloAlgorithm::Log(Int32).0._State_1\, 
-        \MonteCarloAlgorithm::Log(Int32).0._State_2\, 
-        \MonteCarloAlgorithm::Log(Int32).0._State_3\, 
-        \MonteCarloAlgorithm::Log(Int32).0._State_4\, 
-        \MonteCarloAlgorithm::Log(Int32).0._State_5\);
+    type \MonteCarloAlgorithm::LogN(Int32).0._States\ is (
+        \MonteCarloAlgorithm::LogN(Int32).0._State_0\, 
+        \MonteCarloAlgorithm::LogN(Int32).0._State_1\, 
+        \MonteCarloAlgorithm::LogN(Int32).0._State_2\, 
+        \MonteCarloAlgorithm::LogN(Int32).0._State_3\, 
+        \MonteCarloAlgorithm::LogN(Int32).0._State_4\, 
+        \MonteCarloAlgorithm::LogN(Int32).0._State_5\);
     -- Signals:
-    Signal \MonteCarloAlgorithm::Log(Int32).0._Finished\: boolean := false;
-    Signal \MonteCarloAlgorithm::Log(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\: boolean := false;
-    Signal \MonteCarloAlgorithm::Log(Int32).0._Started\: boolean := false;
-    Signal \MonteCarloAlgorithm::Log(Int32).0.value.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Finished.0\: boolean := false;
-    Signal \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32).0 declarations end
+    Signal \MonteCarloAlgorithm::LogN(Int32).0._Finished\: boolean := false;
+    Signal \MonteCarloAlgorithm::LogN(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::LogN(Int32).0._Started\: boolean := false;
+    Signal \MonteCarloAlgorithm::LogN(Int32).0.value.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Finished.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32).0 declarations end
 
 
     -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log10(System.Int32).0 declarations start
@@ -15345,8 +15345,8 @@ begin
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Started.0\ <= false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= to_signed(0, 32);
@@ -15795,7 +15795,7 @@ begin
                             -- 	num25 = 13;
                             -- 	num26 = (int)num25 + num8 * (int)((short)num21) * 100 / 100;
                             -- 	num27 = 2;
-                            -- 	num28 = (int)((System.Int32)(num27) * 100) * this.Log (5 * num26 / 100) / 10;
+                            -- 	num28 = (int)((System.Int32)(num27) * 100) * this.LogN (5 * num26 / 100) / 10;
                             -- 	num29 = this.Sqrt (num22 * num22 + num24 * num24) - 300;
                             -- 	num30 = num28 * num28 + num29 * num29 / 100;
                             -- 	flag = num30 < 100;
@@ -15861,7 +15861,7 @@ begin
                             -- 	num25 = 13;
                             -- 	num26 = (int)num25 + num8 * (int)((short)num21) * 100 / 100;
                             -- 	num27 = 2;
-                            -- 	num28 = (int)((System.Int32)(num27) * 100) * this.Log (5 * num26 / 100) / 10;
+                            -- 	num28 = (int)((System.Int32)(num27) * 100) * this.LogN (5 * num26 / 100) / 10;
                             -- 	num29 = this.Sqrt (num22 * num22 + num24 * num24) - 300;
                             -- 	num30 = num28 * num28 + num29 * num29 / 100;
                             -- 	flag = num30 < 100;
@@ -16064,7 +16064,7 @@ begin
                         -- 
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num27\ := to_signed(2, 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- num28 = (int)((System.Int32)(num27) * 100) * this.Log (5 * num26 / 100) / 10;
+                        -- num28 = (int)((System.Int32)(num27) * 100) * this.LogN (5 * num26 / 100) / 10;
                         -- 
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num27\), 32) * to_signed(100, 32), 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_19\;
@@ -16086,16 +16086,16 @@ begin
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\ / to_signed(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_21\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32)
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= true;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_22\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_22\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32)
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Finished.0\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).return.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32)
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).return.0\;
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\, 32);
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_23\;
                         end if;
@@ -17298,95 +17298,86 @@ begin
     -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32).0 state machine end
 
 
-    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32).0 state machine start
-    \MonteCarloAlgorithm::Log(Int32).0._StateMachine\: process (\Clock\) 
-        Variable \MonteCarloAlgorithm::Log(Int32).0._State\: \MonteCarloAlgorithm::Log(Int32).0._States\ := \MonteCarloAlgorithm::Log(Int32).0._State_0\;
-        Variable \MonteCarloAlgorithm::Log(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::Log(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::Log(Int32).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::Log(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32).0 state machine start
+    \MonteCarloAlgorithm::LogN(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloAlgorithm::LogN(Int32).0._State\: \MonteCarloAlgorithm::LogN(Int32).0._States\ := \MonteCarloAlgorithm::LogN(Int32).0._State_0\;
+        Variable \MonteCarloAlgorithm::LogN(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::LogN(Int32).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::LogN(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \MonteCarloAlgorithm::Log(Int32).0._Finished\ <= false;
-                \MonteCarloAlgorithm::Log(Int32).0.return\ <= to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ <= false;
-                \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_0\;
-                \MonteCarloAlgorithm::Log(Int32).0.value\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.num\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.return.0\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::Log(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0._Finished\ <= false;
+                \MonteCarloAlgorithm::LogN(Int32).0.return\ <= to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ <= false;
+                \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_0\;
+                \MonteCarloAlgorithm::LogN(Int32).0.value\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0.return.0\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::LogN(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
             else 
-                case \MonteCarloAlgorithm::Log(Int32).0._State\ is 
-                    when \MonteCarloAlgorithm::Log(Int32).0._State_0\ => 
+                case \MonteCarloAlgorithm::LogN(Int32).0._State\ is 
+                    when \MonteCarloAlgorithm::LogN(Int32).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\MonteCarloAlgorithm::Log(Int32).0._Started\ = true) then 
-                            \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_2\;
+                        if (\MonteCarloAlgorithm::LogN(Int32).0._Started\ = true) then 
+                            \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::Log(Int32).0._State_1\ => 
+                    when \MonteCarloAlgorithm::LogN(Int32).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\MonteCarloAlgorithm::Log(Int32).0._Started\ = true) then 
-                            \MonteCarloAlgorithm::Log(Int32).0._Finished\ <= true;
+                        if (\MonteCarloAlgorithm::LogN(Int32).0._Started\ = true) then 
+                            \MonteCarloAlgorithm::LogN(Int32).0._Finished\ <= true;
                         else 
-                            \MonteCarloAlgorithm::Log(Int32).0._Finished\ <= false;
-                            \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_0\;
+                            \MonteCarloAlgorithm::LogN(Int32).0._Finished\ <= false;
+                            \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::Log(Int32).0._State_2\ => 
-                        \MonteCarloAlgorithm::Log(Int32).0.value\ := \MonteCarloAlgorithm::Log(Int32).0.value.parameter.In\;
+                    when \MonteCarloAlgorithm::LogN(Int32).0._State_2\ => 
+                        \MonteCarloAlgorithm::LogN(Int32).0.value\ := \MonteCarloAlgorithm::LogN(Int32).0.value.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = this.Log10 (value);
+                        -- return this.Log10 (value) * 10000 / 4342;
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log10(System.Int32)
-                        \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::Log(Int32).0.value\;
-                        \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_3\;
+                        \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::LogN(Int32).0.value\;
+                        \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ <= true;
+                        \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::Log(Int32).0._State_3\ => 
+                    when \MonteCarloAlgorithm::LogN(Int32).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log10(System.Int32)
-                        if (\MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ = \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Finished.0\) then 
-                            \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::Log(Int32).0.return.0\ := \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).return.0\;
-                            \MonteCarloAlgorithm::Log(Int32).0.num\ := \MonteCarloAlgorithm::Log(Int32).0.return.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- return num * 10000 / 4342;
-                            -- 
-                            \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.0\ := SmartResize(\MonteCarloAlgorithm::Log(Int32).0.num\ * to_signed(10000, 32), 32);
-                            \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_4\;
+                        if (\MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ = \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Finished.0\) then 
+                            \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\ <= false;
+                            \MonteCarloAlgorithm::LogN(Int32).0.return.0\ := \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).return.0\;
+                            \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.0\ := SmartResize(\MonteCarloAlgorithm::LogN(Int32).0.return.0\ * to_signed(10000, 32), 32);
+                            \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::Log(Int32).0._State_4\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::LogN(Int32).0._State_4\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.1\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::Log(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_5\;
-                            \MonteCarloAlgorithm::Log(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::LogN(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_5\;
+                            \MonteCarloAlgorithm::LogN(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::Log(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloAlgorithm::Log(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::LogN(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloAlgorithm::LogN(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.1\ := \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.0\ / to_signed(4342, 32);
+                        \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.1\ := \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.0\ / to_signed(4342, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::Log(Int32).0._State_5\ => 
-                        \MonteCarloAlgorithm::Log(Int32).0.return\ <= \MonteCarloAlgorithm::Log(Int32).0.binaryOperationResult.1\;
-                        \MonteCarloAlgorithm::Log(Int32).0._State\ := \MonteCarloAlgorithm::Log(Int32).0._State_1\;
+                    when \MonteCarloAlgorithm::LogN(Int32).0._State_5\ => 
+                        \MonteCarloAlgorithm::LogN(Int32).0.return\ <= \MonteCarloAlgorithm::LogN(Int32).0.binaryOperationResult.1\;
+                        \MonteCarloAlgorithm::LogN(Int32).0._State\ := \MonteCarloAlgorithm::LogN(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32).0 state machine end
+    -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32).0 state machine end
 
 
     -- System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log10(System.Int32).0 state machine start
@@ -23948,13 +23939,13 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32) start
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32) start
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloAlgorithm::CalculateTorusSectionValues(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
-    \MonteCarloAlgorithm::Log(Int32).0._Started\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Started.0\;
-    \MonteCarloAlgorithm::Log(Int32).0.value.parameter.In\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).value.parameter.Out.0\;
-    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32)._Finished.0\ <= \MonteCarloAlgorithm::Log(Int32).0._Finished\;
-    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Log(Int32).return.0\ <= \MonteCarloAlgorithm::Log(Int32).0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32) end
+    \MonteCarloAlgorithm::LogN(Int32).0._Started\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\;
+    \MonteCarloAlgorithm::LogN(Int32).0.value.parameter.In\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Finished.0\ <= \MonteCarloAlgorithm::LogN(Int32).0._Finished\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).return.0\ <= \MonteCarloAlgorithm::LogN(Int32).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32) start
@@ -23977,11 +23968,11 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log10(System.Int32) start
-    -- Signal connections for System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log(System.Int32).0 (#0):
-    \MonteCarloAlgorithm::Log10(Int32).0._Started\ <= \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\;
-    \MonteCarloAlgorithm::Log10(Int32).0.value.parameter.In\ <= \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\;
-    \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Finished.0\ <= \MonteCarloAlgorithm::Log10(Int32).0._Finished\;
-    \MonteCarloAlgorithm::Log(Int32).0.MonteCarloAlgorithm::Log10(Int32).return.0\ <= \MonteCarloAlgorithm::Log10(Int32).0.return\;
+    -- Signal connections for System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32).0 (#0):
+    \MonteCarloAlgorithm::Log10(Int32).0._Started\ <= \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Started.0\;
+    \MonteCarloAlgorithm::Log10(Int32).0.value.parameter.In\ <= \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).value.parameter.Out.0\;
+    \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32)._Finished.0\ <= \MonteCarloAlgorithm::Log10(Int32).0._Finished\;
+    \MonteCarloAlgorithm::LogN(Int32).0.MonteCarloAlgorithm::Log10(Int32).return.0\ <= \MonteCarloAlgorithm::Log10(Int32).0.return\;
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Log10(System.Int32) end
 
 
