@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(PrngMWC64X).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.

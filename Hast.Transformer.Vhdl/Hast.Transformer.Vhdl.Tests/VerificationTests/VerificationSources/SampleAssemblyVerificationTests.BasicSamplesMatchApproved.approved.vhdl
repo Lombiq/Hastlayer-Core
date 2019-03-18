@@ -225,6 +225,10 @@ architecture Imp of Hast_IP is
     type \Hast.Samples.SampleAssembly.MemoryContainer\ is record 
         \IsNull\: boolean;
     end record;
+    type \Hast.Algorithms.PrngMWC64X\ is record 
+        \IsNull\: boolean;
+        \state\: unsigned(63 downto 0);
+    end record;
     -- Custom inter-dependent type declarations end
 
 
@@ -1948,13 +1952,26 @@ architecture Imp of Hast_IP is
         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_102\, 
         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_103\, 
         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_104\, 
-        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_105\);
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_105\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_106\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_107\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_108\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_109\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_110\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_111\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_112\, 
+        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_113\);
     -- Signals:
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._Finished\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -1963,6 +1980,11 @@ architecture Imp of Hast_IP is
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).power.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._Started\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Finished.0\: boolean := false;
+    Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Finished.0\: boolean := false;
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\: boolean := false;
@@ -2997,6 +3019,38 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._Started\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation.parameter.In\: \Hast.Samples.SampleAssembly.SimdOperation\;
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
+
+
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 declarations start
+    -- State machine states:
+    type \PrngMWC64X::.ctor(UInt64).0._States\ is (
+        \PrngMWC64X::.ctor(UInt64).0._State_0\, 
+        \PrngMWC64X::.ctor(UInt64).0._State_1\, 
+        \PrngMWC64X::.ctor(UInt64).0._State_2\);
+    -- Signals:
+    Signal \PrngMWC64X::.ctor(UInt64).0._Finished\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).0._Started\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 declarations end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 declarations start
+    -- State machine states:
+    type \PrngMWC64X::NextUInt32().0._States\ is (
+        \PrngMWC64X::NextUInt32().0._State_0\, 
+        \PrngMWC64X::NextUInt32().0._State_1\, 
+        \PrngMWC64X::NextUInt32().0._State_2\, 
+        \PrngMWC64X::NextUInt32().0._State_3\, 
+        \PrngMWC64X::NextUInt32().0._State_4\);
+    -- Signals:
+    Signal \PrngMWC64X::NextUInt32().0._Finished\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrngMWC64X::NextUInt32().0.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::NextUInt32().0._Started\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().0.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -15160,6 +15214,7 @@ begin
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\: \Hast.Algorithms.PrngMWC64X\;
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\: signed(31 downto 0) := to_signed(0, 32);
@@ -15190,153 +15245,164 @@ begin
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentab94d7f75d58835f838540d73d1db758f04f4aae65373872718b463acdca8833\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta3fe2c0330a632b2ebfb732d75d9a2a928a6f002f7f3a211fa6826db6d17fb5a\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\: boolean := false;
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\: boolean := false;
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\: boolean := false;
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\: boolean := false;
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\: boolean := false;
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\: boolean := false;
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\: boolean := false;
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\: boolean := false;
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.57\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.59\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.63\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.71\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.73\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.10\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.95\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.96\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.97\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.98\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -15345,6 +15411,9 @@ begin
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= to_unsigned(0, 64);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
@@ -15393,149 +15462,162 @@ begin
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentab94d7f75d58835f838540d73d1db758f04f4aae65373872718b463acdca8833\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta3fe2c0330a632b2ebfb732d75d9a2a928a6f002f7f3a211fa6826db6d17fb5a\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\ := to_signed(0, 64);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\ := to_unsigned(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.11\ := to_unsigned(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\ := to_unsigned(0, 64);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 64);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\ := to_unsigned(0, 64);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.29\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.30\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\ := false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.33\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.34\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\ := false;
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.43\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.47\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\ := false;
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\ := false;
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\ := false;
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\ := false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\ := false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\ := false;
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.57\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.59\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.63\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\ := to_unsigned(0, 64);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\ := to_unsigned(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\ := to_unsigned(0, 64);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.71\ := to_unsigned(0, 64);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.73\ := to_unsigned(0, 64);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\ := to_unsigned(0, 64);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\ := to_unsigned(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\ := to_unsigned(0, 64);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\ := to_unsigned(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.5\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.6\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.7\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\ := to_unsigned(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.8\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ := to_signed(0, 32);
                 \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.9\ := to_signed(0, 32);
-                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.10\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\ := to_unsigned(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.33\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.95\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.34\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.11\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.96\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.97\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.35\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.12\ := to_signed(0, 32);
+                \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.98\ := to_unsigned(0, 32);
             else 
                 case \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ is 
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_0\ => 
@@ -15585,6 +15667,9 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num10;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- PrngMWC64X prngMWC64X;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num11;
@@ -15749,6 +15834,41 @@ begin
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\ := ConvertStdLogicVectorToInt32(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
+                            -- prngMWC64X = new PrngMWC64X ((ulong)memory.ReadUInt32 (9));
+                            -- 
+                            -- Initializing record fields to their defaults.
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\.\IsNull\ := false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\.\state\ := to_unsigned(0, 64);
+                            -- Invoking the target's constructor.
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_4\ => 
+                        -- Begin SimpleMemory read.
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(9, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_5\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.1\), 64);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= true;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
                             -- num11 = 0;
                             -- 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ := to_signed(0, 32);
@@ -15786,9 +15906,15 @@ begin
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ := to_signed(1, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (i <= num10) {
-                            -- 	num19 = memory.ReadUInt32 (9 + i);
-                            -- 	num20 = memory.ReadUInt32 (9 + i + 1);
-                            -- 	num21 = memory.ReadUInt32 (9 + i + 2);
+                            -- 	System.UInt32 remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242;
+                            -- 	remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	num19 = remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 - remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 / 100u * 100u;
+                            -- 	System.UInt32 remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984;
+                            -- 	remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	num20 = remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 - remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 / 100u * 100u;
+                            -- 	System.UInt32 remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4;
+                            -- 	remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	num21 = remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 - remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 / 100u * 100u;
                             -- 	num22 = (int)(100u + num19 * 3u * 100u / 100u);
                             -- 	num23 = -3;
                             -- 	num24 = (int)((long)((System.Int32)(num23) * 100) + (long)((ulong)(num20 * 7u * 100u / 100u)));
@@ -15818,43 +15944,49 @@ begin
                             -- 		num16 = num16 + num5 / 100;
                             -- 		num17 = num17 + num6 / 100;
                             -- 		num18 = num18 + num7 / 100;
-                            -- 		int assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                            -- 		assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459 = 0;
-                            -- 		num7 = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                            -- 		int assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                            -- 		assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                            -- 		num6 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                            -- 		int assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                            -- 		assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                            -- 		num5 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                            -- 		int assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                            -- 		assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                            -- 		num4 = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                            -- 		int assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                            -- 		assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                            -- 		num3 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                            -- 		int assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                            -- 		assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                            -- 		num2 = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                            -- 		num = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
+                            -- 		int assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                            -- 		assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83 = 0;
+                            -- 		num7 = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                            -- 		int assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                            -- 		assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                            -- 		num6 = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                            -- 		int assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                            -- 		assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                            -- 		num5 = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                            -- 		int assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                            -- 		assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                            -- 		num4 = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                            -- 		int assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                            -- 		assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                            -- 		num3 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                            -- 		int assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                            -- 		assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                            -- 		num2 = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                            -- 		num = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
                             -- 	}
                             -- 	i = i + 1;
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_4\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_3\.
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_7\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.0\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num19 = memory.ReadUInt32 (9 + i);
-                            -- 	num20 = memory.ReadUInt32 (9 + i + 1);
-                            -- 	num21 = memory.ReadUInt32 (9 + i + 2);
+                            -- 	System.UInt32 remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242;
+                            -- 	remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	num19 = remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 - remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 / 100u * 100u;
+                            -- 	System.UInt32 remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984;
+                            -- 	remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	num20 = remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 - remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 / 100u * 100u;
+                            -- 	System.UInt32 remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4;
+                            -- 	remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	num21 = remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 - remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 / 100u * 100u;
                             -- 	num22 = (int)(100u + num19 * 3u * 100u / 100u);
                             -- 	num23 = -3;
                             -- 	num24 = (int)((long)((System.Int32)(num23) * 100) + (long)((ulong)(num20 * 7u * 100u / 100u)));
@@ -15884,122 +16016,182 @@ begin
                             -- 		num16 = num16 + num5 / 100;
                             -- 		num17 = num17 + num6 / 100;
                             -- 		num18 = num18 + num7 / 100;
-                            -- 		int assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                            -- 		assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459 = 0;
-                            -- 		num7 = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                            -- 		int assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                            -- 		assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                            -- 		num6 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                            -- 		int assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                            -- 		assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                            -- 		num5 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                            -- 		int assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                            -- 		assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                            -- 		num4 = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                            -- 		int assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                            -- 		assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                            -- 		num3 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                            -- 		int assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                            -- 		assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                            -- 		num2 = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                            -- 		num = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
+                            -- 		int assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                            -- 		assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83 = 0;
+                            -- 		num7 = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                            -- 		int assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                            -- 		assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                            -- 		num6 = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                            -- 		int assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                            -- 		assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                            -- 		num5 = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                            -- 		int assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                            -- 		assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                            -- 		num4 = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                            -- 		int assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                            -- 		assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                            -- 		num3 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                            -- 		int assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                            -- 		assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                            -- 		num2 = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                            -- 		num = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
                             -- 	}
                             -- 	i = i + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num19 = memory.ReadUInt32 (9 + i);
+                            -- System.UInt32 remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242;
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\ := to_signed(9, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\;
-                            -- Begin SimpleMemory read.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\, 32);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_9\;
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_5\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_5\ => 
-                        -- State after the while loop which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_8\ => 
+                        -- State after the while loop which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (1, (uint)((ulong)(609u * (uint)num11) / (ulong)((long)num10)));
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\), 64);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_58\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.71\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\), 64);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_66\;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num19\ := ConvertStdLogicVectorToUInt32(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.1\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- num20 = memory.ReadUInt32 (9 + i + 1);
-                            -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\ := to_signed(9, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\ + to_signed(1, 32);
-                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6526
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_7\ => 
-                        -- Begin SimpleMemory read.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_8\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num20\ := ConvertStdLogicVectorToUInt32(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.2\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- num21 = memory.ReadUInt32 (9 + i + 2);
-                            -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ := to_signed(9, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ + to_signed(2, 32);
-                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_9\ => 
-                        -- Begin SimpleMemory read.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_10\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num19 = remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 - remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242 / 100u * 100u;
+                            -- 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_10\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_10\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num21\ := ConvertStdLogicVectorToUInt32(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.dataIn.3\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- num22 = (int)(100u + num19 * 3u * 100u / 100u);
-                            -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num19\ * to_unsigned(3, 32), 32);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\ * to_unsigned(100, 32), 32);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_11\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8416
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_11\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\ (have to wait 9 clock cycles in this state).
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_12\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_11\;
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ / to_unsigned(100, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242\ / to_unsigned(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_11\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.1\ * to_unsigned(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand01f1cccaddc233d6ef23fd801b3dded8b385de779e5fc5c5aa50c9aac0cc6242\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.2\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num19\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- System.UInt32 remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_12\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(signed(to_unsigned(100, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\ := (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\);
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num20 = remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 - remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984 / 100u * 100u;
+                            -- 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_13\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_14\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984\ / to_unsigned(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_14\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.4\ * to_unsigned(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperand2cae954880c56c9ed299735c284a8dea0e91cfa88484a28e118d485adf42f984\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.5\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num20\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- System.UInt32 remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_15\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.prngMWC64X\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num21 = remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 - remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4 / 100u * 100u;
+                            -- 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_16\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_16\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(9, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_17\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4\ / to_unsigned(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_17\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.7\ * to_unsigned(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.remainderOperande305c79b6d53e114533d15fbebfeb819e9c8bde18a6df551be8cba1fb1a5dac4\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.8\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num21\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.9\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num22 = (int)(100u + num19 * 3u * 100u / 100u);
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_18\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_18\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num19\ * to_unsigned(3, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\ * to_unsigned(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_19\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8416
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_19\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ >= to_signed(9, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_20\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.11\ / to_unsigned(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_20\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(signed(to_unsigned(100, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\ := (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
                         -- num23 = -3;
                         -- 
@@ -16007,29 +16199,29 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num24 = (int)((long)((System.Int32)(num23) * 100) + (long)((ulong)(num20 * 7u * 100u / 100u)));
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\ := SmartResize(SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num23\), 32) * to_signed(100, 32), 64);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_13\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\ := SmartResize(SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num23\), 32) * to_signed(100, 32), 64);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_13\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_21\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num20\ * to_unsigned(7, 32), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.11\ * to_unsigned(100, 32), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_14\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num20\ * to_unsigned(7, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\ * to_unsigned(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_22\;
                         -- Clock cycles needed to complete this state (approximation): 0.8416
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_14\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\ (have to wait 9 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_22\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_15\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ >= to_signed(9, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_23\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.12\ / to_unsigned(100, 32), 64);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\ / to_unsigned(100, 32), 64);
                         -- Clock cycles needed to complete this state (approximation): 9
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_15\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.10\) + signed(((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.13\))), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\ := (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\);
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_23\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.18\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.14\) + signed(((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\))), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\ := (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.18\);
                         -- The following section was transformed from the .NET statement below:
                         -- num25 = 13;
                         -- 
@@ -16037,28 +16229,28 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num26 = (int)num25 + num8 * (int)((short)num21) * 100 / 100;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num8\ * SmartResize((signed(SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num21\, 16))), 32), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_16\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num8\ * SmartResize((signed(SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num21\, 16))), 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.8106
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_16\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_24\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.15\ * to_signed(100, 32), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_17\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\ * to_signed(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_25\;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_17\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_25\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_18\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_26\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.16\ / to_signed(100, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\ / to_signed(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_18\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.18\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num25\, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.17\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num26\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.18\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_26\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num25\, 32) + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num26\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\;
                         -- The following section was transformed from the .NET statement below:
                         -- num27 = 2;
                         -- 
@@ -16066,106 +16258,106 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num28 = (int)((System.Int32)(num27) * 100) * this.LogN (5 * num26 / 100) / 10;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num27\), 32) * to_signed(100, 32), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_19\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_19\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(to_signed(5, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num26\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_20\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_20\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_21\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.20\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_21\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.21\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_22\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_22\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32)
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Finished.0\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.19\) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.0\, 32);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_23\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_23\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_24\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.22\ / to_signed(10, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_24\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num29 = this.Sqrt (num22 * num22 + num24 * num24) - 300;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_25\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8416
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_25\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.26\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.24\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\;
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.26\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_26\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.1\ - to_signed(300, 32);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num29\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num30 = num28 * num28 + num29 * num29 / 100;
-                            -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.28\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\, 32);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_27\;
-                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\ := SmartResize(SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num27\), 32) * to_signed(100, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_27\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_27\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.29\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num29\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num29\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.30\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.28\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.29\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(to_signed(5, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num26\, 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_28\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_28\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\ (have to wait 10 clock cycles in this state).
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ >= to_signed(10, 32)) then 
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ >= to_signed(10, 32)) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_29\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.30\ / to_signed(100, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.24\ / to_signed(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_29\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num30\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\;
+                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32)
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.25\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= true;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_30\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_30\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32)
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32)._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::LogN(Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.26\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.23\) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_31\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4208
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_31\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_32\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.26\ / to_signed(10, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_32\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.27\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num29 = this.Sqrt (num22 * num22 + num24 * num24) - 300;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.28\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.29\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_33\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8416
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_33\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.30\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.28\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.29\;
+                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.30\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= true;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_34\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_34\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\ - to_signed(300, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num29\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.31\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num30 = num28 * num28 + num29 * num29 / 100;
+                            -- 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_35\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_35\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num29\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num29\, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.34\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.33\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_36\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_36\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.34\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num30\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = num30 < 100;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num30\ < to_signed(100, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.flag\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.32\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num30\ < to_signed(100, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.flag\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	num2 = num2 + 100;
@@ -16179,25 +16371,25 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_31\ and ends in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\.
-                        --     * Execution after either branch will continue in the following state: \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_30\.
+                        --     * The true branch starts in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_39\ and ends in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_46\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\.
 
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.flag\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_31\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_39\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_30\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_30\ => 
-                        -- State after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_29\.
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\ => 
+                        -- State after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = i - i / 1000 * 1000 == 0 || i == num10;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_39\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_47\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_31\ => 
-                        -- True branch of the if-else started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_29\.
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_39\ => 
+                        -- True branch of the if-else started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 + 100;
@@ -16212,114 +16404,114 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 + 100;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.33\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ + to_signed(100, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.33\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.37\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ + to_signed(100, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.37\;
                         -- The following section was transformed from the .NET statement below:
                         -- num = num + num22;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.34\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.34\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\;
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + num24;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.35\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.39\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.39\;
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = num4 + num28;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_32\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_40\;
                         -- Clock cycles needed to complete this state (approximation): 0.9789
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_32\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_40\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.36\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.40\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.40\;
                         -- The following section was transformed from the .NET statement below:
                         -- num5 = num5 + num22 * num22 / 100;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.37\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_33\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num22\, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_33\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_34\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.6\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.37\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_34\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.39\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.38\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.39\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num6 = num6 + num24 * num24 / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.40\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_35\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_35\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_36\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.40\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_36\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num7 = num7 + num28 * num28 / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.8\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.43\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\;
-                        -- Going to the state after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_29\.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_30\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_39\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_40\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\;
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := to_signed(0, 32);
                         else 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ / to_signed(1000, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.41\ / to_signed(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_40\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.47\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\ * to_signed(1000, 32), 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.47\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.43\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.42\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.43\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num6 + num24 * num24 / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num24\, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_43\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_43\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_44\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.44\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_44\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.45\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.46\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num7 = num7 + num28 * num28 / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.47\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\ * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num28\, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_45\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_45\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_46\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.47\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_46\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\;
+                        -- Going to the state after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_37\.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_46\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_38\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_47\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_48\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ / to_signed(1000, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_48\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\ := SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\ * to_signed(1000, 32), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.48\ = to_signed(0, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.49\ or \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.50\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.flag2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.51\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\ = to_signed(0, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\ or \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.flag2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
                         -- 	num11 = num11 + num2 / 100;
@@ -16330,53 +16522,53 @@ begin
                         -- 	num16 = num16 + num5 / 100;
                         -- 	num17 = num17 + num6 / 100;
                         -- 	num18 = num18 + num7 / 100;
-                        -- 	int assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 	assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459 = 0;
-                        -- 	num7 = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 	int assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 	assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 	num6 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 	int assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 	assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 	num5 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 	int assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 	assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 	num4 = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 	int assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 	assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 	num3 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 	int assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 	assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 	num2 = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 	num = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
+                        -- 	int assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 	assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83 = 0;
+                        -- 	num7 = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 	int assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 	assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 	num6 = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 	int assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 	assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 	num5 = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 	int assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 	assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 	num4 = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 	int assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 	assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 	num3 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 	int assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 	assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 	num2 = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 	num = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_43\ and ends in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_57\.
-                        --     * Execution after either branch will continue in the following state: \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\.
+                        --     * The true branch starts in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_51\ and ends in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_65\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\.
 
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.flag2\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_43\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_51\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6518
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\ => 
-                        -- State after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\.
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\ => 
+                        -- State after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ + to_signed(1, 32);
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\;
-                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_4\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ + to_signed(1, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.i\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_43\ => 
-                        -- True branch of the if-else started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\.
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_51\ => 
+                        -- True branch of the if-else started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num11 = num11 + num2 / 100;
@@ -16387,103 +16579,103 @@ begin
                         -- 	num16 = num16 + num5 / 100;
                         -- 	num17 = num17 + num6 / 100;
                         -- 	num18 = num18 + num7 / 100;
-                        -- 	int assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 	assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459 = 0;
-                        -- 	num7 = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 	int assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 	assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 	num6 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 	int assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 	assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 	num5 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 	int assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 	assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 	num4 = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 	int assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 	assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 	num3 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 	int assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 	assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 	num2 = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 	num = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
+                        -- 	int assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 	assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83 = 0;
+                        -- 	num7 = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 	int assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 	assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 	num6 = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 	int assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 	assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 	num5 = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 	int assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 	assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 	num4 = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 	int assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 	assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 	num3 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 	int assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 	assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 	num2 = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 	num = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num11 = num11 + num2 / 100;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_44\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_52\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_44\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_45\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.10\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_45\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.52\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.53\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num12 + num / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_46\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_46\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_47\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_47\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.54\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.55\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = num13 + num3 / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_48\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_48\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_52\ => 
                         -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.12\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.57\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.57\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num14 = num14 + num4 / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_51\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_53\;
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := to_signed(0, 32);
                         else 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ / to_signed(100, 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ / to_signed(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_51\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.59\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.59\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_53\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.57\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.56\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.57\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = num12 + num / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_54\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_54\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_55\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_55\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.59\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.58\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.59\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num13 = num13 + num3 / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_56\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_56\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_57\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_57\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.61\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.61\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num14 = num14 + num4 / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_58\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_58\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_59\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_59\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.63\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.63\;
                         -- The following section was transformed from the .NET statement below:
                         -- num15 = 100;
                         -- 
@@ -16491,154 +16683,154 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num16 = num16 + num5 / 100;
                         -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_52\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_60\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_52\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_53\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.14\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_53\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.61\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num16\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.60\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num16\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.61\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num17 = num17 + num6 / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_54\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_54\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_55\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_55\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.63\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num17\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.62\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num17\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.63\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num18 = num18 + num7 / 100;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_56\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_56\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_60\ => 
                         -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_57\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ := to_signed(0, 32);
-                        else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.16\ + to_signed(1, 32);
-                        end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ / to_signed(100, 32);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_57\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num18\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num18\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459 = 0;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num7 = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c = assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment457b59ba4450df69a1be5be0461a54dc5e78307937c0bc57e166bc370d96c459\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num6 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7 = assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7703774b505e43b4c4e8ed3cebe9478ec2c8ee2ae8d141dae91109e8b50256c\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num5 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4 = assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment89ec7d3fb26d575437d468332f81b317544c8a322bcb0a283fd1cc05be6e0ae7\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num4 = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a = assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentd1bc20b78381e8cff7522f65183e91f7758815fdfd355e1675897c91b5e594f4\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932 = assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment17fefecfebaadfad5d0c6af6812c3cb9b66e4b9244d678bbea6f1a049f2fe00a\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932;
-                        -- 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment22b61013ddc6e696360414aa599164c3fa1e5ceb7ba3ef8ab7584bb6ea733932\;
-                        -- Going to the state after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_41\.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_57\) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_42\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_58\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\ (have to wait 26 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\ >= to_signed(26, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_59\;
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_61\;
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\ := to_signed(0, 32);
                         else 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.17\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_61\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num16\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.64\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num16\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.65\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num17 = num17 + num6 / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_62\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_62\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_63\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_63\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num17\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.66\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num17\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.67\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num18 + num7 / 100;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_64\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_64\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\ (have to wait 10 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_65\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ / to_signed(100, 32);
+                        -- Clock cycles needed to complete this state (approximation): 10
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_65\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num18\ + \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num18\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83 = 0;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num7 = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde = assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentee87aa7ae10eabeef968e41bc151092e90433467c96011b51cf194536bad6f83\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b = assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignment808a5d23ebc0ee17cc8b12409411682822e9b552278ea17a07c107073e99ecde\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f = assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentb8ccfa25b87d4949fa6200ad5f10f61ec32b8129e37736be6a494ab6846a577b\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a = assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmentaa0e61fe421b023f40b2fb58fb8b4bde4df445d0ea8a82297790735bb65f247f\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4 = assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmente7e8b23cf3afd3bd76e902347d05ae2ab9d1c6217ca707c2c830ec558a80bd1a\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4;
+                        -- 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.assignmenta2e4b4b19aafe10b8d66989591304786d21566d9ae83020ed013675c5d54d0c4\;
+                        -- Going to the state after the if-else which was started in state \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_49\.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_65\) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_50\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_66\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\ (have to wait 26 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ >= to_signed(26, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_67\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.71\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
                         -- Clock cycles needed to complete this state (approximation): 26
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_59\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_67\ => 
                         -- Begin SimpleMemory write.
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.68\));
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_60\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\));
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_60\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_68\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16646,29 +16838,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (2, (uint)((ulong)(609u * (uint)num12) / (ulong)((long)num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\), 64);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_61\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.73\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\), 64);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_69\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_61\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\ (have to wait 26 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_69\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ >= to_signed(26, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_62\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ >= to_signed(26, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_70\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.18\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.69\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.73\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
                         -- Clock cycles needed to complete this state (approximation): 26
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_62\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_70\ => 
                         -- Begin SimpleMemory write.
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.70\));
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_63\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\));
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_71\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_63\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_71\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16676,29 +16868,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (3, (uint)((ulong)(609u * (uint)num13) / (ulong)((long)num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.71\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\), 64);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_64\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\), 64);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_72\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_64\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\ (have to wait 26 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_72\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ >= to_signed(26, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_65\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ >= to_signed(26, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_73\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.19\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.71\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
                         -- Clock cycles needed to complete this state (approximation): 26
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_65\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_73\ => 
                         -- Begin SimpleMemory write.
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.72\));
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_66\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\));
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_74\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_66\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_74\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16706,29 +16898,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (4, (uint)((ulong)(609u * (uint)num14) / (ulong)((long)num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.73\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\), 64);
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_67\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\ := SmartResize(to_unsigned(609, 32) * unsigned(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\), 64);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_75\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_67\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\ (have to wait 26 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_75\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\ (have to wait 26 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ >= to_signed(26, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_68\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ >= to_signed(26, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_76\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.20\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.73\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\ := SmartResize((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\) / unsigned((SmartResize(\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\, 64))), 32);
                         -- Clock cycles needed to complete this state (approximation): 26
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_68\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_76\ => 
                         -- Begin SimpleMemory write.
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.74\));
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_69\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\));
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_77\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_69\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_77\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16736,81 +16928,81 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (5, (uint)(609 * this.Sqrt (num15 / num10 - this.Pow (num11 / num10, 2) / num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_70\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_78\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_70\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_78\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_71\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_79\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.21\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num15\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num15\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_71\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_72\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_79\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_80\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_72\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_80\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_73\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_81\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.22\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num11\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_73\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_81\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.76\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).power.parameter.Out.0\ <= to_signed(2, 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_74\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_82\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_74\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_82\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.75\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.2\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_75\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.5\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_83\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_75\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_83\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_76\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_84\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.23\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.77\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_76\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_84\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.78\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_77\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_85\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_77\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_85\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.3\), 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.6\), 32);
                             -- Begin SimpleMemory write.
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(5, 32), 32);
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.79\));
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_78\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\));
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_86\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_78\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_86\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16818,81 +17010,81 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (6, (uint)(609 * this.Sqrt (num16 / num10 - this.Pow (num12 / num10, 2) / num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_79\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_87\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_79\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_87\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_80\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_88\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.24\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num16\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num16\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_80\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_81\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_88\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_89\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_81\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_89\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_82\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_90\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.25\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num12\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_82\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_90\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.81\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).power.parameter.Out.0\ <= to_signed(2, 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_83\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_91\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_83\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_91\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.80\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.4\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_84\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.7\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_92\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_84\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_92\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_85\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_93\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.26\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.82\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_85\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_93\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.83\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_86\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_94\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_86\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_94\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.5\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.5\), 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.8\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.8\), 32);
                             -- Begin SimpleMemory write.
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(6, 32), 32);
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.84\));
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_87\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\));
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_95\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_87\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_95\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16900,81 +17092,81 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (7, (uint)(609 * this.Sqrt (num17 / num10 - this.Pow (num13 / num10, 2) / num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_88\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_96\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_88\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_96\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_89\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_97\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.27\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num17\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num17\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_89\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_90\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_97\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_98\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_90\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_98\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_91\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_99\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.28\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num13\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_91\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_99\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.86\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).power.parameter.Out.0\ <= to_signed(2, 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_92\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_100\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_92\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_100\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.6\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.85\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.6\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_93\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.9\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.9\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_101\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_93\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_101\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_94\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_102\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.29\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.87\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_94\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_102\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.88\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_95\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_103\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_95\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_103\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.7\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.7\), 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.10\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.10\), 32);
                             -- Begin SimpleMemory write.
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(7, 32), 32);
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.89\));
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_96\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\));
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_104\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_96\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_104\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16982,81 +17174,81 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (8, (uint)(609 * this.Sqrt (num18 / num10 - this.Pow (num14 / num10, 2) / num10)));
                             -- 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_97\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_105\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_97\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_105\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_98\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.33\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_106\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.33\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.30\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.33\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.33\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num18\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num18\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_98\ => 
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_99\;
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_106\ => 
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_107\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_99\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_107\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.95\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_100\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.34\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_108\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.34\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.31\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.34\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.34\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.95\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num14\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_100\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_108\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.91\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.95\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).power.parameter.Out.0\ <= to_signed(2, 32);
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_101\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_109\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_101\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_109\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Pow(System.Int32,System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.8\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.90\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.8\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_102\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.11\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Pow(Int32,Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.96\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\ - \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.11\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_110\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_102\ => 
-                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\ (have to wait 10 clock cycles in this state).
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_110\ => 
+                        -- Waiting for the result to appear in \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.97\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ >= to_signed(10, 32)) then 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_103\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ := to_signed(0, 32);
+                        if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.35\ >= to_signed(10, 32)) then 
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_111\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.35\ := to_signed(0, 32);
                         else 
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.32\ + to_signed(1, 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.35\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.35\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.92\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.97\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.96\ / \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.num10\;
                         -- Clock cycles needed to complete this state (approximation): 10
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_103\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_111\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.93\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).value.parameter.Out.0\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.97\;
                         \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= true;
-                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_104\;
+                        \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_112\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_104\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_112\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::Sqrt(System.Int32)
                         if (\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ = \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Finished.0\) then 
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32)._Started.0\ <= false;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.9\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.9\), 32);
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.12\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.MonteCarloAlgorithm::Sqrt(Int32).return.0\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.98\ := SmartResize(unsigned(to_signed(609, 32) * \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.return.12\), 32);
                             -- Begin SimpleMemory write.
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(8, 32), 32);
                             \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.94\));
-                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_105\;
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector((\MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.binaryOperationResult.98\));
+                            \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State\ := \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_113\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
-                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_105\ => 
+                    when \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0._State_113\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -23465,6 +23657,173 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine end
 
 
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 state machine start
+    \PrngMWC64X::.ctor(UInt64).0._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::.ctor(UInt64).0._State\: \PrngMWC64X::.ctor(UInt64).0._States\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+        Variable \PrngMWC64X::.ctor(UInt64).0.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::.ctor(UInt64).0.seed\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::.ctor(UInt64).0._Finished\ <= false;
+                \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+                \PrngMWC64X::.ctor(UInt64).0.seed\ := to_unsigned(0, 64);
+            else 
+                case \PrngMWC64X::.ctor(UInt64).0._State\ is 
+                    when \PrngMWC64X::.ctor(UInt64).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::.ctor(UInt64).0._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::.ctor(UInt64).0._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).0._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::.ctor(UInt64).0._Finished\ <= false;
+                            \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\ <= \PrngMWC64X::.ctor(UInt64).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).0._State_2\ => 
+                        \PrngMWC64X::.ctor(UInt64).0.this\ := \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\;
+                        \PrngMWC64X::.ctor(UInt64).0.seed\ := \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = seed;
+                        -- 
+                        \PrngMWC64X::.ctor(UInt64).0.this\.\state\ := \PrngMWC64X::.ctor(UInt64).0.seed\;
+                        \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 state machine end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 state machine start
+    \PrngMWC64X::NextUInt32().0._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::NextUInt32().0._State\: \PrngMWC64X::NextUInt32().0._States\ := \PrngMWC64X::NextUInt32().0._State_0\;
+        Variable \PrngMWC64X::NextUInt32().0.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::NextUInt32().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::NextUInt32().0._Finished\ <= false;
+                \PrngMWC64X::NextUInt32().0.return\ <= to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_0\;
+                \PrngMWC64X::NextUInt32().0.num\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num2\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num3\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num4\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num5\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \PrngMWC64X::NextUInt32().0._State\ is 
+                    when \PrngMWC64X::NextUInt32().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::NextUInt32().0._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::NextUInt32().0._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().0._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::NextUInt32().0._Finished\ <= false;
+                            \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::NextUInt32().0.this.parameter.Out\ <= \PrngMWC64X::NextUInt32().0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().0._State_2\ => 
+                        \PrngMWC64X::NextUInt32().0.this\ := \PrngMWC64X::NextUInt32().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.state >> 32);
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.0\ := SmartResize(shift_right(\PrngMWC64X::NextUInt32().0.this\.\state\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \PrngMWC64X::NextUInt32().0.num\ := (\PrngMWC64X::NextUInt32().0.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)@this.state;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.num2\ := SmartResize(\PrngMWC64X::NextUInt32().0.this\.\state\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 65534u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.num3\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 47131u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.num4\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 4294883355u;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().0.num5\ := "11111111111111101011100000011011";
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \PrngMWC64X::NextUInt32().0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().0.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \PrngMWC64X::NextUInt32().0._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64);
+                        \PrngMWC64X::NextUInt32().0.this\.\state\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\ := \PrngMWC64X::NextUInt32().0.num2\ xor \PrngMWC64X::NextUInt32().0.num\;
+                        \PrngMWC64X::NextUInt32().0.return\ <= \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\;
+                        \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5284
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -23937,6 +24296,26 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._Finished\;
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.return\;
     -- System.Void Hast::InternalInvocationProxy().System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloAlgorithm::CalculateTorusSectionValues(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \PrngMWC64X::.ctor(UInt64).0._Started\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\;
+    \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\;
+    \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Finished.0\ <= \PrngMWC64X::.ctor(UInt64).0._Finished\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\ <= \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32() start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloAlgorithm::CalculateTorusSectionValues(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \PrngMWC64X::NextUInt32().0._Started\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Started.0\;
+    \PrngMWC64X::NextUInt32().0.this.parameter.In\ <= \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32()._Finished.0\ <= \PrngMWC64X::NextUInt32().0._Finished\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().0.return\;
+    \MonteCarloAlgorithm::CalculateTorusSectionValues(SimpleMemory).0.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.MonteCarloAlgorithm::LogN(System.Int32) start
