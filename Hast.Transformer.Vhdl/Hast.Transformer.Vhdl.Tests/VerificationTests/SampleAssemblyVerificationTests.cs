@@ -36,6 +36,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<Loopback>();
 
+                        configuration.AddHardwareEntryPointType<MonteCarloAlgorithm>();
+
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
                         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
