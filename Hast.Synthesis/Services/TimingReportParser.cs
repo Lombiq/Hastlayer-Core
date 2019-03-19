@@ -79,8 +79,7 @@ namespace Hast.Synthesis.Services
                     {
                         case "and":
                             isSignAgnosticBinaryOperatorType = true;
-                            if (operandSizeBits == 1) binaryOperator = BinaryOperatorType.ConditionalAnd;
-                            else binaryOperator = BinaryOperatorType.BitwiseAnd;
+                            binaryOperator = BinaryOperatorType.BitwiseAnd;
                             break;
                         case "add":
                             binaryOperator = BinaryOperatorType.Add;
@@ -120,8 +119,7 @@ namespace Hast.Synthesis.Services
                             break;
                         case "or":
                             isSignAgnosticBinaryOperatorType = true;
-                            if (operandSizeBits == 1) binaryOperator = BinaryOperatorType.ConditionalOr;
-                            else binaryOperator = BinaryOperatorType.BitwiseOr;
+                            binaryOperator = BinaryOperatorType.BitwiseOr;
                             break;
                         case var op when(op.StartsWith("dotnet_shift_left")):
                             binaryOperator = BinaryOperatorType.ShiftLeft;
@@ -171,6 +169,22 @@ namespace Hast.Synthesis.Services
                         if (isSignAgnosticBinaryOperatorType)
                         {
                             timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                        }
+
+                        // Bitwise and/or are defined for bools too, so need to handle that above, then handling
+                        // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
+                        if (operandSizeBits == 1 && 
+                            (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
+                        {
+                            binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ? 
+                                BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
+
+                            timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
+
+                            if (isSignAgnosticBinaryOperatorType)
+                            {
+                                timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                            }
                         }
                     }
                     else if (unaryOperator.HasValue)
