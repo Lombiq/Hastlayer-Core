@@ -51,7 +51,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression))
+                if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression) ||
+                    SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var cellCount))
                 {
                     CreateArrayDeclarationIfNew(AstBuilder.ConvertType(assignmentExpression.GetActualTypeReference().GetElementType()));
                 }

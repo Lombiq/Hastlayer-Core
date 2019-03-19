@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
@@ -12,7 +13,9 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     public class SimpleMemoryOperationProxyBuilder : ISimpleMemoryOperationProxyBuilder
     {
-        public IArchitectureComponent BuildProxy(IEnumerable<IArchitectureComponent> components)
+        public IArchitectureComponent BuildProxy(
+            IEnumerable<IArchitectureComponent> components,
+            ITransformationContext transformationContext)
         {
             var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
 
@@ -31,12 +34,14 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                     Left = component.CreateSimpleMemoryReadEnableSignalReference(),
                     Operator = BinaryOperator.Or,
                     Right = component.CreateSimpleMemoryWriteEnableSignalReference()
-                }));
+                },
+                transformationContext));
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
                 SimpleMemoryPortNames.DataOut,
                 simpleMemoryUsingComponents,
-                component => component.CreateSimpleMemoryWriteEnableSignalReference()));
+                component => component.CreateSimpleMemoryWriteEnableSignalReference(),
+                transformationContext));
 
             signalsAssignmentBlock.Add(BuildConditionalOrPortAssignment(
                 SimpleMemoryPortNames.ReadEnable,
@@ -59,7 +64,8 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         private static ConditionalSignalAssignment BuildConditionalPortAssignment(
             string portName,
             IEnumerable<IArchitectureComponent> components,
-            Func<IArchitectureComponent, IVhdlElement> expressionBuilderForComponentsAssignment)
+            Func<IArchitectureComponent, IVhdlElement> expressionBuilderForComponentsAssignment,
+            ITransformationContext transformationContext)
         {
             var assignment = new ConditionalSignalAssignment
             {
@@ -71,8 +77,8 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             {
                 IVhdlElement value = component.CreateSimpleMemorySignalName(portName).ToVhdlIdValue();
 
-                // Since CellIndex is an integer but all ints are handled as unsigned types internally we need to do
-                // a type conversion.
+                // Since CellIndex is an integer but all ints are handled as unsigned types internally we need to do a
+                // type conversion.
                 if (portName == SimpleMemoryPortNames.CellIndex)
                 {
                     value = Invocation.ToInteger(value);
@@ -89,8 +95,8 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             assignment.Whens.Add(new SignalAssignmentWhen
             {
                 Value = portName == SimpleMemoryPortNames.CellIndex ? 
-                    KnownDataTypes.UnrangedInt.DefaultValue : 
-                    KnownDataTypes.StdLogicVector32.DefaultValue
+                    KnownDataTypes.UnrangedInt.DefaultValue :
+                    SimpleMemoryTypes.DataSignalsDataTypeFromContext(transformationContext).DefaultValue
             });
 
 

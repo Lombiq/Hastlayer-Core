@@ -277,11 +277,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         {
                             DataType = targetAvailableIndicatorDataType,
                             Name = targetAvailableIndicatorVariableReference.Name,
-                            InitialValue = new Value
-                            {
-                                DataType = targetAvailableIndicatorDataType,
-                                Content = "others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl()
-                            }
+                            InitialValue = ("others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl())
+                                .ToVhdlValue(targetAvailableIndicatorDataType)
                         });
 
                         bodyBlock.Add(new LineComment(

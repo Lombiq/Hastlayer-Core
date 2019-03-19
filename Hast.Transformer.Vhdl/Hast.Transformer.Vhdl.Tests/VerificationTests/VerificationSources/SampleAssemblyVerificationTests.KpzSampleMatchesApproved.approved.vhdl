@@ -257,7 +257,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0._Started\: boolean := false;
@@ -285,7 +285,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
@@ -314,7 +314,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Started\: boolean := false;
@@ -338,7 +338,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Started\: boolean := false;
@@ -695,7 +695,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor().this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
@@ -1106,8 +1106,8 @@ begin
     -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \KpzKernelsInterface::TestAdd(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\: \KpzKernelsInterface::TestAdd(SimpleMemory).0._States\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_0\;
-        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -1115,9 +1115,12 @@ begin
                 -- Synchronous reset
                 \KpzKernelsInterface::TestAdd(SimpleMemory).0._Finished\ <= false;
                 \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_0\;
+                \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
             else 
                 case \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ is 
@@ -1196,35 +1199,42 @@ begin
     \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\: \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._States\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\: \Hast.Samples.Kpz.KpzKernels\;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= to_unsigned(0, 64);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 64);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := (others => '0');
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := (others => '0');
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 64);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\ := (others => '0');
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := false;
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\ := (others => '0');
             else 
                 case \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ is 
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\ => 
@@ -1413,6 +1423,7 @@ begin
                 -- Synchronous reset
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\ <= false;
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_0\;
@@ -1595,7 +1606,7 @@ begin
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
+        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -1604,6 +1615,7 @@ begin
                 -- Synchronous reset
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Finished\ <= false;
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_0\;
@@ -1615,6 +1627,7 @@ begin
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
             else 
@@ -4643,32 +4656,32 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object94af5e47e36007bcc79a8c3f88303eecc869f2bc64aeda4d4864f033833350ed\: \Hast.Algorithms.PrngMWC64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -4704,7 +4717,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(31 downto 0);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4764,6 +4777,7 @@ begin
                 -- Synchronous reset
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._Finished\ <= false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.PrngMWC64X::.ctor()._Started.0\ <= false;
@@ -4805,24 +4819,31 @@ begin
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\ := to_unsigned(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 64);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 64);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\ := to_unsigned(0, 64);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\ := to_unsigned(0, 64);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\ := to_unsigned(0, 64);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\ := to_unsigned(0, 64);
@@ -4858,6 +4879,7 @@ begin
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\ := (others => '0');
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ := to_unsigned(0, 32);
@@ -7768,7 +7790,7 @@ begin
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
     \CellIndex\ <= to_integer(\KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\) when \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\) when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\) when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\) when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\) when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ else "00000000000000000000000000000000";
+    \DataOut\ <= \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ else \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
     \ReadEnable\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\;
     \WriteEnable\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ or \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ or \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ or \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end

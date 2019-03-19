@@ -127,6 +127,10 @@
       <Project>{0dd555f3-b472-422b-8cfb-63cb494cbb5a}</Project>
       <Name>Hast.Samples.Kpz</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Catapult\Hast.Catapult.csproj">
+      <Project>{2C30740A-0E66-476C-89B2-C89D86BFA70C}</Project>
+      <Name>Hast.Catapult</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554F7-5565-4D82-8AAB-CDCD745CA822}</Project>
       <Name>Hast.Synthesis</Name>
@@ -196,6 +200,7 @@
     <Compile Include="IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
     <Compile Include="BasicHardwareStructureTests.cs" />
     <Compile Include="TransformationCheckTests.cs" />
+    <Compile Include="VerificationTests\SampleAssemblyCatapultVerificationTests.cs" />
     <Compile Include="VerificationTests\SampleAssemblyVerificationTests.cs" />
     <Compile Include="VerificationTests\ShouldMatchApprovedExtensions.cs" />
     <Compile Include="VerificationTests\TestInputAssembliesVerificationTests.cs" />

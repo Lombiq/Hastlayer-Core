@@ -1,4 +1,5 @@
 ﻿using Hast.Layer;
+using Hast.Synthesis;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Models
@@ -10,6 +11,7 @@ namespace Hast.Transformer.Models
         public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
         public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; set; }
         public IArraySizeHolder ArraySizeHolder { get; set; }
+        public IDeviceDriver DeviceDriver { get; set; }
 
 
         public TransformationContext(ITransformationContext previousContext) : this()
@@ -19,6 +21,7 @@ namespace Hast.Transformer.Models
             HardwareGenerationConfiguration = previousContext.HardwareGenerationConfiguration;
             TypeDeclarationLookupTable = previousContext.TypeDeclarationLookupTable;
             ArraySizeHolder = previousContext.ArraySizeHolder;
+            DeviceDriver = previousContext.DeviceDriver;
         }
 
         public TransformationContext()

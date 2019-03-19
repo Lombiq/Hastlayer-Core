@@ -5,6 +5,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public static class KnownDataTypes
     {
+        // There is a private field and a public one for each type because the DefaultValue construction needs the type
+        // itself too.
+
         private static DataType _bit = new DataType { TypeCategory = DataTypeCategory.Character, Name = "bit" };
         public static DataType Bit = new DataType(_bit)
         {
@@ -112,10 +115,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         };
 
         private static StdLogicVector _stdLogicVector32 = new StdLogicVector { Size = 32 };
-        public static StdLogicVector StdLogicVector32 = new StdLogicVector(_stdLogicVector32)
-        {
-            DefaultValue = "00000000000000000000000000000000".ToVhdlValue(_stdLogicVector32)
-        };
+        public static StdLogicVector StdLogicVector32 = new StdLogicVector(_stdLogicVector32);
 
         private static DataType _string = new String { Length = 256 };
         public static DataType String = new DataType(_string)

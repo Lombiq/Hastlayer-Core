@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Hast.Layer;
+using Hast.Synthesis;
+using Hast.Synthesis.Services;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure1.ComplexTypes;
 using Hast.TestInputs.ClassStructure2;
@@ -10,6 +12,7 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
+using Hast.Xilinx;
 using ICSharpCode.NRefactory.CSharp;
 using Moq;
 using NUnit.Framework;
@@ -41,6 +44,8 @@ namespace Hast.Transformer.Vhdl.Tests
             builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
             builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
             builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
+            builder.RegisterType<DeviceDriverSelector>().As<IDeviceDriverSelector>();
+            builder.RegisterType<Nexys4DdrDriver>().As<IDeviceDriver>();
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
 

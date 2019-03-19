@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation.Expression;
+﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -29,10 +30,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
 
         public static Value CreateDefaultInitialization(DataType arrayInstantiationType, DataType elementType) =>
-            new Value
-            {
-                DataType = arrayInstantiationType,
-                Content = "others => " + elementType.DefaultValue.ToVhdl()
-            };
+            ("others => " + elementType.DefaultValue.ToVhdl()).ToVhdlValue(arrayInstantiationType);
     }
 }

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Common.Helpers;
 using Hast.Layer;
+using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
@@ -49,7 +50,9 @@ namespace Hast.Transformer
         private readonly IMethodInliner _methodInliner;
         private readonly IObjectInitializerExpander _objectInitializerExpander;
         private readonly ITaskBodyInvocationInstanceCountsSetter _taskBodyInvocationInstanceCountsSetter;
+        private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
         private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
+        private readonly IDeviceDriverSelector _deviceDriverSelector;
 
 
         public DefaultTransformer(
@@ -79,7 +82,9 @@ namespace Hast.Transformer
             IMethodInliner methodInliner,
             IObjectInitializerExpander objectInitializerExpander,
             ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
-            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster)
+            ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
+            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
+            IDeviceDriverSelector deviceDriverSelector)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -107,7 +112,9 @@ namespace Hast.Transformer
             _methodInliner = methodInliner;
             _objectInitializerExpander = objectInitializerExpander;
             _taskBodyInvocationInstanceCountsSetter = taskBodyInvocationInstanceCountsSetter;
+            _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
             _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
+            _deviceDriverSelector = deviceDriverSelector;
         }
 
 
@@ -292,9 +299,16 @@ namespace Hast.Transformer
 
             if (transformerConfiguration.UseSimpleMemory)
             {
-                CheckSimpleMemoryUsage(syntaxTree);
+                _simpleMemoryUsageVerifier.VerifySimpleMemoryUsage(syntaxTree);
             }
 
+            var deviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName);
+
+            if (deviceDriver == null)
+            {
+                throw new InvalidOperationException(
+                    "No device driver with the name " + configuration.DeviceName + " was found.");
+            }
 
             var context = new TransformationContext
             {
@@ -302,7 +316,8 @@ namespace Hast.Transformer
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
-                ArraySizeHolder = arraySizeHolder
+                ArraySizeHolder = arraySizeHolder,
+                DeviceDriver = deviceDriver
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
@@ -313,33 +328,6 @@ namespace Hast.Transformer
             }
 
             return _engine.Transform(context);
-        }
-
-
-        private static void CheckSimpleMemoryUsage(SyntaxTree syntaxTree)
-        {
-            foreach (var type in syntaxTree.GetAllTypeDeclarations())
-            {
-                foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
-                {
-                    if (member is MethodDeclaration method)
-                    {
-                        var methodName = member.GetFullName();
-
-                        if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
-                        {
-                            throw new InvalidOperationException(
-                                "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
-                        }
-
-                        if (method.Parameters.Count > 1)
-                        {
-                            throw new InvalidOperationException(
-                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
-                        }
-                    }
-                }
-            }
         }
 
 
