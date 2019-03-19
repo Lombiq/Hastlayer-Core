@@ -45,7 +45,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
                     if (baseTypeDeclaration == null)
                     {
-                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName());
+                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName(), member);
                     }
 
                     if (baseTypeDeclaration.ClassType == ClassType.Interface)

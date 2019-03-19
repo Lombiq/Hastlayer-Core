@@ -589,7 +589,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var type = ((TypeReferenceExpression)expression).Type;
                 var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
-                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier);
+                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier, expression);
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
@@ -761,7 +761,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var typeDeclaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(recordAstType);
 
-            if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(recordAstType.GetFullName());
+            if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(recordAstType.GetFullName(), expression);
 
             var record = _recordComposer.CreateRecordFromType(typeDeclaration, context.TransformationContext);
 

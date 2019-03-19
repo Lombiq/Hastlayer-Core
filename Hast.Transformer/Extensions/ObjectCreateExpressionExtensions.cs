@@ -22,7 +22,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
             var constructorType = typeDeclarationLookupTable.Lookup(createdTypeName);
 
-            if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName);
+            if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName, objectCreateExpression);
 
             return constructorType
                 .Members
