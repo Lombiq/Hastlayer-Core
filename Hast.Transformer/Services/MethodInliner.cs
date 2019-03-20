@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Helpers;
+using Hast.Layer;
 using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -14,20 +15,24 @@ namespace Hast.Transformer.Services
 {
     public class MethodInliner : IMethodInliner
     {
-        public void InlineMethods(SyntaxTree syntaxTree)
+        public void InlineMethods(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
+            var additionalInlinableMethodsFullNames = configuration.TransformerConfiguration().AdditionalInlinableMethodsFullNames;
             var inlinableMethods = new Dictionary<string, MethodDeclaration>();
 
             foreach (var method in syntaxTree.GetAllTypeDeclarations().SelectMany(type => type.Members.Where(member => member is MethodDeclaration)))
             {
-                var isInlinableMethod = method.Attributes
-                    .Any(attributeSection => attributeSection
-                        .Attributes
-                        .Any(attribute => attribute
-                            .FindFirstChildOfType<MemberReferenceExpression>(expression => expression
-                                .Target
-                                .Is<TypeReferenceExpression>(type => type.GetFullName() == typeof(MethodImplOptions).FullName) &&
-                                expression.MemberName == nameof(MethodImplOptions.AggressiveInlining)) != null));
+                var isInlinableMethod = 
+                    additionalInlinableMethodsFullNames.Contains(method.GetFullName()) ||
+                    method.Attributes
+                        .Any(attributeSection => attributeSection
+                            .Attributes
+                            .Any(attribute => attribute
+                                .FindFirstChildOfType<MemberReferenceExpression>(expression => expression
+                                    .Target
+                                    .Is<TypeReferenceExpression>(type => 
+                                        type.GetFullName() == typeof(MethodImplOptions).FullName) &&
+                                        expression.MemberName == nameof(MethodImplOptions.AggressiveInlining)) != null));
 
                 if (isInlinableMethod)
                 {
