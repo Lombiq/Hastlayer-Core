@@ -150,9 +150,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (ConstantValueSubstitutionHelper.IsInWhile(ifElseStatement)) return;
 
-            var primitiveCondition = ifElseStatement.Condition as PrimitiveExpression;
-
-            if (primitiveCondition == null) return;
+            if (!(ifElseStatement.Condition is PrimitiveExpression primitiveCondition)) return;
 
             void replaceIfElse(Statement branchStatement)
             {
