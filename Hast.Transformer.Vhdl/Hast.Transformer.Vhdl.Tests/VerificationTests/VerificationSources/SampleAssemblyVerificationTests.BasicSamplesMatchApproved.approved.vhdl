@@ -2,6 +2,7 @@
 -- * System.Void Hast.Samples.SampleAssembly.Loopback::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+-- * System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
@@ -223,6 +224,10 @@ architecture Imp of Hast_IP is
     end record;
     type \Hast.Samples.SampleAssembly.MemoryContainer\ is record 
         \IsNull\: boolean;
+    end record;
+    type \Hast.Algorithms.PrngMWC64X\ is record 
+        \IsNull\: boolean;
+        \state\: unsigned(63 downto 0);
     end record;
     -- Custom inter-dependent type declarations end
 
@@ -1839,6 +1844,183 @@ architecture Imp of Hast_IP is
     -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).24 declarations end
 
 
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed declarations start
+    -- Shared (global) variables:
+    shared Variable \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range declarations start
+    -- Shared (global) variables:
+    shared Variable \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask declarations start
+    -- Shared (global) variables:
+    shared Variable \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).0 declarations start
+    -- State machine states:
+    type \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._States\ is (
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_0\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_1\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_2\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_3\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_4\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_5\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_6\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_7\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_8\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_9\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_10\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_11\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_12\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_13\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_14\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_15\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_16\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_17\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_18\);
+    -- Signals:
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).0 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).1 declarations start
+    -- State machine states:
+    type \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._States\ is (
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_0\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_1\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_2\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_3\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_4\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_5\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_6\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_7\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_8\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_9\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_10\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_11\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_12\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_13\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_14\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_15\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_16\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_17\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_18\);
+    -- Signals:
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).1 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).2 declarations start
+    -- State machine states:
+    type \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._States\ is (
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_0\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_1\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_2\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_3\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_4\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_5\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_6\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_7\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_8\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_9\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_10\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_11\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_12\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_13\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_14\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_15\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_16\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_17\, 
+        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_18\);
+    -- Signals:
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).2 declarations end
+
+
+    -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- State machine states:
+    type \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._States\ is (
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_1\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_2\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_3\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_4\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_5\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_8\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_9\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_12\, 
+        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_13\);
+    -- Signals:
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.1\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.2\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.1\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.2\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ is (
@@ -2770,12 +2952,109 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
 
 
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 declarations start
+    -- State machine states:
+    type \PrngMWC64X::.ctor(UInt64).0._States\ is (
+        \PrngMWC64X::.ctor(UInt64).0._State_0\, 
+        \PrngMWC64X::.ctor(UInt64).0._State_1\, 
+        \PrngMWC64X::.ctor(UInt64).0._State_2\);
+    -- Signals:
+    Signal \PrngMWC64X::.ctor(UInt64).0._Finished\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).0._Started\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 declarations end
+
+
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).1 declarations start
+    -- State machine states:
+    type \PrngMWC64X::.ctor(UInt64).1._States\ is (
+        \PrngMWC64X::.ctor(UInt64).1._State_0\, 
+        \PrngMWC64X::.ctor(UInt64).1._State_1\, 
+        \PrngMWC64X::.ctor(UInt64).1._State_2\);
+    -- Signals:
+    Signal \PrngMWC64X::.ctor(UInt64).1._Finished\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).1.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).1._Started\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).1.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).1.seed.parameter.In\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).1 declarations end
+
+
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).2 declarations start
+    -- State machine states:
+    type \PrngMWC64X::.ctor(UInt64).2._States\ is (
+        \PrngMWC64X::.ctor(UInt64).2._State_0\, 
+        \PrngMWC64X::.ctor(UInt64).2._State_1\, 
+        \PrngMWC64X::.ctor(UInt64).2._State_2\);
+    -- Signals:
+    Signal \PrngMWC64X::.ctor(UInt64).2._Finished\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).2.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).2._Started\: boolean := false;
+    Signal \PrngMWC64X::.ctor(UInt64).2.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::.ctor(UInt64).2.seed.parameter.In\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).2 declarations end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 declarations start
+    -- State machine states:
+    type \PrngMWC64X::NextUInt32().0._States\ is (
+        \PrngMWC64X::NextUInt32().0._State_0\, 
+        \PrngMWC64X::NextUInt32().0._State_1\, 
+        \PrngMWC64X::NextUInt32().0._State_2\, 
+        \PrngMWC64X::NextUInt32().0._State_3\, 
+        \PrngMWC64X::NextUInt32().0._State_4\);
+    -- Signals:
+    Signal \PrngMWC64X::NextUInt32().0._Finished\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrngMWC64X::NextUInt32().0.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::NextUInt32().0._Started\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().0.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 declarations end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().1 declarations start
+    -- State machine states:
+    type \PrngMWC64X::NextUInt32().1._States\ is (
+        \PrngMWC64X::NextUInt32().1._State_0\, 
+        \PrngMWC64X::NextUInt32().1._State_1\, 
+        \PrngMWC64X::NextUInt32().1._State_2\, 
+        \PrngMWC64X::NextUInt32().1._State_3\, 
+        \PrngMWC64X::NextUInt32().1._State_4\);
+    -- Signals:
+    Signal \PrngMWC64X::NextUInt32().1._Finished\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrngMWC64X::NextUInt32().1.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::NextUInt32().1._Started\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().1.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().1 declarations end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().2 declarations start
+    -- State machine states:
+    type \PrngMWC64X::NextUInt32().2._States\ is (
+        \PrngMWC64X::NextUInt32().2._State_0\, 
+        \PrngMWC64X::NextUInt32().2._State_1\, 
+        \PrngMWC64X::NextUInt32().2._State_2\, 
+        \PrngMWC64X::NextUInt32().2._State_3\, 
+        \PrngMWC64X::NextUInt32().2._State_4\);
+    -- Signals:
+    Signal \PrngMWC64X::NextUInt32().2._Finished\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \PrngMWC64X::NextUInt32().2.this.parameter.Out\: \Hast.Algorithms.PrngMWC64X\;
+    Signal \PrngMWC64X::NextUInt32().2._Started\: boolean := false;
+    Signal \PrngMWC64X::NextUInt32().2.this.parameter.In\: \Hast.Algorithms.PrngMWC64X\;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().2 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().Loopback::Run(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\: boolean := false;
@@ -2790,6 +3069,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().Loopback::Run(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Finished.0\: boolean := false;
@@ -14925,6 +15205,1472 @@ begin
     -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).24 state machine end
 
 
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).0 state machine start
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\: \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._States\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_0\;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num5\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.flag\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.11\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.12\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Finished\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_0\;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num3\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num4\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num5\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.flag\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.0\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.1\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.8\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.11\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.12\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.14\ := to_signed(0, 32);
+            else 
+                case \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ is 
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Started\ = true) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Started\ = true) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Finished\ <= true;
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Finished\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_2\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- PrngMWC64X prngMWC64X;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- prngMWC64X = new PrngMWC64X ((ulong)(this.randomSeed + num));
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\.\IsNull\ := false;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\.\state\ := to_unsigned(0, 64);
+                        -- Invoking the target's constructor.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.0\ := SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ + \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num\, 64);
+                        -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.0\);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= true;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0u;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num2\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 0;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num3\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while ((long)num3 < (long)((ulong)this.iterationsPerTask)) {
+                            -- 	UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 	remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 	remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 	num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 	UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                            -- 	remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 	remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 	num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 	flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                            -- 	if (flag) {
+                            -- 		num2 = num2 + 1u;
+                            -- 	}
+                            -- 	num3 = num3 + 1;
+                            -- }
+                            -- 
+                            -- Starting a while loop.
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_3\.
+                        -- The while loop's condition:
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.1\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num3\, 64) < signed((SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask\, 64)));
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 	remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 	remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 	num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 	UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                            -- 	remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 	remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 	num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 	flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                            -- 	if (flag) {
+                            -- 		num2 = num2 + 1u;
+                            -- 	}
+                            -- 	num3 = num3 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_6\;
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_5\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num2\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.0\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\ := \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_7\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_8\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.2\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ / \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_8\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.3\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.2\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.4\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ - \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.3\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num4\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.4\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.1\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\ := \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_10\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.5\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_11\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.5\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ / \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_11\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.6\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.5\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.7\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ - \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.6\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num5\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.7\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_12\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.8\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num4\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num4\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_13\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.9\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num5\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num5\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_14\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.10\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.8\ + \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.9\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_15\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.11\ := SmartResize(SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\, 64) * SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\, 64), 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_16\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.12\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.10\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.11\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.flag\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.12\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_18\ and ends in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_18\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_17\.
+
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.flag\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_18\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_17\ => 
+                        -- State after the if-else which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num3 + 1;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.14\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num3\ + to_signed(1, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num3\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.14\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_17\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_18\ => 
+                        -- True branch of the if-else started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + 1u;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.13\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num2\ + to_unsigned(1, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num2\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.13\;
+                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_16\.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_18\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).0 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).1 state machine start
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\: \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._States\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_0\;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num5\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.flag\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.11\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.12\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Finished\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_0\;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num3\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num4\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num5\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.flag\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.0\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.4\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.1\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.7\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.8\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.9\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.10\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.11\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.12\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.13\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.14\ := to_signed(0, 32);
+            else 
+                case \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ is 
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Started\ = true) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Started\ = true) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Finished\ <= true;
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Finished\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_2\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- PrngMWC64X prngMWC64X;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- prngMWC64X = new PrngMWC64X ((ulong)(this.randomSeed + num));
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\.\IsNull\ := false;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\.\state\ := to_unsigned(0, 64);
+                        -- Invoking the target's constructor.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.0\ := SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ + \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num\, 64);
+                        -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.0\);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Started.0\ <= true;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0u;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num2\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 0;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num3\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while ((long)num3 < (long)((ulong)this.iterationsPerTask)) {
+                            -- 	UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 	remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 	remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 	num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 	UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                            -- 	remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 	remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 	num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 	flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                            -- 	if (flag) {
+                            -- 		num2 = num2 + 1u;
+                            -- 	}
+                            -- 	num3 = num3 + 1;
+                            -- }
+                            -- 
+                            -- Starting a while loop.
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_3\.
+                        -- The while loop's condition:
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.1\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num3\, 64) < signed((SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask\, 64)));
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 	remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 	remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 	num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 	UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                            -- 	remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 	remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 	num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 	flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                            -- 	if (flag) {
+                            -- 		num2 = num2 + 1u;
+                            -- 	}
+                            -- 	num3 = num3 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_6\;
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_5\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num2\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.0\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\ := \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_7\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_8\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.2\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ / \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_8\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.3\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.2\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.4\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ - \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.3\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num4\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.4\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.1\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\ := \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_10\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.5\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_11\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.5\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ / \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_11\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.6\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.5\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.7\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ - \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.6\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num5\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.7\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_12\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.8\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num4\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num4\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_13\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.9\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num5\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num5\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_14\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.10\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.8\ + \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.9\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_15\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.11\ := SmartResize(SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\, 64) * SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\, 64), 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_16\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.12\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.10\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.11\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.flag\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.12\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_18\ and ends in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_18\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_17\.
+
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.flag\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_18\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_17\ => 
+                        -- State after the if-else which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num3 + 1;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.14\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num3\ + to_signed(1, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num3\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.14\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_3\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_17\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_18\ => 
+                        -- True branch of the if-else started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + 1u;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.13\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num2\ + to_unsigned(1, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num2\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.13\;
+                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_16\.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_18\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).1 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).2 state machine start
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\: \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._States\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_0\;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num5\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.flag\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.11\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.12\: boolean := false;
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Finished\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_0\;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num3\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num4\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num5\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.flag\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.0\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.4\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.1\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.7\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.8\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.9\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.10\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.11\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.12\ := false;
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.13\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.14\ := to_signed(0, 32);
+            else 
+                case \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ is 
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Started\ = true) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Started\ = true) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Finished\ <= true;
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Finished\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_2\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- PrngMWC64X prngMWC64X;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- prngMWC64X = new PrngMWC64X ((ulong)(this.randomSeed + num));
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\.\IsNull\ := false;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\.\state\ := to_unsigned(0, 64);
+                        -- Invoking the target's constructor.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.0\ := SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ + \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num\, 64);
+                        -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\ <= (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.0\);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Started.0\ <= true;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64)
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0u;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num2\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 0;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num3\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while ((long)num3 < (long)((ulong)this.iterationsPerTask)) {
+                            -- 	UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 	remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 	remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 	num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 	UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                            -- 	remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 	remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 	num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 	flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                            -- 	if (flag) {
+                            -- 		num2 = num2 + 1u;
+                            -- 	}
+                            -- 	num3 = num3 + 1;
+                            -- }
+                            -- 
+                            -- Starting a while loop.
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_3\.
+                        -- The while loop's condition:
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.1\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num3\, 64) < signed((SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask\, 64)));
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 	remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 	remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 	num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 	UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                            -- 	remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 	UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 	remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 	num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 	flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                            -- 	if (flag) {
+                            -- 		num2 = num2 + 1u;
+                            -- 	}
+                            -- 	num3 = num3 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_6\;
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_5\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num2\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.0\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 = this.range;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\ := \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = (ulong)(remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 - remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91 / remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8 * remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8);
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_7\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_8\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.2\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ / \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_8\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.3\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.2\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand82790f04041b2b7642c83fa3fbf84a4bf8d1d60237e00729b74efcad9bd959a8\, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.4\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperandc1a3455d0ea6844a2434b579d954c489978bb861ba9c9d94ca1064efc5b37d91\ - \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.3\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num4\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.4\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- UInt32 remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f = Hast.Algorithms.PrngMWC64X.NextUInt32 (prngMWC64X);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.Out.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ <= true;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32()
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Finished.0\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\ <= false;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.1\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().return.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.prngMWC64X\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.In.0\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- UInt32 remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 = this.range;
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\ := \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = (ulong)(remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f - remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f / remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78 * remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78);
+                            -- 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_10\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.5\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_11\;
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.5\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ / \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\;
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_11\ => 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.6\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.5\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand931cdfb7ff718e207584b9b01b46466d51f629f667138a9aeadaca5231ec2b78\, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.7\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.remainderOperand25d1c2e7f7e59a7e0a3cb09d172abdb061fe8249f54a3ac72a09f4ffb4585e4f\ - \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.6\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num5\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.7\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num4 * num4 + num5 * num5 <= (ulong)this.range * (ulong)this.range;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7471
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_12\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.8\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num4\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num4\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_13\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.9\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num5\ * \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num5\, 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_14\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.10\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.8\ + \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.9\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_15\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.11\ := SmartResize(SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\, 64) * SmartResize(\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\, 64), 64);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_16\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.12\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.10\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.11\;
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.flag\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.12\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_18\ and ends in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_18\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_17\.
+
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.flag\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_18\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2897
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_17\ => 
+                        -- State after the if-else which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num3 + 1;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.14\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num3\ + to_signed(1, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num3\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.14\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_3\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_17\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_18\ => 
+                        -- True branch of the if-else started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + 1u;
+                        -- 
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.13\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num2\ + to_unsigned(1, 32);
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num2\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.13\;
+                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_16\.
+                        if (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ = \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_18\) then 
+                            \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).2 state machine end
+
+
+    -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\: \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._States\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\;
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 12) := (others => to_unsigned(0, 32));
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.arg_74_1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Finished\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.0\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.0\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.1\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.1\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.2\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.2\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.arg_74_1\ := to_signed(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ := to_signed(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := (others => '0');
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).invocationIndex\ := 0;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
+            else 
+                case \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ is 
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Started\ = true) then 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Started\ = true) then 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Finished\ <= true;
+                        else 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Finished\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- MonteCarloPiEstimator.<>c__DisplayClass4_0 <>c__DisplayClass4_;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<uint>[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int arg_74_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- TaskFactory arg_6F_0;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Func<object, uint> arg_6F_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass4_ = new MonteCarloPiEstimator.<>c__DisplayClass4_0 ();
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadUInt32 (0);
+                        -- 
+                        -- Begin SimpleMemory read.
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_3\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- <>c__DisplayClass4_.randomSeed = memory.ReadUInt32 (1);
+                            -- 
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_4\ => 
+                        -- Begin SimpleMemory read.
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_5\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ := ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- <>c__DisplayClass4_.iterationsPerTask = num / 13u;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\ => 
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ (have to wait 9 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ / to_unsigned(13, 32);
+                        -- Clock cycles needed to complete this state (approximation): 9
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\ => 
+                        \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass4_.range = 16777215u;
+                        -- 
+                        \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::range\ := to_unsigned(16777215, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new Task<uint>[13];
+                        -- 
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 0u;
+                        -- 
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num2 < 13u) {
+                        -- 	arg_74_1 = (int)num2;
+                        -- 	arg_6F_0 = Task.Factory;
+                        -- 	if (arg_6F_1 = <>c__DisplayClass4_.<>9__0 == null) {
+                        -- 		arg_6F_1 = <>c__DisplayClass4_.<>9__0 = new Func<object, uint> (<>c__DisplayClass4_.<EstimatePi>b__0);
+                        -- 	}
+                        -- 	array [arg_74_1] = arg_6F_0.StartNew<uint> (arg_6F_1, num2);
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_8\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\.
+                        -- The while loop's condition:
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ < to_unsigned(13, 32);
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	arg_74_1 = (int)num2;
+                            -- 	arg_6F_0 = Task.Factory;
+                            -- 	if (arg_6F_1 = <>c__DisplayClass4_.<>9__0 == null) {
+                            -- 		arg_6F_1 = <>c__DisplayClass4_.<>9__0 = new Func<object, uint> (<>c__DisplayClass4_.<EstimatePi>b__0);
+                            -- 	}
+                            -- 	array [arg_74_1] = arg_6F_0.StartNew<uint> (arg_6F_1, num2);
+                            -- 	num2 = num2 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_74_1 = (int)num2;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.arg_74_1\ := signed(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_6F_0 = Task.Factory;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (arg_6F_1 = <>c__DisplayClass4_.<>9__0 == null) {
+                            -- 	arg_6F_1 = <>c__DisplayClass4_.<>9__0 = new Func<object, uint> (<>c__DisplayClass4_.<EstimatePi>b__0);
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [arg_74_1] = arg_6F_0.StartNew<uint> (arg_6F_1, num2);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32)
+                            case \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).invocationIndex\ is 
+                                when 0 => 
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.0\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.0\ <= true;
+                                when 1 => 
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.1\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.1\ <= true;
+                                when 2 => 
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.2\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.2\ <= true;
+                            end case;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).invocationIndex\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).invocationIndex\ + 1;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = num2 + 1u;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.2\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ + to_unsigned(1, 32);
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.2\;
+                        else 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6016
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_9\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<uint> (array).Wait ();
+                        -- 
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32)
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.1\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.1\ and \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.2\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.2\ and \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.0\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.0\) then 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.0\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.1\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.2\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).invocationIndex\ := 0;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.0\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.1\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.2\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(0) := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(1) := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(2) := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 0u;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = 0;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (i < 13) {
+                            -- 	num3 = num3 + array [i].Result;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- Starting a while loop.
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\.
+                        -- The while loop's condition:
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ < to_signed(13, 32);
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num3 = num3 + array [i].Result;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + array [i].Result;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.4\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\ + \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(to_integer(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\));
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.4\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.5\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ + to_signed(1, 32);
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.5\;
+                        else 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_12\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.9279
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_12\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (0, num3);
+                        -- 
+                        -- Begin SimpleMemory write.
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_13\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \ObjectOrientedShowcase::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0._State\: \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
@@ -20185,6 +21931,507 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine end
 
 
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 state machine start
+    \PrngMWC64X::.ctor(UInt64).0._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::.ctor(UInt64).0._State\: \PrngMWC64X::.ctor(UInt64).0._States\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+        Variable \PrngMWC64X::.ctor(UInt64).0.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::.ctor(UInt64).0.seed\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::.ctor(UInt64).0._Finished\ <= false;
+                \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+                \PrngMWC64X::.ctor(UInt64).0.seed\ := to_unsigned(0, 64);
+            else 
+                case \PrngMWC64X::.ctor(UInt64).0._State\ is 
+                    when \PrngMWC64X::.ctor(UInt64).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::.ctor(UInt64).0._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::.ctor(UInt64).0._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).0._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::.ctor(UInt64).0._Finished\ <= false;
+                            \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\ <= \PrngMWC64X::.ctor(UInt64).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).0._State_2\ => 
+                        \PrngMWC64X::.ctor(UInt64).0.this\ := \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\;
+                        \PrngMWC64X::.ctor(UInt64).0.seed\ := \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = seed;
+                        -- 
+                        \PrngMWC64X::.ctor(UInt64).0.this\.\state\ := \PrngMWC64X::.ctor(UInt64).0.seed\;
+                        \PrngMWC64X::.ctor(UInt64).0._State\ := \PrngMWC64X::.ctor(UInt64).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).0 state machine end
+
+
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).1 state machine start
+    \PrngMWC64X::.ctor(UInt64).1._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::.ctor(UInt64).1._State\: \PrngMWC64X::.ctor(UInt64).1._States\ := \PrngMWC64X::.ctor(UInt64).1._State_0\;
+        Variable \PrngMWC64X::.ctor(UInt64).1.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::.ctor(UInt64).1.seed\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::.ctor(UInt64).1._Finished\ <= false;
+                \PrngMWC64X::.ctor(UInt64).1._State\ := \PrngMWC64X::.ctor(UInt64).1._State_0\;
+                \PrngMWC64X::.ctor(UInt64).1.seed\ := to_unsigned(0, 64);
+            else 
+                case \PrngMWC64X::.ctor(UInt64).1._State\ is 
+                    when \PrngMWC64X::.ctor(UInt64).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::.ctor(UInt64).1._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).1._State\ := \PrngMWC64X::.ctor(UInt64).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::.ctor(UInt64).1._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).1._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::.ctor(UInt64).1._Finished\ <= false;
+                            \PrngMWC64X::.ctor(UInt64).1._State\ := \PrngMWC64X::.ctor(UInt64).1._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::.ctor(UInt64).1.this.parameter.Out\ <= \PrngMWC64X::.ctor(UInt64).1.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).1._State_2\ => 
+                        \PrngMWC64X::.ctor(UInt64).1.this\ := \PrngMWC64X::.ctor(UInt64).1.this.parameter.In\;
+                        \PrngMWC64X::.ctor(UInt64).1.seed\ := \PrngMWC64X::.ctor(UInt64).1.seed.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = seed;
+                        -- 
+                        \PrngMWC64X::.ctor(UInt64).1.this\.\state\ := \PrngMWC64X::.ctor(UInt64).1.seed\;
+                        \PrngMWC64X::.ctor(UInt64).1._State\ := \PrngMWC64X::.ctor(UInt64).1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).1 state machine end
+
+
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).2 state machine start
+    \PrngMWC64X::.ctor(UInt64).2._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::.ctor(UInt64).2._State\: \PrngMWC64X::.ctor(UInt64).2._States\ := \PrngMWC64X::.ctor(UInt64).2._State_0\;
+        Variable \PrngMWC64X::.ctor(UInt64).2.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::.ctor(UInt64).2.seed\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::.ctor(UInt64).2._Finished\ <= false;
+                \PrngMWC64X::.ctor(UInt64).2._State\ := \PrngMWC64X::.ctor(UInt64).2._State_0\;
+                \PrngMWC64X::.ctor(UInt64).2.seed\ := to_unsigned(0, 64);
+            else 
+                case \PrngMWC64X::.ctor(UInt64).2._State\ is 
+                    when \PrngMWC64X::.ctor(UInt64).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::.ctor(UInt64).2._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).2._State\ := \PrngMWC64X::.ctor(UInt64).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::.ctor(UInt64).2._Started\ = true) then 
+                            \PrngMWC64X::.ctor(UInt64).2._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::.ctor(UInt64).2._Finished\ <= false;
+                            \PrngMWC64X::.ctor(UInt64).2._State\ := \PrngMWC64X::.ctor(UInt64).2._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::.ctor(UInt64).2.this.parameter.Out\ <= \PrngMWC64X::.ctor(UInt64).2.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::.ctor(UInt64).2._State_2\ => 
+                        \PrngMWC64X::.ctor(UInt64).2.this\ := \PrngMWC64X::.ctor(UInt64).2.this.parameter.In\;
+                        \PrngMWC64X::.ctor(UInt64).2.seed\ := \PrngMWC64X::.ctor(UInt64).2.seed.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = seed;
+                        -- 
+                        \PrngMWC64X::.ctor(UInt64).2.this\.\state\ := \PrngMWC64X::.ctor(UInt64).2.seed\;
+                        \PrngMWC64X::.ctor(UInt64).2._State\ := \PrngMWC64X::.ctor(UInt64).2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64).2 state machine end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 state machine start
+    \PrngMWC64X::NextUInt32().0._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::NextUInt32().0._State\: \PrngMWC64X::NextUInt32().0._States\ := \PrngMWC64X::NextUInt32().0._State_0\;
+        Variable \PrngMWC64X::NextUInt32().0.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::NextUInt32().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::NextUInt32().0._Finished\ <= false;
+                \PrngMWC64X::NextUInt32().0.return\ <= to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_0\;
+                \PrngMWC64X::NextUInt32().0.num\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num2\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num3\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num4\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.num5\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \PrngMWC64X::NextUInt32().0._State\ is 
+                    when \PrngMWC64X::NextUInt32().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::NextUInt32().0._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::NextUInt32().0._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().0._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::NextUInt32().0._Finished\ <= false;
+                            \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::NextUInt32().0.this.parameter.Out\ <= \PrngMWC64X::NextUInt32().0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().0._State_2\ => 
+                        \PrngMWC64X::NextUInt32().0.this\ := \PrngMWC64X::NextUInt32().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.state >> 32);
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.0\ := SmartResize(shift_right(\PrngMWC64X::NextUInt32().0.this\.\state\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \PrngMWC64X::NextUInt32().0.num\ := (\PrngMWC64X::NextUInt32().0.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)@this.state;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.num2\ := SmartResize(\PrngMWC64X::NextUInt32().0.this\.\state\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 65534u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.num3\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 47131u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.num4\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 4294883355u;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().0.num5\ := "11111111111111101011100000011011";
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \PrngMWC64X::NextUInt32().0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().0.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \PrngMWC64X::NextUInt32().0._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().0.num\, 64);
+                        \PrngMWC64X::NextUInt32().0.this\.\state\ := \PrngMWC64X::NextUInt32().0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
+                        \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\ := \PrngMWC64X::NextUInt32().0.num2\ xor \PrngMWC64X::NextUInt32().0.num\;
+                        \PrngMWC64X::NextUInt32().0.return\ <= \PrngMWC64X::NextUInt32().0.binaryOperationResult.3\;
+                        \PrngMWC64X::NextUInt32().0._State\ := \PrngMWC64X::NextUInt32().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5284
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().0 state machine end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().1 state machine start
+    \PrngMWC64X::NextUInt32().1._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::NextUInt32().1._State\: \PrngMWC64X::NextUInt32().1._States\ := \PrngMWC64X::NextUInt32().1._State_0\;
+        Variable \PrngMWC64X::NextUInt32().1.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::NextUInt32().1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().1.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().1.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().1.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::NextUInt32().1._Finished\ <= false;
+                \PrngMWC64X::NextUInt32().1.return\ <= to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_0\;
+                \PrngMWC64X::NextUInt32().1.num\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1.num2\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1.num3\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1.num4\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1.num5\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().1.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \PrngMWC64X::NextUInt32().1._State\ is 
+                    when \PrngMWC64X::NextUInt32().1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::NextUInt32().1._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::NextUInt32().1._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().1._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::NextUInt32().1._Finished\ <= false;
+                            \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::NextUInt32().1.this.parameter.Out\ <= \PrngMWC64X::NextUInt32().1.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().1._State_2\ => 
+                        \PrngMWC64X::NextUInt32().1.this\ := \PrngMWC64X::NextUInt32().1.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.state >> 32);
+                        -- 
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.0\ := SmartResize(shift_right(\PrngMWC64X::NextUInt32().1.this\.\state\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \PrngMWC64X::NextUInt32().1.num\ := (\PrngMWC64X::NextUInt32().1.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)@this.state;
+                        -- 
+                        \PrngMWC64X::NextUInt32().1.num2\ := SmartResize(\PrngMWC64X::NextUInt32().1.this\.\state\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 65534u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().1.num3\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 47131u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().1.num4\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 4294883355u;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().1.num5\ := "11111111111111101011100000011011";
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \PrngMWC64X::NextUInt32().1._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().1.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \PrngMWC64X::NextUInt32().1._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().1.num\, 64);
+                        \PrngMWC64X::NextUInt32().1.this\.\state\ := \PrngMWC64X::NextUInt32().1.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
+                        \PrngMWC64X::NextUInt32().1.binaryOperationResult.3\ := \PrngMWC64X::NextUInt32().1.num2\ xor \PrngMWC64X::NextUInt32().1.num\;
+                        \PrngMWC64X::NextUInt32().1.return\ <= \PrngMWC64X::NextUInt32().1.binaryOperationResult.3\;
+                        \PrngMWC64X::NextUInt32().1._State\ := \PrngMWC64X::NextUInt32().1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5284
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().1 state machine end
+
+
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().2 state machine start
+    \PrngMWC64X::NextUInt32().2._StateMachine\: process (\Clock\) 
+        Variable \PrngMWC64X::NextUInt32().2._State\: \PrngMWC64X::NextUInt32().2._States\ := \PrngMWC64X::NextUInt32().2._State_0\;
+        Variable \PrngMWC64X::NextUInt32().2.this\: \Hast.Algorithms.PrngMWC64X\;
+        Variable \PrngMWC64X::NextUInt32().2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().2.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().2.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().2.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \PrngMWC64X::NextUInt32().2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \PrngMWC64X::NextUInt32().2._Finished\ <= false;
+                \PrngMWC64X::NextUInt32().2.return\ <= to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_0\;
+                \PrngMWC64X::NextUInt32().2.num\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2.num2\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2.num3\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2.num4\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2.num5\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \PrngMWC64X::NextUInt32().2.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \PrngMWC64X::NextUInt32().2._State\ is 
+                    when \PrngMWC64X::NextUInt32().2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\PrngMWC64X::NextUInt32().2._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\PrngMWC64X::NextUInt32().2._Started\ = true) then 
+                            \PrngMWC64X::NextUInt32().2._Finished\ <= true;
+                        else 
+                            \PrngMWC64X::NextUInt32().2._Finished\ <= false;
+                            \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \PrngMWC64X::NextUInt32().2.this.parameter.Out\ <= \PrngMWC64X::NextUInt32().2.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrngMWC64X::NextUInt32().2._State_2\ => 
+                        \PrngMWC64X::NextUInt32().2.this\ := \PrngMWC64X::NextUInt32().2.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.state >> 32);
+                        -- 
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.0\ := SmartResize(shift_right(\PrngMWC64X::NextUInt32().2.this\.\state\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \PrngMWC64X::NextUInt32().2.num\ := (\PrngMWC64X::NextUInt32().2.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)@this.state;
+                        -- 
+                        \PrngMWC64X::NextUInt32().2.num2\ := SmartResize(\PrngMWC64X::NextUInt32().2.this\.\state\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 65534u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().2.num3\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 47131u;
+                        -- 
+                        \PrngMWC64X::NextUInt32().2.num4\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 4294883355u;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().2.num5\ := "11111111111111101011100000011011";
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.state = (ulong)num2 * 4294883355uL + (ulong)num;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \PrngMWC64X::NextUInt32().2._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ := SmartResize(SmartResize(\PrngMWC64X::NextUInt32().2.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7638
+                    when \PrngMWC64X::NextUInt32().2._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.1\ + SmartResize(\PrngMWC64X::NextUInt32().2.num\, 64);
+                        \PrngMWC64X::NextUInt32().2.this\.\state\ := \PrngMWC64X::NextUInt32().2.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
+                        \PrngMWC64X::NextUInt32().2.binaryOperationResult.3\ := \PrngMWC64X::NextUInt32().2.num2\ xor \PrngMWC64X::NextUInt32().2.num\;
+                        \PrngMWC64X::NextUInt32().2.return\ <= \PrngMWC64X::NextUInt32().2.binaryOperationResult.3\;
+                        \PrngMWC64X::NextUInt32().2._State\ := \PrngMWC64X::NextUInt32().2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5284
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32().2 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -20196,6 +22443,7 @@ begin
                 \Hast::ExternalInvocationProxy().Loopback::Run(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= false;
@@ -20233,76 +22481,83 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 3 => 
+                            if (\Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 4 => 
                             if (\Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 4 => 
+                        when 5 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 5 => 
+                        when 6 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 6 => 
+                        when 7 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 7 => 
+                        when 8 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 8 => 
+                        when 9 => 
                             if (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 9 => 
+                        when 10 => 
                             if (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 10 => 
+                        when 11 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 11 => 
+                        when 12 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 12 => 
+                        when 13 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 13 => 
+                        when 14 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Finished.0\) then 
@@ -20649,6 +22904,69 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).24._Finished\;
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.return\;
     -- System.Void Hast::InternalInvocationProxy().System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64) start
+    -- Signal connections for System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).0 (#0):
+    \PrngMWC64X::.ctor(UInt64).0._Started\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Started.0\;
+    \PrngMWC64X::.ctor(UInt64).0.this.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\;
+    \PrngMWC64X::.ctor(UInt64).0.seed.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64)._Finished.0\ <= \PrngMWC64X::.ctor(UInt64).0._Finished\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\ <= \PrngMWC64X::.ctor(UInt64).0.this.parameter.Out\;
+    -- Signal connections for System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).1 (#1):
+    \PrngMWC64X::.ctor(UInt64).1._Started\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Started.0\;
+    \PrngMWC64X::.ctor(UInt64).1.this.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\;
+    \PrngMWC64X::.ctor(UInt64).1.seed.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64)._Finished.0\ <= \PrngMWC64X::.ctor(UInt64).1._Finished\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\ <= \PrngMWC64X::.ctor(UInt64).1.this.parameter.Out\;
+    -- Signal connections for System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).2 (#2):
+    \PrngMWC64X::.ctor(UInt64).2._Started\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Started.0\;
+    \PrngMWC64X::.ctor(UInt64).2.this.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).this.parameter.Out.0\;
+    \PrngMWC64X::.ctor(UInt64).2.seed.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).seed.parameter.Out.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64)._Finished.0\ <= \PrngMWC64X::.ctor(UInt64).2._Finished\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::.ctor(UInt64).this.parameter.In.0\ <= \PrngMWC64X::.ctor(UInt64).2.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.PrngMWC64X::.ctor(System.UInt64) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32() start
+    -- Signal connections for System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).0 (#0):
+    \PrngMWC64X::NextUInt32().0._Started\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Started.0\;
+    \PrngMWC64X::NextUInt32().0.this.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32()._Finished.0\ <= \PrngMWC64X::NextUInt32().0._Finished\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().0.return\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().0.this.parameter.Out\;
+    -- Signal connections for System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).1 (#1):
+    \PrngMWC64X::NextUInt32().1._Started\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Started.0\;
+    \PrngMWC64X::NextUInt32().1.this.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32()._Finished.0\ <= \PrngMWC64X::NextUInt32().1._Finished\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().1.return\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().1.this.parameter.Out\;
+    -- Signal connections for System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32).2 (#2):
+    \PrngMWC64X::NextUInt32().2._Started\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Started.0\;
+    \PrngMWC64X::NextUInt32().2.this.parameter.In\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.Out.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32()._Finished.0\ <= \PrngMWC64X::NextUInt32().2._Finished\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().return.0\ <= \PrngMWC64X::NextUInt32().2.return\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.PrngMWC64X::NextUInt32().this.parameter.In.0\ <= \PrngMWC64X::NextUInt32().2.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.PrngMWC64X::NextUInt32() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.0\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.0\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._Finished\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.0\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.1\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.1\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.1\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._Finished\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.1\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Started.2\;
+    \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.2\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32)._Finished.2\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._Finished\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).return.2\ <= \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(System.UInt32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
@@ -21899,6 +24217,13 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Finished.0\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ObjectOrientedShowcase::Run(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\;
@@ -21970,10 +24295,10 @@ begin
 
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\) when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;

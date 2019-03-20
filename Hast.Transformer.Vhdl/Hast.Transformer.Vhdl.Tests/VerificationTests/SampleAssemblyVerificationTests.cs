@@ -36,7 +36,12 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<Loopback>();
 
-                        //configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
+                        configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
+                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<MonteCarloPiEstimator>(m => m.EstimatePi(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
 
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
