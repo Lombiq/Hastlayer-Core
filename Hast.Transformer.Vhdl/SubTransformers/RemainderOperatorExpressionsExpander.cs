@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                         "remainderOperand",
                         operand,
-                        AstType.Create(operand.GetActualTypeReference().FullName));
+                        TypeHelper.CreateAstType(operand.GetActualTypeReference()));
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
                         .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());

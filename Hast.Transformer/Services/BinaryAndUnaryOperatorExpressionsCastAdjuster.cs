@@ -262,7 +262,7 @@ namespace Hast.Transformer.Services
             private static CastExpression CreateCast<T>(TypeReference toTypeReference, T expression, out T clonedExpression)
                 where T : Expression
             {
-                var castExpression = new CastExpression { Type = AstType.Create(toTypeReference.FullName) };
+                var castExpression = new CastExpression { Type = TypeHelper.CreateAstType(toTypeReference) };
 
                 clonedExpression = (T)expression.Clone();
                 castExpression.Expression = new ParenthesizedExpression(clonedExpression);

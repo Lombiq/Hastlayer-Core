@@ -4210,7 +4210,7 @@ begin
                         -- array = new Task<ImageContrastModifier.PixelProcessingTaskOutput>[25];
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = (int)((System.Int32)(num2) * (System.Int32)(num));
+                        -- num4 = (int)((Int32)(num2) * (Int32)(num));
                         -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(signed(SmartResize((\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\), 32)) * signed(SmartResize((\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32)), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
@@ -17805,7 +17805,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
+                            -- flag = (Int32)(number) == 0 || (Int32)(number) == 1;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) = to_signed(1, 32);
@@ -17816,7 +17816,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -17860,11 +17860,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -18009,7 +18009,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
+                            -- flag = (Int32)(number) == 0 || (Int32)(number) == 1;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) = to_signed(1, 32);
@@ -18020,7 +18020,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -18064,11 +18064,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -18213,7 +18213,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
+                            -- flag = (Int32)(number) == 0 || (Int32)(number) == 1;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) = to_signed(1, 32);
@@ -18224,7 +18224,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -18268,11 +18268,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -18417,7 +18417,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0 || (System.Int32)(number) == 1;
+                            -- flag = (Int32)(number) == 0 || (Int32)(number) == 1;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) = to_signed(1, 32);
@@ -18428,7 +18428,7 @@ begin
                             -- 	result = (uint)number;
                             -- }
                             -- else {
-                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                             -- }
                             -- 
 
@@ -18472,11 +18472,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (System.Int16)((System.Int32)(number) - 1));
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (Int16)((Int32)(number) - 1));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -18613,7 +18613,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0;
+                            -- flag = (Int32)(number) == 0;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\;
@@ -18622,7 +18622,7 @@ begin
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -18666,11 +18666,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -18787,7 +18787,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0;
+                            -- flag = (Int32)(number) == 0;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\;
@@ -18796,7 +18796,7 @@ begin
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -18840,11 +18840,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -18961,7 +18961,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0;
+                            -- flag = (Int32)(number) == 0;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\;
@@ -18970,7 +18970,7 @@ begin
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -19014,11 +19014,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
@@ -19135,7 +19135,7 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)(number) == 0;
+                            -- flag = (Int32)(number) == 0;
                             -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\), 32) = to_signed(0, 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\;
@@ -19144,7 +19144,7 @@ begin
                             -- 	result = 1u;
                             -- }
                             -- else {
-                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                             -- }
                             -- 
 
@@ -19188,11 +19188,11 @@ begin
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (System.Int16)((System.Int32)(number) - 1))));
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, (Int16)((Int32)(number) - 1))));
                         -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\), 32) - to_signed(1, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
