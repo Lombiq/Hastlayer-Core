@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Configuration;
-using Hast.Synthesis.Services;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -17,6 +13,9 @@ using Hast.VhdlBuilder.Testing;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -495,7 +494,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // Casting if the result type is not what the parent expects.
                         var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
                         if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
-                            parentTypeInformation != null && 
+                            parentTypeInformation != null &&
                             parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
                             parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
                         {
@@ -677,39 +676,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Running the constructor, which needs to be done before initializers.
                 var constructorFullName = objectCreateExpression.GetConstructorFullName();
-                if (!string.IsNullOrEmpty(constructorFullName))
-                {
-                    if (context.TransformationContext.TypeDeclarationLookupTable
+                if (!string.IsNullOrEmpty(constructorFullName) &&
+                    context.TransformationContext.TypeDeclarationLookupTable
                         .Lookup(objectCreateExpression.Type)
                         .Members
                         .SingleOrDefault(member => member.GetFullName() == constructorFullName) is MethodDeclaration constructor)
-                    {
-                        scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
+                {
+                    scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
 
-                        // The easiest is to fake an invocation.
-                        var constructorInvocation = new InvocationExpression(
-                            new MemberReferenceExpression(
-                                new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
-                                constructor.Name),
-                            // Passing ctor parameters, and an object reference as the first one (since all methods were
-                            // converted to static with the first parameter being @this).
-                            new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
-                                .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
+                    // The easiest is to fake an invocation.
+                    var constructorInvocation = new InvocationExpression(
+                        new MemberReferenceExpression(
+                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
+                            constructor.Name),
+                        // Passing ctor parameters, and an object reference as the first one (since all methods were
+                        // converted to static with the first parameter being @this).
+                        new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                            .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
 
-                        expression.CopyAnnotationsTo(constructorInvocation);
+                    expression.CopyAnnotationsTo(constructorInvocation);
 
-                        // Creating a clone of the expression's sub-tree where object creation is replaced to make the 
-                        // fake InvocationExpression realistic. A clone is needed not to cause concurrency issues if the
-                        // same expression is processed on multiple threads for multiple hardware copies.
-                        var expressionName = expression.GetFullName();
+                    // Creating a clone of the expression's sub-tree where object creation is replaced to make the fake
+                    // InvocationExpression realistic. A clone is needed not to cause concurrency issues if the same
+                    // expression is processed on multiple threads for multiple hardware copies.
+                    var expressionName = expression.GetFullName();
 
-                        var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
-                        var objectCreateExpressionClone = subTreeClone
-                            .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
-                        objectCreateExpressionClone.ReplaceWith(constructorInvocation);
+                    var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
+                    var objectCreateExpressionClone = subTreeClone
+                        .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
+                    objectCreateExpressionClone.ReplaceWith(constructorInvocation);
 
-                        Transform(constructorInvocation, context);
-                    }
+                    Transform(constructorInvocation, context);
                 }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
