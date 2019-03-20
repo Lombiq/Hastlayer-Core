@@ -310,6 +310,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // So we need to truncate.
                 // Furthermore right shifts will also do a bitwise AND with just 1s on the count, see:
                 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
+                // How the vacated bits are filled on shifting in either direction is the same (see: 
+                // https://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl).
 
                 var countSize = leftTypeSize <= 32 ? 5 : 6;
                 IVhdlElement resize = ResizeHelper.SmartResize(binary.Right, countSize);
