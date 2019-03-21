@@ -282,7 +282,17 @@ namespace Hast.Transformer
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
-            var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
+
+            var preConfiguredArrayLengths = configuration
+                .TransformerConfiguration()
+                .ArrayLengths
+                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
+            var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
+            if (transformerConfiguration.EnableConstantSubstitution)
+            {
+                _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, arraySizeHolder, configuration); 
+            }
+
             // Needs to run after const substitution.
             _taskBodyInvocationInstanceCountsSetter.SetTaskBodyInvocationInstanceCounts(syntaxTree, configuration);
 
