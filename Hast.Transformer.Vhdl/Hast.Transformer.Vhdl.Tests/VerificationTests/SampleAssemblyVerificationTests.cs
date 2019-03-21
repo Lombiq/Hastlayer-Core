@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(PrngMWC64X).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.
@@ -80,7 +80,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(PrngMWC64X).Assembly },
+                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
