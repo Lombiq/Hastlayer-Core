@@ -318,6 +318,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 if (expression.Operator == BinaryOperatorType.ShiftRight)
                 {
+                    // Since we're already resizing the additional "& 11111" (or "& 111111") might not be needed.
+                    // However it's just an identity operation due to the count parameter having the same size.
                     resize = new Binary
                     {
                         Left = resize,
