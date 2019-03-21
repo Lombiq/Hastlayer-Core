@@ -2950,7 +2950,6 @@ begin
     \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._States\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_0\;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.rawTaskState\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-        Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3008,6 +3007,7 @@ begin
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.unaryOperationResult.7\: boolean := false;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.unaryOperationResult.8\: boolean := false;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
+        Alias \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\ : \Hast.Samples.Kpz.KpzKernelsTaskState\ is \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.rawTaskState\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3507,7 +3507,6 @@ begin
     \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._StateMachine\: process (\Clock\) 
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._States\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_0\;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.rawTaskState\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-        Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3565,6 +3564,7 @@ begin
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.unaryOperationResult.7\: boolean := false;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.unaryOperationResult.8\: boolean := false;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
+        Alias \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\ : \Hast.Samples.Kpz.KpzKernelsTaskState\ is \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.rawTaskState\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4064,7 +4064,6 @@ begin
     \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._StateMachine\: process (\Clock\) 
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\: \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._States\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_0\;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.rawTaskState\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-        Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4122,6 +4121,7 @@ begin
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.unaryOperationResult.7\: boolean := false;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.unaryOperationResult.8\: boolean := false;
         Variable \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
+        Alias \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\ : \Hast.Samples.Kpz.KpzKernelsTaskState\ is \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.rawTaskState\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 

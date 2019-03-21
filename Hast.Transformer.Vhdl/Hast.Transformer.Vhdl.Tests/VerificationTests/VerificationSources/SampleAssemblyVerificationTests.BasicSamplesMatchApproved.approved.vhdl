@@ -11684,11 +11684,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11825,11 +11825,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11966,11 +11966,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12107,11 +12107,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).3.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12248,11 +12248,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).4.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12389,11 +12389,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).5.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12530,11 +12530,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).6.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12671,11 +12671,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).7.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12812,11 +12812,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).8.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12953,11 +12953,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).9.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13094,11 +13094,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).10.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13235,11 +13235,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).11.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13376,11 +13376,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).12.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13517,11 +13517,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).13.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13658,11 +13658,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).14.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13799,11 +13799,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).15.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -13940,11 +13940,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).16.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14081,11 +14081,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).17.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14222,11 +14222,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).18.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14363,11 +14363,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).19.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14504,11 +14504,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).20.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14645,11 +14645,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).21.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14786,11 +14786,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).22.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14927,11 +14927,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).23.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -15068,11 +15068,11 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Alias \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.pixelProcessingTaskInput\ : \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).24.inputObject\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 

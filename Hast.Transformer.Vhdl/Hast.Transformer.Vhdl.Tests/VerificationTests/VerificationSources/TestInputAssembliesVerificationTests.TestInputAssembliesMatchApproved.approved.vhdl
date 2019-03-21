@@ -21,6 +21,7 @@
 -- * System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32)
 -- * System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage()
 -- * System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32)
+-- * System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32)
 -- * System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Various.ParallelCases::ObjectUsingTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32)
@@ -1131,6 +1132,19 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 declarations start
+    -- State machine states:
+    type \ObjectUsingCases::ReferenceAssignment(Int32).0._States\ is (
+        \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\, 
+        \ObjectUsingCases::ReferenceAssignment(Int32).0._State_1\, 
+        \ObjectUsingCases::ReferenceAssignment(Int32).0._State_2\);
+    -- Signals:
+    Signal \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\: boolean := false;
+    Signal \ObjectUsingCases::ReferenceAssignment(Int32).0._Started\: boolean := false;
+    Signal \ObjectUsingCases::ReferenceAssignment(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 declarations end
+
+
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 declarations start
     -- State machine states:
     type \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._States\ is (
@@ -1408,6 +1422,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\: boolean := false;
@@ -1433,6 +1448,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\: boolean := false;
@@ -14955,6 +14971,85 @@ begin
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 state machine start
+    \ObjectUsingCases::ReferenceAssignment(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0._State\: \ObjectUsingCases::ReferenceAssignment(Int32).0._States\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\;
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Alias \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\ : \Hast.TestInputs.Various.ObjectUsingCases/MyClass\ is \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\ <= false;
+                \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\;
+                \ObjectUsingCases::ReferenceAssignment(Int32).0.input\ := to_signed(0, 32);
+                \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+            else 
+                case \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ is 
+                    when \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ = true) then 
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::ReferenceAssignment(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ = true) then 
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\ <= true;
+                        else 
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\ <= false;
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::ReferenceAssignment(Int32).0._State_2\ => 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.input\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ObjectUsingCases.MyClass myClass;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ObjectUsingCases.MyClass myClass2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = new ObjectUsingCases.MyClass {
+                        -- 
+                        -- };
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\IsNull\ := false;
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = input;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass2 = myClass;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = myClass.MyProperty + 1;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ + to_signed(1, 32);
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass2.MyProperty = myClass2.MyProperty + 1;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\.\MyProperty\ + to_signed(1, 32);
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\.\MyProperty\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\;
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 state machine end
+
+
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 state machine start
     \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._StateMachine\: process (\Clock\) 
         Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\: \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._States\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\;
@@ -16371,6 +16466,7 @@ begin
                 \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
@@ -16533,20 +16629,27 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 22 => 
+                            if (\Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 23 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 23 => 
+                        when 24 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 24 => 
+                        when 25 => 
                             if (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\) then 
@@ -17293,6 +17396,13 @@ begin
     \ObjectUsingCases::VoidReturn(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\;
     \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\ <= \ObjectUsingCases::VoidReturn(Int32).0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\ <= \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start

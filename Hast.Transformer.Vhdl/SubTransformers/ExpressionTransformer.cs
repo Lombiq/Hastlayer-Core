@@ -74,7 +74,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
                 {
-                    if (left.GetActualTypeReference().IsSimpleMemory()) return Empty.Instance;
+                    var leftTypeReference = left.GetActualTypeReference();
+                    if (leftTypeReference.IsSimpleMemory()) return Empty.Instance;
 
                     var leftTransformed = Transform(left, context);
                     if (leftTransformed == Empty.Instance) return Empty.Instance;
@@ -90,14 +91,54 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         rightTransformed = Transform(right, context);
                     }
+
+                    var leftDataObject = (IDataObject)leftTransformed;
+
+                    if (left is IdentifierExpression &&
+                        stateMachine.LocalAliases.Any(alias => alias.Name == leftDataObject.Name))
+                    {
+                        // The left variable was previously swapped for an alias to allow reference-like behavior so
+                        // changes made to record fields are propagated. However such aliases can't be assigned to as
+                        // that would also overwrite the original variable.
+                        throw new NotSupportedException(
+                            "The assignment " + expression + 
+                            " is not supported. You can't at the moment assign to a variable that you previously assigned to using a reference type-holding variable."
+                            .AddParentEntityName(assignment));
+                    }
+
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
+
+                    var rightTypeReference = right.GetActualTypeReference();
+                    if (leftTypeReference != null && 
+                        leftTypeReference.FullName == rightTypeReference.FullName && 
+                        !leftTypeReference.IsValueType &&
+                        left is IdentifierExpression && right is IdentifierExpression)
+                    {
+                        // This is an assignment between two variables holding reference type objects. Since there are
+                        // no references in VHDL the best option is to use aliases (instead of assigning back variables
+                        // after every change). This is not perfect though since if the now alias variable is assigned
+                        // to
+
+                        // Switching the left variable out with an alias so it'll have reference-like behavior.
+                        stateMachine.LocalVariables.Remove(stateMachine.LocalVariables.Single(variable => variable.Name == leftDataObject.Name));
+                        var aliasedVariable = stateMachine.LocalVariables
+                                .Single(variable => variable.Name == ((IDataObject)rightTransformed).Name);
+
+                        stateMachine.LocalAliases.Add(
+                            new Alias
+                            {
+                                Name = leftDataObject.Name,
+                                AliasedObject = aliasedVariable.ToReference(),
+                                DataType = aliasedVariable.DataType
+                            });
+                    }
 
                     // _typeConversionTransformer.ImplementTypeConversionForAssignment() could be used here, but that
                     // also needs the data types of both operands.
 
                     return new Assignment
                     {
-                        AssignTo = (IDataObject)leftTransformed,
+                        AssignTo = leftDataObject,
                         Expression = rightTransformed
                     };
                 }
