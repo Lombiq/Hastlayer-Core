@@ -21737,6 +21737,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
+                                -- A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state.
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\ => 
                                 -- The following section was transformed from the .NET statement below:
@@ -21772,6 +21773,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
+                                -- A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state.
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\ => 
                                 -- The following section was transformed from the .NET statement below:
@@ -21807,6 +21809,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29), 32);
+                                -- A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state.
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\ => 
                                 -- The following section was transformed from the .NET statement below:
