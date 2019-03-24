@@ -181,7 +181,7 @@ architecture Imp of Hast_IP is
     -- Custom inter-dependent type declarations start
     type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
-    type \Hast.Algorithms.RandomMwc64X\ is record 
+    type \Hast.Algorithms.Random.RandomMwc64X\ is record 
         \IsNull\: boolean;
         \State\: unsigned(63 downto 0);
     end record;
@@ -189,15 +189,15 @@ architecture Imp of Hast_IP is
         \IsNull\: boolean;
         \BramDx\: \boolean_Array\(0 to 63);
         \BramDy\: \boolean_Array\(0 to 63);
-        \Random1\: \Hast.Algorithms.RandomMwc64X\;
-        \Random2\: \Hast.Algorithms.RandomMwc64X\;
+        \Random1\: \Hast.Algorithms.Random.RandomMwc64X\;
+        \Random2\: \Hast.Algorithms.Random.RandomMwc64X\;
     end record;
     type \Hast.Samples.Kpz.KpzKernelsTaskState_Array\ is array (integer range <>) of \Hast.Samples.Kpz.KpzKernelsTaskState\;
     type \Hast.Samples.Kpz.KpzKernels\ is record 
         \IsNull\: boolean;
         \_gridRaw\: \unsigned32_Array\(0 to 63);
-        \Random1\: \Hast.Algorithms.RandomMwc64X\;
-        \Random2\: \Hast.Algorithms.RandomMwc64X\;
+        \Random1\: \Hast.Algorithms.Random.RandomMwc64X\;
+        \Random2\: \Hast.Algorithms.Random.RandomMwc64X\;
         \TestMode\: boolean;
         \NumberOfIterations\: unsigned(31 downto 0);
     end record;
@@ -386,7 +386,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -409,7 +409,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Started\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\: \Hast.Samples.Kpz.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
@@ -540,11 +540,11 @@ architecture Imp of Hast_IP is
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.return\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.rawTaskState.parameter.Out\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._Started\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.rawTaskState.parameter.In\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- Hast.Samples.Kpz.KpzKernelsTaskState Hast.Samples.Kpz.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.KpzKernelsTaskState).0 declarations end
@@ -575,11 +575,11 @@ architecture Imp of Hast_IP is
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.return\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.rawTaskState.parameter.Out\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._Started\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.rawTaskState.parameter.In\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- Hast.Samples.Kpz.KpzKernelsTaskState Hast.Samples.Kpz.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.KpzKernelsTaskState).1 declarations end
@@ -610,11 +610,11 @@ architecture Imp of Hast_IP is
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.return\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.rawTaskState.parameter.Out\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._Started\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.rawTaskState.parameter.In\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
-    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- Hast.Samples.Kpz.KpzKernelsTaskState Hast.Samples.Kpz.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.KpzKernelsTaskState).2 declarations end
@@ -690,7 +690,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).rawTaskState.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Started.0\: boolean := false;
@@ -699,7 +699,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).rawTaskState.parameter.Out.2\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState)._Started.2\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._Started\: boolean := false;
-    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).rawTaskState.parameter.In.0\: \Hast.Samples.Kpz.KpzKernelsTaskState\;
@@ -714,7 +714,7 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.Kpz.KpzKernelsParallelizedInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().0 declarations start
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().0 declarations start
     -- State machine states:
     type \RandomMwc64X::NextUInt32().0._States\ is (
         \RandomMwc64X::NextUInt32().0._State_0\, 
@@ -725,13 +725,13 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \RandomMwc64X::NextUInt32().0._Finished\: boolean := false;
     Signal \RandomMwc64X::NextUInt32().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \RandomMwc64X::NextUInt32().0.this.parameter.Out\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \RandomMwc64X::NextUInt32().0.this.parameter.Out\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \RandomMwc64X::NextUInt32().0._Started\: boolean := false;
-    Signal \RandomMwc64X::NextUInt32().0.this.parameter.In\: \Hast.Algorithms.RandomMwc64X\;
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().0 declarations end
+    Signal \RandomMwc64X::NextUInt32().0.this.parameter.In\: \Hast.Algorithms.Random.RandomMwc64X\;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().0 declarations end
 
 
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().1 declarations start
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().1 declarations start
     -- State machine states:
     type \RandomMwc64X::NextUInt32().1._States\ is (
         \RandomMwc64X::NextUInt32().1._State_0\, 
@@ -742,13 +742,13 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \RandomMwc64X::NextUInt32().1._Finished\: boolean := false;
     Signal \RandomMwc64X::NextUInt32().1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \RandomMwc64X::NextUInt32().1.this.parameter.Out\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \RandomMwc64X::NextUInt32().1.this.parameter.Out\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \RandomMwc64X::NextUInt32().1._Started\: boolean := false;
-    Signal \RandomMwc64X::NextUInt32().1.this.parameter.In\: \Hast.Algorithms.RandomMwc64X\;
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().1 declarations end
+    Signal \RandomMwc64X::NextUInt32().1.this.parameter.In\: \Hast.Algorithms.Random.RandomMwc64X\;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().1 declarations end
 
 
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().2 declarations start
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().2 declarations start
     -- State machine states:
     type \RandomMwc64X::NextUInt32().2._States\ is (
         \RandomMwc64X::NextUInt32().2._State_0\, 
@@ -759,10 +759,10 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \RandomMwc64X::NextUInt32().2._Finished\: boolean := false;
     Signal \RandomMwc64X::NextUInt32().2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \RandomMwc64X::NextUInt32().2.this.parameter.Out\: \Hast.Algorithms.RandomMwc64X\;
+    Signal \RandomMwc64X::NextUInt32().2.this.parameter.Out\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \RandomMwc64X::NextUInt32().2._Started\: boolean := false;
-    Signal \RandomMwc64X::NextUInt32().2.this.parameter.In\: \Hast.Algorithms.RandomMwc64X\;
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().2 declarations end
+    Signal \RandomMwc64X::NextUInt32().2.this.parameter.In\: \Hast.Algorithms.Random.RandomMwc64X\;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().2 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -1960,15 +1960,15 @@ begin
                         -- bool flag;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = Hast.Algorithms.RandomMwc64X.NextUInt32 (@this.Random1);
+                        -- num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (@this.Random1);
                         -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\Random1\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\;
@@ -2004,20 +2004,20 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = Hast.Algorithms.RandomMwc64X.NextUInt32 (@this.Random2);
+                            -- num4 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (@this.Random2);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\Random2\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\;
@@ -3107,8 +3107,8 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.i\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 32) {
-                        -- 	num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
-                        -- 	num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                        -- 	num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                        -- 	num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                         -- 	num3 = (int)(num & 7u);
                         -- 	num4 = (int)(num >> 16 & 7u);
                         -- 	num5 = num3 + num4 * 8;
@@ -3143,8 +3143,8 @@ begin
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
-                            -- 	num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                            -- 	num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                            -- 	num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                             -- 	num3 = (int)(num & 7u);
                             -- 	num4 = (int)(num >> 16 & 7u);
                             -- 	num5 = num3 + num4 * 8;
@@ -3170,9 +3170,9 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                            -- num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
                             -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\Random1\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_5\;
@@ -3189,14 +3189,14 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.return.0\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\Random1\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.num\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                            -- num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_6\;
@@ -3207,13 +3207,13 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_7\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.kpzKernelsTaskState\.\Random2\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.return.1\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\;
@@ -3664,8 +3664,8 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.i\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 32) {
-                        -- 	num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
-                        -- 	num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                        -- 	num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                        -- 	num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                         -- 	num3 = (int)(num & 7u);
                         -- 	num4 = (int)(num >> 16 & 7u);
                         -- 	num5 = num3 + num4 * 8;
@@ -3700,8 +3700,8 @@ begin
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
-                            -- 	num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                            -- 	num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                            -- 	num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                             -- 	num3 = (int)(num & 7u);
                             -- 	num4 = (int)(num >> 16 & 7u);
                             -- 	num5 = num3 + num4 * 8;
@@ -3727,9 +3727,9 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                            -- num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
                             -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\Random1\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_5\;
@@ -3746,14 +3746,14 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.return.0\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\Random1\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.num\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                            -- num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_6\;
@@ -3764,13 +3764,13 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_7\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.kpzKernelsTaskState\.\Random2\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.return.1\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\;
@@ -4221,8 +4221,8 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.i\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 32) {
-                        -- 	num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
-                        -- 	num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                        -- 	num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                        -- 	num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                         -- 	num3 = (int)(num & 7u);
                         -- 	num4 = (int)(num >> 16 & 7u);
                         -- 	num5 = num3 + num4 * 8;
@@ -4257,8 +4257,8 @@ begin
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
-                            -- 	num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                            -- 	num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                            -- 	num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                             -- 	num3 = (int)(num & 7u);
                             -- 	num4 = (int)(num >> 16 & 7u);
                             -- 	num5 = num3 + num4 * 8;
@@ -4284,9 +4284,9 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
+                            -- num = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random1);
                             -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\Random1\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_5\;
@@ -4303,14 +4303,14 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.return.0\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\Random1\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.num\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = Hast.Algorithms.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
+                            -- num2 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (kpzKernelsTaskState.Random2);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_6\;
@@ -4321,13 +4321,13 @@ begin
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_7\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.kpzKernelsTaskState\.\Random2\;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                         \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.return.1\ := \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\;
@@ -4574,7 +4574,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\: \Hast.Algorithms.RandomMwc64X\;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\: \Hast.Samples.Kpz.KpzKernelsTaskState_Array\(0 to 7);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4610,7 +4610,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd60665f5b5b7d41983ff6f74de8a3adba1505e058e007f874787b15ca1ff2fee\: \Hast.Algorithms.RandomMwc64X\;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd60665f5b5b7d41983ff6f74de8a3adba1505e058e007f874787b15ca1ff2fee\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
@@ -4655,12 +4655,12 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
@@ -4697,12 +4697,12 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\: boolean := false;
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\: signed(31 downto 0) := to_signed(0, 32);
@@ -4816,12 +4816,12 @@ begin
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := to_signed(0, 32);
@@ -4855,12 +4855,12 @@ begin
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := false;
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := to_signed(0, 32);
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ := to_signed(0, 32);
+                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := to_signed(0, 32);
                 \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := to_signed(0, 32);
@@ -5342,7 +5342,7 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.j\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (j < num2) {
-                            -- 	num5 = Hast.Algorithms.RandomMwc64X.NextUInt32 (randomMwc64X);
+                            -- 	num5 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (randomMwc64X);
                             -- 	num6 = (int)(7u & num5);
                             -- 	num7 = (int)(7u & num5 >> 16);
                             -- 	k = 0;
@@ -5359,12 +5359,12 @@ begin
                             -- 			while (m < 8) {
                             -- 				n = 0;
                             -- 				while (n < 8) {
-                            -- 					Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 					remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 					num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 					Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 					remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 					num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 					Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 					remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 					num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 					Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 					remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 					num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 					num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 					array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 					array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5392,12 +5392,12 @@ begin
                             -- 			while (num22 < 8) {
                             -- 				num23 = 0;
                             -- 				while (num23 < 8) {
-                            -- 					Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 					remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 					num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 					Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 					remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 					num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 					Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 					remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 					num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 					Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 					remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 					num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 					uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 					if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 						conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -5438,7 +5438,7 @@ begin
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.21\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num5 = Hast.Algorithms.RandomMwc64X.NextUInt32 (randomMwc64X);
+                            -- 	num5 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (randomMwc64X);
                             -- 	num6 = (int)(7u & num5);
                             -- 	num7 = (int)(7u & num5 >> 16);
                             -- 	k = 0;
@@ -5455,12 +5455,12 @@ begin
                             -- 			while (m < 8) {
                             -- 				n = 0;
                             -- 				while (n < 8) {
-                            -- 					Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 					remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 					num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 					Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 					remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 					num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 					Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 					remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 					num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 					Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 					remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 					num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 					num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 					array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 					array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5488,12 +5488,12 @@ begin
                             -- 			while (num22 < 8) {
                             -- 				num23 = 0;
                             -- 				while (num23 < 8) {
-                            -- 					Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 					remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 					num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 					Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 					remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 					num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 					Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 					remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 					num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 					Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 					remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 					num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 					uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 					if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 						conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -5524,9 +5524,9 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num5 = Hast.Algorithms.RandomMwc64X.NextUInt32 (randomMwc64X);
+                            -- num5 = Hast.Algorithms.Random.RandomMwc64X.NextUInt32 (randomMwc64X);
                             -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\ <= true;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_18\;
@@ -5539,7 +5539,7 @@ begin
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_18\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32()
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32()
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\ = \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\) then 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.return.0\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().return.0\;
@@ -5574,12 +5574,12 @@ begin
                             -- 		while (m < 8) {
                             -- 			n = 0;
                             -- 			while (n < 8) {
-                            -- 				Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 				remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 				num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 				Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 				remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 				num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 				Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 				remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 				num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 				Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 				remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 				num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 				num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 				array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 				array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5607,12 +5607,12 @@ begin
                             -- 		while (num22 < 8) {
                             -- 			num23 = 0;
                             -- 			while (num23 < 8) {
-                            -- 				Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 				remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 				num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 				Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 				remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 				num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 				Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 				remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 				num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 				Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 				remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 				num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 				uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 				if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 					conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -5663,12 +5663,12 @@ begin
                             -- 		while (m < 8) {
                             -- 			n = 0;
                             -- 			while (n < 8) {
-                            -- 				Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 				remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 				num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 				Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 				remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 				num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 				Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 				remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 				num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 				Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 				remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 				num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 				num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 				array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 				array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5696,12 +5696,12 @@ begin
                             -- 		while (num22 < 8) {
                             -- 			num23 = 0;
                             -- 			while (num23 < 8) {
-                            -- 				Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 				remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 				num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 				Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 				remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 				num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 				Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 				remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 				num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 				Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 				remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 				num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 				uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 				if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 					conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -5747,12 +5747,12 @@ begin
                             -- 	while (m < 8) {
                             -- 		n = 0;
                             -- 		while (n < 8) {
-                            -- 			Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 			remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 			num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 			Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 			remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 			num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 			Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 			remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 			num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 			Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 			remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 			num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 			num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 			array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 			array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5803,12 +5803,12 @@ begin
                             -- 	while (m < 8) {
                             -- 		n = 0;
                             -- 		while (n < 8) {
-                            -- 			Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 			remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 			num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 			Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 			remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 			num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 			Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 			remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 			num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 			Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 			remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 			num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 			num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 			array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 			array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5889,12 +5889,12 @@ begin
                         -- while (m < 8) {
                         -- 	n = 0;
                         -- 	while (n < 8) {
-                        -- 		Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                        -- 		remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                        -- 		num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                        -- 		Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                        -- 		remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                        -- 		num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                        -- 		Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                        -- 		remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                        -- 		num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                        -- 		Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                        -- 		remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                        -- 		num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                         -- 		num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                         -- 		array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                         -- 		array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5915,12 +5915,12 @@ begin
                             -- {
                             -- 	n = 0;
                             -- 	while (n < 8) {
-                            -- 		Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 		remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 		num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 		Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 		remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 		num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 		Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 		remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 		num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 		Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 		remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 		num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 		num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 		array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 		array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -5935,12 +5935,12 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (n < 8) {
-                            -- 	Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 	remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 	num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 	Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 	remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 	num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 	Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 	remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 	num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 	Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 	remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 	num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 	num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 	array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 	array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -6000,12 +6000,12 @@ begin
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
-                            -- 	remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
-                            -- 	num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
-                            -- 	Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
-                            -- 	remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
-                            -- 	num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                            -- 	Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- 	remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- 	num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- 	Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                            -- 	remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                            -- 	num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                             -- 	num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
                             -- 	array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 	array [l].BramDy [m + n * 8] = num15 & 2u == 2u;
@@ -6013,15 +6013,15 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Int32 remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
+                            -- Int32 remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
+                            -- remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 = num11 + m;
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.m\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num13 = remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
+                            -- num13 = remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 - remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9 / 64 * 64;
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\;
                         else 
@@ -6042,36 +6042,36 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_31\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ / to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ / to_signed(64, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ * to_signed(64, 32), 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\;
                         -- Clock cycles needed to complete this state (approximation): 0.8843
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_32\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand34d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand19F-1A434d9cf39a094205f24b6c37ca715c490a9841cc9dc29ed1462f3f91eb02582e9\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num13\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Int32 remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
+                        -- Int32 remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
+                        -- remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 = num12 + n;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num12\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.n\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num14 = remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
+                        -- num14 = remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 - remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22 / 64 * 64;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\;
                         -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_33\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ / to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ / to_signed(64, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ * to_signed(64, 32), 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\;
                         -- Clock cycles needed to complete this state (approximation): 0.8843
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_34\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand1A9-1AE1184a8aa795b4550df85609dcfad0ce8293d58ddac34418aa825183c8ca1ba22\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num14\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\;
                         -- The following section was transformed from the .NET statement below:
                         -- num15 = memory.ReadUInt32 (35 + num13 + num14 * 64);
@@ -6158,12 +6158,12 @@ begin
                             -- 	while (num22 < 8) {
                             -- 		num23 = 0;
                             -- 		while (num23 < 8) {
-                            -- 			Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 			remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 			num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 			Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 			remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 			num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 			Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 			remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 			num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 			Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 			remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 			num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 			uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 			if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 				conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -6209,12 +6209,12 @@ begin
                             -- 	while (num22 < 8) {
                             -- 		num23 = 0;
                             -- 		while (num23 < 8) {
-                            -- 			Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 			remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 			num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 			Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 			remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 			num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 			Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 			remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 			num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 			Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 			remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 			num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 			uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 			if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 				conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -6309,12 +6309,12 @@ begin
                         -- while (num22 < 8) {
                         -- 	num23 = 0;
                         -- 	while (num23 < 8) {
-                        -- 		Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                        -- 		remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                        -- 		num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                        -- 		Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                        -- 		remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                        -- 		num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                        -- 		Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                        -- 		remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                        -- 		num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                        -- 		Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                        -- 		remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                        -- 		num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                         -- 		uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                         -- 		if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                         -- 			conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -6348,12 +6348,12 @@ begin
                             -- {
                             -- 	num23 = 0;
                             -- 	while (num23 < 8) {
-                            -- 		Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 		remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 		num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 		Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 		remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 		num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 		Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 		remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 		num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 		Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 		remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 		num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 		uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 		if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 			conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -6381,12 +6381,12 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num23 < 8) {
-                            -- 	Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 	remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 	num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 	Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 	remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 	num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 	Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 	remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 	num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 	Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 	remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 	num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 	uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 	if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 		conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -6439,12 +6439,12 @@ begin
                         if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
-                            -- 	remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
-                            -- 	num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
-                            -- 	Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
-                            -- 	remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
-                            -- 	num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                            -- 	Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- 	remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- 	num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- 	Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                            -- 	remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                            -- 	num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                             -- 	uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
                             -- 	if (array2 [num16].Result.BramDx [num22 + num23 * 8]) {
                             -- 		conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66 = 1u;
@@ -6465,15 +6465,15 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Int32 remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
+                            -- Int32 remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
+                            -- remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 = num20 + num22;
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num20\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num22\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num24 = remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
+                            -- num24 = remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 - remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8 / 64 * 64;
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_50\;
                         else 
@@ -6494,36 +6494,36 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_50\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ / to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ / to_signed(64, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ * to_signed(64, 32), 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\;
                         -- Clock cycles needed to complete this state (approximation): 0.8843
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_51\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperandf56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2B3-2B8f56ba5591b65eb1d32ef1610453d533641c2dbabc5a2025b0dc76818ac01fbb8\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Int32 remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
+                        -- Int32 remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
+                        -- remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 = num21 + num23;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num21\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num23\;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num25 = remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
+                        -- num25 = remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 - remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864 / 64 * 64;
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\;
                         -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_52\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ / to_signed(64, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ / to_signed(64, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := SmartResize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ * to_signed(64, 32), 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\;
                         -- Clock cycles needed to complete this state (approximation): 0.8843
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_53\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand81df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\;
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.remainderOperand2BD-2C281df3e5fefadb084662282ea201b255ad20745023d5874a2308ab2fcf6c8e864\ - \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint conditionalf0b00adf23d48ac1ef59e049bd5bab08157778eac0373619c6461be2a1304d66;
@@ -6683,10 +6683,10 @@ begin
     -- System.Void Hast.Samples.Kpz.KpzKernelsParallelizedInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().0 state machine start
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().0 state machine start
     \RandomMwc64X::NextUInt32().0._StateMachine\: process (\Clock\) 
         Variable \RandomMwc64X::NextUInt32().0._State\: \RandomMwc64X::NextUInt32().0._States\ := \RandomMwc64X::NextUInt32().0._State_0\;
-        Variable \RandomMwc64X::NextUInt32().0.this\: \Hast.Algorithms.RandomMwc64X\;
+        Variable \RandomMwc64X::NextUInt32().0.this\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \RandomMwc64X::NextUInt32().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -6798,13 +6798,13 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().0 state machine end
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().0 state machine end
 
 
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().1 state machine start
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().1 state machine start
     \RandomMwc64X::NextUInt32().1._StateMachine\: process (\Clock\) 
         Variable \RandomMwc64X::NextUInt32().1._State\: \RandomMwc64X::NextUInt32().1._States\ := \RandomMwc64X::NextUInt32().1._State_0\;
-        Variable \RandomMwc64X::NextUInt32().1.this\: \Hast.Algorithms.RandomMwc64X\;
+        Variable \RandomMwc64X::NextUInt32().1.this\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \RandomMwc64X::NextUInt32().1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().1.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -6916,13 +6916,13 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().1 state machine end
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().1 state machine end
 
 
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().2 state machine start
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().2 state machine start
     \RandomMwc64X::NextUInt32().2._StateMachine\: process (\Clock\) 
         Variable \RandomMwc64X::NextUInt32().2._State\: \RandomMwc64X::NextUInt32().2._States\ := \RandomMwc64X::NextUInt32().2._State_0\;
-        Variable \RandomMwc64X::NextUInt32().2.this\: \Hast.Algorithms.RandomMwc64X\;
+        Variable \RandomMwc64X::NextUInt32().2.this\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \RandomMwc64X::NextUInt32().2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().2.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -7034,7 +7034,7 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32().2 state machine end
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().2 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
@@ -7125,7 +7125,7 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32() start
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32() start
     \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
         Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\: integer range 0 to 2 := 0;
@@ -7486,7 +7486,7 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.RandomMwc64X::NextUInt32() end
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::GetIndexFromXY(System.Int32,System.Int32) start
