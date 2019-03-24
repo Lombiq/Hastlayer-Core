@@ -53,7 +53,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // so somehow we need to distinguish between them.
                         "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
                         operand,
-                        TypeHelper.CreateAstType(operand.GetActualTypeReference()));
+                        TypeHelper.CreateAstType(operand.GetActualTypeReference(true)));
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
                         .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());
