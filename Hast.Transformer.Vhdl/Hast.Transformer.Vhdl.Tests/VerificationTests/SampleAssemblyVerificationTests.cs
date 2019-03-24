@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Hast.Algorithms;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;

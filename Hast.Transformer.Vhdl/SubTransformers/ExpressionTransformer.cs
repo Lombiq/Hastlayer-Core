@@ -641,7 +641,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return innerExpressionResult;
                 }
 
-                var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
+                var fromTypeReference = castExpression.Expression.GetActualTypeReference(true) ?? castExpression.GetActualTypeReference();
                 var fromType = _declarableTypeCreator
                     .CreateDeclarableType(castExpression.Expression, fromTypeReference, context.TransformationContext);
                 var toType = _declarableTypeCreator

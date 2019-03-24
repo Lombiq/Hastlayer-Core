@@ -51,7 +51,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                         // Need to add ILRange because there can be multiple remainder operations for the same variable
                         // so somehow we need to distinguish between them.
-                        "remainderOperand" + operand.GetILRangeName(),
+                        "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
                         operand,
                         TypeHelper.CreateAstType(operand.GetActualTypeReference()));
 

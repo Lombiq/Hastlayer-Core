@@ -68,15 +68,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement TransformBinaryOperatorExpression(
             IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
-            ISubTransformerContext context)
-        {
-            return TransformBinaryOperatorExpressionInner(
+            ISubTransformerContext context) =>
+            TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpression,
                 true,
                 true,
                 true,
                 context);
-        }
 
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(
