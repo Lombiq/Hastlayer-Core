@@ -2847,46 +2847,6 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\: signed(31 downto 0) := to_signed(0, 32);
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\: signed(31 downto 0) := to_signed(0, 32);
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\: signed(31 downto 0) := to_signed(0, 32);
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._Started\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation.parameter.In\: \Hast.Samples.SampleAssembly.SimdOperation\;
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
@@ -20954,9 +20914,9 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\: \Hast.Samples.SampleAssembly.SimdOperation\;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\: \signed32_Array\(0 to 29) := (others => to_signed(0, 32));
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\: \signed32_Array\(0 to 29) := (others => to_signed(0, 32));
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\: \signed32_Array\(0 to 29) := (others => to_signed(0, 32));
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\: \signed32_Array\(0 to 19) := (others => to_signed(0, 32));
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\: \signed32_Array\(0 to 19) := (others => to_signed(0, 32));
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\: \signed32_Array\(0 to 19) := (others => to_signed(0, 32));
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\: signed(31 downto 0) := to_signed(0, 32);
@@ -20974,11 +20934,11 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\: boolean := false;
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\: boolean := false;
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -21068,46 +21028,6 @@ begin
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\ <= to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\ <= to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\ <= to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\ <= to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_0\;
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := to_signed(0, 32);
@@ -21131,11 +21051,11 @@ begin
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\ := (others => '0');
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\ := false;
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\ := to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\ := to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\ := to_signed(0, 32);
-                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\ := to_signed(0, 32);
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\ := false;
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\ := to_signed(0, 32);
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\ := to_signed(0, 32);
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\ := to_signed(0, 32);
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\ := to_signed(0, 32);
             else 
                 case \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ is 
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_0\ => 
@@ -21202,39 +21122,39 @@ begin
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (i < num) {
-                            -- 	array = new int[30];
-                            -- 	array2 = new int[30];
-                            -- 	array3 = new int[30];
+                            -- 	array = new int[20];
+                            -- 	array2 = new int[20];
+                            -- 	array3 = new int[20];
                             -- 	j = 0;
-                            -- 	while (j < 30) {
+                            -- 	while (j < 20) {
                             -- 		array [j] = memory.ReadInt32 (1 + i + j);
                             -- 		j = j + 1;
                             -- 	}
                             -- 	k = 0;
-                            -- 	while (k < 30) {
+                            -- 	while (k < 20) {
                             -- 		array2 [k] = memory.ReadInt32 (1 + i + k + num);
                             -- 		k = k + 1;
                             -- 	}
                             -- 	switch (operation) {
                             -- 	case SimdOperation.Add:
-                            -- 		array3 = SimdOperations.AddVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.AddVectors (array, array2, 20);
                             -- 		break;
                             -- 	case SimdOperation.Subtract:
-                            -- 		array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.SubtractVectors (array, array2, 20);
                             -- 		break;
                             -- 	case SimdOperation.Multiply:
-                            -- 		array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.MultiplyVectors (array, array2, 20);
                             -- 		break;
                             -- 	case SimdOperation.Divide:
-                            -- 		array3 = SimdOperations.DivideVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.DivideVectors (array, array2, 20);
                             -- 		break;
                             -- 	}
                             -- 	l = 0;
-                            -- 	while (l < 30) {
+                            -- 	while (l < 20) {
                             -- 		memory.WriteInt32 (1 + i + l, array3 [l]);
                             -- 		l = l + 1;
                             -- 	}
-                            -- 	i = i + 30;
+                            -- 	i = i + 20;
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -21248,51 +21168,51 @@ begin
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	array = new int[30];
-                            -- 	array2 = new int[30];
-                            -- 	array3 = new int[30];
+                            -- 	array = new int[20];
+                            -- 	array2 = new int[20];
+                            -- 	array3 = new int[20];
                             -- 	j = 0;
-                            -- 	while (j < 30) {
+                            -- 	while (j < 20) {
                             -- 		array [j] = memory.ReadInt32 (1 + i + j);
                             -- 		j = j + 1;
                             -- 	}
                             -- 	k = 0;
-                            -- 	while (k < 30) {
+                            -- 	while (k < 20) {
                             -- 		array2 [k] = memory.ReadInt32 (1 + i + k + num);
                             -- 		k = k + 1;
                             -- 	}
                             -- 	switch (operation) {
                             -- 	case SimdOperation.Add:
-                            -- 		array3 = SimdOperations.AddVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.AddVectors (array, array2, 20);
                             -- 		break;
                             -- 	case SimdOperation.Subtract:
-                            -- 		array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.SubtractVectors (array, array2, 20);
                             -- 		break;
                             -- 	case SimdOperation.Multiply:
-                            -- 		array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.MultiplyVectors (array, array2, 20);
                             -- 		break;
                             -- 	case SimdOperation.Divide:
-                            -- 		array3 = SimdOperations.DivideVectors (array, array2, 30);
+                            -- 		array3 = SimdOperations.DivideVectors (array, array2, 20);
                             -- 		break;
                             -- 	}
                             -- 	l = 0;
-                            -- 	while (l < 30) {
+                            -- 	while (l < 20) {
                             -- 		memory.WriteInt32 (1 + i + l, array3 [l]);
                             -- 		l = l + 1;
                             -- 	}
-                            -- 	i = i + 30;
+                            -- 	i = i + 20;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- array = new int[30];
+                            -- array = new int[20];
                             -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\ := (others => to_signed(0, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- array2 = new int[30];
+                            -- array2 = new int[20];
                             -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\ := (others => to_signed(0, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- array3 = new int[30];
+                            -- array3 = new int[20];
                             -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (others => to_signed(0, 32));
                             -- The following section was transformed from the .NET statement below:
@@ -21300,7 +21220,7 @@ begin
                             -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (j < 30) {
+                            -- while (j < 20) {
                             -- 	array [j] = memory.ReadInt32 (1 + i + j);
                             -- 	j = j + 1;
                             -- }
@@ -21318,7 +21238,7 @@ begin
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_6\ => 
                         -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\.
                         -- The while loop's condition:
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ < to_signed(30, 32);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ < to_signed(20, 32);
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -21346,7 +21266,7 @@ begin
                         -- 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (k < 30) {
+                        -- while (k < 20) {
                         -- 	array2 [k] = memory.ReadInt32 (1 + i + k + num);
                         -- 	k = k + 1;
                         -- }
@@ -21375,7 +21295,7 @@ begin
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\.
                         -- The while loop's condition:
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ < to_signed(30, 32);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ < to_signed(20, 32);
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -21398,23 +21318,23 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- switch (operation) {
                         -- case SimdOperation.Add:
-                        -- 	array3 = SimdOperations.AddVectors (array, array2, 30);
+                        -- 	array3 = SimdOperations.AddVectors (array, array2, 20);
                         -- 	break;
                         -- case SimdOperation.Subtract:
-                        -- 	array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                        -- 	array3 = SimdOperations.SubtractVectors (array, array2, 20);
                         -- 	break;
                         -- case SimdOperation.Multiply:
-                        -- 	array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                        -- 	array3 = SimdOperations.MultiplyVectors (array, array2, 20);
                         -- 	break;
                         -- case SimdOperation.Divide:
-                        -- 	array3 = SimdOperations.DivideVectors (array, array2, 30);
+                        -- 	array3 = SimdOperations.DivideVectors (array, array2, 20);
                         -- 	break;
                         -- }
                         -- 
                         case \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\ is 
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Add\ => 
                                 -- The following section was transformed from the .NET statement below:
-                                -- array3 = SimdOperations.AddVectors (array, array2, 30);
+                                -- array3 = SimdOperations.AddVectors (array, array2, 20);
                                 -- 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
@@ -21436,93 +21356,63 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.27\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.28\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.29\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(20) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(20);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(21) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(21);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(22) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(22);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(23) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(23);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(24) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(24);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(25) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(25);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(26) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(26);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
                                 -- A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state.
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\ => 
                                 -- The following section was transformed from the .NET statement below:
-                                -- array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                                -- array3 = SimdOperations.SubtractVectors (array, array2, 20);
                                 -- 
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(20) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(20);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(21) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(21);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(22) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(22);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(23) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(23);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(24) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(24);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(25) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(25);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(26) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(26);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
                                 -- A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state.
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\ => 
                                 -- The following section was transformed from the .NET statement below:
-                                -- array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                                -- array3 = SimdOperations.MultiplyVectors (array, array2, 20);
                                 -- 
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(20) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(20), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(21) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(21), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(22) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(22), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(23) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(23), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(24) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(24), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(25) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(25), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(26) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(26), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28), 32);
-                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18), 32);
+                                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\ <= SmartResize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19), 32);
                                 -- A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state.
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\ => 
                                 -- The following section was transformed from the .NET statement below:
-                                -- array3 = SimdOperations.DivideVectors (array, array2, 30);
+                                -- array3 = SimdOperations.DivideVectors (array, array2, 20);
                                 -- 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\;
                         end case;
@@ -21560,7 +21450,7 @@ begin
                         -- 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (l < 30) {
+                        -- while (l < 20) {
                         -- 	memory.WriteInt32 (1 + i + l, array3 [l]);
                         -- 	l = l + 1;
                         -- }
@@ -21569,7 +21459,7 @@ begin
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\ => 
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.13\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.14\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.15\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.16\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.17\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.18\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.19\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.20\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.21\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.22\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.23\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.24\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.25\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.26\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.27\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.28\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.29\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.13\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.14\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.15\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.16\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.17\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.18\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.19\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.20\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.21\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.22\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.23\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.24\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.25\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.26\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.27\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.28\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.29\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -21579,7 +21469,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\ => 
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -21589,7 +21479,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4208
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\ => 
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -21599,7 +21489,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\ => 
-                        -- Waiting for the result to appear in \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ (have to wait 10 clock cycles in this state).
+                        -- Waiting for the result to appear in \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\ (have to wait 10 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\;
@@ -21607,39 +21497,29 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(20) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(20);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(21) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(21);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(22) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(22);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(23) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(23);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(24) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(24);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(25) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(25);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(26) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(26);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(27) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(27);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(28) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(28);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(3) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(3);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(4) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(4);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(5) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(5);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(6) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(6);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(7) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(7);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(8) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(8);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(9) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(9);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(10) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(10);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(11) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(11);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(12) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(12);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(13) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(13);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(14) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(14);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(15) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(15);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(16) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(16);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(17) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(17);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(18) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(18);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(19) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(19);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\ => 
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -21651,8 +21531,8 @@ begin
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\ => 
                         -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\.
                         -- The while loop's condition:
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ < to_signed(30, 32);
-                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\) then 
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ < to_signed(20, 32);
+                        if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	memory.WriteInt32 (1 + i + l, array3 [l]);
@@ -21662,10 +21542,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteInt32 (1 + i + l, array3 [l]);
                             -- 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\ := to_signed(1, 32) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\ := to_signed(1, 32) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\;
                             -- Begin SimpleMemory write.
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\, 32);
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ <= true;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\)));
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_21\;
@@ -21676,10 +21556,10 @@ begin
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_20\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
-                        -- i = i + 30;
+                        -- i = i + 20;
                         -- 
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ + to_signed(30, 32);
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\;
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ + to_signed(20, 32);
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\;
                         -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_3\ if the loop wasn't exited with a state change.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_20\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\;
@@ -21693,8 +21573,8 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- l = l + 1;
                             -- 
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ + to_signed(1, 32);
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ + to_signed(1, 32);
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\ if the loop wasn't exited with a state change.
                             if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_21\) then 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\;
