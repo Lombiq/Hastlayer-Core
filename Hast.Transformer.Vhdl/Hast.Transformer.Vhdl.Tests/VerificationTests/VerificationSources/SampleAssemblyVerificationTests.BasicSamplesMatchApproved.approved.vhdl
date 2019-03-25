@@ -15205,7 +15205,7 @@ begin
                         -- 	this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State = (UInt16)((Int32)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State) ^ (Int32)((ushort)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State >> 13)));
                         -- 	return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76 = this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State;
                         -- 	num5 = (uint)return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76;
-                        -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                        -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                         -- 	if (flag) {
                         -- 		num2 = num2 + 1u;
                         -- 	}
@@ -15238,7 +15238,7 @@ begin
                             -- 	this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State = (UInt16)((Int32)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State) ^ (Int32)((ushort)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State >> 13)));
                             -- 	return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76 = this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State;
                             -- 	num5 = (uint)return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76;
-                            -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                            -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                             -- 	if (flag) {
                             -- 		num2 = num2 + 1u;
                             -- 	}
@@ -15337,7 +15337,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.num5\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                        -- flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                         -- 
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.874
@@ -15350,8 +15350,8 @@ begin
                     when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.16\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.14\) + (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.15\);
-                        -- Since the integer literal 18446744073709420545 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111100000000000000001).
-                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.17\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.16\ <= "1111111111111111111111111111111111111111111111100000000000000001";
+                        -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.17\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.16\ <= "0000000000000000000000000000000011111111111111100000000000000001";
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.flag\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).0.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
@@ -15562,7 +15562,7 @@ begin
                         -- 	this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State = (UInt16)((Int32)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State) ^ (Int32)((ushort)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State >> 13)));
                         -- 	return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76 = this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State;
                         -- 	num5 = (uint)return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76;
-                        -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                        -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                         -- 	if (flag) {
                         -- 		num2 = num2 + 1u;
                         -- 	}
@@ -15595,7 +15595,7 @@ begin
                             -- 	this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State = (UInt16)((Int32)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State) ^ (Int32)((ushort)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State >> 13)));
                             -- 	return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76 = this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State;
                             -- 	num5 = (uint)return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76;
-                            -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                            -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                             -- 	if (flag) {
                             -- 		num2 = num2 + 1u;
                             -- 	}
@@ -15694,7 +15694,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.num5\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                        -- flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                         -- 
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.874
@@ -15707,8 +15707,8 @@ begin
                     when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.16\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.14\) + (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.15\);
-                        -- Since the integer literal 18446744073709420545 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111100000000000000001).
-                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.17\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.16\ <= "1111111111111111111111111111111111111111111111100000000000000001";
+                        -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.17\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.16\ <= "0000000000000000000000000000000011111111111111100000000000000001";
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.flag\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).1.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
@@ -15919,7 +15919,7 @@ begin
                         -- 	this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State = (UInt16)((Int32)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State) ^ (Int32)((ushort)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State >> 13)));
                         -- 	return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76 = this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State;
                         -- 	num5 = (uint)return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76;
-                        -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                        -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                         -- 	if (flag) {
                         -- 		num2 = num2 + 1u;
                         -- 	}
@@ -15952,7 +15952,7 @@ begin
                             -- 	this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State = (UInt16)((Int32)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State) ^ (Int32)((ushort)(this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State >> 13)));
                             -- 	return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76 = this_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76.State;
                             -- 	num5 = (uint)return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76;
-                            -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                            -- 	flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                             -- 	if (flag) {
                             -- 		num2 = num2 + 1u;
                             -- 	}
@@ -16051,7 +16051,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.num5\ := SmartResize(\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.return_9b6c4e06e4b2c684c77d642d760f96f3728cfe54ccfbe34ba2ae02ee95d39d76\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 18446744073709420545uL;
+                        -- flag = (ulong)(num4 * num4) + (ulong)(num5 * num5) <= 4294836225uL;
                         -- 
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.874
@@ -16064,8 +16064,8 @@ begin
                     when \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.16\ := (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.14\) + (\MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.15\);
-                        -- Since the integer literal 18446744073709420545 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111100000000000000001).
-                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.17\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.16\ <= "1111111111111111111111111111111111111111111111100000000000000001";
+                        -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
+                        \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.17\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.16\ <= "0000000000000000000000000000000011111111111111100000000000000001";
                         \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.flag\ := \MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).2.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
@@ -16124,7 +16124,7 @@ begin
     \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\: \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._States\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\;
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 35) := (others => to_unsigned(0, 32));
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 99) := (others => to_unsigned(0, 32));
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.arg_6A_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -16263,7 +16263,7 @@ begin
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- <>c__DisplayClass4_.iterationsPerTask = num / 36u;
+                            -- <>c__DisplayClass4_.iterationsPerTask = num / 100u;
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\;
                         end if;
@@ -16277,12 +16277,12 @@ begin
                         else 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ / to_unsigned(36, 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ / to_unsigned(100, 32);
                         -- Clock cycles needed to complete this state (approximation): 9
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\ => 
                         \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new Task<uint>[36];
+                        -- array = new Task<uint>[100];
                         -- 
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -16290,7 +16290,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2 < 36u) {
+                        -- while (num2 < 100u) {
                         -- 	arg_6A_1 = (int)num2;
                         -- 	arg_65_0 = Task.Factory;
                         -- 	if (arg_65_1 = <>c__DisplayClass4_.<>9__0 == null) {
@@ -16306,7 +16306,7 @@ begin
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ < to_unsigned(36, 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ < to_unsigned(100, 32);
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16385,7 +16385,7 @@ begin
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (i < 36) {
+                            -- while (i < 100) {
                             -- 	num3 = num3 + array [i].Result;
                             -- 	i = i + 1;
                             -- }
@@ -16397,7 +16397,7 @@ begin
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ < to_signed(36, 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\ < to_signed(100, 32);
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {

@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             {
                                 MaxDegreeOfParallelism = 3
                             });
-                        configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomLfsr>(p => p.NextUInt32());
+                        configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
 
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 

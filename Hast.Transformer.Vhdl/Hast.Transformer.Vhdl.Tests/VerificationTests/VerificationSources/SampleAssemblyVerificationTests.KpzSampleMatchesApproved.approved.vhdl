@@ -6689,9 +6689,6 @@ begin
         Variable \RandomMwc64X::NextUInt32().0.this\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \RandomMwc64X::NextUInt32().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \RandomMwc64X::NextUInt32().0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -6705,9 +6702,6 @@ begin
                 \RandomMwc64X::NextUInt32().0._State\ := \RandomMwc64X::NextUInt32().0._State_0\;
                 \RandomMwc64X::NextUInt32().0.num\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().0.num2\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().0.num3\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().0.num4\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().0.num5\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().0.binaryOperationResult.1\ := to_unsigned(0, 64);
                 \RandomMwc64X::NextUInt32().0.binaryOperationResult.2\ := to_unsigned(0, 64);
@@ -6742,15 +6736,6 @@ begin
                         -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num5;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- num = (uint)(@this.State >> 32);
                         -- 
                         \RandomMwc64X::NextUInt32().0.binaryOperationResult.0\ := SmartResize(shift_right(\RandomMwc64X::NextUInt32().0.this\.\State\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
@@ -6759,19 +6744,6 @@ begin
                         -- num2 = (uint)@this.State;
                         -- 
                         \RandomMwc64X::NextUInt32().0.num2\ := SmartResize(\RandomMwc64X::NextUInt32().0.this\.\State\, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 65534u;
-                        -- 
-                        \RandomMwc64X::NextUInt32().0.num3\ := to_unsigned(65534, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num4 = 47131u;
-                        -- 
-                        \RandomMwc64X::NextUInt32().0.num4\ := to_unsigned(47131, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num5 = 4294883355u;
-                        -- 
-                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
-                        \RandomMwc64X::NextUInt32().0.num5\ := "11111111111111101011100000011011";
                         -- The following section was transformed from the .NET statement below:
                         -- @this.State = (ulong)num2 * 4294883355uL + (ulong)num;
                         -- 
@@ -6807,9 +6779,6 @@ begin
         Variable \RandomMwc64X::NextUInt32().1.this\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \RandomMwc64X::NextUInt32().1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().1.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().1.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().1.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().1.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \RandomMwc64X::NextUInt32().1.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -6823,9 +6792,6 @@ begin
                 \RandomMwc64X::NextUInt32().1._State\ := \RandomMwc64X::NextUInt32().1._State_0\;
                 \RandomMwc64X::NextUInt32().1.num\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().1.num2\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().1.num3\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().1.num4\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().1.num5\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().1.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().1.binaryOperationResult.1\ := to_unsigned(0, 64);
                 \RandomMwc64X::NextUInt32().1.binaryOperationResult.2\ := to_unsigned(0, 64);
@@ -6860,15 +6826,6 @@ begin
                         -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num5;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- num = (uint)(@this.State >> 32);
                         -- 
                         \RandomMwc64X::NextUInt32().1.binaryOperationResult.0\ := SmartResize(shift_right(\RandomMwc64X::NextUInt32().1.this\.\State\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
@@ -6877,19 +6834,6 @@ begin
                         -- num2 = (uint)@this.State;
                         -- 
                         \RandomMwc64X::NextUInt32().1.num2\ := SmartResize(\RandomMwc64X::NextUInt32().1.this\.\State\, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 65534u;
-                        -- 
-                        \RandomMwc64X::NextUInt32().1.num3\ := to_unsigned(65534, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num4 = 47131u;
-                        -- 
-                        \RandomMwc64X::NextUInt32().1.num4\ := to_unsigned(47131, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num5 = 4294883355u;
-                        -- 
-                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
-                        \RandomMwc64X::NextUInt32().1.num5\ := "11111111111111101011100000011011";
                         -- The following section was transformed from the .NET statement below:
                         -- @this.State = (ulong)num2 * 4294883355uL + (ulong)num;
                         -- 
@@ -6925,9 +6869,6 @@ begin
         Variable \RandomMwc64X::NextUInt32().2.this\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \RandomMwc64X::NextUInt32().2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().2.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().2.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RandomMwc64X::NextUInt32().2.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RandomMwc64X::NextUInt32().2.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \RandomMwc64X::NextUInt32().2.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -6941,9 +6882,6 @@ begin
                 \RandomMwc64X::NextUInt32().2._State\ := \RandomMwc64X::NextUInt32().2._State_0\;
                 \RandomMwc64X::NextUInt32().2.num\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().2.num2\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().2.num3\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().2.num4\ := to_unsigned(0, 32);
-                \RandomMwc64X::NextUInt32().2.num5\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().2.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RandomMwc64X::NextUInt32().2.binaryOperationResult.1\ := to_unsigned(0, 64);
                 \RandomMwc64X::NextUInt32().2.binaryOperationResult.2\ := to_unsigned(0, 64);
@@ -6978,15 +6916,6 @@ begin
                         -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num5;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- num = (uint)(@this.State >> 32);
                         -- 
                         \RandomMwc64X::NextUInt32().2.binaryOperationResult.0\ := SmartResize(shift_right(\RandomMwc64X::NextUInt32().2.this\.\State\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
@@ -6995,19 +6924,6 @@ begin
                         -- num2 = (uint)@this.State;
                         -- 
                         \RandomMwc64X::NextUInt32().2.num2\ := SmartResize(\RandomMwc64X::NextUInt32().2.this\.\State\, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 65534u;
-                        -- 
-                        \RandomMwc64X::NextUInt32().2.num3\ := to_unsigned(65534, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num4 = 47131u;
-                        -- 
-                        \RandomMwc64X::NextUInt32().2.num4\ := to_unsigned(47131, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num5 = 4294883355u;
-                        -- 
-                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
-                        \RandomMwc64X::NextUInt32().2.num5\ := "11111111111111101011100000011011";
                         -- The following section was transformed from the .NET statement below:
                         -- @this.State = (ulong)num2 * 4294883355uL + (ulong)num;
                         -- 

@@ -2042,9 +2042,10 @@ begin
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)(@this._rawValue & -1L);
+                        -- num = (int)(@this._rawValue & 4294967295L);
                         -- 
-                        \Fix64::ToIntegers().0.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().0.this\.\_rawValue\ and to_signed(-1, 64), 32);
+                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
+                        \Fix64::ToIntegers().0.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().0.this\.\_rawValue\ and "0000000000000000000000000000000011111111111111111111111111111111", 32);
                         \Fix64::ToIntegers().0.num\ := (\Fix64::ToIntegers().0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (int)(@this._rawValue >> 32);
@@ -2130,9 +2131,10 @@ begin
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)(@this._rawValue & -1L);
+                        -- num = (int)(@this._rawValue & 4294967295L);
                         -- 
-                        \Fix64::ToIntegers().1.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().1.this\.\_rawValue\ and to_signed(-1, 64), 32);
+                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
+                        \Fix64::ToIntegers().1.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().1.this\.\_rawValue\ and "0000000000000000000000000000000011111111111111111111111111111111", 32);
                         \Fix64::ToIntegers().1.num\ := (\Fix64::ToIntegers().1.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (int)(@this._rawValue >> 32);
@@ -2218,9 +2220,10 @@ begin
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)(@this._rawValue & -1L);
+                        -- num = (int)(@this._rawValue & 4294967295L);
                         -- 
-                        \Fix64::ToIntegers().2.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().2.this\.\_rawValue\ and to_signed(-1, 64), 32);
+                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
+                        \Fix64::ToIntegers().2.binaryOperationResult.0\ := SmartResize(\Fix64::ToIntegers().2.this\.\_rawValue\ and "0000000000000000000000000000000011111111111111111111111111111111", 32);
                         \Fix64::ToIntegers().2.num\ := (\Fix64::ToIntegers().2.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (int)(@this._rawValue >> 32);

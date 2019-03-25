@@ -25,6 +25,7 @@
 -- * System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Various.ParallelCases::ObjectUsingTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32)
+-- * System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals()
 
 -- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
@@ -1397,6 +1398,18 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 declarations start
+    -- State machine states:
+    type \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._States\ is (
+        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\, 
+        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_1\, 
+        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_2\);
+    -- Signals:
+    Signal \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\: boolean := false;
+    Signal \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -1426,6 +1439,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Finished.0\: boolean := false;
@@ -1452,6 +1466,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -16436,6 +16451,84 @@ begin
     -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 state machine start
+    \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._StateMachine\: process (\Clock\) 
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\: \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._States\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\;
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num3\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\ <= false;
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\;
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num\ := to_unsigned(0, 32);
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num2\ := to_unsigned(0, 32);
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num3\ := to_unsigned(0, 64);
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num4\ := to_unsigned(0, 64);
+            else 
+                case \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ is 
+                    when \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\ = true) then 
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\ = true) then 
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\ <= true;
+                        else 
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\ <= false;
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 4294836225u;
+                        -- 
+                        -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num\ := "11111111111111100000000000000001";
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 4294836229u;
+                        -- 
+                        -- Since the integer literal 4294836229 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000101).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num2\ := "11111111111111100000000000000101";
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 4294883355u;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num3\ := "11111111111111101011100000011011";
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 4294883359uL;
+                        -- 
+                        -- Since the integer literal 4294883359 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011111).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num4\ := "0000000000000000000000000000000011111111111111101011100000011111";
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -16470,6 +16563,7 @@ begin
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -16654,6 +16748,13 @@ begin
                                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 26 => 
+                            if (\Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ = \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -17424,5 +17525,12 @@ begin
     \UnaryCases::IncrementDecrement(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\;
     \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\ <= \UnaryCases::IncrementDecrement(Int32).0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals() start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\ <= \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\;
+    \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Finished.0\ <= \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals() end
 
 end Imp;
