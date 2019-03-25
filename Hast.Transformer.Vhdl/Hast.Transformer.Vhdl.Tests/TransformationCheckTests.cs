@@ -57,6 +57,17 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
         [Test]
+        public async Task InvalidHardwareEntryPointsArePrevented()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    typeof(NotSupportedException));
+            });
+        }
+
+        [Test]
         public async Task InvalidLanguageConstructsArePrevented()
         {
             await _host.Run<ITransformer>(async transformer =>
@@ -72,12 +83,12 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
         [Test]
-        public async Task InvalidHardwareEntryPointsArePrevented()
+        public async Task InvalidInvalidObjectUsingCasesArePrevented()
         {
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
                     typeof(NotSupportedException));
             });
         }

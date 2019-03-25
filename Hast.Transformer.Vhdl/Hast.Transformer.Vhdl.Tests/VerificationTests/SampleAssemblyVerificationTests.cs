@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Hast.Algorithms;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;
@@ -23,7 +24,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.
@@ -35,6 +36,14 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
                         configuration.AddHardwareEntryPointType<Loopback>();
+
+                        configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
+                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<MonteCarloPiEstimator>(m => m.EstimatePi(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
+                        configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
 
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
@@ -73,7 +82,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(PrngMWC64X).Assembly },
+                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<KpzKernelsInterface>();

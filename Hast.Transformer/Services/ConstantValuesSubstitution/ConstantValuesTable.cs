@@ -23,7 +23,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        /// <param name="scope">The node within the value should valid.</param>
+        /// <param name="scope">The node within which the value should valid.</param>
         public void MarkAsPotentiallyConstant(
             AstNode valueHolder,
             PrimitiveExpression expression,

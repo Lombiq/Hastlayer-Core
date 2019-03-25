@@ -53,6 +53,7 @@ namespace Hast.Transformer
         private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
         private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
         private readonly IDeviceDriverSelector _deviceDriverSelector;
+        private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
 
 
         public DefaultTransformer(
@@ -84,7 +85,8 @@ namespace Hast.Transformer
             ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
             ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
             IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
-            IDeviceDriverSelector deviceDriverSelector)
+            IDeviceDriverSelector deviceDriverSelector,
+            IDecompilationErrorsFixer decompilationErrorsFixer)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -115,6 +117,7 @@ namespace Hast.Transformer
             _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
             _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
             _deviceDriverSelector = deviceDriverSelector;
+            _decompilationErrorsFixer = decompilationErrorsFixer;
         }
 
 
@@ -266,6 +269,7 @@ namespace Hast.Transformer
 
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
+            _decompilationErrorsFixer.FixDecompilationErrors(syntaxTree);
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
             _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
@@ -281,8 +285,18 @@ namespace Hast.Transformer
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
-            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);
-            var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
+            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
+
+            var preConfiguredArrayLengths = configuration
+                .TransformerConfiguration()
+                .ArrayLengths
+                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
+            var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
+            if (transformerConfiguration.EnableConstantSubstitution)
+            {
+                _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, arraySizeHolder, configuration); 
+            }
+
             // Needs to run after const substitution.
             _taskBodyInvocationInstanceCountsSetter.SetTaskBodyInvocationInstanceCounts(syntaxTree, configuration);
 

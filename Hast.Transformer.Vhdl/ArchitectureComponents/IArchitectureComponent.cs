@@ -19,6 +19,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IList<Variable> LocalVariables { get; }
 
         /// <summary>
+        /// Aliases local to the component.
+        /// </summary>
+        IList<Alias> LocalAliases { get; }
+
+        /// <summary>
         /// Variables corresponding to the component that are in the global namespace.
         /// </summary>
         IList<Variable> GlobalVariables { get; }

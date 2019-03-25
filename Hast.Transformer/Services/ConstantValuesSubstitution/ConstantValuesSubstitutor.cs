@@ -21,14 +21,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        public IArraySizeHolder SubstituteConstantValues(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public void SubstituteConstantValues(
+            SyntaxTree syntaxTree, 
+            IArraySizeHolder arraySizeHolder, 
+            IHardwareGenerationConfiguration configuration)
         {
-            var preConfiguredArrayLengths = configuration
-                .TransformerConfiguration()
-                .ArrayLengths
-                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
-            var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
-
             new ConstantValuesSubstitutingAstProcessor(
                 new ConstantValuesTable(),
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),
@@ -36,8 +33,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 new Dictionary<string, ConstantValuesSubstitutingAstProcessor.ConstructorReference>(),
                 _astExpressionEvaluator)
                 .SubstituteConstantValuesInSubTree(syntaxTree, false);
-
-            return arraySizeHolder;
         }
     }
 }

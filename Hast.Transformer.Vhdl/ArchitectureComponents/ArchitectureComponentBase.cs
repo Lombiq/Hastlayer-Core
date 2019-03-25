@@ -15,6 +15,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     {
         public string Name { get; private set; }
         public IList<Variable> LocalVariables { get; private set; } = new List<Variable>();
+        public IList<Alias> LocalAliases { get; private set; } = new List<Alias>();
         public IList<Variable> GlobalVariables { get; private set; } = new List<Variable>();
         public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
         public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
@@ -74,6 +75,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             var process = new Process { Name = Name.ToExtendedVhdlId() };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
+            process.Declarations.AddRange(LocalAliases);
 
             var ifInResetBlock = new InlineBlock(new LineComment("Synchronous reset"));
 

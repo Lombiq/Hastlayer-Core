@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Configuration;
-using Hast.Synthesis.Services;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -17,6 +13,9 @@ using Hast.VhdlBuilder.Testing;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -75,7 +74,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
                 {
-                    if (left.GetActualTypeReference().IsSimpleMemory()) return Empty.Instance;
+                    var leftTypeReference = left.GetActualTypeReference();
+                    if (leftTypeReference.IsSimpleMemory()) return Empty.Instance;
 
                     var leftTransformed = Transform(left, context);
                     if (leftTransformed == Empty.Instance) return Empty.Instance;
@@ -91,14 +91,54 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         rightTransformed = Transform(right, context);
                     }
+
+                    var leftDataObject = (IDataObject)leftTransformed;
+
+                    if (left is IdentifierExpression &&
+                        stateMachine.LocalAliases.Any(alias => alias.Name == leftDataObject.Name))
+                    {
+                        // The left variable was previously swapped for an alias to allow reference-like behavior so
+                        // changes made to record fields are propagated. However such aliases can't be assigned to as
+                        // that would also overwrite the original variable.
+                        throw new NotSupportedException(
+                            "The assignment " + expression + 
+                            " is not supported. You can't at the moment assign to a variable that you previously assigned to using a reference type-holding variable."
+                            .AddParentEntityName(assignment));
+                    }
+
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
+
+                    var rightTypeReference = right.GetActualTypeReference();
+                    if (leftTypeReference != null && 
+                        leftTypeReference.FullName == rightTypeReference.FullName && 
+                        !leftTypeReference.IsValueType &&
+                        left is IdentifierExpression && right is IdentifierExpression)
+                    {
+                        // This is an assignment between two variables holding reference type objects. Since there are
+                        // no references in VHDL the best option is to use aliases (instead of assigning back variables
+                        // after every change). This is not perfect though since if the now alias variable is assigned
+                        // to
+
+                        // Switching the left variable out with an alias so it'll have reference-like behavior.
+                        stateMachine.LocalVariables.Remove(stateMachine.LocalVariables.Single(variable => variable.Name == leftDataObject.Name));
+                        var aliasedVariable = stateMachine.LocalVariables
+                                .Single(variable => variable.Name == ((IDataObject)rightTransformed).Name);
+
+                        stateMachine.LocalAliases.Add(
+                            new Alias
+                            {
+                                Name = leftDataObject.Name,
+                                AliasedObject = aliasedVariable.ToReference(),
+                                DataType = aliasedVariable.DataType
+                            });
+                    }
 
                     // _typeConversionTransformer.ImplementTypeConversionForAssignment() could be used here, but that
                     // also needs the data types of both operands.
 
                     return new Assignment
                     {
-                        AssignTo = (IDataObject)leftTransformed,
+                        AssignTo = leftDataObject,
                         Expression = rightTransformed
                     };
                 }
@@ -495,7 +535,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // Casting if the result type is not what the parent expects.
                         var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
                         if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
-                            parentTypeInformation != null && 
+                            parentTypeInformation != null &&
                             parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
                             parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
                         {
@@ -585,7 +625,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var type = ((TypeReferenceExpression)expression).Type;
                 var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
-                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier);
+                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier, expression);
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
@@ -601,7 +641,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return innerExpressionResult;
                 }
 
-                var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
+                var fromTypeReference = castExpression.Expression.GetActualTypeReference(true) ?? castExpression.GetActualTypeReference();
                 var fromType = _declarableTypeCreator
                     .CreateDeclarableType(castExpression.Expression, fromTypeReference, context.TransformationContext);
                 var toType = _declarableTypeCreator
@@ -677,39 +717,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Running the constructor, which needs to be done before initializers.
                 var constructorFullName = objectCreateExpression.GetConstructorFullName();
-                if (!string.IsNullOrEmpty(constructorFullName))
-                {
-                    if (context.TransformationContext.TypeDeclarationLookupTable
+                if (!string.IsNullOrEmpty(constructorFullName) &&
+                    context.TransformationContext.TypeDeclarationLookupTable
                         .Lookup(objectCreateExpression.Type)
                         .Members
                         .SingleOrDefault(member => member.GetFullName() == constructorFullName) is MethodDeclaration constructor)
-                    {
-                        scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
+                {
+                    scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
 
-                        // The easiest is to fake an invocation.
-                        var constructorInvocation = new InvocationExpression(
-                            new MemberReferenceExpression(
-                                new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
-                                constructor.Name),
-                            // Passing ctor parameters, and an object reference as the first one (since all methods were
-                            // converted to static with the first parameter being @this).
-                            new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
-                                .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
+                    // The easiest is to fake an invocation.
+                    var constructorInvocation = new InvocationExpression(
+                        new MemberReferenceExpression(
+                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
+                            constructor.Name),
+                        // Passing ctor parameters, and an object reference as the first one (since all methods were
+                        // converted to static with the first parameter being @this).
+                        new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                            .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
 
-                        expression.CopyAnnotationsTo(constructorInvocation);
+                    expression.CopyAnnotationsTo(constructorInvocation);
 
-                        // Creating a clone of the expression's sub-tree where object creation is replaced to make the 
-                        // fake InvocationExpression realistic. A clone is needed not to cause concurrency issues if the
-                        // same expression is processed on multiple threads for multiple hardware copies.
-                        var expressionName = expression.GetFullName();
+                    // Creating a clone of the expression's sub-tree where object creation is replaced to make the fake
+                    // InvocationExpression realistic. A clone is needed not to cause concurrency issues if the same
+                    // expression is processed on multiple threads for multiple hardware copies.
+                    var expressionName = expression.GetFullName();
 
-                        var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
-                        var objectCreateExpressionClone = subTreeClone
-                            .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
-                        objectCreateExpressionClone.ReplaceWith(constructorInvocation);
+                    var subTreeClone = expression.FindFirstParentEntityDeclaration().Clone();
+                    var objectCreateExpressionClone = subTreeClone
+                        .FindFirstChildOfType<ObjectCreateExpression>(cloneExpression => cloneExpression.GetFullName() == expressionName);
+                    objectCreateExpressionClone.ReplaceWith(constructorInvocation);
 
-                        Transform(constructorInvocation, context);
-                    }
+                    Transform(constructorInvocation, context);
                 }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
@@ -757,7 +795,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var typeDeclaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(recordAstType);
 
-            if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(recordAstType.GetFullName());
+            if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(recordAstType.GetFullName(), expression);
 
             var record = _recordComposer.CreateRecordFromType(typeDeclaration, context.TransformationContext);
 
