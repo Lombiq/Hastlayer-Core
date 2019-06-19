@@ -61,11 +61,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         DataType fieldDataType;
 
                         // If the field stores an instance of this type then we shouldn't declare that, otherwise we'd
-                        // get a stack overflow. This won't help against having a type that contains this type, so 
-                        // indirect circular type dependency.
+                        // get a stack overflow. Since it's not valid in VHDL ("[Synth 8-4702] element type of the
+                        // record element is same as the parent record type" in Vivado) we shouldn't even allow it.
+                        // This won't help against having a type that contains this type, so indirect circular type
+                        // dependency.
                         if (member.ReturnType.GetFullName() == typeFullName)
                         {
-                            fieldDataType = new NullableRecord { Name = recordName }.ToReference();
+                            throw new NotSupportedException(
+                                "A type referencing itself in its properties or fields (like in a linked list implementation) is not supported. The member " +
+                                member.GetFullName() + " references its parent type.".AddParentEntityName(member));
                         }
                         else
                         {

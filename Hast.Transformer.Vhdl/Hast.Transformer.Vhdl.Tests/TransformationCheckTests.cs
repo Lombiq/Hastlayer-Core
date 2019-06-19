@@ -90,6 +90,10 @@ namespace Hast.Transformer.Vhdl.Tests
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
                     typeof(NotSupportedException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.SelfReferencingType()),
+                    typeof(NotSupportedException));
             });
         }
 
