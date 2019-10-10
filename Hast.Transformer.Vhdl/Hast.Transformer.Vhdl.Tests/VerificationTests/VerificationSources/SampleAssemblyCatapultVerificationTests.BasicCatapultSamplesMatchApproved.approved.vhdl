@@ -500,7 +500,7 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\;
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0.52035
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
@@ -517,7 +517,7 @@ begin
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7359
+                        -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ (have to wait 8 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -791,7 +791,7 @@ begin
                         else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.61305
+                        -- Clock cycles needed to complete this state (approximation): 0.678
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_1\;
@@ -850,7 +850,7 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\;
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.52035
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
@@ -863,7 +863,7 @@ begin
                         -- memory.WriteBoolean (1 + num2, return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a);
                         -- 
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7359
+                        -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ (have to wait 8 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -1122,7 +1122,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.61305
+                        -- Clock cycles needed to complete this state (approximation): 0.678
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_1\;
@@ -1389,7 +1389,7 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.52035
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -1403,7 +1403,7 @@ begin
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7359
+                        -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ (have to wait 8 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -1555,7 +1555,7 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.52035
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -1569,7 +1569,7 @@ begin
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7359
+                        -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ (have to wait 8 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -1721,7 +1721,7 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.52035
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -1735,7 +1735,7 @@ begin
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return_31c48b81d598febb577b7f5df72b4f92903c8e9ff87bf736a09c1823d9955083\;
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7359
+                        -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
                         -- Waiting for the result to appear in \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ (have to wait 8 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
