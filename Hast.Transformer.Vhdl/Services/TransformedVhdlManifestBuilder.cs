@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Hast.Common.Extensions;
-using Hast.Common.Helpers;
+﻿using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -22,6 +15,12 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -272,6 +271,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             manifest.Modules.Add(new BlockComment(LongGeneratedCodeComments.Libraries));
 
+            // If the TypeConversion functions change those changes need to be applied to the Timing Tester app too.
             ReadAndAddEmbedLibrary("TypeConversion", manifest, hastIpModule);
 
             if (useSimpleMemory)
