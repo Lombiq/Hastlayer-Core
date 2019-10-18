@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
+using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -117,10 +117,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static StdLogicVector _stdLogicVector32 = new StdLogicVector { Size = 32 };
         public static StdLogicVector StdLogicVector32 = new StdLogicVector(_stdLogicVector32);
 
-        private static DataType _string = new String { Length = 256 };
-        public static DataType String = new DataType(_string)
+        private static DataType _unrangedString = new String();
+        public static DataType UnrangedString = new DataType(_unrangedString)
         {
-            DefaultValue = default(string).ToVhdlValue(_string)
+            DefaultValue = default(string).ToVhdlValue(_unrangedString)
         };
 
         private static DataType _real = new DataType { TypeCategory = DataTypeCategory.Scalar, Name = "real" };

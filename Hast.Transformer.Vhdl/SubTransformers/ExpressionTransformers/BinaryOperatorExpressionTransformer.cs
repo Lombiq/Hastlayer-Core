@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Synthesis.Services;
-using Hast.Transformer.Helpers;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -416,6 +413,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Then we transition from that state forward to a state where the actual algorithm continues.
             else
             {
+                var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
+
                 // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
                 // single operation).
                 if (isFirstOfSimdOperationsOrIsSingleOperation)
@@ -426,8 +425,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
                     waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                     var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
-
-                    var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
 
                     var waitForResultBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
@@ -470,6 +467,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
                 currentBlock.Add(operationResultAssignment);
+                stateMachine.RecordMultiCycleOperation(operationResultDataObjectReference, clockCyclesToWait);
 
 
                 // Changing the current block to the one in the state after the wait state, just when this is the last

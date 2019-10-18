@@ -1,4 +1,5 @@
 ﻿using Hast.Catapult;
+using Hast.Catapult.Abstractions;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
     public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
     {
         protected override bool UseStubMemberSuitabilityChecker => false;
-        protected override string DeviceName => "Catapult";
+        protected override string DeviceName => CatapultManifestProvider.DeviceName;
 
 
         public CatapultSamplesVerificationTests()

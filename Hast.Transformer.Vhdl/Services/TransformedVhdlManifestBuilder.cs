@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Extensions;
 using Hast.Layer;
+using Hast.Synthesis;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
@@ -161,6 +162,47 @@ namespace Hast.Transformer.Vhdl.Services
                 if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.GetTypes().Any())
                 {
                     dependentTypesTables.Add(architectureComponentResult.ArchitectureComponent.DependentTypesTable);
+                }
+            }
+
+
+            // Adding multi-cycle path constraints for Quartus.
+            if (transformationContext.DeviceDriver.ToolChainName == CommonToolChainNames.QuartusPrime)
+            {
+                var anyMultiCycleOperations = false;
+                var sdcExpression = new VhdlBuilder.Representation.Expression.MultiCycleSdcStatementsAttributeExpression();
+
+                foreach (var architectureComponentResult in architectureComponentResults)
+                {
+                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
+                    {
+                        sdcExpression.AddPath(
+                            ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name, 
+                            operation.OperationResultReference, 
+                            operation.RequiredClockCyclesCeiling);
+
+                        anyMultiCycleOperations = true;
+                    }
+                }
+
+                if (anyMultiCycleOperations)
+                {
+                    var alteraAttribute = new VhdlBuilder.Representation.Declaration.Attribute
+                    {
+                        Name = "altera_attribute",
+                        ValueType = KnownDataTypes.UnrangedString
+                    };
+
+                    hastIpArchitecture.Declarations.Add(new LogicalBlock(
+                        new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
+                        alteraAttribute,
+                        new VhdlBuilder.Representation.Expression.AttributeSpecification
+                        {
+                            Attribute = alteraAttribute,
+                            ItemName = hastIpArchitecture.Name,
+                            ItemClass = "architecture",
+                            Expression = sdcExpression
+                        })); 
                 }
             }
 

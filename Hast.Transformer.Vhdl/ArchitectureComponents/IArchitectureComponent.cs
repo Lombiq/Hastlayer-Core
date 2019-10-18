@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Vhdl.Models;
+﻿using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    public interface IMultiCycleOperation
+    {
+        IDataObject OperationResultReference { get; }
+        int RequiredClockCyclesCeiling { get; }
+    }
+
+
     public interface IArchitectureComponent
     {
         /// <summary>
@@ -50,6 +57,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// Stores dependency relations between VDHL types, for custom types declared in this component that need this.
         /// </summary>
         DependentTypesTable DependentTypesTable { get; }
+
+        /// <summary>
+        /// Operations that take multiple clock cycles and are thus awaited in their own state. This is to be used when
+        /// multi-cycle paths need to be defined in the hardware design tool.
+        /// </summary>
+        IEnumerable<IMultiCycleOperation> MultiCycleOperations { get; }
 
         /// <summary>
         /// Produces the declarations corresponding to the component that should be inserted into the head of the

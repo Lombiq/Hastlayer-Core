@@ -107,6 +107,10 @@
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj">
+      <Project>{1059805B-3221-4788-BDF3-11120FA4BF1A}</Project>
+      <Name>Hast.Catapult.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">
       <Project>{1d1ec796-dff6-4ec7-b749-62b89d1dea92}</Project>
       <Name>Hast.Synthesis.Abstractions</Name>
@@ -118,6 +122,10 @@
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj">
       <Project>{0D13986F-FA33-4898-A0DE-C173764663F0}</Project>
       <Name>Hast.Transformer.Vhdl.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj">
+      <Project>{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}</Project>
+      <Name>Hast.Xilinx.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj">
       <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>

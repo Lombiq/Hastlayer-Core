@@ -191,7 +191,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Single:
                     break;
                 case KnownTypeCode.String:
-                    return KnownDataTypes.String;
+                    return KnownDataTypes.UnrangedString;
                 case KnownTypeCode.Task:
                     break;
                 case KnownTypeCode.TaskOfT:

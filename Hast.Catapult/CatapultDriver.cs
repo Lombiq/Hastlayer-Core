@@ -1069,6 +1069,8 @@ mul_by_0	unsigned64	unsigned64	sync	impl	0	0
             }
         }
 
+        public string ToolChainName { get; } = CommonToolChainNames.QuartusPrime;
+
 
         public CatapultDriver(ITimingReportParser timingReportParser)
         {

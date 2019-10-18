@@ -8,6 +8,7 @@ using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using Hast.Xilinx;
+using Hast.Xilinx.Abstractions;
 using ICSharpCode.NRefactory.CSharp;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Hast.Transformer.Vhdl.Tests
     public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
     {
         protected virtual bool UseStubMemberSuitabilityChecker { get; set; } = true;
-        protected virtual string DeviceName { get; set; } = "Nexys4 DDR";
+        protected virtual string DeviceName { get; set; } = Nexys4DdrManifestProvider.DeviceName;
 
 
         protected VhdlTransformingTestFixtureBase()
