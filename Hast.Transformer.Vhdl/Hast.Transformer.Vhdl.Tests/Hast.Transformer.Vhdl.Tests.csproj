@@ -200,10 +200,11 @@
     <Compile Include="IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
     <Compile Include="BasicHardwareStructureTests.cs" />
     <Compile Include="TransformationCheckTests.cs" />
-    <Compile Include="VerificationTests\SampleAssemblyCatapultVerificationTests.cs" />
-    <Compile Include="VerificationTests\SampleAssemblyVerificationTests.cs" />
+    <Compile Include="VerificationTests\CatapultSamplesVerificationTests.cs" />
+    <Compile Include="VerificationTests\SamplesVerificationTestsBase.cs" />
     <Compile Include="VerificationTests\ShouldMatchApprovedExtensions.cs" />
     <Compile Include="VerificationTests\TestInputAssembliesVerificationTests.cs" />
+    <Compile Include="VerificationTests\XilinxSamplesVerificationTests.cs" />
     <Compile Include="VhdlTransformingTestFixtureBase.cs" />
     <Compile Include="VerificationTests\VerificationTestFixtureBase.cs" />
   </ItemGroup>

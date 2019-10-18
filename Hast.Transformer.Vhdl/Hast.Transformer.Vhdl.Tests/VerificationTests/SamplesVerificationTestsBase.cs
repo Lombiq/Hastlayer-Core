@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Hast.Algorithms;
+﻿using Hast.Algorithms;
 using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz;
@@ -7,23 +6,25 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Lombiq.OrchardAppHost;
-using NUnit.Framework;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
-    [TestFixture]
-    public class SampleAssemblyVerificationTests : VerificationTestFixtureBase
+    /// <summary>
+    /// Base for tests that cover the samples. Needs to be done in such a way, test methods can't be in the base class
+    /// (NUnit limitation), nor can Shouldly matching happen here (since it needs to be configured from the actual
+    /// caller).
+    /// </summary>
+    public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
     {
         protected override bool UseStubMemberSuitabilityChecker => false;
 
 
-        [Test]
-        public async Task BasicSamplesMatchApproved()
-        {
-            await _host.Run<ITransformer>(async transformer =>
+        protected Task<string> CreateVhdlForBasicSamples() =>
+            _host.RunGet(async wc =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    transformer,
+                    wc.Resolve<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
@@ -71,17 +72,14 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
                     });
 
-                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+                return hardwareDescription.VhdlSource;
             });
-        }
 
-        [Test]
-        public async Task KpzSampleMatchesApproved()
-        {
-            await _host.Run<ITransformer>(async transformer =>
+        protected Task<string> CreateVhdlForKpzSamples() =>
+            _host.RunGet(async wc =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    transformer,
+                    wc.Resolve<ITransformer>(),
                     new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
@@ -95,17 +93,14 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
                     });
 
-                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+                return hardwareDescription.VhdlSource;
             });
-        }
 
-        [Test]
-        public async Task Fix64SampleMatchesApproved()
-        {
-            await _host.Run<ITransformer>(async transformer =>
+        protected Task<string> CreateVhdlForFix64Samples() =>
+            _host.RunGet(async wc =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    transformer,
+                    wc.Resolve<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
                     configuration =>
                     {
@@ -118,8 +113,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
                     });
 
-                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+                return hardwareDescription.VhdlSource;
             });
-        }
     }
 }

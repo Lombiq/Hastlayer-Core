@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Autofac.Core;
 using Hast.Layer;
-using Hast.Synthesis;
-using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
@@ -16,12 +9,18 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using Hast.Xilinx;
 using ICSharpCode.NRefactory.CSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
     public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
     {
         protected virtual bool UseStubMemberSuitabilityChecker { get; set; } = true;
+        protected virtual string DeviceName { get; set; } = "Nexys4 DDR";
 
 
         protected VhdlTransformingTestFixtureBase()
@@ -66,7 +65,7 @@ namespace Hast.Transformer.Vhdl.Tests
             IEnumerable<Assembly> assemblies,
             Action<HardwareGenerationConfiguration> configurationModifier = null)
         {
-            var configuration = new HardwareGenerationConfiguration("Nexys4 DDR") { EnableCaching = false };
+            var configuration = new HardwareGenerationConfiguration(DeviceName) { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
         }
