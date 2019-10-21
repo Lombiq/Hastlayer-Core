@@ -177,7 +177,11 @@ namespace Hast.Transformer.Vhdl.Services
                     foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
                     {
                         sdcExpression.AddPath(
-                            ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name, 
+                            // If the path is through a global signal (i.e. that doesn't have a parent process) then
+                            // the parent should be empty.
+                            operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
+                                ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
+                                string.Empty, 
                             operation.OperationResultReference, 
                             operation.RequiredClockCyclesCeiling);
 
