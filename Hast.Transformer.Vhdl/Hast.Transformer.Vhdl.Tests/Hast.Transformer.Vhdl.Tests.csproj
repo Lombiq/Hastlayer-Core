@@ -131,9 +131,9 @@
       <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
       <Name>Hast.Algorithms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz\Hast.Samples.Kpz.csproj">
-      <Project>{0dd555f3-b472-422b-8cfb-63cb494cbb5a}</Project>
-      <Name>Hast.Samples.Kpz</Name>
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj">
+      <Project>{EE140765-5088-40AA-9621-D4B0A971EE2C}</Project>
+      <Name>Hast.Samples.Kpz.Algorithms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.Catapult\Hast.Catapult.csproj">
       <Project>{2C30740A-0E66-476C-89B2-C89D86BFA70C}</Project>

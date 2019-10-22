@@ -2,6 +2,7 @@
 using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz;
+using Hast.Samples.Kpz.Algorithms;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
