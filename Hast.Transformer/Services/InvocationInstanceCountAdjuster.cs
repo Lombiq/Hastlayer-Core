@@ -25,10 +25,6 @@ namespace Hast.Transformer.Services
         }
 
 
-        /// <summary>
-        /// When a member's instance count is >1 the members invoked by it should have at least that instance count. This
-        /// visitor adjusts these instance counts.
-        /// </summary>
         private class InvocationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
