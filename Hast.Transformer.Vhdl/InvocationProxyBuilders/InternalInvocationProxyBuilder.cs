@@ -262,9 +262,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         // Creating a boolean vector where each of the elements will indicate whether the target
                         // component with that index is available and can be started. I.e. targetAvailableIndicator(0)
                         // being true tells that the target component with index 0 can be started.
-                        // All this is necessary to avoid a ifs with large conditions which would cause timing 
-                        // errors with more than cca. 20 components. This implementation can be better implemented
-                        // with parallel paths.
+                        // All this is necessary to avoid ifs with large conditions which would cause timing errors
+                        // with more than cca. 20 components. This implementation can be better implemented with
+                        // parallel paths.
                         targetAvailableIndicatorVariableReference = proxyComponent
                             .CreatePrefixedSegmentedObjectName("targetAvailableIndicator")
                             .ToVhdlVariableReference();
