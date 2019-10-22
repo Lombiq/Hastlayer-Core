@@ -772,6 +772,40 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().2 declarations end
 
 
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().3 declarations start
+    -- State machine states:
+    type \RandomMwc64X::NextUInt32().3._States\ is (
+        \RandomMwc64X::NextUInt32().3._State_0\, 
+        \RandomMwc64X::NextUInt32().3._State_1\, 
+        \RandomMwc64X::NextUInt32().3._State_2\, 
+        \RandomMwc64X::NextUInt32().3._State_3\, 
+        \RandomMwc64X::NextUInt32().3._State_4\);
+    -- Signals:
+    Signal \RandomMwc64X::NextUInt32().3._Finished\: boolean := false;
+    Signal \RandomMwc64X::NextUInt32().3.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \RandomMwc64X::NextUInt32().3.this.parameter.Out\: \Hast.Algorithms.Random.RandomMwc64X\;
+    Signal \RandomMwc64X::NextUInt32().3._Started\: boolean := false;
+    Signal \RandomMwc64X::NextUInt32().3.this.parameter.In\: \Hast.Algorithms.Random.RandomMwc64X\;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().3 declarations end
+
+
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().4 declarations start
+    -- State machine states:
+    type \RandomMwc64X::NextUInt32().4._States\ is (
+        \RandomMwc64X::NextUInt32().4._State_0\, 
+        \RandomMwc64X::NextUInt32().4._State_1\, 
+        \RandomMwc64X::NextUInt32().4._State_2\, 
+        \RandomMwc64X::NextUInt32().4._State_3\, 
+        \RandomMwc64X::NextUInt32().4._State_4\);
+    -- Signals:
+    Signal \RandomMwc64X::NextUInt32().4._Finished\: boolean := false;
+    Signal \RandomMwc64X::NextUInt32().4.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \RandomMwc64X::NextUInt32().4.this.parameter.Out\: \Hast.Algorithms.Random.RandomMwc64X\;
+    Signal \RandomMwc64X::NextUInt32().4._Started\: boolean := false;
+    Signal \RandomMwc64X::NextUInt32().4.this.parameter.In\: \Hast.Algorithms.Random.RandomMwc64X\;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().4 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -6988,6 +7022,186 @@ begin
     -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().2 state machine end
 
 
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().3 state machine start
+    \RandomMwc64X::NextUInt32().3._StateMachine\: process (\Clock\) 
+        Variable \RandomMwc64X::NextUInt32().3._State\: \RandomMwc64X::NextUInt32().3._States\ := \RandomMwc64X::NextUInt32().3._State_0\;
+        Variable \RandomMwc64X::NextUInt32().3.this\: \Hast.Algorithms.Random.RandomMwc64X\;
+        Variable \RandomMwc64X::NextUInt32().3.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RandomMwc64X::NextUInt32().3.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RandomMwc64X::NextUInt32().3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RandomMwc64X::NextUInt32().3.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \RandomMwc64X::NextUInt32().3.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \RandomMwc64X::NextUInt32().3.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \RandomMwc64X::NextUInt32().3._Finished\ <= false;
+                \RandomMwc64X::NextUInt32().3.return\ <= to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().3._State\ := \RandomMwc64X::NextUInt32().3._State_0\;
+                \RandomMwc64X::NextUInt32().3.num\ := to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().3.num2\ := to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().3.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().3.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \RandomMwc64X::NextUInt32().3.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \RandomMwc64X::NextUInt32().3.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \RandomMwc64X::NextUInt32().3._State\ is 
+                    when \RandomMwc64X::NextUInt32().3._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\RandomMwc64X::NextUInt32().3._Started\ = true) then 
+                            \RandomMwc64X::NextUInt32().3._State\ := \RandomMwc64X::NextUInt32().3._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \RandomMwc64X::NextUInt32().3._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\RandomMwc64X::NextUInt32().3._Started\ = true) then 
+                            \RandomMwc64X::NextUInt32().3._Finished\ <= true;
+                        else 
+                            \RandomMwc64X::NextUInt32().3._Finished\ <= false;
+                            \RandomMwc64X::NextUInt32().3._State\ := \RandomMwc64X::NextUInt32().3._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \RandomMwc64X::NextUInt32().3.this.parameter.Out\ <= \RandomMwc64X::NextUInt32().3.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \RandomMwc64X::NextUInt32().3._State_2\ => 
+                        \RandomMwc64X::NextUInt32().3.this\ := \RandomMwc64X::NextUInt32().3.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.State >> 32);
+                        -- 
+                        \RandomMwc64X::NextUInt32().3.binaryOperationResult.0\ := SmartResize(shift_right(\RandomMwc64X::NextUInt32().3.this\.\State\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \RandomMwc64X::NextUInt32().3.num\ := (\RandomMwc64X::NextUInt32().3.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)@this.State;
+                        -- 
+                        \RandomMwc64X::NextUInt32().3.num2\ := SmartResize(\RandomMwc64X::NextUInt32().3.this\.\State\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.State = (ulong)num2 * 4294883355uL + (ulong)num;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \RandomMwc64X::NextUInt32().3._State\ := \RandomMwc64X::NextUInt32().3._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4467
+                    when \RandomMwc64X::NextUInt32().3._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \RandomMwc64X::NextUInt32().3.binaryOperationResult.1\ := SmartResize(SmartResize(\RandomMwc64X::NextUInt32().3.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \RandomMwc64X::NextUInt32().3._State\ := \RandomMwc64X::NextUInt32().3._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.82035
+                    when \RandomMwc64X::NextUInt32().3._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \RandomMwc64X::NextUInt32().3.binaryOperationResult.2\ := \RandomMwc64X::NextUInt32().3.binaryOperationResult.1\ + SmartResize(\RandomMwc64X::NextUInt32().3.num\, 64);
+                        \RandomMwc64X::NextUInt32().3.this\.\State\ := \RandomMwc64X::NextUInt32().3.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
+                        \RandomMwc64X::NextUInt32().3.binaryOperationResult.3\ := \RandomMwc64X::NextUInt32().3.num2\ xor \RandomMwc64X::NextUInt32().3.num\;
+                        \RandomMwc64X::NextUInt32().3.return\ <= \RandomMwc64X::NextUInt32().3.binaryOperationResult.3\;
+                        \RandomMwc64X::NextUInt32().3._State\ := \RandomMwc64X::NextUInt32().3._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.64125
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().3 state machine end
+
+
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().4 state machine start
+    \RandomMwc64X::NextUInt32().4._StateMachine\: process (\Clock\) 
+        Variable \RandomMwc64X::NextUInt32().4._State\: \RandomMwc64X::NextUInt32().4._States\ := \RandomMwc64X::NextUInt32().4._State_0\;
+        Variable \RandomMwc64X::NextUInt32().4.this\: \Hast.Algorithms.Random.RandomMwc64X\;
+        Variable \RandomMwc64X::NextUInt32().4.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RandomMwc64X::NextUInt32().4.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RandomMwc64X::NextUInt32().4.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RandomMwc64X::NextUInt32().4.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \RandomMwc64X::NextUInt32().4.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \RandomMwc64X::NextUInt32().4.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \RandomMwc64X::NextUInt32().4._Finished\ <= false;
+                \RandomMwc64X::NextUInt32().4.return\ <= to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().4._State\ := \RandomMwc64X::NextUInt32().4._State_0\;
+                \RandomMwc64X::NextUInt32().4.num\ := to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().4.num2\ := to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().4.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \RandomMwc64X::NextUInt32().4.binaryOperationResult.1\ := to_unsigned(0, 64);
+                \RandomMwc64X::NextUInt32().4.binaryOperationResult.2\ := to_unsigned(0, 64);
+                \RandomMwc64X::NextUInt32().4.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \RandomMwc64X::NextUInt32().4._State\ is 
+                    when \RandomMwc64X::NextUInt32().4._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\RandomMwc64X::NextUInt32().4._Started\ = true) then 
+                            \RandomMwc64X::NextUInt32().4._State\ := \RandomMwc64X::NextUInt32().4._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \RandomMwc64X::NextUInt32().4._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\RandomMwc64X::NextUInt32().4._Started\ = true) then 
+                            \RandomMwc64X::NextUInt32().4._Finished\ <= true;
+                        else 
+                            \RandomMwc64X::NextUInt32().4._Finished\ <= false;
+                            \RandomMwc64X::NextUInt32().4._State\ := \RandomMwc64X::NextUInt32().4._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \RandomMwc64X::NextUInt32().4.this.parameter.Out\ <= \RandomMwc64X::NextUInt32().4.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \RandomMwc64X::NextUInt32().4._State_2\ => 
+                        \RandomMwc64X::NextUInt32().4.this\ := \RandomMwc64X::NextUInt32().4.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.State >> 32);
+                        -- 
+                        \RandomMwc64X::NextUInt32().4.binaryOperationResult.0\ := SmartResize(shift_right(\RandomMwc64X::NextUInt32().4.this\.\State\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                        \RandomMwc64X::NextUInt32().4.num\ := (\RandomMwc64X::NextUInt32().4.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)@this.State;
+                        -- 
+                        \RandomMwc64X::NextUInt32().4.num2\ := SmartResize(\RandomMwc64X::NextUInt32().4.this\.\State\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.State = (ulong)num2 * 4294883355uL + (ulong)num;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \RandomMwc64X::NextUInt32().4._State\ := \RandomMwc64X::NextUInt32().4._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4467
+                    when \RandomMwc64X::NextUInt32().4._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \RandomMwc64X::NextUInt32().4.binaryOperationResult.1\ := SmartResize(SmartResize(\RandomMwc64X::NextUInt32().4.num2\, 64) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \RandomMwc64X::NextUInt32().4._State\ := \RandomMwc64X::NextUInt32().4._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.82035
+                    when \RandomMwc64X::NextUInt32().4._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \RandomMwc64X::NextUInt32().4.binaryOperationResult.2\ := \RandomMwc64X::NextUInt32().4.binaryOperationResult.1\ + SmartResize(\RandomMwc64X::NextUInt32().4.num\, 64);
+                        \RandomMwc64X::NextUInt32().4.this\.\State\ := \RandomMwc64X::NextUInt32().4.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
+                        \RandomMwc64X::NextUInt32().4.binaryOperationResult.3\ := \RandomMwc64X::NextUInt32().4.num2\ xor \RandomMwc64X::NextUInt32().4.num\;
+                        \RandomMwc64X::NextUInt32().4.return\ <= \RandomMwc64X::NextUInt32().4.binaryOperationResult.3\;
+                        \RandomMwc64X::NextUInt32().4._State\ := \RandomMwc64X::NextUInt32().4._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.64125
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().4 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -7077,366 +7291,36 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32() start
-    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32()\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\ := (others => false);
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-            else 
-                -- Building a boolean array where each of the elements will indicate whether the component with the given index should be started next.
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(0) := \RandomMwc64X::NextUInt32().1._Started\ = true and \RandomMwc64X::NextUInt32().2._Started\ = true and \RandomMwc64X::NextUInt32().0._Started\ = false;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(1) := \RandomMwc64X::NextUInt32().2._Started\ = true and \RandomMwc64X::NextUInt32().1._Started\ = false;
-                \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(2) := \RandomMwc64X::NextUInt32().2._Started\ = false;
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.Kpz.Algorithms.KpzKernels::RandomlySwitchFourCells(System.Boolean).0
-                case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\) then 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 0;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(0) := false;
-                                    \RandomMwc64X::NextUInt32().0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 1;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(1) := false;
-                                    \RandomMwc64X::NextUInt32().1.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ := 2;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(2) := false;
-                                    \RandomMwc64X::NextUInt32().2.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\RandomMwc64X::NextUInt32().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := AfterFinished;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= false;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().0.return\;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().0.this.parameter.Out\;
-                                end if;
-                            when 1 => 
-                                if (\RandomMwc64X::NextUInt32().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := AfterFinished;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= false;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().1.return\;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().1.this.parameter.Out\;
-                                end if;
-                            when 2 => 
-                                if (\RandomMwc64X::NextUInt32().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := AfterFinished;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= false;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().2.return\;
-                                    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().2.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernels::RandomlySwitchFourCells(Boolean).0.runningState.0\ := WaitingForStarted;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState).0
-                case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\ := 0;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(0) := false;
-                                    \RandomMwc64X::NextUInt32().0.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\ := 1;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(1) := false;
-                                    \RandomMwc64X::NextUInt32().1.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\ := 2;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(2) := false;
-                                    \RandomMwc64X::NextUInt32().2.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\RandomMwc64X::NextUInt32().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().0.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().0.this.parameter.Out\;
-                                end if;
-                            when 1 => 
-                                if (\RandomMwc64X::NextUInt32().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().1.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().1.this.parameter.Out\;
-                                end if;
-                            when 2 => 
-                                if (\RandomMwc64X::NextUInt32().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().2.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().2.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.runningState.0\ := WaitingForStarted;
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState).1
-                case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\ := 0;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(0) := false;
-                                    \RandomMwc64X::NextUInt32().0.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\ := 1;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(1) := false;
-                                    \RandomMwc64X::NextUInt32().1.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\ := 2;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(2) := false;
-                                    \RandomMwc64X::NextUInt32().2.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningIndex.0\ is 
-                            when 0 => 
-                                if (\RandomMwc64X::NextUInt32().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().0.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().0.this.parameter.Out\;
-                                end if;
-                            when 1 => 
-                                if (\RandomMwc64X::NextUInt32().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().1.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().1.this.parameter.Out\;
-                                end if;
-                            when 2 => 
-                                if (\RandomMwc64X::NextUInt32().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().2.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().2.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.runningState.0\ := WaitingForStarted;
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState).2
-                case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\) then 
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningIndex.0\ := 0;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(0) := false;
-                                    \RandomMwc64X::NextUInt32().0.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningIndex.0\ := 1;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(1) := false;
-                                    \RandomMwc64X::NextUInt32().1.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningIndex.0\ := 2;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(2) := false;
-                                    \RandomMwc64X::NextUInt32().2.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningIndex.0\ is 
-                            when 0 => 
-                                if (\RandomMwc64X::NextUInt32().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().0.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().0.this.parameter.Out\;
-                                end if;
-                            when 1 => 
-                                if (\RandomMwc64X::NextUInt32().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().1.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().1.this.parameter.Out\;
-                                end if;
-                            when 2 => 
-                                if (\RandomMwc64X::NextUInt32().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().2.return\;
-                                    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().2.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.runningState.0\ := WaitingForStarted;
-                            \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
-                case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\) then 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\ := 0;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(0) := false;
-                                    \RandomMwc64X::NextUInt32().0.this.parameter.In\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\ := 1;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(1) := false;
-                                    \RandomMwc64X::NextUInt32().1.this.parameter.In\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\ := 2;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().targetAvailableIndicator\(2) := false;
-                                    \RandomMwc64X::NextUInt32().2.this.parameter.In\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\RandomMwc64X::NextUInt32().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().0._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().0.return\;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().0.this.parameter.Out\;
-                                end if;
-                            when 1 => 
-                                if (\RandomMwc64X::NextUInt32().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().1._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().1.return\;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().1.this.parameter.Out\;
-                                end if;
-                            when 2 => 
-                                if (\RandomMwc64X::NextUInt32().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= true;
-                                    \RandomMwc64X::NextUInt32().2._Started\ <= false;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().2.return\;
-                                    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().2.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().RandomMwc64X::NextUInt32().KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-            end if;
-        end if;
-    end process;
+    -- Signal connections for System.Void Hast.Samples.Kpz.Algorithms.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
+    \RandomMwc64X::NextUInt32().0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\;
+    \RandomMwc64X::NextUInt32().0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\ <= \RandomMwc64X::NextUInt32().0._Finished\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().0.return\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().0.this.parameter.Out\;
+    -- Signal connections for Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState).0 (#1):
+    \RandomMwc64X::NextUInt32().1._Started\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Started.0\;
+    \RandomMwc64X::NextUInt32().1.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32()._Finished.0\ <= \RandomMwc64X::NextUInt32().1._Finished\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().1.return\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().1.this.parameter.Out\;
+    -- Signal connections for Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState).1 (#2):
+    \RandomMwc64X::NextUInt32().2._Started\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Started.0\;
+    \RandomMwc64X::NextUInt32().2.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32()._Finished.0\ <= \RandomMwc64X::NextUInt32().2._Finished\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().2.return\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).1.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().2.this.parameter.Out\;
+    -- Signal connections for Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState).2 (#3):
+    \RandomMwc64X::NextUInt32().3._Started\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Started.0\;
+    \RandomMwc64X::NextUInt32().3.this.parameter.In\ <= \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32()._Finished.0\ <= \RandomMwc64X::NextUInt32().3._Finished\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().3.return\;
+    \KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).2.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().3.this.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.Kpz.Algorithms.KpzKernelsParallelizedInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#4):
+    \RandomMwc64X::NextUInt32().4._Started\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Started.0\;
+    \RandomMwc64X::NextUInt32().4.this.parameter.In\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\;
+    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32()._Finished.0\ <= \RandomMwc64X::NextUInt32().4._Finished\;
+    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().return.0\ <= \RandomMwc64X::NextUInt32().4.return\;
+    \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.In.0\ <= \RandomMwc64X::NextUInt32().4.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32() end
 
 

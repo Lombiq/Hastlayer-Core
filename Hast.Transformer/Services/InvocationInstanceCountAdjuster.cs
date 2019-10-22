@@ -3,6 +3,8 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
+using System;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
@@ -29,6 +31,7 @@ namespace Hast.Transformer.Services
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
             private readonly TransformerConfiguration _transformerConfiguration;
+            private readonly HashSet<EntityDeclaration> _singlyInvokedMembers = new HashSet<EntityDeclaration>();
 
 
             public InvocationInstanceCountAdjustingVisitor(
@@ -75,9 +78,35 @@ namespace Hast.Transformer.Services
                 var invokingMemberMaxInvocationConfiguration = _transformerConfiguration
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencingExpression.FindFirstParentOfType<EntityDeclaration>());
 
-                if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount > referencedMemberMaxInvocationConfiguration.MaxInvocationInstanceCount)
+                var referencedMemberFullName = referencedMember.GetFullName();
+
+                if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism > referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism)
                 {
                     referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism = invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism;
+
+                    // Was the referenced member invoked both from a parallelized member and from a single one? Then
+                    // let's increase MaxDegreeOfParallelism so there is no large multiplexing logic needed, instances
+                    // of the referenced and invoking members can be paired.
+                    if (_singlyInvokedMembers.Contains(referencedMember))
+                    {
+                        referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
+                    }
+                }
+                else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 && 
+                    !(referencedMemberFullName.IsDisplayClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                {
+                    _singlyInvokedMembers.Add(referencedMember);
+
+                    // Same increment as above. Just needed so it doesn't matter whether the parallelized or the single
+                    // invoking member is processed first.
+                    if (referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism != 1)
+                    {
+                        referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
+                    }
+                }
+
+                if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth > referencedMemberMaxInvocationConfiguration.MaxRecursionDepth)
+                {
                     referencedMemberMaxInvocationConfiguration.MaxRecursionDepth = invokingMemberMaxInvocationConfiguration.MaxRecursionDepth;
                 }
             }
