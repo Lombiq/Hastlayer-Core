@@ -185,9 +185,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 var invocationsCount = 0;
                 var invocationsCanBePaired =
                     !invokedFromSingleComponent &&
-                    invokedFromComponents
-                        .FirstOrDefault(componentInvocation => componentInvocation.Value > 1)
-                        .Equals(default(KeyValuePair<string, int>)) &&
+                    !invokedFromComponents.Any(componentInvocation => componentInvocation.Value > 1) &&
                     (invocationsCount = invokedFromComponents.Sum(invokingComponent => invokingComponent.Value)) <= targetComponentCount;
 
                 if (invokedFromSingleComponent || invocationsCanBePaired)
@@ -289,15 +287,17 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                         for (int c = 0; c < targetComponentCount; c++)
                         {
-                            var selectorConditions = new List<IVhdlElement>();
-                            selectorConditions.Add(new Binary
+                            var selectorConditions = new List<IVhdlElement>
                             {
-                                Left = ArchitectureComponentNameHelper
+                                new Binary
+                                {
+                                    Left = ArchitectureComponentNameHelper
                                     .CreateStartedSignalName(getTargetMemberComponentName(c))
                                     .ToVhdlSignalReference(),
-                                Operator = BinaryOperator.Equality,
-                                Right = Value.False
-                            });
+                                    Operator = BinaryOperator.Equality,
+                                    Right = Value.False
+                                }
+                            };
                             for (int s = c + 1; s < targetComponentCount; s++)
                             {
                                 selectorConditions.Add(new Binary

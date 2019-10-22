@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Abstractions.Configuration;
+﻿using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Common.Configuration
 {
@@ -103,8 +103,7 @@ namespace Hast.Common.Configuration
                     return;
                 }
 
-                EntityDeclaration member;
-                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out member))
+                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out EntityDeclaration member))
                 {
                     if (member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
                     {
@@ -122,7 +121,7 @@ namespace Hast.Common.Configuration
                         });
 
                         _lambdaCounts[parentMember]++;
-                    } 
+                    }
                 }
             }
         }
