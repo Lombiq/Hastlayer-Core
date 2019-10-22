@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -11,6 +8,9 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
@@ -69,7 +69,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     afterFinishedStateValue
                 }.ToList()
             };
-            proxyComponents.Add(new BasicComponent((namePrefix + "_CommonDeclarations").ToExtendedVhdlId()) { Declarations = new InlineBlock(booleanArrayType, runningStates) });
+            proxyComponents.Add(new BasicComponent((namePrefix + "_CommonDeclarations").ToExtendedVhdlId())
+            {
+                Declarations = new InlineBlock(booleanArrayType, runningStates)
+            });
 
 
             foreach (var invokedMember in invokedMembers)
