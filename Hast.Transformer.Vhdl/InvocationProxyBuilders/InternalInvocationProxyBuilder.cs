@@ -42,6 +42,23 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 }
             }
 
+            foreach (var invokedMember in invokedMembers)
+            {
+                var memberFullName = invokedMember.Key.GetFullName();
+
+                // Is this a recursive member? If yes then remove the last component (i.e. the one with the highest
+                // index, the deepest one in the call stack) from the list of invoking ones, because that won't invoke
+                // anything else.
+                var maxIndexComponents = invokedMember.Value
+                    .Where(component => component.Key.StartsWith(memberFullName))
+                    .OrderByDescending(component => component.Key);
+
+                if (maxIndexComponents.Any())
+                {
+                    invokedMember.Value.Remove(maxIndexComponents.First());
+                }
+            }
+
 
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would 
