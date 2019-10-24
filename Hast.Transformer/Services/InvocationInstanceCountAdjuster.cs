@@ -48,6 +48,11 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
+                if (memberReferenceExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null)
+                {
+                    return;
+                }
+
                 AdjustInstanceCount(
                     memberReferenceExpression, 
                     memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable));

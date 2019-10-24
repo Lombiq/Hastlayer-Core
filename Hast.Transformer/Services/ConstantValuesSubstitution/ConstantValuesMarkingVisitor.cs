@@ -139,7 +139,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            if (node.GetActualTypeReference()?.IsArray == false)
+            var typeReference = node.GetActualTypeReference();
+            if (typeReference?.IsArray == false)
             {
                 // Passing on constructor mappings.
 
@@ -174,7 +175,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()),
                     namedExpressionHandler: processParent);
             }
-            else
+            else if (typeReference != null)
             {
                 // Passing on array sizes.
 

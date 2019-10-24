@@ -125,7 +125,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression); 
         }
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -248,7 +248,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            base.VisitChildren(node);
+            // Attributes can slip in here but we don't care about those.
+            if (!(node is ICSharpCode.NRefactory.CSharp.Attribute))
+            {
+                base.VisitChildren(node); 
+            }
         }
 
 
