@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -139,8 +138,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            var typeReference = node.GetActualTypeReference();
-            if (typeReference?.IsArray == false)
+            if (node.GetActualTypeReference()?.IsArray == false)
             {
                 // Passing on constructor mappings.
 
@@ -175,7 +173,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()),
                     namedExpressionHandler: processParent);
             }
-            else if (typeReference != null)
+            else
             {
                 // Passing on array sizes.
 

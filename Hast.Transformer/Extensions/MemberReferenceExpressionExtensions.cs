@@ -117,7 +117,8 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (target is IdentifierExpression || target is IndexerExpression)
             {
-                return typeDeclarationLookupTable.Lookup(target.GetActualTypeReference().FullName);
+                var typeReference = target.GetActualTypeReference();
+                return typeReference == null ? null : typeDeclarationLookupTable.Lookup(typeReference.FullName);
             }
             else if (target is MemberReferenceExpression)
             {
