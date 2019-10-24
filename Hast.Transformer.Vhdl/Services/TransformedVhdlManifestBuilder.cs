@@ -246,7 +246,7 @@ namespace Hast.Transformer.Vhdl.Services
             if (!hardwareEntryPointMemberResults.Any())
             {
                 throw new InvalidOperationException(
-                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware.");
+                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there methods suitable as hardware entry points (see the documentation)?");
             }
             var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
             var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
