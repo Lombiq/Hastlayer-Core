@@ -230,7 +230,7 @@ namespace Hast.Transformer.Services
 
                 var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
 
-                // Removing the type if it's empty but leaving if it was references as a type (which is with an 
+                // Removing the type if it's empty but leaving if it was referenced as a type (which is with an 
                 // object create expression or a default value expression).
                 if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
                 {
