@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Hast.Common.Extensions;
+﻿using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -55,7 +55,19 @@ namespace Hast.Transformer.Services
                         }
 
                         member.SetHardwareEntryPointMember();
-                        member.AddReference(syntaxTree);
+
+                        // Referencing all parent types. This is necessary if the hardware entry point is in a nested
+                        // class.
+                        var parent = member.FindFirstParentTypeDeclaration();
+                        var child = member;
+                        while (parent != null)
+                        {
+                            child.AddReference(parent);
+                            child = parent;
+                            parent = parent.FindFirstParentTypeDeclaration();
+                        }
+                        child.AddReference(syntaxTree);
+
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
                     }
                 }
