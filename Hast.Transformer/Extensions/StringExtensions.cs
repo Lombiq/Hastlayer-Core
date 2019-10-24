@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.NRefactory.CSharp;
+using System.Text.RegularExpressions;
 
 namespace System
 {
@@ -28,16 +28,19 @@ namespace System
         }
 
         /// <summary>
-        /// Checks whether the string looks like the name of a compiler-generated DisplayClass.
+        /// Checks whether the string looks like the name of a compiler-generated DisplayClass from C# or one
+        /// generated from an F# closure.
         /// </summary>
         /// <example>
         /// Such a name is like following: 
         /// "Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass9_0"
         /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c"
+        /// Run@28
         /// </example>
-        public static bool IsDisplayClassName(this string name) =>
-            // A class anme containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
-            name.Contains("/<>c");
+        public static bool IsDisplayOrClosureClassName(this string name) =>
+            // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
+            name.Contains("/<>c") ||
+            Regex.IsMatch(name, @".+\@\d+", RegexOptions.Compiled);
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.
@@ -45,8 +48,10 @@ namespace System
         /// <example>
         /// Such a name is like following: 
         /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass2::numbers"
+        /// "System.UInt32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@28::Invoke(System.UInt32)"
         /// </example>
-        public static bool IsDisplayClassMemberName(this string name) => name.IsDisplayClassName() && name.Contains("::");
+        public static bool IsDisplayOrClosureClassMemberName(this string name) => 
+            name.IsDisplayOrClosureClassName() && name.Contains("::");
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated method that was created in place of a

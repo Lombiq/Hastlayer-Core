@@ -208,7 +208,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
                     string rightObjectFullName;
                     if (assignment.Right is ObjectCreateExpression rightObjectCreateExpression &&
-                        (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayClassName())
+                        (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayOrClosureClassName())
                     {
                         context.TransformationContext.TypeDeclarationLookupTable.Lookup(rightObjectCreateExpression.Type);
 
@@ -433,7 +433,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // Field reference expressions in DisplayClasses are supported.
-                if (memberReference.Target is ThisReferenceExpression && memberFullName.IsDisplayClassMemberName())
+                if (memberReference.Target is ThisReferenceExpression && memberFullName.IsDisplayOrClosureClassMemberName())
                 {
                     // These fields are global and correspond to the DisplayClass class so they shouldn't be prefixed
                     // with the state machine's name.

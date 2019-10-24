@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.NRefactory.CSharp;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
@@ -65,6 +61,13 @@ namespace Hast.Transformer.Services
                 if (primitiveExpression == null)
                 {
                     primitiveExpression = condition.Right as PrimitiveExpression ?? condition.Right.FindFirstChildOfType<PrimitiveExpression>();
+
+                    if (condition.Right.Is<BinaryOperatorExpression>(out var innerCondition))
+                    {
+                        // In code decopmiled from F# it can happen that the expression will be decompiled into 
+                        // "1 + actual number"... Taking care of that here.
+                        primitiveExpression = innerCondition.Right as PrimitiveExpression ?? innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
+                    }
                 }
 
                 if (primitiveExpression == null) return;

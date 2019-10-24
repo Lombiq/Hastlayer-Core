@@ -15,7 +15,7 @@ namespace Hast.Common.Configuration
         {
             var fullName = entity.GetFullName();
             var simpleName = entity.GetSimpleName();
-            var isDisplayClassMember = fullName.IsDisplayClassMemberName();
+            var isDisplayClassMember = fullName.IsDisplayOrClosureClassMemberName();
             var isIsInlineCompilerGeneratedMethod = fullName.IsInlineCompilerGeneratedMethodName();
 
             if (!isDisplayClassMember && !isIsInlineCompilerGeneratedMethod)
@@ -43,7 +43,7 @@ namespace Hast.Common.Configuration
                         .FindFirstParentTypeDeclaration(); // The parent type.
 
                     compilerGeneratedMembers = parentType.Members
-                        .Where(member => member.GetFullName().IsDisplayClassName())
+                        .Where(member => member.GetFullName().IsDisplayOrClosureClassName())
                         .SelectMany(displayClass => ((TypeDeclaration)displayClass).Members);
                 }
                 else
@@ -98,7 +98,7 @@ namespace Hast.Common.Configuration
 
                 var memberFullName = memberReferenceExpression.GetMemberFullName();
 
-                if (!memberFullName.IsDisplayClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
+                if (!memberFullName.IsDisplayOrClosureClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
                 {
                     return;
                 }

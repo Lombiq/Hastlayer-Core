@@ -524,7 +524,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (targetMemberReference.Target is MemberReferenceExpression)
             {
                 var targetTargetFullName = ((MemberReferenceExpression)targetMemberReference.Target).GetFullName();
-                if (targetTargetFullName.IsDisplayClassMemberName())
+                if (targetTargetFullName.IsDisplayOrClosureClassMemberName())
                 {
                     // We need to find the corresponding member in the parent class of this expression's class.
                     targetDeclaration = expression

@@ -393,7 +393,7 @@ namespace Hast.Transformer.Vhdl.Services
 
                             // Records need to be created only for those types that are neither display classes, nor
                             // hardware entry point types or static types 
-                            if (!typeDeclaration.GetFullName().IsDisplayClassName() && 
+                            if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() && 
                                 !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                                 !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
                             {

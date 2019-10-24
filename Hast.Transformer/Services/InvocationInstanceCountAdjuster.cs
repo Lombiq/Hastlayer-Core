@@ -100,7 +100,7 @@ namespace Hast.Transformer.Services
                     }
                 }
                 else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 && 
-                    !(referencedMemberFullName.IsDisplayClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                    !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 
@@ -124,7 +124,7 @@ namespace Hast.Transformer.Services
                     }
                 }
                 else if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth == 1 &&
-                    !(referencedMemberFullName.IsDisplayClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                    !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 
