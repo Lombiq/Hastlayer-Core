@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Hast.Common.Helpers;
+﻿using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
@@ -15,10 +9,14 @@ using Hast.Transformer.Services.ConstantValuesSubstitution;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.Ast.Transforms;
-using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard.FileSystems.AppData;
 using Orchard.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer
 {
@@ -54,6 +52,7 @@ namespace Hast.Transformer
         private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
         private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
+        private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
 
 
         public DefaultTransformer(
@@ -86,7 +85,8 @@ namespace Hast.Transformer
             ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
             IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
             IDeviceDriverSelector deviceDriverSelector,
-            IDecompilationErrorsFixer decompilationErrorsFixer)
+            IDecompilationErrorsFixer decompilationErrorsFixer,
+            IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -118,6 +118,7 @@ namespace Hast.Transformer
             _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
             _deviceDriverSelector = deviceDriverSelector;
             _decompilationErrorsFixer = decompilationErrorsFixer;
+            _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
         }
 
 
@@ -263,6 +264,7 @@ namespace Hast.Transformer
 
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
+            _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasie(syntaxTree);
 
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
