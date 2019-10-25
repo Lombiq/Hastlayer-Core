@@ -1,7 +1,6 @@
 ﻿using Hast.Algorithms;
 using Hast.Algorithms.Random;
 using Hast.Layer;
-using Hast.Samples.Kpz;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
@@ -58,7 +57,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<PrimeCalculator>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
                             {
                                 MaxDegreeOfParallelism = 3
                             });
@@ -108,7 +107,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.AddHardwareEntryPointType<Fix64Calculator>();
 
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
                             {
                                 MaxDegreeOfParallelism = 3
                             });
