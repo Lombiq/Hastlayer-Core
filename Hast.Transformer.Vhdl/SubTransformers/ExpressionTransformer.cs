@@ -109,27 +109,34 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
 
                     var rightTypeReference = right.GetActualTypeReference();
-                    if (leftTypeReference != null && 
-                        leftTypeReference.FullName == rightTypeReference.FullName && 
+                    if (leftTypeReference != null &&
+                        leftTypeReference.FullName == rightTypeReference.FullName &&
                         !leftTypeReference.IsValueType &&
-                        left is IdentifierExpression && right is IdentifierExpression)
+                        left is IdentifierExpression &&
+                        (right is IdentifierExpression || right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference())))
                     {
-                        // This is an assignment between two variables holding reference type objects. Since there are
-                        // no references in VHDL the best option is to use aliases (instead of assigning back variables
-                        // after every change). This is not perfect though since if the now alias variable is assigned
-                        // to
+                        // This is an assignment between two variables or a variable and a field holding reference type
+                        // objects. Since there are no references in VHDL the best option is to use aliases (instead of
+                        // assigning back variables after every change). This is not perfect though since if the now
+                        // alias variable is assigned to then that won't work, see the exception above.
 
                         // Switching the left variable out with an alias so it'll have reference-like behavior.
-                        stateMachine.LocalVariables.Remove(stateMachine.LocalVariables.Single(variable => variable.Name == leftDataObject.Name));
-                        var aliasedVariable = stateMachine.LocalVariables
-                                .Single(variable => variable.Name == ((IDataObject)rightTransformed).Name);
+
+                        var leftVariable = stateMachine.LocalVariables.Single(variable => variable.Name == leftDataObject.Name);
+                        stateMachine.LocalVariables.Remove(leftVariable);
+                        var aliasedObjectReference =
+                            right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference()) ?
+                                (IDataObject)rightTransformed :
+                                stateMachine.LocalVariables
+                                    .Single(variable => variable.Name == ((IDataObject)rightTransformed).Name)
+                                    .ToReference();
 
                         stateMachine.LocalAliases.Add(
                             new Alias
                             {
                                 Name = leftDataObject.Name,
-                                AliasedObject = aliasedVariable.ToReference(),
-                                DataType = aliasedVariable.DataType
+                                AliasedObject = aliasedObjectReference,
+                                DataType = leftVariable.DataType
                             });
                     }
 

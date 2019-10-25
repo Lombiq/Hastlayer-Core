@@ -1,6 +1,5 @@
 ﻿using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +93,7 @@ namespace Hast.Common.Configuration
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
                 // Only dealing with method references.
-                if (memberReferenceExpression.Annotation<MethodDefinition>() == null) return;
+                if (!memberReferenceExpression.IsMethodReference()) return;
 
                 var memberFullName = memberReferenceExpression.GetMemberFullName();
 
