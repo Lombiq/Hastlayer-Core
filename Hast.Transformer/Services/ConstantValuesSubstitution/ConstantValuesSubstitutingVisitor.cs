@@ -101,6 +101,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // mess up the AST upwards.
             if (ConstantValueSubstitutionHelper.IsMethodInvocation(memberReferenceExpression)) return;
 
+            // Is the target an array or some other indexer? We don't handle those.
+            if (memberReferenceExpression.Target is IndexerExpression) return;
+
             if (memberReferenceExpression.IsArrayLengthAccess())
             {
                 var arraySize = _arraySizeHolder.GetSize(memberReferenceExpression.Target);
