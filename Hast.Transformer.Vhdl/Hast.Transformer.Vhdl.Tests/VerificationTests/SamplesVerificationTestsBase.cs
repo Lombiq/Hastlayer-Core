@@ -75,8 +75,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 return hardwareDescription.VhdlSource;
             });
 
-        protected Task<string> CreateVhdlForKpzSamples() =>
-            _host.RunGet(async wc =>
+        protected async Task<string> CreateVhdlForKpzSamples()
+        {
+            var notInlinedSource = await _host.RunGet(async wc =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     wc.Resolve<ITransformer>(),
@@ -95,6 +96,30 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                 return hardwareDescription.VhdlSource;
             });
+
+            var inlinedSource = await _host.RunGet(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.Resolve<ITransformer>(),
+                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
+
+                        configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
+                        configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
+
+            return notInlinedSource + inlinedSource;
+        }
 
         protected Task<string> CreateVhdlForFix64Samples() =>
             _host.RunGet(async wc =>
