@@ -232,7 +232,20 @@ namespace Hast.Transformer
                 // more complicated.
                 .Without("DeclareVariables")
 
-                // Removes empty ctors or ctors that can be substituted with field initializers.
+                // Removes empty ctors or ctors that can be substituted with field initializers. Also breaks the ctors
+                // of compiler-generated classes created from F# lambdas from by converting from this:
+                //     public int input;
+                //     public Run@32 (int input)
+                //     {
+                //         this.input = input;
+                //         base..ctor();
+                //     }
+                //
+                // To this:
+                //     public int input = input;
+                //     public Run@32 (int input)
+                //     {
+                //     }
                 //.Without("ConvertConstructorCallIntoInitializer")
 
                 // Converts decimal const fields to more readable variants, e.g. this:
