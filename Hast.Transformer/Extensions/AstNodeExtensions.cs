@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ICSharpCode.Decompiler.ILAst;
+using Mono.Cecil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.Decompiler.ILAst;
-using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
@@ -183,17 +183,22 @@ namespace ICSharpCode.NRefactory.CSharp
                 name = name.Substring(name.LastIndexOf('.') + 1);
             }
 
+            var childIsNested = false;
             while (declaringType != null)
             {
+                // The delimiter between the name of an inner class and its parent needs to be a plus.
+                var delimiter = childIsNested ? "+" : ".";
+
                 if (declaringType.DeclaringType == null)
                 {
-                    name = declaringType.FullName + "." + name;
+                    name = declaringType.FullName + delimiter + name;
                 }
                 else
                 {
-                    name = declaringType.Name + "." + name;
+                    name = declaringType.Name + delimiter + name;
                 }
 
+                childIsNested = declaringType.IsNested;
                 declaringType = declaringType.DeclaringType;
             }
 

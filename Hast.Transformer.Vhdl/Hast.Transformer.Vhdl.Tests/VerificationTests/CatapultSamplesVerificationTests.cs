@@ -28,15 +28,21 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         [Test]
-        public async Task KpzSampleMatchesApproved()
+        public async Task KpzSamplesMatchesApproved()
         {
             (await CreateVhdlForKpzSamples()).ShouldMatchApprovedWithVhdlConfiguration();
         }
 
         [Test]
-        public async Task Fix64SampleMatchesApproved()
+        public async Task Fix64SamplesMatchesApproved()
         {
             (await CreateVhdlForFix64Samples()).ShouldMatchApprovedWithVhdlConfiguration();
+        }
+
+        [Test]
+        public async Task FSharpSamplesMatchesApproved()
+        {
+            (await CreateVhdlForFSharpSamples()).ShouldMatchApprovedWithVhdlConfiguration();
         }
     }
 }
