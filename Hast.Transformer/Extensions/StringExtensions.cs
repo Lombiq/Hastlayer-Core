@@ -28,6 +28,15 @@ namespace System
         }
 
         /// <summary>
+        /// Checks whether the string looks like the name of a compiler-generated class generated from an F# closure.
+        /// </summary>
+        /// <example>
+        /// Such a name is like following: Run@28
+        /// </example>
+        // // A class name containing "@" would be invalid in standard C#, so this is a fairly safe bet.
+        public static bool IsClosureClassName(this string name) => Regex.IsMatch(name, @".+\@\d+", RegexOptions.Compiled);
+
+        /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass from C# or one
         /// generated from an F# closure.
         /// </summary>
@@ -40,7 +49,7 @@ namespace System
         public static bool IsDisplayOrClosureClassName(this string name) =>
             // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
             name.Contains("/<>c") ||
-            Regex.IsMatch(name, @".+\@\d+", RegexOptions.Compiled);
+            name.IsClosureClassName();
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.

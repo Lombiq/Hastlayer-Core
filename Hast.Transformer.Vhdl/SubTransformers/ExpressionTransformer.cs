@@ -260,11 +260,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     // Handling shorthand Task starts like:
                     // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is(invocation =>
-                        invocation.Target.Is<MemberReferenceExpression>(memberReference => memberReference.IsTaskStartNew()) &&
-                        invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
-                            objectCreate.Type.GetFullName().Contains("Func")),
-                        out invocationExpression))
+                    else if (assignment.Right.Is(invocation => invocation.IsShorthandTaskStart(), out invocationExpression))
                     {
                         var funcCreateExpression = (ObjectCreateExpression)invocationExpression.Arguments.First();
 
