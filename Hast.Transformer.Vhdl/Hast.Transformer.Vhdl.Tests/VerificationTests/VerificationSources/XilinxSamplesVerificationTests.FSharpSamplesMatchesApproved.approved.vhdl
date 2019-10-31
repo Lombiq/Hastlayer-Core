@@ -200,96 +200,96 @@ architecture Imp of Hast_IP is
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.0\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.1\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.1\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.1\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.2\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.2\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.2\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.0\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.1\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.1\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.1\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.2\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.2\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.2\: boolean := false;
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._Started\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.0\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.1\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.2\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.1\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.2\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.0\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.1\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.2\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.1\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.2\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::.ctor(System.Int32).0 declarations start
+    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::.ctor(System.Int32).0 declarations start
     -- State machine states:
-    type \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._States\ is (
-        \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_0\, 
-        \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_1\, 
-        \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_2\);
+    type \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._States\ is (
+        \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_0\, 
+        \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_1\, 
+        \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_2\);
     -- Signals:
-    Signal \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Finished\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Started\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::.ctor(System.Int32).0 declarations end
+    Signal \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Finished\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Started\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::.ctor(System.Int32).0 declarations end
 
 
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).0 declarations start
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).0 declarations start
     -- State machine states:
-    type \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._States\ is (
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_0\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_1\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_2\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_4\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_5\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_6\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_7\);
+    type \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._States\ is (
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_0\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_1\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_2\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_4\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_5\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_6\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_7\);
     -- Signals:
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Finished\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Started\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).0 declarations end
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Finished\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Started\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).0 declarations end
 
 
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).1 declarations start
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).1 declarations start
     -- State machine states:
-    type \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._States\ is (
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_0\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_1\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_2\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_4\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_5\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_6\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_7\);
+    type \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._States\ is (
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_0\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_1\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_2\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_4\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_5\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_6\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_7\);
     -- Signals:
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Finished\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Started\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).1 declarations end
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Finished\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Started\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).1 declarations end
 
 
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).2 declarations start
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).2 declarations start
     -- State machine states:
-    type \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._States\ is (
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_0\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_1\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_2\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_4\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_5\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_6\, 
-        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_7\);
+    type \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._States\ is (
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_0\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_1\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_2\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_4\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_5\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_6\, 
+        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_7\);
     -- Signals:
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Finished\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Started\: boolean := false;
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).2 declarations end
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Finished\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Started\: boolean := false;
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).2 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -319,7 +319,7 @@ begin
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.1\: signed(31 downto 0) := to_signed(0, 32);
@@ -336,15 +336,15 @@ begin
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.0\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.0\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.0\ <= false;
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.1\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.1\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.1\ <= false;
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.2\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.2\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.2\ <= false;
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.0\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.0\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.0\ <= false;
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.1\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.1\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.1\ <= false;
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.2\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.2\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.2\ <= false;
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State_0\;
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\ := to_signed(0, 32);
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.array\ := (others => to_signed(0, 32));
@@ -352,7 +352,7 @@ begin
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.num\ := to_signed(0, 32);
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).invocationIndex\ := 0;
+                \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\ := 0;
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.0\ := to_signed(0, 32);
                 \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.1\ := to_signed(0, 32);
@@ -417,7 +417,7 @@ begin
                             \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (i < 280) {
-                            -- 	array [i] = Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@36 (input).Invoke), i, input);
+                            -- 	array [i] = Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@35 (input).Invoke), i, input);
                             -- 	i = i + 1;
                             -- }
                             -- 
@@ -432,29 +432,29 @@ begin
                         if (\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	array [i] = Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@36 (input).Invoke), i, input);
+                            -- 	array [i] = Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@35 (input).Invoke), i, input);
                             -- 	i = i + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- array [i] = Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@36 (input).Invoke), i, input);
+                            -- array [i] = Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@35 (input).Invoke), i, input);
                             -- 
-                            -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32)
-                            case \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).invocationIndex\ is 
+                            -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32)
+                            case \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\ is 
                                 when 0 => 
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.0\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\;
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.0\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\;
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.0\ <= true;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.0\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.0\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.0\ <= true;
                                 when 1 => 
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.1\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\;
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.1\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\;
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.1\ <= true;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.1\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.1\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.1\ <= true;
                                 when 2 => 
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.2\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\;
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.2\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\;
-                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.2\ <= true;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.2\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.2\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\;
+                                    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.2\ <= true;
                             end case;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).invocationIndex\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).invocationIndex\ + 1;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\ + 1;
                             -- The following section was transformed from the .NET statement below:
                             -- i = i + 1;
                             -- 
@@ -472,15 +472,15 @@ begin
                         \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32)
-                        if (\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.1\ = \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.1\ and \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.2\ = \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.2\ and \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.0\ = \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.0\) then 
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.0\ <= false;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.1\ <= false;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.2\ <= false;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).invocationIndex\ := 0;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.0\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.0\;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.1\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.1\;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.2\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32)
+                        if (\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.1\ = \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.1\ and \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.2\ = \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.2\ and \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.0\ = \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.0\) then 
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.0\ <= false;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.1\ <= false;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.2\ <= false;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\ := 0;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.0\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.0\;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.1\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.1\;
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.2\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.2\;
                             \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.array\(0) := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.0\;
                             \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.array\(1) := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.1\;
                             \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.array\(2) := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.return.2\;
@@ -553,105 +553,105 @@ begin
     -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::.ctor(System.Int32).0 state machine start
-    \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._StateMachine\: process (\Clock\) 
-        Variable \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State\: \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._States\ := \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_0\;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::.ctor(System.Int32).0 state machine start
+    \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State\: \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._States\ := \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_0\;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Finished\ <= false;
-                \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_0\;
-                \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0.input\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Finished\ <= false;
+                \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_0\;
+                \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0.input\ := to_signed(0, 32);
             else 
-                case \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State\ is 
-                    when \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_0\ => 
+                case \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State\ is 
+                    when \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_2\;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_1\ => 
+                    when \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Finished\ <= true;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Finished\ <= true;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._Finished\ <= false;
-                            \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_0\;
+                            \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._Finished\ <= false;
+                            \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_2\ => 
-                        \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0.input\ := \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0.input.parameter.In\;
-                        \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::.ctor(Int32).0._State_1\;
+                    when \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_2\ => 
+                        \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0.input\ := \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0.input.parameter.In\;
+                        \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::.ctor(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::.ctor(System.Int32).0 state machine end
+    -- System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::.ctor(System.Int32).0 state machine end
 
 
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).0 state machine start
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._StateMachine\: process (\Clock\) 
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\: \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._States\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_0\;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.flag\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.2\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.unaryOperationResult.0\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).0 state machine start
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\: \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._States\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_0\;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.flag\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.2\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.unaryOperationResult.0\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Finished\ <= false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.return\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_0\;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.flag\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.i\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.2\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.unaryOperationResult.0\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Finished\ <= false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.return\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_0\;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.flag\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.i\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.2\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.unaryOperationResult.0\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
             else 
-                case \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ is 
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_0\ => 
+                case \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ is 
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_2\;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_1\ => 
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Finished\ <= true;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Finished\ <= true;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Finished\ <= false;
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_0\;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Finished\ <= false;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_2\ => 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject.parameter.In\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input.parameter.In\;
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_2\ => 
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject.parameter.In\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -667,21 +667,21 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = indexObject;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = input + num * 2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.0\ := SmartResize(\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num\ * to_signed(2, 32), 32);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.1\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input\ + \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.0\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.1\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.0\ := SmartResize(\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num\ * to_signed(2, 32), 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.1\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input\ + \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.0\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.flag\ := True;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.flag\ := True;
                         -- The following section was transformed from the .NET statement below:
                         -- i = 2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.i\ := to_signed(2, 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.i\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 9999999) {
                         -- 	if (flag) {
@@ -695,13 +695,13 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_2\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_2\.
                         -- The while loop's condition:
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.i\ < to_signed(9999999, 32);
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.2\) then 
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.i\ < to_signed(9999999, 32);
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	if (flag) {
@@ -724,46 +724,46 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_6\ and ends in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_6\.
-                            --     * The false branch starts in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_7\ and ends in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_7\.
-                            --     * Execution after either branch will continue in the following state: \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_5\.
+                            --     * The true branch starts in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_6\ and ends in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_6\.
+                            --     * The false branch starts in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_7\ and ends in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_7\.
+                            --     * Execution after either branch will continue in the following state: \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_5\.
 
-                            if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.flag\) then 
-                                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_6\;
+                            if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.flag\) then 
+                                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_6\;
                             else 
-                                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_7\;
+                                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_7\;
                             end if;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_4\;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_4\ => 
-                        -- State after the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_2\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_4\ => 
+                        -- State after the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return num2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.return\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_1\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.return\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_5\ => 
-                        -- State after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_5\ => 
+                        -- State after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.unaryOperationResult.0\ := not(\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.flag\);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.flag\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.unaryOperationResult.0\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.unaryOperationResult.0\ := not(\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.flag\);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.flag\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.unaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.5\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.i\ + to_signed(1, 32);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.i\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.5\;
-                        -- Returning to the repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_5\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.5\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.i\ + to_signed(1, 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.i\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.5\;
+                        -- Returning to the repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_2\ if the loop wasn't exited with a state change.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_5\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4265
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_6\ => 
-                        -- True branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_6\ => 
+                        -- True branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 + num;
@@ -772,15 +772,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 + num;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.3\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\ + \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.3\;
-                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_6\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_5\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.3\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\ + \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.3\;
+                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_6\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_7\ => 
-                        -- False branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_7\ => 
+                        -- False branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 - num;
@@ -789,78 +789,78 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 - num;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.4\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\ - \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.binaryOperationResult.4\;
-                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_3\.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_7\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._State_5\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.4\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\ - \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_3\.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_7\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).0 state machine end
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).0 state machine end
 
 
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).1 state machine start
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._StateMachine\: process (\Clock\) 
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\: \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._States\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_0\;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.flag\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.2\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.unaryOperationResult.0\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).1 state machine start
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._StateMachine\: process (\Clock\) 
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\: \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._States\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_0\;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.flag\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.2\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.unaryOperationResult.0\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Finished\ <= false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.return\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_0\;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.flag\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.i\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.0\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.1\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.2\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.3\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.4\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.unaryOperationResult.0\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.5\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Finished\ <= false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.return\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_0\;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.flag\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.i\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.0\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.1\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.2\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.3\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.4\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.unaryOperationResult.0\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.5\ := to_signed(0, 32);
             else 
-                case \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ is 
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_0\ => 
+                case \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ is 
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_2\;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_1\ => 
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Finished\ <= true;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Finished\ <= true;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Finished\ <= false;
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_0\;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Finished\ <= false;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_2\ => 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject.parameter.In\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input.parameter.In\;
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_2\ => 
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject.parameter.In\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -876,21 +876,21 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = indexObject;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = input + num * 2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.0\ := SmartResize(\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num\ * to_signed(2, 32), 32);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.1\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input\ + \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.0\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.1\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.0\ := SmartResize(\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num\ * to_signed(2, 32), 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.1\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input\ + \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.0\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.flag\ := True;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.flag\ := True;
                         -- The following section was transformed from the .NET statement below:
                         -- i = 2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.i\ := to_signed(2, 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.i\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 9999999) {
                         -- 	if (flag) {
@@ -904,13 +904,13 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_2\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_2\.
                         -- The while loop's condition:
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.i\ < to_signed(9999999, 32);
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.2\) then 
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.i\ < to_signed(9999999, 32);
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	if (flag) {
@@ -933,46 +933,46 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_6\ and ends in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_6\.
-                            --     * The false branch starts in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_7\ and ends in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_7\.
-                            --     * Execution after either branch will continue in the following state: \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_5\.
+                            --     * The true branch starts in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_6\ and ends in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_6\.
+                            --     * The false branch starts in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_7\ and ends in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_7\.
+                            --     * Execution after either branch will continue in the following state: \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_5\.
 
-                            if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.flag\) then 
-                                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_6\;
+                            if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.flag\) then 
+                                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_6\;
                             else 
-                                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_7\;
+                                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_7\;
                             end if;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_4\;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_4\ => 
-                        -- State after the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_2\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_4\ => 
+                        -- State after the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return num2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.return\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_1\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.return\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_5\ => 
-                        -- State after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_5\ => 
+                        -- State after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.unaryOperationResult.0\ := not(\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.flag\);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.flag\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.unaryOperationResult.0\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.unaryOperationResult.0\ := not(\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.flag\);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.flag\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.unaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.5\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.i\ + to_signed(1, 32);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.i\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.5\;
-                        -- Returning to the repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_2\ if the loop wasn't exited with a state change.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_5\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.5\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.i\ + to_signed(1, 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.i\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.5\;
+                        -- Returning to the repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_2\ if the loop wasn't exited with a state change.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_5\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4265
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_6\ => 
-                        -- True branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_6\ => 
+                        -- True branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 + num;
@@ -981,15 +981,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 + num;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.3\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\ + \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.3\;
-                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_6\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_5\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.3\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\ + \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.3\;
+                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_6\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_7\ => 
-                        -- False branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_7\ => 
+                        -- False branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 - num;
@@ -998,78 +998,78 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 - num;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.4\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\ - \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.binaryOperationResult.4\;
-                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_3\.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_7\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._State_5\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.4\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\ - \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_3\.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_7\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).1 state machine end
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).1 state machine end
 
 
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).2 state machine start
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._StateMachine\: process (\Clock\) 
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\: \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._States\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_0\;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.flag\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.2\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.unaryOperationResult.0\: boolean := false;
-        Variable \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).2 state machine start
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._StateMachine\: process (\Clock\) 
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\: \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._States\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_0\;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.flag\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.2\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.unaryOperationResult.0\: boolean := false;
+        Variable \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Finished\ <= false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.return\ <= to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_0\;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.flag\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.i\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.0\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.1\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.2\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.3\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.4\ := to_signed(0, 32);
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.unaryOperationResult.0\ := false;
-                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.5\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Finished\ <= false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.return\ <= to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_0\;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.flag\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.i\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.0\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.1\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.2\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.3\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.4\ := to_signed(0, 32);
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.unaryOperationResult.0\ := false;
+                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.5\ := to_signed(0, 32);
             else 
-                case \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ is 
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_0\ => 
+                case \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ is 
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_2\;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_1\ => 
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Started\ = true) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Finished\ <= true;
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Started\ = true) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Finished\ <= true;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Finished\ <= false;
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_0\;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Finished\ <= false;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_2\ => 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject.parameter.In\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input.parameter.In\;
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_2\ => 
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject.parameter.In\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -1085,21 +1085,21 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = indexObject;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = input + num * 2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.0\ := SmartResize(\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num\ * to_signed(2, 32), 32);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.1\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input\ + \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.0\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.1\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.0\ := SmartResize(\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num\ * to_signed(2, 32), 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.1\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input\ + \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.0\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.flag\ := True;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.flag\ := True;
                         -- The following section was transformed from the .NET statement below:
                         -- i = 2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.i\ := to_signed(2, 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.i\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (i < 9999999) {
                         -- 	if (flag) {
@@ -1113,13 +1113,13 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_2\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_2\.
                         -- The while loop's condition:
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.i\ < to_signed(9999999, 32);
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.2\) then 
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.i\ < to_signed(9999999, 32);
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	if (flag) {
@@ -1142,46 +1142,46 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_6\ and ends in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_6\.
-                            --     * The false branch starts in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_7\ and ends in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_7\.
-                            --     * Execution after either branch will continue in the following state: \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_5\.
+                            --     * The true branch starts in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_6\ and ends in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_6\.
+                            --     * The false branch starts in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_7\ and ends in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_7\.
+                            --     * Execution after either branch will continue in the following state: \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_5\.
 
-                            if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.flag\) then 
-                                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_6\;
+                            if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.flag\) then 
+                                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_6\;
                             else 
-                                \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_7\;
+                                \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_7\;
                             end if;
                         else 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_4\;
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_4\ => 
-                        -- State after the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_2\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_4\ => 
+                        -- State after the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return num2;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.return\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_1\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.return\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_5\ => 
-                        -- State after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_5\ => 
+                        -- State after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.unaryOperationResult.0\ := not(\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.flag\);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.flag\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.unaryOperationResult.0\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.unaryOperationResult.0\ := not(\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.flag\);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.flag\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.unaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- i = i + 1;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.5\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.i\ + to_signed(1, 32);
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.i\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.5\;
-                        -- Returning to the repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_2\ if the loop wasn't exited with a state change.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_5\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.5\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.i\ + to_signed(1, 32);
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.i\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.5\;
+                        -- Returning to the repeated state of the while loop which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_2\ if the loop wasn't exited with a state change.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_5\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4265
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_6\ => 
-                        -- True branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_6\ => 
+                        -- True branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 + num;
@@ -1190,15 +1190,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 + num;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.3\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\ + \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.3\;
-                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_6\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_5\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.3\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\ + \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.3\;
+                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_6\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_7\ => 
-                        -- False branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\.
+                    when \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_7\ => 
+                        -- False branch of the if-else started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = num2 - num;
@@ -1207,18 +1207,18 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = num2 - num;
                         -- 
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.4\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\ - \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num\;
-                        \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.num2\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.binaryOperationResult.4\;
-                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_3\.
-                        if (\FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ = \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_7\) then 
-                            \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._State_5\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.4\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\ - \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num\;
+                        \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.num2\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_3\.
+                        if (\FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ = \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_7\) then 
+                            \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State\ := \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32).2 state machine end
+    -- System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32).2 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
@@ -1256,26 +1256,26 @@ begin
     -- System.Void Hast::ExternalInvocationProxy() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32) start
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32) start
     -- Signal connections for System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Started\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.0\;
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.indexObject.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.0\;
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.input.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.0\;
-    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.0\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0._Finished\;
-    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.0\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).0.return\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Started\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.0\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.indexObject.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.0\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.input.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.0\;
+    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.0\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0._Finished\;
+    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.0\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).0.return\;
     -- Signal connections for System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Started\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.1\;
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.indexObject.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.1\;
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.input.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.1\;
-    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.1\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1._Finished\;
-    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.1\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).1.return\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Started\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.1\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.indexObject.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.1\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.input.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.1\;
+    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.1\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1._Finished\;
+    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.1\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).1.return\;
     -- Signal connections for System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Started\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Started.2\;
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.indexObject.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).indexObject.parameter.Out.2\;
-    \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.input.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).input.parameter.Out.2\;
-    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32)._Finished.2\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2._Finished\;
-    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).return.2\ <= \FSharpParallelAlgorithmContainer/Run@36::Invoke(Int32).2.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@36::Invoke(System.Int32) end
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Started\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Started.2\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.indexObject.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.2\;
+    \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.input.parameter.In\ <= \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).input.parameter.Out.2\;
+    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32)._Finished.2\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2._Finished\;
+    \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).return.2\ <= \FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).2.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@35::Invoke(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
