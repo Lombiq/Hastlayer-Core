@@ -73,5 +73,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             return content;
         }
+
+
+        public static IVhdlElement UnrangedInt(int value) => new Value
+        {
+            DataType = KnownDataTypes.UnrangedInt,
+            Content = value.ToString()
+        };
     }
 }

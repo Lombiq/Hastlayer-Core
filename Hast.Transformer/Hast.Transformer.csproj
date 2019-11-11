@@ -109,11 +109,16 @@
     <Compile Include="Helpers\AstInsertionHelper.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Services\BinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
+    <Compile Include="Services\DecompilationErrorsFixer.cs" />
     <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
+    <Compile Include="Services\FSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IBinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
+    <Compile Include="Services\IDecompilationErrorsFixer.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
+    <Compile Include="Services\IFSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IMethodInliner.cs" />
     <Compile Include="Services\IObjectInitializerExpander.cs" />
+    <Compile Include="Services\ISimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\ITaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\ITransformationContextCacheService.cs" />
     <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
@@ -169,6 +174,7 @@
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
+    <Compile Include="Services\SimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\TransformationContextCacheService.cs" />
     <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
@@ -198,6 +204,10 @@
     <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
       <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
+      <Project>{040554F7-5565-4D82-8AAB-CDCD745CA822}</Project>
+      <Name>Hast.Synthesis</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

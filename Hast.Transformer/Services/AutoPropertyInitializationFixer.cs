@@ -1,6 +1,5 @@
-﻿using System;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+﻿using ICSharpCode.NRefactory.CSharp;
+using System;
 
 namespace Hast.Transformer.Services
 {
@@ -28,7 +27,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                if (memberReferenceExpression.Annotation<FieldDefinition>() == null) return;
+                if (!memberReferenceExpression.IsFieldReference()) return;
 
                 memberReferenceExpression.MemberName = memberReferenceExpression.MemberName.ConvertSimpleBackingFieldNameToPropertyName();
             }

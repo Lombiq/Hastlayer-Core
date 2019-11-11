@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ICSharpCode.Decompiler.ILAst;
+using Mono.Cecil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.Decompiler.ILAst;
-using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
@@ -111,6 +111,20 @@ namespace ICSharpCode.NRefactory.CSharp
             return node.CreateNameForUnnamedNode();
         }
 
+        public static string GetILRangeName(this AstNode node)
+        {
+            // The node or parents should contain one or more ILRange objects which maybe correspond to the node's
+            // location in the original IL.
+            var ilRange = node.Annotation<List<ILRange>>();
+            if (ilRange == null)
+            {
+                ilRange = node
+                    .FindFirstParentOfType<AstNode>(parent => parent.Annotations.Any(annotation => annotation is List<ILRange>))
+                    ?.Annotation<List<ILRange>>(); 
+            }
+            return ilRange != null ? ilRange.First().ToString() : string.Empty;
+        }
+
         /// <summary>
         /// Retrieves the node's full name (see <see cref="GetFullName(AstNode)"/>) and if it's a property, produces
         /// a unified name for all of its forms (like backing field, compiler-generated get/set methods).
@@ -169,17 +183,22 @@ namespace ICSharpCode.NRefactory.CSharp
                 name = name.Substring(name.LastIndexOf('.') + 1);
             }
 
+            var childIsNested = false;
             while (declaringType != null)
             {
+                // The delimiter between the name of an inner class and its parent needs to be a plus.
+                var delimiter = childIsNested ? "+" : ".";
+
                 if (declaringType.DeclaringType == null)
                 {
-                    name = declaringType.FullName + "." + name;
+                    name = declaringType.FullName + delimiter + name;
                 }
                 else
                 {
-                    name = declaringType.Name + "." + name;
+                    name = declaringType.Name + delimiter + name;
                 }
 
+                childIsNested = declaringType.IsNested;
                 declaringType = declaringType.DeclaringType;
             }
 
@@ -301,17 +320,9 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
 
-        private static string CreateNameForUnnamedNode(this AstNode node)
-        {
+        private static string CreateNameForUnnamedNode(this AstNode node) =>
             // The node doesn't really have a name so give it one that is suitably unique.
-            // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
-            // original IL.
-            var ilRanges = node.Annotation<List<ILRange>>();
-            if (ilRanges == null) ilRanges = node.Parent.Annotation<List<ILRange>>(); // Maybe the parent has one.
-            return CreateParentEntityBasedName(
-                node,
-                node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
-        }
+            CreateParentEntityBasedName(node, node.ToString() + node.GetILRangeName());
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;

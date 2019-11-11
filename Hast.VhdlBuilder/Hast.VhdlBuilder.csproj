@@ -53,6 +53,7 @@
     <Compile Include="Representation\Declaration\Alias.cs" />
     <Compile Include="Representation\Declaration\ArrayType.cs" />
     <Compile Include="Representation\Declaration\ArrayTypeBase.cs" />
+    <Compile Include="Representation\Declaration\Attribute.cs" />
     <Compile Include="Representation\Declaration\BitVector.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />
     <Compile Include="Representation\Declaration\IReferenceableDeclaration.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Representation\Expression\Assignment.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Representation\Declaration\Architecture.cs" />
+    <Compile Include="Representation\Expression\AttributeSpecification.cs" />
     <Compile Include="Representation\Expression\Binary.cs" />
     <Compile Include="Representation\Expression\Case.cs" />
     <Compile Include="Representation\Declaration\Component.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Representation\Expression\Parenthesized.cs" />
     <Compile Include="Representation\Expression\RecordFieldAccess.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
+    <Compile Include="Representation\Expression\MultiCycleSdcStatementsAttributeExpression.cs" />
     <Compile Include="Representation\Expression\Unary.cs" />
     <Compile Include="Representation\Expression\UnaryOperator.cs" />
     <Compile Include="Representation\Expression\VectorSlice.cs" />

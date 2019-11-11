@@ -3,6 +3,8 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
+using System;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
@@ -25,14 +27,12 @@ namespace Hast.Transformer.Services
         }
 
 
-        /// <summary>
-        /// When a member's instance count is >1 the members invoked by it should have at least that instance count. This
-        /// visitor adjusts these instance counts.
-        /// </summary>
         private class InvocationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
             private readonly TransformerConfiguration _transformerConfiguration;
+            private readonly HashSet<EntityDeclaration> _membersInvokedFromNonParallel = new HashSet<EntityDeclaration>();
+            private readonly HashSet<EntityDeclaration> _membersInvokedFromNonRecursive = new HashSet<EntityDeclaration>();
 
 
             public InvocationInstanceCountAdjustingVisitor(
@@ -47,6 +47,11 @@ namespace Hast.Transformer.Services
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
+
+                if (memberReferenceExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null)
+                {
+                    return;
+                }
 
                 AdjustInstanceCount(
                     memberReferenceExpression, 
@@ -79,10 +84,54 @@ namespace Hast.Transformer.Services
                 var invokingMemberMaxInvocationConfiguration = _transformerConfiguration
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencingExpression.FindFirstParentOfType<EntityDeclaration>());
 
-                if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount > referencedMemberMaxInvocationConfiguration.MaxInvocationInstanceCount)
+                var referencedMemberFullName = referencedMember.GetFullName();
+
+
+                if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism > referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism)
                 {
                     referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism = invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism;
+
+                    // Was the referenced member invoked both from a parallelized member and from a non-parallelized
+                    // one? Then let's increase MaxDegreeOfParallelism so there is no large multiplexing logic needed,
+                    // instances of the referenced and invoking members can be paired.
+                    if (_membersInvokedFromNonParallel.Contains(referencedMember))
+                    {
+                        referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
+                    }
+                }
+                else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 && 
+                    !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                {
+                    _membersInvokedFromNonParallel.Add(referencedMember);
+
+                    // Same increment as above. Just needed so it doesn't matter whether the parallelized or the
+                    // non-parallelized invoking member is processed first.
+                    if (referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism != 1)
+                    {
+                        referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
+                    }
+                }
+
+
+                if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth > referencedMemberMaxInvocationConfiguration.MaxRecursionDepth)
+                {
                     referencedMemberMaxInvocationConfiguration.MaxRecursionDepth = invokingMemberMaxInvocationConfiguration.MaxRecursionDepth;
+
+                    // Same logic here than above with MaxDegreeOfParallelism.
+                    if (_membersInvokedFromNonRecursive.Contains(referencedMember))
+                    {
+                        referencedMemberMaxInvocationConfiguration.MaxRecursionDepth++;
+                    }
+                }
+                else if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth == 1 &&
+                    !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                {
+                    _membersInvokedFromNonParallel.Add(referencedMember);
+
+                    if (referencedMemberMaxInvocationConfiguration.MaxRecursionDepth != 1)
+                    {
+                        referencedMemberMaxInvocationConfiguration.MaxRecursionDepth++;
+                    }
                 }
             }
         }

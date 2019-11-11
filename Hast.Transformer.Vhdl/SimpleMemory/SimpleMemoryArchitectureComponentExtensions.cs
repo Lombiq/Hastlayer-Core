@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
@@ -26,61 +26,49 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
 
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
-                });
+            {
+                DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
+            });
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.DataSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
-                });
+            {
+                DataType = SimpleMemoryTypes.DataSignalsDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
+            });
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.EnableSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable),
-                    InitialValue = Value.False
-                });
+            {
+                DataType = SimpleMemoryTypes.EnableSignalsDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable),
+                InitialValue = Value.False
+            });
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.EnableSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable),
-                    InitialValue = Value.False
-                });
+            {
+                DataType = SimpleMemoryTypes.EnableSignalsDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable),
+                InitialValue = Value.False
+            });
         }
 
-        public static DataObjectReference CreateSimpleMemoryCellIndexSignalReference(this IArchitectureComponent component)
-        {
-            return component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.CellIndex);
-        }
+        public static DataObjectReference CreateSimpleMemoryCellIndexSignalReference(this IArchitectureComponent component) =>
+            component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.CellIndex);
 
-        public static DataObjectReference CreateSimpleMemoryDataOutSignalReference(this IArchitectureComponent component)
-        {
-            return component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.DataOut);
-        }
+        public static DataObjectReference CreateSimpleMemoryDataOutSignalReference(this IArchitectureComponent component) =>
+            component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.DataOut);
 
-        public static DataObjectReference CreateSimpleMemoryReadEnableSignalReference(this IArchitectureComponent component)
-        {
-            return component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.ReadEnable);
-        }
+        public static DataObjectReference CreateSimpleMemoryReadEnableSignalReference(this IArchitectureComponent component) =>
+            component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.ReadEnable);
 
-        public static DataObjectReference CreateSimpleMemoryWriteEnableSignalReference(this IArchitectureComponent component)
-        {
-            return component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.WriteEnable);
-        }
+        public static DataObjectReference CreateSimpleMemoryWriteEnableSignalReference(this IArchitectureComponent component) =>
+            component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.WriteEnable);
 
         public static DataObjectReference CreateSimpleMemorySignalReference(
-            this IArchitectureComponent component, 
-            string simpleMemoryPortName)
-        {
-            return component.CreateSimpleMemorySignalName(simpleMemoryPortName).ToVhdlSignalReference();
-        }
+            this IArchitectureComponent component,
+            string simpleMemoryPortName) =>
+            component.CreateSimpleMemorySignalName(simpleMemoryPortName).ToVhdlSignalReference();
 
         public static string CreateSimpleMemorySignalName(
-            this IArchitectureComponent component, 
-            string simpleMemoryPortName)
-        {
-            return component.CreatePrefixedSegmentedObjectName("SimpleMemory", simpleMemoryPortName).ToExtendedVhdlId();
-        }
+            this IArchitectureComponent component,
+            string simpleMemoryPortName) =>
+            component.CreatePrefixedSegmentedObjectName("SimpleMemory", simpleMemoryPortName).ToExtendedVhdlId();
     }
 }

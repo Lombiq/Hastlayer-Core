@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.ILAst;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 using System;
@@ -48,9 +49,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-                        "remainderOperand",
+                        // Need to add ILRange because there can be multiple remainder operations for the same variable
+                        // so somehow we need to distinguish between them.
+                        "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
                         operand,
-                        AstType.Create(operand.GetActualTypeReference().FullName));
+                        TypeHelper.CreateAstType(operand.GetActualTypeReference(true)));
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
                         .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());

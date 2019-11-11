@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public bool IsDisplayClassField(FieldDeclaration field)
         {
-            return field.GetFullName().IsDisplayClassMemberName();
+            return field.GetFullName().IsDisplayOrClosureClassMemberName();
         }
 
         public Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context)

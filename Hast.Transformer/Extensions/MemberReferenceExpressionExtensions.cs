@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Models;
+﻿using Hast.Transformer.Models;
 using Mono.Cecil;
+using System;
+using System.Linq;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
@@ -117,7 +117,8 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (target is IdentifierExpression || target is IndexerExpression)
             {
-                return typeDeclarationLookupTable.Lookup(target.GetActualTypeReference().FullName);
+                var typeReference = target.GetActualTypeReference();
+                return typeReference == null ? null : typeDeclarationLookupTable.Lookup(typeReference.FullName);
             }
             else if (target is MemberReferenceExpression)
             {
@@ -153,5 +154,11 @@ namespace ICSharpCode.NRefactory.CSharp
         public static bool IsTaskStartNew(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.MemberName == "StartNew" &&
             memberReferenceExpression.Target.GetActualTypeReference().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
+
+        public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.Annotation<MethodDefinition>() != null;
+
+        public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.Annotation<FieldDefinition>() != null;
     }
 }

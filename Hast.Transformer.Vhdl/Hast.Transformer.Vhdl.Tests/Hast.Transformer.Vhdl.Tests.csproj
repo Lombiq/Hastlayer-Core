@@ -39,6 +39,9 @@
       <HintPath>..\..\..\Orchard\src\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Hast.Samples.FSharpSampleAssembly">
+      <HintPath>..\..\..\Hast.Samples.FSharpSampleAssembly\bin\Debug\netstandard2.0\Hast.Samples.FSharpSampleAssembly.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
       <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
       <Private>True</Private>
@@ -107,6 +110,10 @@
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj">
+      <Project>{1059805B-3221-4788-BDF3-11120FA4BF1A}</Project>
+      <Name>Hast.Catapult.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">
       <Project>{1d1ec796-dff6-4ec7-b749-62b89d1dea92}</Project>
       <Name>Hast.Synthesis.Abstractions</Name>
@@ -119,13 +126,21 @@
       <Project>{0D13986F-FA33-4898-A0DE-C173764663F0}</Project>
       <Name>Hast.Transformer.Vhdl.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj">
+      <Project>{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}</Project>
+      <Name>Hast.Xilinx.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj">
       <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
       <Name>Hast.Algorithms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz\Hast.Samples.Kpz.csproj">
-      <Project>{0dd555f3-b472-422b-8cfb-63cb494cbb5a}</Project>
-      <Name>Hast.Samples.Kpz</Name>
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj">
+      <Project>{EE140765-5088-40AA-9621-D4B0A971EE2C}</Project>
+      <Name>Hast.Samples.Kpz.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Catapult\Hast.Catapult.csproj">
+      <Project>{2C30740A-0E66-476C-89B2-C89D86BFA70C}</Project>
+      <Name>Hast.Catapult</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554F7-5565-4D82-8AAB-CDCD745CA822}</Project>
@@ -196,9 +211,11 @@
     <Compile Include="IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
     <Compile Include="BasicHardwareStructureTests.cs" />
     <Compile Include="TransformationCheckTests.cs" />
-    <Compile Include="VerificationTests\SampleAssemblyVerificationTests.cs" />
+    <Compile Include="VerificationTests\CatapultSamplesVerificationTests.cs" />
+    <Compile Include="VerificationTests\SamplesVerificationTestsBase.cs" />
     <Compile Include="VerificationTests\ShouldMatchApprovedExtensions.cs" />
     <Compile Include="VerificationTests\TestInputAssembliesVerificationTests.cs" />
+    <Compile Include="VerificationTests\XilinxSamplesVerificationTests.cs" />
     <Compile Include="VhdlTransformingTestFixtureBase.cs" />
     <Compile Include="VerificationTests\VerificationTestFixtureBase.cs" />
   </ItemGroup>

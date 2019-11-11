@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -37,6 +36,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression))
             {
                 _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
+            }
+
+            if (SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var cellCount))
+            {
+                _arraySizeHolder.SetSize(assignmentExpression.Left, cellCount);
             }
         }
 

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Hast.VhdlBuilder.Representation.Declaration;
+﻿using Hast.VhdlBuilder.Representation.Declaration;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -27,5 +27,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// <param name="state">The state's VHDL element.</param>
         /// <returns>The index of the state.</returns>
         int AddState(IBlockElement state);
+
+        /// <summary>
+        /// Makes note of a new multi-cycle operations. See <see cref="IArchitectureComponent.MultiCycleOperations"/>.
+        /// </summary>
+        /// <param name="operationResultReference">Reference to the result data object of the operation.</param>
+        /// <param name="requiredClockCyclesCeiling">The clock cycles needed to complete the operation, rounded up.</param>
+        void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling);
     }
 }

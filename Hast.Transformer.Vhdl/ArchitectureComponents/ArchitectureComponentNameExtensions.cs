@@ -4,28 +4,20 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class ArchitectureComponentNameExtensions
     {
-        public static string CreateStartedSignalName(this IArchitectureComponent component)
-        {
-            return ArchitectureComponentNameHelper.CreateStartedSignalName(component.Name);
-        }
+        public static string CreateStartedSignalName(this IArchitectureComponent component) =>
+            ArchitectureComponentNameHelper.CreateStartedSignalName(component.Name);
 
-        public static string CreateFinishedSignalName(this IArchitectureComponent component)
-        {
-            return ArchitectureComponentNameHelper.CreateFinishedSignalName(component.Name);
-        }
+        public static string CreateFinishedSignalName(this IArchitectureComponent component) =>
+            ArchitectureComponentNameHelper.CreateFinishedSignalName(component.Name);
 
-        public static string CreatePrefixedSegmentedObjectName(this IArchitectureComponent component, params string[] segments)
-        {
-            return ArchitectureComponentNameHelper.CreatePrefixedSegmentedObjectName(component.Name, segments);
-        }
+        public static string CreatePrefixedSegmentedObjectName(this IArchitectureComponent component, params string[] segments) =>
+            ArchitectureComponentNameHelper.CreatePrefixedSegmentedObjectName(component.Name, segments);
 
         /// <summary>
         /// Creates a VHDL object (i.e. signal or variable) name prefixed with the component's name.
         /// </summary>
-        public static string CreatePrefixedObjectName(this IArchitectureComponent component, string name)
-        {
-            return ArchitectureComponentNameHelper.CreatePrefixedObjectName(component.Name, name);
-        }
+        public static string CreatePrefixedObjectName(this IArchitectureComponent component, string name) =>
+            ArchitectureComponentNameHelper.CreatePrefixedObjectName(component.Name, name);
 
         /// <summary>
         /// Determines the name of the next available name for a VHDL object (i.e. signal or variable) whose name is

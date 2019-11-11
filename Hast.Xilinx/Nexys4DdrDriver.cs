@@ -1,5 +1,4 @@
-﻿using System;
-using Hast.Synthesis;
+﻿using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
@@ -1069,6 +1068,8 @@ mul_by_0	unsigned64	unsigned64	sync	synth	0	0
                 }
             }
         }
+
+        public string ToolChainName { get; } = CommonToolChainNames.Vivado;
 
 
         public Nexys4DdrDriver(ITimingReportParser timingReportParser)

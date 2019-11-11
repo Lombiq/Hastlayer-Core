@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using ICSharpCode.Decompiler.Ast;
+using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Helpers
@@ -31,6 +32,10 @@ namespace Hast.Transformer.Helpers
                     new Version(int32Assembly.FullName.Split(',')[1].Substring(9))));
             return int32TypeReference;
         }
+
+        public static AstType CreateAstType(TypeReference typeReference) =>
+            (typeReference.IsPrimitive ? new PrimitiveType(typeReference.Name) : AstType.Create(typeReference.FullName))
+            .WithAnnotation(typeReference);
 
 
         private class PrimitiveTypeReference : TypeReference

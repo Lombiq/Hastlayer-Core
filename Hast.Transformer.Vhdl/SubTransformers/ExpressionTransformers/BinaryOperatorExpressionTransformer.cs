@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Synthesis.Services;
-using Hast.Transformer.Helpers;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTransformer
     {
-        private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public BinaryOperatorExpressionTransformer(
-            IDeviceDriverSelector deviceDriverSelector,
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer)
         {
-            _deviceDriverSelector = deviceDriverSelector;
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
         }
@@ -71,15 +65,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement TransformBinaryOperatorExpression(
             IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
-            ISubTransformerContext context)
-        {
-            return TransformBinaryOperatorExpressionInner(
+            ISubTransformerContext context) =>
+            TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpression,
                 true,
                 true,
                 true,
                 context);
-        }
 
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(
@@ -283,7 +275,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
             if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
 
-            var deviceDriver = _deviceDriverSelector.GetDriver(context);
+            var deviceDriver = context.TransformationContext.DeviceDriver;
             decimal clockCyclesNeededForOperation;
             var clockCyclesNeededForSignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
@@ -311,14 +303,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // shifting out to the void) but 2, since only a shift by 1 happens (as 33 is 100001 in binary).
                 // See: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/left-shift-operator
                 // So we need to truncate.
-                // Furthermore right shifts will also do a bitwise AND with just 1s on the count, see:
+                // Furthermore both shifts will also do a bitwise AND with just 1s on the count, see:
                 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
+                // How the vacated bits are filled on shifting in either direction is the same (see: 
+                // https://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl).
 
                 var countSize = leftTypeSize <= 32 ? 5 : 6;
                 IVhdlElement resize = ResizeHelper.SmartResize(binary.Right, countSize);
 
                 if (expression.Operator == BinaryOperatorType.ShiftRight)
                 {
+                    // Since we're already resizing the additional "& 11111" (or "& 111111") might not be needed.
+                    // However it's just an identity operation due to the count parameter having the same size. Also,
+                    // while this was only added to right shifts .NET actually does the same for left shifts too.
+                    // However, it seems to work. Needs further testing to see if it can be removed (it was added in
+                    // 21ae34098e48 without anything else being changed and it did fix an issue).
                     resize = new Binary
                     {
                         Left = resize,
@@ -414,6 +413,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Then we transition from that state forward to a state where the actual algorithm continues.
             else
             {
+                var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
+
                 // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
                 // single operation).
                 if (isFirstOfSimdOperationsOrIsSingleOperation)
@@ -424,8 +425,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
                     waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                     var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
-
-                    var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
 
                     var waitForResultBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
@@ -468,6 +467,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
                 currentBlock.Add(operationResultAssignment);
+                stateMachine.RecordMultiCycleOperation(operationResultDataObjectReference, clockCyclesToWait);
 
 
                 // Changing the current block to the one in the state after the wait state, just when this is the last

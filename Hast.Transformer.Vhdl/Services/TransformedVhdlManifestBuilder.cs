@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Hast.Common.Extensions;
-using Hast.Common.Helpers;
+﻿using Hast.Common.Extensions;
 using Hast.Layer;
+using Hast.Synthesis;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
@@ -22,6 +16,12 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -166,6 +166,51 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
+            // Adding multi-cycle path constraints for Quartus.
+            if (transformationContext.DeviceDriver.ToolChainName == CommonToolChainNames.QuartusPrime)
+            {
+                var anyMultiCycleOperations = false;
+                var sdcExpression = new VhdlBuilder.Representation.Expression.MultiCycleSdcStatementsAttributeExpression();
+
+                foreach (var architectureComponentResult in architectureComponentResults)
+                {
+                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
+                    {
+                        sdcExpression.AddPath(
+                            // If the path is through a global signal (i.e. that doesn't have a parent process) then
+                            // the parent should be empty.
+                            operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
+                                ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
+                                string.Empty,
+                            operation.OperationResultReference,
+                            operation.RequiredClockCyclesCeiling);
+
+                        anyMultiCycleOperations = true;
+                    }
+                }
+
+                if (anyMultiCycleOperations)
+                {
+                    var alteraAttribute = new VhdlBuilder.Representation.Declaration.Attribute
+                    {
+                        Name = "altera_attribute",
+                        ValueType = KnownDataTypes.UnrangedString
+                    };
+
+                    hastIpArchitecture.Declarations.Add(new LogicalBlock(
+                        new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
+                        alteraAttribute,
+                        new VhdlBuilder.Representation.Expression.AttributeSpecification
+                        {
+                            Attribute = alteraAttribute,
+                            ItemName = hastIpArchitecture.Name,
+                            ItemClass = "architecture",
+                            Expression = sdcExpression
+                        }));
+                }
+            }
+
+
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
             // file.
@@ -201,7 +246,7 @@ namespace Hast.Transformer.Vhdl.Services
             if (!hardwareEntryPointMemberResults.Any())
             {
                 throw new InvalidOperationException(
-                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware.");
+                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there methods suitable as hardware entry points (see the documentation)?");
             }
             var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
             var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
@@ -271,6 +316,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             manifest.Modules.Add(new BlockComment(LongGeneratedCodeComments.Libraries));
 
+            // If the TypeConversion functions change those changes need to be applied to the Timing Tester app too.
             ReadAndAddEmbedLibrary("TypeConversion", manifest, hastIpModule);
 
             if (useSimpleMemory)
@@ -346,11 +392,11 @@ namespace Hast.Transformer.Vhdl.Services
 
                             // Records need to be created only for those types that are neither display classes, nor
                             // hardware entry point types or static types 
-                            if (!typeDeclaration.GetFullName().IsDisplayClassName() && 
+                            if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
                                 !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                                 !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
                             {
-                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext)); 
+                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
                             }
                             traverseTo = traverseTo.Where(n =>
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);

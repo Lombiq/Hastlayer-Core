@@ -21,9 +21,11 @@
 -- * System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32)
 -- * System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage()
 -- * System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32)
+-- * System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32)
 -- * System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Various.ParallelCases::ObjectUsingTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32)
+-- * System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals()
 
 -- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
@@ -1131,6 +1133,19 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 declarations start
+    -- State machine states:
+    type \ObjectUsingCases::ReferenceAssignment(Int32).0._States\ is (
+        \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\, 
+        \ObjectUsingCases::ReferenceAssignment(Int32).0._State_1\, 
+        \ObjectUsingCases::ReferenceAssignment(Int32).0._State_2\);
+    -- Signals:
+    Signal \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\: boolean := false;
+    Signal \ObjectUsingCases::ReferenceAssignment(Int32).0._Started\: boolean := false;
+    Signal \ObjectUsingCases::ReferenceAssignment(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 declarations end
+
+
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 declarations start
     -- State machine states:
     type \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._States\ is (
@@ -1383,6 +1398,18 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 declarations start
+    -- State machine states:
+    type \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._States\ is (
+        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\, 
+        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_1\, 
+        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_2\);
+    -- Signals:
+    Signal \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\: boolean := false;
+    Signal \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -1408,9 +1435,11 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Finished.0\: boolean := false;
@@ -1433,9 +1462,11 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -2865,8 +2896,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
@@ -2881,8 +2912,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
@@ -2897,8 +2928,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
@@ -2913,8 +2944,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.41\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
@@ -2929,7 +2960,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.53\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\: signed(31 downto 0) := to_signed(0, 32);
@@ -2944,7 +2975,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.64\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.65\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\: signed(31 downto 0) := to_signed(0, 32);
@@ -2959,8 +2990,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.77\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -2975,7 +3006,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.88\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.89\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -2990,8 +3021,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.100\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.101\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.102\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.103\: signed(31 downto 0) := to_signed(0, 32);
@@ -3006,8 +3037,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.112\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.113\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.114\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.115\: signed(31 downto 0) := to_signed(0, 32);
@@ -3022,8 +3053,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.124\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.125\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.126\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.127\: signed(31 downto 0) := to_signed(0, 32);
@@ -3038,8 +3069,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.136\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.137\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.138\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.139\: signed(31 downto 0) := to_signed(0, 32);
@@ -3054,7 +3085,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.148\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.149\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\: signed(31 downto 0) := to_signed(0, 32);
@@ -3069,8 +3100,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.160\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.161\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\: signed(63 downto 0) := to_signed(0, 64);
@@ -3085,7 +3116,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.172\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.173\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\: signed(63 downto 0) := to_signed(0, 64);
@@ -3102,8 +3133,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.186\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.187\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.188\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.189\: signed(31 downto 0) := to_signed(0, 32);
@@ -3118,8 +3149,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.198\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.199\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.200\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.201\: signed(31 downto 0) := to_signed(0, 32);
@@ -3134,8 +3165,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.210\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.211\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.212\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.213\: signed(31 downto 0) := to_signed(0, 32);
@@ -3150,8 +3181,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.222\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.223\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.224\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.225\: signed(31 downto 0) := to_signed(0, 32);
@@ -3166,7 +3197,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.234\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.235\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\: signed(31 downto 0) := to_signed(0, 32);
@@ -3181,8 +3212,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.246\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.247\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.41\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\: signed(63 downto 0) := to_signed(0, 64);
@@ -3197,7 +3228,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.258\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.259\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\: signed(63 downto 0) := to_signed(0, 64);
@@ -3214,8 +3245,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.272\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.273\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.274\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.275\: signed(31 downto 0) := to_signed(0, 32);
@@ -3230,8 +3261,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.284\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.285\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.286\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.287\: signed(31 downto 0) := to_signed(0, 32);
@@ -3246,8 +3277,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.296\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.297\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.298\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.299\: signed(31 downto 0) := to_signed(0, 32);
@@ -3262,8 +3293,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.308\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.309\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.310\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.311\: signed(31 downto 0) := to_signed(0, 32);
@@ -3278,7 +3309,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.320\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.321\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.53\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\: signed(31 downto 0) := to_signed(0, 32);
@@ -3293,7 +3324,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.332\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.333\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.54\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.55\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\: signed(31 downto 0) := to_signed(0, 32);
@@ -3308,8 +3339,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.344\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.345\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.56\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3324,7 +3355,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.356\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.357\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.58\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.59\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3339,7 +3370,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.368\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.369\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.371\: signed(31 downto 0) := to_signed(0, 32);
@@ -3354,7 +3385,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.380\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.381\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.62\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.63\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.383\: signed(31 downto 0) := to_signed(0, 32);
@@ -3369,7 +3400,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.392\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.393\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.64\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.65\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.395\: signed(31 downto 0) := to_signed(0, 32);
@@ -3384,7 +3415,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.404\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.405\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.66\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.67\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.407\: signed(31 downto 0) := to_signed(0, 32);
@@ -3413,8 +3444,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.428\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.429\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\: signed(63 downto 0) := to_signed(0, 64);
@@ -3429,7 +3460,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.440\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.441\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\: signed(63 downto 0) := to_signed(0, 64);
@@ -3446,7 +3477,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.454\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.455\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.457\: signed(31 downto 0) := to_signed(0, 32);
@@ -3461,8 +3492,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.466\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.467\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3477,8 +3508,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.478\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.479\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.78\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3493,7 +3524,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.490\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.491\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.80\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.81\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.493\: signed(31 downto 0) := to_signed(0, 32);
@@ -3508,8 +3539,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.502\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.503\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.82\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3538,8 +3569,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.526\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.527\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.86\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3554,7 +3585,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.538\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.539\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.88\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3569,7 +3600,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.550\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.551\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.90\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.91\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.553\: signed(63 downto 0) := to_signed(0, 64);
@@ -3584,7 +3615,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.562\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.563\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.565\: signed(63 downto 0) := to_signed(0, 64);
@@ -3599,7 +3630,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.574\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.575\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.95\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.577\: signed(63 downto 0) := to_signed(0, 64);
@@ -3614,7 +3645,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.586\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.587\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.96\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.97\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.589\: signed(63 downto 0) := to_signed(0, 64);
@@ -3629,7 +3660,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.598\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.599\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.98\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.99\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.601\: signed(63 downto 0) := to_signed(0, 64);
@@ -3644,7 +3675,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.610\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.611\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.100\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.101\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.613\: signed(63 downto 0) := to_signed(0, 64);
@@ -3675,7 +3706,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.636\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.637\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.104\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.105\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.639\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3694,7 +3725,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.652\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.653\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.106\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.107\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.655\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -3711,7 +3742,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.666\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.667\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.108\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.669\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -4337,8 +4368,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.6\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.7\ := to_signed(0, 32);
@@ -4353,8 +4384,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.19\ := to_signed(0, 32);
@@ -4369,8 +4400,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.28\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.29\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.4\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.30\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.5\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.31\ := to_signed(0, 32);
@@ -4385,8 +4416,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.40\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.41\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.6\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.42\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.7\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.43\ := to_signed(0, 32);
@@ -4401,7 +4432,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.52\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.53\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.8\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\ := to_unsigned(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.9\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\ := to_signed(0, 32);
@@ -4416,7 +4447,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.64\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.65\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.10\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ := to_unsigned(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.11\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\ := to_signed(0, 32);
@@ -4431,8 +4462,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.76\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.77\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.12\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ := to_unsigned(0, 8);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\ := to_unsigned(0, 64);
@@ -4447,7 +4478,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.88\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.89\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.14\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\ := to_unsigned(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\ := to_unsigned(0, 64);
@@ -4462,8 +4493,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.100\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.101\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.16\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.102\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.17\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.103\ := to_signed(0, 32);
@@ -4478,8 +4509,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.112\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.113\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.18\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.114\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.19\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.115\ := to_signed(0, 32);
@@ -4494,8 +4525,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.124\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.125\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.20\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.126\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.21\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.127\ := to_signed(0, 32);
@@ -4510,8 +4541,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.136\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.137\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.22\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.138\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.23\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.139\ := to_signed(0, 32);
@@ -4526,7 +4557,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.148\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.149\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.24\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\ := to_signed(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.25\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\ := to_signed(0, 32);
@@ -4541,8 +4572,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.160\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.161\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.26\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ := to_signed(0, 8);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.27\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\ := to_signed(0, 64);
@@ -4557,7 +4588,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.172\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.173\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.28\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\ := to_signed(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.29\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\ := to_signed(0, 64);
@@ -4574,8 +4605,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.186\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.187\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.30\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.188\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.31\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.189\ := to_signed(0, 32);
@@ -4590,8 +4621,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.198\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.199\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.32\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.200\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.33\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.201\ := to_signed(0, 32);
@@ -4606,8 +4637,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.210\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.211\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.34\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.212\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.35\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.213\ := to_signed(0, 32);
@@ -4622,8 +4653,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.222\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.223\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.36\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.224\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.37\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.225\ := to_signed(0, 32);
@@ -4638,7 +4669,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.234\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.235\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.38\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\ := to_signed(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\ := to_signed(0, 32);
@@ -4653,8 +4684,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.246\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.247\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.40\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ := to_signed(0, 16);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.41\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\ := to_signed(0, 64);
@@ -4669,7 +4700,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.258\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.259\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.42\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\ := to_signed(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.43\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\ := to_signed(0, 64);
@@ -4686,8 +4717,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.272\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.273\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.44\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.274\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.45\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.275\ := to_signed(0, 32);
@@ -4702,8 +4733,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.284\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.285\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.46\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.286\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.47\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.287\ := to_signed(0, 32);
@@ -4718,8 +4749,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.296\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.297\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.48\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.298\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.49\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.299\ := to_signed(0, 32);
@@ -4734,8 +4765,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.308\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.309\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.50\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.310\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.51\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.311\ := to_signed(0, 32);
@@ -4750,7 +4781,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.320\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.321\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.52\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\ := to_unsigned(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.53\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\ := to_signed(0, 32);
@@ -4765,7 +4796,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.332\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.333\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.54\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ := to_unsigned(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.55\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\ := to_signed(0, 32);
@@ -4780,8 +4811,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.344\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.345\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.56\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ := to_unsigned(0, 16);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\ := to_unsigned(0, 64);
@@ -4796,7 +4827,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.356\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.357\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.58\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\ := to_unsigned(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.59\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\ := to_unsigned(0, 64);
@@ -4811,7 +4842,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.368\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.369\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.60\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\ := to_unsigned(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.61\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.371\ := to_signed(0, 32);
@@ -4826,7 +4857,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.380\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.381\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.62\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\ := to_signed(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.63\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.383\ := to_signed(0, 32);
@@ -4841,7 +4872,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.392\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.393\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.64\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\ := to_signed(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.65\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.395\ := to_signed(0, 32);
@@ -4856,7 +4887,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.404\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.405\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.66\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\ := to_unsigned(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.67\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.407\ := to_signed(0, 32);
@@ -4885,8 +4916,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.428\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.429\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.70\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.71\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\ := to_signed(0, 64);
@@ -4901,7 +4932,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.440\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.441\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.72\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.73\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\ := to_signed(0, 64);
@@ -4918,7 +4949,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.454\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.455\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.74\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\ := to_unsigned(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.75\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.457\ := to_signed(0, 32);
@@ -4933,8 +4964,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.466\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.467\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.76\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\ := to_unsigned(0, 64);
@@ -4949,8 +4980,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.478\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.479\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.78\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\ := to_unsigned(0, 64);
@@ -4965,7 +4996,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.490\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.491\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.80\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\ := to_unsigned(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.81\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.493\ := to_signed(0, 32);
@@ -4980,8 +5011,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.502\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.503\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.82\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\ := to_unsigned(0, 64);
@@ -5010,8 +5041,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.526\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.527\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.86\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\ := to_unsigned(0, 64);
@@ -5026,7 +5057,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.538\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.539\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.88\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\ := to_unsigned(0, 64);
@@ -5041,7 +5072,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.550\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.551\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.90\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.91\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.553\ := to_signed(0, 64);
@@ -5056,7 +5087,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.562\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.563\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.92\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\ := to_signed(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.93\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.565\ := to_signed(0, 64);
@@ -5071,7 +5102,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.574\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.575\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.94\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\ := to_signed(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.95\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.577\ := to_signed(0, 64);
@@ -5086,7 +5117,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.586\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.587\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.96\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.97\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.589\ := to_signed(0, 64);
@@ -5101,7 +5132,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.598\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.599\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.98\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.99\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.601\ := to_signed(0, 64);
@@ -5116,7 +5147,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.610\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.611\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.100\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.101\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.613\ := to_signed(0, 64);
@@ -5147,7 +5178,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.636\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.637\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.104\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\ := to_unsigned(0, 8);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.105\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.639\ := to_unsigned(0, 64);
@@ -5166,7 +5197,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.652\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.653\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.106\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\ := to_unsigned(0, 16);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.107\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.655\ := to_unsigned(0, 64);
@@ -5183,7 +5214,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.666\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.667\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.108\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.669\ := to_unsigned(0, 64);
@@ -7015,12 +7046,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.1\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32)), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num2\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (int)((System.Int32)(b) + (System.Int32)(b2));
+                        -- num3 = (int)((Int32)(b) + (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num3\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = (int)((System.Int32)(b) - (System.Int32)(b2));
+                        -- num4 = (int)((Int32)(b) - (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
@@ -7029,12 +7060,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.3\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num4\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = (int)((System.Int32)(b) * (System.Int32)(b2));
+                        -- num5 = (int)((Int32)(b) * (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.4\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) * signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num5\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.4\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num6 = (int)((System.Int32)(b) / (System.Int32)(b2));
+                        -- num6 = (int)((Int32)(b) / (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -7052,21 +7083,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_6\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num6\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4;
+                        -- Int32 remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4 = (System.Int32)(b);
+                        -- remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1 = (Int32)(b);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20;
+                        -- Int32 remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20 = (System.Int32)(b2);
+                        -- remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b = (Int32)(b2);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num7 = (int)(remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4 - remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4 / remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20 * remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20);
+                        -- num7 = (int)(remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1 - remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1 / remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b * remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7079,19 +7110,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_8\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18982bde189ff0025d4c4e1149f062ad4d5d480aed78b0f239f9959264571c20\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.7\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cf06cbd762585641f7c697a4323a6c889ca08368404673b2eef8c90e03cc3089b\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand29_2Cb07006a717c6a82b269934ba85f678d22eb41a6ab7749236bd8a8be6d7bd70e1\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num7\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.8\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num8 = (int)((System.Int32)(b) & (System.Int32)(b2));
+                        -- num8 = (int)((Int32)(b) & (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.9\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num8\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num9 = (int)((System.Int32)(b) | (System.Int32)(b2));
+                        -- num9 = (int)((Int32)(b) | (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -7100,7 +7131,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.10\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num9\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.10\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num10 = (int)((System.Int32)(b) ^ (System.Int32)(b2));
+                        -- num10 = (int)((Int32)(b) ^ (Int32)(b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.11\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num10\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.11\);
@@ -7123,26 +7154,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.13\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num12\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.13\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num13 = (int)((System.Int32)(b) + (System.Int32)((byte)b3));
+                        -- num13 = (int)((Int32)(b) + (Int32)((byte)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.14\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) + SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.14\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) + signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num13\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.14\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num14 = (int)((System.Int32)(b) - (System.Int32)((byte)b3));
+                        -- num14 = (int)((Int32)(b) - (Int32)((byte)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.15\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) - SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.15\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) - signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num14\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.15\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num15 = (int)((System.Int32)(b) * (System.Int32)((byte)b3));
+                        -- num15 = (int)((Int32)(b) * (Int32)((byte)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.16\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) * SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.16\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) * signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num15\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.16\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num16 = (int)((System.Int32)(b) / (System.Int32)((byte)b3));
+                        -- num16 = (int)((Int32)(b) / (Int32)((byte)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -7155,26 +7186,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.17\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) / SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.17\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) / signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_13\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num16\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.17\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4;
+                        -- Int32 remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4 = (System.Int32)(b);
+                        -- remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d = (Int32)(b);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419;
+                        -- Int32 remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419 = (System.Int32)((byte)b3);
+                        -- remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097 = (Int32)((byte)b3);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419\ := SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097\ := signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num17 = (int)(remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4 - remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4 / remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419 * remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419);
+                        -- num17 = (int)(remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d - remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d / remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097 * remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7187,30 +7218,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_15\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9fd14d1d704aa47c6f3ea41c8be9ed61e106127168c354c62f239be6bb5bd419\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf1ec831d41d49bfa673c9c3b72de92e50daed4b95bcbb022ed4fd115a3bbc6a4\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6Fa561f5ddafcc6b80837ddea61b1cc6df2f1972ab444d2ac7ba8cb932ed400097\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6B_6F3701572f8e729675a2845b1c46eb4814c004fed3bd5dd48e6f2e94adfeb0492d\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num17\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.20\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num18 = (int)((System.Int32)(b) & (System.Int32)((byte)b3));
+                        -- num18 = (int)((Int32)(b) & (Int32)((byte)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.21\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) and SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.21\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) and signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num18\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.21\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num19 = (int)((System.Int32)(b) | (System.Int32)((byte)b3));
+                        -- num19 = (int)((Int32)(b) | (Int32)((byte)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.22\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) or SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.22\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) or signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num19\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.22\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = (int)((System.Int32)(b) ^ (System.Int32)((byte)b3));
+                        -- num20 = (int)((Int32)(b) ^ (Int32)((byte)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.23\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) xor SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.23\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\), 32)) xor signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num20\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.23\);
                         -- The following section was transformed from the .NET statement below:
                         -- num21 = (short)input;
@@ -7231,26 +7262,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.25\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num23\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.25\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num24 = (int)((System.Int32)((short)b) + (System.Int32)(num21));
+                        -- num24 = (int)((Int32)((short)b) + (Int32)(num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.26\ := SmartResize(signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.26\ := SmartResize(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num24\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.26\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num25 = (int)((System.Int32)((short)b) - (System.Int32)(num21));
+                        -- num25 = (int)((Int32)((short)b) - (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_18\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.27\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.27\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num25\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.27\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num26 = (int)((System.Int32)((short)b) * (System.Int32)(num21));
+                        -- num26 = (int)((Int32)((short)b) * (Int32)(num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.28\ := SmartResize(signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) * SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.28\ := SmartResize(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) * SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num26\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.28\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num27 = (int)((System.Int32)((short)b) / (System.Int32)(num21));
+                        -- num27 = (int)((Int32)((short)b) / (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_19\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -7263,26 +7294,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.4\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.4\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.29\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) / SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.29\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) / SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_20\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num27\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.29\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738;
+                        -- Int32 remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738 = (System.Int32)((short)b);
+                        -- remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707 = (Int32)((short)b);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a;
+                        -- Int32 remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a = (System.Int32)(num21);
+                        -- remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797 = (Int32)(num21);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num28 = (int)(remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738 - remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738 / remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a * remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a);
+                        -- num28 = (int)(remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707 - remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707 / remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797 * remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7295,30 +7326,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_22\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10726a3b7a18f6029f75a6ab7f33e42e96935280722a68aee987ec03db81e738\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B52af8d25ae712a9130d841c2eb6acd748b4a6bed19f101e70464bff7c51ddb797\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB1_B5489556444b27b72543c7c00b6afe779cdf3d734d0918d9570b2bc9522d11f707\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num28\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.32\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num29 = (int)((System.Int32)((short)b) & (System.Int32)(num21));
+                        -- num29 = (int)((Int32)((short)b) & (Int32)(num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.33\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.33\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num29\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.33\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num30 = (int)((System.Int32)((short)b) | (System.Int32)(num21));
+                        -- num30 = (int)((Int32)((short)b) | (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_23\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_23\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.34\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.34\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num30\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.34\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num31 = (int)((System.Int32)((short)b) ^ (System.Int32)(num21));
+                        -- num31 = (int)((Int32)((short)b) ^ (Int32)(num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.35\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32)) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.35\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16))), 32) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num31\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.35\);
                         -- The following section was transformed from the .NET statement below:
                         -- num32 = (ushort)input;
@@ -7339,12 +7370,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.37\ := signed(SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num34\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.37\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num35 = (int)((System.Int32)((ushort)b) + (System.Int32)(num32));
+                        -- num35 = (int)((Int32)((ushort)b) + (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.38\ := SmartResize(signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num35\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.38\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num36 = (int)((System.Int32)((ushort)b) - (System.Int32)(num32));
+                        -- num36 = (int)((Int32)((ushort)b) - (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_25\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
@@ -7353,12 +7384,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.39\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num36\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.39\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num37 = (int)((System.Int32)((ushort)b) * (System.Int32)(num32));
+                        -- num37 = (int)((Int32)((ushort)b) * (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.40\ := SmartResize(signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) * signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num37\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.40\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num38 = (int)((System.Int32)((ushort)b) / (System.Int32)(num32));
+                        -- num38 = (int)((Int32)((ushort)b) / (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -7376,21 +7407,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_27\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num38\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.41\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60;
+                        -- Int32 remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60 = (System.Int32)((ushort)b);
+                        -- remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6 = (Int32)((ushort)b);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1;
+                        -- Int32 remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1 = (System.Int32)(num32);
+                        -- remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d = (Int32)(num32);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num39 = (int)(remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60 - remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60 / remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1 * remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1);
+                        -- num39 = (int)(remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6 - remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6 / remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d * remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_28\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7403,19 +7434,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_29\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand841e3cf80ce4caaad8442450c719ee6a939242959fc629b35b3e3ed0d7057e60\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.43\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FB2783a67a2fed31ae98c6393f0db49cb9e99085cbe0e4277efea03540e5b2167d\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF7_FBe33b4bb18957ac64e7078e733bccc6c388a194c6353cbe7bea90903b7a7c56e6\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num39\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.44\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num40 = (int)((System.Int32)((ushort)b) & (System.Int32)(num32));
+                        -- num40 = (int)((Int32)((ushort)b) & (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.45\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num40\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.45\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num41 = (int)((System.Int32)((ushort)b) | (System.Int32)(num32));
+                        -- num41 = (int)((Int32)((ushort)b) | (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_30\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -7424,7 +7455,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.46\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num41\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.46\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num42 = (int)((System.Int32)((ushort)b) ^ (System.Int32)(num32));
+                        -- num42 = (int)((Int32)((ushort)b) ^ (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.47\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 16)), 32)) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num42\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.47\);
@@ -7480,14 +7511,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_34\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num48\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.53\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4;
+                        -- Int32 remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4 = (int)b;
+                        -- remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4 = (int)b;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num49 = remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4 - remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4 / input * input;
+                        -- num49 = remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4 - remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4 / input * input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7500,11 +7531,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_36\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.56\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.56\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand13C_13D1e409a177b7b16ea22e14d58fdd54da9d5ce3752845ad25f8fe417fa7a3c14b4\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num49\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.56\;
                         -- The following section was transformed from the .NET statement below:
                         -- num50 = (int)b & input;
@@ -7577,14 +7608,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_41\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num58\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.65\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9;
+                        -- Int32 remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9 = (int)b;
+                        -- remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9 = (int)b;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num59 = (uint)(remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9 - remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9 / input * input);
+                        -- num59 = (uint)(remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9 - remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9 / input * input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_42\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7597,11 +7628,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 8);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 8);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_43\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.66\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 8), 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.68\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.68\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand181_1821a1e73721a1a7a5d86972b2af6956ffba7b350a6e4144f3eccfbf75c142285b9\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.67\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num59\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.68\);
                         -- The following section was transformed from the .NET statement below:
                         -- num60 = (uint)((int)b & input);
@@ -7682,21 +7713,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_49\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num69\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.77\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975;
+                        -- UInt64 remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975 = (ulong)b;
+                        -- remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975 = (ulong)b;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int64 remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930;
+                        -- UInt64 remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930 = (ulong)num63;
+                        -- remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930 = (ulong)num63;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num70 = (long)(remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975 - remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975 / remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930 * remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930);
+                        -- num70 = (long)(remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975 - remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975 / remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930 * remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_50\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7709,15 +7740,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_51\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.78\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CF_1D1148241202b93bbb844c59566dc23b647f755a3945b5f22aebdc0b3609b3cc930\), 8), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_52\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_52\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.80\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.80\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1CD_1CE3ffb0323ad33dae5a5315d9658f47fcb18268317d11b5ee64ffe62316dca0975\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.79\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num70\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.80\);
                         -- The following section was transformed from the .NET statement below:
                         -- num71 = (long)((ulong)b & (ulong)num63);
@@ -7798,14 +7829,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_58\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num80\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.89\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00;
+                        -- UInt64 remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00 = (ulong)b;
+                        -- remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00 = (ulong)b;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num81 = remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00 - remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00 / num74 * num74;
+                        -- num81 = remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00 - remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00 / num74 * num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_59\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7818,7 +7849,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.15\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_60\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.90\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
@@ -7826,7 +7857,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_61\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.92\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.92\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand21D_21E8774d0916bdba111e50fc6d2643d29bf41c9fb5777aebfe96db03296919aba00\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.91\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num81\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.92\;
                         -- The following section was transformed from the .NET statement below:
                         -- num82 = (ulong)b & num74;
@@ -7866,26 +7897,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.97\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32)), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num86\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.97\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num87 = (int)((System.Int32)(b4) + (System.Int32)((sbyte)b2));
+                        -- num87 = (int)((Int32)(b4) + (Int32)((sbyte)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.98\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) + signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.98\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) + SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num87\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.98\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num88 = (int)((System.Int32)(b4) - (System.Int32)((sbyte)b2));
+                        -- num88 = (int)((Int32)(b4) - (Int32)((sbyte)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_64\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_64\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.99\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) - signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.99\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) - SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num88\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.99\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num89 = (int)((System.Int32)(b4) * (System.Int32)((sbyte)b2));
+                        -- num89 = (int)((Int32)(b4) * (Int32)((sbyte)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.100\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) * signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.100\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) * SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num89\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.100\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num90 = (int)((System.Int32)(b4) / (System.Int32)((sbyte)b2));
+                        -- num90 = (int)((Int32)(b4) / (Int32)((sbyte)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_65\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -7898,26 +7929,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.16\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.16\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.101\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) / signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.101\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) / SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_66\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num90\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.101\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8;
+                        -- Int32 remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8 = (System.Int32)(b4);
+                        -- remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79 = (Int32)(b4);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17;
+                        -- Int32 remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17 = (System.Int32)((sbyte)b2);
+                        -- remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4 = (Int32)((sbyte)b2);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17\ := signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4\ := SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num91 = (int)(remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8 - remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8 / remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17 * remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17);
+                        -- num91 = (int)(remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79 - remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79 / remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4 * remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_67\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7930,30 +7961,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.17\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.17\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.102\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.102\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_68\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.103\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.102\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand633eef730e7d827d46a1d2d1b5cb41aed0345c516f9a15390275b1629d55ff17\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.104\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.103\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.103\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.102\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26B1c9714eef82638b519f128d4712a16b2067065cc8662e1061520b90f3d4165c4\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.104\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand267_26Bee74ef7b4c5848bae53c42d8e234a55cc6e2de603c32ddcdb53e6aaa4f39fd79\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.103\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num91\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.104\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num92 = (int)((System.Int32)(b4) & (System.Int32)((sbyte)b2));
+                        -- num92 = (int)((Int32)(b4) & (Int32)((sbyte)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.105\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) and signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.105\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) and SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num92\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.105\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num93 = (int)((System.Int32)(b4) | (System.Int32)((sbyte)b2));
+                        -- num93 = (int)((Int32)(b4) | (Int32)((sbyte)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_69\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_69\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.106\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) or signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.106\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) or SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num93\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.106\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num94 = (int)((System.Int32)(b4) ^ (System.Int32)((sbyte)b2));
+                        -- num94 = (int)((Int32)(b4) ^ (Int32)((sbyte)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.107\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) xor signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.107\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) xor SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num94\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.107\);
                         -- The following section was transformed from the .NET statement below:
                         -- num95 = (int)b4 << (int)b3;
@@ -7970,12 +8001,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.109\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num96\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.109\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num97 = (int)((System.Int32)(b4) + (System.Int32)(b3));
+                        -- num97 = (int)((Int32)(b4) + (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.110\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num97\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.110\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num98 = (int)((System.Int32)(b4) - (System.Int32)(b3));
+                        -- num98 = (int)((Int32)(b4) - (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_71\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
@@ -7984,12 +8015,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.111\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num98\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.111\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num99 = (int)((System.Int32)(b4) * (System.Int32)(b3));
+                        -- num99 = (int)((Int32)(b4) * (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.112\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) * SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num99\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.112\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num100 = (int)((System.Int32)(b4) / (System.Int32)(b3));
+                        -- num100 = (int)((Int32)(b4) / (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_72\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8007,21 +8038,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_73\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num100\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.113\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8;
+                        -- Int32 remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8 = (System.Int32)(b4);
+                        -- remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027 = (Int32)(b4);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378;
+                        -- Int32 remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378 = (System.Int32)(b3);
+                        -- remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328 = (Int32)(b3);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num101 = (int)(remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8 - remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8 / remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378 * remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378);
+                        -- num101 = (int)(remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027 - remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027 / remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328 * remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_74\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8034,19 +8065,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.19\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.19\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.114\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.114\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_75\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.115\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.114\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3621ae98ba99b1c15797dd146ebaa23bd4dd22a6c36616c6aae68f432806d378\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.116\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand91f805bfedc43c7e7dc1bbc39bf3df6111e4d43937ec3c056232290171d7c0f8\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.115\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.115\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.114\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B4592b1d6fcbcf89ffedb048737ffea5d332eec0e2bddb63d1ab2c2140bbf3c328\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.116\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2AF_2B435469fd84bfec4ea6c3f99977bf021f98be224b658161eb746a56ff22e5cf027\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.115\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num101\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.116\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num102 = (int)((System.Int32)(b4) & (System.Int32)(b3));
+                        -- num102 = (int)((Int32)(b4) & (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.117\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num102\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.117\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num103 = (int)((System.Int32)(b4) | (System.Int32)(b3));
+                        -- num103 = (int)((Int32)(b4) | (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_76\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -8055,7 +8086,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.118\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num103\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.118\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num104 = (int)((System.Int32)(b4) ^ (System.Int32)(b3));
+                        -- num104 = (int)((Int32)(b4) ^ (Int32)(b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.119\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\), 32) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num104\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.119\);
@@ -8074,12 +8105,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.121\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num106\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.121\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num107 = (int)((System.Int32)((short)b4) + (System.Int32)(num21));
+                        -- num107 = (int)((Int32)((short)b4) + (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.122\ := SmartResize(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num107\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.122\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num108 = (int)((System.Int32)((short)b4) - (System.Int32)(num21));
+                        -- num108 = (int)((Int32)((short)b4) - (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_78\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
@@ -8088,12 +8119,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.123\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num108\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.123\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num109 = (int)((System.Int32)((short)b4) * (System.Int32)(num21));
+                        -- num109 = (int)((Int32)((short)b4) * (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.124\ := SmartResize(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) * SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num109\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.124\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num110 = (int)((System.Int32)((short)b4) / (System.Int32)(num21));
+                        -- num110 = (int)((Int32)((short)b4) / (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_79\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8111,21 +8142,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_80\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num110\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.125\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639;
+                        -- Int32 remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639 = (System.Int32)((short)b4);
+                        -- remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca = (Int32)((short)b4);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a;
+                        -- Int32 remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a = (System.Int32)(num21);
+                        -- remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73 = (Int32)(num21);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num111 = (int)(remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639 - remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639 / remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a * remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a);
+                        -- num111 = (int)(remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca - remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca / remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73 * remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_81\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8138,19 +8169,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.21\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.21\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.126\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.126\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_82\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.127\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.126\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.128\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd280f9fb613db7a2d09e651923ac45ba625c6f430d9e1af65ab50d0141a6d639\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.127\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.127\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.126\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300131ce89ad94672f482d016cb248ca5f2f90d9ba2a1fe61afae8cd6e623cddf73\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.128\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2FB_300b53318f8130de91f5f96c62e08ddab5bad530bba0600d5fce0516f195042e1ca\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.127\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num111\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.128\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num112 = (int)((System.Int32)((short)b4) & (System.Int32)(num21));
+                        -- num112 = (int)((Int32)((short)b4) & (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.129\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num112\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.129\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num113 = (int)((System.Int32)((short)b4) | (System.Int32)(num21));
+                        -- num113 = (int)((Int32)((short)b4) | (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_83\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -8159,7 +8190,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.130\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num113\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.130\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num114 = (int)((System.Int32)((short)b4) ^ (System.Int32)(num21));
+                        -- num114 = (int)((Int32)((short)b4) ^ (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.131\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num114\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.131\);
@@ -8178,26 +8209,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.133\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num116\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.133\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num117 = (int)((System.Int32)((ushort)b4) + (System.Int32)(num32));
+                        -- num117 = (int)((Int32)((ushort)b4) + (Int32)(num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.134\ := SmartResize(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.134\ := SmartResize(signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num117\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.134\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num118 = (int)((System.Int32)((ushort)b4) - (System.Int32)(num32));
+                        -- num118 = (int)((Int32)((ushort)b4) - (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_85\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_85\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.135\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.135\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num118\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.135\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num119 = (int)((System.Int32)((ushort)b4) * (System.Int32)(num32));
+                        -- num119 = (int)((Int32)((ushort)b4) * (Int32)(num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.136\ := SmartResize(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) * signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.136\ := SmartResize(signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) * signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num119\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.136\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num120 = (int)((System.Int32)((ushort)b4) / (System.Int32)(num32));
+                        -- num120 = (int)((Int32)((ushort)b4) / (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_86\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8210,26 +8241,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.22\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.22\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.137\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) / signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.137\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) / signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_87\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num120\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.137\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e;
+                        -- Int32 remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e = (System.Int32)((ushort)b4);
+                        -- remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056 = (Int32)((ushort)b4);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1;
+                        -- Int32 remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1 = (System.Int32)(num32);
+                        -- remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d = (Int32)(num32);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num121 = (int)(remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e - remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e / remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1 * remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1);
+                        -- num121 = (int)(remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056 - remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056 / remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d * remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_88\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8242,30 +8273,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.23\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.23\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.138\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.138\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_89\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.139\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.138\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.140\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandda2093dd2bb6c199a29c53735c55925e30d84ff0d9ed7b118467d077cef2a93e\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.139\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.139\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.138\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34Cd9ac54acf796b40d0a826fbf4ff65390c495884c78efcba2746089eeb153bc4d\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.140\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand347_34C118a028a44d9275d600251e488bb4057e5f7714e39f49c4fcee0b50504165056\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.139\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num121\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.140\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num122 = (int)((System.Int32)((ushort)b4) & (System.Int32)(num32));
+                        -- num122 = (int)((Int32)((ushort)b4) & (Int32)(num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.141\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.141\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num122\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.141\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num123 = (int)((System.Int32)((ushort)b4) | (System.Int32)(num32));
+                        -- num123 = (int)((Int32)((ushort)b4) | (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_90\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_90\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.142\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.142\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num123\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.142\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num124 = (int)((System.Int32)((ushort)b4) ^ (System.Int32)(num32));
+                        -- num124 = (int)((Int32)((ushort)b4) ^ (Int32)(num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.143\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.143\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 16)), 32)) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num124\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.143\);
                         -- The following section was transformed from the .NET statement below:
                         -- num125 = (int)b4 << input;
@@ -8319,14 +8350,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_94\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num130\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.149\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.SByte remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61;
+                        -- Int32 remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61 = (int)b4;
+                        -- remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61 = (int)b4;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num131 = remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61 - remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61 / input * input;
+                        -- num131 = remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61 - remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61 / input * input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_95\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8339,11 +8370,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.25\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.25\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_96\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.150\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.152\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand08bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.152\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand393_39508bf687bde982222922b97cac3f1dff04af5be20c822d661db5ab97949630d61\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.151\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num131\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.152\;
                         -- The following section was transformed from the .NET statement below:
                         -- num132 = (int)b4 & input;
@@ -8420,21 +8451,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_102\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num140\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.161\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.SByte remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f;
+                        -- Int64 remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f = (long)b4;
+                        -- remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f = (long)b4;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt64 remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de;
+                        -- Int64 remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de = (long)((ulong)input);
+                        -- remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de = (long)((ulong)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num141 = remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f - remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f / remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de * remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de;
+                        -- num141 = remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f - remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f / remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de * remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_103\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8447,15 +8478,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.27\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.27\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\, 8));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\, 8));
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_104\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.162\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3EA_3EDb428a4ebce5953c6893076b4d8c1d285f57b52b72c3382129f92662e69e0e9de\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_105\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_105\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.164\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.164\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3E7_3E9130de5b976783f9f5fb72b05ab469ea0300fe9e2e41f3da4806ce6614b4ae08f\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.163\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num141\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.164\;
                         -- The following section was transformed from the .NET statement below:
                         -- num142 = (long)b4 & (long)((ulong)input);
@@ -8532,14 +8563,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_111\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num150\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.173\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.SByte remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d;
+                        -- Int64 remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d = (long)b4;
+                        -- remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d = (long)b4;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b4\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num151 = remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d - remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d / num63 * num63;
+                        -- num151 = remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d - remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d / num63 * num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_112\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8552,7 +8583,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.29\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.29\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_113\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.174\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
@@ -8560,7 +8591,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_114\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.176\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcaa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.176\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand441_443caa14c30f00289d7acd0176293e27c62d173beb9046a90f1d6c2975d21848e8d\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.175\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num151\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.176\;
                         -- The following section was transformed from the .NET statement below:
                         -- num152 = (long)b4 & num63;
@@ -8618,26 +8649,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.183\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32)), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num159\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.183\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num160 = (int)((System.Int32)(num157) + (System.Int32)((short)b2));
+                        -- num160 = (int)((Int32)(num157) + (Int32)((short)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.184\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) + signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.184\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) + SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num160\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.184\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num161 = (int)((System.Int32)(num157) - (System.Int32)((short)b2));
+                        -- num161 = (int)((Int32)(num157) - (Int32)((short)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_119\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_119\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.185\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) - signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.185\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) - SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num161\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.185\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num162 = (int)((System.Int32)(num157) * (System.Int32)((short)b2));
+                        -- num162 = (int)((Int32)(num157) * (Int32)((short)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.186\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) * signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.186\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) * SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num162\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.186\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num163 = (int)((System.Int32)(num157) / (System.Int32)((short)b2));
+                        -- num163 = (int)((Int32)(num157) / (Int32)((short)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_120\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8650,26 +8681,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.30\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.187\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) / signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.187\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) / SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_121\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num163\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.187\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712;
+                        -- Int32 remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 = (System.Int32)(num157);
+                        -- remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3 = (Int32)(num157);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce;
+                        -- Int32 remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce = (System.Int32)((short)b2);
+                        -- remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2 = (Int32)((short)b2);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce\ := signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2\ := SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num164 = (int)(remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 - remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 / remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce * remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce);
+                        -- num164 = (int)(remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3 - remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3 / remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2 * remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_122\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8682,30 +8713,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.31\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.31\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.188\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.188\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_123\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.189\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.188\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand371720b4cf5d3f37d575044a983a575a68d39b98188b91d16ae99a12f31741ce\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.190\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.189\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.189\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.188\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A95dcffde26e2492bc82aabdf1247f8658ee66f24ad0dedc0493a3b88ed5ec3de2\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.190\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4A5_4A96fca888a0ce80379b0bf20c14c5e416c7b119df7f2bf9020bdfca596cf3bc8b3\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.189\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num164\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.190\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num165 = (int)((System.Int32)(num157) & (System.Int32)((short)b2));
+                        -- num165 = (int)((Int32)(num157) & (Int32)((short)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.191\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) and signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.191\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) and SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num165\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.191\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num166 = (int)((System.Int32)(num157) | (System.Int32)((short)b2));
+                        -- num166 = (int)((Int32)(num157) | (Int32)((short)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_124\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_124\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.192\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.192\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num166\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.192\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num167 = (int)((System.Int32)(num157) ^ (System.Int32)((short)b2));
+                        -- num167 = (int)((Int32)(num157) ^ (Int32)((short)b2));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.193\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) xor signed(SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.193\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) xor SmartResize((signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num167\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.193\);
                         -- The following section was transformed from the .NET statement below:
                         -- num168 = (int)num157 << (int)b3;
@@ -8722,12 +8753,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.195\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num169\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.195\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num170 = (int)((System.Int32)(num157) + (System.Int32)((short)b3));
+                        -- num170 = (int)((Int32)(num157) + (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.196\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) + SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num170\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.196\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num171 = (int)((System.Int32)(num157) - (System.Int32)((short)b3));
+                        -- num171 = (int)((Int32)(num157) - (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_126\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
@@ -8736,12 +8767,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.197\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) - SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num171\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.197\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num172 = (int)((System.Int32)(num157) * (System.Int32)((short)b3));
+                        -- num172 = (int)((Int32)(num157) * (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.198\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) * SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num172\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.198\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num173 = (int)((System.Int32)(num157) / (System.Int32)((short)b3));
+                        -- num173 = (int)((Int32)(num157) / (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_127\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8759,21 +8790,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_128\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num173\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.199\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712;
+                        -- Int32 remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 = (System.Int32)(num157);
+                        -- remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5 = (Int32)(num157);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a;
+                        -- Int32 remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a = (System.Int32)((short)b3);
+                        -- remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2 = (Int32)((short)b3);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2\ := SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num174 = (int)(remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 - remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 / remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a * remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a);
+                        -- num174 = (int)(remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5 - remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5 / remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2 * remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_129\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8786,19 +8817,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.33\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.33\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.200\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.200\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_130\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.201\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.200\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5f592ed8302024912d2514f330001ffd3c2c90f71477cffa85dd1c3efe6c5d1a\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.202\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.201\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.201\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.200\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F26c4d54bd85afe29103e67d8b2c7654db82ef32739dd289eab872a5ec96d1eeb2\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.202\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4ED_4F243bd39d5a0ff86e5b4ace285a798da1b35ceda51888d4f7be6328817a54afba5\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.201\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num174\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.202\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num175 = (int)((System.Int32)(num157) & (System.Int32)((short)b3));
+                        -- num175 = (int)((Int32)(num157) & (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.203\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) and SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num175\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.203\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num176 = (int)((System.Int32)(num157) | (System.Int32)((short)b3));
+                        -- num176 = (int)((Int32)(num157) | (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_131\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -8807,7 +8838,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.204\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num176\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.204\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num177 = (int)((System.Int32)(num157) ^ (System.Int32)((short)b3));
+                        -- num177 = (int)((Int32)(num157) ^ (Int32)((short)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.205\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) xor SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num177\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.205\);
@@ -8826,12 +8857,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.207\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num179\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.207\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num180 = (int)((System.Int32)(num157) + (System.Int32)(num21));
+                        -- num180 = (int)((Int32)(num157) + (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.208\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num180\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.208\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num181 = (int)((System.Int32)(num157) - (System.Int32)(num21));
+                        -- num181 = (int)((Int32)(num157) - (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_133\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
@@ -8840,12 +8871,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.209\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num181\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.209\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num182 = (int)((System.Int32)(num157) * (System.Int32)(num21));
+                        -- num182 = (int)((Int32)(num157) * (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.210\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) * SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num182\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.210\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num183 = (int)((System.Int32)(num157) / (System.Int32)(num21));
+                        -- num183 = (int)((Int32)(num157) / (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_134\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8863,21 +8894,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_135\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num183\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.211\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712;
+                        -- Int32 remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 = (System.Int32)(num157);
+                        -- remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d = (Int32)(num157);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a;
+                        -- Int32 remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a = (System.Int32)(num21);
+                        -- remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c = (Int32)(num21);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num184 = (int)(remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 - remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 / remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a * remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a);
+                        -- num184 = (int)(remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d - remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d / remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c * remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_136\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8890,19 +8921,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.35\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.35\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.212\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.212\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_137\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.213\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.212\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97b8c3c73d17279f49009d50ed7144be1bc5335a50b0e43a0b829ef3c1cccd3a\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.214\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.213\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.213\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.212\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53Ed3ca8011193a90a5222e6848e0c252c02701408f6ff07dd208aa564db696f95c\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.214\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand539_53E104d4a9795844f3a0afddacdff159f6f30c3633fe1a4bfb508da8577585b653d\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.213\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num184\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.214\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num185 = (int)((System.Int32)(num157) & (System.Int32)(num21));
+                        -- num185 = (int)((Int32)(num157) & (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.215\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num185\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.215\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num186 = (int)((System.Int32)(num157) | (System.Int32)(num21));
+                        -- num186 = (int)((Int32)(num157) | (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_138\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -8911,7 +8942,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.216\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num186\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.216\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num187 = (int)((System.Int32)(num157) ^ (System.Int32)(num21));
+                        -- num187 = (int)((Int32)(num157) ^ (Int32)(num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.217\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num187\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.217\);
@@ -8930,26 +8961,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.219\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num189\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.219\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num190 = (int)((System.Int32)(num157) + (System.Int32)((short)num32));
+                        -- num190 = (int)((Int32)(num157) + (Int32)((short)num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.220\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) + signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.220\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) + SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num190\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.220\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num191 = (int)((System.Int32)(num157) - (System.Int32)((short)num32));
+                        -- num191 = (int)((Int32)(num157) - (Int32)((short)num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_140\;
                         -- Clock cycles needed to complete this state (approximation): 0.9742
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_140\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.221\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) - signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.221\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) - SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num191\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.221\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num192 = (int)((System.Int32)(num157) * (System.Int32)((short)num32));
+                        -- num192 = (int)((Int32)(num157) * (Int32)((short)num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.222\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) * signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.222\ := SmartResize(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) * SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num192\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.222\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num193 = (int)((System.Int32)(num157) / (System.Int32)((short)num32));
+                        -- num193 = (int)((Int32)(num157) / (Int32)((short)num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_141\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -8962,26 +8993,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.36\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.36\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.223\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) / signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.223\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) / SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_142\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num193\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.223\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712;
+                        -- Int32 remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 = (System.Int32)(num157);
+                        -- remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5 = (Int32)(num157);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86;
+                        -- Int32 remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86 = (System.Int32)((short)num32);
+                        -- remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a = (Int32)((short)num32);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86\ := signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a\ := SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num194 = (int)(remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 - remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712 / remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86 * remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86);
+                        -- num194 = (int)(remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5 - remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5 / remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a * remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_143\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8994,30 +9025,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.37\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.37\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.224\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.224\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_144\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.225\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.224\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandd34e6ddc5c4ec0656ab9a0f5f8c829d608af2607ed62d28434ef45425a197b86\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.226\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57ea44d0932c0702ea40f68c4c0f7a978f7a874dc90e76d3c8ce93d7dbf21712\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.225\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.225\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.224\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aea7cb5d3af7ff2f22060453aae122c68629abb0856eeea4abb94630e049cd45a\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.226\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand585_58Aa86d26aa8e7f0f8ee64a7c003e3a9be82ac95fde5137dacfe7ed6c4a6bafe4a5\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.225\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num194\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.226\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num195 = (int)((System.Int32)(num157) & (System.Int32)((short)num32));
+                        -- num195 = (int)((Int32)(num157) & (Int32)((short)num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.227\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) and signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.227\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) and SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num195\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.227\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num196 = (int)((System.Int32)(num157) | (System.Int32)((short)num32));
+                        -- num196 = (int)((Int32)(num157) | (Int32)((short)num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_145\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_145\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.228\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.228\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) or SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num196\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.228\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num197 = (int)((System.Int32)(num157) ^ (System.Int32)((short)num32));
+                        -- num197 = (int)((Int32)(num157) ^ (Int32)((short)num32));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.229\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) xor signed(SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.229\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\), 32) xor SmartResize((signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num197\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.229\);
                         -- The following section was transformed from the .NET statement below:
                         -- num198 = (int)num157 << input;
@@ -9071,14 +9102,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_149\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num203\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.235\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int16 remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09;
+                        -- Int32 remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09 = (int)num157;
+                        -- remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09 = (int)num157;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num204 = remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09 - remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09 / input * input;
+                        -- num204 = remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09 - remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09 / input * input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_150\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9091,11 +9122,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.39\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.39\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_151\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.236\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.238\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand58688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.238\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5D1_5D358688ba4801904938949dc1cd33a99d33881a90a1f967833248027bfe008ff09\, 32) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.237\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num204\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.238\;
                         -- The following section was transformed from the .NET statement below:
                         -- num205 = (int)num157 & input;
@@ -9172,21 +9203,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_157\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num213\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.247\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int16 remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a;
+                        -- Int64 remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a = (long)num157;
+                        -- remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a = (long)num157;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt64 remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04;
+                        -- Int64 remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04 = (long)((ulong)input);
+                        -- remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04 = (long)((ulong)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num214 = remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a - remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a / remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04 * remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04;
+                        -- num214 = remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a - remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a / remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04 * remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_158\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9199,15 +9230,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.41\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.41\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\, 16));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\, 16));
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_159\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.248\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand628_62Bf8dc27ab51ac3f64c0cdb21b3500f00f4857175a46fbf81e297a3edded2eeb04\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_160\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_160\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.250\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.250\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand625_627a4099ee273403bf70d088c1842cc5ea4cdcfcb78dce106a1e5d9036b7fb5330a\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.249\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num214\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.250\;
                         -- The following section was transformed from the .NET statement below:
                         -- num215 = (long)num157 & (long)((ulong)input);
@@ -9284,14 +9315,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_166\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num223\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.259\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int16 remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2;
+                        -- Int64 remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2 = (long)num157;
+                        -- remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2 = (long)num157;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num157\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num224 = remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2 - remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2 / num63 * num63;
+                        -- num224 = remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2 - remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2 / num63 * num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_167\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9304,7 +9335,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.43\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.43\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_168\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.260\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
@@ -9312,7 +9343,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_169\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.262\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand97c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.262\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand67F_68197c8f83260c464239035f2cbda586b605d805772f931627c232aed8127cac0f2\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.261\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num224\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.262\;
                         -- The following section was transformed from the .NET statement below:
                         -- num225 = (long)num157 & num63;
@@ -9370,12 +9401,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.269\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32)), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num232\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.269\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num233 = (int)((System.Int32)(num230) + (System.Int32)((ushort)b2));
+                        -- num233 = (int)((Int32)(num230) + (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.270\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) + signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num233\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.270\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num234 = (int)((System.Int32)(num230) - (System.Int32)((ushort)b2));
+                        -- num234 = (int)((Int32)(num230) - (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_174\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
@@ -9384,12 +9415,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.271\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) - signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num234\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.271\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num235 = (int)((System.Int32)(num230) * (System.Int32)((ushort)b2));
+                        -- num235 = (int)((Int32)(num230) * (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.272\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) * signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num235\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.272\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num236 = (int)((System.Int32)(num230) / (System.Int32)((ushort)b2));
+                        -- num236 = (int)((Int32)(num230) / (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_175\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -9407,21 +9438,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_176\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num236\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.273\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99;
+                        -- Int32 remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 = (System.Int32)(num230);
+                        -- remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03 = (Int32)(num230);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0;
+                        -- Int32 remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0 = (System.Int32)((ushort)b2);
+                        -- remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177 = (Int32)((ushort)b2);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177\ := signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num237 = (int)(remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 - remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 / remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0 * remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0);
+                        -- num237 = (int)(remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03 - remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03 / remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177 * remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_177\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9434,19 +9465,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.45\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.45\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.274\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.274\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_178\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.275\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.274\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc01e999d3ba2dcca138542ac62afffe270cbbc24afa366d1c9eac429271238d0\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.276\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.275\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.275\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.274\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E7941871c845877261ff3e6c81b1dff7b34dc371880a4f9c7d3648ef5648059177\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.276\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand6E3_6E75ace1fc7e059b26c46d6d26ffa33705efc19e2d516573c2da68851913878db03\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.275\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num237\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.276\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num238 = (int)((System.Int32)(num230) & (System.Int32)((ushort)b2));
+                        -- num238 = (int)((Int32)(num230) & (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.277\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) and signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num238\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.277\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num239 = (int)((System.Int32)(num230) | (System.Int32)((ushort)b2));
+                        -- num239 = (int)((Int32)(num230) | (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_179\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -9455,7 +9486,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.278\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num239\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.278\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num240 = (int)((System.Int32)(num230) ^ (System.Int32)((ushort)b2));
+                        -- num240 = (int)((Int32)(num230) ^ (Int32)((ushort)b2));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.279\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) xor signed(SmartResize((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num240\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.279\);
@@ -9474,26 +9505,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.281\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num242\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.281\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num243 = (int)((System.Int32)(num230) + (System.Int32)((ushort)b3));
+                        -- num243 = (int)((Int32)(num230) + (Int32)((ushort)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.282\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) + SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.282\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) + signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num243\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.282\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num244 = (int)((System.Int32)(num230) - (System.Int32)((ushort)b3));
+                        -- num244 = (int)((Int32)(num230) - (Int32)((ushort)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_181\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_181\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.283\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) - SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.283\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) - signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num244\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.283\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num245 = (int)((System.Int32)(num230) * (System.Int32)((ushort)b3));
+                        -- num245 = (int)((Int32)(num230) * (Int32)((ushort)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.284\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) * SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.284\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) * signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num245\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.284\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num246 = (int)((System.Int32)(num230) / (System.Int32)((ushort)b3));
+                        -- num246 = (int)((Int32)(num230) / (Int32)((ushort)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_182\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -9506,26 +9537,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.46\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.46\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.285\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) / SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.285\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) / signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_183\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num246\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.285\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99;
+                        -- Int32 remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 = (System.Int32)(num230);
+                        -- remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415 = (Int32)(num230);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7;
+                        -- Int32 remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7 = (System.Int32)((ushort)b3);
+                        -- remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3 = (Int32)((ushort)b3);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7\ := SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3\ := signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num247 = (int)(remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 - remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 / remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7 * remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7);
+                        -- num247 = (int)(remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415 - remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415 / remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3 * remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_184\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9538,30 +9569,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.47\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.47\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.286\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.286\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_185\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.287\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.286\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand84beec9774983e4cd6cd65f6aa6bec18d30812800f11c62ee75dd5a37283dbe7\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.288\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.287\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.287\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.286\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730a9bcb7b19b6ca1537564336a47d4fae6cdef81c623c0eb44880e7f228178d2c3\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.288\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand72B_730da75f0d2968401c08f3ca4efa2a92993a0aac7f322b878b7bd1dc92ddc2c4415\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.287\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num247\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.288\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num248 = (int)((System.Int32)(num230) & (System.Int32)((ushort)b3));
+                        -- num248 = (int)((Int32)(num230) & (Int32)((ushort)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.289\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) and SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.289\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) and signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num248\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.289\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num249 = (int)((System.Int32)(num230) | (System.Int32)((ushort)b3));
+                        -- num249 = (int)((Int32)(num230) | (Int32)((ushort)b3));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_186\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_186\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.290\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.290\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num249\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.290\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num250 = (int)((System.Int32)(num230) ^ (System.Int32)((ushort)b3));
+                        -- num250 = (int)((Int32)(num230) ^ (Int32)((ushort)b3));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.291\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) xor SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.291\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) xor signed(SmartResize((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 16)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num250\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.291\);
                         -- The following section was transformed from the .NET statement below:
                         -- num251 = (int)num230 << (int)num21;
@@ -9578,26 +9609,26 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.293\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num252\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.293\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num253 = (int)((System.Int32)(num230) + (System.Int32)((ushort)num21));
+                        -- num253 = (int)((Int32)(num230) + (Int32)((ushort)num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.294\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) + SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.294\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) + signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num253\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.294\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num254 = (int)((System.Int32)(num230) - (System.Int32)((ushort)num21));
+                        -- num254 = (int)((Int32)(num230) - (Int32)((ushort)num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_188\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_188\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.295\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) - SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.295\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) - signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num254\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.295\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num255 = (int)((System.Int32)(num230) * (System.Int32)((ushort)num21));
+                        -- num255 = (int)((Int32)(num230) * (Int32)((ushort)num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.296\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) * SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.296\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) * signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num255\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.296\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num256 = (int)((System.Int32)(num230) / (System.Int32)((ushort)num21));
+                        -- num256 = (int)((Int32)(num230) / (Int32)((ushort)num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_189\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -9610,26 +9641,26 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.48\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.48\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.297\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) / SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.297\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) / signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_190\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num256\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.297\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99;
+                        -- Int32 remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 = (System.Int32)(num230);
+                        -- remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7 = (Int32)(num230);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed;
+                        -- Int32 remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed = (System.Int32)((ushort)num21);
+                        -- remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41 = (Int32)((ushort)num21);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed\ := SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41\ := signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num257 = (int)(remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 - remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 / remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed * remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed);
+                        -- num257 = (int)(remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7 - remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7 / remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41 * remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_191\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9642,30 +9673,30 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.49\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.49\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.298\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.298\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_192\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.299\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.298\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand69821432954bec7858a09d18becc2e89c01e805e0b4f00ae363a8ff9642749ed\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.300\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.299\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.299\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.298\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7989357acf93b065eadad03f069008c425b28bc30418f3e56a8224c057cd82abe41\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.300\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand793_7986fdfd33a0cbba2080c82c101a6bda609bb506e822113ea4de423f5bab141a2a7\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.299\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num257\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.300\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num258 = (int)((System.Int32)(num230) & (System.Int32)((ushort)num21));
+                        -- num258 = (int)((Int32)(num230) & (Int32)((ushort)num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.301\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) and SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.301\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) and signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num258\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.301\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num259 = (int)((System.Int32)(num230) | (System.Int32)((ushort)num21));
+                        -- num259 = (int)((Int32)(num230) | (Int32)((ushort)num21));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_193\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_193\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.302\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.302\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num259\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.302\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num260 = (int)((System.Int32)(num230) ^ (System.Int32)((ushort)num21));
+                        -- num260 = (int)((Int32)(num230) ^ (Int32)((ushort)num21));
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.303\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) xor SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.303\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) xor signed(SmartResize((unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\)), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num260\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.303\);
                         -- The following section was transformed from the .NET statement below:
                         -- num261 = (int)num230 << (int)num32;
@@ -9682,12 +9713,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.305\ := signed(SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32)), 5) and "11111"))), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num262\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.305\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num263 = (int)((System.Int32)(num230) + (System.Int32)(num32));
+                        -- num263 = (int)((Int32)(num230) + (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.306\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num263\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.306\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num264 = (int)((System.Int32)(num230) - (System.Int32)(num32));
+                        -- num264 = (int)((Int32)(num230) - (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_195\;
                         -- Clock cycles needed to complete this state (approximation): 0.9774
@@ -9696,12 +9727,12 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.307\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num264\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.307\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num265 = (int)((System.Int32)(num230) * (System.Int32)(num32));
+                        -- num265 = (int)((Int32)(num230) * (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.308\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) * signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num265\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.308\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num266 = (int)((System.Int32)(num230) / (System.Int32)(num32));
+                        -- num266 = (int)((Int32)(num230) / (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_196\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
@@ -9719,21 +9750,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_197\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num266\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.309\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99;
+                        -- Int32 remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 = (System.Int32)(num230);
+                        -- remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21 = (Int32)(num230);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1;
+                        -- Int32 remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1 = (System.Int32)(num32);
+                        -- remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe = (Int32)(num32);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num267 = (int)(remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 - remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99 / remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1 * remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1);
+                        -- num267 = (int)(remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21 - remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21 / remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe * remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_198\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9746,19 +9777,19 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.51\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.51\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.310\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.310\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21\ / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_199\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.311\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.310\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand68c58d140eeeaaf496224765d5c80725858f131ba72fbd77028e915538314ac1\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.312\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand3ce7e7753f4a386f1f8f9e51feea607ff5e81a067abffd5067c29fa4787f0c99\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.311\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.311\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.310\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80C6b142a96bb52afb186d442b70f1efbd9110101a4f11af26b326077e250a304fe\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.312\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand807_80Cda78e03533a89c2cedead1b6e5a4ff3171147141adfdc278687cf58761675a21\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.311\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num267\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.312\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num268 = (int)((System.Int32)(num230) & (System.Int32)(num32));
+                        -- num268 = (int)((Int32)(num230) & (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.313\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num268\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.313\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num269 = (int)((System.Int32)(num230) | (System.Int32)(num32));
+                        -- num269 = (int)((Int32)(num230) | (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_200\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -9767,7 +9798,7 @@ begin
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.314\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num269\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.314\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num270 = (int)((System.Int32)(num230) ^ (System.Int32)(num32));
+                        -- num270 = (int)((Int32)(num230) ^ (Int32)(num32));
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.315\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\), 32)) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num270\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.315\);
@@ -9823,14 +9854,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_204\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num276\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.321\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a;
+                        -- Int32 remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a = (int)num230;
+                        -- remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a = (int)num230;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num277 = remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a - remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a / input * input;
+                        -- num277 = remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a - remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a / input * input;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_205\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9843,11 +9874,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.53\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.53\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_206\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.322\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.324\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.324\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand87B_87D63a41781f0b0d4160c020fd82d20aacc13eda71be0b68178b7b6468dd056ed4a\, 32)) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.323\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num277\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.324\;
                         -- The following section was transformed from the .NET statement below:
                         -- num278 = (int)num230 & input;
@@ -9920,14 +9951,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_211\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num286\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.333\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278;
+                        -- Int32 remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278 = (int)num230;
+                        -- remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278 = (int)num230;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num287 = (uint)(remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278 - remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278 / input * input);
+                        -- num287 = (uint)(remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278 - remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278 / input * input);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_212\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9940,11 +9971,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.55\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.55\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 16);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 16);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_213\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.334\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\), 16), 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.336\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandfd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.336\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand8EF_8F1fd63bef4d482ca04a616d656872907ec8b48d0f4580f23644af8e3931c409278\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.335\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num287\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.336\);
                         -- The following section was transformed from the .NET statement below:
                         -- num288 = (uint)((int)num230 & input);
@@ -10021,21 +10052,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_219\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num296\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.345\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d;
+                        -- UInt64 remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d = (ulong)num230;
+                        -- remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d = (ulong)num230;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int64 remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84;
+                        -- UInt64 remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84 = (ulong)num63;
+                        -- remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84 = (ulong)num63;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num297 = (long)(remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d - remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d / remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84 * remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84);
+                        -- num297 = (long)(remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d - remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d / remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84 * remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_220\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10048,15 +10079,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.57\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ / SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_221\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.346\ * SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand96C_96E42600825767ff020b388cbb91bd29b647fa08c60dcae3f51f367e34075635e84\), 16), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_222\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_222\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.348\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.348\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand969_96B1028ddc7b34268c9040ecd5bd290c66599be4daeb922a71920e5dfbb5cc70d6d\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.347\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num297\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.348\);
                         -- The following section was transformed from the .NET statement below:
                         -- num298 = (long)((ulong)num230 & (ulong)num63);
@@ -10133,14 +10164,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_228\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num306\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.357\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938;
+                        -- UInt64 remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938 = (ulong)num230;
+                        -- remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938 = (ulong)num230;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num230\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num307 = remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938 - remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938 / num74 * num74;
+                        -- num307 = remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938 - remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938 / num74 * num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_229\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10153,7 +10184,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.59\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.59\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_230\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.358\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
@@ -10161,7 +10192,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_231\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.360\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.360\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand9E7_9E9548164e7ad6abaa4f49087e0c614fcd3f032edc3b66d4d96b90aba35a78d8938\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.359\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num307\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.360\;
                         -- The following section was transformed from the .NET statement below:
                         -- num308 = (ulong)num230 & num74;
@@ -10234,14 +10265,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_236\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num316\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.369\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05;
+                        -- Int32 remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05 = (int)b2;
+                        -- remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05 = (int)b2;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num317 = input - input / remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05 * remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05;
+                        -- num317 = input - input / remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05 * remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_237\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10254,10 +10285,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.61\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.61\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_238\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.371\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.371\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.370\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandA7E_A7F62d0b069c21ae1bc95773ac826c8729f6aa615c39fd74e4f283fd4942ecbef05\, 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.372\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.371\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num317\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.372\;
                         -- The following section was transformed from the .NET statement below:
@@ -10331,14 +10362,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_243\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num326\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.381\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.SByte remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030;
+                        -- Int32 remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030 = (int)b3;
+                        -- remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030 = (int)b3;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num327 = input - input / remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030 * remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030;
+                        -- num327 = input - input / remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030 * remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_244\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10351,10 +10382,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.63\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.63\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_245\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.383\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand86ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.383\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.382\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandB16_B1886ee368d06ca7880f4ec0638ab735829faf0ae24af162c73dbc109472b304030\, 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.384\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.383\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num327\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.384\;
                         -- The following section was transformed from the .NET statement below:
@@ -10428,14 +10459,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_250\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num336\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.393\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int16 remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122;
+                        -- Int32 remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122 = (int)num21;
+                        -- remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122 = (int)num21;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num337 = input - input / remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122 * remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122;
+                        -- num337 = input - input / remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122 * remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_251\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10448,10 +10479,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.65\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.65\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32);
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_252\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.395\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand98d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.395\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.394\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandBB2_BB498d417a46ac385de46984345e0e5ab10fc772e1e1acb1ad0ce1f33a481d90122\, 32), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.396\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.395\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num337\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.396\;
                         -- The following section was transformed from the .NET statement below:
@@ -10525,14 +10556,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_257\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num346\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.405\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53;
+                        -- Int32 remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53 = (int)num32;
+                        -- remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53 = (int)num32;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num347 = input - input / remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53 * remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53;
+                        -- num347 = input - input / remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53 * remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_258\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10545,10 +10576,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.67\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.67\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_259\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.407\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.407\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.406\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandC4E_C50e34aa75fccdb856ff3be7e3f2e7654e4d34e6f29d50a5f8f4edbbe8e09631e53\, 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.408\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.407\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num347\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.408\;
                         -- The following section was transformed from the .NET statement below:
@@ -10716,21 +10747,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_272\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num366\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.429\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653;
+                        -- Int64 remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653 = (long)input;
+                        -- remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653 = (long)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt64 remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2;
+                        -- Int64 remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2 = (long)((ulong)input);
+                        -- remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2 = (long)((ulong)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num367 = remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653 - remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653 / remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2 * remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2;
+                        -- num367 = remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653 - remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653 / remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2 * remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_273\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10743,15 +10774,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.71\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.71\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\, 32));
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_274\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.430\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD8F_D924e011931998783eeba60615c60025ed363e8e75e35470bb27b5f7c391bc744f2\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_275\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_275\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.432\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.432\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandD88_D8C57e0def8e5ed9883bbe4566c34bbdce5a1e23c956771146ce7e1987761ccc653\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.431\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num367\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.432\;
                         -- The following section was transformed from the .NET statement below:
                         -- num368 = (long)input & (long)((ulong)input);
@@ -10828,14 +10859,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_281\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num376\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.441\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9;
+                        -- Int64 remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9 = (long)input;
+                        -- remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9 = (long)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num377 = remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9 - remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9 / num63 * num63;
+                        -- num377 = remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9 - remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9 / num63 * num63;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_282\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10848,7 +10879,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.73\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.73\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_283\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.442\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\, 64);
@@ -10856,7 +10887,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_284\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.444\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.444\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandE32_E36a95ef9430445f3376db5ed2a59f1340567b5317613063e3c1e8d9dc51e1defc9\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.443\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num377\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.444\;
                         -- The following section was transformed from the .NET statement below:
                         -- num378 = (long)input & num63;
@@ -10947,14 +10978,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_291\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num388\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.455\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773;
+                        -- Int32 remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773 = (int)b2;
+                        -- remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773 = (int)b2;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num389 = (uint)(input - input / remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773 * remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773);
+                        -- num389 = (uint)(input - input / remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773 * remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_292\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10967,10 +10998,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.75\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.75\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_293\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.457\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.457\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.456\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandEFF_F005b1f8155666d5d3541023aa30fb54443cdfbafc38a4dd56929dee40827c4b773\, 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.458\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.457\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num389\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.458\);
                         -- The following section was transformed from the .NET statement below:
@@ -11048,21 +11079,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_299\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num398\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.467\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a;
+                        -- UInt64 remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a = (ulong)input;
+                        -- remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a = (ulong)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int64 remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d;
+                        -- UInt64 remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d = (ulong)((long)b3);
+                        -- remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d = (ulong)((long)b3);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\ := unsigned((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\ := unsigned((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num399 = (long)(remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a - remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a / remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d * remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d);
+                        -- num399 = (long)(remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a - remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a / remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d * remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_300\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11075,15 +11106,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.77\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_301\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandcbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.468\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandFA0_FA3cbebcc3aaf38234db44a369f5591be06fcbc4b516265d94d7bf7b91be826cb6d\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_302\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_302\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.470\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.470\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandF99_F9D38385e0ba3802548485a07eb8d61c92768a71ad76fc9e557ea69f8e0ce53252a\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.469\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num399\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.470\);
                         -- The following section was transformed from the .NET statement below:
                         -- num400 = (long)((ulong)input & (ulong)((long)b3));
@@ -11160,21 +11191,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_308\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num408\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.479\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097;
+                        -- UInt64 remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097 = (ulong)input;
+                        -- remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097 = (ulong)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int64 remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f;
+                        -- UInt64 remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f = (ulong)((long)num21);
+                        -- remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f = (ulong)((long)num21);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\ := unsigned((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\ := unsigned((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num409 = (long)(remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097 - remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097 / remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f * remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f);
+                        -- num409 = (long)(remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097 - remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097 / remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f * remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_309\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11187,15 +11218,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.79\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_310\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.480\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand104C_104F5d6d4e58b740fc5c9e09d60104a0e085258e22e5735cb51645cdbef11c1d1c7f\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_311\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_311\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.482\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.482\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1045_1049162ba0a94e854007a1c3f209f5289bdc32698b864b5b6bc37f5eedb99db29097\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.481\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num409\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.482\);
                         -- The following section was transformed from the .NET statement below:
                         -- num410 = (long)((ulong)input & (ulong)((long)num21));
@@ -11268,14 +11299,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_316\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num418\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.491\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240;
+                        -- Int32 remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240 = (int)num32;
+                        -- remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240 = (int)num32;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- num419 = (uint)(input - input / remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240 * remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240);
+                        -- num419 = (uint)(input - input / remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240 * remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_317\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11288,10 +11319,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.81\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.81\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ / signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32));
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_318\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.493\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32)), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.493\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.492\ * signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand10EF_10F1942d5f32c5a6a37f13fc56ef1c0d59ffab094e00b65355fb0efd4acca722a240\, 32)), 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.494\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.493\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num419\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.494\);
                         -- The following section was transformed from the .NET statement below:
@@ -11369,21 +11400,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_324\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num428\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.503\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7;
+                        -- UInt64 remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7 = (ulong)input;
+                        -- remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7 = (ulong)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int64 remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968;
+                        -- UInt64 remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968 = (ulong)((long)input);
+                        -- remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968 = (ulong)((long)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\ := unsigned((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\ := unsigned((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num429 = (long)(remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7 - remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7 / remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968 * remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968);
+                        -- num429 = (long)(remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7 - remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7 / remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968 * remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_325\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11396,15 +11427,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.83\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_326\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand25bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.504\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1194_119725bdf838b7855a7fd3548239730496b6dacc2b651e3c602c708270e581f16968\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_327\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_327\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.506\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.506\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand118D_11910ca3ae342d242dc51a87de621929864b9286e05693437843aca0d84c2e8ac0e7\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.505\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num429\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.506\);
                         -- The following section was transformed from the .NET statement below:
                         -- num430 = (long)((ulong)input & (ulong)((long)input));
@@ -11571,21 +11602,21 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_340\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num448\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.527\);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c;
+                        -- UInt64 remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c = (ulong)input;
+                        -- remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c = (ulong)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int64 remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc;
+                        -- UInt64 remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc = (ulong)num63;
+                        -- remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc = (ulong)num63;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num63\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num449 = (long)(remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c - remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c / remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc * remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc);
+                        -- num449 = (long)(remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c - remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c / remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc * remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc);
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_341\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11598,15 +11629,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.87\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_342\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.528\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12DA_12DC93d787fac8f9abee5d98332b8b06634c044dec151009bf67c2e7ba80be961edc\, 32), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_343\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_343\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.530\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand4fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.530\ := signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand12D3_12D74fd38b318dbddffadf9022c0a6ccdb7bb79a1958c81e93424e64cb3fa1f1b72c\ - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.529\);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num449\ := (\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.530\);
                         -- The following section was transformed from the .NET statement below:
                         -- num450 = (long)((ulong)input & (ulong)num63);
@@ -11683,14 +11714,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_349\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num458\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.539\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155;
+                        -- UInt64 remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155 = (ulong)input;
+                        -- remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155 = (ulong)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num459 = remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155 - remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155 / num74 * num74;
+                        -- num459 = remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155 - remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155 / num74 * num74;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_350\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11703,7 +11734,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.89\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) / \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_351\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.540\ * \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num74\, 64);
@@ -11711,7 +11742,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_352\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.542\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperanda1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\;
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.542\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1379_137Da1e557aa8cd3e0d592d148474073ace59e8e2e00b57d121c318a9085f7f39155\, 64) - \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.541\;
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num459\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.542\;
                         -- The following section was transformed from the .NET statement below:
                         -- num460 = (ulong)input & num74;
@@ -11792,14 +11823,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_358\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num469\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.551\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt64 remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95;
+                        -- Int64 remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95 = (long)((ulong)b2);
+                        -- remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95 = (long)((ulong)b2);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\ := signed((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\ := signed((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num470 = num463 - num463 / remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95 * remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95;
+                        -- num470 = num463 - num463 / remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95 * remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_359\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11812,10 +11843,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.91\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.91\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_360\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.553\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand5baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.553\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.552\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1425_14275baf4f161ec01d1bc9af36311d4c32391044f071cca9deadba4669a2479e3b95\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_361\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_361\ => 
@@ -11897,14 +11928,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_367\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num479\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.563\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.SByte remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033;
+                        -- Int64 remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033 = (long)b3;
+                        -- remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033 = (long)b3;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b3\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num480 = num463 - num463 / remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033 * remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033;
+                        -- num480 = num463 - num463 / remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033 * remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_368\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11917,10 +11948,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.93\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.93\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_369\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.565\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandc6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.565\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.564\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand14C5_14C7c6e0f3261c30ae33b5f6673ba5419ba0af708470fbf8f5c21ac48239d165f033\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_370\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_370\ => 
@@ -12002,14 +12033,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_376\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num489\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.575\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int16 remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5;
+                        -- Int64 remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5 = (long)num21;
+                        -- remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5 = (long)num21;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num21\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num490 = num463 - num463 / remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5 * remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5;
+                        -- num490 = num463 - num463 / remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5 * remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_377\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12022,10 +12053,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.95\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.95\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_378\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.577\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.577\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.576\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1569_156B2cd33843b73a7615133c2e75943a7659678ac7b6c5d0dce039a6e131e9a304a5\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_379\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_379\ => 
@@ -12107,14 +12138,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_385\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num499\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.587\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt64 remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98;
+                        -- Int64 remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98 = (long)((ulong)num32);
+                        -- remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98 = (long)((ulong)num32);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\ := signed((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\ := signed((SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num500 = num463 - num463 / remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98 * remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98;
+                        -- num500 = num463 - num463 / remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98 * remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_386\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12127,10 +12158,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.97\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.97\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_387\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.589\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandbd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.589\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.588\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand160D_1610bd5cc7459cc3f98689ba367bd824087bee724a8099b69b2b6931cfc2778b1d98\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_388\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_388\ => 
@@ -12212,14 +12243,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_394\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num509\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.599\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e;
+                        -- Int64 remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e = (long)input;
+                        -- remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e = (long)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num510 = num463 - num463 / remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e * remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e;
+                        -- num510 = num463 - num463 / remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e * remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_395\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12232,10 +12263,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.99\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.99\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_396\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.601\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand0ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.601\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.600\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand16B1_16B30ba744be4fb26cb2717115dd5e2efa0441fb6410b02c815f9d8e45edd7bf4b2e\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_397\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_397\ => 
@@ -12317,14 +12348,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_403\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num519\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.611\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt64 remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271;
+                        -- Int64 remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271 = (long)((ulong)input);
+                        -- remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271 = (long)((ulong)input);
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\ := signed((ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64)));
                         -- The following section was transformed from the .NET statement below:
-                        -- num520 = num463 - num463 / remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271 * remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271;
+                        -- num520 = num463 - num463 / remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271 * remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_404\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12337,10 +12368,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.101\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.101\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num463\ / signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\);
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_405\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.613\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperande9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.613\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.612\ * signed(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1755_1758e9189de32f062c7bcfae38e0e651f7348034cb997ecae6bf145c9375f7ec3271\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_406\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_406\ => 
@@ -12542,14 +12573,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_423\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num542\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.637\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Byte remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175;
+                        -- UInt64 remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175 = (ulong)b2;
+                        -- remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175 = (ulong)b2;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.b2\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num543 = num536 - num536 / remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175 * remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175;
+                        -- num543 = num536 - num536 / remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175 * remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_424\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12562,10 +12593,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.105\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.105\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_425\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.639\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand2fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.639\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.638\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand18BF_18C02fb0af6c1e4571314d17aabf09951bfd94783cb1fb92650cb2a3d08283986175\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_426\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_426\ => 
@@ -12683,14 +12714,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_436\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num556\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.653\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt16 remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9;
+                        -- UInt64 remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9 = (ulong)num32;
+                        -- remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9 = (ulong)num32;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num32\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num557 = num536 - num536 / remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9 * remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9;
+                        -- num557 = num536 - num536 / remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9 * remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_437\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12703,10 +12734,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.107\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.107\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_438\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.655\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.655\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.654\ * SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand19A7_19A9ff0ec0d396ff6ec9af6116c42be6795042dda4db426ab111bf9d38136dd9e8d9\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_439\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_439\ => 
@@ -12806,14 +12837,14 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_447\ => 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num568\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.667\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe;
+                        -- UInt64 remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe = (ulong)input;
+                        -- remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe = (ulong)input;
                         -- 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.input\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- num569 = num536 - num536 / remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe * remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe;
+                        -- num569 = num536 - num536 / remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe * remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe;
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_448\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12826,10 +12857,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.clockCyclesWaitedForBinaryOperationResult.109\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.num536\ / ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64);
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_449\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.669\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ * ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperandacaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64), 64);
+                        \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.669\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.binaryOperationResult.668\ * ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0.remainderOperand1A6F_1A71acaa0479ccedb03e672b6576ca2a4a55b965e13e581361aaa6dc5ea6a98e1cfe\, 64), 64);
                         \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_450\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::AllBinaryOperatorExpressionVariations(Int32).0._State_450\ => 
@@ -13335,12 +13366,12 @@ begin
                         -- long num4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (System.Int16)((System.Int32)(a) * (System.Int32)(b));
+                        -- num = (Int16)((Int32)(a) * (Int32)(b));
                         -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := SmartResize(SmartResize((\CastingCases::NumberCasting(Int16,Int16).0.a\), 32) * SmartResize((\CastingCases::NumberCasting(Int16,Int16).0.b\), 32), 16);
                         \CastingCases::NumberCasting(Int16,Int16).0.num\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (int)((System.Int32)(a) * (System.Int32)(b));
+                        -- num2 = (int)((Int32)(a) * (Int32)(b));
                         -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := SmartResize(SmartResize((\CastingCases::NumberCasting(Int16,Int16).0.a\), 32) * SmartResize((\CastingCases::NumberCasting(Int16,Int16).0.b\), 32), 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
@@ -14955,6 +14986,85 @@ begin
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 state machine start
+    \ObjectUsingCases::ReferenceAssignment(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0._State\: \ObjectUsingCases::ReferenceAssignment(Int32).0._States\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\;
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Alias \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\ : \Hast.TestInputs.Various.ObjectUsingCases/MyClass\ is \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\ <= false;
+                \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\;
+                \ObjectUsingCases::ReferenceAssignment(Int32).0.input\ := to_signed(0, 32);
+                \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+            else 
+                case \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ is 
+                    when \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ = true) then 
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::ReferenceAssignment(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ = true) then 
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\ <= true;
+                        else 
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\ <= false;
+                            \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::ReferenceAssignment(Int32).0._State_2\ => 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.input\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ObjectUsingCases.MyClass myClass;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ObjectUsingCases.MyClass myClass2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = new ObjectUsingCases.MyClass {
+                        -- 
+                        -- };
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\IsNull\ := false;
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = input;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass2 = myClass;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = myClass.MyProperty + 1;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ + to_signed(1, 32);
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass2.MyProperty = myClass2.MyProperty + 1;
+                        -- 
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\.\MyProperty\ + to_signed(1, 32);
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass2\.\MyProperty\ := \ObjectUsingCases::ReferenceAssignment(Int32).0.binaryOperationResult.1\;
+                        \ObjectUsingCases::ReferenceAssignment(Int32).0._State\ := \ObjectUsingCases::ReferenceAssignment(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32).0 state machine end
+
+
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 state machine start
     \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._StateMachine\: process (\Clock\) 
         Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\: \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._States\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\;
@@ -15110,7 +15220,7 @@ begin
     \ParallelCases/Calculator::IsEven().0._StateMachine\: process (\Clock\) 
         Variable \ParallelCases/Calculator::IsEven().0._State\: \ParallelCases/Calculator::IsEven().0._States\ := \ParallelCases/Calculator::IsEven().0._State_0\;
         Variable \ParallelCases/Calculator::IsEven().0.this\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
-        Variable \ParallelCases/Calculator::IsEven().0.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/Calculator::IsEven().0.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -15122,7 +15232,7 @@ begin
                 \ParallelCases/Calculator::IsEven().0._Finished\ <= false;
                 \ParallelCases/Calculator::IsEven().0.return\ <= false;
                 \ParallelCases/Calculator::IsEven().0._State\ := \ParallelCases/Calculator::IsEven().0._State_0\;
-                \ParallelCases/Calculator::IsEven().0.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := to_unsigned(0, 32);
+                \ParallelCases/Calculator::IsEven().0.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().0.binaryOperationResult.2\ := to_unsigned(0, 32);
@@ -15151,18 +15261,18 @@ begin
                     when \ParallelCases/Calculator::IsEven().0._State_2\ => 
                         \ParallelCases/Calculator::IsEven().0.this\ := \ParallelCases/Calculator::IsEven().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt32 remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1;
+                        -- UInt32 remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 = @this.Number;
+                        -- remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 = @this.Number;
                         -- 
-                        \ParallelCases/Calculator::IsEven().0.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := \ParallelCases/Calculator::IsEven().0.this\.\Number\;
+                        \ParallelCases/Calculator::IsEven().0.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := \ParallelCases/Calculator::IsEven().0.this\.\Number\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 - remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 / 2u * 2u == 0u;
+                        -- return remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 - remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 / 2u * 2u == 0u;
                         -- 
-                        \ParallelCases/Calculator::IsEven().0.binaryOperationResult.0\ := \ParallelCases/Calculator::IsEven().0.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ / to_unsigned(2, 32);
+                        \ParallelCases/Calculator::IsEven().0.binaryOperationResult.0\ := \ParallelCases/Calculator::IsEven().0.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ / to_unsigned(2, 32);
                         \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\ := SmartResize(\ParallelCases/Calculator::IsEven().0.binaryOperationResult.0\ * to_unsigned(2, 32), 32);
-                        \ParallelCases/Calculator::IsEven().0.binaryOperationResult.2\ := \ParallelCases/Calculator::IsEven().0.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ - \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\;
+                        \ParallelCases/Calculator::IsEven().0.binaryOperationResult.2\ := \ParallelCases/Calculator::IsEven().0.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ - \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\;
                         \ParallelCases/Calculator::IsEven().0.binaryOperationResult.3\ := \ParallelCases/Calculator::IsEven().0.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \ParallelCases/Calculator::IsEven().0.return\ <= \ParallelCases/Calculator::IsEven().0.binaryOperationResult.3\;
                         \ParallelCases/Calculator::IsEven().0._State\ := \ParallelCases/Calculator::IsEven().0._State_1\;
@@ -15178,7 +15288,7 @@ begin
     \ParallelCases/Calculator::IsEven().1._StateMachine\: process (\Clock\) 
         Variable \ParallelCases/Calculator::IsEven().1._State\: \ParallelCases/Calculator::IsEven().1._States\ := \ParallelCases/Calculator::IsEven().1._State_0\;
         Variable \ParallelCases/Calculator::IsEven().1.this\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
-        Variable \ParallelCases/Calculator::IsEven().1.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/Calculator::IsEven().1.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().1.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -15190,7 +15300,7 @@ begin
                 \ParallelCases/Calculator::IsEven().1._Finished\ <= false;
                 \ParallelCases/Calculator::IsEven().1.return\ <= false;
                 \ParallelCases/Calculator::IsEven().1._State\ := \ParallelCases/Calculator::IsEven().1._State_0\;
-                \ParallelCases/Calculator::IsEven().1.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := to_unsigned(0, 32);
+                \ParallelCases/Calculator::IsEven().1.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().1.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().1.binaryOperationResult.2\ := to_unsigned(0, 32);
@@ -15219,18 +15329,18 @@ begin
                     when \ParallelCases/Calculator::IsEven().1._State_2\ => 
                         \ParallelCases/Calculator::IsEven().1.this\ := \ParallelCases/Calculator::IsEven().1.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt32 remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1;
+                        -- UInt32 remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 = @this.Number;
+                        -- remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 = @this.Number;
                         -- 
-                        \ParallelCases/Calculator::IsEven().1.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := \ParallelCases/Calculator::IsEven().1.this\.\Number\;
+                        \ParallelCases/Calculator::IsEven().1.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := \ParallelCases/Calculator::IsEven().1.this\.\Number\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 - remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 / 2u * 2u == 0u;
+                        -- return remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 - remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 / 2u * 2u == 0u;
                         -- 
-                        \ParallelCases/Calculator::IsEven().1.binaryOperationResult.0\ := \ParallelCases/Calculator::IsEven().1.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ / to_unsigned(2, 32);
+                        \ParallelCases/Calculator::IsEven().1.binaryOperationResult.0\ := \ParallelCases/Calculator::IsEven().1.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ / to_unsigned(2, 32);
                         \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\ := SmartResize(\ParallelCases/Calculator::IsEven().1.binaryOperationResult.0\ * to_unsigned(2, 32), 32);
-                        \ParallelCases/Calculator::IsEven().1.binaryOperationResult.2\ := \ParallelCases/Calculator::IsEven().1.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ - \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\;
+                        \ParallelCases/Calculator::IsEven().1.binaryOperationResult.2\ := \ParallelCases/Calculator::IsEven().1.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ - \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\;
                         \ParallelCases/Calculator::IsEven().1.binaryOperationResult.3\ := \ParallelCases/Calculator::IsEven().1.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \ParallelCases/Calculator::IsEven().1.return\ <= \ParallelCases/Calculator::IsEven().1.binaryOperationResult.3\;
                         \ParallelCases/Calculator::IsEven().1._State\ := \ParallelCases/Calculator::IsEven().1._State_1\;
@@ -15246,7 +15356,7 @@ begin
     \ParallelCases/Calculator::IsEven().2._StateMachine\: process (\Clock\) 
         Variable \ParallelCases/Calculator::IsEven().2._State\: \ParallelCases/Calculator::IsEven().2._States\ := \ParallelCases/Calculator::IsEven().2._State_0\;
         Variable \ParallelCases/Calculator::IsEven().2.this\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
-        Variable \ParallelCases/Calculator::IsEven().2.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/Calculator::IsEven().2.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/Calculator::IsEven().2.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -15258,7 +15368,7 @@ begin
                 \ParallelCases/Calculator::IsEven().2._Finished\ <= false;
                 \ParallelCases/Calculator::IsEven().2.return\ <= false;
                 \ParallelCases/Calculator::IsEven().2._State\ := \ParallelCases/Calculator::IsEven().2._State_0\;
-                \ParallelCases/Calculator::IsEven().2.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := to_unsigned(0, 32);
+                \ParallelCases/Calculator::IsEven().2.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().2.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases/Calculator::IsEven().2.binaryOperationResult.2\ := to_unsigned(0, 32);
@@ -15287,18 +15397,18 @@ begin
                     when \ParallelCases/Calculator::IsEven().2._State_2\ => 
                         \ParallelCases/Calculator::IsEven().2.this\ := \ParallelCases/Calculator::IsEven().2.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- System.UInt32 remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1;
+                        -- UInt32 remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 = @this.Number;
+                        -- remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 = @this.Number;
                         -- 
-                        \ParallelCases/Calculator::IsEven().2.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := \ParallelCases/Calculator::IsEven().2.this\.\Number\;
+                        \ParallelCases/Calculator::IsEven().2.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ := \ParallelCases/Calculator::IsEven().2.this\.\Number\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 - remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 / 2u * 2u == 0u;
+                        -- return remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 - remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1 / 2u * 2u == 0u;
                         -- 
-                        \ParallelCases/Calculator::IsEven().2.binaryOperationResult.0\ := \ParallelCases/Calculator::IsEven().2.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ / to_unsigned(2, 32);
+                        \ParallelCases/Calculator::IsEven().2.binaryOperationResult.0\ := \ParallelCases/Calculator::IsEven().2.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ / to_unsigned(2, 32);
                         \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\ := SmartResize(\ParallelCases/Calculator::IsEven().2.binaryOperationResult.0\ * to_unsigned(2, 32), 32);
-                        \ParallelCases/Calculator::IsEven().2.binaryOperationResult.2\ := \ParallelCases/Calculator::IsEven().2.remainderOperandfdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ - \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\;
+                        \ParallelCases/Calculator::IsEven().2.binaryOperationResult.2\ := \ParallelCases/Calculator::IsEven().2.remainderOperand00_06fdd3edde7d84c3ebe8167fbdbfc8b3ada4fd7309504ff3b643482605d2284fc1\ - \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\;
                         \ParallelCases/Calculator::IsEven().2.binaryOperationResult.3\ := \ParallelCases/Calculator::IsEven().2.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \ParallelCases/Calculator::IsEven().2.return\ <= \ParallelCases/Calculator::IsEven().2.binaryOperationResult.3\;
                         \ParallelCases/Calculator::IsEven().2._State\ := \ParallelCases/Calculator::IsEven().2._State_1\;
@@ -16341,6 +16451,84 @@ begin
     -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 state machine start
+    \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._StateMachine\: process (\Clock\) 
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\: \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._States\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\;
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num3\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\ <= false;
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\;
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num\ := to_unsigned(0, 32);
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num2\ := to_unsigned(0, 32);
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num3\ := to_unsigned(0, 64);
+                \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num4\ := to_unsigned(0, 64);
+            else 
+                case \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ is 
+                    when \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\ = true) then 
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\ = true) then 
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\ <= true;
+                        else 
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\ <= false;
+                            \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 4294836225u;
+                        -- 
+                        -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num\ := "11111111111111100000000000000001";
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 4294836229u;
+                        -- 
+                        -- Since the integer literal 4294836229 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000101).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num2\ := "11111111111111100000000000000101";
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 4294883355u;
+                        -- 
+                        -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num3\ := "11111111111111101011100000011011";
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 4294883359uL;
+                        -- 
+                        -- Since the integer literal 4294883359 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011111).
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0.num4\ := "0000000000000000000000000000000011111111111111101011100000011111";
+                        \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State\ := \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -16371,9 +16559,11 @@ begin
                 \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -16533,24 +16723,38 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 22 => 
+                            if (\Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 23 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 23 => 
+                        when 24 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 24 => 
+                        when 25 => 
                             if (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 26 => 
+                            if (\Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ = \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -17295,6 +17499,13 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\ <= \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::ReferenceAssignment(System.Int32) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._Started\ <= \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\;
@@ -17314,5 +17525,12 @@ begin
     \UnaryCases::IncrementDecrement(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\;
     \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\ <= \UnaryCases::IncrementDecrement(Int32).0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals() start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Started\ <= \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Started.0\;
+    \Hast::ExternalInvocationProxy().WronglyDecompiledCases::IncorrectlyDecompiledLiterals()._Finished.0\ <= \WronglyDecompiledCases::IncorrectlyDecompiledLiterals().0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.WronglyDecompiledCases::IncorrectlyDecompiledLiterals() end
 
 end Imp;

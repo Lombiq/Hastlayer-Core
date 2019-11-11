@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Hast.Common.Helpers;
+﻿using Hast.Common.Helpers;
 using Hast.Layer;
+using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
@@ -14,10 +9,14 @@ using Hast.Transformer.Services.ConstantValuesSubstitution;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.Ast.Transforms;
-using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard.FileSystems.AppData;
 using Orchard.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer
 {
@@ -49,7 +48,11 @@ namespace Hast.Transformer
         private readonly IMethodInliner _methodInliner;
         private readonly IObjectInitializerExpander _objectInitializerExpander;
         private readonly ITaskBodyInvocationInstanceCountsSetter _taskBodyInvocationInstanceCountsSetter;
+        private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
         private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
+        private readonly IDeviceDriverSelector _deviceDriverSelector;
+        private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
+        private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
 
 
         public DefaultTransformer(
@@ -79,7 +82,11 @@ namespace Hast.Transformer
             IMethodInliner methodInliner,
             IObjectInitializerExpander objectInitializerExpander,
             ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
-            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster)
+            ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
+            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
+            IDeviceDriverSelector deviceDriverSelector,
+            IDecompilationErrorsFixer decompilationErrorsFixer,
+            IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -107,7 +114,11 @@ namespace Hast.Transformer
             _methodInliner = methodInliner;
             _objectInitializerExpander = objectInitializerExpander;
             _taskBodyInvocationInstanceCountsSetter = taskBodyInvocationInstanceCountsSetter;
+            _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
             _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
+            _deviceDriverSelector = deviceDriverSelector;
+            _decompilationErrorsFixer = decompilationErrorsFixer;
+            _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
         }
 
 
@@ -221,7 +232,20 @@ namespace Hast.Transformer
                 // more complicated.
                 .Without("DeclareVariables")
 
-                // Removes empty ctors or ctors that can be substituted with field initializers.
+                // Removes empty ctors or ctors that can be substituted with field initializers. Also breaks the ctors
+                // of compiler-generated classes created from F# lambdas from by converting from this:
+                //     public int input;
+                //     public Run@32 (int input)
+                //     {
+                //         this.input = input;
+                //         base..ctor();
+                //     }
+                //
+                // To this:
+                //     public int input = input;
+                //     public Run@32 (int input)
+                //     {
+                //     }
                 //.Without("ConvertConstructorCallIntoInitializer")
 
                 // Converts decimal const fields to more readable variants, e.g. this:
@@ -253,12 +277,14 @@ namespace Hast.Transformer
 
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
+            _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasie(syntaxTree);
 
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
+            _decompilationErrorsFixer.FixDecompilationErrors(syntaxTree);
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
             _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
@@ -274,8 +300,18 @@ namespace Hast.Transformer
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
-            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree);
-            var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
+            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
+
+            var preConfiguredArrayLengths = configuration
+                .TransformerConfiguration()
+                .ArrayLengths
+                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
+            var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
+            if (transformerConfiguration.EnableConstantSubstitution)
+            {
+                _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, arraySizeHolder, configuration); 
+            }
+
             // Needs to run after const substitution.
             _taskBodyInvocationInstanceCountsSetter.SetTaskBodyInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -292,9 +328,16 @@ namespace Hast.Transformer
 
             if (transformerConfiguration.UseSimpleMemory)
             {
-                CheckSimpleMemoryUsage(syntaxTree);
+                _simpleMemoryUsageVerifier.VerifySimpleMemoryUsage(syntaxTree);
             }
 
+            var deviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName);
+
+            if (deviceDriver == null)
+            {
+                throw new InvalidOperationException(
+                    "No device driver with the name " + configuration.DeviceName + " was found.");
+            }
 
             var context = new TransformationContext
             {
@@ -302,7 +345,8 @@ namespace Hast.Transformer
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
-                ArraySizeHolder = arraySizeHolder
+                ArraySizeHolder = arraySizeHolder,
+                DeviceDriver = deviceDriver
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
@@ -313,33 +357,6 @@ namespace Hast.Transformer
             }
 
             return _engine.Transform(context);
-        }
-
-
-        private static void CheckSimpleMemoryUsage(SyntaxTree syntaxTree)
-        {
-            foreach (var type in syntaxTree.GetAllTypeDeclarations())
-            {
-                foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
-                {
-                    if (member is MethodDeclaration method)
-                    {
-                        var methodName = member.GetFullName();
-
-                        if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
-                        {
-                            throw new InvalidOperationException(
-                                "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
-                        }
-
-                        if (method.Parameters.Count > 1)
-                        {
-                            throw new InvalidOperationException(
-                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
-                        }
-                    }
-                }
-            }
         }
 
 

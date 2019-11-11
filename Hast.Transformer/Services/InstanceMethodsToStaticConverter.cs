@@ -29,7 +29,7 @@ namespace Hast.Transformer.Services
             public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
             {
                 // Omitting DisplayClasses because those are handled separately.
-                if (methodDeclaration.GetFullName().IsDisplayClassMemberName()) return;
+                if (methodDeclaration.GetFullName().IsDisplayOrClosureClassMemberName()) return;
 
                 base.VisitMethodDeclaration(methodDeclaration);
 

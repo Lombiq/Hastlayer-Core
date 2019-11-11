@@ -37,7 +37,7 @@ namespace Hast.Transformer.Services
             {
                 var typeName = astType.GetFullName();
                 if (expression.Parent is AssignmentExpression ||
-                    typeName.IsDisplayClassName() ||
+                    typeName.IsDisplayOrClosureClassName() ||
                     // Omitting Funcs for now, as those are used in parallel code with Tasks and handled separately.
                     typeName == "System.Func`2")
                 {

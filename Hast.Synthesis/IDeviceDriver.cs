@@ -12,6 +12,7 @@ namespace Hast.Synthesis
     /// </remarks>
     public interface IDeviceDriver : IDeviceManifestProvider
     {
+        string ToolChainName { get; }
         decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned);
         decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned);
     }

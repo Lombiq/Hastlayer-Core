@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -94,6 +94,15 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return _states.Count - 1;
         }
 
+        public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling)
+        {
+            _multiCycleOperations.Add(new MultiCycleOperation
+            {
+                OperationResultReference = operationResultReference,
+                RequiredClockCyclesCeiling = requiredClockCyclesCeiling
+            });
+        }
+
         public override IVhdlElement BuildDeclarations()
         {
             for (int i = 0; i < _states.Count; i++)
@@ -137,6 +146,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
             public IBlockElement Body { get; set; }
             public decimal RequiredClockCycles { get; set; }
+        }
+
+        private class MultiCycleOperation : IMultiCycleOperation
+        {
+            public IDataObject OperationResultReference { get; set; }
+            public int RequiredClockCyclesCeiling { get; set; }
         }
     }
 }

@@ -24,6 +24,14 @@
             VoidMethod(customObject);
         }
 
+        public void ReferenceAssignment(int input)
+        {
+            var customObject1 = new MyClass { MyProperty = input };
+            var customObject2 = customObject1;
+            customObject1.MyProperty += 1;
+            customObject2.MyProperty += 1;
+        }
+
 
         private void VoidMethod(MyClass myClass)
         {
@@ -35,7 +43,6 @@
 
                 if (myClass.MyProperty == 10) return;
             }
-
 
             myClass.MyProperty = 5;
         }

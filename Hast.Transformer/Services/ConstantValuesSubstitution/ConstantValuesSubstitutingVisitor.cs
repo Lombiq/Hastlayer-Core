@@ -101,6 +101,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // mess up the AST upwards.
             if (ConstantValueSubstitutionHelper.IsMethodInvocation(memberReferenceExpression)) return;
 
+            // Is the target an array or some other indexer? We don't handle those.
+            if (memberReferenceExpression.Target is IndexerExpression) return;
+
             if (memberReferenceExpression.IsArrayLengthAccess())
             {
                 var arraySize = _arraySizeHolder.GetSize(memberReferenceExpression.Target);
@@ -125,7 +128,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression); 
         }
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -150,9 +153,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (ConstantValueSubstitutionHelper.IsInWhile(ifElseStatement)) return;
 
-            var primitiveCondition = ifElseStatement.Condition as PrimitiveExpression;
-
-            if (primitiveCondition == null) return;
+            if (!(ifElseStatement.Condition is PrimitiveExpression primitiveCondition)) return;
 
             void replaceIfElse(Statement branchStatement)
             {
@@ -250,7 +251,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            base.VisitChildren(node);
+            // Attributes can slip in here but we don't care about those.
+            if (!(node is ICSharpCode.NRefactory.CSharp.Attribute))
+            {
+                base.VisitChildren(node); 
+            }
         }
 
 

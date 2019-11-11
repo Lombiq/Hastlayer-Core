@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Hast.VhdlBuilder.Representation.Expression;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -8,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <summary>
         /// Name of the object that the alias is created for.
         /// </summary>
-        public string ObjectName { get; set; }
+        public IDataObject AliasedObject { get; set; }
 
 
         public Alias()
@@ -19,12 +20,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
-                "alias " +
+                "Alias " +
                 vhdlGenerationOptions.ShortenName(Name) +
                 " : " +
                 DataType.ToReference().ToVhdl(vhdlGenerationOptions) +
                 " is " +
-                vhdlGenerationOptions.ShortenName(ObjectName),
+                AliasedObject.ToVhdl(vhdlGenerationOptions),
                 vhdlGenerationOptions);
     }
 }

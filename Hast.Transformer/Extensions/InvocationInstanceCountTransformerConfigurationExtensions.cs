@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Hast.Transformer.Abstractions.Configuration;
+using ICSharpCode.NRefactory.CSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hast.Transformer.Abstractions.Configuration;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
 
 namespace Hast.Common.Configuration
 {
@@ -15,7 +14,7 @@ namespace Hast.Common.Configuration
         {
             var fullName = entity.GetFullName();
             var simpleName = entity.GetSimpleName();
-            var isDisplayClassMember = fullName.IsDisplayClassMemberName();
+            var isDisplayClassMember = fullName.IsDisplayOrClosureClassMemberName();
             var isIsInlineCompilerGeneratedMethod = fullName.IsInlineCompilerGeneratedMethodName();
 
             if (!isDisplayClassMember && !isIsInlineCompilerGeneratedMethod)
@@ -43,7 +42,7 @@ namespace Hast.Common.Configuration
                         .FindFirstParentTypeDeclaration(); // The parent type.
 
                     compilerGeneratedMembers = parentType.Members
-                        .Where(member => member.GetFullName().IsDisplayClassName())
+                        .Where(member => member.GetFullName().IsDisplayOrClosureClassName())
                         .SelectMany(displayClass => ((TypeDeclaration)displayClass).Members);
                 }
                 else
@@ -94,17 +93,16 @@ namespace Hast.Common.Configuration
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
                 // Only dealing with method references.
-                if (memberReferenceExpression.Annotation<MethodDefinition>() == null) return;
+                if (!memberReferenceExpression.IsMethodReference()) return;
 
                 var memberFullName = memberReferenceExpression.GetMemberFullName();
 
-                if (!memberFullName.IsDisplayClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
+                if (!memberFullName.IsDisplayOrClosureClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
                 {
                     return;
                 }
 
-                EntityDeclaration member;
-                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out member))
+                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out EntityDeclaration member))
                 {
                     if (member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
                     {
@@ -122,7 +120,7 @@ namespace Hast.Common.Configuration
                         });
 
                         _lambdaCounts[parentMember]++;
-                    } 
+                    }
                 }
             }
         }

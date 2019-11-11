@@ -10,6 +10,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     /// </summary>
     public interface IConstantValuesSubstitutor : IDependency
     {
-        IArraySizeHolder SubstituteConstantValues(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        void SubstituteConstantValues(
+            SyntaxTree syntaxTree,
+            IArraySizeHolder arraySizeHolder,
+            IHardwareGenerationConfiguration configuration);
     }
 }

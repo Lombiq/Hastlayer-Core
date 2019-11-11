@@ -57,6 +57,17 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
         [Test]
+        public async Task InvalidHardwareEntryPointsArePrevented()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    typeof(NotSupportedException));
+            });
+        }
+
+        [Test]
         public async Task InvalidLanguageConstructsArePrevented()
         {
             await _host.Run<ITransformer>(async transformer =>
@@ -72,12 +83,16 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
         [Test]
-        public async Task InvalidHardwareEntryPointsArePrevented()
+        public async Task InvalidInvalidObjectUsingCasesArePrevented()
         {
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
+                    typeof(NotSupportedException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.SelfReferencingType()),
                     typeof(NotSupportedException));
             });
         }
@@ -85,14 +100,15 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
             ITransformer transformer,
-            Expression<Action<T>> expression)
+            Expression<Action<T>> expression,
+            bool useSimpleMemory = false)
         {
             return TransformAssembliesToVhdl(
                 transformer,
                 new[] { typeof(InvalidParallelCases).Assembly },
                 configuration =>
                 {
-                    configuration.TransformerConfiguration().UseSimpleMemory = false;
+                    configuration.TransformerConfiguration().UseSimpleMemory = useSimpleMemory;
                     configuration.AddHardwareEntryPointMethod(expression);
                 });
         }

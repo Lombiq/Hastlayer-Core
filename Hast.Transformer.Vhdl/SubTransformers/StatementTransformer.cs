@@ -62,7 +62,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // DisplayClass objects that generated for lambda expressions are put into variables like:
                     // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
                     // processing the corresponding ObjectCreateExpressions.
-                    variableType.GetFullName().IsDisplayClassName() ||
+                    variableType.GetFullName().IsDisplayOrClosureClassName() ||
                     variableSimpleType != null &&
                     (
                         // The TaskFactory object is saved to a variable like TaskFactory arg_97_0;
@@ -145,7 +145,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         binary.Left.Is<AssignmentExpression>(assignment =>
                             assignment.Right.Is<MemberReferenceExpression>(member =>
                                 member.Target.Is<TypeReferenceExpression>(typeReference =>
-                                    typeReference.Type.GetFullName().IsDisplayClassName())
+                                    typeReference.Type.GetFullName().IsDisplayOrClosureClassName())
                                 ||
                                 member.Target.Is<IdentifierExpression>(identifier =>
                                     scope.VariableNameToDisplayClassNameMappings.ContainsKey(identifier.Identifier)))) &&

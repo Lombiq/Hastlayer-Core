@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using Hast.VhdlBuilder.Representation.Expression;
+﻿using Hast.VhdlBuilder.Representation.Expression;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -56,7 +56,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// double quotes.
         /// </summary>
         public virtual bool IsLiteralArrayType() =>
-            this == KnownDataTypes.String || Name == "bit_vector" || Name == "std_logic_vector";
+            this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector";
 
         public override bool Equals(object obj)
         {
