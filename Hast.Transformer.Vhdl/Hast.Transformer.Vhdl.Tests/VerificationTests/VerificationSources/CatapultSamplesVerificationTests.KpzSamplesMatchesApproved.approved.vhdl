@@ -125,8 +125,8 @@ use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
-        \DataIn\: In std_logic_vector(511 downto 0);
-        \DataOut\: Out std_logic_vector(511 downto 0);
+        \DataIn\: In std_logic_vector(31 downto 0);
+        \DataOut\: Out std_logic_vector(31 downto 0);
         \CellIndex\: Out integer;
         \ReadEnable\: Out boolean;
         \WriteEnable\: Out boolean;
@@ -151,9 +151,9 @@ entity Hast_IP is
     -- * Finished: Indicates whether the execution of a given hardware entry point member is complete. See the documentation of the Started port above on how it is used.
     -- * Reset: Synchronous reset.
     -- * Clock: The main clock.
-    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port depends on the hardware platform but is at least 32b. Inputs of the algorithm implemented in Hast_IP all come through this port.
-    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port depends on the hardware platform but is at least 32b. Outputs of the algorithm implemented in Hast_IP all go through this port.
-    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells. The value of CellIndex is always aligned to the width of the DataIn and DataOut ports, so e.g. with 128b data ports CellIndex will always contain a value which is a >= 0 integer multiple of 4 (since 128 / 32 = 4).
+    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Inputs of the algorithm implemented in Hast_IP all come through this port.
+    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Outputs of the algorithm implemented in Hast_IP all go through this port.
+    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells.
     -- * ReadEnable: Indicates whether a memory read operation is initiated. The process of a memory read is as following:
     --     1. ReadEnable is FALSE by default. It's set to TRUE when a memory read is started. CellIndex is set to the index of the memory cell to be read out.
     --     2. Waiting for ReadsDone to be TRUE.
@@ -257,7 +257,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0._Started\: boolean := false;
@@ -285,7 +285,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Started\: boolean := false;
@@ -309,7 +309,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Started\: boolean := false;
@@ -333,7 +333,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Started\: boolean := false;
@@ -694,7 +694,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
@@ -1106,8 +1106,8 @@ begin
     -- System.Void Hast.Samples.Kpz.Algorithms.KpzKernelsInterface::TestAdd(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \KpzKernelsInterface::TestAdd(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\: \KpzKernelsInterface::TestAdd(SimpleMemory).0._States\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_0\;
-        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
-        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -1172,11 +1172,11 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\(31 downto 0)) + ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\(31 downto 0));
+                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\) + ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\);
                             -- Begin SimpleMemory write.
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
+                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -1199,18 +1199,18 @@ begin
     \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\: \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._States\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1278,7 +1278,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\(31 downto 0)), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
@@ -1295,7 +1295,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\(31 downto 0)), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Random1\.\State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- @this.Random2 = new RandomMwc64X {
@@ -1324,7 +1324,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\(31 downto 0)), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
@@ -1341,7 +1341,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\(31 downto 0)), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Random2\.\State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
                             -- @this.TestMode = memory.ReadUInt32 (1) & 1u == 1u;
@@ -1362,7 +1362,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\(31 downto 0)) and to_unsigned(1, 32);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\) and to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ = to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\TestMode\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\;
                             -- The following section was transformed from the .NET statement below:
@@ -1384,7 +1384,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\NumberOfIterations\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\(31 downto 0));
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\NumberOfIterations\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1560,7 +1560,7 @@ begin
                         -- Begin SimpleMemory write.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\)));
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\)));
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\ => 
@@ -1598,7 +1598,7 @@ begin
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -1761,7 +1761,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\)) := ConvertStdLogicVectorToUInt32(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\)) := ConvertStdLogicVectorToUInt32(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- j = j + 1;
                             -- 
@@ -4676,32 +4676,32 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object5710de8b7e2689e6850aa23be6ccd4d58deeb47a56743d121bd86e7f546e2a9f\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -4737,7 +4737,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -5097,7 +5097,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num * 2;
                             -- 
@@ -5225,7 +5225,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object5710de8b7e2689e6850aa23be6ccd4d58deeb47a56743d121bd86e7f546e2a9f\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\(31 downto 0)), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object5710de8b7e2689e6850aa23be6ccd4d58deeb47a56743d121bd86e7f546e2a9f\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -5272,7 +5272,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -5312,7 +5312,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\Random2\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\(31 downto 0)), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\Random2\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -5338,7 +5338,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -5371,7 +5371,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\(31 downto 0)), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -5397,7 +5397,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -6163,7 +6163,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\);
                             -- The following section was transformed from the .NET statement below:
                             -- array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 
@@ -6726,7 +6726,7 @@ begin
                         -- Begin SimpleMemory write.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_60\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_60\ => 
@@ -7558,8 +7558,8 @@ use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
-        \DataIn\: In std_logic_vector(511 downto 0);
-        \DataOut\: Out std_logic_vector(511 downto 0);
+        \DataIn\: In std_logic_vector(31 downto 0);
+        \DataOut\: Out std_logic_vector(31 downto 0);
         \CellIndex\: Out integer;
         \ReadEnable\: Out boolean;
         \WriteEnable\: Out boolean;
@@ -7584,9 +7584,9 @@ entity Hast_IP is
     -- * Finished: Indicates whether the execution of a given hardware entry point member is complete. See the documentation of the Started port above on how it is used.
     -- * Reset: Synchronous reset.
     -- * Clock: The main clock.
-    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port depends on the hardware platform but is at least 32b. Inputs of the algorithm implemented in Hast_IP all come through this port.
-    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port depends on the hardware platform but is at least 32b. Outputs of the algorithm implemented in Hast_IP all go through this port.
-    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells. The value of CellIndex is always aligned to the width of the DataIn and DataOut ports, so e.g. with 128b data ports CellIndex will always contain a value which is a >= 0 integer multiple of 4 (since 128 / 32 = 4).
+    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Inputs of the algorithm implemented in Hast_IP all come through this port.
+    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Outputs of the algorithm implemented in Hast_IP all go through this port.
+    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells.
     -- * ReadEnable: Indicates whether a memory read operation is initiated. The process of a memory read is as following:
     --     1. ReadEnable is FALSE by default. It's set to TRUE when a memory read is started. CellIndex is set to the index of the memory cell to be read out.
     --     2. Waiting for ReadsDone to be TRUE.
@@ -7690,7 +7690,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernelsInterface::TestAdd(SimpleMemory).0._Started\: boolean := false;
@@ -7718,7 +7718,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Started\: boolean := false;
@@ -7742,7 +7742,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Started\: boolean := false;
@@ -7766,7 +7766,7 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Started\: boolean := false;
@@ -8118,7 +8118,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsParallelizedInterface/<>c::<ScheduleIterations>b__9_0(KpzKernelsTaskState).rawTaskState.parameter.Out.0\: \Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState\;
@@ -8440,8 +8440,8 @@ begin
     -- System.Void Hast.Samples.Kpz.Algorithms.KpzKernelsInterface::TestAdd(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \KpzKernelsInterface::TestAdd(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\: \KpzKernelsInterface::TestAdd(SimpleMemory).0._States\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_0\;
-        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
-        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -8506,11 +8506,11 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\(31 downto 0)) + ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\(31 downto 0));
+                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\) + ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\);
                             -- Begin SimpleMemory write.
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
+                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -8533,18 +8533,18 @@ begin
     \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\: \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._States\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -8612,7 +8612,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\(31 downto 0)), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
@@ -8629,7 +8629,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\(31 downto 0)), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Random1\.\State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- @this.Random2 = new RandomMwc64X {
@@ -8658,7 +8658,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\(31 downto 0)), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
@@ -8675,7 +8675,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\(31 downto 0)), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\Random2\.\State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
                             -- @this.TestMode = memory.ReadUInt32 (1) & 1u == 1u;
@@ -8696,7 +8696,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\(31 downto 0)) and to_unsigned(1, 32);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\) and to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ = to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\TestMode\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\;
                             -- The following section was transformed from the .NET statement below:
@@ -8718,7 +8718,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\NumberOfIterations\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\(31 downto 0));
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\NumberOfIterations\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8894,7 +8894,7 @@ begin
                         -- Begin SimpleMemory write.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\)));
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\)));
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\ => 
@@ -8932,7 +8932,7 @@ begin
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -9095,7 +9095,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\)) := ConvertStdLogicVectorToUInt32(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\)) := ConvertStdLogicVectorToUInt32(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- j = j + 1;
                             -- 
@@ -12486,32 +12486,32 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num25\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object5710de8b7e2689e6850aa23be6ccd4d58deeb47a56743d121bd86e7f546e2a9f\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\: unsigned(63 downto 0) := to_unsigned(0, 64);
@@ -12553,7 +12553,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -12919,7 +12919,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num * 2;
                             -- 
@@ -13047,7 +13047,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object5710de8b7e2689e6850aa23be6ccd4d58deeb47a56743d121bd86e7f546e2a9f\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\(31 downto 0)), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object5710de8b7e2689e6850aa23be6ccd4d58deeb47a56743d121bd86e7f546e2a9f\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -13094,7 +13094,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -13134,7 +13134,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\Random2\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\(31 downto 0)), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.i\)).\Random2\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -13160,7 +13160,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -13193,7 +13193,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\(31 downto 0)), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -13219,7 +13219,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = num3 + 1;
                             -- 
@@ -14040,7 +14040,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\(31 downto 0));
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num15\ := ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\);
                             -- The following section was transformed from the .NET statement below:
                             -- array [l].BramDx [m + n * 8] = num15 & 1u == 1u;
                             -- 
@@ -14603,7 +14603,7 @@ begin
                         -- Begin SimpleMemory write.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_62\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_62\ => 

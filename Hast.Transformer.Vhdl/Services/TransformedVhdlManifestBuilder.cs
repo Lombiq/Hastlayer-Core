@@ -181,8 +181,8 @@ namespace Hast.Transformer.Vhdl.Services
                             // the parent should be empty.
                             operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
                                 ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
-                                string.Empty, 
-                            operation.OperationResultReference, 
+                                string.Empty,
+                            operation.OperationResultReference,
                             operation.RequiredClockCyclesCeiling);
 
                         anyMultiCycleOperations = true;
@@ -206,7 +206,7 @@ namespace Hast.Transformer.Vhdl.Services
                             ItemName = hastIpArchitecture.Name,
                             ItemClass = "architecture",
                             Expression = sdcExpression
-                        })); 
+                        }));
                 }
             }
 
@@ -271,8 +271,7 @@ namespace Hast.Transformer.Vhdl.Services
             {
                 _simpleMemoryComponentBuilderLazy.Value.AddSimpleMemoryComponentsToArchitecture(
                     potentiallyInvokingArchitectureComponents,
-                    hastIpArchitecture,
-                    transformationContext);
+                    hastIpArchitecture);
             }
 
 
@@ -393,11 +392,11 @@ namespace Hast.Transformer.Vhdl.Services
 
                             // Records need to be created only for those types that are neither display classes, nor
                             // hardware entry point types or static types 
-                            if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() && 
+                            if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
                                 !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                                 !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
                             {
-                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext)); 
+                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
                             }
                             traverseTo = traverseTo.Where(n =>
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);

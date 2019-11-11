@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     public class SimpleMemoryOperationProxyBuilder : ISimpleMemoryOperationProxyBuilder
     {
-        public IArchitectureComponent BuildProxy(
-            IEnumerable<IArchitectureComponent> components,
-            ITransformationContext transformationContext)
+        public IArchitectureComponent BuildProxy(IEnumerable<IArchitectureComponent> components)
         {
             var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
 
@@ -34,14 +31,12 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                     Left = component.CreateSimpleMemoryReadEnableSignalReference(),
                     Operator = BinaryOperator.Or,
                     Right = component.CreateSimpleMemoryWriteEnableSignalReference()
-                },
-                transformationContext));
+                }));
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
                 SimpleMemoryPortNames.DataOut,
                 simpleMemoryUsingComponents,
-                component => component.CreateSimpleMemoryWriteEnableSignalReference(),
-                transformationContext));
+                component => component.CreateSimpleMemoryWriteEnableSignalReference()));
 
             signalsAssignmentBlock.Add(BuildConditionalOrPortAssignment(
                 SimpleMemoryPortNames.ReadEnable,
@@ -64,8 +59,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         private static ConditionalSignalAssignment BuildConditionalPortAssignment(
             string portName,
             IEnumerable<IArchitectureComponent> components,
-            Func<IArchitectureComponent, IVhdlElement> expressionBuilderForComponentsAssignment,
-            ITransformationContext transformationContext)
+            Func<IArchitectureComponent, IVhdlElement> expressionBuilderForComponentsAssignment)
         {
             var assignment = new ConditionalSignalAssignment
             {
@@ -94,9 +88,9 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
             assignment.Whens.Add(new SignalAssignmentWhen
             {
-                Value = portName == SimpleMemoryPortNames.CellIndex ? 
+                Value = portName == SimpleMemoryPortNames.CellIndex ?
                     KnownDataTypes.UnrangedInt.DefaultValue :
-                    SimpleMemoryTypes.DataSignalsDataTypeFromContext(transformationContext).DefaultValue
+                    SimpleMemoryTypes.DataSignalsDataType.DefaultValue
             });
 
 
@@ -111,7 +105,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             {
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
                 Expression = BinaryChainBuilder.BuildBinaryChain(
-                    components.Select(c => c.CreateSimpleMemorySignalReference(portName)), 
+                    components.Select(c => c.CreateSimpleMemorySignalReference(portName)),
                     BinaryOperator.Or)
             };
         }

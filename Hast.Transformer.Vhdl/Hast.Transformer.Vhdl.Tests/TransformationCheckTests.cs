@@ -97,17 +97,6 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
-        public async Task InvalidSimpleMemoryUsageIsPrevented()
-        {
-            await _host.Run<ITransformer>(async transformer =>
-            {
-                await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs<InvalidSimpleMemoryUsingCases>(transformer, c => c.BatchedReadCountIsNotConstant(null), true),
-                    typeof(NotSupportedException));
-            });
-        }
-
 
         private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
             ITransformer transformer,

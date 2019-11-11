@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Orchard;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     public interface ISimpleMemoryOperationProxyBuilder : IDependency
     {
-        IArchitectureComponent BuildProxy(
-            IEnumerable<IArchitectureComponent> components,
-            ITransformationContext transformationContext);
+        IArchitectureComponent BuildProxy(IEnumerable<IArchitectureComponent> components);
     }
 }

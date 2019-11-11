@@ -137,8 +137,8 @@ use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
-        \DataIn\: In std_logic_vector(511 downto 0);
-        \DataOut\: Out std_logic_vector(511 downto 0);
+        \DataIn\: In std_logic_vector(31 downto 0);
+        \DataOut\: Out std_logic_vector(31 downto 0);
         \CellIndex\: Out integer;
         \ReadEnable\: Out boolean;
         \WriteEnable\: Out boolean;
@@ -163,9 +163,9 @@ entity Hast_IP is
     -- * Finished: Indicates whether the execution of a given hardware entry point member is complete. See the documentation of the Started port above on how it is used.
     -- * Reset: Synchronous reset.
     -- * Clock: The main clock.
-    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port depends on the hardware platform but is at least 32b. Inputs of the algorithm implemented in Hast_IP all come through this port.
-    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port depends on the hardware platform but is at least 32b. Outputs of the algorithm implemented in Hast_IP all go through this port.
-    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells. The value of CellIndex is always aligned to the width of the DataIn and DataOut ports, so e.g. with 128b data ports CellIndex will always contain a value which is a >= 0 integer multiple of 4 (since 128 / 32 = 4).
+    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Inputs of the algorithm implemented in Hast_IP all come through this port.
+    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Outputs of the algorithm implemented in Hast_IP all go through this port.
+    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells.
     -- * ReadEnable: Indicates whether a memory read operation is initiated. The process of a memory read is as following:
     --     1. ReadEnable is FALSE by default. It's set to TRUE when a memory read is started. CellIndex is set to the index of the memory cell to be read out.
     --     2. Waiting for ReadsDone to be TRUE.
@@ -248,7 +248,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \Loopback::Run(SimpleMemory).0._Finished\: boolean := false;
     Signal \Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \Loopback::Run(SimpleMemory).0._Started\: boolean := false;
@@ -335,7 +335,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ParallelAlgorithm::Run(SimpleMemory).0._Finished\: boolean := false;
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -393,7 +393,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\: boolean := false;
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
@@ -1952,7 +1952,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Finished\: boolean := false;
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator/<>c__DisplayClass4_0::<EstimatePi>b__0(UInt32).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2007,7 +2007,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
@@ -2232,7 +2232,7 @@ architecture Imp of Hast_IP is
     Signal \MemoryContainer::GetInput().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \MemoryContainer::GetInput().0.this.parameter.Out\: \Hast.Samples.SampleAssembly.MemoryContainer\;
     Signal \MemoryContainer::GetInput().0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \MemoryContainer::GetInput().0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \MemoryContainer::GetInput().0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \MemoryContainer::GetInput().0._Started\: boolean := false;
@@ -2257,7 +2257,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\: boolean := false;
@@ -2301,7 +2301,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Started\: boolean := false;
@@ -2329,7 +2329,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2421,7 +2421,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2445,7 +2445,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2475,7 +2475,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2506,7 +2506,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2537,7 +2537,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2568,7 +2568,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2596,7 +2596,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2624,7 +2624,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2652,7 +2652,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2680,7 +2680,7 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._Finished\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\: signed(15 downto 0) := to_signed(0, 16);
@@ -2786,7 +2786,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._Finished\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
@@ -2923,7 +2923,7 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.Loopback::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \Loopback::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \Loopback::Run(SimpleMemory).0._State\: \Loopback::Run(SimpleMemory).0._States\ := \Loopback::Run(SimpleMemory).0._State_0\;
-        Variable \Loopback::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \Loopback::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2971,11 +2971,11 @@ begin
                             -- SimpleMemory read finished.
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Loopback::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToInt32(\Loopback::Run(SimpleMemory).0.dataIn.0\(31 downto 0)) + to_signed(1, 32);
+                            \Loopback::Run(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToInt32(\Loopback::Run(SimpleMemory).0.dataIn.0\) + to_signed(1, 32);
                             -- Begin SimpleMemory write.
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertInt32ToStdLogicVector(\Loopback::Run(SimpleMemory).0.binaryOperationResult.0\);
+                            \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Loopback::Run(SimpleMemory).0.binaryOperationResult.0\);
                             \Loopback::Run(SimpleMemory).0._State\ := \Loopback::Run(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -3653,7 +3653,7 @@ begin
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.arg_57_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3755,7 +3755,7 @@ begin
                             -- SimpleMemory read finished.
                             \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::input\ := ConvertStdLogicVectorToUInt32(\ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::input\ := ConvertStdLogicVectorToUInt32(\ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- array = new Task<uint>[280];
                             -- 
@@ -3902,7 +3902,7 @@ begin
                         -- Begin SimpleMemory write.
                         \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\ParallelAlgorithm::Run(SimpleMemory).0.num2\);
+                        \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ParallelAlgorithm::Run(SimpleMemory).0.num2\);
                         \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_9\ => 
@@ -3945,9 +3945,9 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\: \unsigned8_Array\(0 to 3) := (others => to_unsigned(0, 8));
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
@@ -3968,7 +3968,7 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\: integer range 0 to 24 := 0;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
@@ -4157,7 +4157,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := SmartResize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\(31 downto 0)), 16);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := SmartResize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = (ushort)memory.ReadUInt32 (1);
                             -- 
@@ -4177,7 +4177,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := SmartResize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\(31 downto 0)), 16);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := SmartResize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = memory.ReadInt32 (2);
                             -- 
@@ -4197,7 +4197,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := ConvertStdLogicVectorToInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\(31 downto 0));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := ConvertStdLogicVectorToInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- flag = num3 > 100;
                             -- 
@@ -16131,8 +16131,8 @@ begin
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.arg_6A_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
@@ -16243,7 +16243,7 @@ begin
                             -- SimpleMemory read finished.
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- <>c__DisplayClass4_.randomSeed = (ushort)memory.ReadUInt32 (1);
                             -- 
@@ -16263,7 +16263,7 @@ begin
                             -- SimpleMemory read finished.
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\(31 downto 0)), 16);
+                            \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator/<>c__DisplayClass4_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\), 16);
                             -- The following section was transformed from the .NET statement below:
                             -- <>c__DisplayClass4_.iterationsPerTask = num / 78u;
                             -- 
@@ -16428,7 +16428,7 @@ begin
                         -- Begin SimpleMemory write.
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num3\);
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_13\ => 
@@ -16466,7 +16466,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\: \Hast.Samples.SampleAssembly.NumberContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\: \Hast.Samples.SampleAssembly.MemoryContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -16585,7 +16585,7 @@ begin
                             -- SimpleMemory read finished.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- MemoryContainer object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508;
                             -- 
@@ -17002,7 +17002,7 @@ begin
                             -- Begin SimpleMemory write.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_29\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17591,7 +17591,7 @@ begin
     \MemoryContainer::GetInput().0._StateMachine\: process (\Clock\) 
         Variable \MemoryContainer::GetInput().0._State\: \MemoryContainer::GetInput().0._States\ := \MemoryContainer::GetInput().0._State_0\;
         Variable \MemoryContainer::GetInput().0.this\: \Hast.Samples.SampleAssembly.MemoryContainer\;
-        Variable \MemoryContainer::GetInput().0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \MemoryContainer::GetInput().0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17641,7 +17641,7 @@ begin
                             -- SimpleMemory read finished.
                             \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ <= false;
                             \MemoryContainer::GetInput().0.dataIn.0\ := \DataIn\;
-                            \MemoryContainer::GetInput().0.return\ <= ConvertStdLogicVectorToUInt32(\MemoryContainer::GetInput().0.dataIn.0\(31 downto 0));
+                            \MemoryContainer::GetInput().0.return\ <= ConvertStdLogicVectorToUInt32(\MemoryContainer::GetInput().0.dataIn.0\);
                             \MemoryContainer::GetInput().0._State\ := \MemoryContainer::GetInput().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17656,7 +17656,7 @@ begin
     \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -17736,7 +17736,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- uint number_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207;
                             -- 
@@ -17791,7 +17791,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_777cba073cbf1932f9b50973370f57c1c33d21d7f157fc2db79b90120cd24207\);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
@@ -17912,10 +17912,10 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -18010,7 +18010,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = 0;
                             -- 
@@ -18086,7 +18086,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\(31 downto 0));
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- uint number_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a;
                             -- 
@@ -18189,7 +18189,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\, 32);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_46475ced4b0f77f3af4c3c217fba1bf92aadc9144ff7621b1129fa4a750b5f5a\);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\ => 
@@ -18224,12 +18224,12 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\: boolean := false;
@@ -18330,7 +18330,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- array = new Task<bool>[30];
                             -- 
@@ -18445,7 +18445,7 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\(31 downto 0));
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- array [i] = Task.Factory.StartNew<bool> (new Func<object, bool> (this.<ParallelizedArePrimeNumbers>b__9_0), num3);
                             -- 
@@ -18538,7 +18538,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\, 32);
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\)));
+                        \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\)));
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_14\ => 
@@ -19066,7 +19066,7 @@ begin
     \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State\: \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._States\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_0\;
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -19112,7 +19112,7 @@ begin
                         -- Begin SimpleMemory write.
                         \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(to_unsigned(1, 32));
+                        \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(to_unsigned(1, 32));
                         \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_3\ => 
@@ -19135,7 +19135,7 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := SmartResize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\(31 downto 0)), 16);
+                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := SmartResize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (0, this.RecursivelyCalculateFibonacchiSeries (memory, number));
                             -- 
@@ -19153,7 +19153,7 @@ begin
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.return.0\);
+                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.return.0\);
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19176,7 +19176,7 @@ begin
     \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State\: \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._States\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_0\;
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -19222,7 +19222,7 @@ begin
                         -- Begin SimpleMemory write.
                         \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(to_unsigned(1, 32));
+                        \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(to_unsigned(1, 32));
                         \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_3\ => 
@@ -19245,7 +19245,7 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := SmartResize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\(31 downto 0)), 16);
+                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := SmartResize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 (0, this.RecursivelyCalculateFactorial (memory, number));
                             -- 
@@ -19263,7 +19263,7 @@ begin
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.return.0\);
+                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.return.0\);
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19288,7 +19288,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\: boolean := false;
@@ -19365,11 +19365,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -19492,7 +19492,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\: boolean := false;
@@ -19569,11 +19569,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -19696,7 +19696,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\: boolean := false;
@@ -19773,11 +19773,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -19900,7 +19900,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\: boolean := false;
@@ -19977,11 +19977,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -20104,7 +20104,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -20173,11 +20173,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -20278,7 +20278,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -20347,11 +20347,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -20452,7 +20452,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -20521,11 +20521,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -20626,7 +20626,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -20695,11 +20695,11 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\(31 downto 0)) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= true;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\(31 downto 0) <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -21014,18 +21014,18 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.0\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\: boolean := false;
@@ -21209,7 +21209,7 @@ begin
                             -- SimpleMemory read finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\ := \DataIn\;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\(31 downto 0));
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- i = 0;
                             -- 
@@ -21378,7 +21378,7 @@ begin
                             -- SimpleMemory read finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\ := \DataIn\;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\(31 downto 0));
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- j = j + 1;
                             -- 
@@ -21529,7 +21529,7 @@ begin
                             -- SimpleMemory read finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\ := \DataIn\;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\(31 downto 0));
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- k = k + 1;
                             -- 
@@ -21664,7 +21664,7 @@ begin
                         -- Begin SimpleMemory write.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, 32);
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ <= true;
-                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertInt32ToStdLogicVector(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\)));
+                        \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\)));
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_23\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_23\ => 

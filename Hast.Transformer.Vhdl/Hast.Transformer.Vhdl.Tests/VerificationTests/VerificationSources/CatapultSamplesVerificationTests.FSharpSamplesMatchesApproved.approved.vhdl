@@ -123,8 +123,8 @@ use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
-        \DataIn\: In std_logic_vector(511 downto 0);
-        \DataOut\: Out std_logic_vector(511 downto 0);
+        \DataIn\: In std_logic_vector(31 downto 0);
+        \DataOut\: Out std_logic_vector(31 downto 0);
         \CellIndex\: Out integer;
         \ReadEnable\: Out boolean;
         \WriteEnable\: Out boolean;
@@ -149,9 +149,9 @@ entity Hast_IP is
     -- * Finished: Indicates whether the execution of a given hardware entry point member is complete. See the documentation of the Started port above on how it is used.
     -- * Reset: Synchronous reset.
     -- * Clock: The main clock.
-    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port depends on the hardware platform but is at least 32b. Inputs of the algorithm implemented in Hast_IP all come through this port.
-    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port depends on the hardware platform but is at least 32b. Outputs of the algorithm implemented in Hast_IP all go through this port.
-    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells. The value of CellIndex is always aligned to the width of the DataIn and DataOut ports, so e.g. with 128b data ports CellIndex will always contain a value which is a >= 0 integer multiple of 4 (since 128 / 32 = 4).
+    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Inputs of the algorithm implemented in Hast_IP all come through this port.
+    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Outputs of the algorithm implemented in Hast_IP all go through this port.
+    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells.
     -- * ReadEnable: Indicates whether a memory read operation is initiated. The process of a memory read is as following:
     --     1. ReadEnable is FALSE by default. It's set to TRUE when a memory read is started. CellIndex is set to the index of the memory cell to be read out.
     --     2. Waiting for ReadsDone to be TRUE.
@@ -198,7 +198,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._Finished\: boolean := false;
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(511 downto 0) := (others => '0');
+    Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).indexObject.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -318,7 +318,7 @@ begin
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.array\: \signed32_Array\(0 to 279) := (others => to_signed(0, 32));
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(511 downto 0) := (others => '0');
+        Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.FSharpParallelAlgorithmContainer/Run@35::Invoke(Int32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
@@ -407,7 +407,7 @@ begin
                             -- SimpleMemory read finished.
                             \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\ := ConvertStdLogicVectorToInt32(\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\(31 downto 0));
+                            \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.input\ := ConvertStdLogicVectorToInt32(\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- array = new Task<int>[280];
                             -- 
@@ -535,7 +535,7 @@ begin
                         -- Begin SimpleMemory write.
                         \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\(31 downto 0) <= ConvertInt32ToStdLogicVector(\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.num\);
+                        \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0.num\);
                         \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State\ := \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \FSharpParallelAlgorithmContainer/FSharpParallelAlgorithm::Run(SimpleMemory).0._State_9\ => 

@@ -55,7 +55,6 @@
     <Compile Include="InvalidModel.cs" />
     <Compile Include="InvalidObjectUsingCases.cs" />
     <Compile Include="InvalidParallelCases.cs" />
-    <Compile Include="InvalidSimpleMemoryUsingCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

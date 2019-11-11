@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
@@ -19,30 +18,28 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
         public void AddSimpleMemoryComponentsToArchitecture(
             IEnumerable<IArchitectureComponent> invokingComponents,
-            Architecture architecture,
-            ITransformationContext transformationContext)
+            Architecture architecture)
         {
             // Proxying SimpleMemory operations
-            var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilder.BuildProxy(invokingComponents, transformationContext);
+            var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilder.BuildProxy(invokingComponents);
             architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
             architecture.Add(simpleMemoryProxyComponent.BuildBody());
 
 
             // Adding common ports
-            var dataSignalsDataType = SimpleMemoryTypes.DataSignalsDataTypeFromContext(transformationContext);
             var ports = architecture.Entity.Ports;
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId(),
                 Mode = PortMode.In,
-                DataType = dataSignalsDataType
+                DataType = SimpleMemoryTypes.DataSignalsDataType
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.DataOut.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
-                DataType = dataSignalsDataType
+                DataType = SimpleMemoryTypes.DataSignalsDataType
             });
 
             ports.Add(new Port

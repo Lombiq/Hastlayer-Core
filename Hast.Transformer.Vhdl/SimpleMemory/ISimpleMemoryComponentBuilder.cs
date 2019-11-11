@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Orchard;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
@@ -10,7 +9,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
     {
         void AddSimpleMemoryComponentsToArchitecture(
             IEnumerable<IArchitectureComponent> invokingComponents,
-            Architecture architecture,
-            ITransformationContext transformationContext);
+            Architecture architecture);
     }
 }

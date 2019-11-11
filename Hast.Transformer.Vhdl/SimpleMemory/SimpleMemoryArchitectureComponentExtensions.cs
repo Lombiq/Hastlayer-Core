@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
@@ -20,33 +20,33 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             return component.InternallyDrivenSignals.Any(signal => signal.Name == signalName);
         }
 
-        public static void AddSimpleMemorySignalsIfNew(this IArchitectureComponent component, uint dataBusWidthBytes)
+        public static void AddSimpleMemorySignalsIfNew(this IArchitectureComponent component)
         {
             if (component.AreSimpleMemorySignalsAdded()) return;
 
 
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
-                });
+            {
+                DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
+            });
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.DataSignalsDataType(dataBusWidthBytes),
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
-                });
+            {
+                DataType = SimpleMemoryTypes.DataSignalsDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
+            });
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.EnableSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable),
-                    InitialValue = Value.False
-                });
+            {
+                DataType = SimpleMemoryTypes.EnableSignalsDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable),
+                InitialValue = Value.False
+            });
             component.InternallyDrivenSignals.Add(new Signal
-                {
-                    DataType = SimpleMemoryTypes.EnableSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable),
-                    InitialValue = Value.False
-                });
+            {
+                DataType = SimpleMemoryTypes.EnableSignalsDataType,
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable),
+                InitialValue = Value.False
+            });
         }
 
         public static DataObjectReference CreateSimpleMemoryCellIndexSignalReference(this IArchitectureComponent component) =>
@@ -62,12 +62,12 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.WriteEnable);
 
         public static DataObjectReference CreateSimpleMemorySignalReference(
-            this IArchitectureComponent component, 
+            this IArchitectureComponent component,
             string simpleMemoryPortName) =>
             component.CreateSimpleMemorySignalName(simpleMemoryPortName).ToVhdlSignalReference();
 
         public static string CreateSimpleMemorySignalName(
-            this IArchitectureComponent component, 
+            this IArchitectureComponent component,
             string simpleMemoryPortName) =>
             component.CreatePrefixedSegmentedObjectName("SimpleMemory", simpleMemoryPortName).ToExtendedVhdlId();
     }

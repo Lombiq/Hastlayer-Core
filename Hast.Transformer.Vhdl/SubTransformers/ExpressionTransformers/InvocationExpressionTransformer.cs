@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -13,6 +9,10 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -74,8 +74,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             const string lastWriteFinishedKey = "SimpleMemory.LastWriteFinsihedStateIndex";
             const string lastReadFinishedKey = "SimpleMemory.LastReadFinsihedStateIndex";
 
-            var dataBusWidthBytes = context.TransformationContext.DeviceDriver.DeviceManifest.DataBusWidthBytes;
-            stateMachine.AddSimpleMemorySignalsIfNew(dataBusWidthBytes);
+            stateMachine.AddSimpleMemorySignalsIfNew();
 
             var memberName = targetMemberReference.MemberName;
 
@@ -103,7 +102,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             // Setting CellIndex
-            var dataBusCellCount = dataBusWidthBytes / Transformer.Abstractions.SimpleMemory.SimpleMemory.MemoryCellSizeBytes;
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
@@ -127,29 +125,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
             {
-                string dataConversionInvocationTarget = null;
-
                 // Using the built-in conversion functions to handle known data types.
                 if (operationDataType == "UInt32" ||
                     operationDataType == "Int32" ||
                     operationDataType == "Boolean" ||
                     operationDataType == "Char")
                 {
+                    string dataConversionInvocationTarget;
                     if (directionIsLogicVectorToType)
                     {
                         dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operationDataType;
-
-                        if (dataBusCellCount != 1)
-                        {
-                            // NOTE: this is here temporarily until we actually support multi-cell read/writes.
-                            variableToConvert = new ArraySlice
-                            {
-                                ArrayReference = (IDataObject)variableToConvert,
-                                IsDownTo = true,
-                                IndexFrom = 31,
-                                IndexTo = 0
-                            }; 
-                        }
                     }
                     else
                     {
@@ -220,92 +205,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
                 else
                 {
-                    // The data to write is conventionally the second parameter.
-                    var dataArgument = expression.Arguments.Skip(1).Single();
-                    var arrayLength = dataArgument.GetActualTypeReference().IsArray ?
-                        context.TransformationContext.ArraySizeHolder.GetSizeOrThrow(dataArgument).Length :
-                        -1;
-
-                    if (arrayLength == -1)
+                    currentBlock.Add(new Assignment
                     {
-                        // The data to write is a NOT an array.
-
-                        if (dataBusCellCount == 1)
-                        {
-                            // The platform doesn't support simultaneous read/write of multiple cells, so nothing to do,
-                            // one cell will be written.
-
-                            currentBlock.Add(new Assignment
-                            {
-                                AssignTo = dataOutReference,
-                                // The data to write is conventionally the second parameter.
-                                Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
-                            });
-                        }
-                        else
-                        {
-                            // The platform supports simultaneous read/write of multiple cells but since the data is a
-                            // single cell first the whole segment needs to be read, then the affected cell overwritten,
-                            // and finally the whole segment written.
-                            // NOTE: this is only for future use, not the case currently.
-
-                            // NOTE: this is here temporarily until we actually support multi-cell read/writes.
-                            currentBlock.Add(new Assignment
-                            {
-                                AssignTo = new ArraySlice
-                                {
-                                    ArrayReference = dataOutReference,
-                                    IsDownTo = true,
-                                    IndexFrom = 31,
-                                    IndexTo = 0
-                                },
-                                // The data to write is conventionally the second parameter.
-                                Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
-                            });
-                        }
-                    }
-                    else
-                    {
-                        // The data to write is an array.
-                        var arrayReference = (IDataObject)invocationParameters[1].Reference;
-
-                        if (dataBusCellCount == 1)
-                        {
-                            // The platform doesn't support simultaneous read/write of multiple cells, but the data to 
-                            // write is an array. It needs to be written item by item.
-
-                            for (int i = 0; i < arrayLength; i++)
-                            {
-
-                            }
-                        }
-                        else
-                        {
-                            // The platform supports simultaneous read/write of multiple cells and the data to write is 
-                            // an array. All items need to be run through SimpleMemory type conversion one by one.
-
-                            for (int i = 0; i < arrayLength; i++)
-                            {
-                                var indexer = Value.UnrangedInt(i);
-
-                                currentBlock.Add(new Assignment
-                                {
-                                    AssignTo = new ArrayElementAccess
-                                    {
-                                        ArrayReference = dataOutReference,
-                                        IndexExpression = indexer
-                                    },
-                                    Expression = implementSimpleMemoryTypeConversion(
-                                        new ArrayElementAccess
-                                        {
-                                            ArrayReference = arrayReference,
-                                            IndexExpression = indexer
-                                        },
-                                        false)
-                                });
-                            }
-                        }
-                    }
+                        AssignTo = dataOutReference,
+                        // The data to write is conventionally the second parameter.
+                        Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
+                    });
                 }
             }
 
@@ -352,7 +257,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
 
                 var dataInTemporaryVariableReference = stateMachine
-                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType(dataBusWidthBytes))
+                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType)
                         .ToReference();
                 currentBlock.Add(new Assignment
                 {
