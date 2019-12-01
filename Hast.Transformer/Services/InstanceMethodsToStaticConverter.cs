@@ -2,7 +2,7 @@
 using System.Linq;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services

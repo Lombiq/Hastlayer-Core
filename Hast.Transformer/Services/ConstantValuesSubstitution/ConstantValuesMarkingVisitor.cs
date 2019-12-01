@@ -1,7 +1,7 @@
 ﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +49,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitPrimitiveExpression(primitiveExpression);
 
             // Not bothering with the various assembly attributes.
-            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null) return;
+            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Attribute>() != null) return;
 
             var primitiveExpressionParent = primitiveExpression.Parent;
 

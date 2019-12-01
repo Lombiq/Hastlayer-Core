@@ -1,5 +1,5 @@
 ﻿using Hast.Transformer.Vhdl.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers

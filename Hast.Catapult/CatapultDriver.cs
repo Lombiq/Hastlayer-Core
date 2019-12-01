@@ -3,7 +3,7 @@ using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Catapult
 {

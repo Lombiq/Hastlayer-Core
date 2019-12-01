@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Services
 {
@@ -26,7 +26,7 @@ namespace Hast.Transformer.Services
                 var typeReference = assignmentExpression.GetActualTypeReference();
 
                 if (assignmentExpression.Parent is Statement ||
-                    assignmentExpression.Parent is ICSharpCode.NRefactory.CSharp.Attribute ||
+                    assignmentExpression.Parent is ICSharpCode.Decompiler.CSharp.Attribute ||
                     // This is a DisplayClass-related if, those are handled specially later on.
                     typeReference.FullName.StartsWith("System.Func`2<System.Object,"))
                 {

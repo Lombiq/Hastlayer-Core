@@ -3,7 +3,7 @@ using System.Linq;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -252,7 +252,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
 
             // Attributes can slip in here but we don't care about those.
-            if (!(node is ICSharpCode.NRefactory.CSharp.Attribute))
+            if (!(node is ICSharpCode.Decompiler.CSharp.Attribute))
             {
                 base.VisitChildren(node); 
             }

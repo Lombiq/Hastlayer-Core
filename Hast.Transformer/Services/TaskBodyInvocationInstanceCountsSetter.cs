@@ -1,6 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using System.Collections.Generic;
 
 namespace Hast.Transformer.Services

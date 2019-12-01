@@ -3,7 +3,7 @@ using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using Mono.Cecil;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp
 {
     public static class ObjectCreateExpressionExtensions
     {

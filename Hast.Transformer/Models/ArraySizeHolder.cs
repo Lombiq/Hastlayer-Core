@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using Orchard.Validation;
 
 namespace Hast.Transformer.Models

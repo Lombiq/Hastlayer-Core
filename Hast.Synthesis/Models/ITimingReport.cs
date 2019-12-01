@@ -1,4 +1,4 @@
-﻿using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Synthesis.Models
 {

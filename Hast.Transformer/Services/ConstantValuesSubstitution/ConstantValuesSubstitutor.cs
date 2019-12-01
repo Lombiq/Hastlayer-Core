@@ -2,7 +2,7 @@
 using System.Linq;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {

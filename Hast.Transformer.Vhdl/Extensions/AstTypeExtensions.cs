@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp
 {
     public static class AstTypeExtensions
     {

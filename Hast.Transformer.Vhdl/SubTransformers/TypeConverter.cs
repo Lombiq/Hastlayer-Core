@@ -5,8 +5,8 @@ using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers

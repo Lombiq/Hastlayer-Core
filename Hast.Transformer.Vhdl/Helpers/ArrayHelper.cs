@@ -1,7 +1,7 @@
 ﻿using System;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {

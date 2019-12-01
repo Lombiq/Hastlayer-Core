@@ -3,7 +3,7 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.ILAst;
 using Mono.Cecil;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp
 {
     public static class AnnotatableExtensions
     {

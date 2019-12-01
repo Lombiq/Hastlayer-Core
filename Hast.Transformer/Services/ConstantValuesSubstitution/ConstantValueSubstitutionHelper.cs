@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services
@@ -21,7 +21,7 @@ namespace Hast.Transformer.Services
 
                 foreach (var objectParameter in methodDeclaration.Parameters
                     .Where(parameter => parameter.Type.Is<PrimitiveType>(type =>
-                        type.KnownTypeCode == ICSharpCode.NRefactory.TypeSystem.KnownTypeCode.Object)))
+                        type.KnownTypeCode == ICSharpCode.Decompiler.TypeSystem.KnownTypeCode.Object)))
                 {
                     var castExpressionFindingVisitor = new ParameterCastExpressionFindingVisitor(objectParameter.Name);
                     methodDeclaration.Body.AcceptVisitor(castExpressionFindingVisitor);

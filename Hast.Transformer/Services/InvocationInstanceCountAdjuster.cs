@@ -2,7 +2,7 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using System;
 using System.Collections.Generic;
 
@@ -48,7 +48,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                if (memberReferenceExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null)
+                if (memberReferenceExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Attribute>() != null)
                 {
                     return;
                 }

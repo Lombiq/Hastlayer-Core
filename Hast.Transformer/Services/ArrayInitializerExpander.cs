@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Services
 {

@@ -1,5 +1,5 @@
-﻿using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
+﻿using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Services
 {

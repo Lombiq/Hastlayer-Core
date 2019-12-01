@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {

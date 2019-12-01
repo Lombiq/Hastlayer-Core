@@ -1,5 +1,5 @@
 ﻿using Hast.Layer;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using Orchard;
 
 namespace Hast.Transformer.Services

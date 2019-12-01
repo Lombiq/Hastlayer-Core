@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {

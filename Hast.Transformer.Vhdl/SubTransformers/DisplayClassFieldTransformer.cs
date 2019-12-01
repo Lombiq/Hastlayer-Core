@@ -6,7 +6,7 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services

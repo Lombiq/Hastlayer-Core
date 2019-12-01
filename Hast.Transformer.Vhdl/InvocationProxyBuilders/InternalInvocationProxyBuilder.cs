@@ -7,7 +7,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;

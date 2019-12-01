@@ -3,7 +3,7 @@ using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Xilinx
 {

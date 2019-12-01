@@ -9,7 +9,7 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using Hast.Xilinx;
 using Hast.Xilinx.Abstractions;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;

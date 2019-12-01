@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using CsvHelper;
 using Hast.Synthesis.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
 
 namespace Hast.Synthesis.Services
 {
