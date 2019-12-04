@@ -65,11 +65,11 @@
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensibility\Events\ITransformerEventHandler.cs" />
-    <Compile Include="Extensions\AstTransformEnumerableExtensions.cs" />
     <Compile Include="Extensions\BinaryOperatorExpressionExtensions.cs" />
     <Compile Include="Extensions\InvocationExpressionExtensions.cs" />
     <Compile Include="Extensions\EntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
+    <Compile Include="Extensions\ListExtension.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
     <Compile Include="Extensions\MethodDeclarationExtensions.cs" />
     <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />

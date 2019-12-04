@@ -1,7 +1,7 @@
 ﻿using System;
 using Hast.Layer;
 using Hast.Synthesis.Models;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Synthesis.Helpers
 {

@@ -1,6 +1,6 @@
 ﻿using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast.Transforms;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {

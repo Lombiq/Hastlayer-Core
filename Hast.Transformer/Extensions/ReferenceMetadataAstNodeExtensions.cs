@@ -1,6 +1,6 @@
 ﻿using Hast.Transformer.Models;
 
-namespace ICSharpCode.Decompiler.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     internal static class ReferenceMetadataAstNodeExtensions
     {
@@ -20,7 +20,7 @@ namespace ICSharpCode.Decompiler.CSharp
 
         public static bool HasReferenceMetadata(this AstNode node) => node.GetReferenceMetadata() != null;
 
-        public static DeclarationReferenceMetadata GetReferenceMetadata(this AstNode node) => 
+        public static DeclarationReferenceMetadata GetReferenceMetadata(this AstNode node) =>
             node?.Annotation<DeclarationReferenceMetadata>();
 
         public static DeclarationReferenceMetadata GetOrAddReferenceMetadata(this AstNode node)

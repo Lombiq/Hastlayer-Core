@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.CSharp;
-using Mono.Cecil;
+﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -34,8 +33,8 @@ namespace Hast.Transformer.Services
             {
                 _typeDeclarations = typeDeclarations;
             }
-        
-        
+
+
             public TypeDeclaration Lookup(string fullName)
             {
                 _typeDeclarations.TryGetValue(fullName, out var declaration);

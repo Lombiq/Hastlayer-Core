@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Services

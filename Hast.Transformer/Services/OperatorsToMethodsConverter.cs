@@ -1,5 +1,5 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {

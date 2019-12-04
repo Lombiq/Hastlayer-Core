@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Text.RegularExpressions;
 
 namespace System

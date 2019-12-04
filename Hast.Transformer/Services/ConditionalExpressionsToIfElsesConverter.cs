@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using Hast.Common.Helpers;
+﻿using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.Decompiler.CSharp;
-
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -45,7 +43,7 @@ namespace Hast.Transformer.Services
                     var variableTypeReference = typeInformation.InferredType;
 
                     // First creating a variable for the result.
-                    var variableDeclaration = 
+                    var variableDeclaration =
                         new VariableDeclarationStatement(AstBuilder.ConvertType(variableTypeReference), variableName);
                     variableDeclaration.Variables.Single().AddAnnotation(variableTypeReference);
                     AstInsertionHelper.InsertStatementBefore(
@@ -54,10 +52,10 @@ namespace Hast.Transformer.Services
 
                     // Then moving the conditational expression so its result is assigned to the variable.
                     var variableIdentifier = new IdentifierExpression(variableName);
-                    variableIdentifier.AddAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference });
+                    variableIdentifier.AddAnnotation(new ILVariable( { Name = variableName, Type = variableTypeReference });
                     var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
                     assignment = new AssignmentExpression(
-                        new IdentifierExpression(variableName).WithAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference }), 
+                        new IdentifierExpression(variableName).WithAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference }),
                         newConditionalExpression);
 
 

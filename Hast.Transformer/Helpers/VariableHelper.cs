@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using Hast.Common.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
-using Mono.Cecil;
+﻿using Hast.Common.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 
 namespace Hast.Transformer.Helpers
 {

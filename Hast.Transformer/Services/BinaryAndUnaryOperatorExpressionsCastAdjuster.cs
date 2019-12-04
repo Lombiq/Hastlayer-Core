@@ -1,14 +1,8 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
-using Orchard;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.Transformer.Services
 {
@@ -157,11 +151,11 @@ namespace Hast.Transformer.Services
                     // if this binary operator expression is not also in another binary operator expression, when it 
                     // will be cast again.
                     var firstNonParenthesizedExpressionParent = binaryOperatorExpression.FindFirstNonParenthesizedExpressionParent();
-                    if (!(firstNonParenthesizedExpressionParent is CastExpression) && 
+                    if (!(firstNonParenthesizedExpressionParent is CastExpression) &&
                         !(firstNonParenthesizedExpressionParent is BinaryOperatorExpression))
                     {
                         var castExpression = CreateCast(
-                            binaryOperatorExpression.GetResultTypeReference(), 
+                            binaryOperatorExpression.GetResultTypeReference(),
                             binaryOperatorExpression,
                             out var clonedBinaryOperatorExpression);
                         binaryOperatorExpression.ReplaceWith(castExpression);

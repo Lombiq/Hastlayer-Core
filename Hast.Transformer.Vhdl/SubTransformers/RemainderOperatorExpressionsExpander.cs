@@ -1,6 +1,6 @@
 ﻿using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 using System;
 using System.Collections.Generic;

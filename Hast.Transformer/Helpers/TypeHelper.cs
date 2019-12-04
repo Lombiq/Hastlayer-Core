@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Helpers

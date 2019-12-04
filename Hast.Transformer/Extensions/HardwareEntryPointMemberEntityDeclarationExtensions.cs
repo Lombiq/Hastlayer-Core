@@ -1,6 +1,6 @@
 ﻿using Hast.Transformer.Models;
 
-namespace ICSharpCode.Decompiler.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class HardwareEntryPointMemberEntityDeclarationExtensions
     {

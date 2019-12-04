@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
@@ -26,7 +20,7 @@ namespace Hast.Transformer.Services
                 var typeReference = assignmentExpression.GetActualTypeReference();
 
                 if (assignmentExpression.Parent is Statement ||
-                    assignmentExpression.Parent is ICSharpCode.Decompiler.CSharp.Attribute ||
+                    assignmentExpression.Parent is Attribute ||
                     // This is a DisplayClass-related if, those are handled specially later on.
                     typeReference.FullName.StartsWith("System.Func`2<System.Object,"))
                 {
@@ -37,8 +31,8 @@ namespace Hast.Transformer.Services
                 // embedded assignment. Not using the left side directly later because that can be any complex value
                 // access, keeping it simple.
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-                    "assignment", 
-                    assignmentExpression, 
+                    "assignment",
+                    assignmentExpression,
                     AstBuilder.ConvertType(typeReference));
 
                 var firstParentStatement = assignmentExpression.FindFirstParentStatement();

@@ -1,5 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp;
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {
@@ -29,7 +28,7 @@ namespace Hast.Transformer.Models
         }
 
         public static TypeDeclaration Lookup(
-            this ITypeDeclarationLookupTable typeDeclarationLookupTable, 
+            this ITypeDeclarationLookupTable typeDeclarationLookupTable,
             TypeReferenceExpression typeReferenceExpression)
         {
             return typeDeclarationLookupTable.Lookup(typeReferenceExpression.Type);

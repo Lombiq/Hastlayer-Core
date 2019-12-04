@@ -1,5 +1,5 @@
 ﻿using Hast.Transformer.Abstractions.Configuration;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;

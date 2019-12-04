@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
 

@@ -1,9 +1,8 @@
 ﻿using Hast.Transformer.Models;
-using Mono.Cecil;
 using System;
 using System.Linq;
 
-namespace ICSharpCode.Decompiler.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class MemberReferenceExpressionExtensions
     {

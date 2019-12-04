@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -49,7 +48,7 @@ namespace Hast.Transformer.Services
                     parentAssignment.AddAnnotation(arrayCreateExpression.Annotation<TypeInformation>());
 
                     AstInsertionHelper.InsertStatementBefore(
-                        arrayCreateExpression.FindFirstParentStatement(), 
+                        arrayCreateExpression.FindFirstParentStatement(),
                         new ExpressionStatement(parentAssignment));
 
                     arrayCreateExpression.ReplaceWith(variableIdentifier.Clone());

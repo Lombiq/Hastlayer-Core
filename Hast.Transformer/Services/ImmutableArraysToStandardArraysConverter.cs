@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.Decompiler.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
-using Mono.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {

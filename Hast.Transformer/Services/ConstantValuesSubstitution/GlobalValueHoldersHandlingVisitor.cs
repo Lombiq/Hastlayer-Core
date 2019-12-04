@@ -1,6 +1,6 @@
 ﻿using System;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {

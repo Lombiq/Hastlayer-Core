@@ -1,6 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {

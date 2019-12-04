@@ -1,9 +1,8 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.ILAst;
+using ICSharpCode.Decompiler.IL;
 using Mono.Cecil;
 
-namespace ICSharpCode.Decompiler.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class AnnotatableExtensions
     {

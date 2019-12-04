@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Models
 {

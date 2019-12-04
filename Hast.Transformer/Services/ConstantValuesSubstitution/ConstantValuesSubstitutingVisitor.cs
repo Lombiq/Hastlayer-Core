@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -128,7 +126,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression); 
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
         }
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -254,7 +252,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // Attributes can slip in here but we don't care about those.
             if (!(node is ICSharpCode.Decompiler.CSharp.Attribute))
             {
-                base.VisitChildren(node); 
+                base.VisitChildren(node);
             }
         }
 

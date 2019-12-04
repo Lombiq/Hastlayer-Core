@@ -1,7 +1,7 @@
 ﻿using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Linq;
 
 namespace Hast.Transformer.Services

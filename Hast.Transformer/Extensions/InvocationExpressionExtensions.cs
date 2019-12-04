@@ -1,8 +1,6 @@
-﻿using ICSharpCode.Decompiler.Ast;
-using Mono.Cecil;
-using System.Linq;
+﻿using System.Linq;
 
-namespace ICSharpCode.Decompiler.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class InvocationExpressionExtensions
     {

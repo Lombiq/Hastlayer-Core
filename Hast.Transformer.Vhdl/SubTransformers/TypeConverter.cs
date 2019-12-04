@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Mono.Cecil;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -23,7 +22,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
         public DataType ConvertTypeReference(
-            TypeReference typeReference, 
+            TypeReference typeReference,
             IVhdlTransformationContext context)
         {
             switch (typeReference.FullName)
@@ -69,7 +68,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 if (typeReference is GenericInstanceType)
                 {
-                    return ConvertTypeReference(((GenericInstanceType)typeReference).GenericArguments.Single(), context); 
+                    return ConvertTypeReference(((GenericInstanceType)typeReference).GenericArguments.Single(), context);
                 }
 
                 return SpecialTypes.Task;
@@ -107,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
         public DataType ConvertAndDeclareAstType(
-            AstType type, 
+            AstType type,
             IDeclarableElement declarable,
             IVhdlTransformationContext context)
         {

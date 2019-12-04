@@ -10,8 +10,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Mono.Cecil;
 using System;
 using System.Collections.Generic;
@@ -101,7 +100,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // changes made to record fields are propagated. However such aliases can't be assigned to as
                         // that would also overwrite the original variable.
                         throw new NotSupportedException(
-                            "The assignment " + expression + 
+                            "The assignment " + expression +
                             " is not supported. You can't at the moment assign to a variable that you previously assigned to using a reference type-holding variable."
                             .AddParentEntityName(assignment));
                     }
