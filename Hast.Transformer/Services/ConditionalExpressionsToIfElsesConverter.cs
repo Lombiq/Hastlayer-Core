@@ -50,7 +50,7 @@ namespace Hast.Transformer.Services
                         conditionalExpression.FindFirstParentStatement(),
                         variableDeclaration);
 
-                    // Then moving the conditational expression so its result is assigned to the variable.
+                    // Then moving the conditional expression so its result is assigned to the variable.
                     var variableIdentifier = new IdentifierExpression(variableName);
                     variableIdentifier.AddAnnotation(new ILVariable( { Name = variableName, Type = variableTypeReference });
                     var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
