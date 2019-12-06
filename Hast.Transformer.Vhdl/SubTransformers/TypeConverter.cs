@@ -135,6 +135,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.UInt8;
                 case KnownTypeCode.Char:
                     return KnownDataTypes.Character;
+                //case KnownTypeCode.ICriticalNotifyCompletion:
+                //    break;
                 case KnownTypeCode.DBNull:
                     break;
                 case KnownTypeCode.DateTime:
@@ -149,6 +151,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.Exception:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.FormattableString:
+                //    break;
+                //case KnownTypeCode.IAsyncDisposable:
+                //    break;
+                //case KnownTypeCode.IAsyncEnumerableOfT:
+                //    break;
+                //case KnownTypeCode.IAsyncEnumeratorOfT:
+                //    break;
                 case KnownTypeCode.ICollection:
                     break;
                 case KnownTypeCode.ICollectionOfT:
@@ -163,9 +174,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.IEnumeratorOfT:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.IFormattable:
+                //    break;
+                //case KnownTypeCode.INotifyCompletion:
+                //    break;
                 case KnownTypeCode.IList:
                     break;
                 case KnownTypeCode.IListOfT:
+                    break;
+                case KnownTypeCode.IReadOnlyCollectionOfT:
                     break;
                 case KnownTypeCode.IReadOnlyListOfT:
                     break;
@@ -177,6 +195,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.Int64;
                 case KnownTypeCode.IntPtr:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.MemoryOfT:
+                //    break;
                 case KnownTypeCode.MulticastDelegate:
                     break;
                 case KnownTypeCode.None:
@@ -185,10 +206,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.Object:
                     return KnownDataTypes.StdLogicVector32;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.ReadOnlySpanOfT:
+                //    break;
                 case KnownTypeCode.SByte:
                     return KnownDataTypes.Int8;
                 case KnownTypeCode.Single:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.SpanOfT:
+                //    break;
                 case KnownTypeCode.String:
                     return KnownDataTypes.UnrangedString;
                 case KnownTypeCode.Task:
@@ -197,6 +224,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.Type:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.TypedReference:
+                //    break;
                 case KnownTypeCode.UInt16:
                     return KnownDataTypes.UInt16;
                 case KnownTypeCode.UInt32:
@@ -205,6 +235,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.UInt64;
                 case KnownTypeCode.UIntPtr:
                     break;
+                case KnownTypeCode.Unsafe:
+                    break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.ValueTask:
+                //    break;
+                //case KnownTypeCode.ValueTaskOfT:
+                //    break;
                 case KnownTypeCode.ValueType:
                     break;
                 case KnownTypeCode.Void:
