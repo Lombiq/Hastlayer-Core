@@ -103,7 +103,7 @@ namespace Hast.Transformer.Services
                         // SetItem can be converted into a simple array element assignment to a newly created copy of the
                         // array.
 
-                        var elementType = AstBuilder.ConvertType(((ArrayType)arrayTypeInformation.ExpectedType).ElementType);
+                        var elementType = AstBuildingHelper.ConvertType(((ArrayType)arrayTypeInformation.ExpectedType).ElementType);
                         var parentStatement = invocationExpression.FindFirstParentStatement();
 
                         var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(

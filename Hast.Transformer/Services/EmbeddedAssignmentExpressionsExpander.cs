@@ -33,7 +33,7 @@ namespace Hast.Transformer.Services
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                     "assignment",
                     assignmentExpression,
-                    AstBuilder.ConvertType(typeReference));
+                    AstBuildingHelper.ConvertType(typeReference));
 
                 var firstParentStatement = assignmentExpression.FindFirstParentStatement();
                 var typeInformation = assignmentExpression.GetTypeInformationOrCreateFromActualTypeReference();

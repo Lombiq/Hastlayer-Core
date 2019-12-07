@@ -44,7 +44,7 @@ namespace Hast.Transformer.Services
 
                     // First creating a variable for the result.
                     var variableDeclaration =
-                        new VariableDeclarationStatement(AstBuilder.ConvertType(variableTypeReference), variableName);
+                        new VariableDeclarationStatement(AstBuildingHelper.ConvertType(variableTypeReference), variableName);
                     variableDeclaration.Variables.Single().AddAnnotation(variableTypeReference);
                     AstInsertionHelper.InsertStatementBefore(
                         conditionalExpression.FindFirstParentStatement(),
