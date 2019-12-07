@@ -31,8 +31,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             var referencedMemberFullName = node.GetReferencedMemberFullName();
             if (!string.IsNullOrEmpty(referencedMemberFullName)) return referencedMemberFullName;
 
-            var parameterReference = node.Annotation<ParameterReference>();
-            if (parameterReference != null) return CreateParentEntityBasedName(node, parameterReference.Name);
+            var iLVariableResolveResult = node.Annotation<ILVariableResolveResult>();
+            if (iLVariableResolveResult != null) return CreateParentEntityBasedName(node, iLVariableResolveResult.Variable.Name);
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
@@ -112,16 +112,17 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static string GetILRangeName(this AstNode node)
         {
+            throw new NotImplementedException();
             // The node or parents should contain one or more ILRange objects which maybe correspond to the node's
             // location in the original IL.
-            var ilRange = node.Annotation<List<ILRange>>();
-            if (ilRange == null)
-            {
-                ilRange = node
-                    .FindFirstParentOfType<AstNode>(parent => parent.Annotations.Any(annotation => annotation is List<ILRange>))
-                    ?.Annotation<List<ILRange>>();
-            }
-            return ilRange != null ? ilRange.First().ToString() : string.Empty;
+            //var ilRange = node.Annotation<List<ILRange>>();
+            //if (ilRange == null)
+            //{
+            //    ilRange = node
+            //        .FindFirstParentOfType<AstNode>(parent => parent.Annotations.Any(annotation => annotation is List<ILRange>))
+            //        ?.Annotation<List<ILRange>>();
+            //}
+            //return ilRange != null ? ilRange.First().ToString() : string.Empty;
         }
 
         /// <summary>
@@ -130,22 +131,23 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetFullNameWithUnifiedPropertyName(this AstNode node)
         {
-            var name = node.GetFullName();
+            throw new NotImplementedException();
+            //var name = node.GetFullName();
 
-            // If this is a compiler-generated property getter or setter method then get the real property name.
-            var methodDefinition = node.Annotation<MethodDefinition>();
-            if (methodDefinition != null && (methodDefinition.IsGetter || methodDefinition.IsSetter))
-            {
-                name = methodDefinition.IsGetter ?
-                    name.Replace("::get_", "::") :
-                    name.Replace("::set_", "::");
-            }
-            else if (name.IsBackingFieldName())
-            {
-                name = name.ConvertFullBackingFieldNameToPropertyName();
-            }
+            //// If this is a compiler-generated property getter or setter method then get the real property name.
+            //var methodDefinition = node.Annotation<MethodDefinition>();
+            //if (methodDefinition != null && (methodDefinition.IsGetter || methodDefinition.IsSetter))
+            //{
+            //    name = methodDefinition.IsGetter ?
+            //        name.Replace("::get_", "::") :
+            //        name.Replace("::set_", "::");
+            //}
+            //else if (name.IsBackingFieldName())
+            //{
+            //    name = name.ConvertFullBackingFieldNameToPropertyName();
+            //}
 
-            return name;
+            //return name;
         }
 
         /// <summary>
@@ -154,54 +156,55 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetSimpleName(this AstNode node)
         {
-            string name = null;
-            TypeReference declaringType = null;
+            throw new NotImplementedException();
+            //string name = null;
+            //TypeReference declaringType = null;
 
-            var memberDefinition = node.Annotation<IMemberDefinition>();
-            if (memberDefinition != null)
-            {
-                name = memberDefinition.Name;
-                declaringType = memberDefinition.DeclaringType;
-                if (declaringType == null) name = memberDefinition.FullName;
-            }
-            else
-            {
-                var memberReference = node.Annotation<MemberReference>();
-                if (memberReference != null)
-                {
-                    name = memberReference.Name;
-                    declaringType = memberReference.DeclaringType;
-                    if (declaringType == null) name = memberReference.FullName;
-                }
-            }
+            //var memberDefinition = node.Annotation<IMemberDefinition>();
+            //if (memberDefinition != null)
+            //{
+            //    name = memberDefinition.Name;
+            //    declaringType = memberDefinition.DeclaringType;
+            //    if (declaringType == null) name = memberDefinition.FullName;
+            //}
+            //else
+            //{
+            //    var memberReference = node.Annotation<MemberReference>();
+            //    if (memberReference != null)
+            //    {
+            //        name = memberReference.Name;
+            //        declaringType = memberReference.DeclaringType;
+            //        if (declaringType == null) name = memberReference.FullName;
+            //    }
+            //}
 
-            // The name is already a full name, but for a different declaring type. This is the case for explicitly 
-            // implemented interface methods.
-            if (name.Contains('.'))
-            {
-                name = name.Substring(name.LastIndexOf('.') + 1);
-            }
+            //// The name is already a full name, but for a different declaring type. This is the case for explicitly 
+            //// implemented interface methods.
+            //if (name.Contains('.'))
+            //{
+            //    name = name.Substring(name.LastIndexOf('.') + 1);
+            //}
 
-            var childIsNested = false;
-            while (declaringType != null)
-            {
-                // The delimiter between the name of an inner class and its parent needs to be a plus.
-                var delimiter = childIsNested ? "+" : ".";
+            //var childIsNested = false;
+            //while (declaringType != null)
+            //{
+            //    // The delimiter between the name of an inner class and its parent needs to be a plus.
+            //    var delimiter = childIsNested ? "+" : ".";
 
-                if (declaringType.DeclaringType == null)
-                {
-                    name = declaringType.FullName + delimiter + name;
-                }
-                else
-                {
-                    name = declaringType.Name + delimiter + name;
-                }
+            //    if (declaringType.DeclaringType == null)
+            //    {
+            //        name = declaringType.FullName + delimiter + name;
+            //    }
+            //    else
+            //    {
+            //        name = declaringType.Name + delimiter + name;
+            //    }
 
-                childIsNested = declaringType.IsNested;
-                declaringType = declaringType.DeclaringType;
-            }
+            //    childIsNested = declaringType.IsNested;
+            //    declaringType = declaringType.DeclaringType;
+            //}
 
-            return name;
+            //return name;
         }
 
         public static bool IsIn<T>(this AstNode node) where T : AstNode =>
@@ -309,13 +312,15 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
-            var memberDefinition = node.Annotation<IMemberDefinition>();
-            if (memberDefinition != null) return memberDefinition.FullName;
+            throw new NotImplementedException();
 
-            var memberReference = node.Annotation<MemberReference>();
-            if (memberReference != null) return memberReference.FullName;
+            //var memberDefinition = node.Annotation<IMemberDefinition>();
+            //if (memberDefinition != null) return memberDefinition.FullName;
 
-            return null;
+            //var memberReference = node.Annotation<MemberReference>();
+            //if (memberReference != null) return memberReference.FullName;
+
+            //return null;
         }
 
 
