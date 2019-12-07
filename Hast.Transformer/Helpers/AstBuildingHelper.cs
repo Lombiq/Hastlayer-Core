@@ -13,7 +13,7 @@ namespace Hast.Transformer.Helpers
             typeSystemAstBuilder.AlwaysUseShortTypeNames = true;
             typeSystemAstBuilder.AddResolveResultAnnotations = true;
 
-            return typeSystemAstBuilder.ConvertType.ConvertType(type);
+            return typeSystemAstBuilder.ConvertType(type);
         }
     }
 }
