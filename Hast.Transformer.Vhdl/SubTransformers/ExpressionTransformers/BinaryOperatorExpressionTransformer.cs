@@ -100,10 +100,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // types either without the equality operator defined or they are custom value types and a
             // ReferenceEquals() is attempted on them which is wrong.
             if ((leftType != null &&
-                        !leftType.IsPrimitive &&
+                        !leftType.IsPrimitive() &&
                         leftType.Kind != TypeKind.Enum ||
                     rightType != null &&
-                        !rightType.IsPrimitive &&
+                        !rightType.IsPrimitive() &&
                         rightType.Kind != TypeKind.Enum)
                 &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))

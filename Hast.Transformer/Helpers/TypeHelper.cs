@@ -34,7 +34,7 @@ namespace Hast.Transformer.Helpers
         }
 
         public static AstType CreateAstType(TypeReference typeReference) =>
-            (typeReference.IsPrimitive ? new PrimitiveType(typeReference.Name) : AstType.Create(typeReference.FullName))
+            (typeReference.IsPrimitive() ? new PrimitiveType(typeReference.Name) : AstType.Create(typeReference.FullName))
             .WithAnnotation(typeReference);
 
 
