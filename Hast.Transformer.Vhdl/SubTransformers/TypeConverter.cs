@@ -277,7 +277,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type, IVhdlTransformationContext context)
         {
-            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskTypeReference(type.GetActualTypeReference()))
+            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskTypeReference(type.GetActualType()))
             {
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)

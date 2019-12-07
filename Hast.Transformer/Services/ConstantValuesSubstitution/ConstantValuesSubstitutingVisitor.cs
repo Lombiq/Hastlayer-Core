@@ -232,7 +232,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
 
             if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
-                node.GetActualTypeReference()?.IsArray == false)
+                node.GetActualType()?.IsArray == false)
             {
                 var fullName = node.GetFullName();
 

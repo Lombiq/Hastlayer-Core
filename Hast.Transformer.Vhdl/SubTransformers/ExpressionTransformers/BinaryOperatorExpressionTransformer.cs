@@ -6,7 +6,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,19 +92,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // If the left and/or right expressions are cast then the type that matters here is the result type of that
             // cast, so also checking for that.
 
-            var leftTypeReference = expression.Left.GetActualTypeReference(true) ?? expression.Left.GetActualTypeReference();
+            var leftType = expression.Left.GetActualType(true) ?? expression.Left.GetActualType();
 
-            var rightTypeReference = expression.Right.GetActualTypeReference(true) ?? expression.Right.GetActualTypeReference();
+            var rightType = expression.Right.GetActualType(true) ?? expression.Right.GetActualType();
 
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
             // types either without the equality operator defined or they are custom value types and a
             // ReferenceEquals() is attempted on them which is wrong.
-            if ((leftTypeReference != null &&
-                        !leftTypeReference.IsPrimitive &&
-                        (leftTypeReference as TypeDefinition)?.IsEnum != true ||
-                    rightTypeReference != null &&
-                        !rightTypeReference.IsPrimitive &&
-                        (rightTypeReference as TypeDefinition)?.IsEnum != true)
+            if ((leftType != null &&
+                        !leftType.IsPrimitive &&
+                        leftType.Kind != TypeKind.Enum ||
+                    rightType != null &&
+                        !rightType.IsPrimitive &&
+                        rightType.Kind != TypeKind.Enum)
                 &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
             {
@@ -181,7 +181,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var currentBlock = context.Scope.CurrentBlock;
 
             var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
-            var resultTypeReference = expression.GetResultTypeReference();
+            var resultType = expression.GetResultTypeReference();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
 
@@ -191,12 +191,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var hasExplicitCast = firstNonParenthesizedExpressionParent is CastExpression;
             if (hasExplicitCast)
             {
-                preCastTypeReference = resultTypeReference;
-                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
+                preCastTypeReference = resultType;
+                resultType = firstNonParenthesizedExpressionParent.GetActualType(true);
             }
 
-            var resultType = _typeConverter.ConvertTypeReference(resultTypeReference, context.TransformationContext);
-            var resultTypeSize = resultType.GetSize();
+            var resultVhdlType = _typeConverter.ConvertTypeReference(resultType, context.TransformationContext);
+            var resultTypeSize = resultVhdlType.GetSize();
 
 
 
@@ -204,13 +204,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (operationResultDataObjectIsVariable)
             {
                 operationResultDataObjectReference = stateMachine
-                    .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultType)
+                    .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
                     .ToReference();
             }
             else
             {
                 operationResultDataObjectReference = stateMachine
-                    .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultType)
+                    .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
                     .ToReference();
             }
 
@@ -228,27 +228,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     // unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
                     isMultiplication &&
                     (
-                        resultTypeReference == expression.GetActualTypeReference() ||
-                        resultTypeReference == leftTypeReference && resultTypeReference == rightTypeReference
+                        resultType == expression.GetActualType() ||
+                        resultType == leftType && resultType == rightType
                     )
                 );
 
-            DataType leftType = null;
+            DataType leftVhdlType = null;
             var leftTypeSize = 0;
-            if (leftTypeReference != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
+            if (leftType != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
             {
-                leftType = _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext);
-                leftTypeSize = leftType.GetSize();
+                leftVhdlType = _typeConverter.ConvertTypeReference(leftType, context.TransformationContext);
+                leftTypeSize = leftVhdlType.GetSize();
             }
-            DataType rightType = null;
+            DataType rightVhdlType = null;
             var rightTypeSize = 0;
-            if (rightTypeReference != null)
+            if (rightType != null)
             {
-                rightType = _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext);
-                rightTypeSize = rightType.GetSize();
+                rightVhdlType = _typeConverter.ConvertTypeReference(rightType, context.TransformationContext);
+                rightTypeSize = rightVhdlType.GetSize();
             }
 
-            if (leftTypeReference != null && rightTypeReference != null)
+            if (leftType != null && rightType != null)
             {
                 shouldResizeResult = shouldResizeResult ||
                     (
@@ -263,7 +263,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         // If the operation is an addition and the types of the result and the operands differ then we 
                         // also have to resize.
                         expression.Operator == BinaryOperatorType.Add &&
-                        !(resultTypeReference == leftTypeReference && resultTypeReference == rightTypeReference)
+                        !(resultType == leftType && resultType == rightType)
                     )
                     ||
                     (
@@ -281,9 +281,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
             var clockCyclesNeededForUnsignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
-            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
+            if (leftVhdlType != null && rightVhdlType != null && leftVhdlType.Name == rightVhdlType.Name)
             {
-                clockCyclesNeededForOperation = leftType.Name == "signed" ?
+                clockCyclesNeededForOperation = leftVhdlType.Name == "signed" ?
                     clockCyclesNeededForSignedOperation :
                     clockCyclesNeededForUnsignedOperation;
             }
@@ -328,8 +328,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
 
                     var bitwiseAndBinary = new BinaryOperatorExpression(
-                        expression.Left.Clone(), 
-                        BinaryOperatorType.BitwiseAnd, 
+                        expression.Left.Clone(),
+                        BinaryOperatorType.BitwiseAnd,
                         expression.Right.Clone());
 
                     clockCyclesNeededForOperation += Math.Max(
@@ -356,12 +356,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (hasExplicitCast || isShift)
             {
                 var fromType = isShift && !hasExplicitCast ?
-                    leftType :
+                    leftVhdlType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 
                 var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
                     fromType,
-                    resultType,
+                    resultVhdlType,
                     binaryElement);
 
                 binaryElement = typeConversionResult.ConvertedFromExpression;

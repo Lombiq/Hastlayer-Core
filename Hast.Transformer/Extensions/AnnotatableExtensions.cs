@@ -1,12 +1,13 @@
 ﻿using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class AnnotatableExtensions
     {
-        public static TypeReference GetActualTypeReference(this IAnnotatable annotable, bool getExpectedType = false)
+        public static IType GetActualType(this IAnnotatable annotable, bool getExpectedType = false)
         {
             var typeInformation = annotable.Annotation<TypeInformation>();
             if (typeInformation != null)
@@ -35,17 +36,17 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (annotable is IndexerExpression indexerExpression)
             {
-                return indexerExpression.Target.GetActualTypeReference()?.GetElementType();
+                return indexerExpression.Target.GetActualType()?.GetElementType();
             }
 
             if (annotable is AssignmentExpression assignmentExpression)
             {
-                return assignmentExpression.Left.GetActualTypeReference();
+                return assignmentExpression.Left.GetActualType();
             }
 
             if (annotable is UnaryOperatorExpression unaryOperatorExpression)
             {
-                return unaryOperatorExpression.Expression.GetActualTypeReference();
+                return unaryOperatorExpression.Expression.GetActualType();
             }
 
             if (annotable is PrimitiveExpression primitiveExpression)
@@ -67,7 +68,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static TypeInformation GetTypeInformationOrCreateFromActualTypeReference(this IAnnotatable annotable)
         {
             var typeInformation = annotable.Annotation<TypeInformation>();
-            if (typeInformation == null) typeInformation = annotable.GetActualTypeReference().ToTypeInformation();
+            if (typeInformation == null) typeInformation = annotable.GetActualType().ToTypeInformation();
             return typeInformation;
         }
     }

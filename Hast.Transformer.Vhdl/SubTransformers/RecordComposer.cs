@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .Where(member =>
                         (member is PropertyDeclaration ||
                         member.Is<FieldDeclaration>(field => !field.GetFullName().IsBackingFieldName())) &&
-                        !member.GetActualTypeReference().IsSimpleMemory())
+                        !member.GetActualType().IsSimpleMemory())
                     .Select(member =>
                     {
                         var name = member.Name;

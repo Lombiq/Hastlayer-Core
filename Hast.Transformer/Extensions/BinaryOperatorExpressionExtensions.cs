@@ -4,13 +4,13 @@
     {
         public static TypeReference GetResultTypeReference(this BinaryOperatorExpression expression)
         {
-            var resultTypeReference = expression.GetActualTypeReference(true);
-            if (resultTypeReference == null)
+            var resultType = expression.GetActualType(true);
+            if (resultType == null)
             {
-                resultTypeReference = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
+                resultType = expression.FindFirstNonParenthesizedExpressionParent().GetActualType();
             }
 
-            return resultTypeReference;
+            return resultType;
         }
     }
 }

@@ -38,13 +38,13 @@ namespace Hast.Transformer.Services
                     var castExpression = castExpressionFindingVisitor.Expression;
                     if (castExpression != null)
                     {
-                        var actualTypeReference = castExpression.GetActualTypeReference(true);
+                        var actualType = castExpression.GetActualType(true);
                         objectParameter.Type = castExpression.Type.Clone();
-                        objectParameter.Annotation<ParameterDefinition>().ParameterType = actualTypeReference;
+                        objectParameter.Annotation<ParameterDefinition>().ParameterType = actualType;
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
 
-                        methodDeclaration.Body.AcceptVisitor(new ParameterReferencesTypeChangingVisitor(objectParameter.Name, actualTypeReference));
+                        methodDeclaration.Body.AcceptVisitor(new ParameterReferencesTypeChangingVisitor(objectParameter.Name, actualType));
                     }
                 }
             }

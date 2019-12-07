@@ -68,7 +68,7 @@ namespace Hast.Transformer.Services
                     binaryOperator,
                     assignmentExpression.Right.Clone());
 
-                binary.AddAnnotation(assignmentExpression.GetActualTypeReference(true));
+                binary.AddAnnotation(assignmentExpression.GetActualType(true));
 
                 assignmentExpression.Operator = AssignmentOperatorType.Assign;
                 assignmentExpression.Right.ReplaceWith(binary);

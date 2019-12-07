@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
 using Orchard;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -22,28 +21,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public static DataType CreateDeclarableType(
             this IDeclarableTypeCreator declarableTypeCreator,
             AstNode valueHolder,
-            AstType type,
+            AstType astType,
             IVhdlTransformationContext context)
         {
-            var typeReference = type.GetActualTypeReference();
+            var type = astType.GetActualType();
 
-            if (typeReference == null)
+            if (type == null)
             {
-                if (type.Parent is VariableDeclarationStatement)
+                if (astType.Parent is VariableDeclarationStatement)
                 {
-                    typeReference = ((VariableDeclarationStatement)type.Parent).Variables.First().GetActualTypeReference();
+                    type = ((VariableDeclarationStatement)astType.Parent).Variables.First().GetActualType();
                 }
-                else if (type is PrimitiveType)
+                else if (astType is PrimitiveType)
                 {
-                    typeReference = TypeHelper.CreatePrimitiveTypeReference(((PrimitiveType)type).KnownTypeCode.ToString());
+                    type = TypeHelper.CreatePrimitiveTypeReference(((PrimitiveType)astType).KnownTypeCode.ToString());
                 }
                 else
                 {
-                    typeReference = type.Parent.GetActualTypeReference();
+                    type = astType.Parent.GetActualType();
                 }
             }
 
-            return declarableTypeCreator.CreateDeclarableType(valueHolder, typeReference, context);
+            return declarableTypeCreator.CreateDeclarableType(valueHolder, type, context);
         }
     }
 }

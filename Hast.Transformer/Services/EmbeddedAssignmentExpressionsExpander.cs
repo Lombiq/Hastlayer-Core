@@ -17,12 +17,12 @@ namespace Hast.Transformer.Services
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                var typeReference = assignmentExpression.GetActualTypeReference();
+                var type = assignmentExpression.GetActualType();
 
                 if (assignmentExpression.Parent is Statement ||
                     assignmentExpression.Parent is Attribute ||
                     // This is a DisplayClass-related if, those are handled specially later on.
-                    typeReference.FullName.StartsWith("System.Func`2<System.Object,"))
+                    type.FullName.StartsWith("System.Func`2<System.Object,"))
                 {
                     return;
                 }
@@ -33,7 +33,7 @@ namespace Hast.Transformer.Services
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                     "assignment",
                     assignmentExpression,
-                    AstBuildingHelper.ConvertType(typeReference));
+                    AstBuildingHelper.ConvertType(type));
 
                 var firstParentStatement = assignmentExpression.FindFirstParentStatement();
                 var typeInformation = assignmentExpression.GetTypeInformationOrCreateFromActualTypeReference();

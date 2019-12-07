@@ -73,8 +73,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
                 {
-                    var leftTypeReference = left.GetActualTypeReference();
-                    if (leftTypeReference.IsSimpleMemory()) return Empty.Instance;
+                    var leftType = left.GetActualType();
+                    if (leftType.IsSimpleMemory()) return Empty.Instance;
 
                     var leftTransformed = Transform(left, context);
                     if (leftTransformed == Empty.Instance) return Empty.Instance;
@@ -107,10 +107,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
 
-                    var rightTypeReference = right.GetActualTypeReference();
-                    if (leftTypeReference != null &&
-                        leftTypeReference.FullName == rightTypeReference.FullName &&
-                        !leftTypeReference.IsValueType &&
+                    var rightType = right.GetActualType();
+                    if (leftType != null &&
+                        leftType.FullName == rightType.FullName &&
+                        !leftType.IsValueType &&
                         left is IdentifierExpression &&
                         (right is IdentifierExpression || right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference())))
                     {
@@ -207,7 +207,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             {
                                 Reference = Transform(argument, context),
                                 DataType = _declarableTypeCreator
-                                    .CreateDeclarableType(argument, argument.GetActualTypeReference(), context.TransformationContext)
+                                    .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
                             });
 
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
@@ -306,16 +306,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is PrimitiveExpression primitive)
             {
-                var typeReference = primitive.GetActualTypeReference();
+                var type = primitive.GetActualType();
 
-                var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
+                var vhdlType = _typeConverter.ConvertTypeReference(type, context.TransformationContext);
                 var valueString = primitive.Value.ToString();
                 // Replacing decimal comma to decimal dot.
-                if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
+                if (vhdlType.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
                 // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
                 // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
-                if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                if (vhdlType == KnownDataTypes.Real && !valueString.Contains('.'))
                 {
                     valueString += ".0";
                 }
@@ -323,11 +323,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 
                 // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation 
                 // without these functions.
-                if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
+                if (vhdlType.Name == KnownDataTypes.Int8.Name || vhdlType.Name == KnownDataTypes.UInt8.Name)
                 {
                     var binaryLiteral = string.Empty;
 
-                    if (type.Name == KnownDataTypes.Int8.Name)
+                    if (vhdlType.Name == KnownDataTypes.Int8.Name)
                     {
                         var value = Convert.ToInt64(valueString);
                         if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
@@ -345,7 +345,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             " was out of the VHDL integer range it was substituted with a binary literal (" +
                             binaryLiteral + ")."));
 
-                        var size = type.GetSize();
+                        var size = vhdlType.GetSize();
 
                         if (binaryLiteral.Length < size)
                         {
@@ -356,7 +356,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
-                return valueString.ToVhdlValue(type);
+                return valueString.ToVhdlValue(vhdlType);
             }
             else if (expression is BinaryOperatorExpression binaryExpression)
             {
@@ -400,7 +400,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // directly.
                 if (context.TransformationContext.UseSimpleMemory())
                 {
-                    arguments = arguments.Where(argument => !argument.GetActualTypeReference().IsSimpleMemory());
+                    arguments = arguments.Where(argument => !argument.GetActualType().IsSimpleMemory());
                 }
 
                 foreach (var argument in arguments)
@@ -408,7 +408,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     transformedParameters.Add(new TransformedInvocationParameter
                     {
                         Reference = Transform(argument, context),
-                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualTypeReference(), context.TransformationContext)
+                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
                     });
                 }
 
@@ -477,7 +477,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // Is this a Task result access like array[k].Result or task.Result?
-                var targetTypeReference = memberReference.Target.GetActualTypeReference();
+                var targetType = memberReference.Target.GetActualType();
                 if (targetTypeReference != null &&
                     targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
                     memberReference.MemberName == "Result")
@@ -519,7 +519,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var expressionType = _typeConverter
                     .ConvertTypeReference(
-                        unary.Expression is CastExpression ? unary.Expression.GetActualTypeReference(true) : unary.Expression.GetActualTypeReference(),
+                        unary.Expression is CastExpression ? unary.Expression.GetActualType(true) : unary.Expression.GetActualType(),
                         context.TransformationContext);
                 var expressionSize = expressionType.GetSize();
                 var clockCyclesNeededForOperation = context.TransformationContext.DeviceDriver
@@ -643,10 +643,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return innerExpressionResult;
                 }
 
-                var fromTypeReference = castExpression.Expression.GetActualTypeReference(true) ?? castExpression.GetActualTypeReference();
-                var fromType = _declarableTypeCreator
-                    .CreateDeclarableType(castExpression.Expression, fromTypeReference, context.TransformationContext);
-                var toType = _declarableTypeCreator
+                ICSharpCode.Decompiler.TypeSystem.IType fromType = castExpression.Expression.GetActualType(true) ?? castExpression.GetActualType();
+                var fromVhdlType = _declarableTypeCreator
+                    .CreateDeclarableType(castExpression.Expression, fromVhdlType, context.TransformationContext);
+                var toVhdlType = _declarableTypeCreator
                     .CreateDeclarableType(castExpression, castExpression.Type, context.TransformationContext);
 
                 // If the inner expression produced a data object then let's check the size of that: if it's the same
@@ -659,12 +659,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 var typeConversionResult = _typeConversionTransformer
-                    .ImplementTypeConversion(fromType, toType, innerExpressionResult);
+                    .ImplementTypeConversion(fromVhdlType, toVhdlType, innerExpressionResult);
                 if (typeConversionResult.IsLossy)
                 {
                     scope.Warnings.AddWarning(
                         "LossyCast",
-                        "A cast from " + fromType.ToVhdl() + " to " + toType.ToVhdl() +
+                        "A cast from " + fromVhdlType.ToVhdl() + " to " + toVhdlType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
@@ -700,7 +700,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     ArrayReference = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
-                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
+                            _typeConverter.ConvertTypeReference(indexExpression.GetActualType(), context.TransformationContext),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
                         .ConvertedFromExpression

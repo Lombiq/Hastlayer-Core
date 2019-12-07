@@ -65,7 +65,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpressionParent.Is<CastExpression>(out var castExpression))
             {
                 var newExpression = new PrimitiveExpression(_astExpressionEvaluator.EvaluateCastExpression(castExpression));
-                newExpression.AddAnnotation(primitiveExpressionParent.GetActualTypeReference(true));
+                newExpression.AddAnnotation(primitiveExpressionParent.GetActualType(true));
 
                 primitiveExpressionParent.ReplaceWith(newExpression);
                 primitiveExpressionParent = newExpression.Parent;
@@ -137,7 +137,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            if (node.GetActualTypeReference()?.IsArray == false)
+            if (node.GetActualType()?.IsArray == false)
             {
                 // Passing on constructor mappings.
 

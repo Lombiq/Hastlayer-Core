@@ -52,7 +52,7 @@ namespace Hast.Transformer.Services
 
                 var memberReference = invocationExpression.Target as MemberReferenceExpression;
 
-                var invocationTypeReference = invocationExpression.GetActualTypeReference();
+                var invocationType = invocationExpression.GetActualType();
 
                 Func<MemberReferenceExpression> createArrayLengthExpression = () =>
                     new MemberReferenceExpression(memberReference.Target.Clone(), "Length")
@@ -68,7 +68,7 @@ namespace Hast.Transformer.Services
                         arrayLengthExpression.Clone())
                     .WithAnnotation(new DummyArrayCopyMemberDefinition());
 
-                if (!IsImmutableArrayName(invocationTypeReference?.FullName) || memberReference == null)
+                if (!IsImmutableArrayName(invocationType?.FullName) || memberReference == null)
                 {
                     var methodReference = invocationExpression.Annotation<MethodReference>();
 
@@ -83,7 +83,7 @@ namespace Hast.Transformer.Services
                 }
                 else
                 {
-                    var arrayTypeInformation = CreateArrayTypeInformationFromImmutableArrayReference(invocationTypeReference);
+                    var arrayTypeInformation = CreateArrayTypeInformationFromImmutableArrayReference(invocationType);
 
                     if (memberReference.MemberName == "CreateRange")
                     {
@@ -235,12 +235,12 @@ namespace Hast.Transformer.Services
 
             private TypeReference ChangeTypeInformationIfImmutableArrayReferencingExpression(AstNode node)
             {
-                var expressionTypeReference = node.GetActualTypeReference();
+                var expressionType = node.GetActualType();
 
-                if (!IsImmutableArrayName(expressionTypeReference?.FullName)) return null;
+                if (!IsImmutableArrayName(expressionType?.FullName)) return null;
 
                 node.RemoveAnnotations<TypeInformation>();
-                var typeInformation = CreateArrayTypeInformationFromImmutableArrayReference(expressionTypeReference);
+                var typeInformation = CreateArrayTypeInformationFromImmutableArrayReference(expressionType);
                 node.AddAnnotation(typeInformation);
 
                 return typeInformation.ExpectedType;

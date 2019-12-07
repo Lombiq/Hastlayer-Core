@@ -28,7 +28,7 @@ namespace Hast.Transformer.Services
                 var compilerGeneratedVariableName = string.Empty;
                 if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
                         (compilerGeneratedVariableName = identifier.Identifier).StartsWith("arg_")) &&
-                    assignmentExpression.Right.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
+                    assignmentExpression.Right.GetActualType().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
                 {
                     InlinableVariableMapping[compilerGeneratedVariableName] =
                         ((IdentifierExpression)assignmentExpression.Right).Identifier;
@@ -57,7 +57,7 @@ namespace Hast.Transformer.Services
                     // If this is in an arg_9C_0 = array; kind of assignment, then remove the whole assignment's statement.
                     if (parentAssignment != null &&
                         parentAssignment.Left == identifierExpression &&
-                        parentAssignment.Right.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
+                        parentAssignment.Right.GetActualType().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
                     {
                         parentAssignment.FindFirstParentOfType<ExpressionStatement>().Remove();
                     }

@@ -32,7 +32,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 }
                 else
                 {
-                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualType().FullName);
                 }
             }
             else
@@ -116,8 +116,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             }
             else if (target is IdentifierExpression || target is IndexerExpression)
             {
-                var typeReference = target.GetActualTypeReference();
-                return typeReference == null ? null : typeDeclarationLookupTable.Lookup(typeReference.FullName);
+                var type = target.GetActualType();
+                return type == null ? null : typeDeclarationLookupTable.Lookup(type.FullName);
             }
             else if (target is MemberReferenceExpression)
             {
@@ -148,11 +148,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// Determines if the member reference is an access to an array's Length property.
         /// </summary>
         public static bool IsArrayLengthAccess(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualTypeReference().IsArray;
+            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualType().IsArray;
 
         public static bool IsTaskStartNew(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.MemberName == "StartNew" &&
-            memberReferenceExpression.Target.GetActualTypeReference().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
+            memberReferenceExpression.Target.GetActualType().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.Annotation<MethodDefinition>() != null;

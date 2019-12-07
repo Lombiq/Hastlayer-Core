@@ -40,7 +40,7 @@ namespace Hast.Transformer.Services
                     var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(
                         arrayCreateExpression,
                         arrayCreateExpression.Type,
-                        arrayCreateExpression.GetActualTypeReference());
+                        arrayCreateExpression.GetActualType());
 
                     var newArrayCreateExpression = (ArrayCreateExpression)arrayCreateExpression.Clone();
                     arrayCreateExpression.CopyAnnotationsTo(newArrayCreateExpression);

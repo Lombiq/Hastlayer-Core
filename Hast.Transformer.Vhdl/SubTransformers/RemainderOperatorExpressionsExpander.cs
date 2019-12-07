@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Changing a % b to a – a / b * b.
                 // At this point the operands should have the same type, so it's safe just clone around.
 
-                if (binaryOperatorExpression.GetActualTypeReference() == null)
+                if (binaryOperatorExpression.GetActualType() == null)
                 {
                     binaryOperatorExpression
                         .AddAnnotation(binaryOperatorExpression.Left.GetTypeInformationOrCreateFromActualTypeReference());
@@ -53,7 +53,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // so somehow we need to distinguish between them.
                         "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
                         operand,
-                        TypeHelper.CreateAstType(operand.GetActualTypeReference(true)));
+                        TypeHelper.CreateAstType(operand.GetActualType(true)));
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
                         .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());

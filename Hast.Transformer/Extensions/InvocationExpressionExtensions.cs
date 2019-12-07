@@ -17,7 +17,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 currentNode = currentNode.Parent;
             }
 
-            return currentNode.GetActualTypeReference();
+            return currentNode.GetActualType();
         }
 
         public static string GetTargetMemberFullName(this InvocationExpression expression) =>
