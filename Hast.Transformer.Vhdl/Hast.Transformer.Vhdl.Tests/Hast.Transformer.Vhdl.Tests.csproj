@@ -40,7 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Hast.Samples.FSharpSampleAssembly">
-      <HintPath>..\..\..\Hast.Samples.FSharpSampleAssembly\bin\Debug\netstandard2.0\Hast.Samples.FSharpSampleAssembly.dll</HintPath>
+      <HintPath>..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\bin\Debug\netstandard2.0\Hast.Samples.FSharpSampleAssembly.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
       <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
