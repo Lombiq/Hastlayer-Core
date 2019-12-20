@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Hast.Catapult;
+﻿using Hast.Catapult;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
@@ -22,6 +13,15 @@ using Orchard.Exceptions;
 using Orchard.FileSystems.AppData;
 using Orchard.Logging;
 using Orchard.Services;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Hast.Remote.Worker
 {
@@ -42,9 +42,9 @@ namespace Hast.Remote.Worker
 
 
         public TransformationWorker(
-            IJsonConverter jsonConverter, 
-            IAppDataFolder appDataFolder, 
-            IClock clock, 
+            IJsonConverter jsonConverter,
+            IAppDataFolder appDataFolder,
+            IClock clock,
             IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager)
         {
             _jsonConverter = jsonConverter;
@@ -71,7 +71,7 @@ namespace Hast.Remote.Worker
                         {
                             typeof(DefaultTransformer).Assembly,
                             typeof(VhdlTransformingEngine).Assembly,
-                            typeof(Nexys4DdrDriver).Assembly,
+                            typeof(NexysA7Driver).Assembly,
                             typeof(TimingReportParser).Assembly,
                             typeof(CatapultDriver).Assembly
                         }
