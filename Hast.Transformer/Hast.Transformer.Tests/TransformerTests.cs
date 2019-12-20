@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Synthesis.Services;
@@ -14,11 +11,15 @@ using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Xilinx;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Hast.Xilinx.Abstractions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Services;
 using Orchard.Tests.Utility;
 using Shouldly;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -196,7 +197,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private static HardwareGenerationConfiguration CreateConfig()
         {
-            var configuration = new HardwareGenerationConfiguration("Nexys4 DDR");
+            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName);
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }

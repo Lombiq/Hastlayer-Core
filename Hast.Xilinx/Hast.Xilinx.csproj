@@ -61,6 +61,8 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Nexys4DdrDriver.cs" />
+    <Compile Include="NexysA7Driver.cs" />
+    <Compile Include="NexysDriverBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
