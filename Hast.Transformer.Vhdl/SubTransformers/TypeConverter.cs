@@ -76,7 +76,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             // This type is a value type but was passed as reference explicitly.
-            if (type is Mono.Cecil.ByReferenceType && type.Name.EndsWith("&"))
+            if (type.IsByRefLike && type.Name.EndsWith("&"))
             {
                 return ConvertType(type.GetElementType(), context);
             }

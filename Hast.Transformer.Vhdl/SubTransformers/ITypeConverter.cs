@@ -29,10 +29,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             ParameterDeclaration parameter,
             IVhdlTransformationContext context)
         {
-            var parameterType = parameter.Annotation<ParameterDefinition>().ParameterType;
+            var parameterType = parameter.GetActualType();
 
             // This is an out or ref parameter.
-            if (parameterType.IsByReference)
+            if (parameterType.IsByRefLike)
             {
                 parameterType = ((ByReferenceType)parameterType).ElementType;
             }
