@@ -13,14 +13,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly ConstantValuesTable _constantValuesTable;
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly IArraySizeHolder _arraySizeHolder;
+        private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
 
-        public ConstantValuesSubstitutingVisitor(ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
+        public ConstantValuesSubstitutingVisitor(
+            ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
         {
             _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
             _constantValuesTable = constantValuesSubstitutingAstProcessor.ConstantValuesTable;
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
             _arraySizeHolder = constantValuesSubstitutingAstProcessor.ArraySizeHolder;
+            _knownTypeLookupTable = constantValuesSubstitutingAstProcessor.KnownTypeLookupTable;
         }
 
 
@@ -222,7 +225,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // array size defined then just substitute the array length too.
             lengthArgument.ReplaceWith(
                 new PrimitiveExpression(existingSize.Length)
-                .WithAnnotation(TypeHelper.CreateInt32TypeInformation()));
+                .WithAnnotation(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32).ToResolveResult()));
         }
 
         protected override void VisitChildren(AstNode node)

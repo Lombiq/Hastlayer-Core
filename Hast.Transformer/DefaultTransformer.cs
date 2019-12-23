@@ -57,6 +57,7 @@ namespace Hast.Transformer
         private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
         private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
+        private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
 
 
         public DefaultTransformer(
@@ -90,7 +91,8 @@ namespace Hast.Transformer
             IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
             IDeviceDriverSelector deviceDriverSelector,
             IDecompilationErrorsFixer decompilationErrorsFixer,
-            IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster)
+            IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
+            IKnownTypeLookupTableFactory knownTypeLookupTableFactory)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -123,6 +125,7 @@ namespace Hast.Transformer
             _deviceDriverSelector = deviceDriverSelector;
             _decompilationErrorsFixer = decompilationErrorsFixer;
             _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
+            _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
         }
 
 
@@ -259,6 +262,9 @@ namespace Hast.Transformer
                 File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
             }
 
+            // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
+            var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
+
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
             _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasie(syntaxTree);
 
@@ -268,8 +274,8 @@ namespace Hast.Transformer
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
             _decompilationErrorsFixer.FixDecompilationErrors(syntaxTree);
-            _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
-            _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree);
+            _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree, knownTypeLookupTable);
+            _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree, knownTypeLookupTable);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
@@ -292,7 +298,7 @@ namespace Hast.Transformer
             var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
             if (transformerConfiguration.EnableConstantSubstitution)
             {
-                _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, arraySizeHolder, configuration);
+                _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, arraySizeHolder, configuration, knownTypeLookupTable);
             }
 
             // Needs to run after const substitution.
@@ -328,6 +334,7 @@ namespace Hast.Transformer
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
+                KnownTypeLookupTable = knownTypeLookupTable,
                 ArraySizeHolder = arraySizeHolder,
                 DeviceDriver = deviceDriver
             };

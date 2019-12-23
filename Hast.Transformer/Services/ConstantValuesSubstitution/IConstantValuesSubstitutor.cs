@@ -13,6 +13,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         void SubstituteConstantValues(
             SyntaxTree syntaxTree,
             IArraySizeHolder arraySizeHolder,
-            IHardwareGenerationConfiguration configuration);
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable);
     }
 }

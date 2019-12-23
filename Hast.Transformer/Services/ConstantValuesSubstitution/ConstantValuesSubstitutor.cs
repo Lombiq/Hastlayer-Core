@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -22,16 +21,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
 
         public void SubstituteConstantValues(
-            SyntaxTree syntaxTree, 
-            IArraySizeHolder arraySizeHolder, 
-            IHardwareGenerationConfiguration configuration)
+            SyntaxTree syntaxTree,
+            IArraySizeHolder arraySizeHolder,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable)
         {
             new ConstantValuesSubstitutingAstProcessor(
                 new ConstantValuesTable(),
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 arraySizeHolder,
                 new Dictionary<string, ConstantValuesSubstitutingAstProcessor.ConstructorReference>(),
-                _astExpressionEvaluator)
+                _astExpressionEvaluator,
+                knownTypeLookupTable)
                 .SubstituteConstantValuesInSubTree(syntaxTree, false);
         }
     }

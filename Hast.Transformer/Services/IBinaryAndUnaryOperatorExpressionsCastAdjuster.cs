@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
@@ -34,6 +30,6 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface IBinaryAndUnaryOperatorExpressionsCastAdjuster : IDependency
     {
-        void AdjustBinaryAndUnaryOperatorExpressions(SyntaxTree syntaxTree);
+        void AdjustBinaryAndUnaryOperatorExpressions(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
@@ -11,7 +12,7 @@ namespace Hast.Transformer.Services
 {
     public class ImmutableArraysToStandardArraysConverter : IImmutableArraysToStandardArraysConverter
     {
-        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree)
+        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable)
         {
             // Note that ImmutableArrays can only be single-dimensional in themselves so the whole code here is built
             // around that assumption (though it's possible to create ImmutableArrays of ImmutableArrays, but this is
@@ -20,12 +21,21 @@ namespace Hast.Transformer.Services
             // This implementation is partial, to the extent needed for Unum support. More value holders, like fields,
             // could also be handled for example.
 
-            syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor());
+            syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
         }
 
 
         private class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
         {
+            private readonly IKnownTypeLookupTable _knownTypeLookupTable;
+
+
+            public ImmutableArraysToStandardArraysConvertingVisitor(IKnownTypeLookupTable knownTypeLookupTable)
+            {
+                _knownTypeLookupTable = knownTypeLookupTable;
+            }
+
+
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {
                 base.VisitPropertyDeclaration(propertyDeclaration);
@@ -57,7 +67,7 @@ namespace Hast.Transformer.Services
 
                 Func<MemberReferenceExpression> createArrayLengthExpression = () =>
                     new MemberReferenceExpression(memberReference.Target.Clone(), "Length")
-                        .WithAnnotation(TypeHelper.CreateInt32TypeInformation());
+                        .WithAnnotation(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32).ToResolveResult());
 
                 Func<Expression, MemberReferenceExpression, InvocationExpression> createArrayCopyExpression =
                     (destinationValueHolder, arrayLengthExpression) =>
@@ -144,7 +154,7 @@ namespace Hast.Transformer.Services
                             Type = memberReference.TypeArguments.Single().Clone(),
                         };
                         var sizeExpression = new PrimitiveExpression(0)
-                            .WithAnnotation(TypeHelper.CreateInt32TypeInformation());
+                            .WithAnnotation(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32).ToResolveResult());
                         arrayCreate.Arguments.Add(sizeExpression);
                         arrayCreate.AddAnnotation(arrayTypeInformation);
                         invocationExpression.ReplaceWith(arrayCreate);

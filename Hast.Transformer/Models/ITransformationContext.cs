@@ -30,6 +30,11 @@ namespace Hast.Transformer.Models
         ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
 
         /// <summary>
+        /// Table to look up known types.
+        /// </summary>
+        IKnownTypeLookupTable KnownTypeLookupTable { get; }
+
+        /// <summary>
         /// Container for the sizes of statically sized arrays. 
         /// </summary>
         IArraySizeHolder ArraySizeHolder { get; }

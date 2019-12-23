@@ -10,6 +10,7 @@ namespace Hast.Transformer.Models
         public SyntaxTree SyntaxTree { get; set; }
         public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
         public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; set; }
+        public IKnownTypeLookupTable KnownTypeLookupTable { get; set; }
         public IArraySizeHolder ArraySizeHolder { get; set; }
         public IDeviceDriver DeviceDriver { get; set; }
 
@@ -20,6 +21,7 @@ namespace Hast.Transformer.Models
             SyntaxTree = previousContext.SyntaxTree;
             HardwareGenerationConfiguration = previousContext.HardwareGenerationConfiguration;
             TypeDeclarationLookupTable = previousContext.TypeDeclarationLookupTable;
+            KnownTypeLookupTable = previousContext.KnownTypeLookupTable;
             ArraySizeHolder = previousContext.ArraySizeHolder;
             DeviceDriver = previousContext.DeviceDriver;
         }
