@@ -119,11 +119,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 if (arraySize != null)
                 {
                     var newExpression = new PrimitiveExpression(arraySize.Length);
-                    var typeInformation = memberReferenceExpression.Annotation<TypeInformation>();
-                    if (typeInformation != null)
-                    {
-                        newExpression.AddAnnotation(typeInformation);
-                    }
+                    newExpression.AddAnnotation(memberReferenceExpression.CreateResolveResultFromActualType());
                     memberReferenceExpression.ReplaceWith(newExpression);
                 }
 
@@ -254,7 +250,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
 
             // Attributes can slip in here but we don't care about those.
-            if (!(node is ICSharpCode.Decompiler.CSharp.Attribute))
+            if (!(node is Attribute))
             {
                 base.VisitChildren(node);
             }
