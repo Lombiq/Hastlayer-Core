@@ -1,4 +1,6 @@
-﻿namespace ICSharpCode.Decompiler.TypeSystem
+﻿using ICSharpCode.Decompiler.TypeSystem.Implementation;
+
+namespace ICSharpCode.Decompiler.TypeSystem
 {
     public static class TypeExtensions
     {
@@ -25,5 +27,8 @@
         }
 
         public static bool IsArray(this IType type) => type.Kind == TypeKind.Array;
+
+        public static IType GetElementType(this IType type) =>
+            type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
     }
 }

@@ -53,7 +53,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression) ||
                     SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var cellCount))
                 {
-                    CreateArrayDeclarationIfNew(AstBuildingHelper.ConvertType(assignmentExpression.GetActualType().GetElementType()));
+                    // ArrayType would be a clashing name so need to use GetElementType() as normal method.
+                    CreateArrayDeclarationIfNew(AstBuildingHelper
+                        .ConvertType(ICSharpCode.Decompiler.TypeSystem.TypeExtensions
+                            .GetElementType(assignmentExpression.GetActualType())));
                 }
             }
 
