@@ -1,9 +1,8 @@
-﻿using Hast.Transformer.Helpers;
-using Hast.Transformer.Vhdl.Models;
+﻿using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard;
-using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -12,7 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// </summary>
     public interface IDeclarableTypeCreator : IDependency
     {
-        DataType CreateDeclarableType(AstNode valueHolder, TypeReference typeReference, IVhdlTransformationContext context);
+        DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context);
     }
 
 
@@ -22,27 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             this IDeclarableTypeCreator declarableTypeCreator,
             AstNode valueHolder,
             AstType astType,
-            IVhdlTransformationContext context)
-        {
-            var type = astType.GetActualType();
-
-            if (type == null)
-            {
-                if (astType.Parent is VariableDeclarationStatement)
-                {
-                    type = ((VariableDeclarationStatement)astType.Parent).Variables.First().GetActualType();
-                }
-                else if (astType is PrimitiveType)
-                {
-                    type = TypeHelper.CreatePrimitiveTypeReference(((PrimitiveType)astType).KnownTypeCode.ToString());
-                }
-                else
-                {
-                    type = astType.Parent.GetActualType();
-                }
-            }
-
-            return declarableTypeCreator.CreateDeclarableType(valueHolder, type, context);
-        }
+            IVhdlTransformationContext context) =>
+            declarableTypeCreator.CreateDeclarableType(valueHolder, astType.GetActualType(), context);
     }
 }
