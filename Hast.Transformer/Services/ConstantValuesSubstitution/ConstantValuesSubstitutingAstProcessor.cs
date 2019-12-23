@@ -7,8 +7,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     internal class ConstantValuesSubstitutingAstProcessor
     {
-        private readonly IKnownTypeLookupTable _knownTypeLookupTable;
-
         public ConstantValuesTable ConstantValuesTable { get; }
         public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
         public IArraySizeHolder ArraySizeHolder { get; }
