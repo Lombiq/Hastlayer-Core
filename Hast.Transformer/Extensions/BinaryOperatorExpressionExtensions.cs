@@ -1,8 +1,10 @@
-﻿namespace ICSharpCode.Decompiler.CSharp.Syntax
+﻿using ICSharpCode.Decompiler.TypeSystem;
+
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class BinaryOperatorExpressionExtensions
     {
-        public static TypeReference GetResultTypeReference(this BinaryOperatorExpression expression)
+        public static IType GetResultType(this BinaryOperatorExpression expression)
         {
             var resultType = expression.GetActualType(true);
             if (resultType == null)

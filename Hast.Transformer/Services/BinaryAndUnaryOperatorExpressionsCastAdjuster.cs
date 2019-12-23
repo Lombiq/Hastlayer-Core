@@ -154,7 +154,7 @@ namespace Hast.Transformer.Services
                         !(firstNonParenthesizedExpressionParent is BinaryOperatorExpression))
                     {
                         var castExpression = CreateCast(
-                            binaryOperatorExpression.GetResultTypeReference(),
+                            binaryOperatorExpression.GetResultType(),
                             binaryOperatorExpression,
                             out var clonedBinaryOperatorExpression);
                         binaryOperatorExpression.ReplaceWith(castExpression);

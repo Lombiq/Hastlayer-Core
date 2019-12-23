@@ -99,8 +99,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 {
                     var newExpression = new PrimitiveExpression(
                         _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
-                    var resultType = binaryOperatorExpression.GetResultTypeReference();
-                    newExpression.AddAnnotation(resultType);
+                    var resultType = binaryOperatorExpression.GetResultType();
+                    newExpression.AddAnnotation(resultType.ToResolveResult());
                     if (!(newExpression.Value is bool) && resultType.FullName == typeof(bool).FullName)
                     {
                         newExpression.Value = newExpression.Value.ToString() == 1.ToString();

@@ -181,17 +181,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var currentBlock = context.Scope.CurrentBlock;
 
             var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
-            var resultType = expression.GetResultTypeReference();
+            var resultType = expression.GetResultType();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
 
-            TypeReference preCastTypeReference = null;
+            IType preCastType = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
             // to a smaller type here, then a resize to a bigger type as a result of the cast.
             var hasExplicitCast = firstNonParenthesizedExpressionParent is CastExpression;
             if (hasExplicitCast)
             {
-                preCastTypeReference = resultType;
+                preCastType = resultType;
                 resultType = firstNonParenthesizedExpressionParent.GetActualType(true);
             }
 
@@ -357,7 +357,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 var fromType = isShift && !hasExplicitCast ?
                     leftVhdlType :
-                    _typeConverter.ConvertType(preCastTypeReference, context.TransformationContext);
+                    _typeConverter.ConvertType(preCastType, context.TransformationContext);
 
                 var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
                     fromType,
