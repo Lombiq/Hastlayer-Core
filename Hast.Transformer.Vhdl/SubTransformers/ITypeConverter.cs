@@ -39,11 +39,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (!parameterType.IsArray())
             {
-                return typeConverter.ConvertTypeReference(parameterType, context);
+                return typeConverter.ConvertType(parameterType, context);
             }
 
             return ArrayHelper.CreateArrayInstantiation(
-                typeConverter.ConvertTypeReference(parameterType.GetElementType(), context),
+                typeConverter.ConvertType(parameterType.GetElementType(), context),
                 context.ArraySizeHolder.GetSizeOrThrow(parameter).Length);
         }
     }

@@ -195,7 +195,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 resultType = firstNonParenthesizedExpressionParent.GetActualType(true);
             }
 
-            var resultVhdlType = _typeConverter.ConvertTypeReference(resultType, context.TransformationContext);
+            var resultVhdlType = _typeConverter.ConvertType(resultType, context.TransformationContext);
             var resultTypeSize = resultVhdlType.GetSize();
 
 
@@ -237,14 +237,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeSize = 0;
             if (leftType != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
             {
-                leftVhdlType = _typeConverter.ConvertTypeReference(leftType, context.TransformationContext);
+                leftVhdlType = _typeConverter.ConvertType(leftType, context.TransformationContext);
                 leftTypeSize = leftVhdlType.GetSize();
             }
             DataType rightVhdlType = null;
             var rightTypeSize = 0;
             if (rightType != null)
             {
-                rightVhdlType = _typeConverter.ConvertTypeReference(rightType, context.TransformationContext);
+                rightVhdlType = _typeConverter.ConvertType(rightType, context.TransformationContext);
                 rightTypeSize = rightVhdlType.GetSize();
             }
 

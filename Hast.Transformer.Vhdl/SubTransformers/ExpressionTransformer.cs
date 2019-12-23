@@ -309,7 +309,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var type = primitive.GetActualType();
 
-                var vhdlType = _typeConverter.ConvertTypeReference(type, context.TransformationContext);
+                var vhdlType = _typeConverter.ConvertType(type, context.TransformationContext);
                 var valueString = primitive.Value.ToString();
                 // Replacing decimal comma to decimal dot.
                 if (vhdlType.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
@@ -519,7 +519,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 var expressionType = _typeConverter
-                    .ConvertTypeReference(
+                    .ConvertType(
                         unary.Expression is CastExpression ? unary.Expression.GetActualType(true) : unary.Expression.GetActualType(),
                         context.TransformationContext);
                 var expressionSize = expressionType.GetSize();
@@ -543,9 +543,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
                         {
                             var fromType = _typeConverter
-                                .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
+                                .ConvertType(parentTypeInformation.ExpectedType, context.TransformationContext);
                             var toType = _typeConverter
-                                .ConvertTypeReference(parentTypeInformation.InferredType, context.TransformationContext);
+                                .ConvertType(parentTypeInformation.InferredType, context.TransformationContext);
 
                             if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
                             {
@@ -701,7 +701,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     ArrayReference = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
-                            _typeConverter.ConvertTypeReference(indexExpression.GetActualType(), context.TransformationContext),
+                            _typeConverter.ConvertType(indexExpression.GetActualType(), context.TransformationContext),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
                         .ConvertedFromExpression

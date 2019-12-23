@@ -22,7 +22,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (typeReference.IsArray())
             {
                 return ArrayHelper.CreateArrayInstantiation(
-                    _typeConverter.ConvertTypeReference(((Mono.Cecil.ArrayType)typeReference).ElementType, context),
+                    _typeConverter.ConvertType(((Mono.Cecil.ArrayType)typeReference).ElementType, context),
                     context.ArraySizeHolder.GetSizeOrThrow(valueHolder).Length);
             }
             else

@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // If the type of an operand can't be determined the best guess is the expression's type.
             var expressionType = binaryOperatorExpression.GetActualType();
             var expressionVhdlType = expressionType != null ?
-                _typeConverter.ConvertTypeReference(expressionType, context.TransformationContext) :
+                _typeConverter.ConvertType(expressionType, context.TransformationContext) :
                 null;
 
             var leftType = binaryOperatorExpression.Left.GetActualType();
@@ -64,11 +64,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             var leftVhdlType = leftType != null ?
-                _typeConverter.ConvertTypeReference(leftType, context.TransformationContext) :
+                _typeConverter.ConvertType(leftType, context.TransformationContext) :
                 expressionVhdlType;
 
             var rightVhdlType = rightType != null ?
-                _typeConverter.ConvertTypeReference(rightType, context.TransformationContext) :
+                _typeConverter.ConvertType(rightType, context.TransformationContext) :
                 expressionVhdlType;
 
             if (leftVhdlType == null || rightVhdlType == null)
