@@ -1,6 +1,4 @@
-﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp.Syntax;
-using System.Linq;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
@@ -18,59 +16,59 @@ namespace Hast.Transformer.Services
             {
                 base.VisitArrayCreateExpression(arrayCreateExpression);
 
-                if (!arrayCreateExpression.Initializer.Elements.Any()) return;
+                //if (!arrayCreateExpression.Initializer.Elements.Any()) return;
 
-                var initializerElements = arrayCreateExpression.Initializer.Elements.ToArray();
-                arrayCreateExpression.Initializer.Elements.Clear();
+                //var initializerElements = arrayCreateExpression.Initializer.Elements.ToArray();
+                //arrayCreateExpression.Initializer.Elements.Clear();
 
-                var int32TypeInformation = TypeHelper.CreateInt32TypeInformation();
+                //var int32TypeInformation = TypeHelper.CreateInt32TypeInformation();
 
-                // Setting the size argument, e.g. new int[] will be turned into new int[5].
-                arrayCreateExpression.Arguments.Clear();
-                arrayCreateExpression.Arguments.Add(
-                    new PrimitiveExpression(initializerElements.Length).WithAnnotation(int32TypeInformation));
+                //// Setting the size argument, e.g. new int[] will be turned into new int[5].
+                //arrayCreateExpression.Arguments.Clear();
+                //arrayCreateExpression.Arguments.Add(
+                //    new PrimitiveExpression(initializerElements.Length).WithAnnotation(int32TypeInformation));
 
-                var parentAssignment = arrayCreateExpression
-                    .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == arrayCreateExpression);
+                //var parentAssignment = arrayCreateExpression
+                //    .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == arrayCreateExpression);
 
-                // The array wasn't assigned to a variable or anything but rather directly passed to a method or
-                // constructor. Thus first we need to add a variable to allow uniform processing later.
-                if (parentAssignment == null)
-                {
-                    var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(
-                        arrayCreateExpression,
-                        arrayCreateExpression.Type,
-                        arrayCreateExpression.GetActualType());
+                //// The array wasn't assigned to a variable or anything but rather directly passed to a method or
+                //// constructor. Thus first we need to add a variable to allow uniform processing later.
+                //if (parentAssignment == null)
+                //{
+                //    var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(
+                //        arrayCreateExpression,
+                //        arrayCreateExpression.Type,
+                //        arrayCreateExpression.GetActualType());
 
-                    var newArrayCreateExpression = (ArrayCreateExpression)arrayCreateExpression.Clone();
-                    arrayCreateExpression.CopyAnnotationsTo(newArrayCreateExpression);
-                    parentAssignment = new AssignmentExpression(variableIdentifier, newArrayCreateExpression);
-                    parentAssignment.AddAnnotation(arrayCreateExpression.Annotation<TypeInformation>());
+                //    var newArrayCreateExpression = (ArrayCreateExpression)arrayCreateExpression.Clone();
+                //    arrayCreateExpression.CopyAnnotationsTo(newArrayCreateExpression);
+                //    parentAssignment = new AssignmentExpression(variableIdentifier, newArrayCreateExpression);
+                //    parentAssignment.AddAnnotation(arrayCreateExpression.Annotation<TypeInformation>());
 
-                    AstInsertionHelper.InsertStatementBefore(
-                        arrayCreateExpression.FindFirstParentStatement(),
-                        new ExpressionStatement(parentAssignment));
+                //    AstInsertionHelper.InsertStatementBefore(
+                //        arrayCreateExpression.FindFirstParentStatement(),
+                //        new ExpressionStatement(parentAssignment));
 
-                    arrayCreateExpression.ReplaceWith(variableIdentifier.Clone());
-                    arrayCreateExpression = newArrayCreateExpression;
-                }
+                //    arrayCreateExpression.ReplaceWith(variableIdentifier.Clone());
+                //    arrayCreateExpression = newArrayCreateExpression;
+                //}
 
-                var parentStatement = arrayCreateExpression.FindFirstParentStatement();
+                //var parentStatement = arrayCreateExpression.FindFirstParentStatement();
 
-                for (int i = initializerElements.Length - 1; i >= 0; i--)
-                {
-                    var elementAssignmentStatement = new ExpressionStatement(new AssignmentExpression(
-                        left: new IndexerExpression(
-                            target: parentAssignment
-                                .Left // This should be the IdentifierExpression that the array was assigned to.
-                                .Clone(),
-                            arguments: new PrimitiveExpression(i).WithAnnotation(int32TypeInformation))
-                            .WithAnnotation(initializerElements[i].Annotation<TypeInformation>()),
-                        right: initializerElements[i]
-                        ));
+                //for (int i = initializerElements.Length - 1; i >= 0; i--)
+                //{
+                //    var elementAssignmentStatement = new ExpressionStatement(new AssignmentExpression(
+                //        left: new IndexerExpression(
+                //            target: parentAssignment
+                //                .Left // This should be the IdentifierExpression that the array was assigned to.
+                //                .Clone(),
+                //            arguments: new PrimitiveExpression(i).WithAnnotation(int32TypeInformation))
+                //            .WithAnnotation(initializerElements[i].Annotation<TypeInformation>()),
+                //        right: initializerElements[i]
+                //        ));
 
-                    AstInsertionHelper.InsertStatementAfter(parentStatement, elementAssignmentStatement);
-                }
+                //    AstInsertionHelper.InsertStatementAfter(parentStatement, elementAssignmentStatement);
+                //}
             }
         }
     }
