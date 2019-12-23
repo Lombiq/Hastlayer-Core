@@ -21,11 +21,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public DataType ConvertTypeReference(
-            TypeReference typeReference,
+        public DataType ConvertType(
+            IType type,
             IVhdlTransformationContext context)
         {
-            switch (typeReference.FullName)
+            switch (type.FullName)
             {
                 case "System.Boolean":
                     return ConvertPrimitive(KnownTypeCode.Boolean);
@@ -59,28 +59,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.Void);
             }
 
-            if (typeReference.IsArray)
+            if (type.IsArray())
             {
-                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType(), context));
+                return CreateArrayType(ConvertType(type.GetElementType(), context));
             }
 
-            if (IsTaskTypeReference(typeReference))
+            if (IsTaskTypeReference(type))
             {
-                if (typeReference is GenericInstanceType)
+                if (type is GenericInstanceType)
                 {
-                    return ConvertTypeReference(((GenericInstanceType)typeReference).GenericArguments.Single(), context);
+                    return ConvertType(((GenericInstanceType)type).GenericArguments.Single(), context);
                 }
 
                 return SpecialTypes.Task;
             }
 
             // This type is a value type but was passed as reference explicitly.
-            if (typeReference is Mono.Cecil.ByReferenceType && typeReference.Name.EndsWith("&"))
+            if (type is Mono.Cecil.ByReferenceType && type.Name.EndsWith("&"))
             {
-                return ConvertTypeReference(typeReference.GetElementType(), context);
+                return ConvertType(type.GetElementType(), context);
             }
 
-            return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, context);
+            return ConvertTypeDefinition(type as TypeDefinition, type.FullName, context);
         }
 
         public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)

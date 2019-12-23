@@ -19,7 +19,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public DataType CreateDeclarableType(AstNode valueHolder, TypeReference typeReference, IVhdlTransformationContext context)
         {
-            if (typeReference.IsArray)
+            if (typeReference.IsArray())
             {
                 return ArrayHelper.CreateArrayInstantiation(
                     _typeConverter.ConvertTypeReference(((Mono.Cecil.ArrayType)typeReference).ElementType, context),
@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else
             {
-                return _typeConverter.ConvertTypeReference(typeReference, context);
+                return _typeConverter.ConvertType(typeReference, context);
             }
         }
     }

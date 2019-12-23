@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
@@ -232,7 +233,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
 
             if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
-                node.GetActualType()?.IsArray == false)
+                node.GetActualType()?.IsArray() == false)
             {
                 var fullName = node.GetFullName();
 

@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Linq;
 
@@ -148,7 +149,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// Determines if the member reference is an access to an array's Length property.
         /// </summary>
         public static bool IsArrayLengthAccess(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualType().IsArray;
+            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualType().IsArray();
 
         public static bool IsTaskStartNew(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.MemberName == "StartNew" &&

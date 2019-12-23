@@ -1,7 +1,8 @@
-﻿using System;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {
@@ -11,9 +12,9 @@ namespace Hast.Transformer.Vhdl.Helpers
         {
             var elementSize = elementType.GetSize();
 
-            return 
-                (elementType.Name.TrimExtendedVhdlIdDelimiters() + 
-                (elementSize != 0 ? elementSize.ToString() : string.Empty) + 
+            return
+                (elementType.Name.TrimExtendedVhdlIdDelimiters() +
+                (elementSize != 0 ? elementSize.ToString() : string.Empty) +
                 "_Array")
                 .ToExtendedVhdlId();
         }
@@ -29,8 +30,8 @@ namespace Hast.Transformer.Vhdl.Helpers
 
         public static void ThrowArraysCantBeNullIfArray(Expression expression)
         {
-            if (expression.GetActualType()?.IsArray == true || 
-                expression.GetActualType(true)?.IsArray == true)
+            if (expression.GetActualType()?.IsArray() == true ||
+                expression.GetActualType(true)?.IsArray() == true)
             {
                 throw new NotSupportedException(
                     "Arrays, unlike other objects, can't be compared to null and array references can't be assigned null (see: https://github.com/Lombiq/Hastlayer-SDK/issues/16). " +

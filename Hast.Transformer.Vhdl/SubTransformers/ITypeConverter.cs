@@ -3,20 +3,20 @@ using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface ITypeConverter : IDependency
     {
-        DataType ConvertTypeReference(
-            TypeReference typeReference,
+        DataType ConvertType(
+            IType type,
             IVhdlTransformationContext context);
 
         DataType ConvertAstType(AstType type, IVhdlTransformationContext context);
         DataType ConvertAndDeclareAstType(
-            AstType type, 
+            AstType type,
             IDeclarableElement declarable,
             IVhdlTransformationContext context);
     }
@@ -25,7 +25,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public static class TypeConvertedExtensions
     {
         public static DataType ConvertParameterType(
-            this ITypeConverter typeConverter, 
+            this ITypeConverter typeConverter,
             ParameterDeclaration parameter,
             IVhdlTransformationContext context)
         {
@@ -37,7 +37,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 parameterType = ((ByReferenceType)parameterType).ElementType;
             }
 
-            if (!parameterType.IsArray)
+            if (!parameterType.IsArray())
             {
                 return typeConverter.ConvertTypeReference(parameterType, context);
             }

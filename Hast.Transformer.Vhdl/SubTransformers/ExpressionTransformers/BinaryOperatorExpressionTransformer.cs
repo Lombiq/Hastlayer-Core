@@ -357,7 +357,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 var fromType = isShift && !hasExplicitCast ?
                     leftVhdlType :
-                    _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
+                    _typeConverter.ConvertType(preCastTypeReference, context.TransformationContext);
 
                 var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
                     fromType,

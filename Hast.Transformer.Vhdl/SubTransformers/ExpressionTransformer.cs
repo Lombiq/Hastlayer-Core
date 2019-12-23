@@ -11,6 +11,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
 using System;
 using System.Collections.Generic;
@@ -478,13 +479,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Is this a Task result access like array[k].Result or task.Result?
                 var targetType = memberReference.Target.GetActualType();
-                if (targetTypeReference != null &&
-                    targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
+                if (targetType != null &&
+                    targetType.FullName.StartsWith("System.Threading.Tasks.Task") &&
                     memberReference.MemberName == "Result")
                 {
                     // If this is not an array then it doesn't need to be explicitly awaited, just access to its
                     // Result property should await it. So doing it here.
-                    if (memberReference.Target is IdentifierExpression && !targetTypeReference.IsArray)
+                    if (memberReference.Target is IdentifierExpression && !targetType.IsArray())
                     {
                         var targetMethod = scope
                             .TaskVariableNameToDisplayClassMethodMappings[((IdentifierExpression)memberReference.Target).Identifier];

@@ -23,5 +23,7 @@
                 typeCode == KnownTypeCode.UInt64 ||
                 typeCode == KnownTypeCode.Void;
         }
+
+        public static bool IsArray(this IType type) => type.Kind == TypeKind.Array;
     }
 }
