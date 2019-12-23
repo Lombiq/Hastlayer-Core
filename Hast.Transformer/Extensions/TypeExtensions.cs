@@ -28,6 +28,8 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static bool IsArray(this IType type) => type.Kind == TypeKind.Array;
 
+        public static bool IsEnum(this IType type) => type.Kind == TypeKind.Enum;
+
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
     }
