@@ -1,5 +1,4 @@
-﻿
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.TypeSystem;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
 {

@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.Semantics;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem.Implementation;
 
 namespace ICSharpCode.Decompiler.TypeSystem
@@ -30,6 +31,8 @@ namespace ICSharpCode.Decompiler.TypeSystem
         public static bool IsArray(this IType type) => type.Kind == TypeKind.Array;
 
         public static bool IsEnum(this IType type) => type.Kind == TypeKind.Enum;
+
+        public static bool IsSimpleMemory(this IType type) => type.FullName == typeof(SimpleMemory).FullName;
 
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;

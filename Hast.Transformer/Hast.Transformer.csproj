@@ -80,7 +80,6 @@
     <Compile Include="Extensions\InvocationInstanceCountTransformerConfigurationExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Extensions\TypeReferenceExtensions.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\SimpleMemoryAssignmentHelper.cs" />
     <Compile Include="Helpers\VariableHelper.cs" />

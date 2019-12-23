@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Vhdl.Helpers;
+﻿using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard.Caching;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
