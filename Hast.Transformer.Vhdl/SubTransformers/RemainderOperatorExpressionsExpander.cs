@@ -1,12 +1,5 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.ILAst;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Orchard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -32,7 +25,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (binaryOperatorExpression.GetActualType() == null)
                 {
                     binaryOperatorExpression
-                        .AddAnnotation(binaryOperatorExpression.Left.GetTypeInformationOrCreateFromActualTypeReference());
+                        .AddAnnotation(binaryOperatorExpression.Left.CreateResolveResultFromActualType());
                 }
 
                 // First assigning the operands to new variables so if method calls, casts or anything are in there
@@ -56,7 +49,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         TypeHelper.CreateAstType(operand.GetActualType(true)));
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
-                        .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());
+                        .WithAnnotation(operand.CreateResolveResultFromActualType());
 
                     AstInsertionHelper.InsertStatementBefore(
                         binaryOperatorExpression.FindFirstParentStatement(),

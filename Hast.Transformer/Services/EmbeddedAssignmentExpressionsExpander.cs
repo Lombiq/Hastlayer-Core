@@ -33,18 +33,18 @@ namespace Hast.Transformer.Services
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                     "assignment",
                     assignmentExpression,
-                    AstBuildingHelper.ConvertType(type));
+                    TypeHelper.CreateAstType(type));
 
                 var firstParentStatement = assignmentExpression.FindFirstParentStatement();
-                var typeInformation = assignmentExpression.GetTypeInformationOrCreateFromActualTypeReference();
+                var resolveResult = assignmentExpression.CreateResolveResultFromActualType();
 
                 var tempVariableAssignment = new AssignmentExpression(variableIdentifier, assignmentExpression.Right.Clone())
-                    .WithAnnotation(typeInformation);
+                    .WithAnnotation(resolveResult);
 
                 AstInsertionHelper.InsertStatementBefore(firstParentStatement, new ExpressionStatement(tempVariableAssignment));
 
                 var leftAssignment = new AssignmentExpression(assignmentExpression.Left.Clone(), variableIdentifier.Clone())
-                    .WithAnnotation(typeInformation);
+                    .WithAnnotation(resolveResult);
 
                 AstInsertionHelper.InsertStatementBefore(firstParentStatement, new ExpressionStatement(leftAssignment));
 

@@ -1,6 +1,5 @@
 ﻿using Hast.Common.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
@@ -23,14 +22,12 @@ namespace Hast.Transformer.Helpers
         public static IdentifierExpression DeclareAndReferenceVariable(
             string variableNamePrefix,
             Expression valueHolder,
-            AstType type)
-        {
-            var variableName = variableNamePrefix + Sha2456Helper.ComputeHash(valueHolder.GetFullName());
-            var parentStatement = valueHolder.FindFirstParentStatement();
-            var typeInformation = valueHolder.GetTypeInformationOrCreateFromActualTypeReference();
-
-            return DeclareAndReferenceVariable(variableName, typeInformation, type, parentStatement);
-        }
+            AstType astType) =>
+            DeclareAndReferenceVariable(
+                variableNamePrefix + Sha2456Helper.ComputeHash(valueHolder.GetFullName()),
+                valueHolder.GetActualType(),
+                astType,
+                valueHolder.FindFirstParentStatement());
 
         public static IdentifierExpression DeclareAndReferenceVariable(
             string variableName,
@@ -39,7 +36,7 @@ namespace Hast.Transformer.Helpers
             Statement parentStatement)
         {
             var variableDeclaration = new VariableDeclarationStatement(astType.Clone(), variableName)
-                .WithAnnotation(new ResolveResult(type));
+                .WithAnnotation(type.ToResolveResult());
             variableDeclaration.Variables.Single().AddAnnotation(type);
             AstInsertionHelper.InsertStatementBefore(parentStatement, variableDeclaration);
 

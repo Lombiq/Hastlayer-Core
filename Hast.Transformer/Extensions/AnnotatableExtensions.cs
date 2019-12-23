@@ -1,5 +1,5 @@
-﻿using ICSharpCode.Decompiler.TypeSystem;
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -65,11 +65,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             }
         }
 
-        public static TypeInformation GetTypeInformationOrCreateFromActualTypeReference(this IAnnotatable annotable)
-        {
-            var typeInformation = annotable.Annotation<TypeInformation>();
-            if (typeInformation == null) typeInformation = annotable.GetActualType().ToTypeInformation();
-            return typeInformation;
-        }
+        public static ResolveResult CreateResolveResultFromActualType(this IAnnotatable annotable) =>
+            annotable.GetActualType().ToResolveResult();
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 using System.Linq;
-using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
@@ -40,7 +40,9 @@ namespace Hast.Transformer.Services
                     {
                         var actualType = castExpression.GetActualType(true);
                         objectParameter.Type = castExpression.Type.Clone();
-                        objectParameter.Annotation<ParameterDefinition>().ParameterType = actualType;
+                        // Since the line below is not valid in ILSype any more.
+                        throw new NotImplementedException();
+                        //objectParameter.Annotation<ParameterDefinition>().ParameterType = actualType;
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
 
@@ -86,13 +88,13 @@ namespace Hast.Transformer.Services
             private class ParameterReferencesTypeChangingVisitor : DepthFirstAstVisitor
             {
                 private readonly string _parameterName;
-                private readonly TypeReference _typeReference;
+                private readonly IType _type;
 
 
-                public ParameterReferencesTypeChangingVisitor(string parameterName, TypeReference typeReference)
+                public ParameterReferencesTypeChangingVisitor(string parameterName, IType type)
                 {
                     _parameterName = parameterName;
-                    _typeReference = typeReference;
+                    _type = type;
                 }
 
 
@@ -102,7 +104,7 @@ namespace Hast.Transformer.Services
 
                     if (identifierExpression.Identifier != _parameterName) return;
 
-                    identifierExpression.ReplaceAnnotations(_typeReference.ToTypeInformation());
+                    identifierExpression.ReplaceAnnotations(_type.ToResolveResult());
                 }
             }
         }

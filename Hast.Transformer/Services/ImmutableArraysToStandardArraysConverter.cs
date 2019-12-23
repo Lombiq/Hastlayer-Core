@@ -1,10 +1,11 @@
 ﻿using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
-using Mono.Cecil;
 using System;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace Hast.Transformer.Services
 {
@@ -103,7 +104,7 @@ namespace Hast.Transformer.Services
                         // SetItem can be converted into a simple array element assignment to a newly created copy of the
                         // array.
 
-                        var elementType = AstBuildingHelper.ConvertType(((ArrayType)arrayTypeInformation.ExpectedType).ElementType);
+                        var elementType = TypeHelper.CreateAstType(((ArrayType)arrayTypeInformation.ExpectedType).ElementType);
                         var parentStatement = invocationExpression.FindFirstParentStatement();
 
                         var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(
@@ -252,9 +253,9 @@ namespace Hast.Transformer.Services
             private static ArrayType CreateArrayTypeFromImmutableArrayReference(IType type) =>
                 new ArrayType(((ParameterizedType)type).TypeArguments.Single(), 1);
 
-            private static TypeInformation CreateArrayTypeInformationFromImmutableArrayReference(TypeReference typeReference)
+            private static ResolveResult CreateArrayTypeResolveResultFromImmutableArrayReference(TypeReference typeReference)
             {
-                return CreateArrayTypeFromImmutableArrayReference(typeReference).ToTypeInformation();
+                return CreateArrayTypeFromImmutableArrayReference(typeReference).ToResolveResult();
             }
 
             private static AstType GetClonedElementTypeFromImmutableArrayAstType(AstType astType) =>

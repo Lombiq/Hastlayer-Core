@@ -1,7 +1,6 @@
 ﻿using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Mono.Cecil;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -122,20 +121,20 @@ namespace Hast.Transformer.Services
 
                 void castRightToLeft() => replaceRight(leftTypeReference);
 
-                void replaceLeft(TypeReference typeReference)
+                void replaceLeft(IType type)
                 {
-                    binaryOperatorExpression.Left.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Left, out var _));
-                    setResultTypeReference(typeReference);
+                    binaryOperatorExpression.Left.ReplaceWith(CreateCast(type, binaryOperatorExpression.Left, out var _));
+                    setResultTypeReference(type);
                 }
 
-                void replaceRight(TypeReference typeReference)
+                void replaceRight(IType type)
                 {
-                    binaryOperatorExpression.Right.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Right, out var _));
-                    setResultTypeReference(typeReference);
+                    binaryOperatorExpression.Right.ReplaceWith(CreateCast(type, binaryOperatorExpression.Right, out var _));
+                    setResultTypeReference(type);
                 }
 
                 var resultTypeReferenceIsSet = false;
-                void setResultTypeReference(TypeReference typeReference)
+                void setResultTypeReference(IType type)
                 {
                     if (resultTypeReferenceIsSet) return;
                     resultTypeReferenceIsSet = true;
@@ -162,7 +161,7 @@ namespace Hast.Transformer.Services
                         binaryOperatorExpression = clonedBinaryOperatorExpression;
                     }
 
-                    binaryOperatorExpression.ReplaceAnnotations(typeReference.ToTypeInformation());
+                    binaryOperatorExpression.ReplaceAnnotations(type.ToResolveResult());
                 }
 
 
@@ -215,30 +214,30 @@ namespace Hast.Transformer.Services
 
                 if (!_unaryOperatorsWithNumericPromotions.Contains(unaryOperatorExpression.Operator)) return;
 
-                var typeReference = unaryOperatorExpression.Expression.GetActualTypeReference();
+                var type = unaryOperatorExpression.Expression.GetActualType();
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
-                var expectedTypeReference = unaryOperatorExpression.Expression.GetActualTypeReference(true);
+                var expectedTypeReference = unaryOperatorExpression.Expression.GetActualType(true);
 
-                void replace(TypeReference newTypeReference)
+                void replace(IType newType)
                 {
-                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newTypeReference, unaryOperatorExpression.Expression, out var _));
+                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
 
                     // We should also put a cast around it if necessary so it produces the same type as before.
                     if (!(unaryOperatorExpression.FindFirstNonParenthesizedExpressionParent() is CastExpression))
                     {
-                        var castExpression = CreateCast(typeReference, unaryOperatorExpression, out var clonedUnaryOperatorExpression);
+                        var castExpression = CreateCast(type, unaryOperatorExpression, out var clonedUnaryOperatorExpression);
                         unaryOperatorExpression.ReplaceWith(castExpression);
                         unaryOperatorExpression = clonedUnaryOperatorExpression;
                     }
                 }
 
-                if (_typesConvertedToIntInUnaryOperations.Contains(typeReference.FullName) &&
+                if (_typesConvertedToIntInUnaryOperations.Contains(type.FullName) &&
                     (!isCast || expectedTypeReference.FullName != typeof(int).FullName))
                 {
                     replace(TypeHelper.CreateInt32TypeReference());
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
-                    typeReference.FullName == typeof(uint).FullName &&
+                    type.FullName == typeof(uint).FullName &&
                     (!isCast || expectedTypeReference.FullName != typeof(long).FullName))
                 {
                     replace(TypeHelper.CreateInt64TypeReference());
@@ -253,16 +252,15 @@ namespace Hast.Transformer.Services
             }
 
 
-            private static CastExpression CreateCast<T>(TypeReference toTypeReference, T expression, out T clonedExpression)
+            private static CastExpression CreateCast<T>(IType toType, T expression, out T clonedExpression)
                 where T : Expression
             {
-                var castExpression = new CastExpression { Type = TypeHelper.CreateAstType(toTypeReference) };
+                var castExpression = new CastExpression { Type = TypeHelper.CreateAstType(toType) };
 
                 clonedExpression = (T)expression.Clone();
                 castExpression.Expression = new ParenthesizedExpression(clonedExpression);
-                var expressionTypeInformation = expression.GetTypeInformationOrCreateFromActualTypeReference();
-                if (expressionTypeInformation != null) castExpression.Expression.AddAnnotation(expressionTypeInformation);
-                castExpression.AddAnnotation(toTypeReference.ToTypeInformation());
+                castExpression.Expression.AddAnnotation(expression.CreateResolveResultFromActualType());
+                castExpression.AddAnnotation(toType.ToResolveResult());
 
                 return castExpression;
             }

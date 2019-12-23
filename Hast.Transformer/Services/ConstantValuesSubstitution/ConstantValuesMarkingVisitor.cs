@@ -119,7 +119,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // So we can also substitute the whole expression too.
                 var newExpression = new PrimitiveExpression(
                     _astExpressionEvaluator.EvaluateUnaryOperatorExpression((UnaryOperatorExpression)primitiveExpressionParent))
-                    .WithAnnotation(primitiveExpressionParent.GetTypeInformationOrCreateFromActualTypeReference());
+                    .WithAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 _constantValuesSubstitutingAstProcessor.ConstantValuesTable
                     .MarkAsPotentiallyConstant(primitiveExpressionParent, newExpression, primitiveExpressionParent.Parent);

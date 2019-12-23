@@ -1,8 +1,8 @@
-﻿using System;
-using System.Reflection;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using Mono.Cecil;
+using System;
+using System.Reflection;
 
 namespace Hast.Transformer.Helpers
 {
@@ -33,9 +33,16 @@ namespace Hast.Transformer.Helpers
             return int32TypeReference;
         }
 
-        public static AstType CreateAstType(TypeReference typeReference) =>
-            (typeReference.IsPrimitive() ? new PrimitiveType(typeReference.Name) : AstType.Create(typeReference.FullName))
-            .WithAnnotation(typeReference);
+        public static AstType CreateAstType(IType type)
+        {
+            // CSharpDecompiler.CreateAstBuilder() constructs a TypeSystemAstBuilder object like this.
+            var typeSystemAstBuilder = new TypeSystemAstBuilder();
+            typeSystemAstBuilder.ShowAttributes = true;
+            typeSystemAstBuilder.AlwaysUseShortTypeNames = true;
+            typeSystemAstBuilder.AddResolveResultAnnotations = true;
+
+            return typeSystemAstBuilder.ConvertType(type);
+        }
 
 
         private class PrimitiveTypeReference : TypeReference

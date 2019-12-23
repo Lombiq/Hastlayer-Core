@@ -36,17 +36,17 @@ namespace Hast.Transformer.Services
                     BinaryOperatorType.Add :
                     BinaryOperatorType.Subtract;
 
-                var typeInformation = unaryOperatorExpression.GetTypeInformationOrCreateFromActualTypeReference();
+                var resolveResult = unaryOperatorExpression.CreateResolveResultFromActualType();
 
                 var binaryExpression = new BinaryOperatorExpression(
                     unaryOperatorExpression.Expression.Clone(),
                     binaryOperator,
-                    new PrimitiveExpression(1).WithAnnotation(typeInformation))
-                    .WithAnnotation(typeInformation);
+                    new PrimitiveExpression(1).WithAnnotation(resolveResult))
+                    .WithAnnotation(resolveResult);
 
 
                 var assignment = new AssignmentExpression(unaryOperatorExpression.Expression.Clone(), binaryExpression)
-                    .WithAnnotation(typeInformation);
+                    .WithAnnotation(resolveResult);
 
                 var statement = new ExpressionStatement(assignment);
                 var parentStatement = unaryOperatorExpression.FindFirstParentStatement();

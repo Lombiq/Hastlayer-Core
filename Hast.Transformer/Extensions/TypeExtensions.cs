@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.TypeSystem.Implementation;
+﻿using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem.Implementation;
 
 namespace ICSharpCode.Decompiler.TypeSystem
 {
@@ -32,5 +33,7 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
+
+        public static ResolveResult ToResolveResult(this IType type) => new ResolveResult(type);
     }
 }
