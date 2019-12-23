@@ -64,7 +64,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return CreateArrayType(ConvertType(type.GetElementType(), context));
             }
 
-            if (IsTaskTypeReference(type))
+            if (IsTaskType(type))
             {
                 if (type is GenericInstanceType)
                 {
@@ -277,12 +277,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type, IVhdlTransformationContext context)
         {
-            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskTypeReference(type.GetActualType()))
+            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskType(type.GetActualType()))
             {
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
                 {
-                    if (IsTaskTypeReference(type.Annotation<TypeReference>()))
+                    if (IsTaskType(type.Annotation<TypeReference>()))
                     {
                         if (type.TypeArguments.Single().IsArray())
                         {
@@ -344,7 +344,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 Name = ArrayHelper.CreateArrayTypeName(elementType)
             };
 
-        private static bool IsTaskTypeReference(TypeReference typeReference) =>
-            typeReference != null && typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
+        private static bool IsTaskType(IType type) =>
+            type != null && type.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }
