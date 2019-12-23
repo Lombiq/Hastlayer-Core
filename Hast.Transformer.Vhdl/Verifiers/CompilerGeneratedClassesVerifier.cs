@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
@@ -33,12 +33,12 @@ namespace Hast.Transformer.Vhdl.Verifiers
 
                     Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
                     {
-                        var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
+                        if (!memberReferenceExpression.IsFieldReference()) return;
 
-                        if (fieldDefinition == null) return;
+                        var fullName = memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member.FullName;
 
                         var field = fields.Values
-                            .SingleOrDefault(f => f.Annotation<FieldDefinition>().FullName == fieldDefinition.FullName);
+                            .SingleOrDefault(f => f.GetResolveResult<MemberResolveResult>().Member.FullName == fullName);
 
                         // The field won't be on the compiler-generated class if the member reference accesses a
                         // user-defined type's field.

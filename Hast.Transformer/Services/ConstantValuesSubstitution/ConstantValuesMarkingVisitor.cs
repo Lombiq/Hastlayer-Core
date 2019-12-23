@@ -49,7 +49,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitPrimitiveExpression(primitiveExpression);
 
             // Not bothering with the various assembly attributes.
-            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Attribute>() != null) return;
+            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Syntax.Attribute>() != null) return;
 
             var primitiveExpressionParent = primitiveExpression.Parent;
 

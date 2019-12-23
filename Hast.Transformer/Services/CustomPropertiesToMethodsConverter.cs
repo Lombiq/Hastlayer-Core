@@ -1,7 +1,10 @@
-﻿using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -32,8 +35,8 @@ namespace Hast.Transformer.Services
                 // the setter is empty then it's an auto-property. If the getter is compiler-generated then it's also
                 // an auto-property (a read-only one).
                 if (!propertyDeclaration.Getter.Body.Any() && !propertyDeclaration.Setter.Body.Any() ||
-                    propertyDeclaration.Getter.Attributes.Any(attributeSection => 
-                        attributeSection.Attributes.Any(attribute => 
+                    propertyDeclaration.Getter.Attributes.Any(attributeSection =>
+                        attributeSection.Attributes.Any(attribute =>
                             attribute.Type.Is<SimpleType>(type => type.Identifier == "CompilerGenerated"))))
                 {
                     return;
@@ -46,29 +49,29 @@ namespace Hast.Transformer.Services
                 if (getter.Body.Any())
                 {
                     var getterMethod = MethodDeclarationFactory.CreateMethod(
-                        name: getter.Annotation<MethodDefinition>().Name,
+                        name: getter.GetResolveResult<MemberResolveResult>().Member.Name,
                         annotations: getter.Annotations,
                         attributes: getter.Attributes,
                         parameters: Enumerable.Empty<ParameterDeclaration>(),
                         body: getter.Body,
                         returnType: propertyDeclaration.ReturnType);
-                    parentType.Members.Add(getterMethod); 
+                    parentType.Members.Add(getterMethod);
                 }
 
                 var setter = propertyDeclaration.Setter;
                 if (setter.Body.Any())
                 {
                     var valueParameter = new ParameterDeclaration(propertyDeclaration.ReturnType.Clone(), "value");
-                    valueParameter.AddAnnotation(new ParameterDefinition(
-                        "value", ParameterAttributes.None, propertyDeclaration.Annotation<PropertyDefinition>().PropertyType));
+                    valueParameter.AddAnnotation(new ILVariableResolveResult(
+                        new ILVariable(VariableKind.Parameter, getter.GetActualType()) { Name = "value" }));
                     var setterMethod = MethodDeclarationFactory.CreateMethod(
-                        name: setter.Annotation<MethodDefinition>().Name,
+                        name: setter.GetResolveResult<MemberResolveResult>().Member.Name,
                         annotations: setter.Annotations,
                         attributes: setter.Attributes,
                         parameters: new[] { valueParameter },
                         body: setter.Body,
-                        returnType: new PrimitiveType("void"));
-                    parentType.Members.Add(setterMethod); 
+                        returnType: new ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveType("void"));
+                    parentType.Members.Add(setterMethod);
                 }
 
                 // Changing consumer code of the property to use it as methods.
@@ -96,24 +99,22 @@ namespace Hast.Transformer.Services
 
                     if (memberReferenceExpression.GetMemberFullName() != _unifiedPropertyName) return;
 
-                    // On property accesses there is a PropertyDefinition and MethodDefinition, sometimes MethodReference
-                    // annotation. We need to use the latter to convert the property access into a method call.
-                    memberReferenceExpression.RemoveAnnotations<PropertyDefinition>();
-                    var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-                    memberReferenceExpression.MemberName = methodReference.Name;
-                    var invocation = new InvocationExpression(memberReferenceExpression.Clone());
-                    invocation.AddAnnotation(methodReference);
-                    if (methodReference.IsDefinition && ((MethodDefinition)methodReference).IsSetter ||
-                        !methodReference.IsDefinition && methodReference.Name.StartsWith("set_"))
-                    {
-                        var parentAssignment = (AssignmentExpression)memberReferenceExpression.Parent;
-                        invocation.Arguments.Add(parentAssignment.Right.Clone());
-                        parentAssignment.ReplaceWith(invocation);
-                    }
-                    else
-                    {
-                        memberReferenceExpression.ReplaceWith(invocation);
-                    }
+                    var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
+                    throw new NotImplementedException();
+                    //memberReferenceExpression.MemberName = memberResolveResult.Name; // Needs to use the set/get_ name.
+                    //var invocation = new InvocationExpression(memberReferenceExpression.Clone());
+                    //invocation.AddAnnotation(memberResolveResult);
+                    //if (memberResolveResult.IsDefinition && ((MethodDefinition)memberResolveResult).IsSetter ||
+                    //    !memberResolveResult.IsDefinition && memberResolveResult.Name.StartsWith("set_"))
+                    //{
+                    //    var parentAssignment = (AssignmentExpression)memberReferenceExpression.Parent;
+                    //    invocation.Arguments.Add(parentAssignment.Right.Clone());
+                    //    parentAssignment.ReplaceWith(invocation);
+                    //}
+                    //else
+                    //{
+                    //    memberReferenceExpression.ReplaceWith(invocation);
+                    //}
                 }
             }
         }

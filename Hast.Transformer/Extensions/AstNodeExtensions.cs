@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -206,6 +207,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             //return name;
         }
+
+        public static T GetResolveResult<T>(this AstNode node) where T : ResolveResult =>
+            node.GetResolveResult() as T;
 
         public static bool IsIn<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>() != null;

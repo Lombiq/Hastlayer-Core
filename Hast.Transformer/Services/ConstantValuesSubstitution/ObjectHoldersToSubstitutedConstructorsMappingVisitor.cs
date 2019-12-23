@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -56,7 +55,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
                     _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
                     new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
-                    _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator)
+                    _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator,
+                    _constantValuesSubstitutingAstProcessor.KnownTypeLookupTable)
                 .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
 
                 var constructorReference = new ConstructorReference

@@ -82,7 +82,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
-            var resultElementResolveResult = expression.GetActualType().GetElementType().ToResolveResult()
+            var resultElementResolveResult = expression.GetActualType().GetElementType().ToResolveResult();
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {

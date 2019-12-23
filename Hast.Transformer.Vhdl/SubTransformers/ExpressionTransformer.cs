@@ -12,7 +12,6 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,7 +110,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var rightType = right.GetActualType();
                     if (leftType != null &&
                         leftType.FullName == rightType.FullName &&
-                        !leftType.IsValueType &&
+                        leftType.IsReferenceType == true &&
                         left is IdentifierExpression &&
                         (right is IdentifierExpression || right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference())))
                     {
@@ -535,49 +534,50 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 switch (unary.Operator)
                 {
                     case UnaryOperatorType.Minus:
+                        throw new NotImplementedException();
                         // Casting if the result type is not what the parent expects.
-                        var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
-                            parentTypeInformation != null &&
-                            parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
-                            parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
-                        {
-                            var fromType = _typeConverter
-                                .ConvertType(parentTypeInformation.ExpectedType, context.TransformationContext);
-                            var toType = _typeConverter
-                                .ConvertType(parentTypeInformation.InferredType, context.TransformationContext);
+                        //var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
+                        //if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
+                        //    parentTypeInformation != null &&
+                        //    parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
+                        //    parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
+                        //{
+                        //    var fromType = _typeConverter
+                        //        .ConvertType(parentTypeInformation.ExpectedType, context.TransformationContext);
+                        //    var toType = _typeConverter
+                        //        .ConvertType(parentTypeInformation.InferredType, context.TransformationContext);
 
-                            if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
-                            {
-                                transformedOperation = _typeConversionTransformer.ImplementTypeConversion(
-                                    fromType,
-                                    toType,
-                                    new Binary
-                                    {
-                                        Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                        Operator = BinaryOperator.Subtract,
-                                        Right = transformedExpression
-                                    })
-                                    .ConvertedFromExpression;
-                            }
-                            else
-                            {
-                                transformedOperation = new Unary
-                                {
-                                    Operator = UnaryOperator.Negation,
-                                    Expression = transformedExpression
-                                };
-                            }
-                        }
+                        //    if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
+                        //    {
+                        //        transformedOperation = _typeConversionTransformer.ImplementTypeConversion(
+                        //            fromType,
+                        //            toType,
+                        //            new Binary
+                        //            {
+                        //                Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
+                        //                Operator = BinaryOperator.Subtract,
+                        //                Right = transformedExpression
+                        //            })
+                        //            .ConvertedFromExpression;
+                        //    }
+                        //    else
+                        //    {
+                        //        transformedOperation = new Unary
+                        //        {
+                        //            Operator = UnaryOperator.Negation,
+                        //            Expression = transformedExpression
+                        //        };
+                        //    }
+                        //}
 
-                        else
-                        {
-                            transformedOperation = new Unary
-                            {
-                                Operator = UnaryOperator.Negation,
-                                Expression = transformedExpression
-                            };
-                        }
+                        //else
+                        //{
+                        //    transformedOperation = new Unary
+                        //    {
+                        //        Operator = UnaryOperator.Negation,
+                        //        Expression = transformedExpression
+                        //    };
+                        //}
 
                         break;
                     case UnaryOperatorType.Not:
@@ -644,9 +644,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return innerExpressionResult;
                 }
 
-                ICSharpCode.Decompiler.TypeSystem.IType fromType = castExpression.Expression.GetActualType(true) ?? castExpression.GetActualType();
+                IType fromType = castExpression.Expression.GetActualType(true) ?? castExpression.GetActualType();
                 var fromVhdlType = _declarableTypeCreator
-                    .CreateDeclarableType(castExpression.Expression, fromVhdlType, context.TransformationContext);
+                    .CreateDeclarableType(castExpression.Expression, fromType, context.TransformationContext);
                 var toVhdlType = _declarableTypeCreator
                     .CreateDeclarableType(castExpression, castExpression.Type, context.TransformationContext);
 

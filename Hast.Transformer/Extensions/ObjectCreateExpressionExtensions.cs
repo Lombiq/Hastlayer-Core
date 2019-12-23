@@ -1,5 +1,6 @@
 ﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.Semantics;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -7,7 +8,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
     public static class ObjectCreateExpressionExtensions
     {
         public static string GetConstructorFullName(this ObjectCreateExpression objectCreateExpression) =>
-            objectCreateExpression.Annotation<MethodReference>()?.FullName;
+            objectCreateExpression.GetResolveResult<InvocationResolveResult>()?.Member.FullName;
 
         public static EntityDeclaration FindConstructorDeclaration(
             this ObjectCreateExpression objectCreateExpression,

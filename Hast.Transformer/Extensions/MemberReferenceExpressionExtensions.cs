@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Linq;
@@ -43,58 +44,60 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (type == null) return null;
 
-            // A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
-            // like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
-            var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-            if (methodReference != null)
-            {
-                var memberName = methodReference.FullName;
+            throw new NotImplementedException();
 
-                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
-                // and a PropertyReference will be there, but the latter will contain the member name.
-                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
-                if (propertyReference != null) memberName = propertyReference.FullName;
+            //// A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
+            //// like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
+            //var methodReference = memberReferenceExpression.Annotation<MethodReference>();
+            //if (methodReference != null)
+            //{
+            //    var memberName = methodReference.FullName;
 
-                return type.Members
-                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName);
-            }
-            else
-            {
-                // A FieldReference annotation is present if the expression is about accessing a field.
-                var fieldReference = memberReferenceExpression.Annotation<FieldReference>();
-                if (fieldReference != null)
-                {
-                    if (!fieldReference.FullName.IsBackingFieldName())
-                    {
-                        return type.Members
-                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldReference.FullName);
-                    }
-                    else
-                    {
-                        return type.Members
-                            .SingleOrDefault(member => member.Name == memberReferenceExpression.MemberName && member is PropertyDeclaration);
-                    }
-                }
-                else
-                {
-                    var parent = memberReferenceExpression.Parent;
-                    MemberReference memberReference = null;
-                    while (memberReference == null && parent != null)
-                    {
-                        memberReference = parent.Annotation<MemberReference>();
-                        parent = parent.Parent;
-                    }
+            //    // If this is a member reference to a property then both a MethodReference (for the setter or getter)
+            //    // and a PropertyReference will be there, but the latter will contain the member name.
+            //    var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
+            //    if (propertyReference != null) memberName = propertyReference.FullName;
 
-                    var declaringType = typeDeclarationLookupTable.Lookup(memberReference.DeclaringType.FullName);
+            //    return type.Members
+            //        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName);
+            //}
+            //else
+            //{
+            //    // A FieldReference annotation is present if the expression is about accessing a field.
+            //    var fieldReference = memberReferenceExpression.Annotation<FieldReference>();
+            //    if (fieldReference != null)
+            //    {
+            //        if (!fieldReference.FullName.IsBackingFieldName())
+            //        {
+            //            return type.Members
+            //                .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldReference.FullName);
+            //        }
+            //        else
+            //        {
+            //            return type.Members
+            //                .SingleOrDefault(member => member.Name == memberReferenceExpression.MemberName && member is PropertyDeclaration);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        var parent = memberReferenceExpression.Parent;
+            //        MemberReference memberReference = null;
+            //        while (memberReference == null && parent != null)
+            //        {
+            //            memberReference = parent.Annotation<MemberReference>();
+            //            parent = parent.Parent;
+            //        }
 
-                    if (declaringType == null) return null;
+            //        var declaringType = typeDeclarationLookupTable.Lookup(memberReference.DeclaringType.FullName);
 
-                    return
-                        declaringType
-                        .Members
-                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);
-                }
-            }
+            //        if (declaringType == null) return null;
+
+            //        return
+            //            declaringType
+            //            .Members
+            //            .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);
+            //    }
+            //}
         }
 
         public static TypeDeclaration FindTargetTypeDeclaration(
@@ -131,10 +134,10 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             }
             else if (target is InvocationExpression)
             {
-                var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-                if (methodReference != null)
+                var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
+                if (memberResolveResult != null)
                 {
-                    return typeDeclarationLookupTable.Lookup(methodReference.DeclaringType.FullName);
+                    return typeDeclarationLookupTable.Lookup(memberResolveResult.Member.DeclaringType.FullName);
                 }
             }
 
@@ -156,9 +159,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             memberReferenceExpression.Target.GetActualType().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.Annotation<MethodDefinition>() != null;
+            memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member is IMethod;
 
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.Annotation<FieldDefinition>() != null;
+            memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member is IField;
     }
 }

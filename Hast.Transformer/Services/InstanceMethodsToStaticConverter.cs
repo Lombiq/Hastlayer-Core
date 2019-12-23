@@ -1,8 +1,4 @@
 ﻿using ICSharpCode.Decompiler.CSharp.Syntax;
-using ICSharpCode.Decompiler.IL;
-using Mono.Cecil;
-using System;
-using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -25,122 +21,122 @@ namespace Hast.Transformer.Services
             }
 
 
-            public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
-            {
-                // Omitting DisplayClasses because those are handled separately.
-                if (methodDeclaration.GetFullName().IsDisplayOrClosureClassMemberName()) return;
+            //public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
+            //{
+            //    // Omitting DisplayClasses because those are handled separately.
+            //    if (methodDeclaration.GetFullName().IsDisplayOrClosureClassMemberName()) return;
 
-                base.VisitMethodDeclaration(methodDeclaration);
+            //    base.VisitMethodDeclaration(methodDeclaration);
 
-                var parentType = methodDeclaration.FindFirstParentTypeDeclaration();
+            //    var parentType = methodDeclaration.FindFirstParentTypeDeclaration();
 
-                // We only have to deal with instance methods of non-hardware entry point classes.
-                if (methodDeclaration.HasModifier(Modifiers.Static) ||
-                    methodDeclaration.IsHardwareEntryPointMember() ||
-                    parentType.Members.Any(member => member.IsHardwareEntryPointMember()))
-                {
-                    return;
-                }
+            //    // We only have to deal with instance methods of non-hardware entry point classes.
+            //    if (methodDeclaration.HasModifier(Modifiers.Static) ||
+            //        methodDeclaration.IsHardwareEntryPointMember() ||
+            //        parentType.Members.Any(member => member.IsHardwareEntryPointMember()))
+            //    {
+            //        return;
+            //    }
 
-                var parentTypeDefinition = parentType.Annotation<TypeDefinition>();
+            //    var parentTypeDefinition = parentType.Annotation<TypeDefinition>();
 
-                var parentAstType = AstType.Create(parentType.GetFullName());
-                parentAstType.AddAnnotation(parentTypeDefinition);
+            //    var parentAstType = AstType.Create(parentType.GetFullName());
+            //    parentAstType.AddAnnotation(parentTypeDefinition);
 
-                // Making the method static.
-                methodDeclaration.Modifiers = methodDeclaration.Modifiers | Modifiers.Static;
+            //    // Making the method static.
+            //    methodDeclaration.Modifiers = methodDeclaration.Modifiers | Modifiers.Static;
 
-                // Adding a "@this" parameter and using that instead of the "this" reference.
-                var thisParameter = new ParameterDeclaration(parentAstType, "this")
-                    .WithAnnotation(new ParameterDefinition("this", ParameterAttributes.None, parentTypeDefinition));
-                if (!methodDeclaration.Parameters.Any())
-                {
-                    methodDeclaration.Parameters.Add(thisParameter);
-                }
-                else
-                {
-                    methodDeclaration.Parameters.InsertBefore(methodDeclaration.Parameters.First(), thisParameter);
-                }
+            //    // Adding a "@this" parameter and using that instead of the "this" reference.
+            //    var thisParameter = new ParameterDeclaration(parentAstType, "this")
+            //        .WithAnnotation(new ParameterDefinition("this", ParameterAttributes.None, parentTypeDefinition));
+            //    if (!methodDeclaration.Parameters.Any())
+            //    {
+            //        methodDeclaration.Parameters.Add(thisParameter);
+            //    }
+            //    else
+            //    {
+            //        methodDeclaration.Parameters.InsertBefore(methodDeclaration.Parameters.First(), thisParameter);
+            //    }
 
-                methodDeclaration.AcceptVisitor(new ThisReferenceChangingVisitor());
+            //    methodDeclaration.AcceptVisitor(new ThisReferenceChangingVisitor());
 
-                // Changing consumer code of the method to use it as static with the new "@this" parameter.
-                _syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(
-                    parentAstType,
-                    parentType.GetFullName(),
-                    methodDeclaration.Name));
-            }
-
-
-            private class ThisReferenceChangingVisitor : DepthFirstAstVisitor
-            {
-                public override void VisitThisReferenceExpression(ThisReferenceExpression thisReferenceExpression)
-                {
-                    base.VisitThisReferenceExpression(thisReferenceExpression);
-
-                    var thisIdentifierExpression = new IdentifierExpression("this");
-                    var typeInformation = thisReferenceExpression.Annotation<TypeInformation>();
-
-                    if (typeInformation == null)
-                    {
-                        typeInformation = thisReferenceExpression
-                            .FindFirstParentTypeDeclaration()
-                            .Annotation<TypeDefinition>()
-                            .ToTypeInformation();
-                    }
-
-                    thisIdentifierExpression.AddAnnotation(typeInformation);
-                    thisIdentifierExpression.AddAnnotation(new ILVariable { Name = "this", Type = typeInformation.ExpectedType });
-                    thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
-                }
-            }
-
-            private class MethodCallChangingVisitor : DepthFirstAstVisitor
-            {
-                private readonly AstType _parentAstType;
-                private readonly string _methodParentFullName;
-                private readonly string _methodName;
+            //    // Changing consumer code of the method to use it as static with the new "@this" parameter.
+            //    _syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(
+            //        parentAstType,
+            //        parentType.GetFullName(),
+            //        methodDeclaration.Name));
+            //}
 
 
-                public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodName)
-                {
-                    _parentAstType = parentAstType;
-                    _methodParentFullName = methodParentFullName;
-                    _methodName = methodName;
-                }
+            //private class ThisReferenceChangingVisitor : DepthFirstAstVisitor
+            //{
+            //    public override void VisitThisReferenceExpression(ThisReferenceExpression thisReferenceExpression)
+            //    {
+            //        base.VisitThisReferenceExpression(thisReferenceExpression);
+
+            //        var thisIdentifierExpression = new IdentifierExpression("this");
+            //        var typeInformation = thisReferenceExpression.Annotation<TypeInformation>();
+
+            //        if (typeInformation == null)
+            //        {
+            //            typeInformation = thisReferenceExpression
+            //                .FindFirstParentTypeDeclaration()
+            //                .Annotation<TypeDefinition>()
+            //                .ToTypeInformation();
+            //        }
+
+            //        thisIdentifierExpression.AddAnnotation(typeInformation);
+            //        thisIdentifierExpression.AddAnnotation(new ILVariable { Name = "this", Type = typeInformation.ExpectedType });
+            //        thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
+            //    }
+            //}
+
+            //private class MethodCallChangingVisitor : DepthFirstAstVisitor
+            //{
+            //    private readonly AstType _parentAstType;
+            //    private readonly string _methodParentFullName;
+            //    private readonly string _methodName;
 
 
-                public override void VisitInvocationExpression(InvocationExpression invocationExpression)
-                {
-                    base.VisitInvocationExpression(invocationExpression);
+            //    public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodName)
+            //    {
+            //        _parentAstType = parentAstType;
+            //        _methodParentFullName = methodParentFullName;
+            //        _methodName = methodName;
+            //    }
 
-                    var targetMemberReference = invocationExpression.Target as MemberReferenceExpression;
 
-                    if (targetMemberReference == null) return;
+            //    public override void VisitInvocationExpression(InvocationExpression invocationExpression)
+            //    {
+            //        base.VisitInvocationExpression(invocationExpression);
 
-                    var targetType = targetMemberReference.Target.GetActualType();
-                    var isAffectedMethodCall =
-                        (targetMemberReference.Target is ThisReferenceExpression ||
-                            targetType != null &&
-                            targetType.FullName == _methodParentFullName)
-                        &&
-                        targetMemberReference.MemberName == _methodName;
+            //        var targetMemberReference = invocationExpression.Target as MemberReferenceExpression;
 
-                    if (!isAffectedMethodCall) return;
+            //        if (targetMemberReference == null) return;
 
-                    var originalTarget = targetMemberReference.Target;
-                    targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone()));
+            //        var targetType = targetMemberReference.Target.GetActualType();
+            //        var isAffectedMethodCall =
+            //            (targetMemberReference.Target is ThisReferenceExpression ||
+            //                targetType != null &&
+            //                targetType.FullName == _methodParentFullName)
+            //            &&
+            //            targetMemberReference.MemberName == _methodName;
 
-                    if (!invocationExpression.Arguments.Any())
-                    {
-                        invocationExpression.Arguments.Add(originalTarget);
-                    }
-                    else
-                    {
-                        invocationExpression.Arguments.InsertBefore(invocationExpression.Arguments.First(), originalTarget);
-                    }
-                }
-            }
+            //        if (!isAffectedMethodCall) return;
+
+            //        var originalTarget = targetMemberReference.Target;
+            //        targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone()));
+
+            //        if (!invocationExpression.Arguments.Any())
+            //        {
+            //            invocationExpression.Arguments.Add(originalTarget);
+            //        }
+            //        else
+            //        {
+            //            invocationExpression.Arguments.InsertBefore(invocationExpression.Arguments.First(), originalTarget);
+            //        }
+            //    }
+            //}
         }
     }
 }

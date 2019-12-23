@@ -14,7 +14,7 @@ using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard.Services;
 using System;
 using System.Collections.Generic;
@@ -384,7 +384,7 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         case ClassType.Class:
                         case ClassType.Struct:
-                            if (typeDeclaration.BaseTypes.Any(baseType => !baseType.Annotation<TypeDefinition>().IsInterface))
+                            if (typeDeclaration.BaseTypes.Any(baseType => baseType.GetActualType().Kind != TypeKind.Interface))
                             {
                                 throw new NotSupportedException(
                                     "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");

@@ -147,7 +147,6 @@
     <Compile Include="Services\IOperatorsToMethodsConverter.cs" />
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\MethodInliner.cs" />
-    <Compile Include="Services\NoForPatternStatementTransform.cs" />
     <Compile Include="Services\ObjectInitializerExpander.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />

@@ -26,7 +26,7 @@ namespace Hast.Transformer.Helpers
             }
             else
             {
-                var role = new ICSharpCode.Decompiler.Role<T>(typeof(T).Name);
+                var role = new Role<T>(typeof(T).Name);
                 if (before) enclosingNode.InsertChildBefore(adjacentSibling, statement, role);
                 else enclosingNode.InsertChildAfter(adjacentSibling, statement, role);
             }
