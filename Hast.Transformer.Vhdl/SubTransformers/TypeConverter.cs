@@ -7,6 +7,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -66,9 +67,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (IsTaskType(type))
             {
-                if (type is GenericInstanceType)
+                if (type is ParameterizedType parameterizedType)
                 {
-                    return ConvertType(((GenericInstanceType)type).GenericArguments.Single(), context);
+                    return ConvertType(parameterizedType.TypeArguments.Single(), context);
                 }
 
                 return SpecialTypes.Task;

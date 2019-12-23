@@ -249,8 +249,8 @@ namespace Hast.Transformer.Services
             private static bool IsImmutableArrayName(string name) =>
                 !string.IsNullOrEmpty(name) && name.StartsWith("System.Collections.Immutable.ImmutableArray");
 
-            private static ArrayType CreateArrayTypeFromImmutableArrayReference(TypeReference typeReference) =>
-                new ArrayType(((GenericInstanceType)typeReference).GenericArguments.Single(), 1);
+            private static ArrayType CreateArrayTypeFromImmutableArrayReference(IType type) =>
+                new ArrayType(((ParameterizedType)type).TypeArguments.Single(), 1);
 
             private static TypeInformation CreateArrayTypeInformationFromImmutableArrayReference(TypeReference typeReference)
             {
