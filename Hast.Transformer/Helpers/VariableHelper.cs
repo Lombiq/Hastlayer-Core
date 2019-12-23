@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
@@ -10,11 +11,11 @@ namespace Hast.Transformer.Helpers
         public static IdentifierExpression DeclareAndReferenceArrayVariable(
             Expression valueHolder,
             AstType arrayElementAstType,
-            TypeReference arrayType)
+            IType arrayType)
         {
             var declarationType = new ComposedType { BaseType = arrayElementAstType.Clone() };
             declarationType.ArraySpecifiers.Add(
-                new ArraySpecifier(((ArrayType)arrayType).Dimensions.Count));
+                new ArraySpecifier(((ArrayType)arrayType).Dimensions));
 
             return DeclareAndReferenceVariable("array", valueHolder, declarationType);
         }
@@ -33,16 +34,16 @@ namespace Hast.Transformer.Helpers
 
         public static IdentifierExpression DeclareAndReferenceVariable(
             string variableName,
-            TypeInformation typeInformation,
-            AstType type,
+            IType type,
+            AstType astType,
             Statement parentStatement)
         {
-            var variableDeclaration = new VariableDeclarationStatement(type.Clone(), variableName)
-                .WithAnnotation(typeInformation);
-            variableDeclaration.Variables.Single().AddAnnotation(typeInformation);
+            var variableDeclaration = new VariableDeclarationStatement(astType.Clone(), variableName)
+                .WithAnnotation(new ResolveResult(type));
+            variableDeclaration.Variables.Single().AddAnnotation(type);
             AstInsertionHelper.InsertStatementBefore(parentStatement, variableDeclaration);
 
-            return new IdentifierExpression(variableName).WithAnnotation(typeInformation);
+            return new IdentifierExpression(variableName).WithAnnotation(type);
         }
     }
 }

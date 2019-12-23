@@ -1,5 +1,7 @@
 ﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
 using System;
 
 namespace Hast.Transformer.Services
@@ -46,8 +48,13 @@ namespace Hast.Transformer.Services
                 var variableIdentifier = VariableHelper
                     .DeclareAndReferenceVariable("object", expression, astType);
 
+                var resolveResult = expression.GetResolveResult();
                 var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())
-                    .WithAnnotation(expression.Annotation<TypeInformation>());
+                    .WithAnnotation(new OperatorResolveResult(
+                        resolveResult.Type,
+                        System.Linq.Expressions.ExpressionType.Assign,
+                        resolveResult,
+                        resolveResult));
 
                 AstInsertionHelper.InsertStatementBefore(
                     expression.FindFirstParentStatement(),
