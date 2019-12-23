@@ -1,13 +1,11 @@
 ﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
-using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Linq;
-using System.Reflection.Metadata;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -81,7 +79,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return ConvertType(type.GetElementType(), context);
             }
 
-            return ConvertTypeDefinition(type as TypeDefinition, type.FullName, context);
+            throw new NotImplementedException();
+            //return ConvertTypeDefinition(type as TypeDefinition, type.FullName, context);
         }
 
         public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)
@@ -103,7 +102,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (type is SimpleType) return ConvertSimple((SimpleType)type, context);
 
-            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
+            throw new NotImplementedException();
+            //return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
         }
 
         public DataType ConvertAndDeclareAstType(
@@ -283,7 +283,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
                 {
-                    if (IsTaskType(type.Annotation<TypeReference>()))
+                    if (IsTaskType(type.GetActualType()))
                     {
                         if (type.TypeArguments.Single().IsArray())
                         {
@@ -307,35 +307,36 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return SpecialTypes.Task;
             }
 
-            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
+            throw new NotImplementedException();
+            //return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
         }
 
-        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, string typeFullName, IVhdlTransformationContext context)
-        {
-            if (typeDefinition == null)
-            {
-                typeDefinition = context.TypeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
-            }
+        //private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, string typeFullName, IVhdlTransformationContext context)
+        //{
+        //    if (typeDefinition == null)
+        //    {
+        //        typeDefinition = context.TypeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
+        //    }
 
-            if (typeDefinition == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeFullName);
+        //    if (typeDefinition == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeFullName);
 
-            if (typeDefinition.IsEnum)
-            {
-                return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
-            }
+        //    if (typeDefinition.IsEnum)
+        //    {
+        //        return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
+        //    }
 
-            if (typeDefinition.IsClass)
-            {
-                var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName);
+        //    if (typeDefinition.IsClass)
+        //    {
+        //        var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName);
 
-                if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeDefinition.FullName);
+        //        if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeDefinition.FullName);
 
-                return _recordComposer.CreateRecordFromType(typeDeclaration, context);
-            }
+        //        return _recordComposer.CreateRecordFromType(typeDeclaration, context);
+        //    }
 
-            throw new NotSupportedException(
-                "The type " + typeDefinition.FullName + " is not supported for transforming.");
-        }
+        //    throw new NotSupportedException(
+        //        "The type " + typeDefinition.FullName + " is not supported for transforming.");
+        //}
 
 
         private static DataType CreateArrayType(DataType elementType) =>
