@@ -115,7 +115,6 @@
     <Compile Include="Models\ITransformationContext.cs" />
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
-    <Compile Include="Services\ArrayInitializerExpander.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\AstExpressionEvaluator.cs" />
     <Compile Include="Services\ConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ConstantValuesMarkingVisitor.cs" />
@@ -129,7 +128,6 @@
     <Compile Include="Services\CustomPropertiesToMethodsConverter.cs" />
     <Compile Include="Services\DirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
-    <Compile Include="Services\IArrayInitializerExpander.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
     <Compile Include="Services\IAutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />

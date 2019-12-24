@@ -34,7 +34,6 @@ namespace Hast.Transformer
         private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
         private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
         private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
-        private readonly IArrayInitializerExpander _arrayInitializerExpander;
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
@@ -69,7 +68,6 @@ namespace Hast.Transformer
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
-            IArrayInitializerExpander arrayInitializerExpander,
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
@@ -102,7 +100,6 @@ namespace Hast.Transformer
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
-            _arrayInitializerExpander = arrayInitializerExpander;
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
@@ -165,6 +162,9 @@ namespace Hast.Transformer
                 var decompilerSettings = new DecompilerSettings
                 {
                     AnonymousMethods = false,
+                    // New arrays aren't populated with initializers but items are set one by one, which is easier to
+                    // process.
+                    ArrayInitializers = false,
                     // Having simpler loops.
                     ForStatement = false,
                     DoWhileStatement = false,
@@ -301,7 +301,6 @@ namespace Hast.Transformer
             _operatorsToMethodsConverter.ConvertOperatorsToMethods(syntaxTree);
             _customPropertiesToMethodsConverter.ConvertCustomPropertiesToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
-            _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
