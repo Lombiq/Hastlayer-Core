@@ -107,7 +107,7 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 return string.Empty;
             }
-            
+
             return node.CreateNameForUnnamedNode();
         }
 
@@ -120,9 +120,9 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 ilRange = node
                     .FindFirstParentOfType<AstNode>(parent => parent.Annotations.Any(annotation => annotation is List<ILRange>))
-                    ?.Annotation<List<ILRange>>(); 
+                    ?.Annotation<List<ILRange>>();
             }
-            return ilRange != null ? ilRange.First().ToString() : string.Empty;
+            return ilRange != null && ilRange.Any() ? ilRange.First().ToString() : string.Empty;
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace ICSharpCode.NRefactory.CSharp
         public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>(n => true);
 
-        public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode => 
+        public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
             node.FindFirstParentOfType(predicate, out int height);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate, out int height) where T : AstNode
@@ -262,7 +262,7 @@ namespace ICSharpCode.NRefactory.CSharp
             return null;
         }
 
-        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode => 
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
             node.Is(predicate, out T castNode);
 
         public static bool Is<T>(this AstNode node, out T castNode) where T : AstNode =>

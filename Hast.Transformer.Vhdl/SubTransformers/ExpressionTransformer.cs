@@ -101,7 +101,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // changes made to record fields are propagated. However such aliases can't be assigned to as
                         // that would also overwrite the original variable.
                         throw new NotSupportedException(
-                            "The assignment " + expression + 
+                            "The assignment " + expression +
                             " is not supported. You can't at the moment assign to a variable that you previously assigned to using a reference type-holding variable."
                             .AddParentEntityName(assignment));
                     }
@@ -110,6 +110,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var rightTypeReference = right.GetActualTypeReference();
                     if (leftTypeReference != null &&
+                        rightTypeReference != null &&
                         leftTypeReference.FullName == rightTypeReference.FullName &&
                         !leftTypeReference.IsValueType &&
                         left is IdentifierExpression &&

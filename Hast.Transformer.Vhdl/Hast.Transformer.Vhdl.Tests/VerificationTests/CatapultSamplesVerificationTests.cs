@@ -34,6 +34,37 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         [Test]
+        public async Task UnumSampleMatchesApproved()
+        {
+            (await CreateVhdlForUnumSample()).ShouldMatchApprovedWithVhdlConfiguration();
+        }
+
+        [Test]
+        public async Task PositSampleMatchesApproved()
+        {
+            (await CreateVhdlForPositSample()).ShouldMatchApprovedWithVhdlConfiguration();
+        }
+
+        [Test]
+        public async Task Posit32SampleMatchesApproved()
+        {
+            (await CreateVhdlForPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration();
+        }
+
+        [Test]
+        public async Task Posit32SampleWithInliningMatchesApproved()
+        {
+            (await CreateVhdlForPosit32SampleWithInlining()).ShouldMatchApprovedWithVhdlConfiguration();
+        }
+
+        [Test]
+        [Ignore]
+        public async Task Posit32FusedSampleMatchesApproved()
+        {
+            (await CreateVhdlForPosit32FusedSample()).ShouldMatchApprovedWithVhdlConfiguration();
+        }
+
+        [Test]
         public async Task Fix64SamplesMatchesApproved()
         {
             (await CreateVhdlForFix64Samples()).ShouldMatchApprovedWithVhdlConfiguration();
