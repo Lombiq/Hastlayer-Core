@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -293,25 +294,59 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             return parent;
         }
 
-        public static T WithAnnotation<T>(this T node, object annotation) where T : AstNode
+        public static IType GetActualType(this AstNode node, bool getExpectedType = false)
         {
-            node.AddAnnotation(annotation);
-            return node;
+            throw new NotImplementedException();
+            //var typeInformation = node.Annotation<TypeInformation>();
+            //if (typeInformation != null)
+            //{
+            //    if (getExpectedType) return typeInformation.ExpectedType;
+            //    else return typeInformation.InferredType ?? typeInformation.ExpectedType;
+            //}
+
+            //var typeReference = node.Annotation<TypeReference>();
+            //if (typeReference != null) return typeReference;
+
+            //var ilVariable = node.Annotation<ILVariable>();
+            //if (ilVariable != null) return ilVariable.Type;
+
+            //var fieldReference = node.Annotation<FieldReference>();
+            //if (fieldReference != null) return fieldReference.FieldType;
+
+            //var propertyReference = node.Annotation<PropertyReference>();
+            //if (propertyReference != null) return propertyReference.PropertyType;
+
+            //var methodReference = node.Annotation<MethodReference>();
+            //if (methodReference != null) return methodReference.ReturnType;
+
+            //var parameterReference = node.Annotation<ParameterReference>();
+            //if (parameterReference != null) return parameterReference.ParameterType;
+
+            //if (node is IndexerExpression indexerExpression)
+            //{
+            //    return indexerExpression.Target.GetActualType()?.GetElementType();
+            //}
+
+            //if (node is AssignmentExpression assignmentExpression)
+            //{
+            //    return assignmentExpression.Left.GetActualType();
+            //}
+
+            //if (node is UnaryOperatorExpression unaryOperatorExpression)
+            //{
+            //    return unaryOperatorExpression.Expression.GetActualType();
+            //}
+
+            //if (node is PrimitiveExpression primitiveExpression)
+            //{
+            //    return TypeHelper.CreatePrimitiveTypeReference(primitiveExpression.Value.GetType().Name);
+            //}
+
+            //return null;
         }
 
-        /// <summary>
-        /// Replaces all annotations with the type of the given new annotation with the supplied instance of the new
-        /// annotation.
-        /// </summary>
-        public static TNode ReplaceAnnotations<TNode, TAnnotation>(this TNode node, TAnnotation annotation)
-            where TNode : AstNode
-            where TAnnotation : class
-        {
-            node.RemoveAnnotations<TAnnotation>();
-            node.AddAnnotation(annotation);
-
-            return node;
-        }
+        public static ResolveResult CreateResolveResultFromActualType(this AstNode node) =>
+            node.GetActualType().ToResolveResult();
 
 
         internal static string GetReferencedMemberFullName(this AstNode node)
