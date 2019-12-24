@@ -39,9 +39,6 @@
       <HintPath>..\..\..\Orchard\src\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Hast.Samples.FSharpSampleAssembly">
-      <HintPath>..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\bin\Debug\netstandard2.0\Hast.Samples.FSharpSampleAssembly.dll</HintPath>
-    </Reference>
     <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
       <HintPath>..\..\..\Orchard\src\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
     </Reference>
@@ -122,6 +119,10 @@
     <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj">
       <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
       <Name>Hast.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj">
+      <Project>{a2d4c4bd-4c4a-4ed7-b74f-b2c79f31f2d0}</Project>
+      <Name>Hast.Samples.FSharpSampleAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj">
       <Project>{EE140765-5088-40AA-9621-D4B0A971EE2C}</Project>
