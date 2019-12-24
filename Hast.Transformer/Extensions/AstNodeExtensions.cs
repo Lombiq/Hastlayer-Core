@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.IL;
+﻿using ICSharpCode.Decompiler.CSharp.Resolver;
+using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
@@ -328,12 +329,26 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             var fullName = node.GetResolveResult<MemberResolveResult>()?.GetFullName();
 
-            if (!string.IsNullOrEmpty(fullName) || !(node is MemberReferenceExpression) || !(node.Parent is InvocationExpression))
+            if (!string.IsNullOrEmpty(fullName)) return fullName;
+
+            if (node is MemberReferenceExpression)
             {
-                return fullName;
+                if (node.Parent is InvocationExpression)
+                {
+                    return node.Parent.GetResolveResult<InvocationResolveResult>().GetFullName();
+                }
+
+                // This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0
+                // method here:
+                // Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
+                MethodGroupResolveResult methodGroupResolveResult;
+                if ((methodGroupResolveResult = node.GetResolveResult<MethodGroupResolveResult>()) != null)
+                {
+                    return methodGroupResolveResult.Methods.Single().GetFullName();
+                }
             }
 
-            return node.Parent.GetResolveResult<InvocationResolveResult>().GetFullName();
+            return null;
         }
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>
