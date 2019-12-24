@@ -15,6 +15,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
+            if (node is TypeDeclaration)
+            {
+                return node.GetActualType().FullName;
+            }
+
             if (node is MemberReferenceExpression memberReferenceExpression)
             {
                 return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
@@ -33,7 +38,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             var referencedMemberFullName = node.GetReferencedMemberFullName();
             if (!string.IsNullOrEmpty(referencedMemberFullName)) return referencedMemberFullName;
 
-            var iLVariableResolveResult = node.Annotation<ILVariableResolveResult>();
+            var iLVariableResolveResult = node.GetResolveResult<ILVariableResolveResult>();
             if (iLVariableResolveResult != null) return CreateParentEntityBasedName(node, iLVariableResolveResult.Variable.Name);
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
@@ -109,12 +114,18 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return string.Empty;
             }
 
+            if (node is SimpleType)
+            {
+                return node.GetActualType().FullName;
+            }
+
             return node.CreateNameForUnnamedNode();
         }
 
         public static string GetILRangeName(this AstNode node)
         {
-            throw new NotImplementedException();
+            var ilInstruction = node.Annotation<ILInstruction>();
+            return ilInstruction != null ? ilInstruction.ILRanges.First().ToString() : string.Empty;
             // The node or parents should contain one or more ILRange objects which maybe correspond to the node's
             // location in the original IL.
             //var ilRange = node.Annotation<List<ILRange>>();
@@ -318,18 +329,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.GetActualType().ToResolveResult();
 
 
-        internal static string GetReferencedMemberFullName(this AstNode node)
-        {
-            throw new NotImplementedException();
-
-            //var memberDefinition = node.Annotation<IMemberDefinition>();
-            //if (memberDefinition != null) return memberDefinition.FullName;
-
-            //var memberReference = node.Annotation<MemberReference>();
-            //if (memberReference != null) return memberReference.FullName;
-
-            //return null;
-        }
+        internal static string GetReferencedMemberFullName(this AstNode node) =>
+            node.GetResolveResult<MemberResolveResult>()?.Member.FullName;
 
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>
