@@ -294,55 +294,24 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             return parent;
         }
 
-        public static IType GetActualType(this AstNode node, bool getExpectedType = false)
+        public static IType GetActualType(this AstNode node)
         {
-            throw new NotImplementedException();
-            //var typeInformation = node.Annotation<TypeInformation>();
-            //if (typeInformation != null)
-            //{
-            //    if (getExpectedType) return typeInformation.ExpectedType;
-            //    else return typeInformation.InferredType ?? typeInformation.ExpectedType;
-            //}
+            if (node is IndexerExpression indexerExpression)
+            {
+                return indexerExpression.Target.GetActualType().GetElementType();
+            }
 
-            //var typeReference = node.Annotation<TypeReference>();
-            //if (typeReference != null) return typeReference;
+            if (node is AssignmentExpression assignmentExpression)
+            {
+                return assignmentExpression.Left.GetActualType();
+            }
 
-            //var ilVariable = node.Annotation<ILVariable>();
-            //if (ilVariable != null) return ilVariable.Type;
+            if (node is UnaryOperatorExpression unaryOperatorExpression)
+            {
+                return unaryOperatorExpression.Expression.GetActualType();
+            }
 
-            //var fieldReference = node.Annotation<FieldReference>();
-            //if (fieldReference != null) return fieldReference.FieldType;
-
-            //var propertyReference = node.Annotation<PropertyReference>();
-            //if (propertyReference != null) return propertyReference.PropertyType;
-
-            //var methodReference = node.Annotation<MethodReference>();
-            //if (methodReference != null) return methodReference.ReturnType;
-
-            //var parameterReference = node.Annotation<ParameterReference>();
-            //if (parameterReference != null) return parameterReference.ParameterType;
-
-            //if (node is IndexerExpression indexerExpression)
-            //{
-            //    return indexerExpression.Target.GetActualType()?.GetElementType();
-            //}
-
-            //if (node is AssignmentExpression assignmentExpression)
-            //{
-            //    return assignmentExpression.Left.GetActualType();
-            //}
-
-            //if (node is UnaryOperatorExpression unaryOperatorExpression)
-            //{
-            //    return unaryOperatorExpression.Expression.GetActualType();
-            //}
-
-            //if (node is PrimitiveExpression primitiveExpression)
-            //{
-            //    return TypeHelper.CreatePrimitiveTypeReference(primitiveExpression.Value.GetType().Name);
-            //}
-
-            //return null;
+            return node.GetResolveResult().Type;
         }
 
         public static ResolveResult CreateResolveResultFromActualType(this AstNode node) =>

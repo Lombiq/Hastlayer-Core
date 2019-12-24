@@ -38,7 +38,7 @@ namespace Hast.Transformer.Services
                     var castExpression = castExpressionFindingVisitor.Expression;
                     if (castExpression != null)
                     {
-                        var actualType = castExpression.GetActualType(true);
+                        var actualType = castExpression.GetActualType();
                         objectParameter.Type = castExpression.Type.Clone();
                         // Since the line below is not valid in ILSype any more.
                         throw new NotImplementedException();

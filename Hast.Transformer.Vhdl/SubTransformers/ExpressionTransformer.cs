@@ -518,9 +518,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 var expressionType = _typeConverter
-                    .ConvertType(
-                        unary.Expression is CastExpression ? unary.Expression.GetActualType(true) : unary.Expression.GetActualType(),
-                        context.TransformationContext);
+                    .ConvertType(unary.Expression.GetActualType(), context.TransformationContext);
                 var expressionSize = expressionType.GetSize();
                 var clockCyclesNeededForOperation = context.TransformationContext.DeviceDriver
                     .GetClockCyclesNeededForUnaryOperation(unary, expressionSize, expressionType.Name == "signed");
@@ -644,7 +642,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return innerExpressionResult;
                 }
 
-                IType fromType = castExpression.Expression.GetActualType(true) ?? castExpression.GetActualType();
+                var fromType = castExpression.Expression.GetActualType();
                 var fromVhdlType = _declarableTypeCreator
                     .CreateDeclarableType(castExpression.Expression, fromType, context.TransformationContext);
                 var toVhdlType = _declarableTypeCreator

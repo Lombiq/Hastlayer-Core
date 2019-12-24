@@ -89,12 +89,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
 
-            // If the left and/or right expressions are cast then the type that matters here is the result type of that
-            // cast, so also checking for that.
-
-            var leftType = expression.Left.GetActualType(true) ?? expression.Left.GetActualType();
-
-            var rightType = expression.Right.GetActualType(true) ?? expression.Right.GetActualType();
+            var leftType = expression.Left.GetActualType();
+            var rightType = expression.Right.GetActualType();
 
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
             // types either without the equality operator defined or they are custom value types and a
@@ -192,7 +188,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (hasExplicitCast)
             {
                 preCastType = resultType;
-                resultType = firstNonParenthesizedExpressionParent.GetActualType(true);
+                resultType = firstNonParenthesizedExpressionParent.GetActualType();
             }
 
             var resultVhdlType = _typeConverter.ConvertType(resultType, context.TransformationContext);

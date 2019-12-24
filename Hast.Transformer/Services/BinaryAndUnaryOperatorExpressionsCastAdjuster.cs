@@ -104,13 +104,13 @@ namespace Hast.Transformer.Services
                 var leftType = binaryOperatorExpression.Left.GetActualType();
                 if (binaryOperatorExpression.Left is CastExpression)
                 {
-                    leftType = binaryOperatorExpression.Left.GetActualType(true);
+                    leftType = binaryOperatorExpression.Left.GetActualType();
                 }
 
                 var rightType = binaryOperatorExpression.Right.GetActualType();
                 if (binaryOperatorExpression.Right is CastExpression)
                 {
-                    rightType = binaryOperatorExpression.Right.GetActualType(true);
+                    rightType = binaryOperatorExpression.Right.GetActualType();
                 }
 
 
@@ -225,7 +225,7 @@ namespace Hast.Transformer.Services
 
                 var type = unaryOperatorExpression.Expression.GetActualType();
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
-                var expectedTypeReference = unaryOperatorExpression.Expression.GetActualType(true);
+                var expectedTypeReference = unaryOperatorExpression.Expression.GetActualType();
 
                 void replace(IType newType)
                 {

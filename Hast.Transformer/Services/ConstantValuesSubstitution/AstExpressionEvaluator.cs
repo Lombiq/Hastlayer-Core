@@ -82,7 +82,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     castExpression.Expression.ToString() + ".");
             }
 
-            var toType = castExpression.GetActualType(true);
+            var toType = castExpression.GetActualType();
             dynamic value = ((PrimitiveExpression)castExpression.Expression).Value;
 
             switch (toType.FullName)

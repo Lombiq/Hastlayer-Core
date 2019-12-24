@@ -6,7 +6,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
     {
         public static IType GetResultType(this BinaryOperatorExpression expression)
         {
-            var resultType = expression.GetActualType(true);
+            var resultType = expression.GetActualType();
             if (resultType == null)
             {
                 resultType = expression.FindFirstNonParenthesizedExpressionParent().GetActualType();
