@@ -16,7 +16,7 @@ namespace Hast.Transformer.Services
         }
 
 
-        public void AdjustFSharpIdiosyncrasie(SyntaxTree syntaxTree)
+        public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree)
         {
             syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
         }

@@ -8,6 +8,6 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface IFSharpIdiosyncrasiesAdjuster : IDependency
     {
-        void AdjustFSharpIdiosyncrasie(SyntaxTree syntaxTree);
+        void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree);
     }
 }
