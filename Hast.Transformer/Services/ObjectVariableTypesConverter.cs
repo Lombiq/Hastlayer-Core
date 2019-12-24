@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Hast.Transformer.Services
 
                 foreach (var objectParameter in methodDeclaration.Parameters
                     .Where(parameter => parameter.Type.Is<PrimitiveType>(type =>
-                        type.KnownTypeCode == ICSharpCode.Decompiler.TypeSystem.KnownTypeCode.Object)))
+                        type.KnownTypeCode == KnownTypeCode.Object)))
                 {
                     var castExpressionFindingVisitor = new ParameterCastExpressionFindingVisitor(objectParameter.Name);
                     methodDeclaration.Body.AcceptVisitor(castExpressionFindingVisitor);
@@ -40,9 +41,11 @@ namespace Hast.Transformer.Services
                     {
                         var actualType = castExpression.GetActualType();
                         objectParameter.Type = castExpression.Type.Clone();
-                        // Since the line below is not valid in ILSype any more.
-                        throw new NotImplementedException();
-                        //objectParameter.Annotation<ParameterDefinition>().ParameterType = actualType;
+                        objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
+                        objectParameter.AddAnnotation(new ILVariableResolveResult(
+                            new ICSharpCode.Decompiler.IL.ILVariable(
+                                ICSharpCode.Decompiler.IL.VariableKind.Parameter,
+                                castExpression.Type.GetActualType()) { Name = objectParameter.Name }));
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
 
