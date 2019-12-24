@@ -80,6 +80,7 @@
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\Orchard\src\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Reflection.Metadata, Version=1.4.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -110,6 +111,10 @@
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj">
       <Project>{0D13986F-FA33-4898-A0DE-C173764663F0}</Project>
       <Name>Hast.Transformer.Vhdl.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj">
+      <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
+      <Name>Lombiq.Arithmetics</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj">
       <Project>{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}</Project>

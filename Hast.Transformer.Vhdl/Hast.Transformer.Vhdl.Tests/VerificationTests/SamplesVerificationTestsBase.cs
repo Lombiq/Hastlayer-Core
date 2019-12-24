@@ -6,7 +6,9 @@ using Hast.Samples.Kpz.Algorithms;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
+using Lombiq.Arithmetics;
 using Lombiq.OrchardAppHost;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
@@ -122,6 +124,100 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
             return notInlinedSource + inlinedSource;
         }
+
+        protected Task<string> CreateVhdlForUnumSample() =>
+            _host.RunGet(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.Resolve<ITransformer>(),
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly, typeof(ImmutableArray).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<UnumCalculator>();
+
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                            UnumCalculatorExtensions.ManuallySizedArrays);
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
+
+        protected Task<string> CreateVhdlForPositSample() =>
+            _host.RunGet(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.Resolve<ITransformer>(),
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly, typeof(ImmutableArray).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<PositCalculator>();
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                            PositCalculatorExtensions.ManuallySizedArrays);
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
+
+        protected Task<string> CreateVhdlForPosit32Sample() =>
+            _host.RunGet(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.Resolve<ITransformer>(),
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32Calculator>();
+                        configuration.TransformerConfiguration().EnableMethodInlining = false;
+
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
+
+        protected Task<string> CreateVhdlForPosit32SampleWithInlining() =>
+            _host.RunGet(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.Resolve<ITransformer>(),
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32Calculator>();
+
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
+
+        protected Task<string> CreateVhdlForPosit32FusedSample() =>
+            _host.RunGet(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.Resolve<ITransformer>(),
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32FusedCalculator>();
+                        configuration.TransformerConfiguration().EnableMethodInlining = false;
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            Posit32.QuireSize >> 6,
+                            Posit32FusedCalculatorExtensions.ManuallySizedArrays);
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
 
         protected Task<string> CreateVhdlForFix64Samples() =>
             _host.RunGet(async wc =>
