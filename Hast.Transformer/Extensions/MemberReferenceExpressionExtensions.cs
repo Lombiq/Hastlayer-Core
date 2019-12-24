@@ -44,60 +44,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (type == null) return null;
 
-            throw new NotImplementedException();
-
-            //// A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
-            //// like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
-            //var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-            //if (methodReference != null)
-            //{
-            //    var memberName = methodReference.FullName;
-
-            //    // If this is a member reference to a property then both a MethodReference (for the setter or getter)
-            //    // and a PropertyReference will be there, but the latter will contain the member name.
-            //    var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
-            //    if (propertyReference != null) memberName = propertyReference.FullName;
-
-            //    return type.Members
-            //        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName);
-            //}
-            //else
-            //{
-            //    // A FieldReference annotation is present if the expression is about accessing a field.
-            //    var fieldReference = memberReferenceExpression.Annotation<FieldReference>();
-            //    if (fieldReference != null)
-            //    {
-            //        if (!fieldReference.FullName.IsBackingFieldName())
-            //        {
-            //            return type.Members
-            //                .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldReference.FullName);
-            //        }
-            //        else
-            //        {
-            //            return type.Members
-            //                .SingleOrDefault(member => member.Name == memberReferenceExpression.MemberName && member is PropertyDeclaration);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        var parent = memberReferenceExpression.Parent;
-            //        MemberReference memberReference = null;
-            //        while (memberReference == null && parent != null)
-            //        {
-            //            memberReference = parent.Annotation<MemberReference>();
-            //            parent = parent.Parent;
-            //        }
-
-            //        var declaringType = typeDeclarationLookupTable.Lookup(memberReference.DeclaringType.FullName);
-
-            //        if (declaringType == null) return null;
-
-            //        return
-            //            declaringType
-            //            .Members
-            //            .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);
-            //    }
-            //}
+            var fullName = memberReferenceExpression.GetReferencedMemberFullName();
+            if (string.IsNullOrEmpty(fullName)) return null;
+            return type
+                .Members
+                .SingleOrDefault(member => member.GetFullName() == fullName);
         }
 
         public static TypeDeclaration FindTargetTypeDeclaration(

@@ -22,13 +22,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (node is EntityDeclaration)
             {
-                var member = node.GetResolveResult<MemberResolveResult>().Member;
-                var name = $"{member.ReturnType.FullName} {member.DeclaringType.FullName}::{member.Name}";
-                if (member is IMethod method)
-                {
-                    name += $"({string.Join(", ", method.Parameters.Select(parameter => parameter.Type.FullName))})";
-                }
-                return name;
+                return node.GetResolveResult<MemberResolveResult>().GetFullName();
             }
 
             if (node is MemberReferenceExpression memberReferenceExpression)
@@ -137,16 +131,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             var ilInstruction = node.Annotation<ILInstruction>();
             return ilInstruction != null ? ilInstruction.ILRanges.First().ToString() : string.Empty;
-            // The node or parents should contain one or more ILRange objects which maybe correspond to the node's
-            // location in the original IL.
-            //var ilRange = node.Annotation<List<ILRange>>();
-            //if (ilRange == null)
-            //{
-            //    ilRange = node
-            //        .FindFirstParentOfType<AstNode>(parent => parent.Annotations.Any(annotation => annotation is List<ILRange>))
-            //        ?.Annotation<List<ILRange>>();
-            //}
-            //return ilRange != null ? ilRange.First().ToString() : string.Empty;
         }
 
         /// <summary>
@@ -340,9 +324,17 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.GetActualType().ToResolveResult();
 
 
-        internal static string GetReferencedMemberFullName(this AstNode node) =>
-            node.GetResolveResult<MemberResolveResult>()?.Member.FullName;
+        internal static string GetReferencedMemberFullName(this AstNode node)
+        {
+            var fullName = node.GetResolveResult<MemberResolveResult>()?.GetFullName();
 
+            if (!string.IsNullOrEmpty(fullName) || !(node is MemberReferenceExpression) || !(node.Parent is InvocationExpression))
+            {
+                return fullName;
+            }
+
+            return node.Parent.GetResolveResult<InvocationResolveResult>().GetFullName();
+        }
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>
             // The node doesn't really have a name so give it one that is suitably unique.

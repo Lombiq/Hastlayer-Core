@@ -71,6 +71,7 @@
     <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\ListExtension.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
+    <Compile Include="Extensions\MemberResolveResultExtensions.cs" />
     <Compile Include="Extensions\MethodDeclarationExtensions.cs" />
     <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
