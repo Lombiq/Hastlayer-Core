@@ -20,6 +20,17 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return node.GetActualType().FullName;
             }
 
+            if (node is EntityDeclaration)
+            {
+                var member = node.GetResolveResult<MemberResolveResult>().Member;
+                var name = $"{member.ReturnType.FullName} {member.DeclaringType.FullName}::{member.Name}";
+                if (member is IMethod method)
+                {
+                    name += $"({string.Join(", ", method.Parameters.Select(parameter => parameter.Type.FullName))})";
+                }
+                return name;
+            }
+
             if (node is MemberReferenceExpression memberReferenceExpression)
             {
                 return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
