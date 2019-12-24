@@ -3,7 +3,7 @@ using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
-using System;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -99,22 +99,28 @@ namespace Hast.Transformer.Services
 
                     if (memberReferenceExpression.GetMemberFullName() != _unifiedPropertyName) return;
 
-                    var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
-                    throw new NotImplementedException();
-                    //memberReferenceExpression.MemberName = memberResolveResult.Name; // Needs to use the set/get_ name.
-                    //var invocation = new InvocationExpression(memberReferenceExpression.Clone());
-                    //invocation.AddAnnotation(memberResolveResult);
-                    //if (memberResolveResult.IsDefinition && ((MethodDefinition)memberResolveResult).IsSetter ||
-                    //    !memberResolveResult.IsDefinition && memberResolveResult.Name.StartsWith("set_"))
-                    //{
-                    //    var parentAssignment = (AssignmentExpression)memberReferenceExpression.Parent;
-                    //    invocation.Arguments.Add(parentAssignment.Right.Clone());
-                    //    parentAssignment.ReplaceWith(invocation);
-                    //}
-                    //else
-                    //{
-                    //    memberReferenceExpression.ReplaceWith(invocation);
-                    //}
+                    var property = (IProperty)memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member;
+
+                    // Trying to determine whether the property's setter or getter is being used.
+                    if (memberReferenceExpression.Parent
+                        .Is<AssignmentExpression>(expression => expression.Left == memberReferenceExpression, out var assignment))
+                    {
+                        // Setter.
+                        // Note that the MemberName change needs to happen before creating the InvocationExpression.
+                        memberReferenceExpression.MemberName = property.Setter.Name;
+                        var invocation = new InvocationExpression(memberReferenceExpression.Clone());
+                        invocation.AddAnnotation(property.Setter);
+                        invocation.Arguments.Add(assignment.Right.Clone());
+                        assignment.ReplaceWith(invocation);
+                    }
+                    else
+                    {
+                        // Getter.
+                        memberReferenceExpression.MemberName = property.Getter.Name;
+                        var invocation = new InvocationExpression(memberReferenceExpression.Clone());
+                        invocation.AddAnnotation(property.Getter);
+                        memberReferenceExpression.ReplaceWith(invocation);
+                    }
                 }
             }
         }

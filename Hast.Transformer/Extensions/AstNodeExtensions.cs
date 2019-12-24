@@ -140,10 +140,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetFullNameWithUnifiedPropertyName(this AstNode node)
         {
-            throw new NotImplementedException();
-            //var name = node.GetFullName();
+            var name = node.GetFullName();
 
-            //// If this is a compiler-generated property getter or setter method then get the real property name.
+            // If this is a compiler-generated property getter or setter method then get the real property name.
             //var methodDefinition = node.Annotation<MethodDefinition>();
             //if (methodDefinition != null && (methodDefinition.IsGetter || methodDefinition.IsSetter))
             //{
@@ -156,7 +155,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             //    name = name.ConvertFullBackingFieldNameToPropertyName();
             //}
 
-            //return name;
+            return name;
         }
 
         /// <summary>
