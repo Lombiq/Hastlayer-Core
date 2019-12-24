@@ -38,8 +38,8 @@
     <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
       <HintPath>..\..\Orchard\src\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.Decompiler, Version=5.0.2.5153, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.Decompiler.5.0.2.5153\lib\netstandard2.0\ICSharpCode.Decompiler.dll</HintPath>
+    <Reference Include="ICSharpCode.Decompiler, Version=6.0.0.5485, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\ICSharpCode.Decompiler.6.0.0.5485-preview1\lib\netstandard2.0\ICSharpCode.Decompiler.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

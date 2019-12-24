@@ -169,7 +169,12 @@ namespace Hast.Transformer
                     // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2. The
                     // former is easier to transform. Works in conjunction with the disabling of 
                     // ReplaceMethodCallsWithOperators, see below.
-                    IntroduceIncrementAndDecrement = false
+                    IntroduceIncrementAndDecrement = false,
+                    // Having simpler loops.
+                    ForStatement = false,
+                    DoWhileStatement = false,
+                    // Separating variable declarations and initializations.
+                    SeparateLocalVariableDeclarations = true
                 };
 
                 var typeSystem = new DecompilerTypeSystem(module, resolver, decompilerSettings);
@@ -180,16 +185,17 @@ namespace Hast.Transformer
                 // statements mixed in). So we need to remove the problematic transforms.
                 // Must revisit after an ILSpy update.
 
-                decompiler.ILTransforms
-                    // Might need to be removed:
-                    // - InlineReturnTransform creates returns with ternary operators and introduces multiple return 
-                    //   statements.
-                    // - TransformDisplayClassUsage creates local variables instead of assigning them to DisplayClasses.
+                //decompiler.ILTransforms
+                //    // Might need to be removed:
+                //    // - InlineReturnTransform creates returns with ternary operators and introduces multiple return 
+                //    //   statements.
+                //    // - TransformDisplayClassUsage creates local variables instead of assigning them to DisplayClasses.
 
-                    // Converts simple while loops into for loops. However, all resulting loops are while (true) ones with
-                    // a break statement inside.
-                    .Remove<HighLevelLoopTransform>()
-                    ;
+                //    // Converts simple while loops into for loops. However, all resulting loops are while (true) ones
+                //    // with a break statement inside.
+                //    // Not necessary to remove it with ForStatement = DoWhileStatement = false
+                //    //.Remove<HighLevelLoopTransform>()
+                //    ;
 
                 decompiler.AstTransforms
                     // Replaces op_* methods with operators but these methods are simpler to transform. Works in
