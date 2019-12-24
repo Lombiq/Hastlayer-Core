@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard.Validation;
+using System;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Models
 {
@@ -22,7 +22,7 @@ namespace Hast.Transformer.Models
 
         public IArraySize GetSize(AstNode arrayHolder)
         {
-            _arraySizes.TryGetValue(arrayHolder.GetFullNameWithUnifiedPropertyName(), out IArraySize arraySize);
+            _arraySizes.TryGetValue(arrayHolder.GetFullName(), out IArraySize arraySize);
             return arraySize;
         }
 
@@ -30,7 +30,7 @@ namespace Hast.Transformer.Models
         {
             Argument.ThrowIfNull(arrayHolder, nameof(arrayHolder));
 
-            var holderName = arrayHolder.GetFullNameWithUnifiedPropertyName();
+            var holderName = arrayHolder.GetFullName();
 
             if (_arraySizes.TryGetValue(holderName, out IArraySize existingSize))
             {
