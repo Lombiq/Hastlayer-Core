@@ -165,13 +165,13 @@ namespace Hast.Transformer
                 var decompilerSettings = new DecompilerSettings
                 {
                     AnonymousMethods = false,
+                    // Having simpler loops.
+                    ForStatement = false,
+                    DoWhileStatement = false,
                     // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2. The
                     // former is easier to transform. Works in conjunction with the disabling of 
                     // ReplaceMethodCallsWithOperators, see below.
                     IntroduceIncrementAndDecrement = false,
-                    // Having simpler loops.
-                    ForStatement = false,
-                    DoWhileStatement = false,
                     // Separating variable declarations and initializations.
                     SeparateLocalVariableDeclarations = true
                 };
