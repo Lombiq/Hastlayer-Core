@@ -138,58 +138,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
         /// name.
         /// </summary>
-        public static string GetSimpleName(this AstNode node)
-        {
-            throw new NotImplementedException();
-            //string name = null;
-            //TypeReference declaringType = null;
-
-            //var memberDefinition = node.Annotation<IMemberDefinition>();
-            //if (memberDefinition != null)
-            //{
-            //    name = memberDefinition.Name;
-            //    declaringType = memberDefinition.DeclaringType;
-            //    if (declaringType == null) name = memberDefinition.FullName;
-            //}
-            //else
-            //{
-            //    var memberReference = node.Annotation<MemberReference>();
-            //    if (memberReference != null)
-            //    {
-            //        name = memberReference.Name;
-            //        declaringType = memberReference.DeclaringType;
-            //        if (declaringType == null) name = memberReference.FullName;
-            //    }
-            //}
-
-            //// The name is already a full name, but for a different declaring type. This is the case for explicitly 
-            //// implemented interface methods.
-            //if (name.Contains('.'))
-            //{
-            //    name = name.Substring(name.LastIndexOf('.') + 1);
-            //}
-
-            //var childIsNested = false;
-            //while (declaringType != null)
-            //{
-            //    // The delimiter between the name of an inner class and its parent needs to be a plus.
-            //    var delimiter = childIsNested ? "+" : ".";
-
-            //    if (declaringType.DeclaringType == null)
-            //    {
-            //        name = declaringType.FullName + delimiter + name;
-            //    }
-            //    else
-            //    {
-            //        name = declaringType.Name + delimiter + name;
-            //    }
-
-            //    childIsNested = declaringType.IsNested;
-            //    declaringType = declaringType.DeclaringType;
-            //}
-
-            //return name;
-        }
+        public static string GetSimpleName(this AstNode node) => 
+            // Unlike formerly with Cecil, the FullName property is in a simple format.
+            node.GetResolveResult<MemberResolveResult>()?.Member.FullName ?? node.GetActualType().FullName;
 
         public static T GetResolveResult<T>(this AstNode node) where T : ResolveResult =>
             node.GetResolveResult() as T;
