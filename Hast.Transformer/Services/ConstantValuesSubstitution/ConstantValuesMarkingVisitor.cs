@@ -101,7 +101,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
                     var resultType = binaryOperatorExpression.GetResultType();
                     newExpression.AddAnnotation(resultType.ToResolveResult());
-                    if (!(newExpression.Value is bool) && resultType.FullName == typeof(bool).FullName)
+                    if (!(newExpression.Value is bool) && resultType.GetFullName() == typeof(bool).FullName)
                     {
                         newExpression.Value = newExpression.Value.ToString() == 1.ToString();
                     }

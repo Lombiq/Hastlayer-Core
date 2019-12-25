@@ -21,7 +21,7 @@ namespace Hast.Transformer.Models
         /// <param name="type">The AST type to look up the type declaration for.</param>
         /// <returns>The retrieved <see cref="TypeDeclaration"/> if found or <c>null</c> otherwise.</returns>
         public static TypeDeclaration Lookup(this ITypeDeclarationLookupTable typeDeclarationLookupTable, AstType type) =>
-            typeDeclarationLookupTable.Lookup(type.GetActualType().FullName);
+            typeDeclarationLookupTable.Lookup(type.GetActualTypeFullName());
 
         public static TypeDeclaration Lookup(
             this ITypeDeclarationLookupTable typeDeclarationLookupTable,

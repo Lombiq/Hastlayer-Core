@@ -120,8 +120,8 @@ namespace Hast.Transformer.Services
                 if (leftType == null) leftType = rightType;
                 if (rightType == null) rightType = leftType;
 
-                var leftTypeFullName = leftType.FullName;
-                var rightTypeFullName = rightType.FullName;
+                var leftTypeFullName = leftType.GetFullName();
+                var rightTypeFullName = rightType.GetFullName();
 
 
                 if (!_numericTypes.Contains(leftTypeFullName) || !_numericTypes.Contains(rightTypeFullName)) return;
@@ -240,14 +240,14 @@ namespace Hast.Transformer.Services
                     }
                 }
 
-                if (_typesConvertedToIntInUnaryOperations.Contains(type.FullName) &&
+                if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
                     (!isCast || expectedTypeReference.FullName != typeof(int).FullName))
                 {
                     replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
-                    type.FullName == typeof(uint).FullName &&
-                    (!isCast || expectedTypeReference.FullName != typeof(long).FullName))
+                    type.GetFullName() == typeof(uint).FullName &&
+                    (!isCast || expectedTypeReference.GetFullName() != typeof(long).FullName))
                 {
                     replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int64));
                 }

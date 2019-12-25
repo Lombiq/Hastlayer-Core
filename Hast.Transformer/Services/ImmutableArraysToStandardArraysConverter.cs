@@ -35,7 +35,7 @@ namespace Hast.Transformer.Services
 
         //        var propertyDefinition = propertyDeclaration.Annotation<PropertyDefinition>();
 
-        //        if (!IsImmutableArrayName(propertyDefinition.PropertyType.FullName)) return;
+        //        if (!IsImmutableArrayName(propertyDefinition.PropertyType.GetFullName())) return;
 
         //        // Re-wiring types to use a standard array instead.
         //        var arrayType = CreateArrayTypeFromImmutableArrayReference(propertyDefinition.PropertyType);
@@ -72,12 +72,12 @@ namespace Hast.Transformer.Services
         //                arrayLengthExpression.Clone())
         //            .WithAnnotation(new DummyArrayCopyMemberDefinition());
 
-        //        if (!IsImmutableArrayName(invocationType?.FullName) || memberReference == null)
+        //        if (!IsImmutableArrayName(invocationType?.GetFullName()) || memberReference == null)
         //        {
         //            var methodReference = invocationExpression.Annotation<MethodReference>();
 
         //            if (methodReference != null &&
-        //                IsImmutableArrayName(methodReference.DeclaringType.FullName) &&
+        //                IsImmutableArrayName(methodReference.DeclaringType.GetFullName()) &&
         //                methodReference.Name == "CopyTo")
         //            {
         //                invocationExpression.ReplaceWith(createArrayCopyExpression(
@@ -168,7 +168,7 @@ namespace Hast.Transformer.Services
 
         //        var parameterDefinition = parameterDeclaration.Annotation<ParameterDefinition>();
 
-        //        if (!IsImmutableArrayName(parameterDefinition.ParameterType.FullName)) return;
+        //        if (!IsImmutableArrayName(parameterDefinition.ParameterType.GetFullName())) return;
 
         //        // Re-wiring types to use a standard array instead.
         //        var arrayType = CreateArrayTypeFromImmutableArrayReference(parameterDefinition.ParameterType);
@@ -241,7 +241,7 @@ namespace Hast.Transformer.Services
         //    {
         //        var expressionType = node.GetActualType();
 
-        //        if (!IsImmutableArrayName(expressionType?.FullName)) return null;
+        //        if (!IsImmutableArrayName(expressionType?.GetFullName())) return null;
 
         //        node.RemoveAnnotations<TypeInformation>();
         //        var typeInformation = CreateArrayTypeInformationFromImmutableArrayReference(expressionType);

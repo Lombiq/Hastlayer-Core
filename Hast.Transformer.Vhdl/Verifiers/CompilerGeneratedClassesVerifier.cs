@@ -35,10 +35,10 @@ namespace Hast.Transformer.Vhdl.Verifiers
                     {
                         if (!memberReferenceExpression.IsFieldReference()) return;
 
-                        var fullName = memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member.FullName;
+                        var fullName = memberReferenceExpression.GetResolveResult<MemberResolveResult>().GetFullName();
 
                         var field = fields.Values
-                            .SingleOrDefault(f => f.GetResolveResult<MemberResolveResult>().Member.FullName == fullName);
+                            .SingleOrDefault(f => f.GetResolveResult<MemberResolveResult>().GetFullName() == fullName);
 
                         // The field won't be on the compiler-generated class if the member reference accesses a
                         // user-defined type's field.

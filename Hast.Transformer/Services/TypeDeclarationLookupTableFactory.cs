@@ -18,7 +18,7 @@ namespace Hast.Transformer.Services
         {
             var typeDeclarations = syntaxTree
                 .GetAllTypeDeclarations()
-                .ToDictionary(d => d.GetActualType().FullName);
+                .ToDictionary(d => d.GetActualTypeFullName());
 
             return new TypeDeclarationLookupTable(typeDeclarations);
         }

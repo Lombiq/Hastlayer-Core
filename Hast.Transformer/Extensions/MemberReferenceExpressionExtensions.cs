@@ -1,7 +1,6 @@
 ﻿using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
-using System;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -34,7 +33,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 }
                 else
                 {
-                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualType().FullName);
+                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeFullName());
                 }
             }
             else
@@ -72,7 +71,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             else if (target is IdentifierExpression || target is IndexerExpression)
             {
                 var type = target.GetActualType();
-                return type == null ? null : typeDeclarationLookupTable.Lookup(type.FullName);
+                return type == null ? null : typeDeclarationLookupTable.Lookup(type.GetFullName());
             }
             else if (target is MemberReferenceExpression)
             {
@@ -88,7 +87,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
                 if (memberResolveResult != null)
                 {
-                    return typeDeclarationLookupTable.Lookup(memberResolveResult.Member.DeclaringType.FullName);
+                    return typeDeclarationLookupTable.Lookup(memberResolveResult.Member.DeclaringType.GetFullName());
                 }
             }
 
@@ -107,7 +106,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static bool IsTaskStartNew(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.MemberName == "StartNew" &&
-            memberReferenceExpression.Target.GetActualType().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
+            memberReferenceExpression.Target.GetActualTypeFullName() == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member is IMethod;

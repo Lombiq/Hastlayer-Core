@@ -15,7 +15,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             // If the parameter is a value type then still it needs to be out-flowing if this is a constructor.
             (parameter.GetActualType().IsReferenceType == true ||
                 (parameter.FindFirstParentEntityDeclaration().GetFullName().IsConstructorName() &&
-                parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.GetActualType().FullName)) ||
+                parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.GetActualTypeFullName())) ||
             parameter.ParameterModifier.HasFlag(ParameterModifier.Out) ||
             parameter.ParameterModifier.HasFlag(ParameterModifier.Ref);
     }

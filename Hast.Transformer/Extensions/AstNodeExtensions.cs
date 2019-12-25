@@ -18,7 +18,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             if (node is TypeDeclaration)
             {
-                return node.GetActualType().FullName;
+                return node.GetActualTypeFullName();
             }
 
             if (node is EntityDeclaration)
@@ -122,7 +122,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (node is SimpleType)
             {
-                return node.GetActualType().FullName;
+                return node.GetActualTypeFullName();
             }
 
             return node.CreateNameForUnnamedNode();
@@ -295,6 +295,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             return node.GetResolveResult().Type;
         }
+
+        public static string GetActualTypeFullName(this AstNode node) => node.GetActualType().GetFullName();
 
         public static ResolveResult CreateResolveResultFromActualType(this AstNode node) =>
             node.GetActualType().ToResolveResult();

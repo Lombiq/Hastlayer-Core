@@ -109,7 +109,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var rightType = right.GetActualType();
                     if (leftType != null &&
-                        leftType.FullName == rightType.FullName &&
+                        leftType.GetFullName() == rightType.GetFullName() &&
                         leftType.IsReferenceType == true &&
                         left is IdentifierExpression &&
                         (right is IdentifierExpression || right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference())))
@@ -479,7 +479,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Is this a Task result access like array[k].Result or task.Result?
                 var targetType = memberReference.Target.GetActualType();
                 if (targetType != null &&
-                    targetType.FullName.StartsWith("System.Threading.Tasks.Task") &&
+                    targetType.GetFullName().StartsWith("System.Threading.Tasks.Task") &&
                     memberReference.MemberName == "Result")
                 {
                     // If this is not an array then it doesn't need to be explicitly awaited, just access to its

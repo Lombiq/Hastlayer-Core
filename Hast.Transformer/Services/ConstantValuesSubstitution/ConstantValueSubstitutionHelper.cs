@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -52,7 +53,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             var targetFullName = methodReference.Member.FullName;
 
-            var targetType = typeDeclarationLookupTable.Lookup(methodReference.Member.DeclaringType.FullName);
+            var targetType = typeDeclarationLookupTable.Lookup(methodReference.Member.DeclaringType.GetFullName());
 
             // This can happen e.g. with SimpleMemory calls: the type is not transformed.
             if (targetType == null) return null;

@@ -1,5 +1,6 @@
-﻿using System;
-using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -68,7 +69,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return leftValue ?? rightValue;
                 default:
                     throw new NotImplementedException(
-                        "Evaluating binary operator expressions with the operator " + binaryOperatorExpression.Operator + 
+                        "Evaluating binary operator expressions with the operator " + binaryOperatorExpression.Operator +
                         " is not supported. Affected expression: " + binaryOperatorExpression.ToString());
             }
         }
@@ -78,14 +79,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (!(castExpression.Expression is PrimitiveExpression))
             {
                 throw new NotSupportedException(
-                    "Evaluating only cast expressions that target a primitive expression are supported. The targeted expression was: " + 
+                    "Evaluating only cast expressions that target a primitive expression are supported. The targeted expression was: " +
                     castExpression.Expression.ToString() + ".");
             }
 
             var toType = castExpression.GetActualType();
             dynamic value = ((PrimitiveExpression)castExpression.Expression).Value;
 
-            switch (toType.FullName)
+            switch (toType.GetFullName())
             {
                 case "System.Boolean":
                     return (bool)value;
@@ -117,7 +118,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return (ulong)value;
                 default:
                     throw new NotSupportedException(
-                        "Evaluating casting to " + toType.FullName + " is not supported. Affected expression: " + 
+                        "Evaluating casting to " + toType.GetFullName() + " is not supported. Affected expression: " +
                         castExpression.ToString().AddParentEntityName(castExpression));
             }
         }
@@ -161,7 +162,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 //    break;
                 default:
                     throw new NotSupportedException(
-                        "Evaluating unary operator expressions with the operator " + unaryOperatorExpression.Operator + 
+                        "Evaluating unary operator expressions with the operator " + unaryOperatorExpression.Operator +
                         " is not supported. Affected expression: " + unaryOperatorExpression.ToString()
                         .AddParentEntityName(unaryOperatorExpression));
             }

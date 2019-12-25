@@ -80,7 +80,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             throw new NotImplementedException();
-            //return ConvertTypeDefinition(type as TypeDefinition, type.FullName, context);
+            //return ConvertTypeDefinition(type as TypeDefinition, type.GetFullName(), context);
         }
 
         public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)
@@ -322,20 +322,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         //    if (typeDefinition.IsEnum)
         //    {
-        //        return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
+        //        return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.GetFullName().ToExtendedVhdlId() };
         //    }
 
         //    if (typeDefinition.IsClass)
         //    {
-        //        var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName);
+        //        var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(typeDefinition.GetFullName());
 
-        //        if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeDefinition.FullName);
+        //        if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeDefinition.GetFullName());
 
         //        return _recordComposer.CreateRecordFromType(typeDeclaration, context);
         //    }
 
         //    throw new NotSupportedException(
-        //        "The type " + typeDefinition.FullName + " is not supported for transforming.");
+        //        "The type " + typeDefinition.GetFullName() + " is not supported for transforming.");
         //}
 
 
@@ -347,6 +347,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
 
         private static bool IsTaskType(IType type) =>
-            type != null && type.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
+            type != null && type.GetFullName().StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }

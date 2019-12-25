@@ -1,5 +1,6 @@
 ﻿using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Services
 {
@@ -22,7 +23,7 @@ namespace Hast.Transformer.Services
                 if (assignmentExpression.Parent is Statement ||
                     assignmentExpression.Parent is Attribute ||
                     // This is a DisplayClass-related if, those are handled specially later on.
-                    type.FullName.StartsWith("System.Func`2<System.Object,"))
+                    type.GetFullName().StartsWith("System.Func`2<System.Object,"))
                 {
                     return;
                 }

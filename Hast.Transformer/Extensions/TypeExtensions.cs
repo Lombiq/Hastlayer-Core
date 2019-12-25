@@ -32,11 +32,25 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static bool IsEnum(this IType type) => type.Kind == TypeKind.Enum;
 
-        public static bool IsSimpleMemory(this IType type) => type.FullName == typeof(SimpleMemory).FullName;
+        public static bool IsSimpleMemory(this IType type) => type.GetFullName() == typeof(SimpleMemory).FullName;
 
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
 
         public static ResolveResult ToResolveResult(this IType type) => new ResolveResult(type);
+
+        public static string GetFullName(this IType type)
+        {
+            var declaringTypeNames = string.Empty;
+            var currentType = type;
+            while (currentType.DeclaringType != null)
+            {
+                // For nested types the conventional separator is a slash.
+                declaringTypeNames = "/" + currentType.Name + declaringTypeNames;
+                currentType = currentType.DeclaringType;
+            }
+
+            return currentType.FullName + declaringTypeNames;
+        }
     }
 }

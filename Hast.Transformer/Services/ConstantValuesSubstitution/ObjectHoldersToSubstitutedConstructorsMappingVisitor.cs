@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Collections.Generic;
 using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
@@ -28,7 +29,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // another instance).
 
             if (objectCreateExpression.Parent.Is(assignment =>
-                assignment.Left.GetActualType()?.FullName == objectCreateExpression.Type.GetFullName(),
+                assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
                 out AssignmentExpression parentAssignment))
             {
                 var constructorDeclaration = objectCreateExpression

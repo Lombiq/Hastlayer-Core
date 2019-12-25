@@ -3,6 +3,7 @@ using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Linq;
 
@@ -114,7 +115,7 @@ namespace Hast.Transformer.Services
                     var isAffectedMethodCall =
                         (targetMemberReference.Target is ThisReferenceExpression ||
                             targetType != null &&
-                            targetType.FullName == _methodParentFullName)
+                            targetType.GetFullName() == _methodParentFullName)
                         &&
                         targetMemberReference.MemberName == _methodName;
 
