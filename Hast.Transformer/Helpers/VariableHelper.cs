@@ -38,11 +38,12 @@ namespace Hast.Transformer.Helpers
             Statement parentStatement)
         {
             var variableDeclaration = new VariableDeclarationStatement(astType.Clone(), variableName)
-                .WithAnnotation(type.ToResolveResult());
+                .WithAnnotation(CreateILVariableResolveResult(VariableKind.Local, type, variableName));
             variableDeclaration.Variables.Single().AddAnnotation(type);
             AstInsertionHelper.InsertStatementBefore(parentStatement, variableDeclaration);
 
-            return new IdentifierExpression(variableName).WithAnnotation(type);
+            return new IdentifierExpression(variableName)
+                .WithAnnotation(CreateILVariableResolveResult(VariableKind.Local, type, variableName));
         }
 
         public static ILVariableResolveResult CreateILVariableResolveResult(VariableKind variableKind, IType type, string name) =>

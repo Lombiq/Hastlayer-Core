@@ -45,10 +45,9 @@ namespace Hast.Transformer.Services
                     return;
                 }
 
-                var variableIdentifier = VariableHelper
-                    .DeclareAndReferenceVariable("object", expression, astType);
-
                 var resolveResult = expression.GetResolveResult();
+
+                var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType);
                 var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())
                     .WithAnnotation(new OperatorResolveResult(
                         resolveResult.Type,
