@@ -109,9 +109,14 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             memberReferenceExpression.Target.GetActualTypeFullName() == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member is IMethod;
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IMethod;
 
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member is IField;
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IField;
+
+
+        private static IMember GetMemberDirectlyOrFromParentInvocation(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.GetResolveResult<MemberResolveResult>()?.Member ??
+                memberReferenceExpression.Parent.GetResolveResult<InvocationResolveResult>()?.Member;
     }
 }
