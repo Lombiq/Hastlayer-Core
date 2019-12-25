@@ -96,6 +96,7 @@
     <Compile Include="Services\IDecompilationErrorsFixer.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IFSharpIdiosyncrasiesAdjuster.cs" />
+    <Compile Include="Services\IMemberIdentifiersFixer.cs" />
     <Compile Include="Services\KnownTypeLookupTableFactory.cs" />
     <Compile Include="Services\IMethodInliner.cs" />
     <Compile Include="Services\IObjectInitializerExpander.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Services\ITaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\ITransformationContextCacheService.cs" />
     <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
+    <Compile Include="Services\MemberIdentifiersFixer.cs" />
     <Compile Include="Services\MemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySize.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ConstantValueSubstitutionHelper.cs" />

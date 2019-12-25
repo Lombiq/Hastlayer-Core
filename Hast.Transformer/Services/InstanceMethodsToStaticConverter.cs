@@ -80,20 +80,15 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitThisReferenceExpression(thisReferenceExpression);
 
-                    //var thisIdentifierExpression = new IdentifierExpression("this");
-                    //var typeInformation = thisReferenceExpression.Annotation<TypeInformation>();
-
-                    //if (typeInformation == null)
-                    //{
-                    //    typeInformation = thisReferenceExpression
-                    //        .FindFirstParentTypeDeclaration()
-                    //        .Annotation<TypeDefinition>()
-                    //        .ToTypeInformation();
-                    //}
-
-                    //thisIdentifierExpression.AddAnnotation(typeInformation);
-                    //thisIdentifierExpression.AddAnnotation(new ILVariable { Name = "this", Type = typeInformation.ExpectedType });
-                    //thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
+                    var thisVariableResolveResult = new ILVariableResolveResult(
+                        new ILVariable(
+                            VariableKind.Parameter,
+                            thisReferenceExpression.GetResolveResult().Type)
+                        {
+                            Name = "this"
+                        });
+                    var thisIdentifierExpression = new IdentifierExpression("this").WithAnnotation(thisVariableResolveResult);
+                    thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
                 }
             }
 
@@ -116,45 +111,30 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitInvocationExpression(invocationExpression);
 
-                    // Target will be a MemberReferenceExpression for methods in a different class, and 
-                    // IdentifierExpression for methods in the same class.
                     var targetMemberReference = invocationExpression.Target as MemberReferenceExpression;
-                    var targetIdentifierExpression = invocationExpression.Target as IdentifierExpression;
 
-                    if (targetMemberReference == null && targetIdentifierExpression == null) return;
+                    if (targetMemberReference == null) return;
 
-                    var targetType = targetMemberReference != null ?
-                        targetMemberReference.Target.GetActualType() :
-                        targetIdentifierExpression.FindFirstParentTypeDeclaration().GetActualType();
+                    var targetType = targetMemberReference.Target.GetActualType();
                     var isAffectedMethodCall =
-                        targetType != null &&
-                        targetType.FullName == _methodParentFullName &&
-                        (targetMemberReference?.MemberName == _methodName || targetIdentifierExpression?.Identifier == _methodName);
+                        (targetMemberReference.Target is ThisReferenceExpression ||
+                            targetType != null &&
+                            targetType.FullName == _methodParentFullName)
+                        &&
+                        targetMemberReference.MemberName == _methodName;
 
                     if (!isAffectedMethodCall) return;
 
-                    Expression newTarget;
-
-                    if (targetMemberReference != null)
-                    {
-                        newTarget = targetMemberReference.Target;
-                        targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone()));
-                    }
-                    else
-                    {
-                        var thisIdentifierExpression = new IdentifierExpression("this");
-                        thisIdentifierExpression.AddAnnotation(new ILVariableResolveResult(
-                            new ILVariable(VariableKind.Parameter, targetType) { Name = "this" }));
-                        newTarget = thisIdentifierExpression;
-                    }
+                    var originalTarget = targetMemberReference.Target;
+                    targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone()));
 
                     if (!invocationExpression.Arguments.Any())
                     {
-                        invocationExpression.Arguments.Add(newTarget);
+                        invocationExpression.Arguments.Add(originalTarget);
                     }
                     else
                     {
-                        invocationExpression.Arguments.InsertBefore(invocationExpression.Arguments.First(), newTarget);
+                        invocationExpression.Arguments.InsertBefore(invocationExpression.Arguments.First(), originalTarget);
                     }
                 }
             }

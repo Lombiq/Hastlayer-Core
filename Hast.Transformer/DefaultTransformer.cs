@@ -56,6 +56,7 @@ namespace Hast.Transformer
         private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
         private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
+        private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
 
 
         public DefaultTransformer(
@@ -89,7 +90,8 @@ namespace Hast.Transformer
             IDeviceDriverSelector deviceDriverSelector,
             IDecompilationErrorsFixer decompilationErrorsFixer,
             IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
-            IKnownTypeLookupTableFactory knownTypeLookupTableFactory)
+            IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
+            IMemberIdentifiersFixer memberIdentifiersFixer)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -122,6 +124,7 @@ namespace Hast.Transformer
             _decompilationErrorsFixer = decompilationErrorsFixer;
             _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
+            _memberIdentifiersFixer = memberIdentifiersFixer;
         }
 
 
@@ -285,6 +288,7 @@ namespace Hast.Transformer
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
+            _memberIdentifiersFixer.FixMemberIdentifiers(syntaxTree);
             _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasies(syntaxTree);
 
             // Removing the unnecessary bits.
