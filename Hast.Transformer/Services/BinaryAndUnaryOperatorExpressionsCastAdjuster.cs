@@ -225,7 +225,7 @@ namespace Hast.Transformer.Services
 
                 var type = unaryOperatorExpression.Expression.GetActualType();
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
-                var expectedTypeReference = unaryOperatorExpression.Expression.GetActualType();
+                var expectedType = unaryOperatorExpression.Expression.GetActualType();
 
                 void replace(IType newType)
                 {
@@ -241,13 +241,13 @@ namespace Hast.Transformer.Services
                 }
 
                 if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
-                    (!isCast || expectedTypeReference.FullName != typeof(int).FullName))
+                    (!isCast || expectedType.GetFullName() != typeof(int).FullName))
                 {
                     replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
                     type.GetFullName() == typeof(uint).FullName &&
-                    (!isCast || expectedTypeReference.GetFullName() != typeof(long).FullName))
+                    (!isCast || expectedType.GetFullName() != typeof(long).FullName))
                 {
                     replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int64));
                 }

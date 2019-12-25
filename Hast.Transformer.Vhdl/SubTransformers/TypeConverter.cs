@@ -24,7 +24,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IType type,
             IVhdlTransformationContext context)
         {
-            switch (type.FullName)
+            switch (type.GetFullName())
             {
                 case "System.Boolean":
                     return ConvertPrimitive(KnownTypeCode.Boolean);
