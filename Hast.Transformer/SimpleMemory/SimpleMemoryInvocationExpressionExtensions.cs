@@ -9,6 +9,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// Determines whether the invocation expression is a SimpleMemory object member invocation.
         /// </summary>
         public static bool IsSimpleMemoryInvocation(this InvocationExpression expression) =>
-            expression.GetResolveResult<MemberResolveResult>()?.TargetResult.Type.IsSimpleMemory() == true;
+            expression.GetResolveResult<MemberResolveResult>()?.TargetResult?.Type.IsSimpleMemory() == true;
     }
 }
