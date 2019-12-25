@@ -56,10 +56,10 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             var target = memberReferenceExpression.Target;
 
-            if (target is TypeReferenceExpression)
+            if (target is TypeReferenceExpression typeReferenceExpression)
             {
                 // The member is in a different class.
-                return typeDeclarationLookupTable.Lookup((TypeReferenceExpression)target);
+                return typeDeclarationLookupTable.Lookup(typeReferenceExpression);
             }
             else if (target is BaseReferenceExpression)
             {

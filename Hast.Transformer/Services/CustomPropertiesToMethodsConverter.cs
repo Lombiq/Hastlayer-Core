@@ -97,7 +97,8 @@ namespace Hast.Transformer.Services
 
                     if (memberReferenceExpression.GetMemberFullName() != _unifiedPropertyName) return;
 
-                    var property = (IProperty)memberReferenceExpression.GetResolveResult<MemberResolveResult>().Member;
+                    var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
+                    var property = (IProperty)memberResolveResult.Member;
 
                     // Trying to determine whether the property's setter or getter is being used.
                     if (memberReferenceExpression.Parent
@@ -107,7 +108,7 @@ namespace Hast.Transformer.Services
                         // Note that the MemberName change needs to happen before creating the InvocationExpression.
                         memberReferenceExpression.MemberName = property.Setter.Name;
                         var invocation = new InvocationExpression(memberReferenceExpression.Clone());
-                        invocation.AddAnnotation(property.Setter);
+                        invocation.AddAnnotation(new InvocationResolveResult(memberResolveResult.TargetResult, property.Setter));
                         invocation.Arguments.Add(assignment.Right.Clone());
                         assignment.ReplaceWith(invocation);
                     }
@@ -116,7 +117,7 @@ namespace Hast.Transformer.Services
                         // Getter.
                         memberReferenceExpression.MemberName = property.Getter.Name;
                         var invocation = new InvocationExpression(memberReferenceExpression.Clone());
-                        invocation.AddAnnotation(property.Getter);
+                        invocation.AddAnnotation(new InvocationResolveResult(memberResolveResult.TargetResult, property.Getter));
                         memberReferenceExpression.ReplaceWith(invocation);
                     }
                 }

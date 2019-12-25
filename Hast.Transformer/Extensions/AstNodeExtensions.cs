@@ -138,7 +138,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
         /// name.
         /// </summary>
-        public static string GetSimpleName(this AstNode node) => 
+        public static string GetSimpleName(this AstNode node) =>
             // Unlike formerly with Cecil, the FullName property is in a simple format.
             node.GetResolveResult<MemberResolveResult>()?.Member.FullName ?? node.GetActualType().FullName;
 
@@ -255,10 +255,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
-            var fullName = node.GetResolveResult<MemberResolveResult>()?.GetFullName();
-
-            if (!string.IsNullOrEmpty(fullName)) return fullName;
-
             if (node is MemberReferenceExpression)
             {
                 if (node.Parent is InvocationExpression)
@@ -276,7 +272,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 }
             }
 
-            return null;
+            return node.GetResolveResult<MemberResolveResult>()?.GetFullName(); ;
         }
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>
