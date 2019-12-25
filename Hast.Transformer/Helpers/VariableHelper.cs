@@ -1,5 +1,7 @@
 ﻿using Hast.Common.Helpers;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
@@ -42,5 +44,8 @@ namespace Hast.Transformer.Helpers
 
             return new IdentifierExpression(variableName).WithAnnotation(type);
         }
+
+        public static ILVariableResolveResult CreateILVariableResolveResult(VariableKind variableKind, IType type, string name) =>
+            new ILVariableResolveResult(new ILVariable(variableKind, type) { Name = name });
     }
 }

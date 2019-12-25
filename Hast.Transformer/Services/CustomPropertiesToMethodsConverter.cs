@@ -1,5 +1,4 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
@@ -61,9 +60,8 @@ namespace Hast.Transformer.Services
                 var setter = propertyDeclaration.Setter;
                 if (setter.Body.Any())
                 {
-                    var valueParameter = new ParameterDeclaration(propertyDeclaration.ReturnType.Clone(), "value");
-                    valueParameter.AddAnnotation(new ILVariableResolveResult(
-                        new ILVariable(VariableKind.Parameter, getter.GetActualType()) { Name = "value" }));
+                    var valueParameter = new ParameterDeclaration(propertyDeclaration.ReturnType.Clone(), "value")
+                        .WithAnnotation(VariableHelper.CreateILVariableResolveResult(VariableKind.Parameter, getter.GetActualType(), "value"));
                     var setterMethod = MethodDeclarationFactory.CreateMethod(
                         name: setter.GetResolveResult<MemberResolveResult>().Member.Name,
                         annotations: setter.Annotations,

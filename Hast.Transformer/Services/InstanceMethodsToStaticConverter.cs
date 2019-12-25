@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
@@ -53,8 +54,7 @@ namespace Hast.Transformer.Services
 
                 // Adding a "@this" parameter and using that instead of the "this" reference.
                 var thisParameter = new ParameterDeclaration(parentAstType, "this")
-                    .WithAnnotation(new ILVariableResolveResult(
-                        new ILVariable(VariableKind.Parameter, parentTypeResolveResult.Type) { Name = "this" }));
+                    .WithAnnotation(VariableHelper.CreateILVariableResolveResult(VariableKind.Parameter, parentTypeResolveResult.Type, "this"));
                 if (!methodDeclaration.Parameters.Any())
                 {
                     methodDeclaration.Parameters.Add(thisParameter);
@@ -80,14 +80,9 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitThisReferenceExpression(thisReferenceExpression);
 
-                    var thisVariableResolveResult = new ILVariableResolveResult(
-                        new ILVariable(
-                            VariableKind.Parameter,
-                            thisReferenceExpression.GetResolveResult().Type)
-                        {
-                            Name = "this"
-                        });
-                    var thisIdentifierExpression = new IdentifierExpression("this").WithAnnotation(thisVariableResolveResult);
+                    var thisIdentifierExpression = new IdentifierExpression("this")
+                        .WithAnnotation(VariableHelper
+                            .CreateILVariableResolveResult(VariableKind.Parameter, thisReferenceExpression.GetResolveResult().Type, "this"));
                     thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
                 }
             }

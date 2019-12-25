@@ -1,7 +1,7 @@
-﻿using ICSharpCode.Decompiler.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using System;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -42,10 +42,11 @@ namespace Hast.Transformer.Services
                         var actualType = castExpression.GetActualType();
                         objectParameter.Type = castExpression.Type.Clone();
                         objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
-                        objectParameter.AddAnnotation(new ILVariableResolveResult(
-                            new ICSharpCode.Decompiler.IL.ILVariable(
+                        objectParameter.AddAnnotation(VariableHelper
+                            .CreateILVariableResolveResult(
                                 ICSharpCode.Decompiler.IL.VariableKind.Parameter,
-                                castExpression.Type.GetActualType()) { Name = objectParameter.Name }));
+                                castExpression.Type.GetActualType(),
+                                objectParameter.Name));
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
 
