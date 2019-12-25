@@ -30,6 +30,8 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static bool IsArray(this IType type) => type.Kind == TypeKind.Array;
 
+        public static bool IsClass(this IType type) => type.Kind == TypeKind.Class;
+
         public static bool IsEnum(this IType type) => type.Kind == TypeKind.Enum;
 
         public static bool IsSimpleMemory(this IType type) => type.GetFullName() == typeof(SimpleMemory).FullName;

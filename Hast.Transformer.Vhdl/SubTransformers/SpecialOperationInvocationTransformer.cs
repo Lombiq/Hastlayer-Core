@@ -83,17 +83,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
             var resultElementResolveResult = expression.GetActualType().GetElementType().ToResolveResult();
+            var intType = context.TransformationContext.KnownTypeLookupTable.Lookup(KnownTypeCode.Int32);
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
                 var binaryOperatorExpression = new BinaryOperatorExpression(
                         new IndexerExpression(
-                            expression.Arguments.First().Clone(), // The first array's reference.
-                            new PrimitiveExpression(i)), // The expression object can't be re-used below.
+                            // The first array's reference.
+                            expression.Arguments.First().Clone(),
+                            // The expression object can't be re-used below.
+                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())),
                         simdBinaryOperator,
                         new IndexerExpression(
-                            expression.Arguments.Skip(1).First().Clone(), // The second array's reference.
-                            new PrimitiveExpression(i)));
+                            // The second array's reference.
+                            expression.Arguments.Skip(1).First().Clone(),
+                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())));
 
                 binaryOperatorExpression.AddAnnotation(resultElementResolveResult);
 

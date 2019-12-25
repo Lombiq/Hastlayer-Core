@@ -66,7 +66,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpressionParent.Is<CastExpression>(out var castExpression))
             {
                 var newExpression = new PrimitiveExpression(_astExpressionEvaluator.EvaluateCastExpression(castExpression));
-                newExpression.AddAnnotation(primitiveExpressionParent.GetActualType());
+                newExpression.AddAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 primitiveExpressionParent.ReplaceWith(newExpression);
                 primitiveExpressionParent = newExpression.Parent;
