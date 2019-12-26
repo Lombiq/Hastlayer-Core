@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -21,12 +21,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public bool IsSupportedMember(AstNode node)
-        {
-            return 
-                _recordComposer.IsSupportedRecordMember(node) || 
-                (node is FieldDeclaration && !_displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node));
-        }
+        public bool IsSupportedMember(AstNode node) =>
+            _recordComposer.IsSupportedRecordMember(node) ||
+            (node is FieldDeclaration && !_displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node));
 
         public Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {

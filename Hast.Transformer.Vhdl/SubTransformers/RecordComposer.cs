@@ -24,10 +24,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public bool IsSupportedRecordMember(AstNode node)
-        {
-            return node is PropertyDeclaration || node is FieldDeclaration;
-        }
+        public bool IsSupportedRecordMember(AstNode node) => node is PropertyDeclaration || node is FieldDeclaration;
 
         public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
