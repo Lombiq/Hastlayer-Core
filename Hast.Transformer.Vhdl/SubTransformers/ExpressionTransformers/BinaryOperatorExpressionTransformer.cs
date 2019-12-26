@@ -92,9 +92,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftType = expression.Left.GetActualType();
             var rightType = expression.Right.GetActualType();
 
-            // At this point if non-primitive types are checked for equality it could mean that they are custom 
-            // types either without the equality operator defined or they are custom value types and a
-            // ReferenceEquals() is attempted on them which is wrong.
+            // At this point if non-primitive types are checked for equality it could mean that they are custom types
+            // either without the equality operator defined or they are custom value types and a ReferenceEquals() is
+            // attempted on them which is wrong.
             if ((leftType != null &&
                         !leftType.IsPrimitive() &&
                         leftType.Kind != TypeKind.Enum ||
