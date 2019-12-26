@@ -229,6 +229,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static IType GetActualType(this AstNode node)
         {
+            if (node is ParenthesizedExpression parenthesizedExpression)
+            {
+                return parenthesizedExpression.Expression.GetActualType();
+            }
+
             if (node is IndexerExpression indexerExpression)
             {
                 return indexerExpression.Target.GetActualType().GetElementType();
@@ -244,7 +249,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return unaryOperatorExpression.Expression.GetActualType();
             }
 
-            return node.GetResolveResult().Type;
+            var type = node.GetResolveResult().Type;
+            return type == SpecialType.UnknownType ? null : type;
         }
 
         public static string GetActualTypeFullName(this AstNode node) => node.GetActualType().GetFullName();
@@ -272,7 +278,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 }
             }
 
-            return node.GetResolveResult<MemberResolveResult>()?.GetFullName(); ;
+            return node.GetResolveResult<MemberResolveResult>()?.GetFullName();
         }
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>

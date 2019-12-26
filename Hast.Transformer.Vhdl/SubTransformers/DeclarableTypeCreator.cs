@@ -21,16 +21,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context)
         {
-            if (type.IsArray())
+            if ((valueHolder.GetResolveResult<MemberResolveResult>()?.Member.ReturnType as ITypeDefinition)?
+                    .KnownTypeCode == KnownTypeCode.Void)
+            {
+                return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);
+            }
+            else if (type.IsArray())
             {
                 return ArrayHelper.CreateArrayInstantiation(
                     _typeConverter.ConvertType(type.GetElementType(), context),
                     context.ArraySizeHolder.GetSizeOrThrow(valueHolder).Length);
-            }
-            else if ((valueHolder.GetResolveResult<MemberResolveResult>()?.Member.ReturnType as ITypeDefinition)?
-                    .KnownTypeCode == KnownTypeCode.Void)
-            {
-                return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);
             }
             else
             {

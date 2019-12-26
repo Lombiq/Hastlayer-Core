@@ -23,7 +23,7 @@ namespace Hast.Transformer.Services
                 if (assignmentExpression.Parent is Statement ||
                     assignmentExpression.Parent is Attribute ||
                     // This is a DisplayClass-related if, those are handled specially later on.
-                    type.GetFullName().StartsWith("System.Func`2<System.Object,"))
+                    type.IsFunc())
                 {
                     return;
                 }

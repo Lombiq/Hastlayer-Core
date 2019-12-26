@@ -258,6 +258,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling shorthand Task starts like:
+                    // array[i] = Task.Factory.StartNew((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, (object)num4);
+                    // array[i] = Task.Factory.StartNew(<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
                     // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
                     else if (assignment.Right.Is(invocation => invocation.IsShorthandTaskStart(), out invocationExpression))
                     {
@@ -392,12 +394,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is InvocationExpression invocationExpression)
             {
+                if (invocationExpression.IsShorthandTaskStart()) return Empty.Instance;
+
                 var transformedParameters = new List<ITransformedInvocationParameter>();
 
                 IEnumerable<Expression> arguments = invocationExpression.Arguments;
 
-                // When the SimpleMemory object is passed around it can be omitted since state machines access the memory
-                // directly.
+                // When the SimpleMemory object is passed around it can be omitted since state machines access the
+                // memory directly.
                 if (context.TransformationContext.UseSimpleMemory())
                 {
                     arguments = arguments.Where(argument => !argument.GetActualType().IsSimpleMemory());
@@ -448,7 +452,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
                     {
                         // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
-                        if (memberReference.MemberName.EndsWith("__this"))
+                        // Or it's something like <>c__DisplayClass3_.<Run>b__0 within a call like:
+                        // Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num)
+                        if (memberReference.MemberName.EndsWith("__this") ||
+                            memberReference.GetMemberFullName().IsDisplayOrClosureClassMemberName())
                         {
                             return Empty.Instance;
                         }
