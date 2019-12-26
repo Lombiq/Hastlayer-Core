@@ -3,6 +3,7 @@ using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -25,6 +26,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return ArrayHelper.CreateArrayInstantiation(
                     _typeConverter.ConvertType(type.GetElementType(), context),
                     context.ArraySizeHolder.GetSizeOrThrow(valueHolder).Length);
+            }
+            else if ((valueHolder.GetResolveResult<MemberResolveResult>()?.Member.ReturnType as ITypeDefinition)?
+                    .KnownTypeCode == KnownTypeCode.Void)
+            {
+                return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);
             }
             else
             {
