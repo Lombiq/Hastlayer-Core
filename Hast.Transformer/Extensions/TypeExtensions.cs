@@ -36,6 +36,8 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static bool IsSimpleMemory(this IType type) => type.GetFullName() == typeof(SimpleMemory).FullName;
 
+        public static bool IsFunc(this IType type) => type.FullName.StartsWith("System.Func");
+
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
 

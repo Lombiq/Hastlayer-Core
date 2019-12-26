@@ -3,6 +3,7 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 
@@ -63,7 +64,7 @@ namespace Hast.Transformer.Services
                 base.VisitObjectCreateExpression(objectCreateExpression);
 
                 // Funcs are only needed for Task-based parallelism, omitting them for now.
-                if (objectCreateExpression.Type.GetFullName().StartsWith("System.Func"))
+                if (objectCreateExpression.Type.GetActualType().IsFunc())
                 {
                     return;
                 }

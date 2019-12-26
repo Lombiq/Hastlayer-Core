@@ -2,6 +2,7 @@
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 
 namespace Hast.Transformer.Services
@@ -36,16 +37,16 @@ namespace Hast.Transformer.Services
 
             private static void HandleExpression(Expression expression, AstType astType)
             {
+                var resolveResult = expression.GetResolveResult();
                 var typeName = astType.GetFullName();
                 if (expression.Parent is AssignmentExpression ||
                     typeName.IsDisplayOrClosureClassName() ||
                     // Omitting Funcs for now, as those are used in parallel code with Tasks and handled separately.
-                    typeName == "System.Func`2")
+                    resolveResult.Type.IsFunc())
                 {
                     return;
                 }
 
-                var resolveResult = expression.GetResolveResult();
 
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType);
                 var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())
