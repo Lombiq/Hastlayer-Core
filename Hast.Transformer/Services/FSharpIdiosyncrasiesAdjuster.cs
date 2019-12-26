@@ -1,6 +1,5 @@
 ﻿using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using System;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -93,33 +92,33 @@ namespace Hast.Transformer.Services
                     // Such shorthand expression when created from C# look like this:
                     // Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
                     // The F# closure receives the current value of local variables, not the latest one if in a loop.
-                    // Thus to mimic how this works we'll add the parameters of the compiler-generated class' ctor
-                    // as further parameters like:
+                    // Thus to mimic how this works we'll add the parameters of the compiler-generated class' ctor as
+                    // further parameters like:
                     // Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke), i, other, parameters)
                     // This won't be correct C# but the rest of the Transformer will be tricked into passing them on.
 
                     // Getting the member reference like: new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke
-                    if (((ObjectCreateExpression)invocationExpression.Arguments.First()).Arguments.First()
-                            .Is<MemberReferenceExpression>(
-                                memberReference => memberReference.MemberName == "Invoke" && memberReference.Target.GetFullName().IsClosureClassName(),
-                                out var invokeReference))
-                    {
-                        invocationExpression.Arguments
-                            .AddRange(((ObjectCreateExpression)invokeReference.Target).Arguments.Select(argument => argument.Clone()));
+                    //if (((ObjectCreateExpression)invocationExpression.Arguments.First()).Arguments.First()
+                    //        .Is<MemberReferenceExpression>(
+                    //            memberReference => memberReference.MemberName == "Invoke" && memberReference.Target.GetFullName().IsClosureClassName(),
+                    //            out var invokeReference))
+                    //{
+                    //    invocationExpression.Arguments
+                    //        .AddRange(((ObjectCreateExpression)invokeReference.Target).Arguments.Select(argument => argument.Clone()));
 
-                        // Now that the parameters are added we need to add corresponding parameters to the Invoke()
-                        // method as well by taking them from the ctor of the compiler-generated class.
+                    //    // Now that the parameters are added we need to add corresponding parameters to the Invoke()
+                    //    // method as well by taking them from the ctor of the compiler-generated class.
 
-                        var invokeMethod = (MethodDeclaration)invokeReference.FindMemberDeclaration(_typeDeclarationLookupTable);
-                        var ctor = (ConstructorDeclaration)invokeMethod
-                            .FindFirstParentTypeDeclaration()
-                            .Members.Single(member => member is ConstructorDeclaration);
+                    //    var invokeMethod = (MethodDeclaration)invokeReference.FindMemberDeclaration(_typeDeclarationLookupTable);
+                    //    var ctor = (ConstructorDeclaration)invokeMethod
+                    //        .FindFirstParentTypeDeclaration()
+                    //        .Members.Single(member => member is ConstructorDeclaration);
 
-                        invokeMethod.Parameters.AddRange(ctor.Parameters.Select(parameter => parameter.Clone()));
+                    //    invokeMethod.Parameters.AddRange(ctor.Parameters.Select(parameter => parameter.Clone()));
 
-                        // Finally, change all the references to the fields in Invoke() to the parameters.
-                        invokeMethod.Body.AcceptVisitor(new ClosureClassMethodFieldReferencesChangingVisitor());
-                    }
+                    //    // Finally, change all the references to the fields in Invoke() to the parameters.
+                    //    invokeMethod.Body.AcceptVisitor(new ClosureClassMethodFieldReferencesChangingVisitor());
+                    //}
                 }
             }
 
