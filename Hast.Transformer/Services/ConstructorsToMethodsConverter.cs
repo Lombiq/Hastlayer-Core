@@ -23,6 +23,13 @@ namespace Hast.Transformer.Services
             {
                 base.VisitConstructorDeclaration(constructorDeclaration);
 
+                // If the ctor is empty then no need to keep it.
+                if (!constructorDeclaration.Body.Statements.Any())
+                {
+                    constructorDeclaration.Remove();
+                    return;
+                }
+
                 var method = MethodDeclarationFactory.CreateMethod(
                     name: constructorDeclaration.Name,
                     annotations: constructorDeclaration.Annotations,
