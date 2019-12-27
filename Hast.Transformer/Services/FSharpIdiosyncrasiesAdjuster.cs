@@ -1,5 +1,6 @@
 ﻿using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -17,7 +18,7 @@ namespace Hast.Transformer.Services
 
         public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree)
         {
-            syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
+            //syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
         }
 
 
@@ -98,27 +99,27 @@ namespace Hast.Transformer.Services
                     // This won't be correct C# but the rest of the Transformer will be tricked into passing them on.
 
                     // Getting the member reference like: new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke
-                    //if (((ObjectCreateExpression)invocationExpression.Arguments.First()).Arguments.First()
-                    //        .Is<MemberReferenceExpression>(
-                    //            memberReference => memberReference.MemberName == "Invoke" && memberReference.Target.GetFullName().IsClosureClassName(),
-                    //            out var invokeReference))
-                    //{
-                    //    invocationExpression.Arguments
-                    //        .AddRange(((ObjectCreateExpression)invokeReference.Target).Arguments.Select(argument => argument.Clone()));
+                    if (((ObjectCreateExpression)invocationExpression.Arguments.First()).Arguments.First()
+                            .Is<MemberReferenceExpression>(
+                                memberReference => memberReference.MemberName == "Invoke" && memberReference.Target.GetFullName().IsClosureClassName(),
+                                out var invokeReference))
+                    {
+                        invocationExpression.Arguments
+                            .AddRange(((ObjectCreateExpression)invokeReference.Target).Arguments.Select(argument => argument.Clone()));
 
-                    //    // Now that the parameters are added we need to add corresponding parameters to the Invoke()
-                    //    // method as well by taking them from the ctor of the compiler-generated class.
+                        // Now that the parameters are added we need to add corresponding parameters to the Invoke()
+                        // method as well by taking them from the ctor of the compiler-generated class.
 
-                    //    var invokeMethod = (MethodDeclaration)invokeReference.FindMemberDeclaration(_typeDeclarationLookupTable);
-                    //    var ctor = (ConstructorDeclaration)invokeMethod
-                    //        .FindFirstParentTypeDeclaration()
-                    //        .Members.Single(member => member is ConstructorDeclaration);
+                        var invokeMethod = (MethodDeclaration)invokeReference.FindMemberDeclaration(_typeDeclarationLookupTable);
+                        var ctor = (ConstructorDeclaration)invokeMethod
+                            .FindFirstParentTypeDeclaration()
+                            .Members.Single(member => member is ConstructorDeclaration);
 
-                    //    invokeMethod.Parameters.AddRange(ctor.Parameters.Select(parameter => parameter.Clone()));
+                        invokeMethod.Parameters.AddRange(ctor.Parameters.Select(parameter => parameter.Clone()));
 
-                    //    // Finally, change all the references to the fields in Invoke() to the parameters.
-                    //    invokeMethod.Body.AcceptVisitor(new ClosureClassMethodFieldReferencesChangingVisitor());
-                    //}
+                        // Finally, change all the references to the fields in Invoke() to the parameters.
+                        invokeMethod.Body.AcceptVisitor(new ClosureClassMethodFieldReferencesChangingVisitor());
+                    }
                 }
             }
 
