@@ -11,6 +11,7 @@ namespace Hast.Transformer.Services
         public void ConvertObjectVariableTypes(SyntaxTree syntaxTree)
         {
             syntaxTree.AcceptVisitor(new MethodObjectParametersTypeConvertingVisitor());
+            syntaxTree.AcceptVisitor(new UnnecessaryObjectCastsRemovingVisitor());
         }
 
 
@@ -110,6 +111,22 @@ namespace Hast.Transformer.Services
 
                     identifierExpression.ReplaceAnnotations(_type.ToResolveResult());
                 }
+            }
+        }
+
+        private class UnnecessaryObjectCastsRemovingVisitor : DepthFirstAstVisitor
+        {
+            public override void VisitCastExpression(CastExpression castExpression)
+            {
+                base.VisitCastExpression(castExpression);
+
+                if (castExpression.GetActualType().FullName != typeof(object).FullName ||
+                    !castExpression.Parent.Is<InvocationExpression>(invocation => invocation.IsTaskStart()))
+                {
+                    return;
+                }
+
+                castExpression.ReplaceWith(castExpression.Expression.Detach());
             }
         }
     }

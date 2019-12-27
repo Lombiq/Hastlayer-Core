@@ -4,7 +4,8 @@ using Orchard;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be determined.
+    /// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be
+    /// determined.
     /// </summary>
     /// <example>
     /// Currently the following kind of constructs are supported:
@@ -17,6 +18,12 @@ namespace Hast.Transformer.Services
     ///     num = (uint)numberObject;
     ///     // ...
     /// }
+    /// </c>
+    /// 
+    /// Furthermore, casts to the object type corresponding to these variables when in Task starts are also removed,
+    /// like the one for num4 here:
+    /// <c>
+    /// Task.Factory.StartNew ((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, (object)num4);
     /// </c>
     /// </example>
     /// <remarks>
