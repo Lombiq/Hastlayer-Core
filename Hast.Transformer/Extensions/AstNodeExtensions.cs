@@ -16,7 +16,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
-            if (node is TypeDeclaration)
+            if (node is TypeDeclaration || node is AstType)
             {
                 return node.GetActualTypeFullName();
             }

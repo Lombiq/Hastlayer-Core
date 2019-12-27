@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -9,7 +6,9 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Orchard.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -21,8 +20,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
         public StatementTransformer(
-            ITypeConverter typeConverter, 
-            IExpressionTransformer expressionTransformer, 
+            ITypeConverter typeConverter,
+            IExpressionTransformer expressionTransformer,
             IDeclarableTypeCreator declarableTypeCreator)
         {
             _typeConverter = typeConverter;
@@ -40,7 +39,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private void TransformInner(Statement statement, ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
-            var currentBlock = context.Scope.CurrentBlock;;
+            var currentBlock = context.Scope.CurrentBlock; ;
 
             string stateNameGenerator(int index, IVhdlGenerationOptions vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
@@ -97,7 +96,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // assigned: That causes the return value's reference to be orphaned.
                 if (!(expressionElement is DataObjectReference))
                 {
-                    currentBlock.Add(expressionElement.Terminate()); 
+                    currentBlock.Add(expressionElement.Terminate());
                 }
             }
             else if (statement is ReturnStatement)
@@ -385,7 +384,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (statement is BreakStatement)
             {
                 var breakStatement = statement as BreakStatement;
-                
+
                 // If this is a break in a switch's section then nothing to do: these are not needed in VHDL.
                 if (statement.Parent is SwitchSection)
                 {
