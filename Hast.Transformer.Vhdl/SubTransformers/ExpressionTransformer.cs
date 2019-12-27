@@ -664,8 +664,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // If the inner expression produced a data object then let's check the size of that: if it's the same
                 // size as the target type of the cast then no need to cast again.
                 var resultDataObject = innerExpressionResult as IDataObject;
-                var resultParentesized = innerExpressionResult as Parenthesized;
-                if (resultDataObject == null && resultParentesized != null)
+                if (resultDataObject == null && innerExpressionResult is Parenthesized resultParentesized)
                 {
                     resultDataObject = resultParentesized.Target as IDataObject;
                 }
