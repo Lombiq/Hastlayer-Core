@@ -185,7 +185,7 @@ namespace Hast.Transformer
                     NonTrailingNamedArguments = false,
                     NullPropagation = false,
                     OptionalArguments = false,
-                    OutVariables = true,
+                    OutVariables = false,
                     PatternBasedFixedStatement = false,
                     ReadOnlyMethods = true, // Can help const substitution.
                     RefExtensionMethods = false,
