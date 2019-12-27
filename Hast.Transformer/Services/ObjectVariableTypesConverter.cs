@@ -28,25 +28,28 @@ namespace Hast.Transformer.Services
                     var castExpressionFindingVisitor = new ParameterCastExpressionFindingVisitor(objectParameter.Name);
                     methodDeclaration.Body.AcceptVisitor(castExpressionFindingVisitor);
 
-                    // Simply changing the parameter's type and removing the cast. Note that this will leave corresponding
-                    // compiler-generated Funcs intact and thus wrong. E.g. there will be similar lines added to the
-                    // lambda's calling method:
-                    // Func<object, bool> arg_57_1;
-                    // if (arg_57_1 = PrimeCalculator.<> c.<> 9__9_0 == null) {
-                    //     arg_57_1 = PrimeCalculator.<> c.<> 9__9_0 = new Func<object, bool>(PrimeCalculator.<> c.<> 9.< ParallelizedArePrimeNumbers > b__9_0);
-                    // }
+                    // Simply changing the parameter's type and removing the cast. Note that this will leave
+                    // corresponding compiler-generated Funcs intact and thus wrong. E.g. there will be similar lines
+                    // added to the lambda's calling method:
+                    // Task.Factory.StartNew ((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, num4)
                     // This will remain, despite the Func's type now correctly being e.g. Func<uint, bool>.
+                    // Note that the method's full name will contain the original object parameter since the 
+                    // MemberResolveResult will still the have original parameters. This will be an aesthetic issue 
+                    // only though: Nothing else depends on the parameters being correct here. If we'd change these
+                    // then the whole MemberResolveResult would need to be recreated (since parameter types, as well as
+                    // the list of parameters is read-only), not just here but in all the references to this method too.
 
                     var castExpression = castExpressionFindingVisitor.Expression;
                     if (castExpression != null)
                     {
                         var actualType = castExpression.GetActualType();
+
                         objectParameter.Type = castExpression.Type.Clone();
                         objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
                         objectParameter.AddAnnotation(VariableHelper
                             .CreateILVariableResolveResult(
                                 ICSharpCode.Decompiler.IL.VariableKind.Parameter,
-                                castExpression.Type.GetActualType(),
+                                actualType,
                                 objectParameter.Name));
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
