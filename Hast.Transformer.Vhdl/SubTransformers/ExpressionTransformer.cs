@@ -802,9 +802,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
         {
-            // Objects are mimicked with records and those don't need instantiation. However it's useful to
-            // initialize all record fields to their default or initial values (otherwise if e.g. a class is
-            // instantiated in a loop in the second run the old values could be accessed in VHDL).
+            // Objects are mimicked with records and those don't need instantiation. However it's useful to initialize
+            // all record fields to their default or initial values (otherwise if e.g. a class is instantiated in a
+            // loop in the second run the old values could be accessed in VHDL).
 
             var typeDeclaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(recordAstType);
 
@@ -812,55 +812,67 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var record = _recordComposer.CreateRecordFromType(typeDeclaration, context.TransformationContext);
 
+            var result = new RecordInitializationResult { Record = record };
+
             if (record.Fields.Any())
             {
                 context.Scope.CurrentBlock.Add(new LineComment("Initializing record fields to their defaults."));
-            }
 
-            var result = new RecordInitializationResult { Record = record };
+                var parentAssignment = expression
+                    .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
-            var parentAssignment = expression
-                .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
+                // This will only work if the newly created object is assigned to a variable or something else. It
+                // won't work if the newly created object is directly passed to a method for example. However
+                // DirectlyAccessedNewObjectVariablesCreator takes care of that.
+                var recordInstanceAssignmentTarget = parentAssignment.Left;
+                result.RecordInstanceIdentifier =
+                    recordInstanceAssignmentTarget is IdentifierExpression ||
+                    recordInstanceAssignmentTarget is IndexerExpression ||
+                    recordInstanceAssignmentTarget is MemberReferenceExpression ?
+                        recordInstanceAssignmentTarget :
+                        recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+                result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
 
-            // This will only work if the newly created object is assigned to a variable or something else. It won't
-            // work if the newly created object is directly passed to a method for example. However
-            // DirectlyAccessedNewObjectVariablesCreator takes care of that.
-            var recordInstanceAssignmentTarget = parentAssignment.Left;
-            result.RecordInstanceIdentifier =
-                recordInstanceAssignmentTarget is IdentifierExpression ||
-                recordInstanceAssignmentTarget is IndexerExpression ||
-                recordInstanceAssignmentTarget is MemberReferenceExpression ?
-                    recordInstanceAssignmentTarget :
-                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
-            result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
-
-            foreach (var field in record.Fields)
-            {
-                var initializationValue = field.DataType.DefaultValue;
-
-                if (typeDeclaration.Members
-                    .SingleOrDefault(member =>
-                        member.Is<FieldDeclaration>(f =>
-                            f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) is FieldDeclaration fieldDeclaration)
+                foreach (var field in record.Fields)
                 {
-                    var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
-                    if (fieldInitializer != Expression.Null)
-                    {
-                        initializationValue = Transform(fieldInitializer, context) as Value;
-                    }
-                }
+                    var initializationValue = field.DataType.DefaultValue;
 
-                if (initializationValue != null)
-                {
-                    context.Scope.CurrentBlock.Add(new Assignment
+                    // Initializing fields with their explicit defaults.
+                    if (typeDeclaration.Members
+                        .SingleOrDefault(member =>
+                            member.Is<FieldDeclaration>(f =>
+                                f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) is FieldDeclaration fieldDeclaration)
                     {
-                        AssignTo = new RecordFieldAccess
+                        var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
+                        if (fieldInitializer != Expression.Null)
                         {
-                            Instance = result.RecordInstanceReference,
-                            FieldName = field.Name
-                        },
-                        Expression = initializationValue
-                    });
+                            initializationValue = Transform(fieldInitializer, context) as Value;
+                        }
+                    }
+                    // Initializing properties with their explicit defaults.
+                    else if (typeDeclaration.Members
+                        .SingleOrDefault(member =>
+                            member.Is<PropertyDeclaration>(p =>
+                                p.Name == field.Name.TrimExtendedVhdlIdDelimiters())) is PropertyDeclaration propertyDeclaration)
+                    {
+                        if (propertyDeclaration.Initializer != Expression.Null)
+                        {
+                            initializationValue = Transform(propertyDeclaration.Initializer, context) as Value;
+                        }
+                    }
+
+                    if (initializationValue != null)
+                    {
+                        context.Scope.CurrentBlock.Add(new Assignment
+                        {
+                            AssignTo = new RecordFieldAccess
+                            {
+                                Instance = result.RecordInstanceReference,
+                                FieldName = field.Name
+                            },
+                            Expression = initializationValue
+                        });
+                    }
                 }
             }
 
