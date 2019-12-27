@@ -162,21 +162,42 @@ namespace Hast.Transformer
                     resolver.AddSearchDirectory(searchPath);
                 }
 
+                // Turning off language features to make processing easier.
                 var decompilerSettings = new DecompilerSettings
                 {
+                    AlwaysShowEnumMemberValues = false,
                     AnonymousMethods = false,
-                    // New arrays aren't populated with initializers but items are set one by one, which is easier to
-                    // process.
+                    AnonymousTypes = false,
                     ArrayInitializers = false,
-                    // Having simpler loops.
-                    ForStatement = false,
+                    Discards = false,
                     DoWhileStatement = false,
-                    // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2. The
-                    // former is easier to transform. Works in conjunction with the disabling of 
+                    Dynamic = false,
+                    ExpressionTrees = false,
+                    ForStatement = false,
+                    IntroduceReadonlyAndInModifiers = false,
+                    IntroduceRefModifiersOnStructs = false,
+                    // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
+                    // The former is easier to transform. Works in conjunction with the disabling of
                     // ReplaceMethodCallsWithOperators, see below.
                     IntroduceIncrementAndDecrement = false,
-                    // Separating variable declarations and initializations.
-                    SeparateLocalVariableDeclarations = true
+                    LocalFunctions = false,
+                    NamedArguments = false,
+                    NonTrailingNamedArguments = false,
+                    NullPropagation = false,
+                    OptionalArguments = false,
+                    OutVariables = true,
+                    PatternBasedFixedStatement = false,
+                    ReadOnlyMethods = true, // Can help const substitution.
+                    RefExtensionMethods = false,
+                    SeparateLocalVariableDeclarations = true,
+                    ShowXmlDocumentation = false,
+                    StringInterpolation = false,
+                    TupleComparisons = false,
+                    TupleConversions = false,
+                    TupleTypes = false,
+                    ThrowExpressions = false,
+                    UseLambdaSyntax = false,
+                    YieldReturn = false
                 };
 
                 var typeSystem = new DecompilerTypeSystem(module, resolver, decompilerSettings);
