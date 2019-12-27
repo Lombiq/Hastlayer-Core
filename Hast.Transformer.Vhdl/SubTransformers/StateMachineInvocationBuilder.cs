@@ -320,7 +320,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvocationFinishedIfElse = InvocationHelper
                 .CreateWaitForInvocationFinished(stateMachine, targetMethodName, instanceCount, waitForAll);
 
-            var currentStateName = stateMachine.CreateStateName(currentBlock.StateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
                 new LineComment(
                     "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),
