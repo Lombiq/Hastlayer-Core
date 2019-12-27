@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
@@ -111,7 +112,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             memberReferenceExpression.Target.GetActualTypeFullName() == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IMethod;
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IMethod ||
+            memberReferenceExpression.GetResolveResult<MethodGroupResolveResult>() != null;
 
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IField;
