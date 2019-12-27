@@ -44,14 +44,16 @@ namespace Hast.Transformer.Services
                 // Only do something if there's no invocation instance count configured.
                 if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount != 1) return;
 
-                // Searching for a parent while statement that has a condition with a variable and a primitive expression,
-                // i.e. something like num < 10.
+                // Searching for a parent while statement that has a condition with a variable and a primitive
+                // expression, i.e. something like num < 10.
 
                 var parentWhile = memberReferenceExpression.FindFirstParentOfType<WhileStatement>();
 
                 if (parentWhile == null ||
                     !parentWhile.Condition.Is<BinaryOperatorExpression>(
-                        expression => expression.Right is IdentifierExpression || expression.Left is IdentifierExpression,
+                        expression => 
+                            expression.Left.FindFirstChildOfType<IdentifierExpression>() != null || 
+                            expression.Right.FindFirstChildOfType<IdentifierExpression>() != null,
                         out var condition))
                 {
                     return;

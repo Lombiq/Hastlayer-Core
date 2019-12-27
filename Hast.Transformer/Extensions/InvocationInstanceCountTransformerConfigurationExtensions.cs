@@ -97,30 +97,29 @@ namespace Hast.Common.Configuration
 
                 var memberFullName = memberReferenceExpression.GetMemberFullName();
 
-                if (!memberFullName.IsDisplayOrClosureClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
+                if (!memberFullName.IsDisplayOrClosureClassMemberName() &&
+                    !memberFullName.IsInlineCompilerGeneratedMethodName())
                 {
                     return;
                 }
 
-                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out EntityDeclaration member))
+                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out EntityDeclaration member) &&
+                    member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
                 {
-                    if (member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
+                    var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();
+
+                    if (!_lambdaCounts.ContainsKey(parentMember))
                     {
-                        var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();
-
-                        if (!_lambdaCounts.ContainsKey(parentMember))
-                        {
-                            _lambdaCounts[parentMember] = 0;
-                        }
-
-                        member.AddAnnotation(new LambdaExpressionIndexedNameHolder
-                        {
-                            IndexedName = MemberInvocationInstanceCountConfiguration
-                                .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember])
-                        });
-
-                        _lambdaCounts[parentMember]++;
+                        _lambdaCounts[parentMember] = 0;
                     }
+
+                    member.AddAnnotation(new LambdaExpressionIndexedNameHolder
+                    {
+                        IndexedName = MemberInvocationInstanceCountConfiguration
+                            .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember])
+                    });
+
+                    _lambdaCounts[parentMember]++;
                 }
             }
         }
