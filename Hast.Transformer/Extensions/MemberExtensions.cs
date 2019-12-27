@@ -12,7 +12,8 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
             if (member is IMethod method)
             {
-                name += $"({string.Join(", ", method.Parameters.Select(parameter => parameter.Type.GetFullName()))})";
+                // There shouldn't be a space after commas so it follows Cecil naming conventions.
+                name += $"({string.Join(",", method.Parameters.Select(parameter => parameter.Type.GetFullName()))})";
             }
 
             return name;
