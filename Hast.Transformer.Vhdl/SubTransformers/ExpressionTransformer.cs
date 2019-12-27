@@ -453,36 +453,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 var targetIdentifier = (memberReference.Target as IdentifierExpression)?.Identifier;
-                if (targetIdentifier != null)
+                if (targetIdentifier != null &&
+                    scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
                 {
-                    if (scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
-                    {
-                        // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
-                        // Or it's something like <>c__DisplayClass3_.<Run>b__0 within a call like:
-                        // Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num)
-                        if (memberReference.MemberName.EndsWith("__this") ||
-                            memberReference.GetMemberFullName().IsDisplayOrClosureClassMemberName())
-                        {
-                            return Empty.Instance;
-                        }
-                        // Otherwise this is field access on the DisplayClass object (the field was created to pass variables
-                        // from the local scope to the method generated from the lambda expression). Can look something like:
-                        // <>c__DisplayClass9_.numbers = new uint[35];
-                        else
-                        {
-                            return context.TransformationContext.TypeDeclarationLookupTable
-                                .Lookup(displayClassName)
-                                .Members
-                                .Single(member => member
-                                    .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
-                                .GetFullName()
-                                .ToExtendedVhdlId()
-                                .ToVhdlVariableReference();
-                        }
-                    }
+                    // This is field access on the DisplayClass object (the field was created to pass variables from
+                    // the local scope to the method generated from the lambda expression). Can look something like:
+                    // <>c__DisplayClass9_.numbers = new uint[35];
+                    return context.TransformationContext.TypeDeclarationLookupTable
+                        .Lookup(displayClassName)
+                        .Members
+                        .Single(member => member
+                            .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
+                        .GetFullName()
+                        .ToExtendedVhdlId()
+                        .ToVhdlVariableReference();
                 }
 
-                // Is this reference to an enum's member?
+                // Is this a reference to an enum's member?
                 if (memberReference.Target is TypeReferenceExpression targetTypeReferenceExpression &&
                     context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
                 {
