@@ -348,6 +348,8 @@ namespace Hast.Transformer.Vhdl.Services
 
             var traverseTo = node.Children;
 
+            // If for debugging you want to make the below processing serial instead of it running in parallel then 
+            // add .Result to every transformation call and wrap them into Task.FromResult() methods.
             switch (node.NodeType)
             {
                 case NodeType.Expression:
