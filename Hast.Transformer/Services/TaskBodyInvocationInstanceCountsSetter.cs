@@ -51,8 +51,10 @@ namespace Hast.Transformer.Services
 
                 if (parentWhile == null ||
                     !parentWhile.Condition.Is<BinaryOperatorExpression>(
-                        expression => 
-                            expression.Left.FindFirstChildOfType<IdentifierExpression>() != null || 
+                        expression =>
+                            expression.Left is IdentifierExpression ||
+                            expression.Left.FindFirstChildOfType<IdentifierExpression>() != null ||
+                            expression.Right is IdentifierExpression ||
                             expression.Right.FindFirstChildOfType<IdentifierExpression>() != null,
                         out var condition))
                 {
