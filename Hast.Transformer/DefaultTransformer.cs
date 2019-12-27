@@ -174,8 +174,8 @@ namespace Hast.Transformer
                     Dynamic = false,
                     ExpressionTrees = false,
                     ForStatement = false,
-                    IntroduceReadonlyAndInModifiers = false,
-                    IntroduceRefModifiersOnStructs = false,
+                    IntroduceReadonlyAndInModifiers = true,
+                    IntroduceRefModifiersOnStructs = true,
                     // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
                     // The former is easier to transform. Works in conjunction with the disabling of
                     // ReplaceMethodCallsWithOperators, see below.

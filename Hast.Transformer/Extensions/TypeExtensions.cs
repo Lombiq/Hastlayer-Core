@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem.Implementation;
+using System.Linq;
 
 namespace ICSharpCode.Decompiler.TypeSystem
 {
@@ -30,31 +31,24 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static bool IsArray(this IType type) => type.Kind == TypeKind.Array;
 
+        public static bool IsAttribute(this IType type) =>
+            // ILSpy has such an IsAttributeType() method but it's private.
+            type.GetNonInterfaceBaseTypes().Any(t => t.IsKnownType(KnownTypeCode.Attribute));
+
         public static bool IsClass(this IType type) => type.Kind == TypeKind.Class;
 
         public static bool IsEnum(this IType type) => type.Kind == TypeKind.Enum;
 
-        public static bool IsSimpleMemory(this IType type) => type.GetFullName() == typeof(SimpleMemory).FullName;
-
         public static bool IsFunc(this IType type) => type.FullName.StartsWith("System.Func");
+
+        public static bool IsSimpleMemory(this IType type) => type.GetFullName() == typeof(SimpleMemory).FullName;
 
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
 
         public static ResolveResult ToResolveResult(this IType type) => new ResolveResult(type);
 
-        public static string GetFullName(this IType type)
-        {
-            var declaringTypeNames = string.Empty;
-            var currentType = type;
-            while (currentType.DeclaringType != null)
-            {
-                // For nested types the conventional separator is a slash.
-                declaringTypeNames = "/" + currentType.Name + declaringTypeNames;
-                currentType = currentType.DeclaringType;
-            }
-
-            return currentType.FullName + declaringTypeNames;
-        }
+        // For nested types the conventional separator is a slash.
+        public static string GetFullName(this IType type) => type.ReflectionName.Replace('+', '/');
     }
 }

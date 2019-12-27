@@ -21,9 +21,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return node.GetActualTypeFullName();
             }
 
-            if (node is EntityDeclaration)
+            if (node is EntityDeclaration entityDeclaration)
             {
-                return node.GetResolveResult<MemberResolveResult>().GetFullName();
+                return node.GetResolveResult<MemberResolveResult>()?.GetFullName() ?? 
+                    CreateParentEntityBasedName(node, entityDeclaration.Name);
+
             }
 
             if (node is MemberReferenceExpression memberReferenceExpression)
