@@ -215,6 +215,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             return predicate(castNode);
         }
 
+        public static T As<T>(this AstNode node) where T : AstNode => node as T;
+
         public static AstNode FindFirstNonParenthesizedExpressionParent(this AstNode node)
         {
             var parent = node.Parent;

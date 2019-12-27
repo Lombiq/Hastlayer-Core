@@ -29,7 +29,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             {
                 if (findLeftmostMemberIfRecursive)
                 {
-                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true);
+                    return memberReferenceExpression.Target
+                        .As<MemberReferenceExpression>()
+                        .FindMemberDeclaration(typeDeclarationLookupTable, true);
                 }
                 else
                 {
@@ -75,7 +77,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             }
             else if (target is MemberReferenceExpression)
             {
-                return ((MemberReferenceExpression)target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
+                return target.As<MemberReferenceExpression>().FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
             else if (target is ObjectCreateExpression)
             {

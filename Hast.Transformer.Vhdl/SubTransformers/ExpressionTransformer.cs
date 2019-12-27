@@ -71,6 +71,34 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (expression is AssignmentExpression assignment)
             {
+                /*
+                Task.Factory.StartNew(lambda => here) calls are compiled into one of the two version:
+                * If the lambda is a closure on local variables then a DisplayClass with fields for all local variables
+                  and a method(e.g.ParallelAlgorithm, MonteCarloPiEstimator).Sometimes such a DisplayClass will be
+                  generated even if no local variables are accessed(e.g. (ParallelizedCalculateIntegerSumUpToNumbers()).
+                * If no local variables are access then a method with the[CompilerGenerated] attribute within the same
+                  class (e.g.ImageContrastModifier, Fix64Calculator.PrimeCalculator.ParallelizedArePrimeNumbers(),
+                  KpzKernelsParallelizedInterface, Posit32Calculator.ParallelizedCalculateIntegerSumUpToNumbers()).
+
+                Each of these start with:
+                    Task<OutputType>[] array;
+                    array = new Task<OutputType>[numberOfTasks];
+
+                In the first case ("array" is a Task<T> array) the DisplayClass will be instantiated, its fields populated and then the Task started:
+                    <>c__DisplayClass4_0<> c__DisplayClass4_;
+                    <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
+                    <>c__DisplayClass4_.localVariable1 = ...;
+                    <>c__DisplayClass4_.localVariable2 = ...;
+                    array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+
+                In the second case there will be just a Task start invocation:
+                    array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+
+                Since both cases are almost all assignments we're handling them mostly here.
+                Both of these are then awaited as:
+                    Task.WhenAll(array).Wait();
+                */
+
                 IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
                 {
                     var leftType = left.GetActualType();
@@ -199,19 +227,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    InvocationExpression invocationExpression = null;
-
-                    IEnumerable<TransformedInvocationParameter> transformFromSecondArgument() =>
-                        invocationExpression.Arguments.Skip(1).Select(argument =>
-                            new TransformedInvocationParameter
-                            {
-                                Reference = Transform(argument, context),
-                                DataType = _declarableTypeCreator
-                                    .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
-                            });
-
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
-                    // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
+                    // be like following: <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
                     string rightObjectFullName;
                     if (assignment.Right is ObjectCreateExpression rightObjectCreateExpression &&
                         (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayOrClosureClassName())
@@ -225,57 +242,40 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         return Empty.Instance;
                     }
-                    // Omitting assignments like arg_97_0 = Task.Factory;
-                    else if (assignment.Left.Is<IdentifierExpression>(identifier =>
-                        scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))
+                    // Handling Task starts like:
+                    // array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+                    // array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+                    else if (assignment.Right.Is<InvocationExpression>(
+                        invocation => invocation.IsTaskStart(),
+                        out var invocationExpression))
                     {
-                        return Empty.Instance;
-                    }
-                    // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is(invocation =>
-                        invocation.Target.Is<MemberReferenceExpression>(memberReference =>
-                            memberReference.IsTaskStartNew() &&
-                            memberReference.Target.Is<IdentifierExpression>(identifier =>
-                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier))),
-                        out invocationExpression))
-                    {
-                        // The first argument is always for the Func that refers to the method on the DisplayClass
-                        // generated for the lambda expression originally passed to the Task factory.
-                        var funcVariablename = ((IdentifierExpression)invocationExpression.Arguments.First()).Identifier;
-                        var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
+                        var firstArgument = invocationExpression.Arguments.First();
+                        MethodDeclaration targetMethod;
 
-                        // We only need to care about the invocation here. Since this is a Task start there will be
-                        // some form of await later.
-                        _stateMachineInvocationBuilder.BuildInvocation(
-                            targetMethod,
-                            transformFromSecondArgument(),
-                            getMaxDegreeOfParallelism(targetMethod),
-                            context);
-
-                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] =
-                            targetMethod;
-
-                        return Empty.Instance;
-                    }
-                    // Handling shorthand Task starts like:
-                    // array[i] = Task.Factory.StartNew((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, (object)num4);
-                    // array[i] = Task.Factory.StartNew(<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
-                    // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is(invocation => invocation.IsShorthandTaskStart(), out invocationExpression))
-                    {
-                        var funcCreateExpression = (ObjectCreateExpression)invocationExpression.Arguments.First();
-
-                        if (funcCreateExpression.Arguments.Single() is PrimitiveExpression)
+                        // Is this the first type of Task starts?
+                        if (firstArgument is BinaryOperatorExpression binaryOperatorExpression)
                         {
-                            throw new InvalidOperationException(
-                                "The return value of the Task started as " + invocationExpression.ToString() +
-                                " was substituted with a constant (" + funcCreateExpression.Arguments.Single().ToString() +
-                                "). This means that the body of the Task isn't computing anything. Most possibly this is not what you wanted.");
+                            targetMethod = binaryOperatorExpression
+                                .Right
+                                .As<ParenthesizedExpression>()
+                                .Expression
+                                .As<AssignmentExpression>()
+                                .Right
+                                .As<MemberReferenceExpression>()
+                                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+                                .As<MethodDeclaration>();
+                        }
+                        // Or the second one?
+                        else
+                        {
+                            targetMethod = firstArgument
+                                .As<CastExpression>()
+                                .Expression
+                                .As<MemberReferenceExpression>()
+                                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+                                .As<MethodDeclaration>();
                         }
 
-                        var targetMethod = (MethodDeclaration)TaskParallelizationHelper
-                            .GetTargetDisplayClassMemberFromFuncCreation(funcCreateExpression)
-                            .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                         var targetMaxDegreeOfParallelism = context.TransformationContext
                             .GetTransformerConfiguration()
                             .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
@@ -285,7 +285,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,
-                            transformFromSecondArgument(),
+                            invocationExpression.Arguments.Skip(1).Select(argument =>
+                                new TransformedInvocationParameter
+                                {
+                                    Reference = Transform(argument, context),
+                                    DataType = _declarableTypeCreator
+                                        .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
+                                }),
                             getMaxDegreeOfParallelism(targetMethod),
                             context);
 
@@ -394,7 +400,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is InvocationExpression invocationExpression)
             {
-                if (invocationExpression.IsShorthandTaskStart()) return Empty.Instance;
+                if (invocationExpression.IsTaskStart()) return Empty.Instance;
 
                 var transformedParameters = new List<ITransformedInvocationParameter>();
 

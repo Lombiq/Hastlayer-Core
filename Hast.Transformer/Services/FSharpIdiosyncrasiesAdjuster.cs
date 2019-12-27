@@ -85,7 +85,7 @@ namespace Hast.Transformer.Services
                         invocationExpression.ReplaceWith(assignment);
                     }
                 }
-                else if (invocationExpression.IsShorthandTaskStart())
+                else if (invocationExpression.IsTaskStart())
                 {
                     // The expression is something like if it was created from F# code, and this is what we need to handle:
                     // Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke), i)
