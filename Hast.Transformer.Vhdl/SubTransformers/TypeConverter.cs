@@ -316,7 +316,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return new VhdlBuilder.Representation.Declaration.Enum { Name = type.GetFullName().ToExtendedVhdlId() };
             }
 
-            if (type.IsClass())
+            if (type.IsClass() || type.IsStruct())
             {
                 var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(type.GetFullName());
 
