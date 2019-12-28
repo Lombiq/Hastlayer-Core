@@ -114,7 +114,7 @@ namespace Hast.Transformer.Services
                 }
 
 
-                // If no type reference can be determined then nothing to do.
+                // If no type can be determined then nothing to do.
                 if (leftType == null && rightType == null) return;
 
                 if (leftType == null) leftType = rightType;
