@@ -850,6 +850,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     if (initializationValue != null)
                     {
+                        IVhdlElement initializerExpression = initializationValue;
+
+                        // In C# the default value can be e.g. an integer literal for an ushort field. So we need to
+                        // take care of that.
+                        if (field.DataType != initializationValue.DataType)
+                        {
+                            initializerExpression = _typeConversionTransformer.ImplementTypeConversion(
+                                initializationValue.DataType,
+                                field.DataType,
+                                initializerExpression).ConvertedFromExpression;
+                        }
+
                         context.Scope.CurrentBlock.Add(new Assignment
                         {
                             AssignTo = new RecordFieldAccess
@@ -857,7 +869,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 Instance = result.RecordInstanceReference,
                                 FieldName = field.Name
                             },
-                            Expression = initializationValue
+                            Expression = initializerExpression
                         });
                     }
                 }
