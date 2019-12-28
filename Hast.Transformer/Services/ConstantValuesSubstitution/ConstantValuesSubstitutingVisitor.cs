@@ -1,6 +1,8 @@
 ﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
@@ -247,6 +249,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 {
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings.Remove(fullName);
                 }
+            }
+
+            // Is this a const? Then we can just substitute it directly.
+            var resolveResult = node.GetResolveResult();
+            IType type;
+            if (resolveResult?.IsCompileTimeConstant == true &&
+                !(node is PrimitiveExpression) &&
+                !(type = node.GetActualType()).IsEnum())
+            {
+                node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue, resolveResult.ConstantValue.ToString())
+                    .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
             }
 
             // Attributes can slip in here but we don't care about those.
