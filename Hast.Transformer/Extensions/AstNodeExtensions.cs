@@ -142,7 +142,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetSimpleName(this AstNode node) =>
             // Unlike formerly with Cecil, the FullName property is in a simple format.
-            node.GetResolveResult<MemberResolveResult>()?.Member.FullName ?? node.GetActualType().FullName;
+            node.GetResolveResult<MemberResolveResult>()?.Member.ReflectionName ?? node.GetActualType().FullName;
 
         public static T GetResolveResult<T>(this AstNode node) where T : ResolveResult =>
             node.GetResolveResult() as T;
