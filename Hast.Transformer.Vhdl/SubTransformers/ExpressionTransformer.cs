@@ -167,13 +167,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             });
                     }
 
-                    // _typeConversionTransformer.ImplementTypeConversionForAssignment() could be used here, but that
-                    // also needs the data types of both operands.
+                    var typeConversionResult = _typeConversionTransformer.ImplementTypeConversionForAssignment(
+                        _typeConverter.ConvertType(rightType, context.TransformationContext),
+                        _typeConverter.ConvertType(leftType, context.TransformationContext),
+                        rightTransformed,
+                        leftDataObject);
 
                     return new Assignment
                     {
-                        AssignTo = leftDataObject,
-                        Expression = rightTransformed
+                        AssignTo = typeConversionResult.ConvertedToDataObject,
+                        Expression = typeConversionResult.ConvertedFromExpression
                     };
                 }
 
