@@ -23,7 +23,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (node is EntityDeclaration entityDeclaration)
             {
-                return node.GetResolveResult<MemberResolveResult>()?.GetFullName() ?? 
+                return node.GetResolveResult<MemberResolveResult>()?.GetFullName() ??
                     CreateParentEntityBasedName(node, entityDeclaration.Name);
 
             }
@@ -166,7 +166,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.FindFirstParentOfType<T>(n => true);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
-            node.FindFirstParentOfType(predicate, out int height);
+            node.FindFirstParentOfType(predicate, out _);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate, out int height) where T : AstNode
         {
