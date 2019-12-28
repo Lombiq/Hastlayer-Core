@@ -51,6 +51,6 @@ namespace ICSharpCode.Decompiler.TypeSystem
         public static ResolveResult ToResolveResult(this IType type) => new ResolveResult(type);
 
         // For nested types the conventional separator is a slash.
-        public static string GetFullName(this IType type) => type.ReflectionName.Replace('+', '/');
+        public static string GetFullName(this IType type) => type.ReflectionName;
     }
 }

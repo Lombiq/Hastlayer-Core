@@ -42,13 +42,13 @@ namespace System
         /// </summary>
         /// <example>
         /// Such a name is like following: 
-        /// "Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass9_0"
-        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c"
+        /// "Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass9_0"
+        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm+<>c"
         /// Run@28
         /// </example>
         public static bool IsDisplayOrClosureClassName(this string name) =>
             // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
-            name.Contains("/<>c") ||
+            name.Contains("+<>c") ||
             name.IsClosureClassName();
 
         /// <summary>
@@ -56,10 +56,10 @@ namespace System
         /// </summary>
         /// <example>
         /// Such a name is like following: 
-        /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass2::numbers"
-        /// "System.UInt32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer/Run@28::Invoke(System.UInt32)"
+        /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass2::numbers"
+        /// "System.UInt32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer+Run@28::Invoke(System.UInt32)"
         /// </example>
-        public static bool IsDisplayOrClosureClassMemberName(this string name) => 
+        public static bool IsDisplayOrClosureClassMemberName(this string name) =>
             name.IsDisplayOrClosureClassName() && name.Contains("::");
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace System
         /// Such a name is like:
         /// "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers2>b__9_0(System.Object)"
         /// or: 
-        /// "Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)"
+        /// "Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput)"
         /// </example>
         public static bool IsInlineCompilerGeneratedMethodName(this string name) =>
             // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
@@ -90,9 +90,9 @@ namespace System
         /// </summary>
         /// <remarks>
         /// Such a field's name looks like 
-        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::<ArrayLength>k__BackingField".
+        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases+ArrayHolder1::<ArrayLength>k__BackingField".
         /// It will contain the name of the property. This needs to be converted into the corresponding full property name:
-        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::ArrayLength()"
+        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases+ArrayHolder1::ArrayLength()"
         /// </remarks>
         public static string ConvertFullBackingFieldNameToPropertyName(this string name) =>
              name.ConvertSimpleBackingFieldNameToPropertyName() + "()";
