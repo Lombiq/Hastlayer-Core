@@ -57,6 +57,7 @@ namespace Hast.Transformer
         private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
         private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
+        private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
 
 
         public DefaultTransformer(
@@ -91,7 +92,8 @@ namespace Hast.Transformer
             IDecompilationErrorsFixer decompilationErrorsFixer,
             IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
-            IMemberIdentifiersFixer memberIdentifiersFixer)
+            IMemberIdentifiersFixer memberIdentifiersFixer,
+            IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -125,6 +127,7 @@ namespace Hast.Transformer
             _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
             _memberIdentifiersFixer = memberIdentifiersFixer;
+            _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
         }
 
 
@@ -333,6 +336,7 @@ namespace Hast.Transformer
             _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
+            _unneededReferenceVariablesRemover.RemoveUnneededVariables(syntaxTree);
 
             var preConfiguredArrayLengths = configuration
                 .TransformerConfiguration()

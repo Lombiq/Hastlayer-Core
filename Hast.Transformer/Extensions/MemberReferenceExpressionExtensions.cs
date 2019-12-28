@@ -118,6 +118,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IField;
 
+        public static bool IsPropertyReference(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IProperty;
+
 
         private static IMember GetMemberDirectlyOrFromParentInvocation(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetResolveResult<MemberResolveResult>()?.Member ??

@@ -118,8 +118,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (arraySize != null)
                 {
-                    var newExpression = new PrimitiveExpression(arraySize.Length);
-                    newExpression.AddAnnotation(memberReferenceExpression.CreateResolveResultFromActualType());
+                    var newExpression = new PrimitiveExpression(arraySize.Length)
+                        .WithAnnotation(memberReferenceExpression.CreateResolveResultFromActualType());
                     memberReferenceExpression.ReplaceWith(newExpression);
                 }
 

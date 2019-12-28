@@ -62,6 +62,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions\AnnotatableExtensions.cs" />
+    <Compile Include="Extensions\AssignmentExpressionExtension.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensibility\Events\ITransformerEventHandler.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IFSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IMemberIdentifiersFixer.cs" />
+    <Compile Include="Services\IUnneededReferenceVariablesRemover.cs" />
     <Compile Include="Services\KnownTypeLookupTableFactory.cs" />
     <Compile Include="Services\IMethodInliner.cs" />
     <Compile Include="Services\IObjectInitializerExpander.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\TransformationContextCacheService.cs" />
     <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
+    <Compile Include="Services\UnneededReferenceVariablesRemover.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />

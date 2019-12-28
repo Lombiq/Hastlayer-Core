@@ -136,16 +136,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
 
                     var rightType = right.GetActualType();
-                    if (leftType != null &&
-                        leftType.GetFullName() == rightType.GetFullName() &&
-                        leftType.IsReferenceType == true &&
-                        left is IdentifierExpression &&
-                        (right is IdentifierExpression || right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference())))
+
+                    if (assignment.IsPotentialAliasAssignment())
                     {
-                        // This is an assignment between two variables or a variable and a field holding reference type
-                        // objects. Since there are no references in VHDL the best option is to use aliases (instead of
-                        // assigning back variables after every change). This is not perfect though since if the now
-                        // alias variable is assigned to then that won't work, see the exception above.
+                        // This is an assignment which is possibly just an alias. Since there are no references in VHDL
+                        // the best option is to use aliases (instead of assigning back variables after every change).
+                        // This is not perfect though since if the now alias variable is assigned to then that won't
+                        // work, see the exception above.
+                        // This might not be needed because of UnneededReferenceVariablesRemover. 
 
                         // Switching the left variable out with an alias so it'll have reference-like behavior.
 

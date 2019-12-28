@@ -44,17 +44,18 @@ namespace Hast.Transformer.Services
                     {
                         var actualType = castExpression.GetActualType();
 
-                        objectParameter.Type = castExpression.Type.Clone();
-                        objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
-                        objectParameter.AddAnnotation(VariableHelper
+                        var resolveResult = VariableHelper
                             .CreateILVariableResolveResult(
                                 ICSharpCode.Decompiler.IL.VariableKind.Parameter,
                                 actualType,
-                                objectParameter.Name));
+                                objectParameter.Name);
+                        objectParameter.Type = castExpression.Type.Clone();
+                        objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
+                        objectParameter.AddAnnotation(resolveResult);
                         castExpression.ReplaceWith(castExpression.Expression);
                         castExpression.Remove();
 
-                        methodDeclaration.Body.AcceptVisitor(new ParameterReferencesTypeChangingVisitor(objectParameter.Name, actualType));
+                        methodDeclaration.Body.AcceptVisitor(new ParameterReferencesTypeChangingVisitor(objectParameter.Name, resolveResult));
                     }
                 }
             }
@@ -96,13 +97,13 @@ namespace Hast.Transformer.Services
             private class ParameterReferencesTypeChangingVisitor : DepthFirstAstVisitor
             {
                 private readonly string _parameterName;
-                private readonly IType _type;
+                private readonly ILVariableResolveResult _resolveResult;
 
 
-                public ParameterReferencesTypeChangingVisitor(string parameterName, IType type)
+                public ParameterReferencesTypeChangingVisitor(string parameterName, ILVariableResolveResult resolveResult)
                 {
                     _parameterName = parameterName;
-                    _type = type;
+                    _resolveResult = resolveResult;
                 }
 
 
@@ -112,7 +113,7 @@ namespace Hast.Transformer.Services
 
                     if (identifierExpression.Identifier != _parameterName) return;
 
-                    identifierExpression.ReplaceAnnotations(_type.ToResolveResult());
+                    identifierExpression.ReplaceAnnotations(_resolveResult);
                 }
             }
         }
