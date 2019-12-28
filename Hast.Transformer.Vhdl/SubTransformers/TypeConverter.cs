@@ -311,13 +311,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertTypeInternal(IType type, IVhdlTransformationContext context)
         {
-            //if (type == null)
-            //{
-            //    type = context.TypeDeclarationLookupTable.Lookup(fullName)?.Annotation<TypeDefinition>();
-            //}
-
-            //if (type == null) ExceptionHelper.ThrowDeclarationNotFoundException(fullName);
-
             if (type.IsEnum())
             {
                 return new VhdlBuilder.Representation.Declaration.Enum { Name = type.GetFullName().ToExtendedVhdlId() };
