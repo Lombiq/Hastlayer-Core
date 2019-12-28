@@ -627,7 +627,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var type = ((TypeReferenceExpression)expression).Type;
                 var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
-                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier, expression);
+                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(type.GetFullName(), expression);
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
