@@ -10,8 +10,8 @@ using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Xilinx;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Xilinx.Abstractions;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using NUnit.Framework;
 using Orchard.Services;
@@ -47,6 +47,7 @@ namespace Hast.Transformer.Vhdl.Tests
             builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
             builder.RegisterType<DeviceDriverSelector>().As<IDeviceDriverSelector>();
             builder.RegisterType<Nexys4DdrDriver>().As<IDeviceDriver>();
+            builder.RegisterType<MemberIdentifiersFixer>().As<IMemberIdentifiersFixer>();
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
 
@@ -189,10 +190,8 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        private Dictionary<string, TypeDeclaration> BuildTypeLookup()
-        {
-            return _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
-        }
+        private Dictionary<string, TypeDeclaration> BuildTypeLookup() =>
+            _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
 
 
         private static HardwareGenerationConfiguration CreateConfig()
