@@ -24,7 +24,8 @@ namespace Hast.Transformer.Services
                 base.VisitConstructorDeclaration(constructorDeclaration);
 
                 // If the ctor is empty then no need to keep it.
-                if (!constructorDeclaration.Body.Statements.Any())
+                if (!constructorDeclaration.Body.Statements.Any() &&
+                    constructorDeclaration.Initializer == ConstructorInitializer.Null)
                 {
                     constructorDeclaration.Remove();
                     return;
