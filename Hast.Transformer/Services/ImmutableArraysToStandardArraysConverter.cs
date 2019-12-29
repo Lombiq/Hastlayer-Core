@@ -202,101 +202,88 @@ namespace Hast.Transformer.Services
             {
                 base.VisitParameterDeclaration(parameterDeclaration);
 
-                var type = parameterDeclaration.GetActualType();
+                ProcessIfIsImmutableArray(parameterDeclaration, arrayType =>
+                {
+                    parameterDeclaration.Type = CreateArrayAstTypeFromImmutableArrayAstType(parameterDeclaration.Type, arrayType);
+                    parameterDeclaration.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
+                        VariableKind.Parameter,
+                        arrayType,
+                        parameterDeclaration.Name));
 
-                if (!IsImmutableArray(type)) return;
-
-                var arrayType = CreateArrayType(type.TypeArguments.Single());
-                parameterDeclaration.Type = CreateArrayAstTypeFromImmutableArrayAstType(parameterDeclaration.Type, arrayType);
-                parameterDeclaration.RemoveAnnotations<ResolveResult>();
-                parameterDeclaration.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
-                    VariableKind.Parameter,
-                    CreateArrayType(type.TypeArguments.Single()),
-                    parameterDeclaration.Name));
-
-                ThrowIfMultipleMembersWithTheNameExist(parameterDeclaration.FindFirstParentEntityDeclaration());
+                    ThrowIfMultipleMembersWithTheNameExist(parameterDeclaration.FindFirstParentEntityDeclaration());
+                });
             }
 
             public override void VisitConditionalExpression(ConditionalExpression conditionalExpression)
             {
                 base.VisitConditionalExpression(conditionalExpression);
 
-                var type = conditionalExpression.GetActualType();
-
-                if (!IsImmutableArray(type)) return;
-
-                conditionalExpression.RemoveAnnotations<ResolveResult>();
-                conditionalExpression.AddAnnotation(CreateArrayType(type.TypeArguments.Single()).ToResolveResult());
+                ProcessIfIsImmutableArray(conditionalExpression, arrayType =>
+                    conditionalExpression.AddAnnotation(arrayType.ToResolveResult()));
             }
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {
                 base.VisitIdentifierExpression(identifierExpression);
 
-                var type = identifierExpression.GetActualType();
-
-                if (!IsImmutableArray(type)) return;
-
-                identifierExpression.RemoveAnnotations<ResolveResult>();
-                identifierExpression.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
-                    VariableKind.Parameter,
-                    CreateArrayType(type.TypeArguments.Single()),
-                    identifierExpression.Identifier));
+                ProcessIfIsImmutableArray(identifierExpression, arrayType =>
+                    identifierExpression.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
+                        VariableKind.Parameter,
+                        arrayType,
+                        identifierExpression.Identifier)));
             }
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                var type = memberReferenceExpression.GetActualType();
-
-                if (!IsImmutableArray(type)) return;
-
                 var originalResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
-                memberReferenceExpression.RemoveAnnotations<ResolveResult>();
-                memberReferenceExpression.AddAnnotation(new MemberResolveResult(
-                    originalResolveResult.TargetResult,
-                    originalResolveResult.Member,
-                    CreateArrayType(type.TypeArguments.Single())));
+
+                ProcessIfIsImmutableArray(memberReferenceExpression, arrayType =>
+                    memberReferenceExpression.AddAnnotation(new MemberResolveResult(
+                        originalResolveResult.TargetResult,
+                        originalResolveResult.Member,
+                        arrayType)));
             }
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                var type = assignmentExpression.GetActualType();
-
-                if (!IsImmutableArray(type)) return;
-
-                assignmentExpression.RemoveAnnotations<ResolveResult>();
-                var arrayType = CreateArrayType(type.TypeArguments.Single());
-                assignmentExpression.AddAnnotation(new OperatorResolveResult(
+                ProcessIfIsImmutableArray(assignmentExpression, arrayType =>
+                    assignmentExpression.AddAnnotation(new OperatorResolveResult(
                         arrayType,
                         System.Linq.Expressions.ExpressionType.Assign,
                         assignmentExpression.Left.GetResolveResult(),
-                        assignmentExpression.Right.GetResolveResult()));
+                        assignmentExpression.Right.GetResolveResult())));
             }
 
             public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
             {
                 base.VisitVariableDeclarationStatement(variableDeclarationStatement);
 
+                ProcessIfIsImmutableArray(variableDeclarationStatement, arrayType =>
+                {
+                    variableDeclarationStatement.Type = CreateArrayAstTypeFromImmutableArrayAstType(variableDeclarationStatement.Type, arrayType);
 
-                var type = variableDeclarationStatement.GetActualType();
+                    var variable = variableDeclarationStatement.Variables.Single();
+                    variable.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
+                        VariableKind.Parameter,
+                        arrayType,
+                        variable.Name));
+                });
+            }
+
+
+            private static void ProcessIfIsImmutableArray<T>(T node, Action<ArrayType> processor) where T : AstNode
+            {
+                var type = node.GetActualType();
 
                 if (!IsImmutableArray(type)) return;
 
-                var arrayType = CreateArrayType(type.TypeArguments.Single());
-                variableDeclarationStatement.Type = CreateArrayAstTypeFromImmutableArrayAstType(variableDeclarationStatement.Type, arrayType);
-
-                var variable = variableDeclarationStatement.Variables.Single();
-                variable.RemoveAnnotations<ResolveResult>();
-                variable.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
-                    VariableKind.Parameter,
-                    arrayType,
-                    variable.Name));
+                node.RemoveAnnotations<ResolveResult>();
+                processor(CreateArrayType(type.TypeArguments.Single()));
             }
-
 
             private static bool IsImmutableArray(IType type) =>
                 type?.GetFullName().StartsWith("System.Collections.Immutable.ImmutableArray") == true;
