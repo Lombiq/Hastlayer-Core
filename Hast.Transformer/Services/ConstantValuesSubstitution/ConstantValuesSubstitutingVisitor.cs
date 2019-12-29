@@ -255,6 +255,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var resolveResult = node.GetResolveResult();
             IType type;
             if (resolveResult?.IsCompileTimeConstant == true &&
+                resolveResult.ConstantValue != null &&
                 !(node is PrimitiveExpression) &&
                 !(type = node.GetActualType()).IsEnum() &&
                 !(node is NullReferenceExpression))
