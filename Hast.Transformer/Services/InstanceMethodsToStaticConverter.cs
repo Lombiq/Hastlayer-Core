@@ -1,5 +1,4 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
@@ -71,7 +70,7 @@ namespace Hast.Transformer.Services
                 _syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(
                     parentAstType,
                     parentType.GetFullName(),
-                    methodDeclaration.Name));
+                    methodDeclaration.GetFullName()));
             }
 
 
@@ -83,7 +82,7 @@ namespace Hast.Transformer.Services
 
                     var thisIdentifierExpression = new IdentifierExpression("this")
                         .WithAnnotation(VariableHelper
-                            .CreateILVariableResolveResult(VariableKind.Parameter, thisReferenceExpression.GetResolveResult().Type, "this"));
+                            .CreateILVariableResolveResult(VariableKind.Parameter, thisReferenceExpression.GetActualType(), "this"));
                     thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
                 }
             }
@@ -92,14 +91,14 @@ namespace Hast.Transformer.Services
             {
                 private readonly AstType _parentAstType;
                 private readonly string _methodParentFullName;
-                private readonly string _methodName;
+                private readonly string _methodFullName;
 
 
-                public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodName)
+                public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodFullName)
                 {
                     _parentAstType = parentAstType;
                     _methodParentFullName = methodParentFullName;
-                    _methodName = methodName;
+                    _methodFullName = methodFullName;
                 }
 
 
@@ -117,12 +116,13 @@ namespace Hast.Transformer.Services
                             targetType != null &&
                             targetType.GetFullName() == _methodParentFullName)
                         &&
-                        targetMemberReference.MemberName == _methodName;
+                        targetMemberReference.GetMemberFullName() == _methodFullName;
 
                     if (!isAffectedMethodCall) return;
 
                     var originalTarget = targetMemberReference.Target;
-                    targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone()));
+                    targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone())
+                        .WithAnnotation(new TypeResolveResult(_parentAstType.GetActualType())));
 
                     if (!invocationExpression.Arguments.Any())
                     {
