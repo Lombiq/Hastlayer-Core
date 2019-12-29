@@ -7,9 +7,11 @@ namespace ICSharpCode.Decompiler.TypeSystem
 {
     public static class TypeExtensions
     {
+        public static KnownTypeCode? GetKnownTypeCode(this IType type) => (type as ITypeDefinition)?.KnownTypeCode;
+
         public static bool IsPrimitive(this IType type)
         {
-            var typeCode = (type as ITypeDefinition)?.KnownTypeCode;
+            var typeCode = type.GetKnownTypeCode();
             return
                 typeCode == KnownTypeCode.Boolean ||
                 typeCode == KnownTypeCode.Byte ||
