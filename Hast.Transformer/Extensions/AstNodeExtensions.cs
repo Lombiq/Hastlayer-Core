@@ -265,9 +265,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
+            var memberResolveResult = node.GetResolveResult<MemberResolveResult>();
+
             if (node is MemberReferenceExpression)
             {
-                if (node.Parent is InvocationExpression)
+                if (node.Parent is InvocationExpression && memberResolveResult == null)
                 {
                     return node.Parent.GetResolveResult<InvocationResolveResult>().GetFullName();
                 }
@@ -282,7 +284,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 }
             }
 
-            return node.GetResolveResult<MemberResolveResult>()?.GetFullName();
+            return memberResolveResult?.GetFullName();
         }
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>

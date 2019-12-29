@@ -14,7 +14,8 @@ namespace Hast.Transformer.Helpers
             AstType arrayElementAstType,
             IType arrayType)
         {
-            var declarationType = new ComposedType { BaseType = arrayElementAstType.Clone() };
+            var declarationType = new ComposedType { BaseType = arrayElementAstType.Clone() }
+                .WithAnnotation(arrayType.ToResolveResult());
             declarationType.ArraySpecifiers.Add(
                 new ArraySpecifier(((ArrayType)arrayType).Dimensions));
 
