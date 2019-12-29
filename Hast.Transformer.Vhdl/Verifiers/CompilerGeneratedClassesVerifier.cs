@@ -12,11 +12,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
         {
             var compilerGeneratedClasses = syntaxTree
                 .GetAllTypeDeclarations()
-                .Where(type => type.ClassType == ClassType.Class && type.Name.Contains("__DisplayClass"))
-                .Where(type => type
-                    .Attributes
-                    .Any(attributeSection => attributeSection
-                        .Attributes.Any(attribute => attribute.Type.GetSimpleName() == "CompilerGeneratedAttribute")));
+                .Where(type => type.GetFullName().IsDisplayOrClosureClassName());
 
             foreach (var compilerGeneratedClass in compilerGeneratedClasses)
             {
