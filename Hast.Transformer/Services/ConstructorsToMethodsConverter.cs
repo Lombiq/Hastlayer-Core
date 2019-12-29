@@ -64,7 +64,9 @@ namespace Hast.Transformer.Services
                     }
 
                     var invocation = new InvocationExpression(
-                        new MemberReferenceExpression(new ThisReferenceExpression(), constructorDeclaration.Name),
+                        new MemberReferenceExpression(
+                            new ThisReferenceExpression().WithAnnotation(new ThisResolveResult(constructorDeclaration.GetActualType().DeclaringType)),
+                            constructorDeclaration.Name),
                         constructorDeclaration.Initializer.Arguments.Select(argument => argument.Clone()));
 
                     invocation.AddAnnotation(constructorDeclaration.Initializer.GetResolveResult<InvocationResolveResult>());
