@@ -269,9 +269,19 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (node is MemberReferenceExpression)
             {
-                if (node.Parent is InvocationExpression && memberResolveResult == null)
+                var property = memberResolveResult?.Member as IProperty;
+
+                // For certain members only their parent invocation will contain usable ResolveResult (see:
+                // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since
+                // from the IMember of the property we can't see whether the getter or setter is invoked, only from the
+                // parent invocation (this is only true for custom properties, not for auto-properties).
+                if (node.Parent is InvocationExpression &&
+                    (memberResolveResult == null || 
+                        ((MemberReferenceExpression)node).IsPropertyReference() && 
+                            !property.Getter.IsCompilerGenerated() &&
+                            !property.Setter.IsCompilerGenerated()))
                 {
-                    return node.Parent.GetResolveResult<InvocationResolveResult>().GetFullName();
+                    return node.Parent.GetResolveResult<InvocationResolveResult>()?.GetFullName();
                 }
 
                 // This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0
