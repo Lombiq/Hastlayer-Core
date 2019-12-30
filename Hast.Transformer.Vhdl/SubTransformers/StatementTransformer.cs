@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -17,16 +18,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConverter _typeConverter;
         private readonly IExpressionTransformer _expressionTransformer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public StatementTransformer(
             ITypeConverter typeConverter,
             IExpressionTransformer expressionTransformer,
-            IDeclarableTypeCreator declarableTypeCreator)
+            IDeclarableTypeCreator declarableTypeCreator,
+            ITypeConversionTransformer typeConversionTransformer)
         {
             _typeConverter = typeConverter;
             _expressionTransformer = expressionTransformer;
             _declarableTypeCreator = declarableTypeCreator;
+            _typeConversionTransformer = typeConversionTransformer;
         }
 
 
@@ -106,10 +110,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType, context.TransformationContext);
                 if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
                 {
+                    IDataObject returnReference = stateMachine.CreateReturnSignalReference();
+                    IVhdlElement returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
+
+                    // It can happen that the type of the expression is not the same as the return type of the method.
+                    // Thus a cast may be necessary.
+                    var expressionType = returnStatement.Expression.GetActualType();
+                    var expressionVhdlType = (returnExpression as Value)?.DataType ??
+                        (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
+                    if (expressionVhdlType != null)
+                    {
+                        returnExpression = _typeConversionTransformer
+                            .ImplementTypeConversion(expressionVhdlType, returnType, returnExpression)
+                            .ConvertedFromExpression;
+
+                    }
+
                     var assigmentElement = new Assignment
                     {
-                        AssignTo = stateMachine.CreateReturnSignalReference(),
-                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
+                        AssignTo = returnReference,
+                        Expression = returnExpression
                     };
 
                     // If the expression is an assignment we can't assign it to the return signal, so need to split it.
