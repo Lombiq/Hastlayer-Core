@@ -252,8 +252,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
                     var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
 
-                    // Only trying casting if the parameter is not a constant or something other than an IDataObject.
-                    if (parameterReference is IDataObject)
+                    // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
+                    // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
+                    // the AST.
+                    if (parameterReference is IDataObject || parameterReference is Value)
                     {
                         IAssignmentTypeConversionResult conversionResult;
                         if (flowDirection == ParameterFlowDirection.Out)
