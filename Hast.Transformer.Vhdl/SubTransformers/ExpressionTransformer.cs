@@ -533,7 +533,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 switch (unary.Operator)
                 {
                     case UnaryOperatorType.Minus:
-                        throw new NotImplementedException();
+                        transformedOperation = new Unary
+                        {
+                            Operator = UnaryOperator.Negation,
+                            Expression = transformedExpression
+                        };
+
                         // Casting if the result type is not what the parent expects.
                         //var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
                         //if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
@@ -568,7 +573,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         //        };
                         //    }
                         //}
-
                         //else
                         //{
                         //    transformedOperation = new Unary
