@@ -234,7 +234,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
             DataType rightVhdlType = null;
             var rightTypeSize = 0;
-            if (rightType != null)
+            if (rightType != null && rightType.Kind != TypeKind.Null)
             {
                 rightVhdlType = _typeConverter.ConvertType(rightType, context.TransformationContext);
                 rightTypeSize = rightVhdlType.GetSize();

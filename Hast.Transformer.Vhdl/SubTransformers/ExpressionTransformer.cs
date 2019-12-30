@@ -165,16 +165,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             });
                     }
 
-                    var typeConversionResult = _typeConversionTransformer.ImplementTypeConversionForAssignment(
-                        _typeConverter.ConvertType(rightType, context.TransformationContext),
-                        _typeConverter.ConvertType(leftType, context.TransformationContext),
-                        rightTransformed,
-                        leftDataObject);
+                    if (!(right is NullReferenceExpression))
+                    {
+                        var typeConversionResult = _typeConversionTransformer.ImplementTypeConversionForAssignment(
+                            _typeConverter.ConvertType(rightType, context.TransformationContext),
+                            _typeConverter.ConvertType(leftType, context.TransformationContext),
+                            rightTransformed,
+                            leftDataObject);
+                        leftDataObject = typeConversionResult.ConvertedToDataObject;
+                        rightTransformed = typeConversionResult.ConvertedFromExpression;
+                    }
 
                     return new Assignment
                     {
-                        AssignTo = typeConversionResult.ConvertedToDataObject,
-                        Expression = typeConversionResult.ConvertedFromExpression
+                        AssignTo = leftDataObject,
+                        Expression = rightTransformed
                     };
                 }
 
