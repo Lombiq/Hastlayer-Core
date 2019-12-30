@@ -47,7 +47,7 @@ namespace Hast.Transformer.Services
                 if (getter.Body.Any())
                 {
                     var getterMethod = MethodDeclarationFactory.CreateMethod(
-                        name: getter.GetResolveResult<MemberResolveResult>().Member.Name,
+                        name: getter.GetMemberResolveResult().Member.Name,
                         annotations: getter.Annotations,
                         attributes: getter.Attributes,
                         parameters: Enumerable.Empty<ParameterDeclaration>(),
@@ -62,7 +62,7 @@ namespace Hast.Transformer.Services
                     var valueParameter = new ParameterDeclaration(propertyDeclaration.ReturnType.Clone(), "value")
                         .WithAnnotation(VariableHelper.CreateILVariableResolveResult(VariableKind.Parameter, getter.GetActualType(), "value"));
                     var setterMethod = MethodDeclarationFactory.CreateMethod(
-                        name: setter.GetResolveResult<MemberResolveResult>().Member.Name,
+                        name: setter.GetMemberResolveResult().Member.Name,
                         annotations: setter.Annotations,
                         attributes: setter.Attributes,
                         parameters: new[] { valueParameter },
@@ -98,7 +98,7 @@ namespace Hast.Transformer.Services
                     base.VisitMemberReferenceExpression(memberReferenceExpression);
 
                     var memberFullName = memberReferenceExpression.GetMemberFullName();
-                    var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
+                    var memberResolveResult = memberReferenceExpression.GetMemberResolveResult();
                     var property = memberResolveResult?.Member as IProperty;
                     if (memberFullName == _getterName)
                     {

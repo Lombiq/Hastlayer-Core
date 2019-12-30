@@ -24,7 +24,7 @@ namespace Hast.Transformer.Services
                 var parent = identifierExpression.Parent;
                 var identifier = identifierExpression.Identifier;
 
-                var member = parent.GetResolveResult<MemberResolveResult>()?.Member;
+                var member = parent.GetMemberResolveResult()?.Member;
                 ThisResolveResult thisResolveResult;
                 if (parent is InvocationExpression invocation && invocation.Target == identifierExpression)
                 {
@@ -43,7 +43,7 @@ namespace Hast.Transformer.Services
                     member = identifierExpression.GetResolveResult<MethodGroupResolveResult>()?.Methods.Single();
                     thisResolveResult = new ThisResolveResult(member.DeclaringType);
                 }
-                else if (identifierExpression.GetResolveResult<MemberResolveResult>() is MemberResolveResult memberResolveResult)
+                else if (identifierExpression.GetMemberResolveResult() is MemberResolveResult memberResolveResult)
                 {
                     // A property access.
                     if (memberResolveResult.Member.Name != identifier)

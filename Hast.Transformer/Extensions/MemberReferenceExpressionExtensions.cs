@@ -59,7 +59,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
                     if (isPropertyReference)
                     {
-                        var property = member.GetResolveResult<MemberResolveResult>()?.Member as IProperty;
+                        var property = member.GetMemberResolveResult()?.Member as IProperty;
                         return property?.Getter?.GetFullName() == fullName || property?.Setter?.GetFullName() == fullName;
                     }
 
@@ -101,7 +101,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             }
             else if (target is InvocationExpression)
             {
-                var memberResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
+                var memberResolveResult = memberReferenceExpression.GetMemberResolveResult();
                 if (memberResolveResult != null)
                 {
                     return typeDeclarationLookupTable.Lookup(memberResolveResult.Member.DeclaringType.GetFullName());
@@ -137,7 +137,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
 
         private static IMember GetMemberDirectlyOrFromParentInvocation(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.GetResolveResult<MemberResolveResult>()?.Member ??
+            memberReferenceExpression.GetMemberResolveResult()?.Member ??
                 memberReferenceExpression.Parent.GetResolveResult<InvocationResolveResult>()?.Member;
     }
 }

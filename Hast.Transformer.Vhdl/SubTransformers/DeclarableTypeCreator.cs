@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context)
         {
-            if ((valueHolder.GetResolveResult<MemberResolveResult>()?.Member.ReturnType as ITypeDefinition)?
+            if ((valueHolder.GetMemberResolveResult()?.Member.ReturnType as ITypeDefinition)?
                     .KnownTypeCode == KnownTypeCode.Void)
             {
                 return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);

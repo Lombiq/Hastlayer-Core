@@ -23,7 +23,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (node is EntityDeclaration entityDeclaration)
             {
-                return node.GetResolveResult<MemberResolveResult>()?.GetFullName() ??
+                return node.GetMemberResolveResult()?.GetFullName() ??
                     CreateParentEntityBasedName(node, entityDeclaration.Name);
 
             }
@@ -142,13 +142,13 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         public static string GetSimpleName(this AstNode node) =>
             // Unlike formerly with Cecil, the FullName property is in a simple format.
-            node.GetResolveResult<MemberResolveResult>()?.Member.ReflectionName ?? node.GetActualType().FullName;
+            node.GetMemberResolveResult()?.Member.ReflectionName ?? node.GetActualType().FullName;
 
         public static T GetResolveResult<T>(this AstNode node) where T : ResolveResult =>
             node.GetResolveResult() as T;
 
         public static MemberResolveResult GetMemberResolveResult(this AstNode node) =>
-            node.GetResolveResult<MemberResolveResult>();
+            node.GetMemberResolveResult();
 
         public static bool IsIn<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>() != null;
@@ -268,7 +268,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
-            var memberResolveResult = node.GetResolveResult<MemberResolveResult>();
+            var memberResolveResult = node.GetMemberResolveResult();
 
             if (node is MemberReferenceExpression memberReferenceExpression)
             {

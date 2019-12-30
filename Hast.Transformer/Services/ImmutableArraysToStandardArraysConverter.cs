@@ -45,7 +45,7 @@ namespace Hast.Transformer.Services
 
                 if (!IsImmutableArray(type)) return;
 
-                var member = propertyDeclaration.GetResolveResult<MemberResolveResult>().Member;
+                var member = propertyDeclaration.GetMemberResolveResult().Member;
                 // Re-wiring types to use a standard array instead.
                 var arrayType = CreateArrayType(type.TypeArguments.Single(), member);
 
@@ -237,7 +237,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                var originalResolveResult = memberReferenceExpression.GetResolveResult<MemberResolveResult>();
+                var originalResolveResult = memberReferenceExpression.GetMemberResolveResult();
 
                 ProcessIfIsImmutableArray(memberReferenceExpression, arrayType =>
                     memberReferenceExpression.AddAnnotation(new MemberResolveResult(
