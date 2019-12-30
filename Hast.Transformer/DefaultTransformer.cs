@@ -201,6 +201,7 @@ namespace Hast.Transformer
                     TupleConversions = false,
                     TupleTypes = false,
                     ThrowExpressions = false,
+                    UseExpressionBodyForCalculatedGetterOnlyProperties = false,
                     UseLambdaSyntax = false,
                     YieldReturn = false
                 };

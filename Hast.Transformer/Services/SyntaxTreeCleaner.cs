@@ -172,8 +172,9 @@ namespace Hast.Transformer.Services
                     var typeReferenceExpression = (TypeReferenceExpression)memberReferenceExpression.Target;
                     if (typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
                     {
-                        // This can happen when a method is extern (see: https://msdn.microsoft.com/en-us/library/e59b22c5.aspx),
-                        // thus has no body but has the MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
+                        // This can happen when a method is extern (see:
+                        // https://msdn.microsoft.com/en-us/library/e59b22c5.aspx), thus has no body but has the
+                        // MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
                         return;
                     }
                 }
@@ -183,8 +184,8 @@ namespace Hast.Transformer.Services
 
                 if (member == null || member.WasVisited()) return;
 
-                // Using the reference expression as the "from", since e.g. two calls to the same method should be counted 
-                // twice, even if from the same method.
+                // Using the reference expression as the "from", since e.g. two calls to the same method should be
+                // counted twice, even if from the same method.
                 member.AddReference(memberReferenceExpression);
 
                 // Referencing the member's parent as well.
@@ -204,8 +205,8 @@ namespace Hast.Transformer.Services
 
                 member.SetVisited();
 
-                // Since when e.g. another method is referenced that is above the level of this expression in the syntax
-                // tree, thus it won't be visited unless we start a visitor there too.
+                // Since when e.g. another method is referenced that is above the level of this expression in the
+                // syntax tree, thus it won't be visited unless we start a visitor there too.
                 member.AcceptVisitor(this);
             }
         }

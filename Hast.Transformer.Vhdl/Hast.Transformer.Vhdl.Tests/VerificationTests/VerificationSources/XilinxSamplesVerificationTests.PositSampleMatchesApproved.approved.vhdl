@@ -202,10 +202,6 @@ architecture Imp of Hast_IP is
         \IsNull\: boolean;
         \_environment\: \Lombiq.Arithmetics.PositEnvironment\;
         \PositBits\: \Lombiq.Arithmetics.BitMask\;
-        \MaximumExponentSize\: unsigned(7 downto 0);
-        \Size\: unsigned(15 downto 0);
-        \FirstRegimeBitIndex\: unsigned(15 downto 0);
-        \EmptyBitMask\: \Lombiq.Arithmetics.BitMask\;
     end record;
     -- Custom inter-dependent type declarations end
 
@@ -1027,20 +1023,30 @@ architecture Imp of Hast_IP is
         \Posit::IsPositive().0._State_1\, 
         \Posit::IsPositive().0._State_2\, 
         \Posit::IsPositive().0._State_3\, 
-        \Posit::IsPositive().0._State_4\);
+        \Posit::IsPositive().0._State_4\, 
+        \Posit::IsPositive().0._State_5\, 
+        \Posit::IsPositive().0._State_6\);
     -- Signals:
     Signal \Posit::IsPositive().0._Finished\: boolean := false;
     Signal \Posit::IsPositive().0.return\: boolean := false;
+    Signal \Posit::IsPositive().0.Posit::get_SignBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsPositive().0.Posit::get_SignBitMask()._Started.0\: boolean := false;
     Signal \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\: boolean := false;
+    Signal \Posit::IsPositive().0.Posit::get_EmptyBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\: boolean := false;
     Signal \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\: boolean := false;
     Signal \Posit::IsPositive().0._Started\: boolean := false;
     Signal \Posit::IsPositive().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsPositive().0.Posit::get_SignBitMask()._Finished.0\: boolean := false;
+    Signal \Posit::IsPositive().0.Posit::get_SignBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Finished.0\: boolean := false;
+    Signal \Posit::IsPositive().0.Posit::get_EmptyBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\: boolean := false;
     -- System.Boolean Lombiq.Arithmetics.Posit::IsPositive().0 declarations end
@@ -1052,15 +1058,20 @@ architecture Imp of Hast_IP is
         \Posit::IsNaN().0._State_0\, 
         \Posit::IsNaN().0._State_1\, 
         \Posit::IsNaN().0._State_2\, 
-        \Posit::IsNaN().0._State_3\);
+        \Posit::IsNaN().0._State_3\, 
+        \Posit::IsNaN().0._State_4\);
     -- Signals:
     Signal \Posit::IsNaN().0._Finished\: boolean := false;
     Signal \Posit::IsNaN().0.return\: boolean := false;
+    Signal \Posit::IsNaN().0.Posit::get_NaNBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsNaN().0.Posit::get_NaNBitMask()._Started.0\: boolean := false;
     Signal \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\: boolean := false;
     Signal \Posit::IsNaN().0._Started\: boolean := false;
     Signal \Posit::IsNaN().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsNaN().0.Posit::get_NaNBitMask()._Finished.0\: boolean := false;
+    Signal \Posit::IsNaN().0.Posit::get_NaNBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\: boolean := false;
     -- System.Boolean Lombiq.Arithmetics.Posit::IsNaN().0 declarations end
@@ -1072,15 +1083,20 @@ architecture Imp of Hast_IP is
         \Posit::IsZero().0._State_0\, 
         \Posit::IsZero().0._State_1\, 
         \Posit::IsZero().0._State_2\, 
-        \Posit::IsZero().0._State_3\);
+        \Posit::IsZero().0._State_3\, 
+        \Posit::IsZero().0._State_4\);
     -- Signals:
     Signal \Posit::IsZero().0._Finished\: boolean := false;
     Signal \Posit::IsZero().0.return\: boolean := false;
+    Signal \Posit::IsZero().0.Posit::get_EmptyBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\: boolean := false;
     Signal \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\: boolean := false;
     Signal \Posit::IsZero().0._Started\: boolean := false;
     Signal \Posit::IsZero().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::IsZero().0.Posit::get_EmptyBitMask()._Finished.0\: boolean := false;
+    Signal \Posit::IsZero().0.Posit::get_EmptyBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\: boolean := false;
     -- System.Boolean Lombiq.Arithmetics.Posit::IsZero().0 declarations end
@@ -1278,7 +1294,9 @@ architecture Imp of Hast_IP is
         \Posit::GetRegimeKValue().0._State_12\, 
         \Posit::GetRegimeKValue().0._State_13\, 
         \Posit::GetRegimeKValue().0._State_14\, 
-        \Posit::GetRegimeKValue().0._State_15\);
+        \Posit::GetRegimeKValue().0._State_15\, 
+        \Posit::GetRegimeKValue().0._State_16\, 
+        \Posit::GetRegimeKValue().0._State_17\);
     -- Signals:
     Signal \Posit::GetRegimeKValue().0._Finished\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.return\: signed(31 downto 0) := to_signed(0, 32);
@@ -1287,9 +1305,13 @@ architecture Imp of Hast_IP is
     Signal \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\: boolean := false;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Started.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\: boolean := false;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\: boolean := false;
@@ -1302,8 +1324,12 @@ architecture Imp of Hast_IP is
     Signal \Posit::GetRegimeKValue().0.Posit::IsPositive().return.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Finished.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Finished.0\: boolean := false;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Finished.0\: boolean := false;
+    Signal \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\: boolean := false;
     Signal \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\: boolean := false;
@@ -1506,8 +1532,7 @@ architecture Imp of Hast_IP is
     type \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._States\ is (
         \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_0\, 
         \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_1\, 
-        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_2\, 
-        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_3\);
+        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_2\);
     -- Signals:
     Signal \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._Finished\: boolean := false;
     Signal \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.return\: signed(31 downto 0) := to_signed(0, 32);
@@ -1660,8 +1685,7 @@ architecture Imp of Hast_IP is
         \Posit Posit::op_Addition(Posit,Posit).0._State_136\, 
         \Posit Posit::op_Addition(Posit,Posit).0._State_137\, 
         \Posit Posit::op_Addition(Posit,Posit).0._State_138\, 
-        \Posit Posit::op_Addition(Posit,Posit).0._State_139\, 
-        \Posit Posit::op_Addition(Posit,Posit).0._State_140\);
+        \Posit Posit::op_Addition(Posit,Posit).0._State_139\);
     -- Signals:
     Signal \Posit Posit::op_Addition(Posit,Posit).0._Finished\: boolean := false;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.return\: \Lombiq.Arithmetics.Posit\;
@@ -1698,6 +1722,8 @@ architecture Imp of Hast_IP is
     Signal \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
+    Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\: boolean := false;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.Out.0\: \Lombiq.Arithmetics.PositEnvironment\;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).bits.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
@@ -1741,6 +1767,8 @@ architecture Imp of Hast_IP is
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Finished.0\: boolean := false;
+    Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask().return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.In.0\: \Lombiq.Arithmetics.Posit\;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.In.0\: \Lombiq.Arithmetics.PositEnvironment\;
     Signal \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Finished.0\: boolean := false;
@@ -1854,6 +1882,62 @@ architecture Imp of Hast_IP is
     Signal \Int32 Posit::op_Explicit(Posit).0.Posit::IsPositive()._Finished.0\: boolean := false;
     Signal \Int32 Posit::op_Explicit(Posit).0.Posit::IsPositive().return.0\: boolean := false;
     -- System.Int32 Lombiq.Arithmetics.Posit::op_Explicit(Lombiq.Arithmetics.Posit).0 declarations end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask().0 declarations start
+    -- State machine states:
+    type \Posit::get_SignBitMask().0._States\ is (
+        \Posit::get_SignBitMask().0._State_0\, 
+        \Posit::get_SignBitMask().0._State_1\, 
+        \Posit::get_SignBitMask().0._State_2\);
+    -- Signals:
+    Signal \Posit::get_SignBitMask().0._Finished\: boolean := false;
+    Signal \Posit::get_SignBitMask().0.return\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::get_SignBitMask().0._Started\: boolean := false;
+    Signal \Posit::get_SignBitMask().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask().0 declarations end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask().0 declarations start
+    -- State machine states:
+    type \Posit::get_FirstRegimeBitBitMask().0._States\ is (
+        \Posit::get_FirstRegimeBitBitMask().0._State_0\, 
+        \Posit::get_FirstRegimeBitBitMask().0._State_1\, 
+        \Posit::get_FirstRegimeBitBitMask().0._State_2\);
+    -- Signals:
+    Signal \Posit::get_FirstRegimeBitBitMask().0._Finished\: boolean := false;
+    Signal \Posit::get_FirstRegimeBitBitMask().0.return\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::get_FirstRegimeBitBitMask().0._Started\: boolean := false;
+    Signal \Posit::get_FirstRegimeBitBitMask().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask().0 declarations end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask().0 declarations start
+    -- State machine states:
+    type \Posit::get_EmptyBitMask().0._States\ is (
+        \Posit::get_EmptyBitMask().0._State_0\, 
+        \Posit::get_EmptyBitMask().0._State_1\, 
+        \Posit::get_EmptyBitMask().0._State_2\);
+    -- Signals:
+    Signal \Posit::get_EmptyBitMask().0._Finished\: boolean := false;
+    Signal \Posit::get_EmptyBitMask().0.return\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::get_EmptyBitMask().0._Started\: boolean := false;
+    Signal \Posit::get_EmptyBitMask().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask().0 declarations end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask().0 declarations start
+    -- State machine states:
+    type \Posit::get_NaNBitMask().0._States\ is (
+        \Posit::get_NaNBitMask().0._State_0\, 
+        \Posit::get_NaNBitMask().0._State_1\, 
+        \Posit::get_NaNBitMask().0._State_2\);
+    -- Signals:
+    Signal \Posit::get_NaNBitMask().0._Finished\: boolean := false;
+    Signal \Posit::get_NaNBitMask().0.return\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::get_NaNBitMask().0._Started\: boolean := false;
+    Signal \Posit::get_NaNBitMask().0.this.parameter.In\: \Lombiq.Arithmetics.Posit\;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask().0 declarations end
 
 
     -- System.Void Lombiq.Arithmetics.PositEnvironment::.ctor(System.Byte,System.Byte).0 declarations start
@@ -2035,9 +2119,6 @@ begin
                             -- 
                             -- Initializing record fields to their defaults.
                             \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\.\IsNull\ := false;
-                            \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\.\MaximumExponentSize\ := to_unsigned(0, 8);
-                            \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\.\Size\ := to_unsigned(0, 16);
-                            \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,System.Int32)
                             \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Posit::.ctor(PositEnvironment,Int32).this.parameter.Out.0\ <= \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.posit\;
@@ -7310,7 +7391,7 @@ begin
                             \BitMask::GetTwosComplement(UInt16).0.input\ := \BitMask::GetTwosComplement(UInt16).0.BitMask::.ctor(BitMask).this.parameter.In.0\;
                             \BitMask::GetTwosComplement(UInt16).0.this\ := \BitMask::GetTwosComplement(UInt16).0.BitMask::.ctor(BitMask).source.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return @this.op_RightShift (@this.op_LeftShift (@this.op_Addition (@this.op_OnesComplement (input), 1u), (int)((int)((int)(@this.SegmentCount) * 32) - (int)(size))), (int)((int)((int)(@this.SegmentCount) * 32) - (int)(size)));
+                            -- return @this.op_RightShift (@this.op_LeftShift (@this.op_Addition (@this.op_OnesComplement (input), 1u), (int)((int)((int)(@this.SegmentCount) * 32) - 32)), (int)((int)((int)(@this.SegmentCount) * 32) - 32));
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_OnesComplement(Lombiq.Arithmetics.BitMask)
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_OnesComplement(BitMask).input.parameter.Out.0\ <= \BitMask::GetTwosComplement(UInt16).0.input\;
@@ -7336,7 +7417,7 @@ begin
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
                             \BitMask::GetTwosComplement(UInt16).0.return.1\ := \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_Addition(BitMask,UInt32).return.0\;
                             \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\BitMask::GetTwosComplement(UInt16).0.this\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
-                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\ := (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\) - signed(SmartResize((\BitMask::GetTwosComplement(UInt16).0.size\), 32));
+                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\ := (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.0\) - to_signed(32, 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::GetTwosComplement(UInt16).0.return.1\;
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.1\);
@@ -7350,7 +7431,7 @@ begin
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                             \BitMask::GetTwosComplement(UInt16).0.return.2\ := \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\BitMask::GetTwosComplement(UInt16).0.this\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
-                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\ := (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\) - signed(SmartResize((\BitMask::GetTwosComplement(UInt16).0.size\), 32));
+                            \BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\ := (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.2\) - to_signed(32, 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::GetTwosComplement(UInt16).0.return.2\;
                             \BitMask::GetTwosComplement(UInt16).0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::GetTwosComplement(UInt16).0.binaryOperationResult.3\);
@@ -7482,10 +7563,10 @@ begin
                             \BitMask::LengthOfRunOfBits(UInt16).0.objectb1369c6589960a9227c1a9e600b767400798a7fad25779a33d11a034c4fa423d\ := \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::.ctor(BitMask).this.parameter.In.0\;
                             \BitMask::LengthOfRunOfBits(UInt16).0.this\ := \BitMask::LengthOfRunOfBits(UInt16).0.BitMask::.ctor(BitMask).source.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- left = @this.op_LeftShift (objectb1369c6589960a9227c1a9e600b767400798a7fad25779a33d11a034c4fa423d, (int)((int)((int)(@this.SegmentCount) * 32) - (int)(startingPosition)));
+                            -- left = @this.op_LeftShift (objectb1369c6589960a9227c1a9e600b767400798a7fad25779a33d11a034c4fa423d, (int)((int)((int)(@this.SegmentCount) * 32) - 31));
                             -- 
                             \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\BitMask::LengthOfRunOfBits(UInt16).0.this\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
-                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\ := (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\) - signed(SmartResize((\BitMask::LengthOfRunOfBits(UInt16).0.startingPosition\), 32));
+                            \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\ := (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.0\) - to_signed(31, 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \BitMask::LengthOfRunOfBits(UInt16).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::LengthOfRunOfBits(UInt16).0.objectb1369c6589960a9227c1a9e600b767400798a7fad25779a33d11a034c4fa423d\;
                             \BitMask::LengthOfRunOfBits(UInt16).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.1\);
@@ -7585,13 +7666,13 @@ begin
                         -- ushort conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(num) > (int)(startingPosition))) {
-                        -- 	conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = startingPosition;
+                        -- if (((int)(num) > 31)) {
+                        -- 	conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = 31;
                         -- } else {
                         -- 	conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = num;
                         -- }
                         -- 
-                        \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.10\ := signed(SmartResize((\BitMask::LengthOfRunOfBits(UInt16).0.num\), 32)) > signed(SmartResize((\BitMask::LengthOfRunOfBits(UInt16).0.startingPosition\), 32));
+                        \BitMask::LengthOfRunOfBits(UInt16).0.binaryOperationResult.10\ := signed(SmartResize((\BitMask::LengthOfRunOfBits(UInt16).0.num\), 32)) > to_signed(31, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::LengthOfRunOfBits(UInt16).0._State_15\ and ends in state \BitMask::LengthOfRunOfBits(UInt16).0._State_15\.
@@ -7682,13 +7763,13 @@ begin
                         -- True branch of the if-else started in state \BitMask::LengthOfRunOfBits(UInt16).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = startingPosition;
+                        -- 	conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = 31;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = startingPosition;
+                        -- conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570 = 31;
                         -- 
-                        \BitMask::LengthOfRunOfBits(UInt16).0.conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570\ := \BitMask::LengthOfRunOfBits(UInt16).0.startingPosition\;
+                        \BitMask::LengthOfRunOfBits(UInt16).0.conditionalcdcc6bf3804635e57446719df622fb48b78daeca6aecae4e076cf0e8e9285570\ := to_unsigned(31, 16);
                         -- Going to the state after the if-else which was started in state \BitMask::LengthOfRunOfBits(UInt16).0._State_9\.
                         if (\BitMask::LengthOfRunOfBits(UInt16).0._State\ = \BitMask::LengthOfRunOfBits(UInt16).0._State_15\) then 
                             \BitMask::LengthOfRunOfBits(UInt16).0._State\ := \BitMask::LengthOfRunOfBits(UInt16).0._State_14\;
@@ -8126,9 +8207,6 @@ begin
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit::.ctor(PositEnvironment,Int32).0.object799a49e2aba91af773daac43872a68986a3bfe2188c0a5aa93f270fcf817f40e\.\IsNull\ := false;
-                        \Posit::.ctor(PositEnvironment,Int32).0.object799a49e2aba91af773daac43872a68986a3bfe2188c0a5aa93f270fcf817f40e\.\MaximumExponentSize\ := to_unsigned(0, 8);
-                        \Posit::.ctor(PositEnvironment,Int32).0.object799a49e2aba91af773daac43872a68986a3bfe2188c0a5aa93f270fcf817f40e\.\Size\ := to_unsigned(0, 16);
-                        \Posit::.ctor(PositEnvironment,Int32).0.object799a49e2aba91af773daac43872a68986a3bfe2188c0a5aa93f270fcf817f40e\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,System.UInt32)
                         \Posit::.ctor(PositEnvironment,Int32).0.Posit::.ctor(PositEnvironment,UInt32).this.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,Int32).0.object799a49e2aba91af773daac43872a68986a3bfe2188c0a5aa93f270fcf817f40e\;
@@ -8166,17 +8244,21 @@ begin
         Variable \Posit::IsPositive().0._State\: \Posit::IsPositive().0._States\ := \Posit::IsPositive().0._State_0\;
         Variable \Posit::IsPositive().0.this\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit::IsPositive().0.return.0\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::IsPositive().0.return.1\: boolean := false;
+        Variable \Posit::IsPositive().0.return.1\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::IsPositive().0.return.2\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::IsPositive().0.return.3\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Posit::IsPositive().0._Finished\ <= false;
                 \Posit::IsPositive().0.return\ <= false;
+                \Posit::IsPositive().0.Posit::get_SignBitMask()._Started.0\ <= false;
                 \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= false;
+                \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\ <= false;
                 \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
                 \Posit::IsPositive().0._State\ := \Posit::IsPositive().0._State_0\;
-                \Posit::IsPositive().0.return.1\ := false;
+                \Posit::IsPositive().0.return.3\ := false;
             else 
                 case \Posit::IsPositive().0._State\ is 
                     when \Posit::IsPositive().0._State_0\ => 
@@ -8199,32 +8281,54 @@ begin
                     when \Posit::IsPositive().0._State_2\ => 
                         \Posit::IsPositive().0.this\ := \Posit::IsPositive().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.op_Equality (BitMask.op_BitwiseAnd (@this.PositBits, @this.SignBitMask), @this.EmptyBitMask);
+                        -- return BitMask.op_Equality (BitMask.op_BitwiseAnd (@this.PositBits, Lombiq.Arithmetics.Posit.get_SignBitMask (@this)), Lombiq.Arithmetics.Posit.get_EmptyBitMask (@this));
                         -- 
-                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsPositive().0.this\.\PositBits\;
-                        \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsPositive().0.this\.\SignBitMask\;
-                        \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask()
+                        \Posit::IsPositive().0.Posit::get_SignBitMask().this.parameter.Out.0\ <= \Posit::IsPositive().0.this\;
+                        \Posit::IsPositive().0.Posit::get_SignBitMask()._Started.0\ <= true;
                         \Posit::IsPositive().0._State\ := \Posit::IsPositive().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::IsPositive().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        if (\Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ = \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Finished.0\) then 
-                            \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= false;
-                            \Posit::IsPositive().0.return.0\ := \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\;
-                            -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                            \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsPositive().0.return.0\;
-                            \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsPositive().0.this\.\EmptyBitMask\;
-                            \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask()
+                        if (\Posit::IsPositive().0.Posit::get_SignBitMask()._Started.0\ = \Posit::IsPositive().0.Posit::get_SignBitMask()._Finished.0\) then 
+                            \Posit::IsPositive().0.Posit::get_SignBitMask()._Started.0\ <= false;
+                            \Posit::IsPositive().0.return.0\ := \Posit::IsPositive().0.Posit::get_SignBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                            \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsPositive().0.this\.\PositBits\;
+                            \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsPositive().0.return.0\;
+                            \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= true;
                             \Posit::IsPositive().0._State\ := \Posit::IsPositive().0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::IsPositive().0._State_4\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                        if (\Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ = \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Finished.0\) then 
+                            \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= false;
+                            \Posit::IsPositive().0.return.1\ := \Posit::IsPositive().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\;
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                            \Posit::IsPositive().0.Posit::get_EmptyBitMask().this.parameter.Out.0\ <= \Posit::IsPositive().0.this\;
+                            \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\ <= true;
+                            \Posit::IsPositive().0._State\ := \Posit::IsPositive().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::IsPositive().0._State_5\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                        if (\Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\ = \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Finished.0\) then 
+                            \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\ <= false;
+                            \Posit::IsPositive().0.return.2\ := \Posit::IsPositive().0.Posit::get_EmptyBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                            \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsPositive().0.return.1\;
+                            \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsPositive().0.return.2\;
+                            \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                            \Posit::IsPositive().0._State\ := \Posit::IsPositive().0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::IsPositive().0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                         if (\Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ = \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\) then 
                             \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
-                            \Posit::IsPositive().0.return.1\ := \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
-                            \Posit::IsPositive().0.return\ <= \Posit::IsPositive().0.return.1\;
+                            \Posit::IsPositive().0.return.3\ := \Posit::IsPositive().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
+                            \Posit::IsPositive().0.return\ <= \Posit::IsPositive().0.return.3\;
                             \Posit::IsPositive().0._State\ := \Posit::IsPositive().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8239,16 +8343,18 @@ begin
     \Posit::IsNaN().0._StateMachine\: process (\Clock\) 
         Variable \Posit::IsNaN().0._State\: \Posit::IsNaN().0._States\ := \Posit::IsNaN().0._State_0\;
         Variable \Posit::IsNaN().0.this\: \Lombiq.Arithmetics.Posit\;
-        Variable \Posit::IsNaN().0.return.0\: boolean := false;
+        Variable \Posit::IsNaN().0.return.0\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::IsNaN().0.return.1\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Posit::IsNaN().0._Finished\ <= false;
                 \Posit::IsNaN().0.return\ <= false;
+                \Posit::IsNaN().0.Posit::get_NaNBitMask()._Started.0\ <= false;
                 \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
                 \Posit::IsNaN().0._State\ := \Posit::IsNaN().0._State_0\;
-                \Posit::IsNaN().0.return.0\ := false;
+                \Posit::IsNaN().0.return.1\ := false;
             else 
                 case \Posit::IsNaN().0._State\ is 
                     when \Posit::IsNaN().0._State_0\ => 
@@ -8271,20 +8377,31 @@ begin
                     when \Posit::IsNaN().0._State_2\ => 
                         \Posit::IsNaN().0.this\ := \Posit::IsNaN().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.op_Equality (@this.PositBits, @this.NaNBitMask);
+                        -- return BitMask.op_Equality (@this.PositBits, Lombiq.Arithmetics.Posit.get_NaNBitMask (@this));
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsNaN().0.this\.\PositBits\;
-                        \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsNaN().0.this\.\NaNBitMask\;
-                        \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask()
+                        \Posit::IsNaN().0.Posit::get_NaNBitMask().this.parameter.Out.0\ <= \Posit::IsNaN().0.this\;
+                        \Posit::IsNaN().0.Posit::get_NaNBitMask()._Started.0\ <= true;
                         \Posit::IsNaN().0._State\ := \Posit::IsNaN().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::IsNaN().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask()
+                        if (\Posit::IsNaN().0.Posit::get_NaNBitMask()._Started.0\ = \Posit::IsNaN().0.Posit::get_NaNBitMask()._Finished.0\) then 
+                            \Posit::IsNaN().0.Posit::get_NaNBitMask()._Started.0\ <= false;
+                            \Posit::IsNaN().0.return.0\ := \Posit::IsNaN().0.Posit::get_NaNBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                            \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsNaN().0.this\.\PositBits\;
+                            \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsNaN().0.return.0\;
+                            \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                            \Posit::IsNaN().0._State\ := \Posit::IsNaN().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::IsNaN().0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                         if (\Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ = \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\) then 
                             \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
-                            \Posit::IsNaN().0.return.0\ := \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
-                            \Posit::IsNaN().0.return\ <= \Posit::IsNaN().0.return.0\;
+                            \Posit::IsNaN().0.return.1\ := \Posit::IsNaN().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
+                            \Posit::IsNaN().0.return\ <= \Posit::IsNaN().0.return.1\;
                             \Posit::IsNaN().0._State\ := \Posit::IsNaN().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8299,16 +8416,18 @@ begin
     \Posit::IsZero().0._StateMachine\: process (\Clock\) 
         Variable \Posit::IsZero().0._State\: \Posit::IsZero().0._States\ := \Posit::IsZero().0._State_0\;
         Variable \Posit::IsZero().0.this\: \Lombiq.Arithmetics.Posit\;
-        Variable \Posit::IsZero().0.return.0\: boolean := false;
+        Variable \Posit::IsZero().0.return.0\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::IsZero().0.return.1\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Posit::IsZero().0._Finished\ <= false;
                 \Posit::IsZero().0.return\ <= false;
+                \Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\ <= false;
                 \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
                 \Posit::IsZero().0._State\ := \Posit::IsZero().0._State_0\;
-                \Posit::IsZero().0.return.0\ := false;
+                \Posit::IsZero().0.return.1\ := false;
             else 
                 case \Posit::IsZero().0._State\ is 
                     when \Posit::IsZero().0._State_0\ => 
@@ -8331,20 +8450,31 @@ begin
                     when \Posit::IsZero().0._State_2\ => 
                         \Posit::IsZero().0.this\ := \Posit::IsZero().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.op_Equality (@this.PositBits, @this.EmptyBitMask);
+                        -- return BitMask.op_Equality (@this.PositBits, Lombiq.Arithmetics.Posit.get_EmptyBitMask (@this));
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsZero().0.this\.\PositBits\;
-                        \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsZero().0.this\.\EmptyBitMask\;
-                        \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                        \Posit::IsZero().0.Posit::get_EmptyBitMask().this.parameter.Out.0\ <= \Posit::IsZero().0.this\;
+                        \Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\ <= true;
                         \Posit::IsZero().0._State\ := \Posit::IsZero().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::IsZero().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                        if (\Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\ = \Posit::IsZero().0.Posit::get_EmptyBitMask()._Finished.0\) then 
+                            \Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\ <= false;
+                            \Posit::IsZero().0.return.0\ := \Posit::IsZero().0.Posit::get_EmptyBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                            \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::IsZero().0.this\.\PositBits\;
+                            \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::IsZero().0.return.0\;
+                            \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                            \Posit::IsZero().0._State\ := \Posit::IsZero().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::IsZero().0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                         if (\Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ = \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\) then 
                             \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
-                            \Posit::IsZero().0.return.0\ := \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
-                            \Posit::IsZero().0.return\ <= \Posit::IsZero().0.return.0\;
+                            \Posit::IsZero().0.return.1\ := \Posit::IsZero().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
+                            \Posit::IsZero().0.return\ <= \Posit::IsZero().0.return.1\;
                             \Posit::IsZero().0._State\ := \Posit::IsZero().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8576,60 +8706,59 @@ begin
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.left\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.0\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.1\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.2\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.3\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.4\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object374e96d370f7ab4ad360672fa7f492b1749aa143ab0821492b4ac4272ad5cc5b\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.5\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.6\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional1c0e7f98e9ff7fd3253b0d59df29d39ce944670ba3cac0843fd966566e005698\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objectb02e11b7e239b2355afe0875a36466469d6e0245e30278cffcdb183ae6090b22\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.7\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.8\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.0\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.9\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.11\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional225aacff4f9f4c6e8ef567dda46ffdbe72cef1178a8e308bcd7454d0de5ae2e3\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.1\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.12\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.14\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.15\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.16\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\: boolean := false;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\: boolean := false;
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.17\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object531fa574c42dcd0d4edd050badf324da5cb81538b8a1a9309b72aeef966aeb40\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.18\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.19\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditional69511c2d140a745009dbf71c8ced100a5f820fd49a4882e02201ee06f390e924\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object49da403d78e2b9ce444d44c6da4a89b4471bba9931b66cce04a374ec89c0c5a7\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.20\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.21\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.2\: boolean := false;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.22\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.23\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.24\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.conditionala1e207ad55e2c8978cb587f44d5be2e4dbede4fb73c25e2d1f17c62d41c5e83a\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.3\: boolean := false;
@@ -8664,38 +8793,37 @@ begin
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.signBit\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.regimeKValue\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\ := to_unsigned(0, 16);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.1\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := false;
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 16);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.6\ := false;
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := to_unsigned(0, 16);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.8\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.0\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.10\ := to_unsigned(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.1\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\ := to_unsigned(0, 16);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := to_signed(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := false;
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 16);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := false;
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.19\ := false;
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 16);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 16);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.21\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.2\ := false;
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.23\ := to_unsigned(0, 32);
-                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\ := to_unsigned(0, 32);
+                \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 32);
                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.unaryOperationResult.3\ := false;
             else 
                 case \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ is 
@@ -8744,16 +8872,15 @@ begin
                             -- ushort num;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num = Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1));
+                            -- num = Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31);
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.this\.\FirstRegimeBitIndex\), 32)) + to_signed(1, 32)), 16);
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.left\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(31, 16);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
@@ -8764,12 +8891,12 @@ begin
                             -- int num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = (int)((int)((int)(@this.Size) - (int)(((int)(num) + 2))) - (int)(@this.MaximumExponentSize));
+                            -- num2 = (int)((int)(32 - (int)(((int)(num) + 2))) - 3);
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\), 32)) + to_signed(2, 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\ := signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.this\.\Size\), 32)) - ((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.1\));
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\) - signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.this\.\MaximumExponentSize\), 32));
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\ := signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\), 32)) + to_signed(2, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.1\ := to_signed(32, 32) - ((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.0\));
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.1\) - to_signed(3, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- left = BitMask.op_Addition (left, BitMask.op_LeftShift (exponentBits, num2));
                             -- 
@@ -8823,13 +8950,13 @@ begin
                             -- 	return conditional225aacff4f9f4c6e8ef567dda46ffdbe72cef1178a8e308bcd7454d0de5ae2e3;
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\ < to_signed(0, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\ < to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_8\ and ends in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_24\.
                             --     * Execution after either branch will continue in the following state: \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_7\.
 
-                            if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\) then 
+                            if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.3\) then 
                                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_8\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
@@ -8880,10 +9007,10 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- exponentBits = BitMask.op_LeftShift (exponentBits, (int)((int)(exponentBits.Size) + (int)(num2)));
                         -- 
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := SmartResize(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\), 32)) + (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\), 32);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\ := SmartResize(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\), 32)) + (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num2\), 32);
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.4\);
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -8930,10 +9057,10 @@ begin
                             -- 	left = (conditional1c0e7f98e9ff7fd3253b0d59df29d39ce944670ba3cac0843fd966566e005698);
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\), 32)) - to_signed(1, 32)), 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\), 32)) - to_signed(1, 32)), 16);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object374e96d370f7ab4ad360672fa7f492b1749aa143ab0821492b4ac4272ad5cc5b\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.5\);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_11\;
                         end if;
@@ -9041,10 +9168,10 @@ begin
                             -- 	conditional1c0e7f98e9ff7fd3253b0d59df29d39ce944670ba3cac0843fd966566e005698 = BitMask.op_Addition (left, (uint)((long)(Lombiq.Arithmetics.BitMask.GetLowest32Bits (left)) & 1L));
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\), 32)) - to_signed(1, 32)), 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\), 32)) - to_signed(1, 32)), 16);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objectb02e11b7e239b2355afe0875a36466469d6e0245e30278cffcdb183ae6090b22\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.6\);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_16\;
                         end if;
@@ -9139,10 +9266,10 @@ begin
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.10\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits().return.0\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.10\), 64)) and to_signed(1, 64)), 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.10\), 64)) and to_signed(1, 64)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,System.UInt32)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.left\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.7\);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_23\;
                         end if;
@@ -9220,8 +9347,8 @@ begin
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\), 32)) - to_signed(1, 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\ := signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.13\), 32)) - to_signed(1, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.8\);
                             -- The following section was transformed from the .NET statement below:
                             -- fractionBits = Lombiq.Arithmetics.BitMask.SetZero (fractionBits, (ushort)num3);
                             -- 
@@ -9244,10 +9371,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num4 = (int)((int)((int)(30 - num3) - (int)(num)) - 3);
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := to_signed(30, 32) - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\) - signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\), 32));
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\) - to_signed(3, 32);
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\ := to_signed(30, 32) - \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num3\;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.9\) - signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num\), 32));
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.10\) - to_signed(3, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ := (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.11\);
                             -- The following section was transformed from the .NET statement below:
                             -- left = BitMask.op_Addition (left, BitMask.op_LeftShift (fractionBits, num4));
                             -- 
@@ -9294,13 +9421,13 @@ begin
                             -- 	}
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ < to_signed(0, 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\ < to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_33\ and ends in state \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_38\.
                             --     * Execution after either branch will continue in the following state: \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_32\.
 
-                            if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\) then 
+                            if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.12\) then 
                                 \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_33\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
@@ -9356,10 +9483,10 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- fractionBits = BitMask.op_LeftShift (fractionBits, (int)((int)(fractionBits.Size) + (int)(num4)));
                         -- 
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := SmartResize(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\), 32)) + (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\), 32);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\ := SmartResize(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\), 32)) + (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.num4\), 32);
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\);
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.13\);
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_34\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -9406,10 +9533,10 @@ begin
                             -- 	left = (conditional69511c2d140a745009dbf71c8ced100a5f820fd49a4882e02201ee06f390e924);
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\), 32)) - to_signed(1, 32)), 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\), 32)) - to_signed(1, 32)), 16);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object531fa574c42dcd0d4edd050badf324da5cb81538b8a1a9309b72aeef966aeb40\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.14\);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_36\;
                         end if;
@@ -9499,10 +9626,10 @@ begin
                             -- 	conditional69511c2d140a745009dbf71c8ced100a5f820fd49a4882e02201ee06f390e924 = BitMask.op_Addition (left, (uint)((long)(Lombiq.Arithmetics.BitMask.GetLowest32Bits (left)) & 1L));
                             -- }
                             -- 
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\), 32)) - to_signed(1, 32)), 16);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\), 32)) - to_signed(1, 32)), 16);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object49da403d78e2b9ce444d44c6da4a89b4471bba9931b66cce04a374ec89c0c5a7\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.15\);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_41\;
                         end if;
@@ -9597,10 +9724,10 @@ begin
                         if (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ = \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.23\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::GetLowest32Bits().return.0\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.23\), 64)) and to_signed(1, 64)), 32);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(SmartResize((\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.return.23\), 64)) and to_signed(1, 64)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,System.UInt32)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.left\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.17\);
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= (\Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.binaryOperationResult.16\);
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_48\;
                         end if;
@@ -9681,18 +9808,18 @@ begin
         Variable \Posit::GetRegimeKValue().0._State\: \Posit::GetRegimeKValue().0._States\ := \Posit::GetRegimeKValue().0._State_0\;
         Variable \Posit::GetRegimeKValue().0.this\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit::GetRegimeKValue().0.left\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetRegimeKValue().0.conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetRegimeKValue().0.conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetRegimeKValue().0.return.0\: boolean := false;
         Variable \Posit::GetRegimeKValue().0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetRegimeKValue().0.conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::GetRegimeKValue().0.return.2\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetRegimeKValue().0.return.3\: boolean := false;
-        Variable \Posit::GetRegimeKValue().0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::GetRegimeKValue().0.return.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::GetRegimeKValue().0.return.3\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetRegimeKValue().0.return.4\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetRegimeKValue().0.return.5\: boolean := false;
+        Variable \Posit::GetRegimeKValue().0.return.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::GetRegimeKValue().0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::GetRegimeKValue().0.binaryOperationResult.1\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::GetRegimeKValue().0.return.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::GetRegimeKValue().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::GetRegimeKValue().0.return.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::GetRegimeKValue().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9702,20 +9829,20 @@ begin
                 \Posit::GetRegimeKValue().0.Posit::IsPositive()._Started.0\ <= false;
                 \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
                 \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
+                \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Started.0\ <= false;
                 \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= false;
+                \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\ <= false;
                 \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
                 \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(0, 16);
                 \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                 \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_0\;
                 \Posit::GetRegimeKValue().0.return.0\ := false;
-                \Posit::GetRegimeKValue().0.conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069\ := to_signed(0, 32);
-                \Posit::GetRegimeKValue().0.return.3\ := false;
-                \Posit::GetRegimeKValue().0.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \Posit::GetRegimeKValue().0.return.4\ := to_unsigned(0, 16);
+                \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\ := to_signed(0, 32);
+                \Posit::GetRegimeKValue().0.return.5\ := false;
+                \Posit::GetRegimeKValue().0.return.6\ := to_unsigned(0, 16);
                 \Posit::GetRegimeKValue().0.unaryOperationResult.0\ := to_signed(0, 32);
-                \Posit::GetRegimeKValue().0.binaryOperationResult.1\ := to_unsigned(0, 16);
-                \Posit::GetRegimeKValue().0.return.5\ := to_unsigned(0, 16);
-                \Posit::GetRegimeKValue().0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Posit::GetRegimeKValue().0.return.7\ := to_unsigned(0, 16);
+                \Posit::GetRegimeKValue().0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \Posit::GetRegimeKValue().0._State\ is 
                     when \Posit::GetRegimeKValue().0._State_0\ => 
@@ -9741,13 +9868,13 @@ begin
                         -- BitMask left;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- BitMask conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d;
+                        -- BitMask conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit.IsPositive (@this)) {
-                        -- 	conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d = @this.PositBits;
+                        -- 	conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674 = @this.PositBits;
                         -- } else {
-                        -- 	conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -9776,36 +9903,35 @@ begin
                     when \Posit::GetRegimeKValue().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit::GetRegimeKValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- left = (conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d);
+                        -- left = (conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674);
                         -- 
-                        \Posit::GetRegimeKValue().0.left\ := (\Posit::GetRegimeKValue().0.conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d\);
+                        \Posit::GetRegimeKValue().0.left\ := (\Posit::GetRegimeKValue().0.conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674\);
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069;
+                        -- int conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (BitMask.op_Equality (BitMask.op_BitwiseAnd (left, @this.FirstRegimeBitBitMask), @this.EmptyBitMask)) {
-                        -- 	conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069 = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1)))));
+                        -- if (BitMask.op_Equality (BitMask.op_BitwiseAnd (left, Lombiq.Arithmetics.Posit.get_FirstRegimeBitBitMask (@this)), Lombiq.Arithmetics.Posit.get_EmptyBitMask (@this))) {
+                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31))));
                         -- } else {
-                        -- 	conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069 = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) - 1));
+                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
                         -- }
                         -- 
-                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.left\;
-                        \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.this\.\FirstRegimeBitBitMask\;
-                        \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask()
+                        \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask().this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.this\;
+                        \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Started.0\ <= true;
                         \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit::GetRegimeKValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d = @this.PositBits;
+                        -- 	conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674 = @this.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d = @this.PositBits;
+                        -- conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674 = @this.PositBits;
                         -- 
-                        \Posit::GetRegimeKValue().0.conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d\ := \Posit::GetRegimeKValue().0.this\.\PositBits\;
+                        \Posit::GetRegimeKValue().0.conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674\ := \Posit::GetRegimeKValue().0.this\.\PositBits\;
                         -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_3\.
                         if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_5\) then 
                             \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_4\;
@@ -9815,15 +9941,15 @@ begin
                         -- False branch of the if-else started in state \Posit::GetRegimeKValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::GetTwosComplement(System.UInt16)
                         \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.this\.\PositBits\;
-                        \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.this\.\Size\;
+                        \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= true;
                         \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9832,7 +9958,7 @@ begin
                         if (\Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ = \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Finished.0\) then 
                             \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
                             \Posit::GetRegimeKValue().0.return.1\ := \Posit::GetRegimeKValue().0.BitMask::GetTwosComplement(UInt16).return.0\;
-                            \Posit::GetRegimeKValue().0.conditional1761ace7165ebea99e89a6e88a14a2e0b3fc2c3f7de2d26fef4bc6136ad4054d\ := \Posit::GetRegimeKValue().0.return.1\;
+                            \Posit::GetRegimeKValue().0.conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674\ := \Posit::GetRegimeKValue().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_3\.
                             if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_7\) then 
                                 \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_4\;
@@ -9840,104 +9966,125 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        if (\Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ = \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Finished.0\) then 
-                            \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= false;
-                            \Posit::GetRegimeKValue().0.return.2\ := \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\;
-                            -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.return.2\;
-                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.this\.\EmptyBitMask\;
-                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask()
+                        if (\Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Started.0\ = \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Finished.0\) then 
+                            \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Started.0\ <= false;
+                            \Posit::GetRegimeKValue().0.return.2\ := \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                            \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.left\;
+                            \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.return.2\;
+                            \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= true;
                             \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        if (\Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ = \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\) then 
-                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
-                            \Posit::GetRegimeKValue().0.return.3\ := \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit::GetRegimeKValue().0._State_11\ and ends in state \Posit::GetRegimeKValue().0._State_12\.
-                            --     * The false branch starts in state \Posit::GetRegimeKValue().0._State_13\ and ends in state \Posit::GetRegimeKValue().0._State_15\.
-                            --     * Execution after either branch will continue in the following state: \Posit::GetRegimeKValue().0._State_10\.
-
-                            if (\Posit::GetRegimeKValue().0.return.3\) then 
-                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_11\;
-                            else 
-                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_13\;
-                            end if;
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                        if (\Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ = \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Finished.0\) then 
+                            \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)._Started.0\ <= false;
+                            \Posit::GetRegimeKValue().0.return.3\ := \Posit::GetRegimeKValue().0.BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\;
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                            \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask().this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.this\;
+                            \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\ <= true;
+                            \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_10\ => 
-                        -- State after the if-else which was started in state \Posit::GetRegimeKValue().0._State_9\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069;
-                        -- 
-                        \Posit::GetRegimeKValue().0.return\ <= \Posit::GetRegimeKValue().0.conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069\;
-                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_1\;
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                        if (\Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\ = \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Finished.0\) then 
+                            \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\ <= false;
+                            \Posit::GetRegimeKValue().0.return.4\ := \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.return.3\;
+                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).right.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.return.4\;
+                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= true;
+                            \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_11\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_11\ => 
-                        -- True branch of the if-else started in state \Posit::GetRegimeKValue().0._State_9\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069 = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1)))));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069 = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1)))));
-                        -- 
-                        \Posit::GetRegimeKValue().0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit::GetRegimeKValue().0.this\.\FirstRegimeBitIndex\), 32)) + to_signed(1, 32)), 16);
-                        -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
-                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.left\;
-                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= (\Posit::GetRegimeKValue().0.binaryOperationResult.0\);
-                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
-                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6382
-                    when \Posit::GetRegimeKValue().0._State_12\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
-                        if (\Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
-                            \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
-                            \Posit::GetRegimeKValue().0.return.4\ := \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
-                            \Posit::GetRegimeKValue().0.unaryOperationResult.0\ := -signed(SmartResize((\Posit::GetRegimeKValue().0.return.4\), 32));
-                            \Posit::GetRegimeKValue().0.conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069\ := signed(SmartResize((SmartResize(unsigned((\Posit::GetRegimeKValue().0.unaryOperationResult.0\)), 16)), 32));
-                            -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_9\.
-                            if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_12\) then 
-                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_10\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                        if (\Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ = \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Finished.0\) then 
+                            \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask)._Started.0\ <= false;
+                            \Posit::GetRegimeKValue().0.return.5\ := \Posit::GetRegimeKValue().0.Boolean BitMask::op_Equality(BitMask,BitMask).return.0\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \Posit::GetRegimeKValue().0._State_13\ and ends in state \Posit::GetRegimeKValue().0._State_14\.
+                            --     * The false branch starts in state \Posit::GetRegimeKValue().0._State_15\ and ends in state \Posit::GetRegimeKValue().0._State_17\.
+                            --     * Execution after either branch will continue in the following state: \Posit::GetRegimeKValue().0._State_12\.
+
+                            if (\Posit::GetRegimeKValue().0.return.5\) then 
+                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_13\;
+                            else 
+                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_15\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::GetRegimeKValue().0._State_12\ => 
+                        -- State after the if-else which was started in state \Posit::GetRegimeKValue().0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f;
+                        -- 
+                        \Posit::GetRegimeKValue().0.return\ <= \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\;
+                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_13\ => 
-                        -- False branch of the if-else started in state \Posit::GetRegimeKValue().0._State_9\.
+                        -- True branch of the if-else started in state \Posit::GetRegimeKValue().0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069 = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) - 1));
+                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069 = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) - 1));
+                        -- conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31))));
                         -- 
-                        \Posit::GetRegimeKValue().0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\Posit::GetRegimeKValue().0.this\.\FirstRegimeBitIndex\), 32)) + to_signed(1, 32)), 16);
-                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_14\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit::GetRegimeKValue().0._State_14\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.left\;
-                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= (\Posit::GetRegimeKValue().0.binaryOperationResult.1\);
+                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(31, 16);
                         \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
-                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit::GetRegimeKValue().0._State_15\ => 
+                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3119
+                    when \Posit::GetRegimeKValue().0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         if (\Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
                             \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
-                            \Posit::GetRegimeKValue().0.return.5\ := \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
-                            \Posit::GetRegimeKValue().0.binaryOperationResult.2\ := signed(SmartResize((\Posit::GetRegimeKValue().0.return.5\), 32)) - to_signed(1, 32);
-                            \Posit::GetRegimeKValue().0.conditional6b029e94befe8f615d0ba81e88bcce245c4dfe26f448a2b5540ebb8adbc49069\ := ((\Posit::GetRegimeKValue().0.binaryOperationResult.2\));
-                            -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_9\.
-                            if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_15\) then 
-                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_10\;
+                            \Posit::GetRegimeKValue().0.return.6\ := \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
+                            \Posit::GetRegimeKValue().0.unaryOperationResult.0\ := -signed(SmartResize((\Posit::GetRegimeKValue().0.return.6\), 32));
+                            \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\ := signed(SmartResize((SmartResize(unsigned((\Posit::GetRegimeKValue().0.unaryOperationResult.0\)), 16)), 32));
+                            -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_11\.
+                            if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_14\) then 
+                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_12\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::GetRegimeKValue().0._State_15\ => 
+                        -- False branch of the if-else started in state \Posit::GetRegimeKValue().0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
+                        -- 
+                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
+                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::GetRegimeKValue().0._State_16\ => 
+                        -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
+                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.left\;
+                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(31, 16);
+                        \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
+                        \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_17\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::GetRegimeKValue().0._State_17\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
+                        if (\Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
+                            \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
+                            \Posit::GetRegimeKValue().0.return.7\ := \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
+                            \Posit::GetRegimeKValue().0.binaryOperationResult.0\ := signed(SmartResize((\Posit::GetRegimeKValue().0.return.7\), 32)) - to_signed(1, 32);
+                            \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\ := ((\Posit::GetRegimeKValue().0.binaryOperationResult.0\));
+                            -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_11\.
+                            if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_17\) then 
+                                \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_12\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -9953,19 +10100,17 @@ begin
         Variable \Posit::ExponentSize().0._State\: \Posit::ExponentSize().0._States\ := \Posit::ExponentSize().0._State_0\;
         Variable \Posit::ExponentSize().0.this\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit::ExponentSize().0.bitMask\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::ExponentSize().0.conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::ExponentSize().0.conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::ExponentSize().0.return.0\: boolean := false;
         Variable \Posit::ExponentSize().0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::ExponentSize().0.conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::ExponentSize().0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::ExponentSize().0.conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::ExponentSize().0.return.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::ExponentSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::ExponentSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::ExponentSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::ExponentSize().0.binaryOperationResult.3\: boolean := false;
-        Variable \Posit::ExponentSize().0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::ExponentSize().0.binaryOperationResult.2\: boolean := false;
         Variable \Posit::ExponentSize().0.return.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit::ExponentSize().0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::ExponentSize().0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::ExponentSize().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::ExponentSize().0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9979,16 +10124,14 @@ begin
                 \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                 \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_0\;
                 \Posit::ExponentSize().0.return.0\ := false;
-                \Posit::ExponentSize().0.conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b\ := to_signed(0, 32);
-                \Posit::ExponentSize().0.binaryOperationResult.0\ := to_unsigned(0, 16);
+                \Posit::ExponentSize().0.conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d\ := to_signed(0, 32);
                 \Posit::ExponentSize().0.return.2\ := to_unsigned(0, 16);
+                \Posit::ExponentSize().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit::ExponentSize().0.binaryOperationResult.1\ := to_signed(0, 32);
-                \Posit::ExponentSize().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit::ExponentSize().0.binaryOperationResult.3\ := false;
-                \Posit::ExponentSize().0.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \Posit::ExponentSize().0.binaryOperationResult.2\ := false;
                 \Posit::ExponentSize().0.return.3\ := to_unsigned(0, 16);
-                \Posit::ExponentSize().0.binaryOperationResult.5\ := to_signed(0, 32);
-                \Posit::ExponentSize().0.binaryOperationResult.6\ := to_signed(0, 32);
+                \Posit::ExponentSize().0.binaryOperationResult.3\ := to_signed(0, 32);
+                \Posit::ExponentSize().0.binaryOperationResult.4\ := to_signed(0, 32);
             else 
                 case \Posit::ExponentSize().0._State\ is 
                     when \Posit::ExponentSize().0._State_0\ => 
@@ -10014,13 +10157,13 @@ begin
                         -- BitMask bitMask;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- BitMask conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e;
+                        -- BitMask conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit.IsPositive (@this)) {
-                        -- 	conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e = @this.PositBits;
+                        -- 	conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f = @this.PositBits;
                         -- } else {
-                        -- 	conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -10049,37 +10192,36 @@ begin
                     when \Posit::ExponentSize().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit::ExponentSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- bitMask = (conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e);
+                        -- bitMask = (conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f);
                         -- 
-                        \Posit::ExponentSize().0.bitMask\ := (\Posit::ExponentSize().0.conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e\);
+                        \Posit::ExponentSize().0.bitMask\ := (\Posit::ExponentSize().0.conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f\);
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b;
+                        -- int conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((int)((int)(@this.Size) - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) + 2))) > (int)(@this.MaximumExponentSize))) {
-                        -- 	conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b = @this.MaximumExponentSize;
+                        -- if (((int)(32 - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, 31)) + 2))) > 3)) {
+                        -- 	conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d = 3;
                         -- } else {
-                        -- 	conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b = ((int)((int)(@this.Size) - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) + 2))));
+                        -- 	conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d = ((int)(32 - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, 31)) + 2))));
                         -- }
                         -- 
-                        \Posit::ExponentSize().0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit::ExponentSize().0.this\.\FirstRegimeBitIndex\), 32)) + to_signed(1, 32)), 16);
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::ExponentSize().0.bitMask\;
-                        \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= (\Posit::ExponentSize().0.binaryOperationResult.0\);
+                        \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(31, 16);
                         \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
                         \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::ExponentSize().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit::ExponentSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e = @this.PositBits;
+                        -- 	conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f = @this.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e = @this.PositBits;
+                        -- conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f = @this.PositBits;
                         -- 
-                        \Posit::ExponentSize().0.conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e\ := \Posit::ExponentSize().0.this\.\PositBits\;
+                        \Posit::ExponentSize().0.conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f\ := \Posit::ExponentSize().0.this\.\PositBits\;
                         -- Going to the state after the if-else which was started in state \Posit::ExponentSize().0._State_3\.
                         if (\Posit::ExponentSize().0._State\ = \Posit::ExponentSize().0._State_5\) then 
                             \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_4\;
@@ -10089,15 +10231,15 @@ begin
                         -- False branch of the if-else started in state \Posit::ExponentSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::GetTwosComplement(System.UInt16)
                         \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\ <= \Posit::ExponentSize().0.this\.\PositBits\;
-                        \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= \Posit::ExponentSize().0.this\.\Size\;
+                        \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= true;
                         \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10106,7 +10248,7 @@ begin
                         if (\Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16)._Started.0\ = \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16)._Finished.0\) then 
                             \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
                             \Posit::ExponentSize().0.return.1\ := \Posit::ExponentSize().0.BitMask::GetTwosComplement(UInt16).return.0\;
-                            \Posit::ExponentSize().0.conditional43cfbee0994f704797bae1fb78d8701ffada8c1b706ba270a318040ce200f17e\ := \Posit::ExponentSize().0.return.1\;
+                            \Posit::ExponentSize().0.conditional0c82f059431d76e094f815d31777d59e065e9c8b8d91e1f727def273d8425c4f\ := \Posit::ExponentSize().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit::ExponentSize().0._State_3\.
                             if (\Posit::ExponentSize().0._State\ = \Posit::ExponentSize().0._State_7\) then 
                                 \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_4\;
@@ -10118,16 +10260,16 @@ begin
                         if (\Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
                             \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                             \Posit::ExponentSize().0.return.2\ := \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
-                            \Posit::ExponentSize().0.binaryOperationResult.1\ := signed(SmartResize((\Posit::ExponentSize().0.return.2\), 32)) + to_signed(2, 32);
-                            \Posit::ExponentSize().0.binaryOperationResult.2\ := signed(SmartResize((\Posit::ExponentSize().0.this\.\Size\), 32)) - ((\Posit::ExponentSize().0.binaryOperationResult.1\));
-                            \Posit::ExponentSize().0.binaryOperationResult.3\ := (\Posit::ExponentSize().0.binaryOperationResult.2\) > signed(SmartResize((\Posit::ExponentSize().0.this\.\MaximumExponentSize\), 32));
+                            \Posit::ExponentSize().0.binaryOperationResult.0\ := signed(SmartResize((\Posit::ExponentSize().0.return.2\), 32)) + to_signed(2, 32);
+                            \Posit::ExponentSize().0.binaryOperationResult.1\ := to_signed(32, 32) - ((\Posit::ExponentSize().0.binaryOperationResult.0\));
+                            \Posit::ExponentSize().0.binaryOperationResult.2\ := (\Posit::ExponentSize().0.binaryOperationResult.1\) > to_signed(3, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit::ExponentSize().0._State_10\ and ends in state \Posit::ExponentSize().0._State_10\.
                             --     * The false branch starts in state \Posit::ExponentSize().0._State_11\ and ends in state \Posit::ExponentSize().0._State_12\.
                             --     * Execution after either branch will continue in the following state: \Posit::ExponentSize().0._State_9\.
 
-                            if ((\Posit::ExponentSize().0.binaryOperationResult.3\)) then 
+                            if ((\Posit::ExponentSize().0.binaryOperationResult.2\)) then 
                                 \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_10\;
                             else 
                                 \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_11\;
@@ -10137,22 +10279,22 @@ begin
                     when \Posit::ExponentSize().0._State_9\ => 
                         -- State after the if-else which was started in state \Posit::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)(conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b);
+                        -- return (uint)(conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d);
                         -- 
-                        \Posit::ExponentSize().0.return\ <= unsigned((\Posit::ExponentSize().0.conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b\));
+                        \Posit::ExponentSize().0.return\ <= unsigned((\Posit::ExponentSize().0.conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d\));
                         \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::ExponentSize().0._State_10\ => 
                         -- True branch of the if-else started in state \Posit::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b = @this.MaximumExponentSize;
+                        -- 	conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d = 3;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b = @this.MaximumExponentSize;
+                        -- conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d = 3;
                         -- 
-                        \Posit::ExponentSize().0.conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b\ := signed(SmartResize(\Posit::ExponentSize().0.this\.\MaximumExponentSize\, 32));
+                        \Posit::ExponentSize().0.conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d\ := to_signed(3, 32);
                         -- Going to the state after the if-else which was started in state \Posit::ExponentSize().0._State_8\.
                         if (\Posit::ExponentSize().0._State\ = \Posit::ExponentSize().0._State_10\) then 
                             \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_9\;
@@ -10162,27 +10304,26 @@ begin
                         -- False branch of the if-else started in state \Posit::ExponentSize().0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b = ((int)((int)(@this.Size) - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) + 2))));
+                        -- 	conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d = ((int)(32 - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, 31)) + 2))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b = ((int)((int)(@this.Size) - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) + 2))));
+                        -- conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d = ((int)(32 - (int)(((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, 31)) + 2))));
                         -- 
-                        \Posit::ExponentSize().0.binaryOperationResult.4\ := SmartResize(unsigned(signed(SmartResize((\Posit::ExponentSize().0.this\.\FirstRegimeBitIndex\), 32)) + to_signed(1, 32)), 16);
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::ExponentSize().0.bitMask\;
-                        \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= (\Posit::ExponentSize().0.binaryOperationResult.4\);
+                        \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(31, 16);
                         \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
                         \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::ExponentSize().0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         if (\Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
                             \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                             \Posit::ExponentSize().0.return.3\ := \Posit::ExponentSize().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
-                            \Posit::ExponentSize().0.binaryOperationResult.5\ := signed(SmartResize((\Posit::ExponentSize().0.return.3\), 32)) + to_signed(2, 32);
-                            \Posit::ExponentSize().0.binaryOperationResult.6\ := signed(SmartResize((\Posit::ExponentSize().0.this\.\Size\), 32)) - ((\Posit::ExponentSize().0.binaryOperationResult.5\));
-                            \Posit::ExponentSize().0.conditionala4ebb93e68c4da9e1aa72f2466f4ac73ea84b099c0bc27470995a7c92a48116b\ := ((\Posit::ExponentSize().0.binaryOperationResult.6\));
+                            \Posit::ExponentSize().0.binaryOperationResult.3\ := signed(SmartResize((\Posit::ExponentSize().0.return.3\), 32)) + to_signed(2, 32);
+                            \Posit::ExponentSize().0.binaryOperationResult.4\ := to_signed(32, 32) - ((\Posit::ExponentSize().0.binaryOperationResult.3\));
+                            \Posit::ExponentSize().0.conditional348361549afcd8475905ad106585504a4968663d70c2b960bf10942f50af1d6d\ := ((\Posit::ExponentSize().0.binaryOperationResult.4\));
                             -- Going to the state after the if-else which was started in state \Posit::ExponentSize().0._State_8\.
                             if (\Posit::ExponentSize().0._State\ = \Posit::ExponentSize().0._State_12\) then 
                                 \Posit::ExponentSize().0._State\ := \Posit::ExponentSize().0._State_9\;
@@ -10201,7 +10342,7 @@ begin
         Variable \Posit::GetExponentValue().0._State\: \Posit::GetExponentValue().0._States\ := \Posit::GetExponentValue().0._State_0\;
         Variable \Posit::GetExponentValue().0.this\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit::GetExponentValue().0.left\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetExponentValue().0.conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetExponentValue().0.conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetExponentValue().0.return.0\: boolean := false;
         Variable \Posit::GetExponentValue().0.return.1\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetExponentValue().0.num\: signed(31 downto 0) := to_signed(0, 32);
@@ -10272,13 +10413,13 @@ begin
                         -- BitMask left;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- BitMask conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350;
+                        -- BitMask conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit.IsPositive (@this)) {
-                        -- 	conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350 = @this.PositBits;
+                        -- 	conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52 = @this.PositBits;
                         -- } else {
-                        -- 	conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -10307,9 +10448,9 @@ begin
                     when \Posit::GetExponentValue().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit::GetExponentValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- left = (conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350);
+                        -- left = (conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52);
                         -- 
-                        \Posit::GetExponentValue().0.left\ := (\Posit::GetExponentValue().0.conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350\);
+                        \Posit::GetExponentValue().0.left\ := (\Posit::GetExponentValue().0.conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52\);
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -10325,13 +10466,13 @@ begin
                         -- True branch of the if-else started in state \Posit::GetExponentValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350 = @this.PositBits;
+                        -- 	conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52 = @this.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350 = @this.PositBits;
+                        -- conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52 = @this.PositBits;
                         -- 
-                        \Posit::GetExponentValue().0.conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350\ := \Posit::GetExponentValue().0.this\.\PositBits\;
+                        \Posit::GetExponentValue().0.conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52\ := \Posit::GetExponentValue().0.this\.\PositBits\;
                         -- Going to the state after the if-else which was started in state \Posit::GetExponentValue().0._State_3\.
                         if (\Posit::GetExponentValue().0._State\ = \Posit::GetExponentValue().0._State_5\) then 
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_4\;
@@ -10341,15 +10482,15 @@ begin
                         -- False branch of the if-else started in state \Posit::GetExponentValue().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::GetTwosComplement(System.UInt16)
                         \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\.\PositBits\;
-                        \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\.\Size\;
+                        \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= true;
                         \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10358,7 +10499,7 @@ begin
                         if (\Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ = \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16)._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
                             \Posit::GetExponentValue().0.return.1\ := \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16).return.0\;
-                            \Posit::GetExponentValue().0.conditionalf8f9d8cefb5e0cd5e55076d4299122cab44b081e649e78b9c0f9865fdf83a350\ := \Posit::GetExponentValue().0.return.1\;
+                            \Posit::GetExponentValue().0.conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52\ := \Posit::GetExponentValue().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit::GetExponentValue().0._State_3\.
                             if (\Posit::GetExponentValue().0._State\ = \Posit::GetExponentValue().0._State_7\) then 
                                 \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_4\;
@@ -10390,7 +10531,7 @@ begin
                             \Posit::GetExponentValue().0.return.3\ := \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\;
                             \Posit::GetExponentValue().0.num2\ := \Posit::GetExponentValue().0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_RightShift (left, (int)Lombiq.Arithmetics.Posit.FractionSize (@this)), (int)((long)((int)(@this.PositBits.SegmentCount) * 32) - (long)(Lombiq.Arithmetics.Posit.ExponentSize (@this)))), (int)((int)((int)(@this.PositBits.SegmentCount) * 32) - (int)(@this.MaximumExponentSize))));
+                            -- return Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_RightShift (left, (int)Lombiq.Arithmetics.Posit.FractionSize (@this)), (int)((long)((int)(@this.PositBits.SegmentCount) * 32) - (long)(Lombiq.Arithmetics.Posit.ExponentSize (@this)))), (int)((int)((int)(@this.PositBits.SegmentCount) * 32) - 3)));
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_10\;
@@ -10445,7 +10586,7 @@ begin
                             \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                             \Posit::GetExponentValue().0.return.7\ := \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             \Posit::GetExponentValue().0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\Posit::GetExponentValue().0.this\.\PositBits\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
-                            \Posit::GetExponentValue().0.binaryOperationResult.3\ := (\Posit::GetExponentValue().0.binaryOperationResult.2\) - signed(SmartResize((\Posit::GetExponentValue().0.this\.\MaximumExponentSize\), 32));
+                            \Posit::GetExponentValue().0.binaryOperationResult.3\ := (\Posit::GetExponentValue().0.binaryOperationResult.2\) - to_signed(3, 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.7\;
                             \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::GetExponentValue().0.binaryOperationResult.3\);
@@ -10485,17 +10626,16 @@ begin
         Variable \Posit::FractionSize().0._State\: \Posit::FractionSize().0._States\ := \Posit::FractionSize().0._State_0\;
         Variable \Posit::FractionSize().0.this\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit::FractionSize().0.bitMask\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::FractionSize().0.conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::FractionSize().0.conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::FractionSize().0.return.0\: boolean := false;
         Variable \Posit::FractionSize().0.return.1\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::FractionSize().0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::FractionSize().0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit::FractionSize().0.return.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit::FractionSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::FractionSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::FractionSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::FractionSize().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::FractionSize().0.conditional74666647b17bd1b56c35d749b9f3eeed8414252941a960a68594f732ef3c6879\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::FractionSize().0.binaryOperationResult.4\: boolean := false;
+        Variable \Posit::FractionSize().0.binaryOperationResult.3\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10510,13 +10650,12 @@ begin
                 \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_0\;
                 \Posit::FractionSize().0.return.0\ := false;
                 \Posit::FractionSize().0.num\ := to_signed(0, 32);
-                \Posit::FractionSize().0.binaryOperationResult.0\ := to_unsigned(0, 16);
                 \Posit::FractionSize().0.return.2\ := to_unsigned(0, 16);
+                \Posit::FractionSize().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit::FractionSize().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit::FractionSize().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit::FractionSize().0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Posit::FractionSize().0.conditional74666647b17bd1b56c35d749b9f3eeed8414252941a960a68594f732ef3c6879\ := to_signed(0, 32);
-                \Posit::FractionSize().0.binaryOperationResult.4\ := false;
+                \Posit::FractionSize().0.binaryOperationResult.3\ := false;
             else 
                 case \Posit::FractionSize().0._State\ is 
                     when \Posit::FractionSize().0._State_0\ => 
@@ -10542,13 +10681,13 @@ begin
                         -- BitMask bitMask;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- BitMask conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6;
+                        -- BitMask conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit.IsPositive (@this)) {
-                        -- 	conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6 = @this.PositBits;
+                        -- 	conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208 = @this.PositBits;
                         -- } else {
-                        -- 	conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -10577,33 +10716,32 @@ begin
                     when \Posit::FractionSize().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit::FractionSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- bitMask = (conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6);
+                        -- bitMask = (conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208);
                         -- 
-                        \Posit::FractionSize().0.bitMask\ := (\Posit::FractionSize().0.conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6\);
+                        \Posit::FractionSize().0.bitMask\ := (\Posit::FractionSize().0.conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208\);
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)((int)(@this.Size) - (int)(((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, (ushort)((int)(@this.FirstRegimeBitIndex) + 1))) + 2) + (int)(@this.MaximumExponentSize))));
+                        -- num = (int)(32 - (int)(((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (bitMask, 31)) + 2) + 3)));
                         -- 
-                        \Posit::FractionSize().0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit::FractionSize().0.this\.\FirstRegimeBitIndex\), 32)) + to_signed(1, 32)), 16);
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::FractionSize().0.bitMask\;
-                        \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= (\Posit::FractionSize().0.binaryOperationResult.0\);
+                        \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16).startingPosition.parameter.Out.0\ <= to_unsigned(31, 16);
                         \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= true;
                         \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::FractionSize().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit::FractionSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6 = @this.PositBits;
+                        -- 	conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208 = @this.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6 = @this.PositBits;
+                        -- conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208 = @this.PositBits;
                         -- 
-                        \Posit::FractionSize().0.conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6\ := \Posit::FractionSize().0.this\.\PositBits\;
+                        \Posit::FractionSize().0.conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208\ := \Posit::FractionSize().0.this\.\PositBits\;
                         -- Going to the state after the if-else which was started in state \Posit::FractionSize().0._State_3\.
                         if (\Posit::FractionSize().0._State\ = \Posit::FractionSize().0._State_5\) then 
                             \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_4\;
@@ -10613,15 +10751,15 @@ begin
                         -- False branch of the if-else started in state \Posit::FractionSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::GetTwosComplement(System.UInt16)
                         \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\ <= \Posit::FractionSize().0.this\.\PositBits\;
-                        \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= \Posit::FractionSize().0.this\.\Size\;
+                        \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= true;
                         \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10630,7 +10768,7 @@ begin
                         if (\Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16)._Started.0\ = \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16)._Finished.0\) then 
                             \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
                             \Posit::FractionSize().0.return.1\ := \Posit::FractionSize().0.BitMask::GetTwosComplement(UInt16).return.0\;
-                            \Posit::FractionSize().0.conditional48de9a39299c45813eae9ef94b5deda2919d3131f859e3e23646391aa71be3f6\ := \Posit::FractionSize().0.return.1\;
+                            \Posit::FractionSize().0.conditionalbcdcd781c3641c5bfb2c785e6885b9dcccffd3895f5cddcb6a75fb905ef2a208\ := \Posit::FractionSize().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit::FractionSize().0._State_3\.
                             if (\Posit::FractionSize().0._State\ = \Posit::FractionSize().0._State_7\) then 
                                 \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_4\;
@@ -10642,10 +10780,10 @@ begin
                         if (\Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ = \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16)._Finished.0\) then 
                             \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                             \Posit::FractionSize().0.return.2\ := \Posit::FractionSize().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
-                            \Posit::FractionSize().0.binaryOperationResult.1\ := signed(SmartResize((\Posit::FractionSize().0.return.2\), 32)) + to_signed(2, 32);
-                            \Posit::FractionSize().0.binaryOperationResult.2\ := (\Posit::FractionSize().0.binaryOperationResult.1\) + signed(SmartResize((\Posit::FractionSize().0.this\.\MaximumExponentSize\), 32));
-                            \Posit::FractionSize().0.binaryOperationResult.3\ := signed(SmartResize((\Posit::FractionSize().0.this\.\Size\), 32)) - ((\Posit::FractionSize().0.binaryOperationResult.2\));
-                            \Posit::FractionSize().0.num\ := (\Posit::FractionSize().0.binaryOperationResult.3\);
+                            \Posit::FractionSize().0.binaryOperationResult.0\ := signed(SmartResize((\Posit::FractionSize().0.return.2\), 32)) + to_signed(2, 32);
+                            \Posit::FractionSize().0.binaryOperationResult.1\ := (\Posit::FractionSize().0.binaryOperationResult.0\) + to_signed(3, 32);
+                            \Posit::FractionSize().0.binaryOperationResult.2\ := to_signed(32, 32) - ((\Posit::FractionSize().0.binaryOperationResult.1\));
+                            \Posit::FractionSize().0.num\ := (\Posit::FractionSize().0.binaryOperationResult.2\);
                             -- The following section was transformed from the .NET statement below:
                             -- int conditional74666647b17bd1b56c35d749b9f3eeed8414252941a960a68594f732ef3c6879;
                             -- 
@@ -10661,14 +10799,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9789
                     when \Posit::FractionSize().0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit::FractionSize().0.binaryOperationResult.4\ := \Posit::FractionSize().0.num\ > to_signed(0, 32);
+                        \Posit::FractionSize().0.binaryOperationResult.3\ := \Posit::FractionSize().0.num\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit::FractionSize().0._State_11\ and ends in state \Posit::FractionSize().0._State_11\.
                         --     * The false branch starts in state \Posit::FractionSize().0._State_12\ and ends in state \Posit::FractionSize().0._State_12\.
                         --     * Execution after either branch will continue in the following state: \Posit::FractionSize().0._State_10\.
 
-                        if ((\Posit::FractionSize().0.binaryOperationResult.4\)) then 
+                        if ((\Posit::FractionSize().0.binaryOperationResult.3\)) then 
                             \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_11\;
                         else 
                             \Posit::FractionSize().0._State\ := \Posit::FractionSize().0._State_12\;
@@ -10726,7 +10864,7 @@ begin
         Variable \Posit::FractionWithHiddenBit().0._State\: \Posit::FractionWithHiddenBit().0._States\ := \Posit::FractionWithHiddenBit().0._State_0\;
         Variable \Posit::FractionWithHiddenBit().0.this\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit::FractionWithHiddenBit().0.left\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::FractionWithHiddenBit().0.conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::FractionWithHiddenBit().0.conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::FractionWithHiddenBit().0.return.0\: boolean := false;
         Variable \Posit::FractionWithHiddenBit().0.return.1\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::FractionWithHiddenBit().0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
@@ -10788,13 +10926,13 @@ begin
                         -- BitMask left;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- BitMask conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1;
+                        -- BitMask conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit.IsPositive (@this)) {
-                        -- 	conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1 = @this.PositBits;
+                        -- 	conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c = @this.PositBits;
                         -- } else {
-                        -- 	conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -10823,9 +10961,9 @@ begin
                     when \Posit::FractionWithHiddenBit().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit::FractionWithHiddenBit().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- left = (conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1);
+                        -- left = (conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c);
                         -- 
-                        \Posit::FractionWithHiddenBit().0.left\ := (\Posit::FractionWithHiddenBit().0.conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1\);
+                        \Posit::FractionWithHiddenBit().0.left\ := (\Posit::FractionWithHiddenBit().0.conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c\);
                         -- The following section was transformed from the .NET statement below:
                         -- return Lombiq.Arithmetics.BitMask.SetOne (BitMask.op_RightShift (BitMask.op_LeftShift (left, (int)((long)((int)(@this.PositBits.SegmentCount) * 32) - (long)(Lombiq.Arithmetics.Posit.FractionSize (@this)))), (int)((long)((int)(@this.PositBits.SegmentCount) * 32) - (long)(Lombiq.Arithmetics.Posit.FractionSize (@this)))), (ushort)Lombiq.Arithmetics.Posit.FractionSize (@this));
                         -- 
@@ -10839,13 +10977,13 @@ begin
                         -- True branch of the if-else started in state \Posit::FractionWithHiddenBit().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1 = @this.PositBits;
+                        -- 	conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c = @this.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1 = @this.PositBits;
+                        -- conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c = @this.PositBits;
                         -- 
-                        \Posit::FractionWithHiddenBit().0.conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1\ := \Posit::FractionWithHiddenBit().0.this\.\PositBits\;
+                        \Posit::FractionWithHiddenBit().0.conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c\ := \Posit::FractionWithHiddenBit().0.this\.\PositBits\;
                         -- Going to the state after the if-else which was started in state \Posit::FractionWithHiddenBit().0._State_3\.
                         if (\Posit::FractionWithHiddenBit().0._State\ = \Posit::FractionWithHiddenBit().0._State_5\) then 
                             \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_4\;
@@ -10855,15 +10993,15 @@ begin
                         -- False branch of the if-else started in state \Posit::FractionWithHiddenBit().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- 	conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1 = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, @this.Size);
+                        -- conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c = Lombiq.Arithmetics.BitMask.GetTwosComplement (@this.PositBits, 32);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::GetTwosComplement(System.UInt16)
                         \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\ <= \Posit::FractionWithHiddenBit().0.this\.\PositBits\;
-                        \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= \Posit::FractionWithHiddenBit().0.this\.\Size\;
+                        \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= true;
                         \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10872,7 +11010,7 @@ begin
                         if (\Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16)._Started.0\ = \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16)._Finished.0\) then 
                             \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
                             \Posit::FractionWithHiddenBit().0.return.1\ := \Posit::FractionWithHiddenBit().0.BitMask::GetTwosComplement(UInt16).return.0\;
-                            \Posit::FractionWithHiddenBit().0.conditional475a071ec10523b7cb2a2a4ddbaf371391787fbf14783c92f4c3eaa58e53f6d1\ := \Posit::FractionWithHiddenBit().0.return.1\;
+                            \Posit::FractionWithHiddenBit().0.conditional32356785a0ef7b7787f5fb83d9e2bb639fefac62c5f56d70f8291fe3aacb679c\ := \Posit::FractionWithHiddenBit().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit::FractionWithHiddenBit().0._State_3\.
                             if (\Posit::FractionWithHiddenBit().0._State\ = \Posit::FractionWithHiddenBit().0._State_7\) then 
                                 \Posit::FractionWithHiddenBit().0._State\ := \Posit::FractionWithHiddenBit().0._State_4\;
@@ -10970,9 +11108,8 @@ begin
         Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.regimeKValue\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.exponentValue\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.maximumExponentSize\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10983,9 +11120,8 @@ begin
                 \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.regimeKValue\ := to_signed(0, 32);
                 \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.exponentValue\ := to_unsigned(0, 32);
                 \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.maximumExponentSize\ := to_unsigned(0, 8);
-                \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\ := to_signed(0, 64);
-                \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\ := to_signed(0, 64);
+                \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
                 case \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State\ is 
                     when \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_0\ => 
@@ -11010,18 +11146,13 @@ begin
                         \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.exponentValue\ := \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.exponentValue.parameter.In\;
                         \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.maximumExponentSize\ := \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.maximumExponentSize.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)((long)(regimeKValue * (1 << (int)maximumExponentSize)) + (long)(exponentValue));
+                        -- return (int)((long)(regimeKValue * 8) + (long)(exponentValue));
                         -- 
-                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.maximumExponentSize\, 32)), 5))));
-                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\ := SmartResize(\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.regimeKValue\ * (\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\), 64);
-                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State\ := \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9452
-                    when \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.2\ := SmartResize((\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\) + signed(SmartResize((\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.exponentValue\), 64)), 32);
-                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.return\ <= (\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.2\);
+                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\ := SmartResize(\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.regimeKValue\ * to_signed(8, 32), 64);
+                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\ := SmartResize((\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.0\) + signed(SmartResize((\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.exponentValue\), 64)), 32);
+                        \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.return\ <= (\Posit::CalculateScaleFactor(Int32,UInt32,Byte).0.binaryOperationResult.1\);
                         \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State\ := \Posit::CalculateScaleFactor(Int32,UInt32,Byte).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                        -- Clock cycles needed to complete this state (approximation): 0.5119
                 end case;
             end if;
         end if;
@@ -11065,30 +11196,26 @@ begin
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.conditional497f9554cbf3ce5e4420b2638c3a4d3e5038a8b4fc916f2904e17901ca70b88f\: \Lombiq.Arithmetics.Posit\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.conditional677fd4763adedec3feb47d616b5d73553ab61f31b1922fbbab76fd1ff958adc5\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.left2\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.conditionalf398e3604346919b0c7d047968ad76af8b9bb72437dec895a412dcee15a2f147\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.18\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.19\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.20\: boolean := false;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.21\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.22\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.23\: \Lombiq.Arithmetics.BitMask\;
@@ -11105,81 +11232,73 @@ begin
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.33\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.34\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.35\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.36\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.37\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.38\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.39\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.num4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.40\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.41\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.42\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.7\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.43\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.44\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.45\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.46\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.47\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.48\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.49\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.num5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.50\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.51\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.52\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.53\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.num6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.54\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.55\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.56\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.8\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\: boolean := false;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.57\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.58\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.59\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.60\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.61\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.62\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.63\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.64\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.32\: boolean := false;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\: \Lombiq.Arithmetics.Posit\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.38\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\: \Lombiq.Arithmetics.Posit\;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\: boolean := false;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit Posit::op_Addition(Posit,Posit).0.return.65\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\: \Lombiq.Arithmetics.Posit\;
+        Variable \Posit Posit::op_Addition(Posit,Posit).0.return.66\: \Lombiq.Arithmetics.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11203,6 +11322,7 @@ begin
                 \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Started.0\ <= false;
                 \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\ <= false;
                 \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= false;
                 \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= to_unsigned(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
@@ -11237,75 +11357,62 @@ begin
                 \Posit Posit::op_Addition(Posit,Posit).0.return.11\ := to_unsigned(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.12\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.13\ := to_unsigned(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\ := false;
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.num\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.14\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.15\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.num2\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.return.16\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.17\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.return.20\ := false;
-                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.return.33\ := to_unsigned(0, 16);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.35\ := to_unsigned(0, 16);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.num3\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.36\ := to_unsigned(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.37\ := to_unsigned(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.num4\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.41\ := to_unsigned(0, 16);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.7\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.return.49\ := to_unsigned(0, 16);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.return.49\ := to_unsigned(0, 16);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.num5\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.50\ := to_unsigned(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.51\ := to_unsigned(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.num6\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.return.55\ := to_unsigned(0, 16);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.return.63\ := to_unsigned(0, 16);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.8\ := false;
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\ := to_signed(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.return.64\ := to_unsigned(0, 16);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\ := false;
+                \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue3\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\ := to_signed(0, 32);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.return.63\ := to_unsigned(0, 16);
                 \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.31\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.return.64\ := to_unsigned(0, 16);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.32\ := false;
-                \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue3\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.33\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.34\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.35\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.36\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.38\ := to_unsigned(0, 32);
+                \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\ := to_unsigned(0, 32);
             else 
                 case \Posit Posit::op_Addition(Posit,Posit).0._State\ is 
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_0\ => 
@@ -11640,7 +11747,7 @@ begin
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_20\ => 
                         -- State after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if (regimeKValue == -((int)((int)(left.Size) - 1))) {
+                        -- if (regimeKValue == -31) {
                         -- 	Posit conditional497f9554cbf3ce5e4420b2638c3a4d3e5038a8b4fc916f2904e17901ca70b88f;
                         -- 	if (flag) {
                         -- 		conditional497f9554cbf3ce5e4420b2638c3a4d3e5038a8b4fc916f2904e17901ca70b88f = right;
@@ -11650,21 +11757,19 @@ begin
                         -- 	return conditional497f9554cbf3ce5e4420b2638c3a4d3e5038a8b4fc916f2904e17901ca70b88f;
                         -- }
                         -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.left\.\Size\), 32)) - to_signed(1, 32);
-                        \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\ := -((\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\));
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\ := \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue\ = \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\ := \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue\ = to_signed(-31, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_29\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_30\.
                         --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_28\.
 
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\) then 
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.2\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_29\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_28\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9022
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_21\ => 
                         -- True branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
@@ -11774,7 +11879,7 @@ begin
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_28\ => 
                         -- State after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if (regimeKValue2 == -((int)((int)(right.Size) - 1))) {
+                        -- if (regimeKValue2 == -31) {
                         -- 	Posit conditional677fd4763adedec3feb47d616b5d73553ab61f31b1922fbbab76fd1ff958adc5;
                         -- 	if (flag2) {
                         -- 		conditional677fd4763adedec3feb47d616b5d73553ab61f31b1922fbbab76fd1ff958adc5 = left;
@@ -11784,21 +11889,19 @@ begin
                         -- 	return conditional677fd4763adedec3feb47d616b5d73553ab61f31b1922fbbab76fd1ff958adc5;
                         -- }
                         -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.right\.\Size\), 32)) - to_signed(1, 32);
-                        \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\ := -((\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\));
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\ := \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue2\ = \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\ := \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue2\ = to_signed(-31, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_34\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_35\.
                         --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_33\.
 
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\) then 
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.3\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_34\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_33\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9022
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_29\ => 
                         -- True branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
@@ -11986,12 +12089,12 @@ begin
                             -- int num;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num = this.CalculateScaleFactor (regimeKValue, exponentValue, left.MaximumExponentSize) - this.CalculateScaleFactor (regimeKValue2, exponentValue2, right.MaximumExponentSize);
+                            -- num = this.CalculateScaleFactor (regimeKValue, exponentValue, 3) - this.CalculateScaleFactor (regimeKValue2, exponentValue2, 3);
                             -- 
                             -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit::CalculateScaleFactor(System.Int32,System.UInt32,System.Byte)
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).regimeKValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue\;
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).exponentValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.exponentValue\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\MaximumExponentSize\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= SmartResize(unsigned(to_signed(3, 32)), 8);
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= true;
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_39\;
                         end if;
@@ -12013,7 +12116,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit::CalculateScaleFactor(System.Int32,System.UInt32,System.Byte)
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).regimeKValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue2\;
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).exponentValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.exponentValue2\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.right\.\MaximumExponentSize\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= SmartResize(unsigned(to_signed(3, 32)), 8);
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= true;
                         \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_42\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12022,29 +12125,29 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.15\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\ := \Posit Posit::op_Addition(Posit,Posit).0.return.14\ - \Posit Posit::op_Addition(Posit,Posit).0.return.15\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.num\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\ := \Posit Posit::op_Addition(Posit,Posit).0.return.14\ - \Posit Posit::op_Addition(Posit,Posit).0.return.15\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.num\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.4\;
                             -- The following section was transformed from the .NET statement below:
                             -- int num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4;
+                            -- int conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num >= 0)) {
-                            -- 	conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4 = this.CalculateScaleFactor (regimeKValue, exponentValue, left.MaximumExponentSize);
+                            -- 	conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8 = this.CalculateScaleFactor (regimeKValue, exponentValue, 3);
                             -- } else {
-                            -- 	conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4 = this.CalculateScaleFactor (regimeKValue2, exponentValue2, right.MaximumExponentSize);
+                            -- 	conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8 = this.CalculateScaleFactor (regimeKValue2, exponentValue2, 3);
                             -- }
                             -- 
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\ := \Posit Posit::op_Addition(Posit,Posit).0.num\ >= to_signed(0, 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\ := \Posit Posit::op_Addition(Posit,Posit).0.num\ >= to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_44\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_45\.
                             --     * The false branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_46\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_48\.
                             --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_43\.
 
-                            if ((\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\)) then 
+                            if ((\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.5\)) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_44\;
                             else 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_46\;
@@ -12054,9 +12157,9 @@ begin
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_43\ => 
                         -- State after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_42\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4);
+                        -- num2 = (conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8);
                         -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.num2\ := (\Posit Posit::op_Addition(Posit,Posit).0.conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4\);
+                        \Posit Posit::op_Addition(Posit,Posit).0.num2\ := (\Posit Posit::op_Addition(Posit,Posit).0.conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (num == 0) {
                         -- 	BitMask conditionalf398e3604346919b0c7d047968ad76af8b9bb72437dec895a412dcee15a2f147;
@@ -12078,7 +12181,7 @@ begin
                         -- 	num3 = (int)(Lombiq.Arithmetics.Posit.FractionSize (left) - Lombiq.Arithmetics.Posit.FractionSize (right));
                         -- 	left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left));
                         -- 	int num4;
-                        -- 	num4 = (int)((int)((int)(left.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
+                        -- 	num4 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
                         -- 	left2 = BitMask.op_LeftShift (left2, num4);
                         -- 	BitMask conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648;
                         -- 	if ((!flag3)) {
@@ -12087,13 +12190,13 @@ begin
                         -- 		conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648 = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right), num4 - num + num3));
                         -- 	}
                         -- 	left2 = (conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648);
-                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(left.Size) - 1)));
+                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- } else {
                         -- 	int num5;
                         -- 	num5 = (int)(Lombiq.Arithmetics.Posit.FractionSize (right) - Lombiq.Arithmetics.Posit.FractionSize (left));
                         -- 	left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right));
                         -- 	int num6;
-                        -- 	num6 = (int)((int)((int)(right.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
+                        -- 	num6 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
                         -- 	left2 = BitMask.op_LeftShift (left2, num6);
                         -- 	BitMask conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c;
                         -- 	if ((!flag3)) {
@@ -12102,17 +12205,17 @@ begin
                         -- 		conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left), num6 + num + num5));
                         -- 	}
                         -- 	left2 = (conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c);
-                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(right.Size) - 1)));
+                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- }
                         -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\ := \Posit Posit::op_Addition(Posit,Posit).0.num\ = to_signed(0, 32);
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\ := \Posit Posit::op_Addition(Posit,Posit).0.num\ = to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_50\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_85\.
                         --     * The false branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_86\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_87\.
                         --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_49\.
 
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\) then 
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.6\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_50\;
                         else 
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_86\;
@@ -12122,16 +12225,16 @@ begin
                         -- True branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_42\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4 = this.CalculateScaleFactor (regimeKValue, exponentValue, left.MaximumExponentSize);
+                        -- 	conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8 = this.CalculateScaleFactor (regimeKValue, exponentValue, 3);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4 = this.CalculateScaleFactor (regimeKValue, exponentValue, left.MaximumExponentSize);
+                        -- conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8 = this.CalculateScaleFactor (regimeKValue, exponentValue, 3);
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit::CalculateScaleFactor(System.Int32,System.UInt32,System.Byte)
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).regimeKValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue\;
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).exponentValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.exponentValue\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\MaximumExponentSize\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= SmartResize(unsigned(to_signed(3, 32)), 8);
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= true;
                         \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_45\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12140,7 +12243,7 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.16\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4\ := \Posit Posit::op_Addition(Posit,Posit).0.return.16\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8\ := \Posit Posit::op_Addition(Posit,Posit).0.return.16\;
                             -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_42\.
                             if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_45\) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_43\;
@@ -12151,11 +12254,11 @@ begin
                         -- False branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_42\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4 = this.CalculateScaleFactor (regimeKValue2, exponentValue2, right.MaximumExponentSize);
+                        -- 	conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8 = this.CalculateScaleFactor (regimeKValue2, exponentValue2, 3);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4 = this.CalculateScaleFactor (regimeKValue2, exponentValue2, right.MaximumExponentSize);
+                        -- conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8 = this.CalculateScaleFactor (regimeKValue2, exponentValue2, 3);
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_47\;
@@ -12164,7 +12267,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit::CalculateScaleFactor(System.Int32,System.UInt32,System.Byte)
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).regimeKValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue2\;
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).exponentValue.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.exponentValue2\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.right\.\MaximumExponentSize\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).maximumExponentSize.parameter.Out.0\ <= SmartResize(unsigned(to_signed(3, 32)), 8);
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= true;
                         \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_48\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12173,7 +12276,7 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte)._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.17\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::CalculateScaleFactor(Int32,UInt32,Byte).return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.conditionalb424d05339ccd2b260e0b8755082decb9a32f594275ff6e8a7af08940ef210f4\ := \Posit Posit::op_Addition(Posit,Posit).0.return.17\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.conditionalecea03058ed1514d84e71a162453e2fb8ce35725255e438d73e3d4efff0e9ec8\ := \Posit Posit::op_Addition(Posit,Posit).0.return.17\;
                             -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_42\.
                             if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_48\) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_43\;
@@ -12184,9 +12287,9 @@ begin
                         -- State after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_43\.
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) == 0) {
-                        -- 	Posit object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9;
-                        -- 	object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9 = new Posit (left._environment, left.EmptyBitMask);
-                        -- 	return object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9;
+                        -- 	Posit objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf;
+                        -- 	objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf = new Posit (left._environment, Lombiq.Arithmetics.Posit.get_EmptyBitMask (left));
+                        -- 	return objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
@@ -12265,14 +12368,14 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Boolean BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Boolean BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Boolean BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.20\ := \Posit Posit::op_Addition(Posit,Posit).0.Boolean BitMask::op_GreaterThanOrEqual(BitMask,BitMask).return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\ := not(\Posit Posit::op_Addition(Posit,Posit).0.return.20\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\ := not(\Posit Posit::op_Addition(Posit,Posit).0.return.20\);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_57\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_63\.
                             --     * The false branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_64\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_70\.
                             --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_56\.
 
-                            if ((\Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\)) then 
+                            if ((\Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.4\)) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_57\;
                             else 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_64\;
@@ -12582,9 +12685,9 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.35\ := \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.33\), 32)) - signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.35\), 32));
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.num2\ + (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\), 32);
-                            \Posit Posit::op_Addition(Posit,Posit).0.num2\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.33\), 32)) - signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.35\), 32));
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.num2\ + (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.7\), 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.num2\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.8\;
                             -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_43\.
                             if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_85\) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_49\;
@@ -12599,7 +12702,7 @@ begin
                         -- 	num3 = (int)(Lombiq.Arithmetics.Posit.FractionSize (left) - Lombiq.Arithmetics.Posit.FractionSize (right));
                         -- 	left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left));
                         -- 	int num4;
-                        -- 	num4 = (int)((int)((int)(left.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
+                        -- 	num4 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
                         -- 	left2 = BitMask.op_LeftShift (left2, num4);
                         -- 	BitMask conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648;
                         -- 	if ((!flag3)) {
@@ -12608,13 +12711,13 @@ begin
                         -- 		conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648 = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right), num4 - num + num3));
                         -- 	}
                         -- 	left2 = (conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648);
-                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(left.Size) - 1)));
+                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- } else {
                         -- 	int num5;
                         -- 	num5 = (int)(Lombiq.Arithmetics.Posit.FractionSize (right) - Lombiq.Arithmetics.Posit.FractionSize (left));
                         -- 	left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right));
                         -- 	int num6;
-                        -- 	num6 = (int)((int)((int)(right.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
+                        -- 	num6 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
                         -- 	left2 = BitMask.op_LeftShift (left2, num6);
                         -- 	BitMask conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c;
                         -- 	if ((!flag3)) {
@@ -12623,17 +12726,17 @@ begin
                         -- 		conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left), num6 + num + num5));
                         -- 	}
                         -- 	left2 = (conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c);
-                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(right.Size) - 1)));
+                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- }
                         -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\ := \Posit Posit::op_Addition(Posit,Posit).0.num\ > to_signed(0, 32);
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\ := \Posit Posit::op_Addition(Posit,Posit).0.num\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_88\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_108\.
                         --     * The false branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_109\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_129\.
                         --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_87\.
 
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\) then 
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.9\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_88\;
                         else 
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_109\;
@@ -12654,7 +12757,7 @@ begin
                         -- 	num3 = (int)(Lombiq.Arithmetics.Posit.FractionSize (left) - Lombiq.Arithmetics.Posit.FractionSize (right));
                         -- 	left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left));
                         -- 	int num4;
-                        -- 	num4 = (int)((int)((int)(left.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
+                        -- 	num4 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
                         -- 	left2 = BitMask.op_LeftShift (left2, num4);
                         -- 	BitMask conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648;
                         -- 	if ((!flag3)) {
@@ -12663,7 +12766,7 @@ begin
                         -- 		conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648 = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right), num4 - num + num3));
                         -- 	}
                         -- 	left2 = (conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648);
-                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(left.Size) - 1)));
+                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12701,8 +12804,8 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.37\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\ := signed(\Posit Posit::op_Addition(Posit,Posit).0.return.36\ - \Posit Posit::op_Addition(Posit,Posit).0.return.37\);
-                            \Posit Posit::op_Addition(Posit,Posit).0.num3\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\ := signed(\Posit Posit::op_Addition(Posit,Posit).0.return.36\ - \Posit Posit::op_Addition(Posit,Posit).0.return.37\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.num3\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.10\);
                             -- The following section was transformed from the .NET statement below:
                             -- left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left));
                             -- 
@@ -12734,13 +12837,12 @@ begin
                             -- int num4;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = (int)((int)((int)(left.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
+                            -- num4 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left))));
                             -- 
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.left\.\Size\), 32)) - to_signed(1, 32);
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_95\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_95\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::FractionWithHiddenBit()
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit().this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\;
@@ -12763,8 +12865,8 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.41\ := \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\) - signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.41\), 32));
-                            \Posit Posit::op_Addition(Posit,Posit).0.num4\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\ := to_signed(31, 32) - signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.41\), 32));
+                            \Posit Posit::op_Addition(Posit,Posit).0.num4\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.11\);
                             -- The following section was transformed from the .NET statement below:
                             -- left2 = BitMask.op_LeftShift (left2, num4);
                             -- 
@@ -12791,14 +12893,14 @@ begin
                             -- 	conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648 = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right), num4 - num + num3));
                             -- }
                             -- 
-                            \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.7\ := not(\Posit Posit::op_Addition(Posit,Posit).0.flag3\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\ := not(\Posit Posit::op_Addition(Posit,Posit).0.flag3\);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_100\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_103\.
                             --     * The false branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_104\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_107\.
                             --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_99\.
 
-                            if ((\Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.7\)) then 
+                            if ((\Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.5\)) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_100\;
                             else 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_104\;
@@ -12812,7 +12914,7 @@ begin
                         -- 
                         \Posit Posit::op_Addition(Posit,Posit).0.left2\ := (\Posit Posit::op_Addition(Posit,Posit).0.conditional987a61abd3904aab9dbb26e7f2fa5024703c7b5bcddeb0aee4c44fb305c54648\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(left.Size) - 1)));
+                        -- num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left2\;
@@ -12839,11 +12941,11 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.43\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\ := \Posit Posit::op_Addition(Posit,Posit).0.num4\ - \Posit Posit::op_Addition(Posit,Posit).0.num\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\ + \Posit Posit::op_Addition(Posit,Posit).0.num3\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\ := \Posit Posit::op_Addition(Posit,Posit).0.num4\ - \Posit Posit::op_Addition(Posit,Posit).0.num\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.12\ + \Posit Posit::op_Addition(Posit,Posit).0.num3\;
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.43\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.13\;
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_102\;
                         end if;
@@ -12892,11 +12994,11 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.46\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\ := \Posit Posit::op_Addition(Posit,Posit).0.num4\ - \Posit Posit::op_Addition(Posit,Posit).0.num\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\ + \Posit Posit::op_Addition(Posit,Posit).0.num3\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\ := \Posit Posit::op_Addition(Posit,Posit).0.num4\ - \Posit Posit::op_Addition(Posit,Posit).0.num\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.14\ + \Posit Posit::op_Addition(Posit,Posit).0.num3\;
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.46\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.15\;
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_106\;
                         end if;
@@ -12930,16 +13032,15 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.49\ := \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.left\.\Size\), 32)) - to_signed(1, 32);
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.49\), 32)) - ((\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\));
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.num2\ + (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\), 32);
-                            \Posit Posit::op_Addition(Posit,Posit).0.num2\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.49\), 32)) - to_signed(31, 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.num2\ + (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.16\), 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.num2\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.17\;
                             -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_86\.
                             if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_108\) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_87\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9789
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_109\ => 
                         -- False branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_86\.
                         -- The following section was transformed from the .NET statement below:
@@ -12948,7 +13049,7 @@ begin
                         -- 	num5 = (int)(Lombiq.Arithmetics.Posit.FractionSize (right) - Lombiq.Arithmetics.Posit.FractionSize (left));
                         -- 	left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right));
                         -- 	int num6;
-                        -- 	num6 = (int)((int)((int)(right.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
+                        -- 	num6 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
                         -- 	left2 = BitMask.op_LeftShift (left2, num6);
                         -- 	BitMask conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c;
                         -- 	if ((!flag3)) {
@@ -12957,7 +13058,7 @@ begin
                         -- 		conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left), num6 + num + num5));
                         -- 	}
                         -- 	left2 = (conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c);
-                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(right.Size) - 1)));
+                        -- 	num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12995,8 +13096,8 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.51\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionSize().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\ := signed(\Posit Posit::op_Addition(Posit,Posit).0.return.50\ - \Posit Posit::op_Addition(Posit,Posit).0.return.51\);
-                            \Posit Posit::op_Addition(Posit,Posit).0.num5\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\ := signed(\Posit Posit::op_Addition(Posit,Posit).0.return.50\ - \Posit Posit::op_Addition(Posit,Posit).0.return.51\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.num5\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.18\);
                             -- The following section was transformed from the .NET statement below:
                             -- left2 = BitMask.op_Addition (left2, Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right));
                             -- 
@@ -13028,13 +13129,12 @@ begin
                             -- int num6;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num6 = (int)((int)((int)(right.Size) - 1) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
+                            -- num6 = (int)(31 - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (right))));
                             -- 
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.right\.\Size\), 32)) - to_signed(1, 32);
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_116\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_116\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::FractionWithHiddenBit()
                         \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit().this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.right\;
@@ -13057,8 +13157,8 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.55\ := \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\) - signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.55\), 32));
-                            \Posit Posit::op_Addition(Posit,Posit).0.num6\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\ := to_signed(31, 32) - signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.55\), 32));
+                            \Posit Posit::op_Addition(Posit,Posit).0.num6\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.19\);
                             -- The following section was transformed from the .NET statement below:
                             -- left2 = BitMask.op_LeftShift (left2, num6);
                             -- 
@@ -13085,14 +13185,14 @@ begin
                             -- 	conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c = BitMask.op_Addition (left2, BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (left), num6 + num + num5));
                             -- }
                             -- 
-                            \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.8\ := not(\Posit Posit::op_Addition(Posit,Posit).0.flag3\);
+                            \Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\ := not(\Posit Posit::op_Addition(Posit,Posit).0.flag3\);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_121\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_124\.
                             --     * The false branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_125\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_128\.
                             --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_120\.
 
-                            if ((\Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.8\)) then 
+                            if ((\Posit Posit::op_Addition(Posit,Posit).0.unaryOperationResult.6\)) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_121\;
                             else 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_125\;
@@ -13106,7 +13206,7 @@ begin
                         -- 
                         \Posit Posit::op_Addition(Posit,Posit).0.left2\ := (\Posit Posit::op_Addition(Posit,Posit).0.conditionale1f54abe93a5e3a3fde37f601d8f69c02a93b31adf9430cde160f8aea5d00d2c\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - (int)(((int)(right.Size) - 1)));
+                        -- num2 = num2 + ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (left2)) - 31);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left2\;
@@ -13133,11 +13233,11 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.57\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\ := \Posit Posit::op_Addition(Posit,Posit).0.num6\ + \Posit Posit::op_Addition(Posit,Posit).0.num\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\ + \Posit Posit::op_Addition(Posit,Posit).0.num5\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\ := \Posit Posit::op_Addition(Posit,Posit).0.num6\ + \Posit Posit::op_Addition(Posit,Posit).0.num\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.20\ + \Posit Posit::op_Addition(Posit,Posit).0.num5\;
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.57\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.21\;
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_123\;
                         end if;
@@ -13186,11 +13286,11 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.60\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::FractionWithHiddenBit().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\ := \Posit Posit::op_Addition(Posit,Posit).0.num6\ + \Posit Posit::op_Addition(Posit,Posit).0.num\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\ + \Posit Posit::op_Addition(Posit,Posit).0.num5\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\ := \Posit Posit::op_Addition(Posit,Posit).0.num6\ + \Posit Posit::op_Addition(Posit,Posit).0.num\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.22\ + \Posit Posit::op_Addition(Posit,Posit).0.num5\;
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.60\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.23\;
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_127\;
                         end if;
@@ -13224,28 +13324,27 @@ begin
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.63\ := \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.right\.\Size\), 32)) - to_signed(1, 32);
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.63\), 32)) - ((\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\));
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.31\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.num2\ + (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\), 32);
-                            \Posit Posit::op_Addition(Posit,Posit).0.num2\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.31\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.63\), 32)) - to_signed(31, 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.num2\ + (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.24\), 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.num2\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.25\;
                             -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_86\.
                             if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_129\) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_87\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9789
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_130\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Arithmetics.BitMask::GetMostSignificantOnePosition()
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Posit Posit::op_Addition(Posit,Posit).0.return.64\ := \Posit Posit::op_Addition(Posit,Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.32\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.64\), 32)) = to_signed(0, 32);
+                            \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\ := signed(SmartResize((\Posit Posit::op_Addition(Posit,Posit).0.return.64\), 32)) = to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_132\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_133\.
+                            --     * The true branch starts in state \Posit Posit::op_Addition(Posit,Posit).0._State_132\ and ends in state \Posit Posit::op_Addition(Posit,Posit).0._State_134\.
                             --     * Execution after either branch will continue in the following state: \Posit Posit::op_Addition(Posit,Posit).0._State_131\.
 
-                            if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.32\) then 
+                            if (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.26\) then 
                                 \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_132\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
@@ -13259,82 +13358,15 @@ begin
                         -- int regimeKValue3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue3 = num2 / (1 << (int)left.MaximumExponentSize);
+                        -- regimeKValue3 = num2 / 8;
                         -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.33\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.left\.\MaximumExponentSize\, 32)), 5))));
-                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_134\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5244
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_132\ => 
-                        -- True branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_130\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	Posit object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9;
-                        -- 	object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9 = new Posit (left._environment, left.EmptyBitMask);
-                        -- 	return object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Posit object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9 = new Posit (left._environment, left.EmptyBitMask);
-                        -- 
-                        -- Initializing record fields to their defaults.
-                        \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\.\IsNull\ := false;
-                        \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\.\MaximumExponentSize\ := to_unsigned(0, 8);
-                        \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\.\Size\ := to_unsigned(0, 16);
-                        \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
-                        -- Invoking the target's constructor.
-                        -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\_environment\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).bits.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\EmptyBitMask\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= true;
-                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_133\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_133\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Finished.0\) then 
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= false;
-                            \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.In.0\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.left\.\_environment\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- return object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9;
-                            -- 
-                            \Posit Posit::op_Addition(Posit,Posit).0.return\ <= \Posit Posit::op_Addition(Posit,Posit).0.object6b4efb69fe161990a17fbf5bc16177332db7ca2b2661793a84354d3d6b5528b9\;
-                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_1\;
-                            -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_130\.
-                            if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_133\) then 
-                                \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_131\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_134\ => 
-                        -- Waiting for the result to appear in \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.34\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(10, 32)) then 
-                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_135\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                        else 
-                            \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.0\ := \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
-                        end if;
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.34\ := \Posit Posit::op_Addition(Posit,Posit).0.num2\ / (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.33\);
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_135\ => 
-                        \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue3\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.34\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\ := \Posit Posit::op_Addition(Posit,Posit).0.num2\ / to_signed(8, 32);
+                        \Posit Posit::op_Addition(Posit,Posit).0.regimeKValue3\ := \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.27\;
                         -- The following section was transformed from the .NET statement below:
                         -- BitMask exponentBits;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb = (1 << (int)left.MaximumExponentSize);
-                        -- 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.35\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.left\.\MaximumExponentSize\, 32)), 5))));
-                        \Posit Posit::op_Addition(Posit,Posit).0.remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb\ := (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.35\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = new BitMask ((uint)(num2 - num2 / remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb * remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb), 32);
+                        -- exponentBits = new BitMask ((uint)(num2 - num2 / 8 * 8), 32);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\.\IsNull\ := false;
@@ -13342,30 +13374,78 @@ begin
                         \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\.\SegmentCount\ := to_unsigned(0, 16);
                         \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\.\Segments\ := (others => to_unsigned(0, 32));
                         -- Invoking the target's constructor.
-                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_136\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5244
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_136\ => 
-                        -- Waiting for the result to appear in \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.36\ (have to wait 10 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(10, 32)) then 
-                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_137\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                        else 
-                            \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.1\ := \Posit Posit::op_Addition(Posit,Posit).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
+                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_135\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7308
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_132\ => 
+                        -- True branch of the if-else started in state \Posit Posit::op_Addition(Posit,Posit).0._State_130\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	Posit objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf;
+                        -- 	objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf = new Posit (left._environment, Lombiq.Arithmetics.Posit.get_EmptyBitMask (left));
+                        -- 	return objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Posit objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf = new Posit (left._environment, Lombiq.Arithmetics.Posit.get_EmptyBitMask (left));
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \Posit Posit::op_Addition(Posit,Posit).0.objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf\.\IsNull\ := false;
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask().this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\;
+                        \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\ <= true;
+                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_133\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_133\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask()
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Finished.0\) then 
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\ <= false;
+                            \Posit Posit::op_Addition(Posit,Posit).0.return.65\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask().return.0\;
+                            -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\_environment\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).bits.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.65\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= true;
+                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_134\;
                         end if;
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.36\ := \Posit Posit::op_Addition(Posit,Posit).0.num2\ / \Posit Posit::op_Addition(Posit,Posit).0.remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb\;
-                        -- Clock cycles needed to complete this state (approximation): 10
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_137\ => 
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.37\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.36\ * \Posit Posit::op_Addition(Posit,Posit).0.remainderOperand0b3058415a3a9cc00e6694a1e2be8f8e739811fed1709618c92126d5ce7db3fb\, 32);
-                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.38\ := unsigned(\Posit Posit::op_Addition(Posit,Posit).0.num2\ - \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.37\);
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_134\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Finished.0\) then 
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= false;
+                            \Posit Posit::op_Addition(Posit,Posit).0.objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.In.0\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.left\.\_environment\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf;
+                            -- 
+                            \Posit Posit::op_Addition(Posit,Posit).0.return\ <= \Posit Posit::op_Addition(Posit,Posit).0.objectb7c614301609b0f45c89b9486c66db2fdb7b9863a90e79ecb0d9828907669faf\;
+                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_1\;
+                            -- Going to the state after the if-else which was started in state \Posit Posit::op_Addition(Posit,Posit).0._State_130\.
+                            if (\Posit Posit::op_Addition(Posit,Posit).0._State\ = \Posit Posit::op_Addition(Posit,Posit).0._State_134\) then 
+                                \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_131\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_135\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\ := \Posit Posit::op_Addition(Posit,Posit).0.num2\ / to_signed(8, 32);
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\ := SmartResize(\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.28\ * to_signed(8, 32), 32);
+                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_136\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8529
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_136\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\ := unsigned(\Posit Posit::op_Addition(Posit,Posit).0.num2\ - \Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.29\);
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16)
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\;
-                        \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.38\);
+                        \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= (\Posit Posit::op_Addition(Posit,Posit).0.binaryOperationResult.30\);
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= true;
-                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_138\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_138\ => 
+                        \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_137\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_137\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16)
                         if (\Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
@@ -13378,9 +13458,6 @@ begin
                             -- 
                             -- Initializing record fields to their defaults.
                             \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\.\IsNull\ := false;
-                            \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\.\MaximumExponentSize\ := to_unsigned(0, 8);
-                            \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\.\Size\ := to_unsigned(0, 16);
-                            \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::AssemblePositBitsWithRounding(System.Boolean,System.Int32,Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\;
@@ -13389,23 +13466,23 @@ begin
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).exponentBits.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.exponentBits\;
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).fractionBits.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left2\;
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ <= true;
+                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_138\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit Posit::op_Addition(Posit,Posit).0._State_138\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::AssemblePositBitsWithRounding(System.Boolean,System.Int32,Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Finished.0\) then 
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ <= false;
+                            \Posit Posit::op_Addition(Posit,Posit).0.return.66\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).return.0\;
+                            -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\_environment\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).bits.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.66\;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= true;
                             \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_139\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit Posit::op_Addition(Posit,Posit).0._State_139\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::AssemblePositBitsWithRounding(System.Boolean,System.Int32,Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Finished.0\) then 
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ <= false;
-                            \Posit Posit::op_Addition(Posit,Posit).0.return.65\ := \Posit Posit::op_Addition(Posit,Posit).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).return.0\;
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.objectb00502e49171606479998607d10ffd7fab282128a1bf5ac109a5227ccdc9ac11\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left\.\_environment\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask).bits.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.return.65\;
-                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= true;
-                            \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_140\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit Posit::op_Addition(Posit,Posit).0._State_140\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
                         if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ = \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Finished.0\) then 
                             \Posit Posit::op_Addition(Posit,Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= false;
@@ -13433,7 +13510,7 @@ begin
         Variable \Posit Posit::op_UnaryNegation(Posit).0.return.1\: boolean := false;
         Variable \Posit Posit::op_UnaryNegation(Posit).0.binaryOperationResult.0\: boolean := false;
         Variable \Posit Posit::op_UnaryNegation(Posit).0.objecteb151ca75149137dbf0959ace287b41de181e557dbf3373f2ef3685e128573f6\: \Lombiq.Arithmetics.Posit\;
-        Variable \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\: \Lombiq.Arithmetics.Posit\;
+        Variable \Posit Posit::op_UnaryNegation(Posit).0.object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c\: \Lombiq.Arithmetics.Posit\;
         Variable \Posit Posit::op_UnaryNegation(Posit).0.return.2\: \Lombiq.Arithmetics.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -13515,20 +13592,17 @@ begin
                     when \Posit Posit::op_UnaryNegation(Posit).0._State_5\ => 
                         -- State after the if-else which was started in state \Posit Posit::op_UnaryNegation(Posit).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0;
+                        -- Posit object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0 = new Posit (x._environment, Lombiq.Arithmetics.BitMask.GetTwosComplement (x.PositBits, x.Size));
+                        -- object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c = new Posit (x._environment, Lombiq.Arithmetics.BitMask.GetTwosComplement (x.PositBits, 32));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\.\IsNull\ := false;
-                        \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\.\MaximumExponentSize\ := to_unsigned(0, 8);
-                        \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\.\Size\ := to_unsigned(0, 16);
-                        \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
+                        \Posit Posit::op_UnaryNegation(Posit).0.object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c\.\IsNull\ := false;
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::GetTwosComplement(System.UInt16)
                         \Posit Posit::op_UnaryNegation(Posit).0.BitMask::GetTwosComplement(UInt16).this.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.x\.\PositBits\;
-                        \Posit Posit::op_UnaryNegation(Posit).0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.x\.\Size\;
+                        \Posit Posit::op_UnaryNegation(Posit).0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit Posit::op_UnaryNegation(Posit).0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= true;
                         \Posit Posit::op_UnaryNegation(Posit).0._State\ := \Posit Posit::op_UnaryNegation(Posit).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -13549,9 +13623,6 @@ begin
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit Posit::op_UnaryNegation(Posit).0.objecteb151ca75149137dbf0959ace287b41de181e557dbf3373f2ef3685e128573f6\.\IsNull\ := false;
-                        \Posit Posit::op_UnaryNegation(Posit).0.objecteb151ca75149137dbf0959ace287b41de181e557dbf3373f2ef3685e128573f6\.\MaximumExponentSize\ := to_unsigned(0, 8);
-                        \Posit Posit::op_UnaryNegation(Posit).0.objecteb151ca75149137dbf0959ace287b41de181e557dbf3373f2ef3685e128573f6\.\Size\ := to_unsigned(0, 16);
-                        \Posit Posit::op_UnaryNegation(Posit).0.objecteb151ca75149137dbf0959ace287b41de181e557dbf3373f2ef3685e128573f6\.\FirstRegimeBitIndex\ := to_unsigned(0, 16);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
                         \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.objecteb151ca75149137dbf0959ace287b41de181e557dbf3373f2ef3685e128573f6\;
@@ -13588,7 +13659,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit Posit::op_UnaryNegation(Posit).0._State_9\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
-                        \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\;
+                        \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c\;
                         \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.x\.\_environment\;
                         \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).bits.parameter.Out.0\ <= \Posit Posit::op_UnaryNegation(Posit).0.return.2\;
                         \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= true;
@@ -13598,12 +13669,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,Lombiq.Arithmetics.BitMask)
                         if (\Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ = \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Finished.0\) then 
                             \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask)._Started.0\ <= false;
-                            \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\ := \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.In.0\;
+                            \Posit Posit::op_UnaryNegation(Posit).0.object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c\ := \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).this.parameter.In.0\;
                             \Posit Posit::op_UnaryNegation(Posit).0.x\.\_environment\ := \Posit Posit::op_UnaryNegation(Posit).0.Posit::.ctor(PositEnvironment,BitMask).environment.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0;
+                            -- return object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c;
                             -- 
-                            \Posit Posit::op_UnaryNegation(Posit).0.return\ <= \Posit Posit::op_UnaryNegation(Posit).0.object2cde96aeda7bffbc257da5cad23a5cd884f4ef314dbda5469dd226ba6d570ca0\;
+                            \Posit Posit::op_UnaryNegation(Posit).0.return\ <= \Posit Posit::op_UnaryNegation(Posit).0.object7b806bf4a2ec2789f836c918c3185a0fe02584d983d5f95620187ff887db4a2c\;
                             \Posit Posit::op_UnaryNegation(Posit).0._State\ := \Posit Posit::op_UnaryNegation(Posit).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -13619,28 +13690,26 @@ begin
         Variable \Int32 Posit::op_Explicit(Posit).0._State\: \Int32 Posit::op_Explicit(Posit).0._States\ := \Int32 Posit::op_Explicit(Posit).0._State_0\;
         Variable \Int32 Posit::op_Explicit(Posit).0.x\: \Lombiq.Arithmetics.Posit\;
         Variable \Int32 Posit::op_Explicit(Posit).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\: boolean := false;
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\: boolean := false;
         Variable \Int32 Posit::op_Explicit(Posit).0.lowest32Bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.2\: \Lombiq.Arithmetics.BitMask\;
         Variable \Int32 Posit::op_Explicit(Posit).0.return.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.5\: \Lombiq.Arithmetics.BitMask\;
         Variable \Int32 Posit::op_Explicit(Posit).0.return.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.7\: \Lombiq.Arithmetics.BitMask\;
         Variable \Int32 Posit::op_Explicit(Posit).0.return.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.9\: boolean := false;
-        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.10\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.10\: boolean := false;
     begin 
@@ -13659,25 +13728,23 @@ begin
                 \Int32 Posit::op_Explicit(Posit).0.Posit::IsPositive()._Started.0\ <= false;
                 \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_0\;
                 \Int32 Posit::op_Explicit(Posit).0.return.0\ := to_signed(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Int32 Posit::op_Explicit(Posit).0.return.1\ := to_unsigned(0, 32);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\ := to_signed(0, 64);
                 \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.2\ := to_signed(0, 64);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\ := to_signed(0, 64);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\ := false;
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\ := false;
                 \Int32 Posit::op_Explicit(Posit).0.lowest32Bits\ := to_unsigned(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.return.3\ := to_signed(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\ := to_signed(0, 64);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\ := to_signed(0, 64);
                 \Int32 Posit::op_Explicit(Posit).0.return.4\ := to_unsigned(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.return.6\ := to_unsigned(0, 16);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ := to_signed(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.return.8\ := to_unsigned(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f\ := to_signed(0, 64);
                 \Int32 Posit::op_Explicit(Posit).0.return.9\ := false;
-                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.10\ := to_signed(0, 64);
+                \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ := to_signed(0, 64);
                 \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\ := to_signed(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.return.10\ := false;
             else 
@@ -13702,9 +13769,9 @@ begin
                     when \Int32 Posit::op_Explicit(Posit).0._State_2\ => 
                         \Int32 Posit::op_Explicit(Posit).0.x\ := \Int32 Posit::op_Explicit(Posit).0.x.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * (1 << (int)x.MaximumExponentSize)) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)) + 1L < 31L) {
+                        -- if ((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)) + 1L < 31L) {
                         -- 	uint lowest32Bits;
-                        -- 	lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * (1 << (int)x.MaximumExponentSize)) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
+                        -- 	lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
                         -- 	long conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f;
                         -- 	if (Lombiq.Arithmetics.Posit.IsPositive (x)) {
                         -- 		conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f = lowest32Bits;
@@ -13724,33 +13791,32 @@ begin
                         if (\Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue()._Started.0\ = \Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue()._Finished.0\) then 
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue()._Started.0\ <= false;
                             \Int32 Posit::op_Explicit(Posit).0.return.0\ := \Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue().return.0\;
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Int32 Posit::op_Explicit(Posit).0.x\.\MaximumExponentSize\, 32)), 5))));
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\ := SmartResize(\Int32 Posit::op_Explicit(Posit).0.return.0\ * (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\), 64);
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\ := SmartResize(\Int32 Posit::op_Explicit(Posit).0.return.0\ * to_signed(8, 32), 64);
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::GetExponentValue()
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue().this.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.x\;
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Started.0\ <= true;
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9452
+                        -- Clock cycles needed to complete this state (approximation): 0.1221
                     when \Int32 Posit::op_Explicit(Posit).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit::GetExponentValue()
                         if (\Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Started.0\ = \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Finished.0\) then 
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Started.0\ <= false;
                             \Int32 Posit::op_Explicit(Posit).0.return.1\ := \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue().return.0\;
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.2\ := (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\) + signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.return.1\), 64));
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\ := \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.2\ + to_signed(1, 64);
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\ := (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.0\) + signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.return.1\), 64));
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.2\ := \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.1\ + to_signed(1, 64);
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7796
                     when \Int32 Posit::op_Explicit(Posit).0._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\ := \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\ < to_signed(31, 64);
+                        \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\ := \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.2\ < to_signed(31, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Int32 Posit::op_Explicit(Posit).0._State_7\ and ends in state \Int32 Posit::op_Explicit(Posit).0._State_16\.
                         --     * Execution after either branch will continue in the following state: \Int32 Posit::op_Explicit(Posit).0._State_6\.
 
-                        if (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\) then 
+                        if (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.3\) then 
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_7\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
@@ -13779,7 +13845,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint lowest32Bits;
-                        -- 	lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * (1 << (int)x.MaximumExponentSize)) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
+                        -- 	lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
                         -- 	long conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f;
                         -- 	if (Lombiq.Arithmetics.Posit.IsPositive (x)) {
                         -- 		conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f = lowest32Bits;
@@ -13793,7 +13859,7 @@ begin
                         -- uint lowest32Bits;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * (1 << (int)x.MaximumExponentSize)) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
+                        -- lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::FractionWithHiddenBit()
                         \Int32 Posit::op_Explicit(Posit).0.Posit::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.x\;
@@ -13816,20 +13882,19 @@ begin
                         if (\Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue()._Started.0\ = \Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue()._Finished.0\) then 
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue()._Started.0\ <= false;
                             \Int32 Posit::op_Explicit(Posit).0.return.3\ := \Int32 Posit::op_Explicit(Posit).0.Posit::GetRegimeKValue().return.0\;
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Int32 Posit::op_Explicit(Posit).0.x\.\MaximumExponentSize\, 32)), 5))));
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\ := SmartResize(\Int32 Posit::op_Explicit(Posit).0.return.3\ * (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\), 64);
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\ := SmartResize(\Int32 Posit::op_Explicit(Posit).0.return.3\ * to_signed(8, 32), 64);
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::GetExponentValue()
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue().this.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.x\;
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Started.0\ <= true;
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9452
+                        -- Clock cycles needed to complete this state (approximation): 0.1221
                     when \Int32 Posit::op_Explicit(Posit).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit::GetExponentValue()
                         if (\Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Started.0\ = \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Finished.0\) then 
                             \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue()._Started.0\ <= false;
                             \Int32 Posit::op_Explicit(Posit).0.return.4\ := \Int32 Posit::op_Explicit(Posit).0.Posit::GetExponentValue().return.0\;
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\ := SmartResize((\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\) + signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.return.4\), 64)), 32);
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\ := SmartResize((\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.4\) + signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.return.4\), 64)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::FractionWithHiddenBit()
                             \Int32 Posit::op_Explicit(Posit).0.Posit::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.x\;
                             \Int32 Posit::op_Explicit(Posit).0.Posit::FractionWithHiddenBit()._Started.0\ <= true;
@@ -13852,11 +13917,11 @@ begin
                         if (\Int32 Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Int32 Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Int32 Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Int32 Posit::op_Explicit(Posit).0.return.6\ := \Int32 Posit::op_Explicit(Posit).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ := ((\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\)) - signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.return.6\), 32));
-                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.9\ := SmartResize(\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ + to_signed(1, 32), 32);
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\ := ((\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.5\)) - signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.return.6\), 32));
+                            \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\ := SmartResize(\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\ + to_signed(1, 32), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                             \Int32 Posit::op_Explicit(Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.return.2\;
-                            \Int32 Posit::op_Explicit(Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.9\;
+                            \Int32 Posit::op_Explicit(Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\;
                             \Int32 Posit::op_Explicit(Posit).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_13\;
                         end if;
@@ -13950,8 +14015,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f = ((long)(0L - (long)(lowest32Bits)));
                         -- 
-                        \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.10\ := to_signed(0, 64) - signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.lowest32Bits\), 64));
-                        \Int32 Posit::op_Explicit(Posit).0.conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f\ := ((\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.10\));
+                        \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ := to_signed(0, 64) - signed(SmartResize((\Int32 Posit::op_Explicit(Posit).0.lowest32Bits\), 64));
+                        \Int32 Posit::op_Explicit(Posit).0.conditional4c9968b411e93ed1a5ebb4556cf3120c317e4fc76f52ea1932ed13c0cde5534f\ := ((\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\));
                         -- Going to the state after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_15\.
                         if (\Int32 Posit::op_Explicit(Posit).0._State\ = \Int32 Posit::op_Explicit(Posit).0._State_18\) then 
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_16\;
@@ -14020,6 +14085,182 @@ begin
         end if;
     end process;
     -- System.Int32 Lombiq.Arithmetics.Posit::op_Explicit(Lombiq.Arithmetics.Posit).0 state machine end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask().0 state machine start
+    \Posit::get_SignBitMask().0._StateMachine\: process (\Clock\) 
+        Variable \Posit::get_SignBitMask().0._State\: \Posit::get_SignBitMask().0._States\ := \Posit::get_SignBitMask().0._State_0\;
+        Variable \Posit::get_SignBitMask().0.this\: \Lombiq.Arithmetics.Posit\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit::get_SignBitMask().0._Finished\ <= false;
+                \Posit::get_SignBitMask().0._State\ := \Posit::get_SignBitMask().0._State_0\;
+            else 
+                case \Posit::get_SignBitMask().0._State\ is 
+                    when \Posit::get_SignBitMask().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit::get_SignBitMask().0._Started\ = true) then 
+                            \Posit::get_SignBitMask().0._State\ := \Posit::get_SignBitMask().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_SignBitMask().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit::get_SignBitMask().0._Started\ = true) then 
+                            \Posit::get_SignBitMask().0._Finished\ <= true;
+                        else 
+                            \Posit::get_SignBitMask().0._Finished\ <= false;
+                            \Posit::get_SignBitMask().0._State\ := \Posit::get_SignBitMask().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_SignBitMask().0._State_2\ => 
+                        \Posit::get_SignBitMask().0.this\ := \Posit::get_SignBitMask().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this._environment.SignBitMask;
+                        -- 
+                        \Posit::get_SignBitMask().0.return\ <= \Posit::get_SignBitMask().0.this\.\_environment\.\SignBitMask\;
+                        \Posit::get_SignBitMask().0._State\ := \Posit::get_SignBitMask().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask().0 state machine end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask().0 state machine start
+    \Posit::get_FirstRegimeBitBitMask().0._StateMachine\: process (\Clock\) 
+        Variable \Posit::get_FirstRegimeBitBitMask().0._State\: \Posit::get_FirstRegimeBitBitMask().0._States\ := \Posit::get_FirstRegimeBitBitMask().0._State_0\;
+        Variable \Posit::get_FirstRegimeBitBitMask().0.this\: \Lombiq.Arithmetics.Posit\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit::get_FirstRegimeBitBitMask().0._Finished\ <= false;
+                \Posit::get_FirstRegimeBitBitMask().0._State\ := \Posit::get_FirstRegimeBitBitMask().0._State_0\;
+            else 
+                case \Posit::get_FirstRegimeBitBitMask().0._State\ is 
+                    when \Posit::get_FirstRegimeBitBitMask().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit::get_FirstRegimeBitBitMask().0._Started\ = true) then 
+                            \Posit::get_FirstRegimeBitBitMask().0._State\ := \Posit::get_FirstRegimeBitBitMask().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_FirstRegimeBitBitMask().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit::get_FirstRegimeBitBitMask().0._Started\ = true) then 
+                            \Posit::get_FirstRegimeBitBitMask().0._Finished\ <= true;
+                        else 
+                            \Posit::get_FirstRegimeBitBitMask().0._Finished\ <= false;
+                            \Posit::get_FirstRegimeBitBitMask().0._State\ := \Posit::get_FirstRegimeBitBitMask().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_FirstRegimeBitBitMask().0._State_2\ => 
+                        \Posit::get_FirstRegimeBitBitMask().0.this\ := \Posit::get_FirstRegimeBitBitMask().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this._environment.FirstRegimeBitBitMask;
+                        -- 
+                        \Posit::get_FirstRegimeBitBitMask().0.return\ <= \Posit::get_FirstRegimeBitBitMask().0.this\.\_environment\.\FirstRegimeBitBitMask\;
+                        \Posit::get_FirstRegimeBitBitMask().0._State\ := \Posit::get_FirstRegimeBitBitMask().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask().0 state machine end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask().0 state machine start
+    \Posit::get_EmptyBitMask().0._StateMachine\: process (\Clock\) 
+        Variable \Posit::get_EmptyBitMask().0._State\: \Posit::get_EmptyBitMask().0._States\ := \Posit::get_EmptyBitMask().0._State_0\;
+        Variable \Posit::get_EmptyBitMask().0.this\: \Lombiq.Arithmetics.Posit\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit::get_EmptyBitMask().0._Finished\ <= false;
+                \Posit::get_EmptyBitMask().0._State\ := \Posit::get_EmptyBitMask().0._State_0\;
+            else 
+                case \Posit::get_EmptyBitMask().0._State\ is 
+                    when \Posit::get_EmptyBitMask().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit::get_EmptyBitMask().0._Started\ = true) then 
+                            \Posit::get_EmptyBitMask().0._State\ := \Posit::get_EmptyBitMask().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_EmptyBitMask().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit::get_EmptyBitMask().0._Started\ = true) then 
+                            \Posit::get_EmptyBitMask().0._Finished\ <= true;
+                        else 
+                            \Posit::get_EmptyBitMask().0._Finished\ <= false;
+                            \Posit::get_EmptyBitMask().0._State\ := \Posit::get_EmptyBitMask().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_EmptyBitMask().0._State_2\ => 
+                        \Posit::get_EmptyBitMask().0.this\ := \Posit::get_EmptyBitMask().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this._environment.EmptyBitMask;
+                        -- 
+                        \Posit::get_EmptyBitMask().0.return\ <= \Posit::get_EmptyBitMask().0.this\.\_environment\.\EmptyBitMask\;
+                        \Posit::get_EmptyBitMask().0._State\ := \Posit::get_EmptyBitMask().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask().0 state machine end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask().0 state machine start
+    \Posit::get_NaNBitMask().0._StateMachine\: process (\Clock\) 
+        Variable \Posit::get_NaNBitMask().0._State\: \Posit::get_NaNBitMask().0._States\ := \Posit::get_NaNBitMask().0._State_0\;
+        Variable \Posit::get_NaNBitMask().0.this\: \Lombiq.Arithmetics.Posit\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit::get_NaNBitMask().0._Finished\ <= false;
+                \Posit::get_NaNBitMask().0._State\ := \Posit::get_NaNBitMask().0._State_0\;
+            else 
+                case \Posit::get_NaNBitMask().0._State\ is 
+                    when \Posit::get_NaNBitMask().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit::get_NaNBitMask().0._Started\ = true) then 
+                            \Posit::get_NaNBitMask().0._State\ := \Posit::get_NaNBitMask().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_NaNBitMask().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit::get_NaNBitMask().0._Started\ = true) then 
+                            \Posit::get_NaNBitMask().0._Finished\ <= true;
+                        else 
+                            \Posit::get_NaNBitMask().0._Finished\ <= false;
+                            \Posit::get_NaNBitMask().0._State\ := \Posit::get_NaNBitMask().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit::get_NaNBitMask().0._State_2\ => 
+                        \Posit::get_NaNBitMask().0.this\ := \Posit::get_NaNBitMask().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this._environment.NaNBitMask;
+                        -- 
+                        \Posit::get_NaNBitMask().0.return\ <= \Posit::get_NaNBitMask().0.this\.\_environment\.\NaNBitMask\;
+                        \Posit::get_NaNBitMask().0._State\ := \Posit::get_NaNBitMask().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask().0 state machine end
 
 
     -- System.Void Lombiq.Arithmetics.PositEnvironment::.ctor(System.Byte,System.Byte).0 state machine start
@@ -16517,6 +16758,15 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Arithmetics.Posit::.ctor(Lombiq.Arithmetics.PositEnvironment,System.UInt32) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask() start
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit::IsPositive().0 (#0):
+    \Posit::get_SignBitMask().0._Started\ <= \Posit::IsPositive().0.Posit::get_SignBitMask()._Started.0\;
+    \Posit::get_SignBitMask().0.this.parameter.In\ <= \Posit::IsPositive().0.Posit::get_SignBitMask().this.parameter.Out.0\;
+    \Posit::IsPositive().0.Posit::get_SignBitMask()._Finished.0\ <= \Posit::get_SignBitMask().0._Finished\;
+    \Posit::IsPositive().0.Posit::get_SignBitMask().return.0\ <= \Posit::get_SignBitMask().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_SignBitMask() end
+
+
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask) start
     \Hast::InternalInvocationProxy().BitMask BitMask::op_BitwiseAnd(BitMask,BitMask)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).Posit::IsPositive().0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -16598,6 +16848,155 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask() start
+    \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask()\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningState.0\ := WaitingForStarted;
+                \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                \Posit::IsZero().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+            else 
+
+                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit::IsPositive().0
+                case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\) then 
+                            \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningIndex.0\ := 0;
+                            \Posit::get_EmptyBitMask().0._Started\ <= true;
+                            \Posit::get_EmptyBitMask().0.this.parameter.In\ <= \Posit::IsPositive().0.Posit::get_EmptyBitMask().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit::get_EmptyBitMask().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningState.0\ := AfterFinished;
+                                    \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Finished.0\ <= true;
+                                    \Posit::get_EmptyBitMask().0._Started\ <= false;
+                                    \Posit::IsPositive().0.Posit::get_EmptyBitMask().return.0\ <= \Posit::get_EmptyBitMask().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit::IsPositive().0.Posit::get_EmptyBitMask()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsPositive().0.runningState.0\ := WaitingForStarted;
+                            \Posit::IsPositive().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit::IsZero().0
+                case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\) then 
+                            \Posit::IsZero().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningIndex.0\ := 0;
+                            \Posit::get_EmptyBitMask().0._Started\ <= true;
+                            \Posit::get_EmptyBitMask().0.this.parameter.In\ <= \Posit::IsZero().0.Posit::get_EmptyBitMask().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit::get_EmptyBitMask().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningState.0\ := AfterFinished;
+                                    \Posit::IsZero().0.Posit::get_EmptyBitMask()._Finished.0\ <= true;
+                                    \Posit::get_EmptyBitMask().0._Started\ <= false;
+                                    \Posit::IsZero().0.Posit::get_EmptyBitMask().return.0\ <= \Posit::get_EmptyBitMask().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit::IsZero().0.Posit::get_EmptyBitMask()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::IsZero().0.runningState.0\ := WaitingForStarted;
+                            \Posit::IsZero().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Int32 Lombiq.Arithmetics.Posit::GetRegimeKValue().0
+                case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\) then 
+                            \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningIndex.0\ := 0;
+                            \Posit::get_EmptyBitMask().0._Started\ <= true;
+                            \Posit::get_EmptyBitMask().0.this.parameter.In\ <= \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit::get_EmptyBitMask().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningState.0\ := AfterFinished;
+                                    \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Finished.0\ <= true;
+                                    \Posit::get_EmptyBitMask().0._Started\ <= false;
+                                    \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask().return.0\ <= \Posit::get_EmptyBitMask().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit::GetRegimeKValue().0.runningState.0\ := WaitingForStarted;
+                            \Posit::GetRegimeKValue().0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Posit Lombiq.Arithmetics.Posit::op_Addition(Lombiq.Arithmetics.Posit,Lombiq.Arithmetics.Posit).0
+                case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\) then 
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningIndex.0\ := 0;
+                            \Posit::get_EmptyBitMask().0._Started\ <= true;
+                            \Posit::get_EmptyBitMask().0.this.parameter.In\ <= \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit::get_EmptyBitMask().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningState.0\ := AfterFinished;
+                                    \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Finished.0\ <= true;
+                                    \Posit::get_EmptyBitMask().0._Started\ <= false;
+                                    \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask().return.0\ <= \Posit::get_EmptyBitMask().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit::get_EmptyBitMask().Posit Posit::op_Addition(Posit,Posit).0.runningState.0\ := WaitingForStarted;
+                            \Posit Posit::op_Addition(Posit,Posit).0.Posit::get_EmptyBitMask()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_EmptyBitMask() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask) start
@@ -16786,6 +17185,15 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Lombiq.Arithmetics.BitMask::op_Equality(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask() start
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit::IsNaN().0 (#0):
+    \Posit::get_NaNBitMask().0._Started\ <= \Posit::IsNaN().0.Posit::get_NaNBitMask()._Started.0\;
+    \Posit::get_NaNBitMask().0.this.parameter.In\ <= \Posit::IsNaN().0.Posit::get_NaNBitMask().this.parameter.Out.0\;
+    \Posit::IsNaN().0.Posit::get_NaNBitMask()._Finished.0\ <= \Posit::get_NaNBitMask().0._Finished\;
+    \Posit::IsNaN().0.Posit::get_NaNBitMask().return.0\ <= \Posit::get_NaNBitMask().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_NaNBitMask() end
 
 
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,System.UInt32) start
@@ -17794,6 +18202,15 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Lombiq.Arithmetics.Posit::IsPositive() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask() start
+    -- Signal connections for System.Int32 Lombiq.Arithmetics.Posit::GetRegimeKValue().0 (#0):
+    \Posit::get_FirstRegimeBitBitMask().0._Started\ <= \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Started.0\;
+    \Posit::get_FirstRegimeBitBitMask().0.this.parameter.In\ <= \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask().this.parameter.Out.0\;
+    \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask()._Finished.0\ <= \Posit::get_FirstRegimeBitBitMask().0._Finished\;
+    \Posit::GetRegimeKValue().0.Posit::get_FirstRegimeBitBitMask().return.0\ <= \Posit::get_FirstRegimeBitBitMask().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit::FractionSize() start

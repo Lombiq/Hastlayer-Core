@@ -47,10 +47,24 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             if (type == null) return null;
 
             var fullName = memberReferenceExpression.GetReferencedMemberFullName();
+
             if (string.IsNullOrEmpty(fullName)) return null;
+
+            var isPropertyReference = memberReferenceExpression.IsPropertyReference();
             return type
                 .Members
-                .SingleOrDefault(member => member.GetFullName() == fullName);
+                .SingleOrDefault(member =>
+                {
+                    if (member.GetFullName() == fullName) return true;
+
+                    if (isPropertyReference)
+                    {
+                        var property = member.GetResolveResult<MemberResolveResult>()?.Member as IProperty;
+                        return property?.Getter?.GetFullName() == fullName || property?.Setter?.GetFullName() == fullName;
+                    }
+
+                    return false;
+                });
         }
 
         public static TypeDeclaration FindTargetTypeDeclaration(

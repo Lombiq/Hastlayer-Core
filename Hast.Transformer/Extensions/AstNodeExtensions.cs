@@ -147,6 +147,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static T GetResolveResult<T>(this AstNode node) where T : ResolveResult =>
             node.GetResolveResult() as T;
 
+        public static MemberResolveResult GetMemberResolveResult(this AstNode node) =>
+            node.GetResolveResult<MemberResolveResult>();
+
         public static bool IsIn<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>() != null;
 
@@ -267,21 +270,44 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             var memberResolveResult = node.GetResolveResult<MemberResolveResult>();
 
-            if (node is MemberReferenceExpression)
+            if (node is MemberReferenceExpression memberReferenceExpression)
             {
                 var property = memberResolveResult?.Member as IProperty;
+                var isCustomProperty =
+                    memberReferenceExpression.IsPropertyReference() &&
+                    !property.Getter.IsCompilerGenerated() &&
+                    !property.Setter.IsCompilerGenerated();
 
                 // For certain members only their parent invocation will contain usable ResolveResult (see:
                 // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since
                 // from the IMember of the property we can't see whether the getter or setter is invoked, only from the
                 // parent invocation (this is only true for custom properties, not for auto-properties).
-                if (node.Parent is InvocationExpression &&
-                    (memberResolveResult == null || 
-                        ((MemberReferenceExpression)node).IsPropertyReference() && 
-                            !property.Getter.IsCompilerGenerated() &&
-                            !property.Setter.IsCompilerGenerated()))
+                if (node.Parent is InvocationExpression invocationExpression &&
+                    (memberResolveResult == null || isCustomProperty))
                 {
-                    return node.Parent.GetResolveResult<InvocationResolveResult>()?.GetFullName();
+                    if (invocationExpression.Target == node)
+                    {
+                        return node.Parent.GetResolveResult<InvocationResolveResult>()?.GetFullName();
+                    }
+                    else if (memberReferenceExpression.IsPropertyReference())
+                    {
+                        // This is not necessarily true in all cases but seems to be OK for now: If the property is not
+                        // the target but an argument of an invocation then the property reference is most possibly a
+                        // getter.
+                        return property.Getter.GetFullName();
+                    }
+                }
+
+                // Heuristics on when a property is used as a getter or setter.
+                if (isCustomProperty)
+                {
+                    if (node.Parent is AssignmentExpression parentAssignment)
+                    {
+                        // Can't use if-else because theoretically the node can't just be in these two properties.
+                        if (parentAssignment.Left == node) return property.Setter.GetFullName();
+                        if (parentAssignment.Right == node) return property.Getter.GetFullName();
+                    }
+                    else return property.Getter.GetFullName();
                 }
 
                 // This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0
