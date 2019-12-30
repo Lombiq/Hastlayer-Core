@@ -110,7 +110,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     IVhdlElement rightTransformed;
                     if (right is NullReferenceExpression)
                     {
-                        ArrayHelper.ThrowArraysCantBeNullIfArray(right);
+                        ArrayHelper.ThrowArraysCantBeNullIfArray(assignment);
                         leftTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)leftTransformed);
                         rightTransformed = Value.True;
                     }
