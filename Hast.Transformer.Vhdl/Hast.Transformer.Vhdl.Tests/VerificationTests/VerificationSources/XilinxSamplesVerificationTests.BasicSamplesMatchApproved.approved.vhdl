@@ -19201,7 +19201,7 @@ begin
                         -- this.RunSimdOperation (memory, SimdOperation.Add);
                         -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
-                        \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)\;
+                        \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Add\;
                         \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::AddVectors(SimpleMemory).0._State\ := \SimdCalculator::AddVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19253,7 +19253,7 @@ begin
                         -- this.RunSimdOperation (memory, SimdOperation.Subtract);
                         -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
-                        \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)\;
+                        \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\;
                         \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::SubtractVectors(SimpleMemory).0._State\ := \SimdCalculator::SubtractVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19305,7 +19305,7 @@ begin
                         -- this.RunSimdOperation (memory, SimdOperation.Multiply);
                         -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
-                        \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)\;
+                        \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\;
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0._State\ := \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19357,7 +19357,7 @@ begin
                         -- this.RunSimdOperation (memory, SimdOperation.Divide);
                         -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
-                        \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)\;
+                        \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\;
                         \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::DivideVectors(SimpleMemory).0._State\ := \SimdCalculator::DivideVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
