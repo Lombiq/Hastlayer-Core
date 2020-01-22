@@ -256,6 +256,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return unaryOperatorExpression.Expression.GetActualType();
             }
 
+            if (node is DefaultValueExpression defaultValueExpression)
+            {
+                return defaultValueExpression.Type.GetActualType();
+            }
+
             var type = node.GetResolveResult().Type;
             return type == SpecialType.UnknownType ? null : type;
         }
