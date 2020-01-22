@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Resolver;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -24,12 +25,11 @@ namespace Hast.Transformer.Services
                 var parent = identifierExpression.Parent;
                 var identifier = identifierExpression.Identifier;
 
-                var member = parent.GetMemberResolveResult()?.Member;
-                ThisResolveResult thisResolveResult;
+                IMember member;
                 if (parent is InvocationExpression invocation && invocation.Target == identifierExpression)
                 {
                     // A normal method invocation.
-                    thisResolveResult = new ThisResolveResult(member.DeclaringType);
+                    member = parent.GetMemberResolveResult()?.Member;
                 }
                 else if (identifierExpression
                     .GetResolveResult<MethodGroupResolveResult>()
@@ -41,7 +41,6 @@ namespace Hast.Transformer.Services
                     // A reference to a DisplayClass member or compiler-generated method within a Task.Factory.StartNew
                     // call.
                     member = identifierExpression.GetResolveResult<MethodGroupResolveResult>()?.Methods.Single();
-                    thisResolveResult = new ThisResolveResult(member.DeclaringType);
                 }
                 else if (identifierExpression.GetMemberResolveResult() is MemberResolveResult memberResolveResult)
                 {
@@ -52,18 +51,31 @@ namespace Hast.Transformer.Services
                     }
 
                     member = memberResolveResult.Member;
-                    thisResolveResult = memberResolveResult.TargetResult as ThisResolveResult ?? new ThisResolveResult(member.DeclaringType);
                 }
                 else
                 {
                     return;
                 }
 
-                var thisReferenceExpression = new ThisReferenceExpression().WithAnnotation(thisResolveResult);
+                if (member.IsStatic)
+                {
+                    var typeResolveResult = new TypeResolveResult(member.DeclaringType);
+                    var typeReferenceExpression =
+                        new TypeReferenceExpression(TypeHelper.CreateAstType(member.DeclaringType))
+                        .WithAnnotation(typeResolveResult);
+                    var memberReference = new MemberReferenceExpression(typeReferenceExpression, identifier)
+                        .WithAnnotation(new MemberResolveResult(typeResolveResult, member));
+                    identifierExpression.ReplaceWith(memberReference);
+                }
+                else
+                {
+                    var thisResolveResult = new ThisResolveResult(member.DeclaringType);
+                    var thisReferenceExpression = new ThisReferenceExpression().WithAnnotation(thisResolveResult);
 
-                var memberReference = new MemberReferenceExpression(thisReferenceExpression, identifier)
-                    .WithAnnotation(new MemberResolveResult(thisResolveResult, member));
-                identifierExpression.ReplaceWith(memberReference);
+                    var memberReference = new MemberReferenceExpression(thisReferenceExpression, identifier)
+                        .WithAnnotation(new MemberResolveResult(thisResolveResult, member));
+                    identifierExpression.ReplaceWith(memberReference);
+                }
             }
         }
     }
