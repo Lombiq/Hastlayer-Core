@@ -148,7 +148,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.GetResolveResult() as T;
 
         public static MemberResolveResult GetMemberResolveResult(this AstNode node) =>
-            node.GetMemberResolveResult();
+            node.GetResolveResult<MemberResolveResult>();
 
         public static bool IsIn<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>() != null;
