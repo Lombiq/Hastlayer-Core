@@ -330,7 +330,9 @@ architecture Imp of Hast_IP is
         \BitMask::.ctor(UInt16,Boolean).0._State_8\, 
         \BitMask::.ctor(UInt16,Boolean).0._State_9\, 
         \BitMask::.ctor(UInt16,Boolean).0._State_10\, 
-        \BitMask::.ctor(UInt16,Boolean).0._State_11\);
+        \BitMask::.ctor(UInt16,Boolean).0._State_11\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_12\, 
+        \BitMask::.ctor(UInt16,Boolean).0._State_13\);
     -- Signals:
     Signal \BitMask::.ctor(UInt16,Boolean).0._Finished\: boolean := false;
     Signal \BitMask::.ctor(UInt16,Boolean).0.this.parameter.Out\: \Lombiq.Arithmetics.BitMask\;
@@ -1969,6 +1971,7 @@ architecture Imp of Hast_IP is
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\: boolean := false;
+    Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\: boolean := false;
@@ -2897,20 +2900,33 @@ begin
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = 0;
-                        -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
-                        -- 	array [num2] = 4294967295;
-                        -- 	num2 = (ushort)((int)(num2) + 1);
+                        -- if (allOne) {
+                        -- 	ushort num2;
+                        -- 	num2 = 0;
+                        -- 	while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
+                        -- 		array [num2] = 4294967295;
+                        -- 		num2 = (ushort)((int)(num2) + 1);
+                        -- 	}
+                        -- 	int conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088;
+                        -- 	if ((num > 0)) {
+                        -- 		conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = ((1 << num) - 1);
+                        -- 	} else {
+                        -- 		conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = -1;
+                        -- 	}
+                        -- 	array [num2] = (uint)(conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088);
                         -- }
                         -- 
-                        -- Starting a while loop.
-                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_7\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_8\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_7\.
+
+                        if (\BitMask::.ctor(UInt16,Boolean).0.allOne\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_7\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6395
                     when \BitMask::.ctor(UInt16,Boolean).0._State_5\ => 
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_3\.
@@ -2945,7 +2961,50 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::.ctor(UInt16,Boolean).0._State_7\ => 
-                        -- Repeated state of the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Segments = array;
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.this\.\Segments\ := \BitMask::.ctor(UInt16,Boolean).0.array\;
+                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_8\ => 
+                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	ushort num2;
+                        -- 	num2 = 0;
+                        -- 	while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
+                        -- 		array [num2] = 4294967295;
+                        -- 		num2 = (ushort)((int)(num2) + 1);
+                        -- 	}
+                        -- 	int conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088;
+                        -- 	if ((num > 0)) {
+                        -- 		conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = ((1 << num) - 1);
+                        -- 	} else {
+                        -- 		conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = -1;
+                        -- 	}
+                        -- 	array [num2] = (uint)(conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 0;
+                        -- 
+                        \BitMask::.ctor(UInt16,Boolean).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
+                        -- 	array [num2] = 4294967295;
+                        -- 	num2 = (ushort)((int)(num2) + 1);
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_9\ => 
+                        -- Repeated state of the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
                         -- The while loop's condition:
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\ := signed(SmartResize((\BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\), 32)) - to_signed(1, 32);
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\ := signed(SmartResize((\BitMask::.ctor(UInt16,Boolean).0.num2\), 32)) < (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\);
@@ -2967,11 +3026,11 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.8\ := SmartResize(unsigned(signed(SmartResize((\BitMask::.ctor(UInt16,Boolean).0.num2\), 32)) + to_signed(1, 32)), 16);
                             \BitMask::.ctor(UInt16,Boolean).0.num2\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.8\);
                         else 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_8\;
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.9279
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_8\ => 
-                        -- State after the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_10\ => 
+                        -- State after the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- int conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088;
                         -- 
@@ -2985,30 +3044,29 @@ begin
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.9\ := \BitMask::.ctor(UInt16,Boolean).0.num\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_10\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_10\.
-                        --     * The false branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_11\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_11\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_9\.
+                        --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_12\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_12\.
+                        --     * The false branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_13\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::.ctor(UInt16,Boolean).0._State_11\.
 
                         if ((\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.9\)) then 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_10\;
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_12\;
                         else 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_11\;
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_13\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_9\ => 
-                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_11\ => 
+                        -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- array [num2] = (uint)(conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088);
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.array\(to_integer(\BitMask::.ctor(UInt16,Boolean).0.num2\)) := unsigned((\BitMask::.ctor(UInt16,Boolean).0.conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088\));
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.Segments = array;
-                        -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.this\.\Segments\ := \BitMask::.ctor(UInt16,Boolean).0.array\;
-                        \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_11\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_7\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_10\ => 
-                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_12\ => 
+                        -- True branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = ((1 << num) - 1);
@@ -3020,13 +3078,13 @@ begin
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.10\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.num\, 5))));
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.11\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.10\) - to_signed(1, 32);
                         \BitMask::.ctor(UInt16,Boolean).0.conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.11\);
-                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
-                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_10\) then 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_9\;
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_10\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_12\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.8507
-                    when \BitMask::.ctor(UInt16,Boolean).0._State_11\ => 
-                        -- False branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
+                    when \BitMask::.ctor(UInt16,Boolean).0._State_13\ => 
+                        -- False branch of the if-else started in state \BitMask::.ctor(UInt16,Boolean).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = -1;
@@ -3036,9 +3094,9 @@ begin
                         -- conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088 = -1;
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.conditional428ce4c5feb33894cb6559acc20ffdaf7156f653da7c068296d0860726fcd088\ := to_signed(-1, 32);
-                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
-                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_11\) then 
-                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_9\;
+                        -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_10\.
+                        if (\BitMask::.ctor(UInt16,Boolean).0._State\ = \BitMask::.ctor(UInt16,Boolean).0._State_13\) then 
+                            \BitMask::.ctor(UInt16,Boolean).0._State\ := \BitMask::.ctor(UInt16,Boolean).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -14272,7 +14330,7 @@ begin
         Variable \PositEnvironment::.ctor(Byte,Byte).0.return.0\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.object6e980ec7d6b9bc5254cd0013a72fae6695d5249227113b956d37797062bb0f9d\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\: \Lombiq.Arithmetics.BitMask\;
+        Variable \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.return.2\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.return.3\: \Lombiq.Arithmetics.BitMask\;
         Variable \PositEnvironment::.ctor(Byte,Byte).0.objecta849a20303a830c65da2fdf79d33d95b5e45bf7ce0ed9c1bdd0b82447a49a6d4\: \Lombiq.Arithmetics.BitMask\;
@@ -14286,6 +14344,7 @@ begin
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(0, 16);
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
+                \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
                 \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
@@ -14448,16 +14507,16 @@ begin
                             \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \PositEnvironment::.ctor(Byte,Byte).0.this\.\EmptyBitMask\ := \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- BitMask object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7;
+                            -- BitMask object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7 = new BitMask (32);
+                            -- object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff = new BitMask (32, true);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\.\IsNull\ := false;
-                            \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\.\Size\ := to_unsigned(0, 16);
-                            \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\.\SegmentCount\ := to_unsigned(0, 16);
-                            \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\.\Segments\ := (others => to_unsigned(0, 32));
+                            \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\.\IsNull\ := false;
+                            \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\.\Size\ := to_unsigned(0, 16);
+                            \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\.\SegmentCount\ := to_unsigned(0, 16);
+                            \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_10\;
@@ -14469,8 +14528,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PositEnvironment::.ctor(Byte,Byte).0._State_11\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
-                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\;
+                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
+                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= True;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14478,12 +14538,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
-                            \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\ := \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
+                            \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\ := \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.MaxValueBitMask = BitMask.op_RightShift (object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7, 1);
+                            -- @this.MaxValueBitMask = BitMask.op_RightShift (object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff, 1);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
-                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object7cd794ab04f629495eb2f2689d47e4db825c8a9555bb7628ebaae79accd8b3c7\;
+                            \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\;
                             \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(1, 32);
                             \PositEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_13\;
@@ -15768,6 +15828,7 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
                             \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
                             \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
                         case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).PositEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
