@@ -96,9 +96,9 @@ namespace Hast.Transformer.Services
 
                 var invocationParentStatement = invocationExpression.FindFirstParentStatement();
 
-                // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once inlined.
-                // Since the same method can be inlined multiple times in another method we also need to distinguish per
-                // invocation.
+                // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once
+                // inlined. Since the same method can be inlined multiple times in another method we also need to
+                // distinguish per invocation.
                 var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
