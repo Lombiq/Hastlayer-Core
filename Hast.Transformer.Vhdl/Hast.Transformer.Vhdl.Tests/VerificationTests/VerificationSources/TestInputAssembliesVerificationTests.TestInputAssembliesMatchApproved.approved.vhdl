@@ -1634,7 +1634,7 @@ begin
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.StaticMethod ();
+                            -- ComplexTypeHierarchy.StaticMethod ();
                             -- 
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
@@ -1784,7 +1784,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- this.StaticMethod ();
+                        -- ComplexTypeHierarchy.StaticMethod ();
                         -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
@@ -1886,7 +1886,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::PrivateMethod().0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- this.StaticMethod ();
+                        -- ComplexTypeHierarchy.StaticMethod ();
                         -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
