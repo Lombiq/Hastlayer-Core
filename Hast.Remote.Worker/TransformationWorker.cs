@@ -55,6 +55,19 @@ namespace Hast.Remote.Worker
             Logger = NullLogger.Instance;
         }
 
+        
+        private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
+        {
+            var segment = await container.ListBlobsSegmentedAsync(prefix, null);
+            var list = new List<IListBlobItem>();
+            list.AddRange(segment.Results);
+            while (segment.ContinuationToken != null)
+            {
+                segment = await container.ListBlobsSegmentedAsync(prefix, segment.ContinuationToken);
+                list.AddRange(segment.Results);
+            }
+            return list;
+        }
 
         public async Task Work(ITransformationWorkerConfiguration configuration, CancellationToken cancellationToken)
         {
@@ -94,8 +107,7 @@ namespace Hast.Remote.Worker
                         {
                             // Removing those result blobs that weren't deleted somehow (like the client exited while
                             // waiting for the result to appear, thus never requesting it hence it never getting deleted).
-                            var oldResultBlobs = _container
-                                .ListBlobs("results/")
+                            var oldResultBlobs = (await GetBlobs(_container, "results/"))
                                 .Cast<CloudBlockBlob>()
                                 .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
 
@@ -119,8 +131,7 @@ namespace Hast.Remote.Worker
 
                 while (true)
                 {
-                    var jobBlobs = _container
-                        .ListBlobs("jobs/")
+                    var jobBlobs = (await GetBlobs(_container, "jobs/"))
                         .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
@@ -170,7 +181,7 @@ namespace Hast.Remote.Worker
                                     {
                                         TransformationJob job;
 
-                                        using (var stream = await blob.OpenReadAsync(cancellationToken))
+                                        using (var stream = await blob.OpenReadAsync(null, null, null, cancellationToken))
                                         using (var streamReader = new StreamReader(stream))
                                         {
                                             job = _jsonConverter
@@ -266,7 +277,7 @@ namespace Hast.Remote.Worker
 
                                             var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
 
-                                            using (var blobStream = await resultBlob.OpenWriteAsync(cancellationToken))
+                                            using (var blobStream = await resultBlob.OpenWriteAsync(null, null, null, cancellationToken))
                                             using (var streamWriter = new StreamWriter(blobStream))
                                             {
                                                 await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
