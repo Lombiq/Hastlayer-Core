@@ -18,7 +18,6 @@
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Module.txt" />

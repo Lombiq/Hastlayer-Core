@@ -12,19 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CsvHelper">
-      <Version>3.0.0-beta7</Version>
-    </PackageReference>
-    <PackageReference Include="ICSharpCode.NRefactory">
-      <Version>5.5.1</Version>
-    </PackageReference>
+    <PackageReference Include="CsvHelper" Version="15.0.0" />
+    <PackageReference Include="ICSharpCode.Decompiler" Version="5.0.2.5153" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
