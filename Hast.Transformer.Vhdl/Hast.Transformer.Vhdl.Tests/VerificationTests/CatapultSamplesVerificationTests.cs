@@ -58,7 +58,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         [Test]
-        [Ignore]
         public async Task Posit32FusedSampleMatchesApproved()
         {
             (await CreateVhdlForPosit32FusedSample()).ShouldMatchApprovedWithVhdlConfiguration();

@@ -1,6 +1,7 @@
-﻿using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class SimpleMemoryInvocationExpressionExtensions
     {
@@ -8,6 +9,6 @@ namespace ICSharpCode.NRefactory.CSharp
         /// Determines whether the invocation expression is a SimpleMemory object member invocation.
         /// </summary>
         public static bool IsSimpleMemoryInvocation(this InvocationExpression expression) =>
-            expression.Annotation<MethodReference>()?.DeclaringType.IsSimpleMemory() == true;
+            expression.GetMemberResolveResult()?.TargetResult?.Type.IsSimpleMemory() == true;
     }
 }

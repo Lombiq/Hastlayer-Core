@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services
 {
@@ -40,17 +36,17 @@ namespace Hast.Transformer.Services
                     BinaryOperatorType.Add :
                     BinaryOperatorType.Subtract;
 
-                var typeInformation = unaryOperatorExpression.GetTypeInformationOrCreateFromActualTypeReference();
+                var resolveResult = unaryOperatorExpression.CreateResolveResultFromActualType();
 
                 var binaryExpression = new BinaryOperatorExpression(
                     unaryOperatorExpression.Expression.Clone(),
                     binaryOperator,
-                    new PrimitiveExpression(1).WithAnnotation(typeInformation))
-                    .WithAnnotation(typeInformation);
+                    new PrimitiveExpression(1).WithAnnotation(resolveResult))
+                    .WithAnnotation(resolveResult);
 
 
                 var assignment = new AssignmentExpression(unaryOperatorExpression.Expression.Clone(), binaryExpression)
-                    .WithAnnotation(typeInformation);
+                    .WithAnnotation(resolveResult);
 
                 var statement = new ExpressionStatement(assignment);
                 var parentStatement = unaryOperatorExpression.FindFirstParentStatement();
@@ -60,7 +56,7 @@ namespace Hast.Transformer.Services
                 // Otherwise those will also mistakenly use the modified value. So checking for other expressions here.
 
                 var expressionName = unaryOperatorExpression.Expression.GetFullName();
-                var otherReference = parentStatement.FindFirstChildOfType<Expression>(expression => 
+                var otherReference = parentStatement.FindFirstChildOfType<Expression>(expression =>
                     expression != unaryOperatorExpression.Expression && expression.GetFullName() == expressionName);
 
                 if (otherReference != null)
@@ -70,7 +66,7 @@ namespace Hast.Transformer.Services
                         " in the statement " + parentStatement.ToString() + " while it is also subject of the unary expression " +
                         unaryOperatorExpression.ToString() +
                         ". This prevents the unary expression from being converted to a standard binary expression and thus allow Hastlayer to transform it." +
-                        " Split the statement so one statement only includes a single reference to " + 
+                        " Split the statement so one statement only includes a single reference to " +
                         unaryOperatorExpression.Expression.ToString() + ".".AddParentEntityName(unaryOperatorExpression));
                 }
 

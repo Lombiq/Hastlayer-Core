@@ -1,4 +1,4 @@
-﻿using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
 namespace Hast.Transformer.Services
@@ -10,7 +10,7 @@ namespace Hast.Transformer.Services
     /// Consider the following property initialization:
     /// public uint Number { get; set; } = 99;
     /// 
-    /// While the property itself will be restored as its original form the assigment will be added in the constructor,
+    /// While the property itself will be restored as its original form the assignment will be added in the constructor,
     /// referencing the property's backing field:
     /// 
     /// this.<Number>k__BackingField = 99u;

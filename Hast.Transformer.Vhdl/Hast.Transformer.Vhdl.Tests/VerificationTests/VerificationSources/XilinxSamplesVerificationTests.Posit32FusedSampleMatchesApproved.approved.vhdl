@@ -149,9 +149,9 @@ entity Hast_IP is
     -- * Finished: Indicates whether the execution of a given hardware entry point member is complete. See the documentation of the Started port above on how it is used.
     -- * Reset: Synchronous reset.
     -- * Clock: The main clock.
-    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port depends on the hardware platform but is at least 32b. Inputs of the algorithm implemented in Hast_IP all come through this port.
-    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port depends on the hardware platform but is at least 32b. Outputs of the algorithm implemented in Hast_IP all go through this port.
-    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells. The value of CellIndex is always aligned to the width of the DataIn and DataOut ports, so e.g. with 128b data ports CellIndex will always contain a value which is a >= 0 integer multiple of 4 (since 128 / 32 = 4).
+    -- * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Inputs of the algorithm implemented in Hast_IP all come through this port.
+    -- * DataOut: Data to be written to the memory is assigned to this port. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Outputs of the algorithm implemented in Hast_IP all go through this port.
+    -- * CellIndex: Zero-based index of the SimpleMemory memory cell currently being read or written. Transformed code in Hastlayer can access memory in a simplified fashion by addressing 32b "cells", the accessible physical memory space being divided up in such individually addressable cells.
     -- * ReadEnable: Indicates whether a memory read operation is initiated. The process of a memory read is as following:
     --     1. ReadEnable is FALSE by default. It's set to TRUE when a memory read is started. CellIndex is set to the index of the memory cell to be read out.
     --     2. Waiting for ReadsDone to be TRUE.
@@ -226,7 +226,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._Finished\: boolean := false;
     Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
@@ -304,8 +304,7 @@ architecture Imp of Hast_IP is
         \Posit32::.ctor(Quire).0._State_21\, 
         \Posit32::.ctor(Quire).0._State_22\, 
         \Posit32::.ctor(Quire).0._State_23\, 
-        \Posit32::.ctor(Quire).0._State_24\, 
-        \Posit32::.ctor(Quire).0._State_25\);
+        \Posit32::.ctor(Quire).0._State_24\);
     -- Signals:
     Signal \Posit32::.ctor(Quire).0._Finished\: boolean := false;
     Signal \Posit32::.ctor(Quire).0.this.parameter.Out\: \Lombiq.Arithmetics.Posit32\;
@@ -416,8 +415,7 @@ architecture Imp of Hast_IP is
         \Posit32::EncodeRegimeBits(Int32).0._State_4\, 
         \Posit32::EncodeRegimeBits(Int32).0._State_5\, 
         \Posit32::EncodeRegimeBits(Int32).0._State_6\, 
-        \Posit32::EncodeRegimeBits(Int32).0._State_7\, 
-        \Posit32::EncodeRegimeBits(Int32).0._State_8\);
+        \Posit32::EncodeRegimeBits(Int32).0._State_7\);
     -- Signals:
     Signal \Posit32::EncodeRegimeBits(Int32).0._Finished\: boolean := false;
     Signal \Posit32::EncodeRegimeBits(Int32).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -478,9 +476,7 @@ architecture Imp of Hast_IP is
         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\, 
         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\, 
         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\, 
-        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\, 
-        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\, 
-        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\);
+        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\);
     -- Signals:
     Signal \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._Finished\: boolean := false;
     Signal \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -572,8 +568,7 @@ architecture Imp of Hast_IP is
         \Posit32::ExponentSize().0._State_5\, 
         \Posit32::ExponentSize().0._State_6\, 
         \Posit32::ExponentSize().0._State_7\, 
-        \Posit32::ExponentSize().0._State_8\, 
-        \Posit32::ExponentSize().0._State_9\);
+        \Posit32::ExponentSize().0._State_8\);
     -- Signals:
     Signal \Posit32::ExponentSize().0._Finished\: boolean := false;
     Signal \Posit32::ExponentSize().0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -726,8 +721,7 @@ architecture Imp of Hast_IP is
         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\, 
         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\, 
         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_4\, 
-        \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\, 
-        \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_6\);
+        \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\);
     -- Signals:
     Signal \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Finished\: boolean := false;
     Signal \Posit32::LengthOfRunOfBits(UInt32,Byte).0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -768,8 +762,7 @@ architecture Imp of Hast_IP is
         \Posit32::FusedSum(Posit32[],Quire).0._State_11\, 
         \Posit32::FusedSum(Posit32[],Quire).0._State_12\, 
         \Posit32::FusedSum(Posit32[],Quire).0._State_13\, 
-        \Posit32::FusedSum(Posit32[],Quire).0._State_14\, 
-        \Posit32::FusedSum(Posit32[],Quire).0._State_15\);
+        \Posit32::FusedSum(Posit32[],Quire).0._State_14\);
     -- Signals:
     Signal \Posit32::FusedSum(Posit32[],Quire).0._Finished\: boolean := false;
     Signal \Posit32::FusedSum(Posit32[],Quire).0.return\: \Lombiq.Arithmetics.Quire\;
@@ -929,8 +922,7 @@ architecture Imp of Hast_IP is
         \Quire Quire::op_Addition(Quire,Quire).0._State_23\, 
         \Quire Quire::op_Addition(Quire,Quire).0._State_24\, 
         \Quire Quire::op_Addition(Quire,Quire).0._State_25\, 
-        \Quire Quire::op_Addition(Quire,Quire).0._State_26\, 
-        \Quire Quire::op_Addition(Quire,Quire).0._State_27\);
+        \Quire Quire::op_Addition(Quire,Quire).0._State_26\);
     -- Signals:
     Signal \Quire Quire::op_Addition(Quire,Quire).0._Finished\: boolean := false;
     Signal \Quire Quire::op_Addition(Quire,Quire).0.return\: \Lombiq.Arithmetics.Quire\;
@@ -1008,8 +1000,7 @@ architecture Imp of Hast_IP is
         \Boolean Quire::op_Equality(Quire,Quire).0._State_5\, 
         \Boolean Quire::op_Equality(Quire,Quire).0._State_6\, 
         \Boolean Quire::op_Equality(Quire,Quire).0._State_7\, 
-        \Boolean Quire::op_Equality(Quire,Quire).0._State_8\, 
-        \Boolean Quire::op_Equality(Quire,Quire).0._State_9\);
+        \Boolean Quire::op_Equality(Quire,Quire).0._State_8\);
     -- Signals:
     Signal \Boolean Quire::op_Equality(Quire,Quire).0._Finished\: boolean := false;
     Signal \Boolean Quire::op_Equality(Quire,Quire).0.return\: boolean := false;
@@ -1135,26 +1126,23 @@ begin
     \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\: \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._States\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_0\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\: \Lombiq.Arithmetics.Posit32_Array\(0 to 159);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\: \Lombiq.Arithmetics.Quire\;
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag\: boolean := false;
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag2\: boolean := false;
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.posit\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.0\: \Lombiq.Arithmetics.Quire\;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\: signed(63 downto 0) := to_signed(0, 64);
@@ -1162,16 +1150,18 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._Finished\ <= false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
@@ -1184,20 +1174,19 @@ begin
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_0\;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\ := to_unsigned(0, 32);
+                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\ := to_unsigned(0, 32);
-                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag\ := false;
-                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ := to_signed(0, 32);
-                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\ := to_signed(0, 32);
-                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag2\ := false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 64);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.4\ := false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\ := false;
+                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\ := false;
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 64);
@@ -1205,6 +1194,7 @@ begin
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
             else 
@@ -1231,30 +1221,6 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32[] array;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Quire quire;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Posit32 posit;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
@@ -1270,20 +1236,26 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
+                            -- Posit32[] array;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
                             -- array = new Posit32[160];
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Posit32 objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed;
+                            -- Quire quire;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed = new Posit32 (0);
+                            -- Posit32 objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98 = new Posit32 (0);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed\.\IsNull\ := false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed\.\PositBits\ := to_unsigned(0, 32);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98\.\IsNull\ := false;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98\.\PositBits\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_4\;
@@ -1293,12 +1265,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- quire = Posit32.op_Explicit (objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed);
+                            -- quire = Posit32.op_Explicit (objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32)
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Quire Posit32::op_Explicit(Posit32).x.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectfe4a9fa5c80337963423deb7911c36b6b84408ad501efcf3c7b2342882be55ed\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Quire Posit32::op_Explicit(Posit32).x.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectde41e31d213f26bcb14dc4059ca0ea22b32147dbfb27f3d69d5ff482204eea98\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Quire Posit32::op_Explicit(Posit32)._Started.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_5\;
                         end if;
@@ -1309,6 +1281,9 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Quire Posit32::op_Explicit(Posit32)._Started.0\ <= false;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.0\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Quire Posit32::op_Explicit(Posit32).return.0\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num2;
+                            -- 
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num / 160u;
                             -- 
@@ -1329,7 +1304,9 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_7\ => 
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = num - num / 160u * 160u > 0u;
+                        -- if ((long)(num - num / 160u * 160u) != 0L) {
+                        -- 	num2 = (uint)((long)(num2) + 1L);
+                        -- }
                         -- 
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1346,48 +1323,44 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 9
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_9\ => 
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.1\ * to_unsigned(160, 32), 32);
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\ - \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.2\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\ - \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.2\, 64));
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.4\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\ > to_unsigned(0, 32);
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.4\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	num2 = num2 + 1u;
-                        -- }
-                        -- 
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.4\ := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.3\) /= to_signed(0, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_12\ and ends in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_12\.
                         --     * Execution after either branch will continue in the following state: \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
 
-                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag\) then 
+                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.4\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_12\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                        -- Clock cycles needed to complete this state (approximation): 0.2817
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\ => 
                         -- State after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)num3 < (long)((ulong)num2)) {
-                        -- 	i = 0;
-                        -- 	while (i < 160) {
-                        -- 		flag2 = (long)(num3 * 160 + i) < (long)((ulong)num);
-                        -- 		if (flag2) {
-                        -- 			array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
+                        -- while ((long)(num3) < (long)(num2)) {
+                        -- 	int num4;
+                        -- 	num4 = 0;
+                        -- 	while (num4 < 160) {
+                        -- 		if ((long)(num3 * 160 + num4) < (long)(num)) {
+                        -- 			array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- 		} else {
+                        -- 			array [num4] = new Posit32 (0);
                         -- 		}
-                        -- 		else {
-                        -- 			array [i] = new Posit32 (0);
-                        -- 		}
-                        -- 		i = i + 1;
+                        -- 		num4 = num4 + 1;
                         -- 	}
                         -- 	quire = Posit32.FusedSum (array, quire);
                         -- 	num3 = num3 + 1;
@@ -1400,55 +1373,55 @@ begin
                         -- True branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num2 = num2 + 1u;
+                        -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = num2 + 1u;
+                        -- num2 = (uint)((long)(num2) + 1L);
                         -- 
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.5\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\ + to_unsigned(1, 32);
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.5\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\ := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.5\);
                         -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_10\.
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_12\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_13\ => 
                         -- Repeated state of the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
                         -- The while loop's condition:
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\, 64) < signed((SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\, 64)));
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\ := SmartResize((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\), 64) < signed(SmartResize((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num2\), 64));
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	i = 0;
-                            -- 	while (i < 160) {
-                            -- 		flag2 = (long)(num3 * 160 + i) < (long)((ulong)num);
-                            -- 		if (flag2) {
-                            -- 			array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
+                            -- 	int num4;
+                            -- 	num4 = 0;
+                            -- 	while (num4 < 160) {
+                            -- 		if ((long)(num3 * 160 + num4) < (long)(num)) {
+                            -- 			array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 		} else {
+                            -- 			array [num4] = new Posit32 (0);
                             -- 		}
-                            -- 		else {
-                            -- 			array [i] = new Posit32 (0);
-                            -- 		}
-                            -- 		i = i + 1;
+                            -- 		num4 = num4 + 1;
                             -- 	}
                             -- 	quire = Posit32.FusedSum (array, quire);
                             -- 	num3 = num3 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- i = 0;
+                            -- int num4;
                             -- 
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (i < 160) {
-                            -- 	flag2 = (long)(num3 * 160 + i) < (long)((ulong)num);
-                            -- 	if (flag2) {
-                            -- 		array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
+                            -- num4 = 0;
+                            -- 
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num4 < 160) {
+                            -- 	if ((long)(num3 * 160 + num4) < (long)(num)) {
+                            -- 		array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 	} else {
+                            -- 		array [num4] = new Posit32 (0);
                             -- 	}
-                            -- 	else {
-                            -- 		array [i] = new Posit32 (0);
-                            -- 	}
-                            -- 	i = i + 1;
+                            -- 	num4 = num4 + 1;
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -1460,14 +1433,17 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_14\ => 
                         -- State after the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
-                        -- posit = new Posit32 (quire);
+                        -- Posit32 objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e = new Posit32 (quire);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.posit\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.posit\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.posit\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_26\;
@@ -1475,22 +1451,24 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_15\ => 
                         -- Repeated state of the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_13\.
                         -- The while loop's condition:
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\ < to_signed(160, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ < to_signed(160, 32);
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	flag2 = (long)(num3 * 160 + i) < (long)((ulong)num);
-                            -- 	if (flag2) {
-                            -- 		array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
+                            -- 	if ((long)(num3 * 160 + num4) < (long)(num)) {
+                            -- 		array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 	} else {
+                            -- 		array [num4] = new Posit32 (0);
                             -- 	}
-                            -- 	else {
-                            -- 		array [i] = new Posit32 (0);
-                            -- 	}
-                            -- 	i = i + 1;
+                            -- 	num4 = num4 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = (long)(num3 * 160 + i) < (long)((ulong)num);
+                            -- if ((long)(num3 * 160 + num4) < (long)(num)) {
+                            -- 	array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- } else {
+                            -- 	array [num4] = new Posit32 (0);
+                            -- }
                             -- 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\;
@@ -1511,24 +1489,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\, 64);
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\ := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\) < signed((SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\, 64)));
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag2\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag2) {
-                        -- 	array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
-                        -- }
-                        -- else {
-                        -- 	array [i] = new Posit32 (0);
-                        -- }
-                        -- 
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\, 64);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\ := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\) < signed(SmartResize((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num\), 64));
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\ and ends in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_22\.
                         --     * The false branch starts in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_23\ and ends in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\.
                         --     * Execution after either branch will continue in the following state: \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
 
-                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.flag2\) then 
+                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
                         else 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_23\;
@@ -1537,10 +1506,10 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\ => 
                         -- State after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\.
                         -- The following section was transformed from the .NET statement below:
-                        -- i = i + 1;
+                        -- num4 = num4 + 1;
                         -- 
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\ + to_signed(1, 32);
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ + to_signed(1, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\;
                         -- Returning to the repeated state of the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_15\;
@@ -1550,15 +1519,15 @@ begin
                         -- True branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
+                        -- 	array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [i] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + i), true);
+                        -- array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\)).\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\)).\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ := to_signed(1, 32) + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\;
@@ -1566,7 +1535,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\;
                         -- Begin SimpleMemory read.
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1579,7 +1548,7 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\));
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -1590,7 +1559,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\.
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_22\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\;
@@ -1601,18 +1570,18 @@ begin
                         -- False branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [i] = new Posit32 (0);
+                        -- 	array [num4] = new Posit32 (0);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [i] = new Posit32 (0);
+                        -- array [num4] = new Posit32 (0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\)).\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\)).\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\));
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\;
@@ -1621,7 +1590,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.i\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\.
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\;
@@ -1651,15 +1620,15 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.posit\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (0, posit.PositBits);
+                            -- memory.WriteUInt32 (0, objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.posit\.\PositBits\);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1684,7 +1653,7 @@ begin
         Variable \Posit32::.ctor(UInt32,Boolean).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(UInt32,Boolean).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(UInt32,Boolean).0.fromBitMask\: boolean := false;
-        Variable \Posit32::.ctor(UInt32,Boolean).0.conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::.ctor(UInt32,Boolean).0.conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1693,7 +1662,7 @@ begin
                 \Posit32::.ctor(UInt32,Boolean).0._State\ := \Posit32::.ctor(UInt32,Boolean).0._State_0\;
                 \Posit32::.ctor(UInt32,Boolean).0.bits\ := to_unsigned(0, 32);
                 \Posit32::.ctor(UInt32,Boolean).0.fromBitMask\ := false;
-                \Posit32::.ctor(UInt32,Boolean).0.conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191\ := to_unsigned(0, 32);
+                \Posit32::.ctor(UInt32,Boolean).0.conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6\ := to_unsigned(0, 32);
             else 
                 case \Posit32::.ctor(UInt32,Boolean).0._State\ is 
                     when \Posit32::.ctor(UInt32,Boolean).0._State_0\ => 
@@ -1720,16 +1689,16 @@ begin
                         \Posit32::.ctor(UInt32,Boolean).0.bits\ := \Posit32::.ctor(UInt32,Boolean).0.bits.parameter.In\;
                         \Posit32::.ctor(UInt32,Boolean).0.fromBitMask\ := \Posit32::.ctor(UInt32,Boolean).0.fromBitMask.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191;
+                        -- uint conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191 = bits;
+                        -- conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6 = bits;
                         -- 
-                        \Posit32::.ctor(UInt32,Boolean).0.conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191\ := \Posit32::.ctor(UInt32,Boolean).0.bits\;
+                        \Posit32::.ctor(UInt32,Boolean).0.conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6\ := \Posit32::.ctor(UInt32,Boolean).0.bits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.PositBits = conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191;
+                        -- @this.PositBits = (conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6);
                         -- 
-                        \Posit32::.ctor(UInt32,Boolean).0.this\.\PositBits\ := \Posit32::.ctor(UInt32,Boolean).0.conditionalee808a9bc1fddeb51cbd15cc3bc0aca4eb5f797c5a107863504df477d84ba191\;
+                        \Posit32::.ctor(UInt32,Boolean).0.this\.\PositBits\ := (\Posit32::.ctor(UInt32,Boolean).0.conditional07306ef17ce6eacdbdd521687c7db8bbabd2dc9ca02b65fce7cdbd581ebb7be6\);
                         \Posit32::.ctor(UInt32,Boolean).0._State\ := \Posit32::.ctor(UInt32,Boolean).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -1747,12 +1716,6 @@ begin
         Variable \Posit32::.ctor(Quire).0.signBit\: boolean := false;
         Variable \Posit32::.ctor(Quire).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.num2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::.ctor(Quire).0.flag\: boolean := false;
-        Variable \Posit32::.ctor(Quire).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::.ctor(Quire).0.flag2\: boolean := false;
-        Variable \Posit32::.ctor(Quire).0.num4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::.ctor(Quire).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::.ctor(Quire).0.flag3\: boolean := false;
         Variable \Posit32::.ctor(Quire).0.return.0\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32::.ctor(Quire).0.return.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.0\: boolean := false;
@@ -1765,9 +1728,12 @@ begin
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.return.7\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32::.ctor(Quire).0.return.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::.ctor(Quire).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.4\: boolean := false;
+        Variable \Posit32::.ctor(Quire).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::.ctor(Quire).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Quire).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1800,21 +1766,18 @@ begin
                 \Posit32::.ctor(Quire).0.signBit\ := false;
                 \Posit32::.ctor(Quire).0.num\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.num2\ := to_unsigned(0, 64);
-                \Posit32::.ctor(Quire).0.flag\ := false;
-                \Posit32::.ctor(Quire).0.num3\ := to_signed(0, 32);
-                \Posit32::.ctor(Quire).0.flag2\ := false;
-                \Posit32::.ctor(Quire).0.num4\ := to_signed(0, 32);
-                \Posit32::.ctor(Quire).0.num5\ := to_unsigned(0, 32);
-                \Posit32::.ctor(Quire).0.flag3\ := false;
                 \Posit32::.ctor(Quire).0.return.1\ := to_unsigned(0, 64);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.0\ := false;
                 \Posit32::.ctor(Quire).0.return.5\ := to_unsigned(0, 64);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.1\ := false;
                 \Posit32::.ctor(Quire).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.return.8\ := to_unsigned(0, 64);
+                \Posit32::.ctor(Quire).0.num3\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.4\ := false;
+                \Posit32::.ctor(Quire).0.num4\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \Posit32::.ctor(Quire).0.num5\ := to_unsigned(0, 32);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.6\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \Posit32::.ctor(Quire).0.binaryOperationResult.8\ := to_unsigned(0, 32);
@@ -1849,45 +1812,27 @@ begin
                         \Posit32::.ctor(Quire).0.this\ := \Posit32::.ctor(Quire).0.this.parameter.In\;
                         \Posit32::.ctor(Quire).0.q\ := \Posit32::.ctor(Quire).0.q.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool signBit;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num5;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- @this.PositBits = 2147483648u;
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
                         \Posit32::.ctor(Quire).0.this\.\PositBits\ := "10000000000000000000000000000000";
                         -- The following section was transformed from the .NET statement below:
+                        -- bool signBit;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- signBit = false;
                         -- 
                         \Posit32::.ctor(Quire).0.signBit\ := False;
                         -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- num = 511;
                         -- 
                         \Posit32::.ctor(Quire).0.num\ := to_signed(511, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num2;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = Quire.op_Explicit (Quire.op_RightShift (q, 448));
                         -- 
@@ -1917,24 +1862,20 @@ begin
                             \Posit32::.ctor(Quire).0.return.0\ := \Posit32::.ctor(Quire).0.UInt64 Quire::op_Explicit(Quire).x.parameter.In.0\;
                             \Posit32::.ctor(Quire).0.num2\ := \Posit32::.ctor(Quire).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = num2 >= 9223372036854775808uL;
-                            -- 
-                            -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
-                            \Posit32::.ctor(Quire).0.binaryOperationResult.0\ := \Posit32::.ctor(Quire).0.num2\ >= "1000000000000000000000000000000000000000000000000000000000000000";
-                            \Posit32::.ctor(Quire).0.flag\ := \Posit32::.ctor(Quire).0.binaryOperationResult.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
+                            -- if (num2 >= 9223372036854775808uL) {
                             -- 	q = Quire.op_OnesComplement (q);
                             -- 	q = Quire.op_Addition (q, 1u);
                             -- 	signBit = true;
                             -- }
                             -- 
+                            -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                            \Posit32::.ctor(Quire).0.binaryOperationResult.0\ := \Posit32::.ctor(Quire).0.num2\ >= "1000000000000000000000000000000000000000000000000000000000000000";
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit32::.ctor(Quire).0._State_6\ and ends in state \Posit32::.ctor(Quire).0._State_8\.
                             --     * Execution after either branch will continue in the following state: \Posit32::.ctor(Quire).0._State_5\.
 
-                            if (\Posit32::.ctor(Quire).0.flag\) then 
+                            if (\Posit32::.ctor(Quire).0.binaryOperationResult.0\) then 
                                 \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_6\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
@@ -2062,40 +2003,30 @@ begin
                     when \Posit32::.ctor(Quire).0._State_12\ => 
                         -- State after the while loop which was started in state \Posit32::.ctor(Quire).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- num3 = num - 240;
                         -- 
                         \Posit32::.ctor(Quire).0.binaryOperationResult.3\ := \Posit32::.ctor(Quire).0.num\ - to_signed(240, 32);
                         \Posit32::.ctor(Quire).0.num3\ := \Posit32::.ctor(Quire).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag2 = num == 0;
+                        -- if (num == 0) {
+                        -- 	@this.PositBits = 0u;
+                        -- 	return;
+                        -- }
                         -- 
                         \Posit32::.ctor(Quire).0.binaryOperationResult.4\ := \Posit32::.ctor(Quire).0.num\ = to_signed(0, 32);
-                        \Posit32::.ctor(Quire).0.flag2\ := \Posit32::.ctor(Quire).0.binaryOperationResult.4\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag2) {
-                        -- 	@this.PositBits = 0u;
-                        -- }
-                        -- else {
-                        -- 	num4 = num3 / 4;
-                        -- 	num5 = (uint)(num3 - num3 / 4 * 4);
-                        -- 	flag3 = num5 < 0u;
-                        -- 	if (flag3) {
-                        -- 		num4 = num4 - 1;
-                        -- 		num5 = num5 + 4u;
-                        -- 	}
-                        -- 	@this.PositBits = Posit32.AssemblePositBitsWithRounding (signBit, num4, num5, Quire.op_Explicit (Quire.op_RightShift (q, 480)));
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::.ctor(Quire).0._State_17\ and ends in state \Posit32::.ctor(Quire).0._State_17\.
-                        --     * The false branch starts in state \Posit32::.ctor(Quire).0._State_18\ and ends in state \Posit32::.ctor(Quire).0._State_25\.
                         --     * Execution after either branch will continue in the following state: \Posit32::.ctor(Quire).0._State_16\.
 
-                        if (\Posit32::.ctor(Quire).0.flag2\) then 
+                        if (\Posit32::.ctor(Quire).0.binaryOperationResult.4\) then 
                             \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_17\;
                         else 
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_18\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_16\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5903
                     when \Posit32::.ctor(Quire).0._State_13\ => 
@@ -2147,37 +2078,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::.ctor(Quire).0._State_16\ => 
                         -- State after the if-else which was started in state \Posit32::.ctor(Quire).0._State_12\.
-                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::.ctor(Quire).0._State_17\ => 
-                        -- True branch of the if-else started in state \Posit32::.ctor(Quire).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	@this.PositBits = 0u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.PositBits = 0u;
-                        -- 
-                        \Posit32::.ctor(Quire).0.this\.\PositBits\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_12\.
-                        if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_17\) then 
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_16\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::.ctor(Quire).0._State_18\ => 
-                        -- False branch of the if-else started in state \Posit32::.ctor(Quire).0._State_12\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num4 = num3 / 4;
-                        -- 	num5 = (uint)(num3 - num3 / 4 * 4);
-                        -- 	flag3 = num5 < 0u;
-                        -- 	if (flag3) {
-                        -- 		num4 = num4 - 1;
-                        -- 		num5 = num5 + 4u;
-                        -- 	}
-                        -- 	@this.PositBits = Posit32.AssemblePositBitsWithRounding (signBit, num4, num5, Quire.op_Explicit (Quire.op_RightShift (q, 480)));
-                        -- }
+                        -- int num4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = num3 / 4;
@@ -2185,45 +2087,65 @@ begin
                         \Posit32::.ctor(Quire).0.binaryOperationResult.5\ := \Posit32::.ctor(Quire).0.num3\ / to_signed(4, 32);
                         \Posit32::.ctor(Quire).0.num4\ := \Posit32::.ctor(Quire).0.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- num5 = (uint)(num3 - num3 / 4 * 4);
                         -- 
-                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_19\;
+                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
-                    when \Posit32::.ctor(Quire).0._State_19\ => 
+                    when \Posit32::.ctor(Quire).0._State_17\ => 
+                        -- True branch of the if-else started in state \Posit32::.ctor(Quire).0._State_12\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	@this.PositBits = 0u;
+                        -- 	return;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.PositBits = 0u;
+                        -- 
+                        \Posit32::.ctor(Quire).0.this\.\PositBits\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- return;
+                        -- 
+                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_12\.
+                        if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_17\) then 
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_16\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::.ctor(Quire).0._State_18\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32::.ctor(Quire).0.binaryOperationResult.6\ := \Posit32::.ctor(Quire).0.num3\ / to_signed(4, 32);
                         \Posit32::.ctor(Quire).0.binaryOperationResult.7\ := SmartResize(\Posit32::.ctor(Quire).0.binaryOperationResult.6\ * to_signed(4, 32), 32);
-                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_20\;
+                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_19\;
                         -- Clock cycles needed to complete this state (approximation): 0.8265
-                    when \Posit32::.ctor(Quire).0._State_20\ => 
+                    when \Posit32::.ctor(Quire).0._State_19\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32::.ctor(Quire).0.binaryOperationResult.8\ := unsigned(\Posit32::.ctor(Quire).0.num3\ - \Posit32::.ctor(Quire).0.binaryOperationResult.7\);
                         \Posit32::.ctor(Quire).0.num5\ := (\Posit32::.ctor(Quire).0.binaryOperationResult.8\);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag3 = num5 < 0u;
-                        -- 
-                        \Posit32::.ctor(Quire).0.binaryOperationResult.9\ := \Posit32::.ctor(Quire).0.num5\ < to_unsigned(0, 32);
-                        \Posit32::.ctor(Quire).0.flag3\ := \Posit32::.ctor(Quire).0.binaryOperationResult.9\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag3) {
+                        -- if ((long)(num5) < 0L) {
                         -- 	num4 = num4 - 1;
-                        -- 	num5 = num5 + 4u;
+                        -- 	num5 = (uint)((long)(num5) + 4L);
                         -- }
                         -- 
+                        \Posit32::.ctor(Quire).0.binaryOperationResult.9\ := signed(SmartResize((\Posit32::.ctor(Quire).0.num5\), 64)) < to_signed(0, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::.ctor(Quire).0._State_22\ and ends in state \Posit32::.ctor(Quire).0._State_22\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::.ctor(Quire).0._State_21\.
+                        --     * The true branch starts in state \Posit32::.ctor(Quire).0._State_21\ and ends in state \Posit32::.ctor(Quire).0._State_21\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::.ctor(Quire).0._State_20\.
 
-                        if (\Posit32::.ctor(Quire).0.flag3\) then 
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_22\;
+                        if (\Posit32::.ctor(Quire).0.binaryOperationResult.9\) then 
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_21\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_21\;
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_20\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \Posit32::.ctor(Quire).0._State_21\ => 
-                        -- State after the if-else which was started in state \Posit32::.ctor(Quire).0._State_20\.
+                        -- Clock cycles needed to complete this state (approximation): 0.616
+                    when \Posit32::.ctor(Quire).0._State_20\ => 
+                        -- State after the if-else which was started in state \Posit32::.ctor(Quire).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- @this.PositBits = Posit32.AssemblePositBitsWithRounding (signBit, num4, num5, Quire.op_Explicit (Quire.op_RightShift (q, 480)));
                         -- 
@@ -2231,14 +2153,14 @@ begin
                         \Posit32::.ctor(Quire).0.Quire Quire::op_RightShift(Quire,Int32).left.parameter.Out.0\ <= \Posit32::.ctor(Quire).0.q\;
                         \Posit32::.ctor(Quire).0.Quire Quire::op_RightShift(Quire,Int32).right.parameter.Out.0\ <= to_signed(480, 32);
                         \Posit32::.ctor(Quire).0.Quire Quire::op_RightShift(Quire,Int32)._Started.0\ <= true;
-                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_23\;
+                        \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_22\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::.ctor(Quire).0._State_22\ => 
-                        -- True branch of the if-else started in state \Posit32::.ctor(Quire).0._State_20\.
+                    when \Posit32::.ctor(Quire).0._State_21\ => 
+                        -- True branch of the if-else started in state \Posit32::.ctor(Quire).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num4 = num4 - 1;
-                        -- 	num5 = num5 + 4u;
+                        -- 	num5 = (uint)((long)(num5) + 4L);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -2247,16 +2169,16 @@ begin
                         \Posit32::.ctor(Quire).0.binaryOperationResult.10\ := \Posit32::.ctor(Quire).0.num4\ - to_signed(1, 32);
                         \Posit32::.ctor(Quire).0.num4\ := \Posit32::.ctor(Quire).0.binaryOperationResult.10\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = num5 + 4u;
+                        -- num5 = (uint)((long)(num5) + 4L);
                         -- 
-                        \Posit32::.ctor(Quire).0.binaryOperationResult.11\ := \Posit32::.ctor(Quire).0.num5\ + to_unsigned(4, 32);
-                        \Posit32::.ctor(Quire).0.num5\ := \Posit32::.ctor(Quire).0.binaryOperationResult.11\;
-                        -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_20\.
-                        if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_22\) then 
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_21\;
+                        \Posit32::.ctor(Quire).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Posit32::.ctor(Quire).0.num5\), 64)) + to_signed(4, 64)), 32);
+                        \Posit32::.ctor(Quire).0.num5\ := (\Posit32::.ctor(Quire).0.binaryOperationResult.11\);
+                        -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_19\.
+                        if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_21\) then 
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_20\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6526
-                    when \Posit32::.ctor(Quire).0._State_23\ => 
+                        -- Clock cycles needed to complete this state (approximation): 0.7161
+                    when \Posit32::.ctor(Quire).0._State_22\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_RightShift(Lombiq.Arithmetics.Quire,System.Int32)
                         if (\Posit32::.ctor(Quire).0.Quire Quire::op_RightShift(Quire,Int32)._Started.0\ = \Posit32::.ctor(Quire).0.Quire Quire::op_RightShift(Quire,Int32)._Finished.0\) then 
                             \Posit32::.ctor(Quire).0.Quire Quire::op_RightShift(Quire,Int32)._Started.0\ <= false;
@@ -2265,10 +2187,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Quire::op_Explicit(Lombiq.Arithmetics.Quire)
                             \Posit32::.ctor(Quire).0.UInt32 Quire::op_Explicit(Quire).x.parameter.Out.0\ <= \Posit32::.ctor(Quire).0.return.9\;
                             \Posit32::.ctor(Quire).0.UInt32 Quire::op_Explicit(Quire)._Started.0\ <= true;
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_24\;
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_23\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::.ctor(Quire).0._State_24\ => 
+                    when \Posit32::.ctor(Quire).0._State_23\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Quire::op_Explicit(Lombiq.Arithmetics.Quire)
                         if (\Posit32::.ctor(Quire).0.UInt32 Quire::op_Explicit(Quire)._Started.0\ = \Posit32::.ctor(Quire).0.UInt32 Quire::op_Explicit(Quire)._Finished.0\) then 
                             \Posit32::.ctor(Quire).0.UInt32 Quire::op_Explicit(Quire)._Started.0\ <= false;
@@ -2280,19 +2202,16 @@ begin
                             \Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= \Posit32::.ctor(Quire).0.num5\;
                             \Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).fractionBits.parameter.Out.0\ <= \Posit32::.ctor(Quire).0.return.10\;
                             \Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= true;
-                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_25\;
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::.ctor(Quire).0._State_25\ => 
+                    when \Posit32::.ctor(Quire).0._State_24\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         if (\Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ = \Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32::.ctor(Quire).0.return.11\ := \Posit32::.ctor(Quire).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             \Posit32::.ctor(Quire).0.this\.\PositBits\ := \Posit32::.ctor(Quire).0.return.11\;
-                            -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_12\.
-                            if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_25\) then 
-                                \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_16\;
-                            end if;
+                            \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -2307,9 +2226,6 @@ begin
         Variable \Posit32::.ctor(UInt32).0._State\: \Posit32::.ctor(UInt32).0._States\ := \Posit32::.ctor(UInt32).0._State_0\;
         Variable \Posit32::.ctor(UInt32).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(UInt32).0.value\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::.ctor(UInt32).0.flag\: boolean := false;
-        Variable \Posit32::.ctor(UInt32).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::.ctor(UInt32).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2317,9 +2233,6 @@ begin
                 \Posit32::.ctor(UInt32).0._Finished\ <= false;
                 \Posit32::.ctor(UInt32).0._State\ := \Posit32::.ctor(UInt32).0._State_0\;
                 \Posit32::.ctor(UInt32).0.value\ := to_unsigned(0, 32);
-                \Posit32::.ctor(UInt32).0.flag\ := false;
-                \Posit32::.ctor(UInt32).0.b\ := to_unsigned(0, 8);
-                \Posit32::.ctor(UInt32).0.b2\ := to_unsigned(0, 8);
             else 
                 case \Posit32::.ctor(UInt32).0._State\ is 
                     when \Posit32::.ctor(UInt32).0._State_0\ => 
@@ -2345,22 +2258,9 @@ begin
                         \Posit32::.ctor(UInt32).0.this\ := \Posit32::.ctor(UInt32).0.this.parameter.In\;
                         \Posit32::.ctor(UInt32).0.value\ := \Posit32::.ctor(UInt32).0.value.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- @this.PositBits = 0u;
                         -- 
                         \Posit32::.ctor(UInt32).0.this\.\PositBits\ := to_unsigned(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = true;
-                        -- 
-                        \Posit32::.ctor(UInt32).0.flag\ := True;
                         \Posit32::.ctor(UInt32).0._State\ := \Posit32::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -2375,8 +2275,8 @@ begin
         Variable \Posit32::.ctor(Int32).0._State\: \Posit32::.ctor(Int32).0._States\ := \Posit32::.ctor(Int32).0._State_0\;
         Variable \Posit32::.ctor(Int32).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::.ctor(Int32).0.conditionalbf40994b16b08e8bf40fff739d6e7ef277b64d0b6a7c9a9f9069815990d1f89e\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::.ctor(Int32).0.objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2386,7 +2286,7 @@ begin
                 \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
                 \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_0\;
                 \Posit32::.ctor(Int32).0.value\ := to_signed(0, 32);
-                \Posit32::.ctor(Int32).0.conditionalbf40994b16b08e8bf40fff739d6e7ef277b64d0b6a7c9a9f9069815990d1f89e\ := to_unsigned(0, 32);
+                \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\ := to_unsigned(0, 32);
             else 
                 case \Posit32::.ctor(Int32).0._State\ is 
                     when \Posit32::.ctor(Int32).0._State_0\ => 
@@ -2412,20 +2312,20 @@ begin
                         \Posit32::.ctor(Int32).0.this\ := \Posit32::.ctor(Int32).0.this.parameter.In\;
                         \Posit32::.ctor(Int32).0.value\ := \Posit32::.ctor(Int32).0.value.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditionalbf40994b16b08e8bf40fff739d6e7ef277b64d0b6a7c9a9f9069815990d1f89e;
+                        -- uint conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b;
+                        -- Posit32 object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b = new Posit32 (0u);
+                        -- object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321 = new Posit32 (0u);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).0.objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).0.objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b\;
+                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\;
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_3\;
@@ -2434,11 +2334,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).0.objecta6080a7198b481c1d6693104edda467563fe0f022258778da20725dcd3a3802b\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditionalbf40994b16b08e8bf40fff739d6e7ef277b64d0b6a7c9a9f9069815990d1f89e = 0u;
+                            -- conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331 = 0u;
                             -- 
-                            \Posit32::.ctor(Int32).0.conditionalbf40994b16b08e8bf40fff739d6e7ef277b64d0b6a7c9a9f9069815990d1f89e\ := to_unsigned(0, 32);
+                            \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\ := to_unsigned(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- @this.PositBits = 0u;
                             -- 
@@ -2502,11 +2402,10 @@ begin
     \Posit32::EncodeRegimeBits(Int32).0._StateMachine\: process (\Clock\) 
         Variable \Posit32::EncodeRegimeBits(Int32).0._State\: \Posit32::EncodeRegimeBits(Int32).0._States\ := \Posit32::EncodeRegimeBits(Int32).0._State_0\;
         Variable \Posit32::EncodeRegimeBits(Int32).0.regimeKValue\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::EncodeRegimeBits(Int32).0.flag\: boolean := false;
-        Variable \Posit32::EncodeRegimeBits(Int32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::EncodeRegimeBits(Int32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::EncodeRegimeBits(Int32).0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -2524,11 +2423,10 @@ begin
                 \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                 \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_0\;
                 \Posit32::EncodeRegimeBits(Int32).0.regimeKValue\ := to_signed(0, 32);
-                \Posit32::EncodeRegimeBits(Int32).0.flag\ := false;
-                \Posit32::EncodeRegimeBits(Int32).0.num\ := to_unsigned(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.0\ := false;
+                \Posit32::EncodeRegimeBits(Int32).0.num\ := to_unsigned(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \Posit32::EncodeRegimeBits(Int32).0.return.0\ := to_unsigned(0, 8);
                 \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -2558,66 +2456,60 @@ begin
                     when \Posit32::EncodeRegimeBits(Int32).0._State_2\ => 
                         \Posit32::EncodeRegimeBits(Int32).0.regimeKValue\ := \Posit32::EncodeRegimeBits(Int32).0.regimeKValue.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = regimeKValue > 0;
+                        -- if (regimeKValue > 0) {
+                        -- 	uint num;
+                        -- 	num = (uint)((1 << regimeKValue + 1) - 1);
+                        -- 	return num << 32 - (int)(Posit32.GetMostSignificantOnePosition (num)) - 1;
+                        -- }
                         -- 
                         \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.0\ := \Posit32::EncodeRegimeBits(Int32).0.regimeKValue\ > to_signed(0, 32);
-                        \Posit32::EncodeRegimeBits(Int32).0.flag\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	num = 1u << regimeKValue + 1 - 1u;
-                        -- 	num = num << (int)((System.Int32)(32 - (System.Int32)(Posit32.GetMostSignificantOnePosition (num))) - 1);
-                        -- }
-                        -- else {
-                        -- 	num = 1073741824u >> -regimeKValue;
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::EncodeRegimeBits(Int32).0._State_4\ and ends in state \Posit32::EncodeRegimeBits(Int32).0._State_7\.
-                        --     * The false branch starts in state \Posit32::EncodeRegimeBits(Int32).0._State_8\ and ends in state \Posit32::EncodeRegimeBits(Int32).0._State_8\.
                         --     * Execution after either branch will continue in the following state: \Posit32::EncodeRegimeBits(Int32).0._State_3\.
 
-                        if (\Posit32::EncodeRegimeBits(Int32).0.flag\) then 
+                        if (\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.0\) then 
                             \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_4\;
                         else 
-                            \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_8\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Posit32::EncodeRegimeBits(Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \Posit32::EncodeRegimeBits(Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return num;
+                        -- return 1073741824u >> -regimeKValue;
                         -- 
-                        \Posit32::EncodeRegimeBits(Int32).0.return\ <= \Posit32::EncodeRegimeBits(Int32).0.num\;
+                        \Posit32::EncodeRegimeBits(Int32).0.unaryOperationResult.0\ := -\Posit32::EncodeRegimeBits(Int32).0.regimeKValue\;
+                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.7\ := shift_right(to_unsigned(1073741824, 32), to_integer(unsigned(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.unaryOperationResult.0\, 5) and "11111")));
+                        \Posit32::EncodeRegimeBits(Int32).0.return\ <= \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.7\;
                         \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.963
                     when \Posit32::EncodeRegimeBits(Int32).0._State_4\ => 
                         -- True branch of the if-else started in state \Posit32::EncodeRegimeBits(Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num = 1u << regimeKValue + 1 - 1u;
-                        -- 	num = num << (int)((System.Int32)(32 - (System.Int32)(Posit32.GetMostSignificantOnePosition (num))) - 1);
+                        -- 	uint num;
+                        -- 	num = (uint)((1 << regimeKValue + 1) - 1);
+                        -- 	return num << 32 - (int)(Posit32.GetMostSignificantOnePosition (num)) - 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = 1u << regimeKValue + 1 - 1u;
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)((1 << regimeKValue + 1) - 1);
                         -- 
                         \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.1\ := \Posit32::EncodeRegimeBits(Int32).0.regimeKValue\ + to_signed(1, 32);
-                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.1\, 5))));
+                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.1\, 5))));
                         \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0.8507
                     when \Posit32::EncodeRegimeBits(Int32).0._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\ - to_unsigned(1, 32);
-                        \Posit32::EncodeRegimeBits(Int32).0.num\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\;
+                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\ := unsigned((\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.2\) - to_signed(1, 32));
+                        \Posit32::EncodeRegimeBits(Int32).0.num\ := (\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num = num << (int)((System.Int32)(32 - (System.Int32)(Posit32.GetMostSignificantOnePosition (num))) - 1);
+                        -- return num << 32 - (int)(Posit32.GetMostSignificantOnePosition (num)) - 1;
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::EncodeRegimeBits(Int32).0.num\;
@@ -2630,37 +2522,20 @@ begin
                             \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
                             \Posit32::EncodeRegimeBits(Int32).0.return.0\ := \Posit32::EncodeRegimeBits(Int32).0.Posit32::GetMostSignificantOnePosition(UInt32).return.0\;
                             \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ := to_signed(32, 32) - signed(SmartResize((\Posit32::EncodeRegimeBits(Int32).0.return.0\), 32));
-                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\ := (\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\) - to_signed(1, 32);
+                            \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.4\ - to_signed(1, 32);
                             \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \Posit32::EncodeRegimeBits(Int32).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\ := shift_left(\Posit32::EncodeRegimeBits(Int32).0.num\, to_integer(unsigned(SmartResize((\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\), 5))));
-                        \Posit32::EncodeRegimeBits(Int32).0.num\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\;
+                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\ := shift_left(\Posit32::EncodeRegimeBits(Int32).0.num\, to_integer(unsigned(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.5\, 5))));
+                        \Posit32::EncodeRegimeBits(Int32).0.return\ <= \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.6\;
+                        \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Posit32::EncodeRegimeBits(Int32).0._State_2\.
                         if (\Posit32::EncodeRegimeBits(Int32).0._State\ = \Posit32::EncodeRegimeBits(Int32).0._State_7\) then 
                             \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5244
-                    when \Posit32::EncodeRegimeBits(Int32).0._State_8\ => 
-                        -- False branch of the if-else started in state \Posit32::EncodeRegimeBits(Int32).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num = 1073741824u >> -regimeKValue;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = 1073741824u >> -regimeKValue;
-                        -- 
-                        \Posit32::EncodeRegimeBits(Int32).0.unaryOperationResult.0\ := -\Posit32::EncodeRegimeBits(Int32).0.regimeKValue\;
-                        \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.7\ := shift_right(to_unsigned(1073741824, 32), to_integer(unsigned(SmartResize(\Posit32::EncodeRegimeBits(Int32).0.unaryOperationResult.0\, 5) and "11111")));
-                        \Posit32::EncodeRegimeBits(Int32).0.num\ := \Posit32::EncodeRegimeBits(Int32).0.binaryOperationResult.7\;
-                        -- Going to the state after the if-else which was started in state \Posit32::EncodeRegimeBits(Int32).0._State_2\.
-                        if (\Posit32::EncodeRegimeBits(Int32).0._State\ = \Posit32::EncodeRegimeBits(Int32).0._State_8\) then 
-                            \Posit32::EncodeRegimeBits(Int32).0._State\ := \Posit32::EncodeRegimeBits(Int32).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.963
                 end case;
             end if;
         end if;
@@ -2676,65 +2551,63 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag2\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag3\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag4\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag5\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag6\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag7\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag8\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\: boolean := false;
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\: boolean := false;
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.23\: boolean := false;
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.25\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.27\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\: boolean := false;
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2760,65 +2633,63 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag2\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag3\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag4\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag5\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag6\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag7\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag8\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.0\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := to_unsigned(0, 8);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\ := false;
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\ := false;
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.2\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := to_signed(0, 64);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.4\ := to_unsigned(0, 8);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.5\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.23\ := false;
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.25\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.26\ := to_signed(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.27\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\ := false;
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := to_signed(0, 64);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\ := to_unsigned(0, 32);
             else 
                 case \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ is 
@@ -2848,45 +2719,6 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- byte b;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag5;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag6;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag7;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag8;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- num = Posit32.EncodeRegimeBits (regimeKValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::EncodeRegimeBits(System.Int32)
@@ -2901,11 +2733,14 @@ begin
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.0\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::EncodeRegimeBits(Int32).return.0\;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
+                            -- byte b;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
                             -- b = Posit32.LengthOfRunOfBits (num, 31);
                             -- 
                             -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(31, 8);
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\;
                         end if;
@@ -2917,19 +2752,21 @@ begin
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = (int)(28 - (System.Int32)(b));
+                            -- int num2;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (int)(28 - (int)(b));
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := to_signed(28, 32) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\), 32));
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328;
+                            -- uint conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (num2 >= 0) {
-                            -- 	conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328 = exponentBits << num2;
-                            -- }
-                            -- else {
-                            -- 	conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328 = exponentBits >> -num2;
+                            -- if ((num2 >= 0)) {
+                            -- 	conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9 = (exponentBits << num2);
+                            -- } else {
+                            -- 	conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9 = (exponentBits >> -num2);
                             -- }
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ >= to_signed(0, 32);
@@ -2939,7 +2776,7 @@ begin
                             --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_7\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_7\.
                             --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
 
-                            if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\) then 
+                            if ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\)) then 
                                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\;
                             else 
                                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_7\;
@@ -2949,113 +2786,69 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num = num + conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328;
+                        -- num = num + (conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9);
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9\);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = num2 < 0;
+                        -- if (num2 < 0) {
+                        -- 	uint conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791;
+                        -- 	if ((num2 > 28)) {
+                        -- 		conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits >> 32 + num2);
+                        -- 	} else {
+                        -- 		conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits << 32 + num2);
+                        -- 	}
+                        -- 	exponentBits = (conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791);
+                        -- 	if (exponentBits < 2147483648u) {
+                        -- 		uint conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
+                        -- 		if (signBit) {
+                        -- 			conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
+                        -- 		} else {
+                        -- 			conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
+                        -- 		}
+                        -- 		return conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
+                        -- 	}
+                        -- 	uint conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3;
+                        -- 	if ((exponentBits != 2147483648u)) {
+                        -- 		conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + 1L));
+                        -- 	} else {
+                        -- 		conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 	}
+                        -- 	num = (conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3);
+                        -- 	uint conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0;
+                        -- 	if (signBit) {
+                        -- 		conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = Posit32.GetTwosComplement (num);
+                        -- 	} else {
+                        -- 		conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = num;
+                        -- 	}
+                        -- 	return conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0;
+                        -- }
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ < to_signed(0, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	flag2 = num2 <= 28;
-                        -- 	if (flag2) {
-                        -- 		exponentBits = exponentBits << 32 + num2;
-                        -- 	}
-                        -- 	else {
-                        -- 		exponentBits = exponentBits >> 32 + num2;
-                        -- 	}
-                        -- 	flag3 = exponentBits < 2147483648u;
-                        -- 	if (flag3) {
-                        -- 		if (signBit) {
-                        -- 			result = Posit32.GetTwosComplement (num);
-                        -- 		}
-                        -- 		else {
-                        -- 			result = num;
-                        -- 		}
-                        -- 	}
-                        -- 	else {
-                        -- 		flag4 = exponentBits == 2147483648u;
-                        -- 		if (flag4) {
-                        -- 			num = num + num & 1u;
-                        -- 		}
-                        -- 		else {
-                        -- 			num = num + 1u;
-                        -- 		}
-                        -- 		if (signBit) {
-                        -- 			result = Posit32.GetTwosComplement (num);
-                        -- 		}
-                        -- 		else {
-                        -- 			result = num;
-                        -- 		}
-                        -- 	}
-                        -- }
-                        -- else {
-                        -- 	num3 = (int)((System.Int32)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
-                        -- 	fractionBits = Posit32.SetZero (fractionBits, (ushort)num3);
-                        -- 	num4 = 28 - num3 - (int)b;
-                        -- 	uint conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83;
-                        -- 	if (num4 >= 0) {
-                        -- 		conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits << num4;
-                        -- 	}
-                        -- 	else {
-                        -- 		conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits >> -num4;
-                        -- 	}
-                        -- 	num = num + conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83;
-                        -- 	flag5 = num4 < 0;
-                        -- 	if (flag5) {
-                        -- 		flag6 = 32 + num4 >= 0;
-                        -- 		if (flag6) {
-                        -- 			fractionBits = fractionBits << 32 + num4;
-                        -- 		}
-                        -- 		else {
-                        -- 			fractionBits = fractionBits >> -32 - num4;
-                        -- 		}
-                        -- 		flag7 = fractionBits >= 2147483648u;
-                        -- 		if (flag7) {
-                        -- 			flag8 = fractionBits == 2147483648u;
-                        -- 			if (flag8) {
-                        -- 				num = num + num & 1u;
-                        -- 			}
-                        -- 			else {
-                        -- 				num = num + 1u;
-                        -- 			}
-                        -- 		}
-                        -- 	}
-                        -- 	if (signBit) {
-                        -- 		result = Posit32.GetTwosComplement (num);
-                        -- 	}
-                        -- 	else {
-                        -- 		result = num;
-                        -- 	}
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\.
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\.
                         --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\.
 
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag\) then 
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\;
                         else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6016
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328 = exponentBits << num2;
+                        -- 	conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9 = (exponentBits << num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328 = exponentBits << num2;
+                        -- conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9 = (exponentBits << num2);
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\, to_integer(unsigned(SmartResize(unsigned(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\), 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\);
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\;
@@ -3065,15 +2858,15 @@ begin
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328 = exponentBits >> -num2;
+                        -- 	conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9 = (exponentBits >> -num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328 = exponentBits >> -num2;
+                        -- conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9 = (exponentBits >> -num2);
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\ := -\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\, 5) and "11111")));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalab4dff45ad1531aa3ffc32fdf69ce01c7764a68f6c02e15a454679d3adb1a328\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional080c1e8270378fd06e215f3c8f2add99c4865c1fbe8dd647a36c0c7e2edafab9\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\);
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_7\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\;
@@ -3082,68 +2875,70 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return result;
+                        -- int num3;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = (int)((int)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= true;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	flag2 = num2 <= 28;
-                        -- 	if (flag2) {
-                        -- 		exponentBits = exponentBits << 32 + num2;
+                        -- 	uint conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791;
+                        -- 	if ((num2 > 28)) {
+                        -- 		conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits >> 32 + num2);
+                        -- 	} else {
+                        -- 		conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits << 32 + num2);
                         -- 	}
-                        -- 	else {
-                        -- 		exponentBits = exponentBits >> 32 + num2;
-                        -- 	}
-                        -- 	flag3 = exponentBits < 2147483648u;
-                        -- 	if (flag3) {
+                        -- 	exponentBits = (conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791);
+                        -- 	if (exponentBits < 2147483648u) {
+                        -- 		uint conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
                         -- 		if (signBit) {
-                        -- 			result = Posit32.GetTwosComplement (num);
+                        -- 			conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
+                        -- 		} else {
+                        -- 			conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
                         -- 		}
-                        -- 		else {
-                        -- 			result = num;
-                        -- 		}
+                        -- 		return conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
                         -- 	}
-                        -- 	else {
-                        -- 		flag4 = exponentBits == 2147483648u;
-                        -- 		if (flag4) {
-                        -- 			num = num + num & 1u;
-                        -- 		}
-                        -- 		else {
-                        -- 			num = num + 1u;
-                        -- 		}
-                        -- 		if (signBit) {
-                        -- 			result = Posit32.GetTwosComplement (num);
-                        -- 		}
-                        -- 		else {
-                        -- 			result = num;
-                        -- 		}
+                        -- 	uint conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3;
+                        -- 	if ((exponentBits != 2147483648u)) {
+                        -- 		conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + 1L));
+                        -- 	} else {
+                        -- 		conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + ((long)(num) & 1L)));
                         -- 	}
+                        -- 	num = (conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3);
+                        -- 	uint conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0;
+                        -- 	if (signBit) {
+                        -- 		conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = Posit32.GetTwosComplement (num);
+                        -- 	} else {
+                        -- 		conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = num;
+                        -- 	}
+                        -- 	return conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag2 = num2 <= 28;
+                        -- uint conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ <= to_signed(28, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag2\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (flag2) {
-                        -- 	exponentBits = exponentBits << 32 + num2;
-                        -- }
-                        -- else {
-                        -- 	exponentBits = exponentBits >> 32 + num2;
+                        -- if ((num2 > 28)) {
+                        -- 	conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits >> 32 + num2);
+                        -- } else {
+                        -- 	conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits << 32 + num2);
                         -- }
                         -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\ > to_signed(28, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_11\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_11\.
                         --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\.
                         --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\.
 
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag2\) then 
+                        if ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\)) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_11\;
                         else 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\;
@@ -3152,109 +2947,117 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag3 = exponentBits < 2147483648u;
+                        -- exponentBits = (conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791);
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (exponentBits < 2147483648u) {
+                        -- 	uint conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
+                        -- 	if (signBit) {
+                        -- 		conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
+                        -- 	} else {
+                        -- 		conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
+                        -- 	}
+                        -- 	return conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
+                        -- }
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ < "10000000000000000000000000000000";
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag3\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag3) {
-                        -- 	if (signBit) {
-                        -- 		result = Posit32.GetTwosComplement (num);
-                        -- 	}
-                        -- 	else {
-                        -- 		result = num;
-                        -- 	}
-                        -- }
-                        -- else {
-                        -- 	flag4 = exponentBits == 2147483648u;
-                        -- 	if (flag4) {
-                        -- 		num = num + num & 1u;
-                        -- 	}
-                        -- 	else {
-                        -- 		num = num + 1u;
-                        -- 	}
-                        -- 	if (signBit) {
-                        -- 		result = Posit32.GetTwosComplement (num);
-                        -- 	}
-                        -- 	else {
-                        -- 		result = num;
-                        -- 	}
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\.
                         --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
 
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag3\) then 
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\;
                         else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_11\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	exponentBits = exponentBits << 32 + num2;
+                        -- 	conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits >> 32 + num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = exponentBits << 32 + num2;
+                        -- conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits >> 32 + num2);
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\ := to_signed(32, 32) + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\, 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\, 5) and "11111")));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\);
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_11\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8507
+                        -- Clock cycles needed to complete this state (approximation): 0.9774
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\ => 
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	exponentBits = exponentBits >> 32 + num2;
+                        -- 	conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits << 32 + num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- exponentBits = exponentBits >> 32 + num2;
+                        -- conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791 = (exponentBits << 32 + num2);
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\ := to_signed(32, 32) + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\, 5) and "11111")));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\, 5))));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8ec324176b3f3fcd58fd5cfa6806fcab9222414090d26d94c66a65f1e77ad791\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.9774
+                        -- Clock cycles needed to complete this state (approximation): 0.8507
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\.
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((exponentBits != 2147483648u)) {
+                        -- 	conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + 1L));
+                        -- } else {
+                        -- 	conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- }
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ /= "10000000000000000000000000000000";
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
+                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
+
+                        if ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\)) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\;
+                        else 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.264
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
+                        -- 	uint conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
                         -- 	if (signBit) {
-                        -- 		result = Posit32.GetTwosComplement (num);
+                        -- 		conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
+                        -- 	} else {
+                        -- 		conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
                         -- 	}
-                        -- 	else {
-                        -- 		result = num;
-                        -- 	}
+                        -- 	return conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
+                        -- uint conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- if (signBit) {
-                        -- 	result = Posit32.GetTwosComplement (num);
-                        -- }
-                        -- else {
-                        -- 	result = num;
+                        -- 	conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
+                        -- } else {
+                        -- 	conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
                         -- }
                         -- 
 
@@ -3271,6 +3074,11 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\;
@@ -3280,11 +3088,11 @@ begin
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = Posit32.GetTwosComplement (num);
+                        -- 	conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = Posit32.GetTwosComplement (num);
+                        -- conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = Posit32.GetTwosComplement (num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
@@ -3296,7 +3104,7 @@ begin
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.2\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.2\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.2\;
                             -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\.
                             if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_17\) then 
                                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\;
@@ -3307,222 +3115,137 @@ begin
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = num;
+                        -- 	conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = num;
+                        -- conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalc44e6e18dba54d497a9ebfd5cd45c62d920ed273ec5aec35f89d9d27a8e797d3\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_18\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\.
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	flag4 = exponentBits == 2147483648u;
-                        -- 	if (flag4) {
-                        -- 		num = num + num & 1u;
-                        -- 	}
-                        -- 	else {
-                        -- 		num = num + 1u;
-                        -- 	}
-                        -- 	if (signBit) {
-                        -- 		result = Posit32.GetTwosComplement (num);
-                        -- 	}
-                        -- 	else {
-                        -- 		result = num;
-                        -- 	}
-                        -- }
+                        -- num = (conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3);
                         -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag4 = exponentBits == 2147483648u;
+                        -- uint conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0;
                         -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ = "10000000000000000000000000000000";
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag4\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag4) {
-                        -- 	num = num + num & 1u;
-                        -- }
-                        -- else {
-                        -- 	num = num + 1u;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
-
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag4\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\;
-                        else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.264
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- if (signBit) {
-                        -- 	result = Posit32.GetTwosComplement (num);
-                        -- }
-                        -- else {
-                        -- 	result = num;
+                        -- 	conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = Posit32.GetTwosComplement (num);
+                        -- } else {
+                        -- 	conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = num;
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\.
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\.
+                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\.
 
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.signBit\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\;
                         else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\ => 
+                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + 1L));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + 1L));
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\));
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\ => 
+                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) and to_signed(1, 64);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) + (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\)), 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalfaf425f73af9abdd07507acc85c797211aab0cbc36083f9065056c957f27c6b3\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\));
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5632
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\ => 
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num = num + num & 1u;
+                        -- 	conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = Posit32.GetTwosComplement (num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = num + num & 1u;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ and to_unsigned(1, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_21\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4649
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num = num + 1u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = num + 1u;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + to_unsigned(1, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\ => 
-                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = Posit32.GetTwosComplement (num);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = Posit32.GetTwosComplement (num);
+                        -- conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = Posit32.GetTwosComplement (num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\ => 
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\;
-                            -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
-                            if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\) then 
-                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.3\;
+                            -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
+                            if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_24\) then 
+                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\ => 
+                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = num;
+                        -- 	conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = num;
+                        -- conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_23\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalb43e86d5d828dd5119f9f88af0ba7c790398b5cca8ee395bf1a45e5780b616e0\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_19\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_25\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num3 = (int)((System.Int32)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
-                        -- 	fractionBits = Posit32.SetZero (fractionBits, (ushort)num3);
-                        -- 	num4 = 28 - num3 - (int)b;
-                        -- 	uint conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83;
-                        -- 	if (num4 >= 0) {
-                        -- 		conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits << num4;
-                        -- 	}
-                        -- 	else {
-                        -- 		conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits >> -num4;
-                        -- 	}
-                        -- 	num = num + conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83;
-                        -- 	flag5 = num4 < 0;
-                        -- 	if (flag5) {
-                        -- 		flag6 = 32 + num4 >= 0;
-                        -- 		if (flag6) {
-                        -- 			fractionBits = fractionBits << 32 + num4;
-                        -- 		}
-                        -- 		else {
-                        -- 			fractionBits = fractionBits >> -32 - num4;
-                        -- 		}
-                        -- 		flag7 = fractionBits >= 2147483648u;
-                        -- 		if (flag7) {
-                        -- 			flag8 = fractionBits == 2147483648u;
-                        -- 			if (flag8) {
-                        -- 				num = num + num & 1u;
-                        -- 			}
-                        -- 			else {
-                        -- 				num = num + 1u;
-                        -- 			}
-                        -- 		}
-                        -- 	}
-                        -- 	if (signBit) {
-                        -- 		result = Posit32.GetTwosComplement (num);
-                        -- 	}
-                        -- 	else {
-                        -- 		result = num;
-                        -- 	}
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = (int)((System.Int32)(Posit32.GetMostSignificantOnePosition (fractionBits)) - 1);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= true;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\ => 
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_26\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32)
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetMostSignificantOnePosition(UInt32)._Started.0\ <= false;
@@ -3536,405 +3259,404 @@ begin
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(unsigned(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\), 16);
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16)._Started.0\ <= true;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\ => 
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16)
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.5\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::SetZero(UInt32,UInt16).return.0\;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.5\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = 28 - num3 - (int)b;
+                            -- int num4;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = (int)((int)(28 - num3) - (int)(b));
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := to_signed(28, 32) - \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ - signed(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\, 32));
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\), 32));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\);
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83;
+                            -- uint conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (num4 >= 0) {
-                            -- 	conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits << num4;
-                            -- }
-                            -- else {
-                            -- 	conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits >> -num4;
+                            -- if ((num4 >= 0)) {
+                            -- 	conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2 = (fractionBits << num4);
+                            -- } else {
+                            -- 	conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2 = (fractionBits >> -num4);
                             -- }
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\ >= to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
-                            --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\.
-                            --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
+                            --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\.
+                            --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
+                            --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\.
 
-                            if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\) then 
-                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\;
+                            if ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\)) then 
+                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\;
                             else 
-                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\;
+                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.9279
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\ => 
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num = num + conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83;
+                        -- num = num + (conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2);
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2\);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag5 = num4 < 0;
+                        -- if (num4 < 0) {
+                        -- 	uint conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3;
+                        -- 	if ((32 + num4 < 0)) {
+                        -- 		conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits >> -(32 - num4));
+                        -- 	} else {
+                        -- 		conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits << 32 + num4);
+                        -- 	}
+                        -- 	fractionBits = (conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3);
+                        -- 	if (fractionBits >= 2147483648u) {
+                        -- 		uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 		if ((fractionBits != 2147483648u)) {
+                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 		} else {
+                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 		}
+                        -- 		num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- 	}
+                        -- }
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.23\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\ < to_signed(0, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag5\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.23\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag5) {
-                        -- 	flag6 = 32 + num4 >= 0;
-                        -- 	if (flag6) {
-                        -- 		fractionBits = fractionBits << 32 + num4;
-                        -- 	}
-                        -- 	else {
-                        -- 		fractionBits = fractionBits >> -32 - num4;
-                        -- 	}
-                        -- 	flag7 = fractionBits >= 2147483648u;
-                        -- 	if (flag7) {
-                        -- 		flag8 = fractionBits == 2147483648u;
-                        -- 		if (flag8) {
-                        -- 			num = num + num & 1u;
-                        -- 		}
-                        -- 		else {
-                        -- 			num = num + 1u;
-                        -- 		}
-                        -- 	}
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
 
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag5\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\;
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.23\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\ => 
-                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\ => 
+                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits << num4;
+                        -- 	conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2 = (fractionBits << num4);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits << num4;
+                        -- conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2 = (fractionBits << num4);
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\, to_integer(unsigned(SmartResize(unsigned(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\), 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\);
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5244
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\ => 
+                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits >> -num4;
+                        -- 	conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2 = (fractionBits >> -num4);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83 = fractionBits >> -num4;
+                        -- conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2 = (fractionBits >> -num4);
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.1\ := -\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.1\, 5) and "11111")));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala397d88077016a431282a7da64c24150eade5c64d88e60f80558e29504754f83\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalbf654792f1ef201c91607ce88a255151da71234b0142c97b5e2a3594fec8b3f2\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\);
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.963
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\ => 
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (signBit) {
-                        -- 	result = Posit32.GetTwosComplement (num);
-                        -- }
-                        -- else {
-                        -- 	result = num;
+                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = Posit32.GetTwosComplement (num);
+                        -- } else {
+                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\.
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\.
+                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\.
 
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.signBit\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\;
                         else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\ => 
-                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\ => 
+                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	flag6 = 32 + num4 >= 0;
-                        -- 	if (flag6) {
-                        -- 		fractionBits = fractionBits << 32 + num4;
+                        -- 	uint conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3;
+                        -- 	if ((32 + num4 < 0)) {
+                        -- 		conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits >> -(32 - num4));
+                        -- 	} else {
+                        -- 		conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits << 32 + num4);
                         -- 	}
-                        -- 	else {
-                        -- 		fractionBits = fractionBits >> -32 - num4;
-                        -- 	}
-                        -- 	flag7 = fractionBits >= 2147483648u;
-                        -- 	if (flag7) {
-                        -- 		flag8 = fractionBits == 2147483648u;
-                        -- 		if (flag8) {
-                        -- 			num = num + num & 1u;
+                        -- 	fractionBits = (conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3);
+                        -- 	if (fractionBits >= 2147483648u) {
+                        -- 		uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 		if ((fractionBits != 2147483648u)) {
+                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 		} else {
+                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
                         -- 		}
-                        -- 		else {
-                        -- 			num = num + 1u;
-                        -- 		}
+                        -- 		num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
                         -- 	}
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag6 = 32 + num4 >= 0;
+                        -- uint conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((32 + num4 < 0)) {
+                        -- 	conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits >> -(32 - num4));
+                        -- } else {
+                        -- 	conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits << 32 + num4);
+                        -- }
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.24\ := to_signed(32, 32) + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.25\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.24\ >= to_signed(0, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.25\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag6) {
-                        -- 	fractionBits = fractionBits << 32 + num4;
-                        -- }
-                        -- else {
-                        -- 	fractionBits = fractionBits >> -32 - num4;
-                        -- }
-                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.25\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.24\ < to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
+                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
 
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag6\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\;
+                        if ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.25\)) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\;
                         else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\ => 
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag7 = fractionBits >= 2147483648u;
+                        -- fractionBits = (conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3);
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (fractionBits >= 2147483648u) {
+                        -- 	uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 	if ((fractionBits != 2147483648u)) {
+                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 	} else {
+                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 	}
+                        -- 	num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- }
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ >= "10000000000000000000000000000000";
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag7\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag7) {
-                        -- 	flag8 = fractionBits == 2147483648u;
-                        -- 	if (flag8) {
-                        -- 		num = num + num & 1u;
-                        -- 	}
-                        -- 	else {
-                        -- 		num = num + 1u;
-                        -- 	}
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\.
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\.
 
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag7\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\;
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\ => 
-                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\ => 
+                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	fractionBits = fractionBits << 32 + num4;
+                        -- 	conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits >> -(32 - num4));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- fractionBits = fractionBits << 32 + num4;
+                        -- conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits >> -(32 - num4));
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.26\ := to_signed(32, 32) + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.27\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.26\, 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.27\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\.
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.26\ := to_signed(32, 32) - \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := -(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.26\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6382
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.27\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\, 5) and "11111")));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.27\);
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\ => 
+                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits << 32 + num4);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3 = (fractionBits << 32 + num4);
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\ := to_signed(32, 32) + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\, 5))));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\);
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_32\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_36\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.8507
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	fractionBits = fractionBits >> -32 - num4;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- fractionBits = fractionBits >> -32 - num4;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\ := to_signed(32, 32) - \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num4\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := -\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6382
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\, 5) and "11111")));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\ => 
-                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	flag8 = fractionBits == 2147483648u;
-                        -- 	if (flag8) {
-                        -- 		num = num + num & 1u;
-                        -- 	}
-                        -- 	else {
-                        -- 		num = num + 1u;
-                        -- 	}
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag8 = fractionBits == 2147483648u;
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ = "10000000000000000000000000000000";
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag8\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag8) {
-                        -- 	num = num + num & 1u;
-                        -- }
-                        -- else {
-                        -- 	num = num + 1u;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\.
-                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\.
-
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.flag8\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\;
-                        else 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.264
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\ => 
-                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\ => 
-                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num = num + num & 1u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = num + num & 1u;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ and to_unsigned(1, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4649
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num = num + 1u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = num + 1u;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + to_unsigned(1, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\;
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ => 
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = Posit32.GetTwosComplement (num);
+                        -- 	uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 	if ((fractionBits != 2147483648u)) {
+                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 	} else {
+                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 	}
+                        -- 	num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = Posit32.GetTwosComplement (num);
+                        -- uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((fractionBits != 2147483648u)) {
+                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- } else {
+                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- }
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ /= "10000000000000000000000000000000";
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
+                        --     * The false branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\.
+
+                        if ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\)) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\;
+                        else 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.264
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\ => 
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\);
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\ => 
+                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\));
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\ => 
+                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) and to_signed(1, 64);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) + (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\)), 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\));
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5632
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\ => 
+                        -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\ => 
+                        -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = Posit32.GetTwosComplement (num);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = Posit32.GetTwosComplement (num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\ => 
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\;
-                            -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
-                            if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\) then 
-                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\;
+                            -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
+                            if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\) then 
+                                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\ => 
-                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
+                    when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ => 
+                        -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = num;
+                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = num;
+                        -- conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.result\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
-                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
-                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\) then 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3949,9 +3671,10 @@ begin
         Variable \Posit32::GetRegimeKValue().0._State\: \Posit32::GetRegimeKValue().0._States\ := \Posit32::GetRegimeKValue().0._State_0\;
         Variable \Posit32::GetRegimeKValue().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::GetRegimeKValue().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetRegimeKValue().0.conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetRegimeKValue().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetRegimeKValue().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::GetRegimeKValue().0.conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737\: signed(7 downto 0) := to_signed(0, 8);
         Variable \Posit32::GetRegimeKValue().0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3964,9 +3687,10 @@ begin
                 \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
                 \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_0\;
                 \Posit32::GetRegimeKValue().0.num\ := to_unsigned(0, 32);
+                \Posit32::GetRegimeKValue().0.conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716\ := to_unsigned(0, 32);
                 \Posit32::GetRegimeKValue().0.b\ := to_unsigned(0, 8);
                 \Posit32::GetRegimeKValue().0.return.0\ := to_unsigned(0, 8);
-                \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\ := to_signed(0, 8);
+                \Posit32::GetRegimeKValue().0.conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737\ := to_signed(0, 8);
                 \Posit32::GetRegimeKValue().0.unaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \Posit32::GetRegimeKValue().0._State\ is 
@@ -3993,18 +3717,25 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- byte b;
+                        -- uint conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716;
                         -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716 = 0u;
+                        -- 
+                        \Posit32::GetRegimeKValue().0.conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num = 0u;
                         -- 
                         \Posit32::GetRegimeKValue().0.num\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
+                        -- byte b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- b = Posit32.LengthOfRunOfBits (0u, 31);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
                         \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
-                        \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(31, 8);
+                        \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
                         \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
                         \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4015,17 +3746,17 @@ begin
                             \Posit32::GetRegimeKValue().0.return.0\ := \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::GetRegimeKValue().0.b\ := \Posit32::GetRegimeKValue().0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- sbyte conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65;
+                            -- sbyte conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65 = (sbyte)-(System.Int32)((sbyte)b);
+                            -- conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737 = ((sbyte)(-(int)(b)));
                             -- 
-                            \Posit32::GetRegimeKValue().0.unaryOperationResult.0\ := -signed(SmartResize((signed(\Posit32::GetRegimeKValue().0.b\)), 32));
-                            \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\ := SmartResize(\Posit32::GetRegimeKValue().0.unaryOperationResult.0\, 8);
+                            \Posit32::GetRegimeKValue().0.unaryOperationResult.0\ := -signed(SmartResize((\Posit32::GetRegimeKValue().0.b\), 32));
+                            \Posit32::GetRegimeKValue().0.conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737\ := (SmartResize((\Posit32::GetRegimeKValue().0.unaryOperationResult.0\), 8));
                             -- The following section was transformed from the .NET statement below:
-                            -- return conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65;
+                            -- return conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737;
                             -- 
-                            \Posit32::GetRegimeKValue().0.return\ <= \Posit32::GetRegimeKValue().0.conditional87b33f859401deb82171ed22ec6fd149518753e0ff610a76c4f9a3bc1cf3fc65\;
+                            \Posit32::GetRegimeKValue().0.return\ <= \Posit32::GetRegimeKValue().0.conditional882cd98d817375e03765080fbf2e91fcc69740961af08057feb5bee6e57e0737\;
                             \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3119
@@ -4042,7 +3773,7 @@ begin
         Variable \Posit32::CalculateScaleFactor().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::CalculateScaleFactor().0.regimeKValue\: signed(7 downto 0) := to_signed(0, 8);
         Variable \Posit32::CalculateScaleFactor().0.return.0\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \Posit32::CalculateScaleFactor().0.conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \Posit32::CalculateScaleFactor().0.conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\: boolean := false;
         Variable \Posit32::CalculateScaleFactor().0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::CalculateScaleFactor().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4058,7 +3789,7 @@ begin
                 \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_0\;
                 \Posit32::CalculateScaleFactor().0.regimeKValue\ := to_signed(0, 8);
                 \Posit32::CalculateScaleFactor().0.return.0\ := to_signed(0, 8);
-                \Posit32::CalculateScaleFactor().0.conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7\ := to_signed(0, 16);
+                \Posit32::CalculateScaleFactor().0.conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de\ := to_signed(0, 32);
                 \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\ := false;
                 \Posit32::CalculateScaleFactor().0.binaryOperationResult.1\ := to_signed(0, 64);
                 \Posit32::CalculateScaleFactor().0.return.1\ := to_unsigned(0, 32);
@@ -4102,83 +3833,82 @@ begin
                             \Posit32::CalculateScaleFactor().0.return.0\ := \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().return.0\;
                             \Posit32::CalculateScaleFactor().0.regimeKValue\ := \Posit32::CalculateScaleFactor().0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- short conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7;
+                            -- int conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((System.Int32)(regimeKValue) == -31) {
-                            -- 	conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7 = 0;
-                            -- }
-                            -- else {
-                            -- 	conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7 = (short)((long)((System.Int32)(regimeKValue) * 4) + (long)((ulong)Lombiq.Arithmetics.Posit32.GetExponentValue (@this)));
+                            -- if (((int)(regimeKValue) != -31)) {
+                            -- 	conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de = ((short)((long)((int)(regimeKValue) * 4) + (long)(Lombiq.Arithmetics.Posit32.GetExponentValue (@this))));
+                            -- } else {
+                            -- 	conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de = 0;
                             -- }
                             -- 
-                            \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\ := SmartResize((\Posit32::CalculateScaleFactor().0.regimeKValue\), 32) = to_signed(-31, 32);
+                            \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\ := SmartResize((\Posit32::CalculateScaleFactor().0.regimeKValue\), 32) /= to_signed(-31, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit32::CalculateScaleFactor().0._State_5\ and ends in state \Posit32::CalculateScaleFactor().0._State_5\.
-                            --     * The false branch starts in state \Posit32::CalculateScaleFactor().0._State_6\ and ends in state \Posit32::CalculateScaleFactor().0._State_7\.
+                            --     * The true branch starts in state \Posit32::CalculateScaleFactor().0._State_5\ and ends in state \Posit32::CalculateScaleFactor().0._State_6\.
+                            --     * The false branch starts in state \Posit32::CalculateScaleFactor().0._State_7\ and ends in state \Posit32::CalculateScaleFactor().0._State_7\.
                             --     * Execution after either branch will continue in the following state: \Posit32::CalculateScaleFactor().0._State_4\.
 
-                            if (\Posit32::CalculateScaleFactor().0.binaryOperationResult.0\) then 
+                            if ((\Posit32::CalculateScaleFactor().0.binaryOperationResult.0\)) then 
                                 \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_5\;
                             else 
-                                \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_6\;
+                                \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_7\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.264
                     when \Posit32::CalculateScaleFactor().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7;
+                        -- return (short)(conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de);
                         -- 
-                        \Posit32::CalculateScaleFactor().0.return\ <= \Posit32::CalculateScaleFactor().0.conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7\;
+                        \Posit32::CalculateScaleFactor().0.return\ <= SmartResize((\Posit32::CalculateScaleFactor().0.conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de\), 16);
                         \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::CalculateScaleFactor().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit32::CalculateScaleFactor().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7 = 0;
+                        -- 	conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de = ((short)((long)((int)(regimeKValue) * 4) + (long)(Lombiq.Arithmetics.Posit32.GetExponentValue (@this))));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7 = 0;
-                        -- 
-                        \Posit32::CalculateScaleFactor().0.conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7\ := to_signed(0, 16);
-                        -- Going to the state after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
-                        if (\Posit32::CalculateScaleFactor().0._State\ = \Posit32::CalculateScaleFactor().0._State_5\) then 
-                            \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::CalculateScaleFactor().0._State_6\ => 
-                        -- False branch of the if-else started in state \Posit32::CalculateScaleFactor().0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7 = (short)((long)((System.Int32)(regimeKValue) * 4) + (long)((ulong)Lombiq.Arithmetics.Posit32.GetExponentValue (@this)));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7 = (short)((long)((System.Int32)(regimeKValue) * 4) + (long)((ulong)Lombiq.Arithmetics.Posit32.GetExponentValue (@this)));
+                        -- conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de = ((short)((long)((int)(regimeKValue) * 4) + (long)(Lombiq.Arithmetics.Posit32.GetExponentValue (@this))));
                         -- 
                         \Posit32::CalculateScaleFactor().0.binaryOperationResult.1\ := SmartResize(SmartResize((\Posit32::CalculateScaleFactor().0.regimeKValue\), 32) * to_signed(4, 32), 64);
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue()
                         \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().this.parameter.Out.0\ <= \Posit32::CalculateScaleFactor().0.this\;
                         \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ <= true;
-                        \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_7\;
+                        \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.1221
-                    when \Posit32::CalculateScaleFactor().0._State_7\ => 
+                    when \Posit32::CalculateScaleFactor().0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue()
                         if (\Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ = \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Finished.0\) then 
                             \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ <= false;
                             \Posit32::CalculateScaleFactor().0.return.1\ := \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().return.0\;
-                            \Posit32::CalculateScaleFactor().0.binaryOperationResult.2\ := SmartResize((\Posit32::CalculateScaleFactor().0.binaryOperationResult.1\) + signed((SmartResize(\Posit32::CalculateScaleFactor().0.return.1\, 64))), 16);
-                            \Posit32::CalculateScaleFactor().0.conditionalbe348d6cc5ab52cd20226575574362bbf3fe5cbd865306161ab695a9fc4430a7\ := (\Posit32::CalculateScaleFactor().0.binaryOperationResult.2\);
+                            \Posit32::CalculateScaleFactor().0.binaryOperationResult.2\ := SmartResize((\Posit32::CalculateScaleFactor().0.binaryOperationResult.1\) + signed(SmartResize((\Posit32::CalculateScaleFactor().0.return.1\), 64)), 16);
+                            \Posit32::CalculateScaleFactor().0.conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de\ := SmartResize(((\Posit32::CalculateScaleFactor().0.binaryOperationResult.2\)), 32);
                             -- Going to the state after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
-                            if (\Posit32::CalculateScaleFactor().0._State\ = \Posit32::CalculateScaleFactor().0._State_7\) then 
+                            if (\Posit32::CalculateScaleFactor().0._State\ = \Posit32::CalculateScaleFactor().0._State_6\) then 
                                 \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \Posit32::CalculateScaleFactor().0._State_7\ => 
+                        -- False branch of the if-else started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de = 0;
+                        -- 
+                        \Posit32::CalculateScaleFactor().0.conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                        if (\Posit32::CalculateScaleFactor().0._State\ = \Posit32::CalculateScaleFactor().0._State_7\) then 
+                            \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
@@ -4191,12 +3921,12 @@ begin
         Variable \Posit32::ExponentSize().0._State\: \Posit32::ExponentSize().0._States\ := \Posit32::ExponentSize().0._State_0\;
         Variable \Posit32::ExponentSize().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::ExponentSize().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::ExponentSize().0.conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::ExponentSize().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::ExponentSize().0.flag\: boolean := false;
-        Variable \Posit32::ExponentSize().0.result\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: boolean := false;
+        Variable \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: boolean := false;
@@ -4215,12 +3945,12 @@ begin
                 \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
                 \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_0\;
                 \Posit32::ExponentSize().0.bits\ := to_unsigned(0, 32);
+                \Posit32::ExponentSize().0.conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3\ := to_unsigned(0, 32);
                 \Posit32::ExponentSize().0.b\ := to_unsigned(0, 8);
-                \Posit32::ExponentSize().0.flag\ := false;
-                \Posit32::ExponentSize().0.result\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.return.0\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.1\ := false;
+                \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.4\ := false;
@@ -4253,24 +3983,25 @@ begin
                         -- uint bits;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- byte b;
+                        -- uint conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
+                        -- conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3 = 0u;
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte result;
-                        -- 
+                        \Posit32::ExponentSize().0.conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- bits = 0u;
                         -- 
                         \Posit32::ExponentSize().0.bits\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
+                        -- byte b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- b = Posit32.LengthOfRunOfBits (0u, 31);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
                         \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
-                        \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(31, 8);
+                        \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
                         \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
                         \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4281,75 +4012,74 @@ begin
                             \Posit32::ExponentSize().0.return.0\ := \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::ExponentSize().0.b\ := \Posit32::ExponentSize().0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = (System.Int32)((System.Int32)(b) + 2) <= 32;
-                            -- 
-                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
-                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := (\Posit32::ExponentSize().0.binaryOperationResult.0\) <= to_signed(32, 32);
-                            \Posit32::ExponentSize().0.flag\ := \Posit32::ExponentSize().0.binaryOperationResult.1\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
-                            -- 	if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
-                            -- 		result = 2;
+                            -- if ((int)(b) + 2 <= 32) {
+                            -- 	int conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9;
+                            -- 	if ((32 - ((int)(b) + 2) > 2)) {
+                            -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
+                            -- 	} else {
+                            -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
                             -- 	}
-                            -- 	else {
-                            -- 		result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
-                            -- 	}
-                            -- }
-                            -- else {
-                            -- 	result = (System.Byte)((System.Int32)(32 - (System.Int32)(b)) - 1);
+                            -- 	return (byte)(conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9);
                             -- }
                             -- 
+                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := \Posit32::ExponentSize().0.binaryOperationResult.0\ <= to_signed(32, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit32::ExponentSize().0._State_5\ and ends in state \Posit32::ExponentSize().0._State_6\.
-                            --     * The false branch starts in state \Posit32::ExponentSize().0._State_9\ and ends in state \Posit32::ExponentSize().0._State_9\.
                             --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_4\.
 
-                            if (\Posit32::ExponentSize().0.flag\) then 
+                            if (\Posit32::ExponentSize().0.binaryOperationResult.1\) then 
                                 \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_5\;
                             else 
-                                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6016
                     when \Posit32::ExponentSize().0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return result;
+                        -- return (byte)(32 - (int)(b) - 1);
                         -- 
-                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.result\;
+                        \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(32, 32) - signed(SmartResize((\Posit32::ExponentSize().0.b\), 32));
+                        \Posit32::ExponentSize().0.binaryOperationResult.8\ := SmartResize(unsigned(\Posit32::ExponentSize().0.binaryOperationResult.7\ - to_signed(1, 32)), 8);
+                        \Posit32::ExponentSize().0.return\ <= (\Posit32::ExponentSize().0.binaryOperationResult.8\);
                         \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.6526
                     when \Posit32::ExponentSize().0._State_5\ => 
                         -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
-                        -- 		result = 2;
+                        -- 	int conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9;
+                        -- 	if ((32 - ((int)(b) + 2) > 2)) {
+                        -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
+                        -- 	} else {
+                        -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
                         -- 	}
-                        -- 	else {
-                        -- 		result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
-                        -- 	}
+                        -- 	return (byte)(conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((System.Int32)(32 - (System.Int32)((System.Int32)(b) + 2)) > 2) {
-                        -- 	result = 2;
-                        -- }
-                        -- else {
-                        -- 	result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- int conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((32 - ((int)(b) + 2) > 2)) {
+                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
+                        -- } else {
+                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
                         -- }
                         -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.2\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
                         \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.2\);
-                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := (\Posit32::ExponentSize().0.binaryOperationResult.3\) > to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := \Posit32::ExponentSize().0.binaryOperationResult.3\ > to_signed(2, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::ExponentSize().0._State_7\ and ends in state \Posit32::ExponentSize().0._State_7\.
                         --     * The false branch starts in state \Posit32::ExponentSize().0._State_8\ and ends in state \Posit32::ExponentSize().0._State_8\.
                         --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_6\.
 
-                        if (\Posit32::ExponentSize().0.binaryOperationResult.4\) then 
+                        if ((\Posit32::ExponentSize().0.binaryOperationResult.4\)) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_7\;
                         else 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_8\;
@@ -4357,6 +4087,11 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9279
                     when \Posit32::ExponentSize().0._State_6\ => 
                         -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (byte)(conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9);
+                        -- 
+                        \Posit32::ExponentSize().0.return\ <= SmartResize(unsigned((\Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\)), 8);
+                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_3\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_6\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_4\;
@@ -4366,13 +4101,13 @@ begin
                         -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = 2;
+                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = 2;
+                        -- conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
                         -- 
-                        \Posit32::ExponentSize().0.result\ := to_unsigned(2, 8);
+                        \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\ := to_signed(2, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_5\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_7\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_6\;
@@ -4382,36 +4117,18 @@ begin
                         -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = (System.Byte)(32 - (System.Int32)((System.Int32)(b) + 2));
+                        -- conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
                         -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.5\ := SmartResize(signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32), 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.5\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
                         \Posit32::ExponentSize().0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.5\)), 8);
-                        \Posit32::ExponentSize().0.result\ := (\Posit32::ExponentSize().0.binaryOperationResult.6\);
+                        \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\ := signed(SmartResize(((\Posit32::ExponentSize().0.binaryOperationResult.6\)), 32));
                         -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_5\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_8\) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_6\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6526
-                    when \Posit32::ExponentSize().0._State_9\ => 
-                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = (System.Byte)((System.Int32)(32 - (System.Int32)(b)) - 1);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = (System.Byte)((System.Int32)(32 - (System.Int32)(b)) - 1);
-                        -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(32, 32) - signed(SmartResize((\Posit32::ExponentSize().0.b\), 32));
-                        \Posit32::ExponentSize().0.binaryOperationResult.8\ := SmartResize(unsigned((\Posit32::ExponentSize().0.binaryOperationResult.7\) - to_signed(1, 32)), 8);
-                        \Posit32::ExponentSize().0.result\ := (\Posit32::ExponentSize().0.binaryOperationResult.8\);
-                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_3\.
-                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_9\) then 
-                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6526
                 end case;
@@ -4426,6 +4143,7 @@ begin
         Variable \Posit32::GetExponentValue().0._State\: \Posit32::GetExponentValue().0._States\ := \Posit32::GetExponentValue().0._State_0\;
         Variable \Posit32::GetExponentValue().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::GetExponentValue().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::GetExponentValue().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4433,7 +4151,7 @@ begin
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::GetExponentValue().0.binaryOperationResult.4\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4445,6 +4163,7 @@ begin
                 \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
                 \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_0\;
                 \Posit32::GetExponentValue().0.num\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.b\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().0.return.0\ := to_unsigned(0, 8);
                 \Posit32::GetExponentValue().0.return.1\ := to_unsigned(0, 32);
@@ -4452,7 +4171,7 @@ begin
                 \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00\ := to_unsigned(0, 32);
                 \Posit32::GetExponentValue().0.binaryOperationResult.4\ := false;
             else 
                 case \Posit32::GetExponentValue().0._State\ is 
@@ -4479,12 +4198,19 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- byte b;
+                        -- uint conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992;
                         -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992 = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().0.conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- num = 0u;
                         -- 
                         \Posit32::GetExponentValue().0.num\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- b = Lombiq.Arithmetics.Posit32.ExponentSize (@this);
                         -- 
@@ -4500,7 +4226,7 @@ begin
                             \Posit32::GetExponentValue().0.return.0\ := \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\;
                             \Posit32::GetExponentValue().0.b\ := \Posit32::GetExponentValue().0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num = 0u >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << (int)(32 - (System.Int32)(b)) >> 30;
+                            -- num = 0u >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << 32 - (int)(b) >> 30;
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
                             \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
@@ -4520,32 +4246,31 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9774
                     when \Posit32::GetExponentValue().0._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::GetExponentValue().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize((\Posit32::GetExponentValue().0.binaryOperationResult.1\), 5))));
+                        \Posit32::GetExponentValue().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize(\Posit32::GetExponentValue().0.binaryOperationResult.1\, 5))));
                         \Posit32::GetExponentValue().0.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValue().0.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
                         \Posit32::GetExponentValue().0.num\ := \Posit32::GetExponentValue().0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                        -- uint conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((System.Int32)(b) == 0) {
-                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
-                        -- }
-                        -- else {
-                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- if (((int)(b) != 0)) {
+                        -- 	conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00 = num;
+                        -- } else {
+                        -- 	conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00 = 0u;
                         -- }
                         -- 
                         \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.9522
                     when \Posit32::GetExponentValue().0._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::GetExponentValue().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::GetExponentValue().0.b\), 32)) = to_signed(0, 32);
+                        \Posit32::GetExponentValue().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::GetExponentValue().0.b\), 32)) /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::GetExponentValue().0._State_8\ and ends in state \Posit32::GetExponentValue().0._State_8\.
                         --     * The false branch starts in state \Posit32::GetExponentValue().0._State_9\ and ends in state \Posit32::GetExponentValue().0._State_9\.
                         --     * Execution after either branch will continue in the following state: \Posit32::GetExponentValue().0._State_7\.
 
-                        if (\Posit32::GetExponentValue().0.binaryOperationResult.4\) then 
+                        if ((\Posit32::GetExponentValue().0.binaryOperationResult.4\)) then 
                             \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_8\;
                         else 
                             \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_9\;
@@ -4554,22 +4279,22 @@ begin
                     when \Posit32::GetExponentValue().0._State_7\ => 
                         -- State after the if-else which was started in state \Posit32::GetExponentValue().0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629;
+                        -- return conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00;
                         -- 
-                        \Posit32::GetExponentValue().0.return\ <= \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\;
+                        \Posit32::GetExponentValue().0.return\ <= \Posit32::GetExponentValue().0.conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00\;
                         \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::GetExponentValue().0._State_8\ => 
                         -- True branch of the if-else started in state \Posit32::GetExponentValue().0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- 	conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00 = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = 0u;
+                        -- conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00 = num;
                         -- 
-                        \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := to_unsigned(0, 32);
+                        \Posit32::GetExponentValue().0.conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00\ := \Posit32::GetExponentValue().0.num\;
                         -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().0._State_6\.
                         if (\Posit32::GetExponentValue().0._State\ = \Posit32::GetExponentValue().0._State_8\) then 
                             \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_7\;
@@ -4579,13 +4304,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::GetExponentValue().0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- 	conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629 = num;
+                        -- conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00 = 0u;
                         -- 
-                        \Posit32::GetExponentValue().0.conditionalabf0901ee9e53320f782e035986ce2543c2518ff794faa59fcfd612c4f544629\ := \Posit32::GetExponentValue().0.num\;
+                        \Posit32::GetExponentValue().0.conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().0._State_6\.
                         if (\Posit32::GetExponentValue().0._State\ = \Posit32::GetExponentValue().0._State_9\) then 
                             \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_7\;
@@ -4603,12 +4328,13 @@ begin
         Variable \Posit32::FractionSize().0._State\: \Posit32::FractionSize().0._States\ := \Posit32::FractionSize().0._State_0\;
         Variable \Posit32::FractionSize().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::FractionSize().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionSize().0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionSize().0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::FractionSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.3\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4621,12 +4347,13 @@ begin
                 \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
                 \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_0\;
                 \Posit32::FractionSize().0.bits\ := to_unsigned(0, 32);
+                \Posit32::FractionSize().0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92\ := to_unsigned(0, 32);
                 \Posit32::FractionSize().0.num\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.return.0\ := to_unsigned(0, 8);
                 \Posit32::FractionSize().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.3\ := false;
             else 
                 case \Posit32::FractionSize().0._State\ is 
@@ -4653,18 +4380,25 @@ begin
                         -- uint bits;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
+                        -- uint conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92;
                         -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92 = 0u;
+                        -- 
+                        \Posit32::FractionSize().0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- bits = 0u;
                         -- 
                         \Posit32::FractionSize().0.bits\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (int)(32 - (System.Int32)((System.Int32)((System.Int32)(Posit32.LengthOfRunOfBits (0u, 31)) + 2) + 2));
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 32 - ((int)(Posit32.LengthOfRunOfBits (0u, 31)) + 2 + 2);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
                         \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
-                        \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(31, 8);
+                        \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
                         \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
                         \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4673,19 +4407,18 @@ begin
                         if (\Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
                             \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
                             \Posit32::FractionSize().0.return.0\ := \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
-                            \Posit32::FractionSize().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit32::FractionSize().0.return.0\), 32)) + to_signed(2, 32), 32);
-                            \Posit32::FractionSize().0.binaryOperationResult.1\ := SmartResize((\Posit32::FractionSize().0.binaryOperationResult.0\) + to_signed(2, 32), 32);
+                            \Posit32::FractionSize().0.binaryOperationResult.0\ := signed(SmartResize((\Posit32::FractionSize().0.return.0\), 32)) + to_signed(2, 32);
+                            \Posit32::FractionSize().0.binaryOperationResult.1\ := SmartResize(\Posit32::FractionSize().0.binaryOperationResult.0\ + to_signed(2, 32), 32);
                             \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSize().0.binaryOperationResult.1\);
-                            \Posit32::FractionSize().0.num\ := (\Posit32::FractionSize().0.binaryOperationResult.2\);
+                            \Posit32::FractionSize().0.num\ := \Posit32::FractionSize().0.binaryOperationResult.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- int conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4;
+                            -- int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (num > 0) {
-                            -- 	conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4 = num;
-                            -- }
-                            -- else {
-                            -- 	conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4 = 0;
+                            -- if ((num > 0)) {
+                            -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                            -- } else {
+                            -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
                             -- }
                             -- 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_4\;
@@ -4700,7 +4433,7 @@ begin
                         --     * The false branch starts in state \Posit32::FractionSize().0._State_7\ and ends in state \Posit32::FractionSize().0._State_7\.
                         --     * Execution after either branch will continue in the following state: \Posit32::FractionSize().0._State_5\.
 
-                        if (\Posit32::FractionSize().0.binaryOperationResult.3\) then 
+                        if ((\Posit32::FractionSize().0.binaryOperationResult.3\)) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_6\;
                         else 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_7\;
@@ -4709,22 +4442,22 @@ begin
                     when \Posit32::FractionSize().0._State_5\ => 
                         -- State after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)(conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4);
+                        -- return (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c);
                         -- 
-                        \Posit32::FractionSize().0.return\ <= unsigned((\Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\));
+                        \Posit32::FractionSize().0.return\ <= unsigned((\Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\));
                         \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionSize().0._State_6\ => 
                         -- True branch of the if-else started in state \Posit32::FractionSize().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4 = num;
+                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4 = num;
+                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
                         -- 
-                        \Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\ := \Posit32::FractionSize().0.num\;
+                        \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := \Posit32::FractionSize().0.num\;
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
                         if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_6\) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_5\;
@@ -4734,13 +4467,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::FractionSize().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4 = 0;
+                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4 = 0;
+                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
                         -- 
-                        \Posit32::FractionSize().0.conditionalbde56351df1b2282011ba6cd070cdb77a733ba2f0a4c40b103b7647c834f06a4\ := to_signed(0, 32);
+                        \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
                         if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_7\) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_5\;
@@ -4758,14 +4491,15 @@ begin
         Variable \Posit32::FractionWithHiddenBit().0._State\: \Posit32::FractionWithHiddenBit().0._States\ := \Posit32::FractionWithHiddenBit().0._State_0\;
         Variable \Posit32::FractionWithHiddenBit().0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::FractionWithHiddenBit().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::FractionWithHiddenBit().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::FractionWithHiddenBit().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::FractionWithHiddenBit().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -4780,14 +4514,15 @@ begin
                 \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
                 \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_0\;
                 \Posit32::FractionWithHiddenBit().0.num\ := to_unsigned(0, 32);
-                \Posit32::FractionWithHiddenBit().0.num2\ := to_unsigned(0, 32);
-                \Posit32::FractionWithHiddenBit().0.bits\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.return.0\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.num2\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.bits\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := false;
                 \Posit32::FractionWithHiddenBit().0.return.1\ := to_unsigned(0, 32);
             else 
@@ -4815,12 +4550,6 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- num = Lombiq.Arithmetics.Posit32.FractionSize (@this);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
@@ -4835,69 +4564,81 @@ begin
                             \Posit32::FractionWithHiddenBit().0.return.0\ := \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().return.0\;
                             \Posit32::FractionWithHiddenBit().0.num\ := \Posit32::FractionWithHiddenBit().0.return.0\;
                             -- The following section was transformed from the .NET statement below:
+                            -- uint num2;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e = 0u;
+                            -- 
+                            \Posit32::FractionWithHiddenBit().0.conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
                             -- num2 = 0u;
                             -- 
                             \Posit32::FractionWithHiddenBit().0.num2\ := to_unsigned(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- bits = 0u << (int)(32u - num) >> (int)(32u - num);
+                            -- uint bits;
                             -- 
-                            \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\ := signed(to_unsigned(32, 32) - \Posit32::FractionWithHiddenBit().0.num\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- bits = 0u << (int)(32L - (long)(num)) >> (int)(32L - (long)(num));
+                            -- 
+                            \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)), 32);
                             \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\ := shift_left(to_unsigned(0, 32), to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\), 5))));
                             \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8507
+                        -- Clock cycles needed to complete this state (approximation): 0.9142
                     when \Posit32::FractionWithHiddenBit().0._State_4\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := signed(to_unsigned(32, 32) - \Posit32::FractionWithHiddenBit().0.num\);
+                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)), 32);
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \Posit32::FractionWithHiddenBit().0._State_5\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\), 5) and "11111")));
                         \Posit32::FractionWithHiddenBit().0.bits\ := \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
+                        -- uint conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (num == 0u) {
-                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
-                        -- }
-                        -- else {
-                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- if (((long)(num) == 0L)) {
+                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = 1u;
+                        -- } else {
+                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
                         -- }
                         -- 
-                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9774
-                    when \Posit32::FractionWithHiddenBit().0._State_5\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := \Posit32::FractionWithHiddenBit().0.num\ = to_unsigned(0, 32);
+                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)) = to_signed(0, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::FractionWithHiddenBit().0._State_7\ and ends in state \Posit32::FractionWithHiddenBit().0._State_7\.
                         --     * The false branch starts in state \Posit32::FractionWithHiddenBit().0._State_8\ and ends in state \Posit32::FractionWithHiddenBit().0._State_9\.
                         --     * Execution after either branch will continue in the following state: \Posit32::FractionWithHiddenBit().0._State_6\.
 
-                        if (\Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\) then 
+                        if ((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\)) then 
                             \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_7\;
                         else 
                             \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.264
+                        -- Clock cycles needed to complete this state (approximation): 0.9328
                     when \Posit32::FractionWithHiddenBit().0._State_6\ => 
                         -- State after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3;
+                        -- return conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea;
                         -- 
-                        \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\;
+                        \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\;
                         \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionWithHiddenBit().0._State_7\ => 
                         -- True branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = 1u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = 1u;
+                        -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = 1u;
                         -- 
-                        \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := to_unsigned(1, 32);
+                        \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_7\) then 
                             \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_6\;
@@ -4907,11 +4648,11 @@ begin
                         -- False branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3 = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
                         \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.this\;
@@ -4925,7 +4666,7 @@ begin
                         if (\Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ = \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
                             \Posit32::FractionWithHiddenBit().0.return.1\ := \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).return.0\;
-                            \Posit32::FractionWithHiddenBit().0.conditional0994fe80d759efc0d8545994917aa8060a36714eeda7a8e74d997628ff998ab3\ := \Posit32::FractionWithHiddenBit().0.return.1\;
+                            \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\ := \Posit32::FractionWithHiddenBit().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                             if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_9\) then 
                                 \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_6\;
@@ -4986,11 +4727,11 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- b = 0;
                         -- 
-                        \Posit32::GetMostSignificantOnePosition(UInt32).0.b\ := to_unsigned(0, 8);
+                        \Posit32::GetMostSignificantOnePosition(UInt32).0.b\ := SmartResize(unsigned(to_signed(0, 32)), 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (bits > 0u) {
+                        -- while ((long)(bits) != 0L) {
                         -- 	bits = bits >> 1;
-                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
+                        -- 	b = (byte)((int)(b) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -4999,12 +4740,12 @@ begin
                     when \Posit32::GetMostSignificantOnePosition(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::GetMostSignificantOnePosition(UInt32).0._State_2\.
                         -- The while loop's condition:
-                        \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.0\ := \Posit32::GetMostSignificantOnePosition(UInt32).0.bits\ > to_unsigned(0, 32);
+                        \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.0\ := signed(SmartResize((\Posit32::GetMostSignificantOnePosition(UInt32).0.bits\), 64)) /= to_signed(0, 64);
                         if (\Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bits = bits >> 1;
-                            -- 	b = (System.Byte)((System.Int32)(b) + 1);
+                            -- 	b = (byte)((int)(b) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -5013,14 +4754,14 @@ begin
                             \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.1\ := shift_right(\Posit32::GetMostSignificantOnePosition(UInt32).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                             \Posit32::GetMostSignificantOnePosition(UInt32).0.bits\ := \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b = (System.Byte)((System.Int32)(b) + 1);
+                            -- b = (byte)((int)(b) + 1);
                             -- 
                             \Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize((\Posit32::GetMostSignificantOnePosition(UInt32).0.b\), 32)) + to_signed(1, 32)), 8);
                             \Posit32::GetMostSignificantOnePosition(UInt32).0.b\ := (\Posit32::GetMostSignificantOnePosition(UInt32).0.binaryOperationResult.2\);
                         else 
                             \Posit32::GetMostSignificantOnePosition(UInt32).0._State\ := \Posit32::GetMostSignificantOnePosition(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.864
+                        -- Clock cycles needed to complete this state (approximation): 0.8704
                     when \Posit32::GetMostSignificantOnePosition(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \Posit32::GetMostSignificantOnePosition(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -5042,7 +4783,7 @@ begin
         Variable \Posit32::SetOne(UInt32,UInt16).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::SetOne(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -5053,7 +4794,7 @@ begin
                 \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
                 \Posit32::SetOne(UInt32,UInt16).0.bits\ := to_unsigned(0, 32);
                 \Posit32::SetOne(UInt32,UInt16).0.index\ := to_unsigned(0, 16);
-                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := to_unsigned(0, 32);
             else 
                 case \Posit32::SetOne(UInt32,UInt16).0._State\ is 
@@ -5079,11 +4820,11 @@ begin
                         \Posit32::SetOne(UInt32,UInt16).0.bits\ := \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.index\ := \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return bits | 1u << (int)index;
+                        -- return (uint)((int)bits | (1 << (int)index));
                         -- 
-                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5))));
-                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetOne(UInt32,UInt16).0.bits\ or \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\;
-                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5))));
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := unsigned(signed(\Posit32::SetOne(UInt32,UInt16).0.bits\) or (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\));
+                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\);
                         \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.663
                 end case;
@@ -5098,8 +4839,8 @@ begin
         Variable \Posit32::SetZero(UInt32,UInt16).0._State\: \Posit32::SetZero(UInt32,UInt16).0._States\ := \Posit32::SetZero(UInt32,UInt16).0._State_0\;
         Variable \Posit32::SetZero(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetZero(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -5110,8 +4851,8 @@ begin
                 \Posit32::SetZero(UInt32,UInt16).0._State\ := \Posit32::SetZero(UInt32,UInt16).0._State_0\;
                 \Posit32::SetZero(UInt32,UInt16).0.bits\ := to_unsigned(0, 32);
                 \Posit32::SetZero(UInt32,UInt16).0.index\ := to_unsigned(0, 16);
-                \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := to_unsigned(0, 32);
             else 
                 case \Posit32::SetZero(UInt32,UInt16).0._State\ is 
@@ -5136,12 +4877,12 @@ begin
                         \Posit32::SetZero(UInt32,UInt16).0.bits\ := \Posit32::SetZero(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetZero(UInt32,UInt16).0.index\ := \Posit32::SetZero(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return bits & ~1u << (int)index;
+                        -- return (uint)((int)bits & ~(1 << (int)index));
                         -- 
-                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_unsigned(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetZero(UInt32,UInt16).0.index\, 32)), 5))));
-                        \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\ := not(\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\);
-                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetZero(UInt32,UInt16).0.bits\ and \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\;
-                        \Posit32::SetZero(UInt32,UInt16).0.return\ <= \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetZero(UInt32,UInt16).0.index\, 32)), 5))));
+                        \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\ := not((\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\));
+                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := unsigned(signed(\Posit32::SetZero(UInt32,UInt16).0.bits\) and \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\);
+                        \Posit32::SetZero(UInt32,UInt16).0.return\ <= (\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\);
                         \Posit32::SetZero(UInt32,UInt16).0._State\ := \Posit32::SetZero(UInt32,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.8078
                 end case;
@@ -5157,19 +4898,19 @@ begin
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.flag\: boolean := false;
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\: boolean := false;
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\: boolean := false;
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5180,19 +4921,19 @@ begin
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\ := to_unsigned(0, 8);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := to_unsigned(0, 8);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := to_unsigned(0, 32);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.i\ := to_signed(0, 32);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.flag\ := false;
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := to_unsigned(0, 32);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_signed(0, 64);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\ := to_signed(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ := false;
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\ := false;
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\ := to_unsigned(0, 8);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\ := false;
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\ := to_unsigned(0, 8);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\ := to_signed(0, 32);
             else 
                 case \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ is 
                     when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_0\ => 
@@ -5219,93 +4960,52 @@ begin
                         -- byte b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- b = 1;
                         -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := to_unsigned(1, 8);
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := SmartResize(unsigned(to_signed(1, 32)), 8);
                         -- The following section was transformed from the .NET statement below:
                         -- bits = bits << 1;
                         -- 
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\ := shift_left(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num = bits >> 31 & 1u;
+                        -- uint num;
                         -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ and to_unsigned(1, 32);
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = ((uint)((long)((bits >> 31)) & 1L));
+                        -- 
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := signed(SmartResize(shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize(((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\)), 64)) and to_signed(1, 64)), 32);
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := ((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\));
                         -- The following section was transformed from the .NET statement below:
                         -- bits = bits << 1;
                         -- 
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\ := shift_left(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- i = 0;
+                        -- int num2;
                         -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.i\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (i < (int)startingPosition) {
-                        -- 	flag = bits >> 31 != num;
-                        -- 	if (flag) {
-                        -- 		break;
-                        -- 	}
+                        -- num2 = 0;
+                        -- 
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num2) < (int)(startingPosition) && bits >> 31 == num) {
                         -- 	bits = bits << 1;
-                        -- 	b = (System.Byte)((System.Int32)(b) + 1);
-                        -- 	i = i + 1;
+                        -- 	b = (byte)((int)(b) + 1);
+                        -- 	num2 = num2 + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8332
+                        -- Clock cycles needed to complete this state (approximation): 0.868
                     when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\.
                         -- The while loop's condition:
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.i\ < signed(SmartResize(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\, 32));
-                        if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	flag = bits >> 31 != num;
-                            -- 	if (flag) {
-                            -- 		break;
-                            -- 	}
-                            -- 	bits = bits << 1;
-                            -- 	b = (System.Byte)((System.Int32)(b) + 1);
-                            -- 	i = i + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- flag = bits >> 31 != num;
-                            -- 
-                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ := shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ /= \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\;
-                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.flag\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
-                            -- 	break;
-                            -- }
-                            -- 
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_6\ and ends in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_6\.
-                            --     * Execution after either branch will continue in the following state: \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\.
-
-                            if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.flag\) then 
-                                \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\;
-                            end if;
-                        else 
-                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_4\;
-                        end if;
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ := (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\) < signed(SmartResize((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\), 32));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ := shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ = \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\;
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0.9897
                     when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_4\ => 
                         -- State after the while loop which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\.
@@ -5316,44 +5016,39 @@ begin
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\ => 
-                        -- State after the if-else which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits = bits << 1;
-                        -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\ := shift_left(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- b = (System.Byte)((System.Int32)(b) + 1);
-                        -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\ := SmartResize(unsigned(signed(SmartResize((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\), 32)) + to_signed(1, 32)), 8);
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- i = i + 1;
-                        -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.i\ + to_signed(1, 32);
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.i\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\;
-                        -- Returning to the repeated state of the while loop which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ = \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\) then 
-                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ and \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\;
+                        if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	bits = bits << 1;
+                            -- 	b = (byte)((int)(b) + 1);
+                            -- 	num2 = num2 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- bits = bits << 1;
+                            -- 
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\ := shift_left(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- b = (byte)((int)(b) + 1);
+                            -- 
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\), 32)) + to_signed(1, 32)), 8);
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = num2 + 1;
+                            -- 
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\ + to_signed(1, 32);
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\;
+                            -- Returning to the repeated state of the while loop which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\ if the loop wasn't exited with a state change.
+                            if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ = \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\) then 
+                                \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
+                            end if;
+                        else 
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7747
-                    when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_6\ => 
-                        -- True branch of the if-else started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	break;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- break;
-                        -- 
-                        -- Exiting the while loop with a break statement.
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_4\;
-                        -- Going to the state after the if-else which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\.
-                        if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ = \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_6\) then 
-                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_5\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.8985
                 end case;
             end if;
         end if;
@@ -5399,13 +5094,13 @@ begin
                     when \Posit32::GetTwosComplement(UInt32).0._State_2\ => 
                         \Posit32::GetTwosComplement(UInt32).0.bits\ := \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return ~bits + 1u;
+                        -- return (uint)((long)(~bits) + 1L);
                         -- 
                         \Posit32::GetTwosComplement(UInt32).0.unaryOperationResult.0\ := not(\Posit32::GetTwosComplement(UInt32).0.bits\);
-                        \Posit32::GetTwosComplement(UInt32).0.binaryOperationResult.0\ := \Posit32::GetTwosComplement(UInt32).0.unaryOperationResult.0\ + to_unsigned(1, 32);
-                        \Posit32::GetTwosComplement(UInt32).0.return\ <= \Posit32::GetTwosComplement(UInt32).0.binaryOperationResult.0\;
+                        \Posit32::GetTwosComplement(UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit32::GetTwosComplement(UInt32).0.unaryOperationResult.0\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32::GetTwosComplement(UInt32).0.return\ <= (\Posit32::GetTwosComplement(UInt32).0.binaryOperationResult.0\);
                         \Posit32::GetTwosComplement(UInt32).0._State\ := \Posit32::GetTwosComplement(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4711
+                        -- Clock cycles needed to complete this state (approximation): 0.5346
                 end case;
             end if;
         end if;
@@ -5419,13 +5114,10 @@ begin
         Variable \Posit32::FusedSum(Posit32[],Quire).0.posits\: \Lombiq.Arithmetics.Posit32_Array\(0 to 159);
         Variable \Posit32::FusedSum(Posit32[],Quire).0.startingValue\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.quire\: \Lombiq.Arithmetics.Quire\;
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.flag\: boolean := false;
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.result\: \Lombiq.Arithmetics.Quire\;
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.flag2\: boolean := false;
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\: \Lombiq.Arithmetics.Quire\;
+        Variable \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.0\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.1\: boolean := false;
+        Variable \Posit32::FusedSum(Posit32[],Quire).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\: boolean := false;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.2\: boolean := false;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.3\: \Lombiq.Arithmetics.Quire\;
@@ -5446,10 +5138,8 @@ begin
                 \Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32)._Started.0\ <= false;
                 \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= false;
                 \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_0\;
-                \Posit32::FusedSum(Posit32[],Quire).0.flag\ := false;
-                \Posit32::FusedSum(Posit32[],Quire).0.i\ := to_signed(0, 32);
-                \Posit32::FusedSum(Posit32[],Quire).0.flag2\ := false;
                 \Posit32::FusedSum(Posit32[],Quire).0.return.1\ := false;
+                \Posit32::FusedSum(Posit32[],Quire).0.num\ := to_signed(0, 32);
                 \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\ := false;
                 \Posit32::FusedSum(Posit32[],Quire).0.return.2\ := false;
                 \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\ := to_signed(0, 32);
@@ -5482,33 +5172,21 @@ begin
                         -- Quire quire;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
+                        -- Quire objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Quire objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede = new Quire (1u, 512);
+                        -- objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011 = new Quire (1u, 512);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\.\IsNull\ := false;
-                        \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\.\Size\ := to_unsigned(0, 16);
-                        \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\.\IsNull\ := false;
+                        \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\.\Size\ := to_unsigned(0, 16);
+                        \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\;
+                        \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\;
                         \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(1, 32);
-                        \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(512, 16);
+                        \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(512, 32)), 16);
                         \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
                         \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5516,12 +5194,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\ := \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\ := \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- quire = Quire.op_LeftShift (objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede, 511);
+                            -- quire = Quire.op_LeftShift (objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011, 511);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
-                            \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\;
+                            \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\;
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= to_signed(511, 32);
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
                             \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_4\;
@@ -5532,10 +5210,12 @@ begin
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
                             \Posit32::FusedSum(Posit32[],Quire).0.return.0\ := \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\;
-                            \Posit32::FusedSum(Posit32[],Quire).0.objectb3f25e2914a7d334ff3f0ac9f7936c28283611aaac16ff3aec3f7b7054f99ede\ := \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
+                            \Posit32::FusedSum(Posit32[],Quire).0.objectcca0dec009ae8ed2326a07122a465f3ec1a2db6344ea5f25f4320f84fc89c011\ := \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
                             \Posit32::FusedSum(Posit32[],Quire).0.quire\ := \Posit32::FusedSum(Posit32[],Quire).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- flag = Quire.op_Equality (startingValue, quire);
+                            -- if (Quire.op_Equality (startingValue, quire)) {
+                            -- 	return quire;
+                            -- }
                             -- 
                             -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Quire::op_Equality(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire)
                             \Posit32::FusedSum(Posit32[],Quire).0.Boolean Quire::op_Equality(Quire,Quire).left.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.startingValue\;
@@ -5551,193 +5231,138 @@ begin
                             \Posit32::FusedSum(Posit32[],Quire).0.return.1\ := \Posit32::FusedSum(Posit32[],Quire).0.Boolean Quire::op_Equality(Quire,Quire).return.0\;
                             \Posit32::FusedSum(Posit32[],Quire).0.startingValue\ := \Posit32::FusedSum(Posit32[],Quire).0.Boolean Quire::op_Equality(Quire,Quire).left.parameter.In.0\;
                             \Posit32::FusedSum(Posit32[],Quire).0.quire\ := \Posit32::FusedSum(Posit32[],Quire).0.Boolean Quire::op_Equality(Quire,Quire).right.parameter.In.0\;
-                            \Posit32::FusedSum(Posit32[],Quire).0.flag\ := \Posit32::FusedSum(Posit32[],Quire).0.return.1\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag) {
-                            -- 	result = quire;
-                            -- }
-                            -- else {
-                            -- 	i = 0;
-                            -- 	while (i < 160) {
-                            -- 		flag2 = Lombiq.Arithmetics.Posit32.IsNaN (posits [i]);
-                            -- 		if (flag2) {
-                            -- 			result = quire;
-                            -- 			return result;
-                            -- 		}
-                            -- 		startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [i]));
-                            -- 		i = i + 1;
-                            -- 	}
-                            -- 	result = startingValue;
-                            -- }
-                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit32::FusedSum(Posit32[],Quire).0._State_7\ and ends in state \Posit32::FusedSum(Posit32[],Quire).0._State_7\.
-                            --     * The false branch starts in state \Posit32::FusedSum(Posit32[],Quire).0._State_8\ and ends in state \Posit32::FusedSum(Posit32[],Quire).0._State_10\.
                             --     * Execution after either branch will continue in the following state: \Posit32::FusedSum(Posit32[],Quire).0._State_6\.
 
-                            if (\Posit32::FusedSum(Posit32[],Quire).0.flag\) then 
+                            if (\Posit32::FusedSum(Posit32[],Quire).0.return.1\) then 
                                 \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_7\;
                             else 
-                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_8\;
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_6\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FusedSum(Posit32[],Quire).0._State_6\ => 
                         -- State after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return result;
+                        -- int num;
                         -- 
-                        \Posit32::FusedSum(Posit32[],Quire).0.return\ <= \Posit32::FusedSum(Posit32[],Quire).0.result\;
-                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0;
+                        -- 
+                        \Posit32::FusedSum(Posit32[],Quire).0.num\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num < 160) {
+                        -- 	if (Lombiq.Arithmetics.Posit32.IsNaN (posits [num])) {
+                        -- 		return quire;
+                        -- 	}
+                        -- 	startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [num]));
+                        -- 	num = num + 1;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FusedSum(Posit32[],Quire).0._State_7\ => 
                         -- True branch of the if-else started in state \Posit32::FusedSum(Posit32[],Quire).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = quire;
+                        -- 	return quire;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = quire;
+                        -- return quire;
                         -- 
-                        \Posit32::FusedSum(Posit32[],Quire).0.result\ := \Posit32::FusedSum(Posit32[],Quire).0.quire\;
+                        \Posit32::FusedSum(Posit32[],Quire).0.return\ <= \Posit32::FusedSum(Posit32[],Quire).0.quire\;
+                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_5\.
                         if (\Posit32::FusedSum(Posit32[],Quire).0._State\ = \Posit32::FusedSum(Posit32[],Quire).0._State_7\) then 
                             \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FusedSum(Posit32[],Quire).0._State_8\ => 
-                        -- False branch of the if-else started in state \Posit32::FusedSum(Posit32[],Quire).0._State_5\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	i = 0;
-                        -- 	while (i < 160) {
-                        -- 		flag2 = Lombiq.Arithmetics.Posit32.IsNaN (posits [i]);
-                        -- 		if (flag2) {
-                        -- 			result = quire;
-                        -- 			return result;
-                        -- 		}
-                        -- 		startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [i]));
-                        -- 		i = i + 1;
-                        -- 	}
-                        -- 	result = startingValue;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- i = 0;
-                        -- 
-                        \Posit32::FusedSum(Posit32[],Quire).0.i\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (i < 160) {
-                        -- 	flag2 = Lombiq.Arithmetics.Posit32.IsNaN (posits [i]);
-                        -- 	if (flag2) {
-                        -- 		result = quire;
-                        -- 		return result;
-                        -- 	}
-                        -- 	startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [i]));
-                        -- 	i = i + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_9\ => 
-                        -- Repeated state of the while loop which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_8\.
+                        -- Repeated state of the while loop which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_6\.
                         -- The while loop's condition:
-                        \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\ := \Posit32::FusedSum(Posit32[],Quire).0.i\ < to_signed(160, 32);
+                        \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\ := \Posit32::FusedSum(Posit32[],Quire).0.num\ < to_signed(160, 32);
                         if (\Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	flag2 = Lombiq.Arithmetics.Posit32.IsNaN (posits [i]);
-                            -- 	if (flag2) {
-                            -- 		result = quire;
-                            -- 		return result;
+                            -- 	if (Lombiq.Arithmetics.Posit32.IsNaN (posits [num])) {
+                            -- 		return quire;
                             -- 	}
-                            -- 	startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [i]));
-                            -- 	i = i + 1;
+                            -- 	startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [num]));
+                            -- 	num = num + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = Lombiq.Arithmetics.Posit32.IsNaN (posits [i]);
+                            -- if (Lombiq.Arithmetics.Posit32.IsNaN (posits [num])) {
+                            -- 	return quire;
+                            -- }
                             -- 
                             -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsNaN()
-                            \Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN().this.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.posits\(to_integer(\Posit32::FusedSum(Posit32[],Quire).0.i\));
+                            \Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN().this.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.posits\(to_integer(\Posit32::FusedSum(Posit32[],Quire).0.num\));
                             \Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN()._Started.0\ <= true;
-                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_11\;
-                        else 
                             \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_10\;
+                        else 
+                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_10\ => 
-                        -- State after the while loop which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_8\.
+                    when \Posit32::FusedSum(Posit32[],Quire).0._State_9\ => 
+                        -- State after the while loop which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- result = startingValue;
+                        -- return startingValue;
                         -- 
-                        \Posit32::FusedSum(Posit32[],Quire).0.result\ := \Posit32::FusedSum(Posit32[],Quire).0.startingValue\;
-                        -- Going to the state after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_5\.
-                        if (\Posit32::FusedSum(Posit32[],Quire).0._State\ = \Posit32::FusedSum(Posit32[],Quire).0._State_10\) then 
-                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_6\;
-                        end if;
+                        \Posit32::FusedSum(Posit32[],Quire).0.return\ <= \Posit32::FusedSum(Posit32[],Quire).0.startingValue\;
+                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_11\ => 
+                    when \Posit32::FusedSum(Posit32[],Quire).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsNaN()
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN()._Started.0\ = \Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN()._Finished.0\) then 
                             \Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN()._Started.0\ <= false;
                             \Posit32::FusedSum(Posit32[],Quire).0.return.2\ := \Posit32::FusedSum(Posit32[],Quire).0.Posit32::IsNaN().return.0\;
-                            \Posit32::FusedSum(Posit32[],Quire).0.flag2\ := \Posit32::FusedSum(Posit32[],Quire).0.return.2\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag2) {
-                            -- 	result = quire;
-                            -- 	return result;
-                            -- }
-                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit32::FusedSum(Posit32[],Quire).0._State_13\ and ends in state \Posit32::FusedSum(Posit32[],Quire).0._State_13\.
-                            --     * Execution after either branch will continue in the following state: \Posit32::FusedSum(Posit32[],Quire).0._State_12\.
+                            --     * The true branch starts in state \Posit32::FusedSum(Posit32[],Quire).0._State_12\ and ends in state \Posit32::FusedSum(Posit32[],Quire).0._State_12\.
+                            --     * Execution after either branch will continue in the following state: \Posit32::FusedSum(Posit32[],Quire).0._State_11\.
 
-                            if (\Posit32::FusedSum(Posit32[],Quire).0.flag2\) then 
-                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_13\;
+                            if (\Posit32::FusedSum(Posit32[],Quire).0.return.2\) then 
+                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_12\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_12\;
+                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_11\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_12\ => 
-                        -- State after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_11\.
+                    when \Posit32::FusedSum(Posit32[],Quire).0._State_11\ => 
+                        -- State after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
-                        -- startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [i]));
+                        -- startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [num]));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32)
-                        \Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32).x.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.posits\(to_integer(\Posit32::FusedSum(Posit32[],Quire).0.i\));
+                        \Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32).x.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.posits\(to_integer(\Posit32::FusedSum(Posit32[],Quire).0.num\));
                         \Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32)._Started.0\ <= true;
-                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_14\;
+                        \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_13\ => 
-                        -- True branch of the if-else started in state \Posit32::FusedSum(Posit32[],Quire).0._State_11\.
+                    when \Posit32::FusedSum(Posit32[],Quire).0._State_12\ => 
+                        -- True branch of the if-else started in state \Posit32::FusedSum(Posit32[],Quire).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = quire;
-                        -- 	return result;
+                        -- 	return quire;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = quire;
+                        -- return quire;
                         -- 
-                        \Posit32::FusedSum(Posit32[],Quire).0.result\ := \Posit32::FusedSum(Posit32[],Quire).0.quire\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \Posit32::FusedSum(Posit32[],Quire).0.return\ <= \Posit32::FusedSum(Posit32[],Quire).0.result\;
+                        \Posit32::FusedSum(Posit32[],Quire).0.return\ <= \Posit32::FusedSum(Posit32[],Quire).0.quire\;
                         \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_11\.
-                        if (\Posit32::FusedSum(Posit32[],Quire).0._State\ = \Posit32::FusedSum(Posit32[],Quire).0._State_13\) then 
-                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_12\;
+                        -- Going to the state after the if-else which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_10\.
+                        if (\Posit32::FusedSum(Posit32[],Quire).0._State\ = \Posit32::FusedSum(Posit32[],Quire).0._State_12\) then 
+                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_14\ => 
+                    when \Posit32::FusedSum(Posit32[],Quire).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32)
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32)._Started.0\ = \Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32)._Finished.0\) then 
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Posit32::op_Explicit(Posit32)._Started.0\ <= false;
@@ -5746,10 +5371,10 @@ begin
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.startingValue\;
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Posit32::FusedSum(Posit32[],Quire).0.return.3\;
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= true;
-                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_15\;
+                            \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::FusedSum(Posit32[],Quire).0._State_15\ => 
+                    when \Posit32::FusedSum(Posit32[],Quire).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire)
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ = \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire)._Finished.0\) then 
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= false;
@@ -5758,13 +5383,13 @@ begin
                             \Posit32::FusedSum(Posit32[],Quire).0.return.3\ := \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
                             \Posit32::FusedSum(Posit32[],Quire).0.startingValue\ := \Posit32::FusedSum(Posit32[],Quire).0.return.4\;
                             -- The following section was transformed from the .NET statement below:
-                            -- i = i + 1;
+                            -- num = num + 1;
                             -- 
-                            \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\ := \Posit32::FusedSum(Posit32[],Quire).0.i\ + to_signed(1, 32);
-                            \Posit32::FusedSum(Posit32[],Quire).0.i\ := \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\;
-                            -- Returning to the repeated state of the while loop which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_8\ if the loop wasn't exited with a state change.
-                            if (\Posit32::FusedSum(Posit32[],Quire).0._State\ = \Posit32::FusedSum(Posit32[],Quire).0._State_15\) then 
-                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_9\;
+                            \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\ := \Posit32::FusedSum(Posit32[],Quire).0.num\ + to_signed(1, 32);
+                            \Posit32::FusedSum(Posit32[],Quire).0.num\ := \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\;
+                            -- Returning to the repeated state of the while loop which was started in state \Posit32::FusedSum(Posit32[],Quire).0._State_6\ if the loop wasn't exited with a state change.
+                            if (\Posit32::FusedSum(Posit32[],Quire).0._State\ = \Posit32::FusedSum(Posit32[],Quire).0._State_14\) then 
+                                \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_8\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -5779,16 +5404,15 @@ begin
     \Quire Posit32::op_Explicit(Posit32).0._StateMachine\: process (\Clock\) 
         Variable \Quire Posit32::op_Explicit(Posit32).0._State\: \Quire Posit32::op_Explicit(Posit32).0._States\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.x\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.flag\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.result\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
-        Variable \Quire Posit32::op_Explicit(Posit32).0.quire\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.3\: \Lombiq.Arithmetics.Quire\;
+        Alias \Quire Posit32::op_Explicit(Posit32).0.conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33\ : \Lombiq.Arithmetics.Quire\ is \Quire Posit32::op_Explicit(Posit32).0.left\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5803,11 +5427,10 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
                 \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
-                \Quire Posit32::op_Explicit(Posit32).0.flag\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
                 \Quire Posit32::op_Explicit(Posit32).0.return.0\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return.1\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_unsigned(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.return.2\ := to_signed(0, 16);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -5832,27 +5455,14 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_2\ => 
                         \Quire Posit32::op_Explicit(Posit32).0.x\ := \Quire Posit32::op_Explicit(Posit32).0.x.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Quire result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- ulong[] array;
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Quire quire;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = false;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.flag\ := False;
                         -- The following section was transformed from the .NET statement below:
                         -- array = new ulong[8];
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- array [0] = (ulong)Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x);
+                        -- array [0] = Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
@@ -5866,18 +5476,21 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.return.0\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().return.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.array\(to_integer(to_signed(0, 32))) := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return.0\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- quire = new Quire (array, 0);
+                            -- Quire left;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- left = new Quire (array, 0);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\IsNull\ := false;
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\Size\ := to_unsigned(0, 16);
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\SegmentCount\ := to_unsigned(0, 16);
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\Segments\ := (others => to_unsigned(0, 64));
+                            \Quire Posit32::op_Explicit(Posit32).0.left\.\IsNull\ := false;
+                            \Quire Posit32::op_Explicit(Posit32).0.left\.\Size\ := to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.left\.\SegmentCount\ := to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.left\.\Segments\ := (others => to_unsigned(0, 64));
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.array\;
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_4\;
                         end if;
@@ -5886,10 +5499,10 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.array\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- quire = Quire.op_LeftShift (quire, (int)((ulong)(240u - Lombiq.Arithmetics.Posit32.FractionSize (x)) + (ulong)((long)Lombiq.Arithmetics.Posit32.CalculateScaleFactor (x))));
+                            -- left = Quire.op_LeftShift (left, (int)(240L - (long)(Lombiq.Arithmetics.Posit32.FractionSize (x)) + (long)(Lombiq.Arithmetics.Posit32.CalculateScaleFactor (x))));
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
@@ -5902,21 +5515,21 @@ begin
                         if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.return.1\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().return.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := SmartResize(to_unsigned(240, 32) - \Quire Posit32::op_Explicit(Posit32).0.return.1\, 64);
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_signed(240, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return.1\), 64));
                             -- Starting state machine invocation for the following method: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor()
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= true;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
                     when \Quire Posit32::op_Explicit(Posit32).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor()
                         if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.return.2\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().return.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\) + unsigned((SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return.2\, 64))), 32));
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ + SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return.2\), 64), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
@@ -5927,16 +5540,19 @@ begin
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.return.3\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.return.3\;
+                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- result = quire;
+                            -- Quire conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.result\ := \Quire Posit32::op_Explicit(Posit32).0.quire\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return result;
+                            -- conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33 = left;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.result\;
+                            \Quire Posit32::op_Explicit(Posit32).0.conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33\ := \Quire Posit32::op_Explicit(Posit32).0.left\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33;
+                            -- 
+                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33\;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5953,8 +5569,7 @@ begin
         Variable \Quire::.ctor(UInt64[],UInt16).0.this\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire::.ctor(UInt64[],UInt16).0.segments\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire::.ctor(UInt64[],UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire::.ctor(UInt64[],UInt16).0.flag\: boolean := false;
-        Variable \Quire::.ctor(UInt64[],UInt16).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt64[],UInt16).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\: boolean := false;
         Variable \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -5966,8 +5581,7 @@ begin
                 \Quire::.ctor(UInt64[],UInt16).0._State\ := \Quire::.ctor(UInt64[],UInt16).0._State_0\;
                 \Quire::.ctor(UInt64[],UInt16).0.segments\ := (others => to_unsigned(0, 64));
                 \Quire::.ctor(UInt64[],UInt16).0.size\ := to_unsigned(0, 16);
-                \Quire::.ctor(UInt64[],UInt16).0.flag\ := false;
-                \Quire::.ctor(UInt64[],UInt16).0.i\ := to_signed(0, 32);
+                \Quire::.ctor(UInt64[],UInt16).0.num\ := to_signed(0, 32);
                 \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := false;
                 \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -5997,23 +5611,13 @@ begin
                         \Quire::.ctor(UInt64[],UInt16).0.segments\ := \Quire::.ctor(UInt64[],UInt16).0.segments.parameter.In\;
                         \Quire::.ctor(UInt64[],UInt16).0.size\ := \Quire::.ctor(UInt64[],UInt16).0.size.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- @this.SegmentCount = 8;
                         -- 
                         \Quire::.ctor(UInt64[],UInt16).0.this\.\SegmentCount\ := to_unsigned(8, 16);
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Size = 0;
                         -- 
-                        \Quire::.ctor(UInt64[],UInt16).0.this\.\Size\ := to_unsigned(0, 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = false;
-                        -- 
-                        \Quire::.ctor(UInt64[],UInt16).0.flag\ := False;
+                        \Quire::.ctor(UInt64[],UInt16).0.this\.\Size\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = new ulong[8];
                         -- 
@@ -6023,13 +5627,16 @@ begin
                         -- 
                         \Quire::.ctor(UInt64[],UInt16).0.this\.\Segments\ := \Quire::.ctor(UInt64[],UInt16).0.segments\(0 to 7);
                         -- The following section was transformed from the .NET statement below:
-                        -- i = 8;
+                        -- int num;
                         -- 
-                        \Quire::.ctor(UInt64[],UInt16).0.i\ := to_signed(8, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (i < (int)@this.SegmentCount) {
-                        -- 	@this.Segments [i] = 0uL;
-                        -- 	i = i + 1;
+                        -- num = 8;
+                        -- 
+                        \Quire::.ctor(UInt64[],UInt16).0.num\ := to_signed(8, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num) < (int)(@this.SegmentCount)) {
+                        -- 	@this.Segments [num] = 0uL;
+                        -- 	num = num + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -6038,23 +5645,23 @@ begin
                     when \Quire::.ctor(UInt64[],UInt16).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Quire::.ctor(UInt64[],UInt16).0._State_2\.
                         -- The while loop's condition:
-                        \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt64[],UInt16).0.i\ < signed(SmartResize(\Quire::.ctor(UInt64[],UInt16).0.this\.\SegmentCount\, 32));
+                        \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := (\Quire::.ctor(UInt64[],UInt16).0.num\) < signed(SmartResize((\Quire::.ctor(UInt64[],UInt16).0.this\.\SegmentCount\), 32));
                         if (\Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	@this.Segments [i] = 0uL;
-                            -- 	i = i + 1;
+                            -- 	@this.Segments [num] = 0uL;
+                            -- 	num = num + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.Segments [i] = 0uL;
+                            -- @this.Segments [num] = 0uL;
                             -- 
-                            \Quire::.ctor(UInt64[],UInt16).0.this\.\Segments\(to_integer(\Quire::.ctor(UInt64[],UInt16).0.i\)) := to_unsigned(0, 64);
+                            \Quire::.ctor(UInt64[],UInt16).0.this\.\Segments\(to_integer(\Quire::.ctor(UInt64[],UInt16).0.num\)) := to_unsigned(0, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- i = i + 1;
+                            -- num = num + 1;
                             -- 
-                            \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.1\ := \Quire::.ctor(UInt64[],UInt16).0.i\ + to_signed(1, 32);
-                            \Quire::.ctor(UInt64[],UInt16).0.i\ := \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.1\;
+                            \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.1\ := \Quire::.ctor(UInt64[],UInt16).0.num\ + to_signed(1, 32);
+                            \Quire::.ctor(UInt64[],UInt16).0.num\ := \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.1\;
                         else 
                             \Quire::.ctor(UInt64[],UInt16).0._State\ := \Quire::.ctor(UInt64[],UInt16).0._State_4\;
                         end if;
@@ -6076,15 +5683,15 @@ begin
         Variable \Quire::.ctor(UInt32,UInt16).0.this\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire::.ctor(UInt32,UInt16).0.firstSegment\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire::.ctor(UInt32,UInt16).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire::.ctor(UInt32,UInt16).0.conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\: boolean := false;
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire::.ctor(UInt32,UInt16).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.6\: boolean := false;
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6095,15 +5702,15 @@ begin
                 \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_0\;
                 \Quire::.ctor(UInt32,UInt16).0.firstSegment\ := to_unsigned(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.size\ := to_unsigned(0, 16);
-                \Quire::.ctor(UInt32,UInt16).0.i\ := to_signed(0, 32);
-                \Quire::.ctor(UInt32,UInt16).0.conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305\ := to_signed(0, 32);
-                \Quire::.ctor(UInt32,UInt16).0.remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e\ := to_signed(0, 32);
+                \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\ := to_signed(0, 32);
+                \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := false;
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \Quire::.ctor(UInt32,UInt16).0.num\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.6\ := false;
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.7\ := to_signed(0, 32);
             else 
@@ -6132,45 +5739,41 @@ begin
                         \Quire::.ctor(UInt32,UInt16).0.firstSegment\ := \Quire::.ctor(UInt32,UInt16).0.firstSegment.parameter.In\;
                         \Quire::.ctor(UInt32,UInt16).0.size\ := \Quire::.ctor(UInt32,UInt16).0.size.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- @this.Size = size;
                         -- 
                         \Quire::.ctor(UInt32,UInt16).0.this\.\Size\ := \Quire::.ctor(UInt32,UInt16).0.size\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305;
+                        -- int conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Int32 remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e;
+                        -- int remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e = (System.Int32)(size);
+                        -- remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 = (int)size;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e\ := signed(SmartResize((\Quire::.ctor(UInt32,UInt16).0.size\), 32));
+                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((System.Int32)(remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e - remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e / 32 * 32) == 0) {
-                        -- 	conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305 = 0;
+                        -- if ((remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 - remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 / 32 * 32 != 0)) {
+                        -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 1;
+                        -- } else {
+                        -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 0;
                         -- }
-                        -- else {
-                        -- 	conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305 = 1;
-                        -- }
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e\ / to_signed(32, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ / to_signed(32, 32);
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := SmartResize(\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ * to_signed(32, 32), 32);
                         \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.861
                     when \Quire::.ctor(UInt32,UInt16).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand4dcaf514f2760550bd68165dfd29dadb364db753656c5ec92787ae5db635070e\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := (\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\) = to_signed(0, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Quire::.ctor(UInt32,UInt16).0._State_5\ and ends in state \Quire::.ctor(UInt32,UInt16).0._State_5\.
                         --     * The false branch starts in state \Quire::.ctor(UInt32,UInt16).0._State_6\ and ends in state \Quire::.ctor(UInt32,UInt16).0._State_6\.
                         --     * Execution after either branch will continue in the following state: \Quire::.ctor(UInt32,UInt16).0._State_4\.
 
-                        if (\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\) then 
+                        if ((\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\)) then 
                             \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_5\;
                         else 
                             \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_6\;
@@ -6179,27 +5782,30 @@ begin
                     when \Quire::.ctor(UInt32,UInt16).0._State_4\ => 
                         -- State after the if-else which was started in state \Quire::.ctor(UInt32,UInt16).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = (ushort)(size >> 6 + conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305);
+                        -- @this.SegmentCount = (ushort)((size >> 6) + (conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517));
                         -- 
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ := signed(SmartResize(shift_right(\Quire::.ctor(UInt32,UInt16).0.size\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5) and "11111"))), 32));
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\ := SmartResize(unsigned(\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ + \Quire::.ctor(UInt32,UInt16).0.conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305\), 16);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\ := SmartResize(unsigned((\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\) + (\Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\)), 16);
                         \Quire::.ctor(UInt32,UInt16).0.this\.\SegmentCount\ := (\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = new ulong[8];
                         -- 
                         \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Segments [0] = 1uL;
+                        -- @this.Segments [0] = 1u;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := to_unsigned(1, 64);
+                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(to_unsigned(1, 32), 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- i = 1;
+                        -- int num;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.i\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (i < (int)@this.SegmentCount) {
-                        -- 	@this.Segments [i] = 0uL;
-                        -- 	i = i + 1;
+                        -- num = 1;
+                        -- 
+                        \Quire::.ctor(UInt32,UInt16).0.num\ := to_signed(1, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num) < (int)(@this.SegmentCount)) {
+                        -- 	@this.Segments [num] = 0uL;
+                        -- 	num = num + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -6209,13 +5815,13 @@ begin
                         -- True branch of the if-else started in state \Quire::.ctor(UInt32,UInt16).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305 = 0;
+                        -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305 = 0;
+                        -- conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 1;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305\ := to_signed(0, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\ := to_signed(1, 32);
                         -- Going to the state after the if-else which was started in state \Quire::.ctor(UInt32,UInt16).0._State_3\.
                         if (\Quire::.ctor(UInt32,UInt16).0._State\ = \Quire::.ctor(UInt32,UInt16).0._State_5\) then 
                             \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_4\;
@@ -6225,13 +5831,13 @@ begin
                         -- False branch of the if-else started in state \Quire::.ctor(UInt32,UInt16).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305 = 1;
+                        -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305 = 1;
+                        -- conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 0;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.conditionalac4635b55637b8388ce774767e2449b7d156ca6e122a74106c7762e6b6f52305\ := to_signed(1, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \Quire::.ctor(UInt32,UInt16).0._State_3\.
                         if (\Quire::.ctor(UInt32,UInt16).0._State\ = \Quire::.ctor(UInt32,UInt16).0._State_6\) then 
                             \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_4\;
@@ -6240,23 +5846,23 @@ begin
                     when \Quire::.ctor(UInt32,UInt16).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \Quire::.ctor(UInt32,UInt16).0._State_4\.
                         -- The while loop's condition:
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.6\ := \Quire::.ctor(UInt32,UInt16).0.i\ < signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.this\.\SegmentCount\, 32));
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.6\ := (\Quire::.ctor(UInt32,UInt16).0.num\) < signed(SmartResize((\Quire::.ctor(UInt32,UInt16).0.this\.\SegmentCount\), 32));
                         if (\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	@this.Segments [i] = 0uL;
-                            -- 	i = i + 1;
+                            -- 	@this.Segments [num] = 0uL;
+                            -- 	num = num + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.Segments [i] = 0uL;
+                            -- @this.Segments [num] = 0uL;
                             -- 
-                            \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(\Quire::.ctor(UInt32,UInt16).0.i\)) := to_unsigned(0, 64);
+                            \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(\Quire::.ctor(UInt32,UInt16).0.num\)) := to_unsigned(0, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- i = i + 1;
+                            -- num = num + 1;
                             -- 
-                            \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.7\ := \Quire::.ctor(UInt32,UInt16).0.i\ + to_signed(1, 32);
-                            \Quire::.ctor(UInt32,UInt16).0.i\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.7\;
+                            \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.7\ := \Quire::.ctor(UInt32,UInt16).0.num\ + to_signed(1, 32);
+                            \Quire::.ctor(UInt32,UInt16).0.num\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.7\;
                         else 
                             \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_8\;
                         end if;
@@ -6277,37 +5883,34 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0._State\: \Quire Quire::op_Addition(Quire,Quire).0._States\ := \Quire Quire::op_Addition(Quire,Quire).0._State_0\;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.right\: \Lombiq.Arithmetics.Quire\;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.result\: \Lombiq.Arithmetics.Quire\;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag2\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag3\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag4\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag5\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag6\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.0\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.1\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.2\: boolean := false;
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag\: boolean := false;
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\: boolean := false;
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag2\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\: boolean := false;
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.flag3\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\: boolean := false;
@@ -6316,6 +5919,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.21\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.22\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.23\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6325,36 +5929,34 @@ begin
                 \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
                 \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
                 \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_0\;
-                \Quire Quire::op_Addition(Quire,Quire).0.flag\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.array\ := (others => to_unsigned(0, 64));
-                \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.num\ := to_unsigned(0, 16);
-                \Quire Quire::op_Addition(Quire,Quire).0.num2\ := to_unsigned(0, 16);
-                \Quire Quire::op_Addition(Quire,Quire).0.num3\ := to_unsigned(0, 16);
-                \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.flag4\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.b\ := to_unsigned(0, 8);
-                \Quire Quire::op_Addition(Quire,Quire).0.flag5\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.flag6\ := false;
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.0\ := false;
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.1\ := false;
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.2\ := false;
+                \Quire Quire::op_Addition(Quire,Quire).0.array\ := (others => to_unsigned(0, 64));
+                \Quire Quire::op_Addition(Quire,Quire).0.flag\ := false;
+                \Quire Quire::op_Addition(Quire,Quire).0.num\ := to_unsigned(0, 16);
+                \Quire Quire::op_Addition(Quire,Quire).0.num2\ := to_unsigned(0, 16);
+                \Quire Quire::op_Addition(Quire,Quire).0.num3\ := to_unsigned(0, 16);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\ := false;
+                \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := false;
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\ := false;
+                \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := false;
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881\ := to_signed(0, 32);
-                \Quire Quire::op_Addition(Quire,Quire).0.conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190\ := to_signed(0, 32);
-                \Quire Quire::op_Addition(Quire,Quire).0.conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac\ := to_signed(0, 32);
+                \Quire Quire::op_Addition(Quire,Quire).0.b\ := to_unsigned(0, 8);
+                \Quire Quire::op_Addition(Quire,Quire).0.conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba\ := to_signed(0, 32);
+                \Quire Quire::op_Addition(Quire,Quire).0.conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49\ := to_signed(0, 32);
+                \Quire Quire::op_Addition(Quire,Quire).0.conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.11\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := to_unsigned(0, 8);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_unsigned(0, 64);
+                \Quire Quire::op_Addition(Quire,Quire).0.reference\ := to_unsigned(0, 64);
+                \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_signed(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := false;
@@ -6389,652 +5991,531 @@ begin
                         \Quire Quire::op_Addition(Quire,Quire).0.left\ := \Quire Quire::op_Addition(Quire,Quire).0.left.parameter.In\;
                         \Quire Quire::op_Addition(Quire,Quire).0.right\ := \Quire Quire::op_Addition(Quire,Quire).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Quire result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong[] array;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag5;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag6;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = (System.Int32)(left.SegmentCount) == 0 || (System.Int32)(right.SegmentCount) == 0;
+                        -- if ((int)(left.SegmentCount) == 0 || (int)(right.SegmentCount) == 0) {
+                        -- 	return left;
+                        -- }
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.0\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.left\.\SegmentCount\), 32)) = to_signed(0, 32);
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.1\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.right\.\SegmentCount\), 32)) = to_signed(0, 32);
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.2\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.0\ or \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.1\;
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.2\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	result = left;
-                        -- }
-                        -- else {
-                        -- 	array = new ulong[8];
-                        -- 	flag2 = false;
-                        -- 	num = 0;
-                        -- 	num2 = 0;
-                        -- 	num3 = 0;
-                        -- 	while ((int)num3 < (int)left.SegmentCount << 6) {
-                        -- 		flag3 = left.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 		flag4 = right.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 		int conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881;
-                        -- 		if (flag3) {
-                        -- 			conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                        -- 		}
-                        -- 		else {
-                        -- 			conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                        -- 		}
-                        -- 		int conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190;
-                        -- 		if (flag4) {
-                        -- 			conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
-                        -- 		}
-                        -- 		else {
-                        -- 			conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                        -- 		}
-                        -- 		int conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac;
-                        -- 		if (flag2) {
-                        -- 			conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
-                        -- 		}
-                        -- 		else {
-                        -- 			conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
-                        -- 		}
-                        -- 		b = (byte)(conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 + conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 + conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac);
-                        -- 		flag5 = (System.Int32)((System.Int32)(b) & 1) == 1;
-                        -- 		if (flag5) {
-                        -- 			array [(int)num] = array [(int)num] + 1uL << (int)num2;
-                        -- 		}
-                        -- 		flag2 = b >> 1 == 1;
-                        -- 		num2 = (System.UInt16)((System.Int32)(num2) + 1);
-                        -- 		flag6 = num2 >> 6 == 1;
-                        -- 		if (flag6) {
-                        -- 			num2 = 0;
-                        -- 			num = (System.UInt16)((System.Int32)(num) + 1);
-                        -- 		}
-                        -- 		num3 = (System.UInt16)((System.Int32)(num3) + 1);
-                        -- 	}
-                        -- 	result = new Quire (array, 0);
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_4\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_4\.
-                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_5\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_27\.
                         --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_3\.
 
-                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag\) then 
+                        if (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.2\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_4\;
                         else 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_5\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6518
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_3\ => 
                         -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.result\;
-                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_4\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	result = left;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- result = left;
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.result\ := \Quire Quire::op_Addition(Quire,Quire).0.left\;
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_4\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_5\ => 
-                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	array = new ulong[8];
-                        -- 	flag2 = false;
-                        -- 	num = 0;
-                        -- 	num2 = 0;
-                        -- 	num3 = 0;
-                        -- 	while ((int)num3 < (int)left.SegmentCount << 6) {
-                        -- 		flag3 = left.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 		flag4 = right.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 		int conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881;
-                        -- 		if (flag3) {
-                        -- 			conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                        -- 		}
-                        -- 		else {
-                        -- 			conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                        -- 		}
-                        -- 		int conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190;
-                        -- 		if (flag4) {
-                        -- 			conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
-                        -- 		}
-                        -- 		else {
-                        -- 			conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                        -- 		}
-                        -- 		int conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac;
-                        -- 		if (flag2) {
-                        -- 			conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
-                        -- 		}
-                        -- 		else {
-                        -- 			conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
-                        -- 		}
-                        -- 		b = (byte)(conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 + conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 + conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac);
-                        -- 		flag5 = (System.Int32)((System.Int32)(b) & 1) == 1;
-                        -- 		if (flag5) {
-                        -- 			array [(int)num] = array [(int)num] + 1uL << (int)num2;
-                        -- 		}
-                        -- 		flag2 = b >> 1 == 1;
-                        -- 		num2 = (System.UInt16)((System.Int32)(num2) + 1);
-                        -- 		flag6 = num2 >> 6 == 1;
-                        -- 		if (flag6) {
-                        -- 			num2 = 0;
-                        -- 			num = (System.UInt16)((System.Int32)(num) + 1);
-                        -- 		}
-                        -- 		num3 = (System.UInt16)((System.Int32)(num3) + 1);
-                        -- 	}
-                        -- 	result = new Quire (array, 0);
-                        -- }
+                        -- ulong[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- array = new ulong[8];
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.array\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- flag2 = false;
+                        -- bool flag;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = false;
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = 0;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.num\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.num\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num2;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = 0;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.num2\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num3;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.num3\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.num3\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)num3 < (int)left.SegmentCount << 6) {
-                        -- 	flag3 = left.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 	flag4 = right.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 	int conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881;
-                        -- 	if (flag3) {
-                        -- 		conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                        -- 	}
-                        -- 	else {
-                        -- 		conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                        -- 	}
-                        -- 	int conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190;
-                        -- 	if (flag4) {
-                        -- 		conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
-                        -- 	}
-                        -- 	else {
-                        -- 		conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                        -- 	}
-                        -- 	int conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac;
+                        -- while ((int)(num3) < (int)(left.SegmentCount << 6)) {
+                        -- 	bool flag2;
+                        -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 	bool flag3;
+                        -- 	flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 	byte b;
+                        -- 	int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                         -- 	if (flag2) {
-                        -- 		conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
+                        -- 		conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 1;
+                        -- 	} else {
+                        -- 		conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 0;
                         -- 	}
-                        -- 	else {
-                        -- 		conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
+                        -- 	int conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49;
+                        -- 	if (flag3) {
+                        -- 		conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 1;
+                        -- 	} else {
+                        -- 		conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 0;
                         -- 	}
-                        -- 	b = (byte)(conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 + conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 + conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac);
-                        -- 	flag5 = (System.Int32)((System.Int32)(b) & 1) == 1;
-                        -- 	if (flag5) {
-                        -- 		array [(int)num] = array [(int)num] + 1uL << (int)num2;
+                        -- 	int conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70;
+                        -- 	if (flag) {
+                        -- 		conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 1;
+                        -- 	} else {
+                        -- 		conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 0;
                         -- 	}
-                        -- 	flag2 = b >> 1 == 1;
-                        -- 	num2 = (System.UInt16)((System.Int32)(num2) + 1);
-                        -- 	flag6 = num2 >> 6 == 1;
-                        -- 	if (flag6) {
+                        -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
+                        -- 	if (((int)(b) & 1) == 1) {
+                        -- 		ref ulong reference = ref array [num];
+                        -- 		reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 	}
+                        -- 	flag = (b >> 1 == 1);
+                        -- 	num2 = (ushort)((int)(num2) + 1);
+                        -- 	if (num2 >> 6 == 1) {
                         -- 		num2 = 0;
-                        -- 		num = (System.UInt16)((System.Int32)(num) + 1);
+                        -- 		num = (ushort)((int)(num) + 1);
                         -- 	}
-                        -- 	num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                        -- 	num3 = (ushort)((int)(num3) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_6\;
+                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_6\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_5\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_4\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return left;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return left;
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.left\;
+                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_4\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_5\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\ := shift_left(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.left\.\SegmentCount\, 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5))));
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\ := signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num3\, 32)) < \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\;
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\ := SmartResize(shift_left(\Quire Quire::op_Addition(Quire,Quire).0.left\.\SegmentCount\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5)))), 32);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num3\), 32)) < (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\);
                         if (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	flag3 = left.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                            -- 	flag4 = right.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                            -- 	int conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881;
-                            -- 	if (flag3) {
-                            -- 		conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                            -- 	}
-                            -- 	else {
-                            -- 		conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                            -- 	}
-                            -- 	int conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190;
-                            -- 	if (flag4) {
-                            -- 		conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
-                            -- 	}
-                            -- 	else {
-                            -- 		conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                            -- 	}
-                            -- 	int conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac;
+                            -- 	bool flag2;
+                            -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 	bool flag3;
+                            -- 	flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 	byte b;
+                            -- 	int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                             -- 	if (flag2) {
-                            -- 		conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
+                            -- 		conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 1;
+                            -- 	} else {
+                            -- 		conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 0;
                             -- 	}
-                            -- 	else {
-                            -- 		conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
+                            -- 	int conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49;
+                            -- 	if (flag3) {
+                            -- 		conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 1;
+                            -- 	} else {
+                            -- 		conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 0;
                             -- 	}
-                            -- 	b = (byte)(conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 + conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 + conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac);
-                            -- 	flag5 = (System.Int32)((System.Int32)(b) & 1) == 1;
-                            -- 	if (flag5) {
-                            -- 		array [(int)num] = array [(int)num] + 1uL << (int)num2;
+                            -- 	int conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70;
+                            -- 	if (flag) {
+                            -- 		conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 1;
+                            -- 	} else {
+                            -- 		conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 0;
                             -- 	}
-                            -- 	flag2 = b >> 1 == 1;
-                            -- 	num2 = (System.UInt16)((System.Int32)(num2) + 1);
-                            -- 	flag6 = num2 >> 6 == 1;
-                            -- 	if (flag6) {
+                            -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
+                            -- 	if (((int)(b) & 1) == 1) {
+                            -- 		ref ulong reference = ref array [num];
+                            -- 		reference = (ulong)((long)reference + (1L << (int)num2));
+                            -- 	}
+                            -- 	flag = (b >> 1 == 1);
+                            -- 	num2 = (ushort)((int)(num2) + 1);
+                            -- 	if (num2 >> 6 == 1) {
                             -- 		num2 = 0;
-                            -- 		num = (System.UInt16)((System.Int32)(num) + 1);
+                            -- 		num = (ushort)((int)(num) + 1);
                             -- 	}
-                            -- 	num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                            -- 	num3 = (ushort)((int)(num3) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag3 = left.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
+                            -- bool flag2;
                             -- 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_8\;
-                        else 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_7\;
+                        else 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4003
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_7\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_5\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_6\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- result = new Quire (array, 0);
+                        -- Quire objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,Quire).0.result\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,Quire).0.result\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,Quire).0.result\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,Quire).0.result\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.result\;
+                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\;
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.array\;
-                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
-                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_27\;
+                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_7\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\ := SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.left\.\Segments\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6) and "111111"))), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\) and to_unsigned(1, 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9145
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\ := SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.left\.\Segments\(to_integer(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6) and "111111"))), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\ and to_unsigned(1, 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\) = to_unsigned(1, 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9145
+                        -- Clock cycles needed to complete this state (approximation): 0.2817
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\ = to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag4 = right.Segments [(int)num] >> (int)num2 & 1uL == 1uL;
-                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\ := SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.right\.\Segments\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6) and "111111"))), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\) and to_unsigned(1, 64);
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
+                        -- Clock cycles needed to complete this state (approximation): 0.9145
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\ := SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.right\.\Segments\(to_integer(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num\, 32)))), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6) and "111111"))), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\ and to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9145
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_11\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\ = to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag4\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\;
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\) = to_unsigned(1, 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\);
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881;
+                        -- byte b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (flag3) {
-                        -- 	conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                        -- }
-                        -- else {
-                        -- 	conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_13\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_13\.
-                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
-
-                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag3\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_13\;
-                        else 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_14\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_12\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag4) {
-                        -- 	conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
-                        -- }
-                        -- else {
-                        -- 	conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_16\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_16\.
-                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_17\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_17\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
-
-                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag4\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_16\;
-                        else 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_17\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_13\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 1;
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_13\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_14\ => 
-                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 = 0;
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_14\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_15\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac;
+                        -- int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
-                        -- 	conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
-                        -- }
-                        -- else {
-                        -- 	conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
+                        -- 	conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 1;
+                        -- } else {
+                        -- 	conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 0;
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_19\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_19\.
-                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_18\.
+                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
+                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_13\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
 
                         if (\Quire Quire::op_Addition(Quire,Quire).0.flag2\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_19\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_12\;
                         else 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_20\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2817
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_11\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag3) {
+                        -- 	conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 1;
+                        -- } else {
+                        -- 	conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 0;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
+                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_16\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_16\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
+
+                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag3\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_15\;
+                        else 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_16\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_12\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 1;
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba\ := to_signed(1, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_10\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_12\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_13\ => 
+                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba = 0;
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_10\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_13\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_14\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 1;
+                        -- } else {
+                        -- 	conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 0;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_18\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_18\.
+                        --     * The false branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_19\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_19\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_17\.
+
+                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_18\;
+                        else 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_19\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_15\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 1;
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49\ := to_signed(1, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_15\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_16\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
+                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
+                        -- 	conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 1;
+                        -- conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49 = 0;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
+                        \Quire Quire::op_Addition(Quire,Quire).0.conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_11\.
                         if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_16\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_15\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_17\ => 
-                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
+                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                        -- }
+                        -- b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 = 0;
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_12\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_17\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_15\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_18\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- b = (byte)(conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881 + conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190 + conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac);
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.11\ := \Quire Quire::op_Addition(Quire,Quire).0.conditional1fe9680c5ca106d25b8181afadd8a35805fee0d456af9ed217d299a1f8c5c881\ + \Quire Quire::op_Addition(Quire,Quire).0.conditional0a675590c07433a12f919b4ac465012b9d4a3cf5578918defa63e7bb7773e190\;
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := SmartResize(unsigned(\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.11\ + \Quire Quire::op_Addition(Quire,Quire).0.conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac\), 8);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.11\ := (\Quire Quire::op_Addition(Quire,Quire).0.conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba\) + (\Quire Quire::op_Addition(Quire,Quire).0.conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := SmartResize(unsigned(\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.11\ + (\Quire Quire::op_Addition(Quire,Quire).0.conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70\)), 8);
                         \Quire Quire::op_Addition(Quire,Quire).0.b\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag5 = (System.Int32)((System.Int32)(b) & 1) == 1;
+                        -- if (((int)(b) & 1) == 1) {
+                        -- 	ref ulong reference = ref array [num];
+                        -- 	reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- }
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)) and to_signed(1, 32);
-                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
+                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0.7912
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_19\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_18\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
+                        -- 	conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 1;
+                        -- conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 1;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
+                        \Quire Quire::op_Addition(Quire,Quire).0.conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70\ := to_signed(1, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_18\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_19\ => 
+                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70 = 0;
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_14\.
                         if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_19\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_18\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_17\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_20\ => 
-                        -- False branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac = 0;
-                        -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.conditionalec5a50863a71273afb6756e5a2155452bc30fa62677ec64591505bae84a813ac\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_15\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_20\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_18\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_21\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\) = to_signed(1, 32);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag5\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag5) {
-                        -- 	array [(int)num] = array [(int)num] + 1uL << (int)num2;
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_23\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_23\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_22\.
+                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_22\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_22\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_21\.
 
-                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag5\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_23\;
+                        if (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_22\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_22\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.264
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_22\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_21\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_21\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag2 = b >> 1 == 1;
+                        -- flag = (b >> 1 == 1);
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := signed(SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ = to_signed(1, 32);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\;
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (System.UInt16)((System.Int32)(num2) + 1);
+                        -- num2 = (ushort)((int)(num2) + 1);
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.19\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num2\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.num2\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.19\);
                         -- The following section was transformed from the .NET statement below:
-                        -- flag6 = num2 >> 6 == 1;
+                        -- if (num2 >> 6 == 1) {
+                        -- 	num2 = 0;
+                        -- 	num = (ushort)((int)(num) + 1);
+                        -- }
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_24\;
+                        \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_23\;
                         -- Clock cycles needed to complete this state (approximation): 0.8527
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_23\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_21\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_22\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [(int)num] = array [(int)num] + 1uL << (int)num2;
+                        -- 	ref ulong reference = ref array [num];
+                        -- 	reference = (ulong)((long)reference + (1L << (int)num2));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [(int)num] = array [(int)num] + 1uL << (int)num2;
+                        -- ref ulong reference = ref array [num];
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(shift_left(to_unsigned(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6)))), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num\, 32)))) + \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\;
-                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num\, 32)))) := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\;
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_21\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_23\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_22\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6)))), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.reference\) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.reference\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_22\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.9498
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_24\ => 
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_23\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.20\ := signed(SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.num2\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5) and "11111"))), 32));
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.21\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.20\ = to_signed(1, 32);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag6\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.21\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag6) {
-                        -- 	num2 = 0;
-                        -- 	num = (System.UInt16)((System.Int32)(num) + 1);
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_26\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_26\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_25\.
+                        --     * The true branch starts in state \Quire Quire::op_Addition(Quire,Quire).0._State_25\ and ends in state \Quire Quire::op_Addition(Quire,Quire).0._State_25\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_Addition(Quire,Quire).0._State_24\.
 
-                        if (\Quire Quire::op_Addition(Quire,Quire).0.flag6\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_26\;
+                        if (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.21\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_25\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_25\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5777
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_25\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_24\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_24\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                        -- num3 = (ushort)((int)(num3) + 1);
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.23\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num3\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.num3\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.23\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_5\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_25\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_6\;
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_24\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_26\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_24\.
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_25\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = 0;
-                        -- 	num = (System.UInt16)((System.Int32)(num) + 1);
+                        -- 	num = (ushort)((int)(num) + 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = 0;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.num2\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (System.UInt16)((System.Int32)(num) + 1);
+                        -- num = (ushort)((int)(num) + 1);
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.22\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.num\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.22\);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_24\.
-                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_26\) then 
-                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_25\;
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_23\.
+                        if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_25\) then 
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Quire Quire::op_Addition(Quire,Quire).0._State_27\ => 
+                    when \Quire Quire::op_Addition(Quire,Quire).0._State_26\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,Quire).0.result\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,Quire).0.array\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
-                            -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_2\.
-                            if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_27\) then 
-                                \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_3\;
-                            end if;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d;
+                            -- 
+                            \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.objectd7f66d6090a3f51dbf9c6b85d3744cbaf909687ec9d3f52027672e9a5e2ece9d\;
+                            \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7049,7 +6530,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,UInt32).0._State\: \Quire Quire::op_Addition(Quire,UInt32).0._States\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_0\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.right\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.return.0\: \Lombiq.Arithmetics.Quire\;
     begin 
@@ -7089,20 +6570,20 @@ begin
                         \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.left.parameter.In\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.right\ := \Quire Quire::op_Addition(Quire,UInt32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a;
+                        -- Quire objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a = new Quire (1u, (ushort)(left.SegmentCount << 6));
+                        -- objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6 = new Quire (1u, (ushort)(left.SegmentCount << 6));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(\Quire Quire::op_Addition(Quire,UInt32).0.left\.\SegmentCount\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5))))), 16);
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(1, 32);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= (\Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
@@ -7112,13 +6593,13 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return Quire.op_Addition (left, objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a);
+                            -- return Quire.op_Addition (left, objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire)
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.left\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= true;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_4\;
                         end if;
@@ -7129,7 +6610,7 @@ begin
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= false;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return.0\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.In.0\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.objectd6cf6064d1bbfa9eeef3ff0a41ddd09f2e234acc03c7d5684dd2815d2f8dfc0a\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return\ <= \Quire Quire::op_Addition(Quire,UInt32).0.return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_1\;
                         end if;
@@ -7188,11 +6669,11 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = 0;
                         -- 
-                        \Quire Quire::op_OnesComplement(Quire).0.num\ := to_unsigned(0, 16);
+                        \Quire Quire::op_OnesComplement(Quire).0.num\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((System.Int32)(num) < (System.Int32)(q.SegmentCount)) {
-                        -- 	q.Segments [(int)num] = ~q.Segments [(int)num];
-                        -- 	num = (System.UInt16)((System.Int32)(num) + 1);
+                        -- while ((int)(num) < (int)(q.SegmentCount)) {
+                        -- 	q.Segments [num] = ~q.Segments [num];
+                        -- 	num = (ushort)((int)(num) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -7205,17 +6686,17 @@ begin
                         if (\Quire Quire::op_OnesComplement(Quire).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	q.Segments [(int)num] = ~q.Segments [(int)num];
-                            -- 	num = (System.UInt16)((System.Int32)(num) + 1);
+                            -- 	q.Segments [num] = ~q.Segments [num];
+                            -- 	num = (ushort)((int)(num) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- q.Segments [(int)num] = ~q.Segments [(int)num];
+                            -- q.Segments [num] = ~q.Segments [num];
                             -- 
-                            \Quire Quire::op_OnesComplement(Quire).0.unaryOperationResult.0\ := not(\Quire Quire::op_OnesComplement(Quire).0.q\.\Segments\(to_integer(signed(SmartResize(\Quire Quire::op_OnesComplement(Quire).0.num\, 32)))));
-                            \Quire Quire::op_OnesComplement(Quire).0.q\.\Segments\(to_integer(signed(SmartResize(\Quire Quire::op_OnesComplement(Quire).0.num\, 32)))) := \Quire Quire::op_OnesComplement(Quire).0.unaryOperationResult.0\;
+                            \Quire Quire::op_OnesComplement(Quire).0.unaryOperationResult.0\ := not(\Quire Quire::op_OnesComplement(Quire).0.q\.\Segments\(to_integer(\Quire Quire::op_OnesComplement(Quire).0.num\)));
+                            \Quire Quire::op_OnesComplement(Quire).0.q\.\Segments\(to_integer(\Quire Quire::op_OnesComplement(Quire).0.num\)) := \Quire Quire::op_OnesComplement(Quire).0.unaryOperationResult.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num = (System.UInt16)((System.Int32)(num) + 1);
+                            -- num = (ushort)((int)(num) + 1);
                             -- 
                             \Quire Quire::op_OnesComplement(Quire).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_OnesComplement(Quire).0.num\), 32)) + to_signed(1, 32)), 16);
                             \Quire Quire::op_OnesComplement(Quire).0.num\ := (\Quire Quire::op_OnesComplement(Quire).0.binaryOperationResult.1\);
@@ -7243,11 +6724,8 @@ begin
         Variable \Boolean Quire::op_Equality(Quire,Quire).0._State\: \Boolean Quire::op_Equality(Quire,Quire).0._States\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_0\;
         Variable \Boolean Quire::op_Equality(Quire,Quire).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Boolean Quire::op_Equality(Quire,Quire).0.right\: \Lombiq.Arithmetics.Quire\;
-        Variable \Boolean Quire::op_Equality(Quire,Quire).0.flag\: boolean := false;
-        Variable \Boolean Quire::op_Equality(Quire,Quire).0.result\: boolean := false;
-        Variable \Boolean Quire::op_Equality(Quire,Quire).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Boolean Quire::op_Equality(Quire,Quire).0.flag2\: boolean := false;
         Variable \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.0\: boolean := false;
+        Variable \Boolean Quire::op_Equality(Quire,Quire).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.1\: boolean := false;
         Variable \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.2\: boolean := false;
         Variable \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -7258,11 +6736,8 @@ begin
                 \Boolean Quire::op_Equality(Quire,Quire).0._Finished\ <= false;
                 \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= false;
                 \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_0\;
-                \Boolean Quire::op_Equality(Quire,Quire).0.flag\ := false;
-                \Boolean Quire::op_Equality(Quire,Quire).0.result\ := false;
-                \Boolean Quire::op_Equality(Quire,Quire).0.num\ := to_unsigned(0, 16);
-                \Boolean Quire::op_Equality(Quire,Quire).0.flag2\ := false;
                 \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.0\ := false;
+                \Boolean Quire::op_Equality(Quire,Quire).0.num\ := to_unsigned(0, 16);
                 \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.1\ := false;
                 \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.2\ := false;
                 \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.3\ := to_unsigned(0, 16);
@@ -7292,192 +6767,129 @@ begin
                         \Boolean Quire::op_Equality(Quire,Quire).0.left\ := \Boolean Quire::op_Equality(Quire,Quire).0.left.parameter.In\;
                         \Boolean Quire::op_Equality(Quire,Quire).0.right\ := \Boolean Quire::op_Equality(Quire,Quire).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool result;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = (System.Int32)(left.SegmentCount) != (System.Int32)(right.SegmentCount);
+                        -- if ((int)(left.SegmentCount) != (int)(right.SegmentCount)) {
+                        -- 	return false;
+                        -- }
                         -- 
                         \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.0\ := signed(SmartResize((\Boolean Quire::op_Equality(Quire,Quire).0.left\.\SegmentCount\), 32)) /= signed(SmartResize((\Boolean Quire::op_Equality(Quire,Quire).0.right\.\SegmentCount\), 32));
-                        \Boolean Quire::op_Equality(Quire,Quire).0.flag\ := \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (flag) {
-                        -- 	result = false;
-                        -- }
-                        -- else {
-                        -- 	num = 0;
-                        -- 	while ((System.Int32)(num) < (System.Int32)(left.SegmentCount)) {
-                        -- 		flag2 = left.Segments [(int)num] != right.Segments [(int)num];
-                        -- 		if (flag2) {
-                        -- 			result = false;
-                        -- 			return result;
-                        -- 		}
-                        -- 		num = (System.UInt16)((System.Int32)(num) + 1);
-                        -- 	}
-                        -- 	result = true;
-                        -- }
-                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Boolean Quire::op_Equality(Quire,Quire).0._State_4\ and ends in state \Boolean Quire::op_Equality(Quire,Quire).0._State_4\.
-                        --     * The false branch starts in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\ and ends in state \Boolean Quire::op_Equality(Quire,Quire).0._State_7\.
                         --     * Execution after either branch will continue in the following state: \Boolean Quire::op_Equality(Quire,Quire).0._State_3\.
 
-                        if (\Boolean Quire::op_Equality(Quire,Quire).0.flag\) then 
+                        if (\Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.0\) then 
                             \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_4\;
                         else 
-                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_5\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.264
                     when \Boolean Quire::op_Equality(Quire,Quire).0._State_3\ => 
                         -- State after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return result;
+                        -- ushort num;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= \Boolean Quire::op_Equality(Quire,Quire).0.result\;
-                        \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0;
+                        -- 
+                        \Boolean Quire::op_Equality(Quire,Quire).0.num\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num) < (int)(left.SegmentCount)) {
+                        -- 	if (left.Segments [num] != right.Segments [num]) {
+                        -- 		return false;
+                        -- 	}
+                        -- 	num = (ushort)((int)(num) + 1);
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Quire::op_Equality(Quire,Quire).0._State_4\ => 
                         -- True branch of the if-else started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = false;
+                        -- 	return false;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = false;
+                        -- return false;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.result\ := False;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= False;
+                        \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
                         if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_4\) then 
                             \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Quire::op_Equality(Quire,Quire).0._State_5\ => 
-                        -- False branch of the if-else started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num = 0;
-                        -- 	while ((System.Int32)(num) < (System.Int32)(left.SegmentCount)) {
-                        -- 		flag2 = left.Segments [(int)num] != right.Segments [(int)num];
-                        -- 		if (flag2) {
-                        -- 			result = false;
-                        -- 			return result;
-                        -- 		}
-                        -- 		num = (System.UInt16)((System.Int32)(num) + 1);
-                        -- 	}
-                        -- 	result = true;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = 0;
-                        -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.num\ := to_unsigned(0, 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((System.Int32)(num) < (System.Int32)(left.SegmentCount)) {
-                        -- 	flag2 = left.Segments [(int)num] != right.Segments [(int)num];
-                        -- 	if (flag2) {
-                        -- 		result = false;
-                        -- 		return result;
-                        -- 	}
-                        -- 	num = (System.UInt16)((System.Int32)(num) + 1);
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_6\ => 
-                        -- Repeated state of the while loop which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
+                        -- Repeated state of the while loop which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_3\.
                         -- The while loop's condition:
                         \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.1\ := signed(SmartResize((\Boolean Quire::op_Equality(Quire,Quire).0.num\), 32)) < signed(SmartResize((\Boolean Quire::op_Equality(Quire,Quire).0.left\.\SegmentCount\), 32));
                         if (\Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	flag2 = left.Segments [(int)num] != right.Segments [(int)num];
-                            -- 	if (flag2) {
-                            -- 		result = false;
-                            -- 		return result;
+                            -- 	if (left.Segments [num] != right.Segments [num]) {
+                            -- 		return false;
                             -- 	}
-                            -- 	num = (System.UInt16)((System.Int32)(num) + 1);
+                            -- 	num = (ushort)((int)(num) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = left.Segments [(int)num] != right.Segments [(int)num];
-                            -- 
-                            \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.2\ := \Boolean Quire::op_Equality(Quire,Quire).0.left\.\Segments\(to_integer(signed(SmartResize(\Boolean Quire::op_Equality(Quire,Quire).0.num\, 32)))) /= \Boolean Quire::op_Equality(Quire,Quire).0.right\.\Segments\(to_integer(signed(SmartResize(\Boolean Quire::op_Equality(Quire,Quire).0.num\, 32))));
-                            \Boolean Quire::op_Equality(Quire,Quire).0.flag2\ := \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.2\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- if (flag2) {
-                            -- 	result = false;
-                            -- 	return result;
+                            -- if (left.Segments [num] != right.Segments [num]) {
+                            -- 	return false;
                             -- }
                             -- 
+                            \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.2\ := \Boolean Quire::op_Equality(Quire,Quire).0.left\.\Segments\(to_integer(\Boolean Quire::op_Equality(Quire,Quire).0.num\)) /= \Boolean Quire::op_Equality(Quire,Quire).0.right\.\Segments\(to_integer(\Boolean Quire::op_Equality(Quire,Quire).0.num\));
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Quire::op_Equality(Quire,Quire).0._State_9\ and ends in state \Boolean Quire::op_Equality(Quire,Quire).0._State_9\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Quire::op_Equality(Quire,Quire).0._State_8\.
+                            --     * The true branch starts in state \Boolean Quire::op_Equality(Quire,Quire).0._State_8\ and ends in state \Boolean Quire::op_Equality(Quire,Quire).0._State_8\.
+                            --     * Execution after either branch will continue in the following state: \Boolean Quire::op_Equality(Quire,Quire).0._State_7\.
 
-                            if (\Boolean Quire::op_Equality(Quire,Quire).0.flag2\) then 
-                                \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_9\;
+                            if (\Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.2\) then 
+                                \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_8\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_8\;
+                                \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_7\;
                             end if;
                         else 
-                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_7\;
+                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.557
-                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_7\ => 
-                        -- State after the while loop which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
+                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_6\ => 
+                        -- State after the while loop which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- result = true;
+                        -- return true;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.result\ := True;
-                        -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
-                        if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_7\) then 
-                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_3\;
-                        end if;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= True;
+                        \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_8\ => 
-                        -- State after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_6\.
+                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_7\ => 
+                        -- State after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (System.UInt16)((System.Int32)(num) + 1);
+                        -- num = (ushort)((int)(num) + 1);
                         -- 
                         \Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\Boolean Quire::op_Equality(Quire,Quire).0.num\), 32)) + to_signed(1, 32)), 16);
                         \Boolean Quire::op_Equality(Quire,Quire).0.num\ := (\Boolean Quire::op_Equality(Quire,Quire).0.binaryOperationResult.3\);
-                        -- Returning to the repeated state of the while loop which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\ if the loop wasn't exited with a state change.
-                        if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_8\) then 
-                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_6\;
+                        -- Returning to the repeated state of the while loop which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_7\) then 
+                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_9\ => 
-                        -- True branch of the if-else started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_6\.
+                    when \Boolean Quire::op_Equality(Quire,Quire).0._State_8\ => 
+                        -- True branch of the if-else started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	result = false;
-                        -- 	return result;
+                        -- 	return false;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result = false;
+                        -- return false;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.result\ := False;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return result;
-                        -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= \Boolean Quire::op_Equality(Quire,Quire).0.result\;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= False;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_6\.
-                        if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_9\) then 
-                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_8\;
+                        -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
+                        if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_8\) then 
+                            \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -7492,28 +6904,29 @@ begin
         Variable \Quire Quire::op_RightShift(Quire,Int32).0._State\: \Quire Quire::op_RightShift(Quire,Int32).0._States\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_0\;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.right\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag3\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7524,24 +6937,25 @@ begin
                 \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
                 \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_0\;
                 \Quire Quire::op_RightShift(Quire,Int32).0.right\ := to_signed(0, 32);
-                \Quire Quire::op_RightShift(Quire,Int32).0.num\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.array\ := (others => to_unsigned(0, 64));
-                \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.num4\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.flag3\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \Quire Quire::op_RightShift(Quire,Int32).0.num\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.array\ := (others => to_unsigned(0, 64));
+                \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.num4\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
@@ -7570,46 +6984,28 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.left\ := \Quire Quire::op_RightShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- ulong num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong[] array;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- right = right & 1 << (int)((System.Int32)(left.SegmentCount) * 6) - 1;
+                        -- right = (right & ((1 << (int)(left.SegmentCount) * 6) - 1));
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(6, 32), 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\), 5))));
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\, 5))));
                         \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.9452
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ - to_signed(1, 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\) - to_signed(1, 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = 9223372036854775808uL;
                         -- 
                         -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Quire Quire::op_RightShift(Quire,Int32).0.num\ := "1000000000000000000000000000000000000000000000000000000000000000";
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong[] array;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- array = new ulong[8];
                         -- 
@@ -7619,25 +7015,33 @@ begin
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.array\ := \Quire Quire::op_RightShift(Quire,Int32).0.left\.\Segments\(0 to 7);
                         -- The following section was transformed from the .NET statement below:
+                        -- ushort num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- num2 = 0;
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)num2 < right) {
+                        -- while ((int)(num2) < (int)(right)) {
+                        -- 	bool flag;
                         -- 	flag = false;
+                        -- 	ushort num3;
                         -- 	num3 = 1;
-                        -- 	while ((int)num3 <= 8) {
-                        -- 		num4 = (ushort)(8 - (int)num3);
-                        -- 		flag2 = array [(int)num4] & 1uL == 1uL;
-                        -- 		array [(int)num4] = array [(int)num4] >> 1;
-                        -- 		flag3 = flag;
-                        -- 		if (flag3) {
-                        -- 			array [(int)num4] = array [(int)num4] | num;
+                        -- 	while ((int)(num3) <= 8) {
+                        -- 		ushort num4;
+                        -- 		num4 = (ushort)(8 - (int)(num3));
+                        -- 		bool flag2;
+                        -- 		flag2 = ((array [num4] & 1uL) == 1uL);
+                        -- 		ref ulong reference = ref array [num4];
+                        -- 		reference = reference >> 1;
+                        -- 		if (flag) {
+                        -- 			ref ulong reference2 = ref array [num4];
+                        -- 			reference2 = (reference2 | num);
                         -- 		}
                         -- 		flag = flag2;
-                        -- 		num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                        -- 		num3 = (ushort)((int)(num3) + 1);
                         -- 	}
-                        -- 	num2 = (System.UInt16)((System.Int32)(num2) + 1);
+                        -- 	num2 = (ushort)((int)(num2) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -7646,45 +7050,59 @@ begin
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num2\, 32)) < \Quire Quire::op_RightShift(Quire,Int32).0.right\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
+                            -- 	bool flag;
                             -- 	flag = false;
+                            -- 	ushort num3;
                             -- 	num3 = 1;
-                            -- 	while ((int)num3 <= 8) {
-                            -- 		num4 = (ushort)(8 - (int)num3);
-                            -- 		flag2 = array [(int)num4] & 1uL == 1uL;
-                            -- 		array [(int)num4] = array [(int)num4] >> 1;
-                            -- 		flag3 = flag;
-                            -- 		if (flag3) {
-                            -- 			array [(int)num4] = array [(int)num4] | num;
+                            -- 	while ((int)(num3) <= 8) {
+                            -- 		ushort num4;
+                            -- 		num4 = (ushort)(8 - (int)(num3));
+                            -- 		bool flag2;
+                            -- 		flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 		ref ulong reference = ref array [num4];
+                            -- 		reference = reference >> 1;
+                            -- 		if (flag) {
+                            -- 			ref ulong reference2 = ref array [num4];
+                            -- 			reference2 = (reference2 | num);
                             -- 		}
                             -- 		flag = flag2;
-                            -- 		num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                            -- 		num3 = (ushort)((int)(num3) + 1);
                             -- 	}
-                            -- 	num2 = (System.UInt16)((System.Int32)(num2) + 1);
+                            -- 	num2 = (ushort)((int)(num2) + 1);
                             -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- bool flag;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
                             \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := False;
                             -- The following section was transformed from the .NET statement below:
+                            -- ushort num3;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
                             -- num3 = 1;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := to_unsigned(1, 16);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := SmartResize(unsigned(to_signed(1, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((int)num3 <= 8) {
-                            -- 	num4 = (ushort)(8 - (int)num3);
-                            -- 	flag2 = array [(int)num4] & 1uL == 1uL;
-                            -- 	array [(int)num4] = array [(int)num4] >> 1;
-                            -- 	flag3 = flag;
-                            -- 	if (flag3) {
-                            -- 		array [(int)num4] = array [(int)num4] | num;
+                            -- while ((int)(num3) <= 8) {
+                            -- 	ushort num4;
+                            -- 	num4 = (ushort)(8 - (int)(num3));
+                            -- 	bool flag2;
+                            -- 	flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 	ref ulong reference = ref array [num4];
+                            -- 	reference = reference >> 1;
+                            -- 	if (flag) {
+                            -- 		ref ulong reference2 = ref array [num4];
+                            -- 		reference2 = (reference2 | num);
                             -- 	}
                             -- 	flag = flag2;
-                            -- 	num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                            -- 	num3 = (ushort)((int)(num3) + 1);
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -7696,51 +7114,60 @@ begin
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e;
+                        -- Quire object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e = new Quire (array, 0);
+                        -- object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\.\IsNull\ := false;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\IsNull\ := false;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.array\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
                         \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
                         -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num3\, 32)) <= to_signed(8, 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32)) <= to_signed(8, 32);
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num4 = (ushort)(8 - (int)num3);
-                            -- 	flag2 = array [(int)num4] & 1uL == 1uL;
-                            -- 	array [(int)num4] = array [(int)num4] >> 1;
-                            -- 	flag3 = flag;
-                            -- 	if (flag3) {
-                            -- 		array [(int)num4] = array [(int)num4] | num;
+                            -- 	ushort num4;
+                            -- 	num4 = (ushort)(8 - (int)(num3));
+                            -- 	bool flag2;
+                            -- 	flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 	ref ulong reference = ref array [num4];
+                            -- 	reference = reference >> 1;
+                            -- 	if (flag) {
+                            -- 		ref ulong reference2 = ref array [num4];
+                            -- 		reference2 = (reference2 | num);
                             -- 	}
                             -- 	flag = flag2;
-                            -- 	num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                            -- 	num3 = (ushort)((int)(num3) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = (ushort)(8 - (int)num3);
+                            -- ushort num4;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num3\, 32))), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = (ushort)(8 - (int)(num3));
+                            -- 
+                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32))), 16);
                             \Quire Quire::op_RightShift(Quire,Int32).0.num4\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\);
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = array [(int)num4] & 1uL == 1uL;
+                            -- bool flag2;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num4\, 32)))) and to_unsigned(1, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 
+                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) and to_unsigned(1, 64);
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         else 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_7\;
@@ -7749,7 +7176,7 @@ begin
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (System.UInt16)((System.Int32)(num2) + 1);
+                        -- num2 = (ushort)((int)(num2) + 1);
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\);
@@ -7760,20 +7187,20 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ = to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\);
                         -- The following section was transformed from the .NET statement below:
-                        -- array [(int)num4] = array [(int)num4] >> 1;
+                        -- ref ulong reference = ref array [num4];
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num4\, 32)))), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num4\, 32)))) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag3 = flag;
+                        -- reference = reference >> 1;
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag3\ := \Quire Quire::op_RightShift(Quire,Int32).0.flag\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (flag3) {
-                        -- 	array [(int)num4] = array [(int)num4] | num;
+                        -- if (flag) {
+                        -- 	ref ulong reference2 = ref array [num4];
+                        -- 	reference2 = (reference2 | num);
                         -- }
                         -- 
 
@@ -7781,7 +7208,7 @@ begin
                         --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\.
                         --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
 
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.flag3\) then 
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.flag\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
@@ -7795,7 +7222,7 @@ begin
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := \Quire Quire::op_RightShift(Quire,Int32).0.flag2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                        -- num3 = (ushort)((int)(num3) + 1);
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
@@ -7808,14 +7235,18 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [(int)num4] = array [(int)num4] | num;
+                        -- 	ref ulong reference2 = ref array [num4];
+                        -- 	reference2 = (reference2 | num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [(int)num4] = array [(int)num4] | num;
+                        -- ref ulong reference2 = ref array [num4];
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num4\, 32)))) or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.num4\, 32)))) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- reference2 = (reference2 | num);
+                        -- 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
                         if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
@@ -7825,12 +7256,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_RightShift(Quire,Int32).0.array\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e;
+                            -- return object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object1fb1530bc6976fb9d38ed1bb10da56a1a02990e0addc121b330f8b2e6b6afb8e\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\;
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7846,24 +7277,25 @@ begin
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0._State\: \Quire Quire::op_LeftShift(Quire,Int32).0._States\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_0\;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.right\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.num\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\: boolean := false;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.flag\: boolean := false;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\: boolean := false;
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.flag3\: boolean := false;
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\: boolean := false;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.2\: boolean := false;
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\: boolean := false;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7874,20 +7306,21 @@ begin
                 \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_0\;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := to_signed(0, 32);
+                \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.num\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.array\ := (others => to_unsigned(0, 64));
                 \Quire Quire::op_LeftShift(Quire,Int32).0.num2\ := to_unsigned(0, 32);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
+                \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\ := false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.num4\ := to_unsigned(0, 16);
-                \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := false;
-                \Quire Quire::op_LeftShift(Quire,Int32).0.flag3\ := false;
-                \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\ := false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.2\ := false;
+                \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := false;
+                \Quire Quire::op_LeftShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 64);
+                \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 16);
@@ -7916,39 +7349,21 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.left\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- ulong num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong[] array;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- right = right & 65535;
+                        -- right = (right & 65535);
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(65535, 32);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = 9223372036854775808uL;
                         -- 
                         -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
                         \Quire Quire::op_LeftShift(Quire,Int32).0.num\ := "1000000000000000000000000000000000000000000000000000000000000000";
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong[] array;
+                        -- 
                         -- The following section was transformed from the .NET statement below:
                         -- array = new ulong[8];
                         -- 
@@ -7958,28 +7373,38 @@ begin
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.array\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left\.\Segments\(0 to 7);
                         -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- num2 = 1u;
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.num2\ := to_unsigned(1, 32);
                         -- The following section was transformed from the .NET statement below:
+                        -- ushort num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.num3\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)num3 < right) {
+                        -- while ((int)(num3) < (int)(right)) {
+                        -- 	bool flag;
                         -- 	flag = false;
+                        -- 	ushort num4;
                         -- 	num4 = 0;
-                        -- 	while ((int)num4 < 8) {
-                        -- 		flag2 = array [(int)num4] & num == num;
-                        -- 		array [(int)num4] = array [(int)num4] << 1;
-                        -- 		flag3 = flag;
-                        -- 		if (flag3) {
-                        -- 			array [(int)num4] = array [(int)num4] | (ulong)num2;
+                        -- 	while ((int)(num4) < 8) {
+                        -- 		bool flag2;
+                        -- 		flag2 = ((array [num4] & num) == num);
+                        -- 		ref ulong reference = ref array [num4];
+                        -- 		reference = reference << 1;
+                        -- 		if (flag) {
+                        -- 			ref ulong reference2 = ref array [num4];
+                        -- 			reference2 = ((ulong)(reference2 | (ulong)(num2)));
                         -- 		}
                         -- 		flag = flag2;
-                        -- 		num4 = (System.UInt16)((System.Int32)(num4) + 1);
+                        -- 		num4 = (ushort)((int)(num4) + 1);
                         -- 	}
-                        -- 	num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                        -- 	num3 = (ushort)((int)(num3) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -7988,43 +7413,55 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_2\.
                         -- The while loop's condition:
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\ := signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num3\, 32)) < \Quire Quire::op_LeftShift(Quire,Int32).0.right\;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\ := signed(SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num3\), 32)) < (\Quire Quire::op_LeftShift(Quire,Int32).0.right\);
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
+                            -- 	bool flag;
                             -- 	flag = false;
+                            -- 	ushort num4;
                             -- 	num4 = 0;
-                            -- 	while ((int)num4 < 8) {
-                            -- 		flag2 = array [(int)num4] & num == num;
-                            -- 		array [(int)num4] = array [(int)num4] << 1;
-                            -- 		flag3 = flag;
-                            -- 		if (flag3) {
-                            -- 			array [(int)num4] = array [(int)num4] | (ulong)num2;
+                            -- 	while ((int)(num4) < 8) {
+                            -- 		bool flag2;
+                            -- 		flag2 = ((array [num4] & num) == num);
+                            -- 		ref ulong reference = ref array [num4];
+                            -- 		reference = reference << 1;
+                            -- 		if (flag) {
+                            -- 			ref ulong reference2 = ref array [num4];
+                            -- 			reference2 = ((ulong)(reference2 | (ulong)(num2)));
                             -- 		}
                             -- 		flag = flag2;
-                            -- 		num4 = (System.UInt16)((System.Int32)(num4) + 1);
+                            -- 		num4 = (ushort)((int)(num4) + 1);
                             -- 	}
-                            -- 	num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                            -- 	num3 = (ushort)((int)(num3) + 1);
                             -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- bool flag;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := False;
                             -- The following section was transformed from the .NET statement below:
+                            -- ushort num4;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
                             -- num4 = 0;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.num4\ := to_unsigned(0, 16);
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.num4\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((int)num4 < 8) {
-                            -- 	flag2 = array [(int)num4] & num == num;
-                            -- 	array [(int)num4] = array [(int)num4] << 1;
-                            -- 	flag3 = flag;
-                            -- 	if (flag3) {
-                            -- 		array [(int)num4] = array [(int)num4] | (ulong)num2;
+                            -- while ((int)(num4) < 8) {
+                            -- 	bool flag2;
+                            -- 	flag2 = ((array [num4] & num) == num);
+                            -- 	ref ulong reference = ref array [num4];
+                            -- 	reference = reference << 1;
+                            -- 	if (flag) {
+                            -- 		ref ulong reference2 = ref array [num4];
+                            -- 		reference2 = ((ulong)(reference2 | (ulong)(num2)));
                             -- 	}
                             -- 	flag = flag2;
-                            -- 	num4 = (System.UInt16)((System.Int32)(num4) + 1);
+                            -- 	num4 = (ushort)((int)(num4) + 1);
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -8036,59 +7473,64 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35;
+                        -- Quire objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35 = new Quire (array, 0);
+                        -- objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\.\IsNull\ := false;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\IsNull\ := false;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.array\;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
                         \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\, 32)) < to_signed(8, 32);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.2\ := signed(SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num4\), 32)) < to_signed(8, 32);
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	flag2 = array [(int)num4] & num == num;
-                            -- 	array [(int)num4] = array [(int)num4] << 1;
-                            -- 	flag3 = flag;
-                            -- 	if (flag3) {
-                            -- 		array [(int)num4] = array [(int)num4] | (ulong)num2;
+                            -- 	bool flag2;
+                            -- 	flag2 = ((array [num4] & num) == num);
+                            -- 	ref ulong reference = ref array [num4];
+                            -- 	reference = reference << 1;
+                            -- 	if (flag) {
+                            -- 		ref ulong reference2 = ref array [num4];
+                            -- 		reference2 = ((ulong)(reference2 | (ulong)(num2)));
                             -- 	}
                             -- 	flag = flag2;
-                            -- 	num4 = (System.UInt16)((System.Int32)(num4) + 1);
+                            -- 	num4 = (ushort)((int)(num4) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = array [(int)num4] & num == num;
+                            -- bool flag2;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\, 32)))) and \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ = \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [(int)num4] = array [(int)num4] << 1;
+                            -- flag2 = ((array [num4] & num) == num);
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(shift_left(\Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\, 32)))), to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\, 32)))) := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) and \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\) = \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\);
                             -- The following section was transformed from the .NET statement below:
-                            -- flag3 = flag;
+                            -- ref ulong reference = ref array [num4];
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag3\ := \Quire Quire::op_LeftShift(Quire,Int32).0.flag\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (flag3) {
-                            -- 	array [(int)num4] = array [(int)num4] | (ulong)num2;
+                            -- reference = reference << 1;
+                            -- 
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(shift_left(\Quire Quire::op_LeftShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.reference\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	ref ulong reference2 = ref array [num4];
+                            -- 	reference2 = ((ulong)(reference2 | (ulong)(num2)));
                             -- }
                             -- 
 
@@ -8096,7 +7538,7 @@ begin
                             --     * The true branch starts in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\ and ends in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\.
                             --     * Execution after either branch will continue in the following state: \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\.
 
-                            if (\Quire Quire::op_LeftShift(Quire,Int32).0.flag3\) then 
+                            if (\Quire Quire::op_LeftShift(Quire,Int32).0.flag\) then 
                                 \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
@@ -8109,7 +7551,7 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_6\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (System.UInt16)((System.Int32)(num3) + 1);
+                        -- num3 = (ushort)((int)(num3) + 1);
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num3\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.num3\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\);
@@ -8125,7 +7567,7 @@ begin
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = (System.UInt16)((System.Int32)(num4) + 1);
+                        -- num4 = (ushort)((int)(num4) + 1);
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num4\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.num4\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\);
@@ -8138,14 +7580,18 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [(int)num4] = array [(int)num4] | (ulong)num2;
+                        -- 	ref ulong reference2 = ref array [num4];
+                        -- 	reference2 = ((ulong)(reference2 | (ulong)(num2)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [(int)num4] = array [(int)num4] | (ulong)num2;
+                        -- ref ulong reference2 = ref array [num4];
                         -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\, 32)))) or SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num2\, 64);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(signed(SmartResize(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\, 32)))) := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                        -- 
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\.
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0._State\ = \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\;
@@ -8155,12 +7601,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0.array\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35;
+                            -- return objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object0d989362d58b7d4ed73a1d7d1af631cec27a2a06af83b7cc751ba729ad677d35\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9416,7 +8862,7 @@ begin
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
     \CellIndex\ <= to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\) when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ else "00000000000000000000000000000000";
+    \DataOut\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
     \ReadEnable\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\;
     \WriteEnable\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end

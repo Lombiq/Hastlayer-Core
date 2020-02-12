@@ -10,9 +10,8 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,10 +71,38 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (expression is AssignmentExpression assignment)
             {
+                /*
+                Task.Factory.StartNew(lambda => here) calls are compiled into one of the two version:
+                * If the lambda is a closure on local variables then a DisplayClass with fields for all local variables
+                  and a method(e.g.ParallelAlgorithm, MonteCarloPiEstimator).Sometimes such a DisplayClass will be
+                  generated even if no local variables are accessed(e.g. (ParallelizedCalculateIntegerSumUpToNumbers()).
+                * If no local variables are access then a method with the[CompilerGenerated] attribute within the same
+                  class (e.g.ImageContrastModifier, Fix64Calculator.PrimeCalculator.ParallelizedArePrimeNumbers(),
+                  KpzKernelsParallelizedInterface, Posit32Calculator.ParallelizedCalculateIntegerSumUpToNumbers()).
+
+                Each of these start with:
+                    Task<OutputType>[] array;
+                    array = new Task<OutputType>[numberOfTasks];
+
+                In the first case ("array" is a Task<T> array) the DisplayClass will be instantiated, its fields populated and then the Task started:
+                    <>c__DisplayClass4_0<> c__DisplayClass4_;
+                    <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
+                    <>c__DisplayClass4_.localVariable1 = ...;
+                    <>c__DisplayClass4_.localVariable2 = ...;
+                    array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+
+                In the second case there will be just a Task start invocation:
+                    array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+
+                Since both cases are almost all assignments we're handling them mostly here.
+                Both of these are then awaited as:
+                    Task.WhenAll(array).Wait();
+                */
+
                 IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
                 {
-                    var leftTypeReference = left.GetActualTypeReference();
-                    if (leftTypeReference.IsSimpleMemory()) return Empty.Instance;
+                    var leftType = left.GetActualType();
+                    if (leftType.IsSimpleMemory()) return Empty.Instance;
 
                     var leftTransformed = Transform(left, context);
                     if (leftTransformed == Empty.Instance) return Empty.Instance;
@@ -83,7 +110,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     IVhdlElement rightTransformed;
                     if (right is NullReferenceExpression)
                     {
-                        ArrayHelper.ThrowArraysCantBeNullIfArray(right);
+                        ArrayHelper.ThrowArraysCantBeNullIfArray(assignment);
                         leftTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)leftTransformed);
                         rightTransformed = Value.True;
                     }
@@ -108,18 +135,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
 
-                    var rightTypeReference = right.GetActualTypeReference();
-                    if (leftTypeReference != null &&
-                        rightTypeReference != null &&
-                        leftTypeReference.FullName == rightTypeReference.FullName &&
-                        !leftTypeReference.IsValueType &&
-                        left is IdentifierExpression &&
-                        (right is IdentifierExpression || right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference())))
+                    var rightType = right.GetActualType();
+
+                    if (assignment.IsPotentialAliasAssignment())
                     {
-                        // This is an assignment between two variables or a variable and a field holding reference type
-                        // objects. Since there are no references in VHDL the best option is to use aliases (instead of
-                        // assigning back variables after every change). This is not perfect though since if the now
-                        // alias variable is assigned to then that won't work, see the exception above.
+                        // This is an assignment which is possibly just an alias. Since there are no references in VHDL
+                        // the best option is to use aliases (instead of assigning back variables after every change).
+                        // This is not perfect though since if the now alias variable is assigned to then that won't
+                        // work, see the exception above.
+                        // This might not be needed because of UnneededReferenceVariablesRemover. 
 
                         // Switching the left variable out with an alias so it'll have reference-like behavior.
 
@@ -141,8 +165,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             });
                     }
 
-                    // _typeConversionTransformer.ImplementTypeConversionForAssignment() could be used here, but that
-                    // also needs the data types of both operands.
+                    if (!(right is NullReferenceExpression))
+                    {
+                        var typeConversionResult = _typeConversionTransformer.ImplementTypeConversionForAssignment(
+                            _typeConverter.ConvertType(rightType, context.TransformationContext),
+                            _typeConverter.ConvertType(leftType, context.TransformationContext),
+                            rightTransformed,
+                            leftDataObject);
+                        leftDataObject = typeConversionResult.ConvertedToDataObject;
+                        rightTransformed = typeConversionResult.ConvertedFromExpression;
+                    }
 
                     return new Assignment
                     {
@@ -201,19 +233,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    InvocationExpression invocationExpression = null;
-
-                    IEnumerable<TransformedInvocationParameter> transformFromSecondArgument() =>
-                        invocationExpression.Arguments.Skip(1).Select(argument =>
-                            new TransformedInvocationParameter
-                            {
-                                Reference = Transform(argument, context),
-                                DataType = _declarableTypeCreator
-                                    .CreateDeclarableType(argument, argument.GetActualTypeReference(), context.TransformationContext)
-                            });
-
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
-                    // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
+                    // be like following: <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
                     string rightObjectFullName;
                     if (assignment.Right is ObjectCreateExpression rightObjectCreateExpression &&
                         (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayOrClosureClassName())
@@ -227,55 +248,40 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         return Empty.Instance;
                     }
-                    // Omitting assignments like arg_97_0 = Task.Factory;
-                    else if (assignment.Left.Is<IdentifierExpression>(identifier =>
-                        scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))
+                    // Handling Task starts like:
+                    // array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+                    // array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+                    else if (assignment.Right.Is<InvocationExpression>(
+                        invocation => invocation.IsTaskStart(),
+                        out var invocationExpression))
                     {
-                        return Empty.Instance;
-                    }
-                    // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is(invocation =>
-                        invocation.Target.Is<MemberReferenceExpression>(memberReference =>
-                            memberReference.IsTaskStartNew() &&
-                            memberReference.Target.Is<IdentifierExpression>(identifier =>
-                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier))),
-                        out invocationExpression))
-                    {
-                        // The first argument is always for the Func that refers to the method on the DisplayClass
-                        // generated for the lambda expression originally passed to the Task factory.
-                        var funcVariablename = ((IdentifierExpression)invocationExpression.Arguments.First()).Identifier;
-                        var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
+                        var firstArgument = invocationExpression.Arguments.First();
+                        MethodDeclaration targetMethod;
 
-                        // We only need to care about the invocation here. Since this is a Task start there will be
-                        // some form of await later.
-                        _stateMachineInvocationBuilder.BuildInvocation(
-                            targetMethod,
-                            transformFromSecondArgument(),
-                            getMaxDegreeOfParallelism(targetMethod),
-                            context);
-
-                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] =
-                            targetMethod;
-
-                        return Empty.Instance;
-                    }
-                    // Handling shorthand Task starts like:
-                    // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
-                    else if (assignment.Right.Is(invocation => invocation.IsShorthandTaskStart(), out invocationExpression))
-                    {
-                        var funcCreateExpression = (ObjectCreateExpression)invocationExpression.Arguments.First();
-
-                        if (funcCreateExpression.Arguments.Single() is PrimitiveExpression)
+                        // Is this the first type of Task starts?
+                        if (firstArgument is BinaryOperatorExpression binaryOperatorExpression)
                         {
-                            throw new InvalidOperationException(
-                                "The return value of the Task started as " + invocationExpression.ToString() +
-                                " was substituted with a constant (" + funcCreateExpression.Arguments.Single().ToString() +
-                                "). This means that the body of the Task isn't computing anything. Most possibly this is not what you wanted.");
+                            targetMethod = binaryOperatorExpression
+                                .Right
+                                .As<ParenthesizedExpression>()
+                                .Expression
+                                .As<AssignmentExpression>()
+                                .Right
+                                .As<MemberReferenceExpression>()
+                                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+                                .As<MethodDeclaration>();
+                        }
+                        // Or the second one?
+                        else
+                        {
+                            targetMethod = firstArgument
+                                .As<CastExpression>()
+                                .Expression
+                                .As<MemberReferenceExpression>()
+                                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+                                .As<MethodDeclaration>();
                         }
 
-                        var targetMethod = (MethodDeclaration)TaskParallelizationHelper
-                            .GetTargetDisplayClassMemberFromFuncCreation(funcCreateExpression)
-                            .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                         var targetMaxDegreeOfParallelism = context.TransformationContext
                             .GetTransformerConfiguration()
                             .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
@@ -285,7 +291,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,
-                            transformFromSecondArgument(),
+                            invocationExpression.Arguments.Skip(1).Select(argument =>
+                                new TransformedInvocationParameter
+                                {
+                                    Reference = Transform(argument, context),
+                                    DataType = _declarableTypeCreator
+                                        .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
+                                }),
                             getMaxDegreeOfParallelism(targetMethod),
                             context);
 
@@ -308,16 +320,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is PrimitiveExpression primitive)
             {
-                var typeReference = primitive.GetActualTypeReference();
+                var type = primitive.GetActualType();
 
-                var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
+                var vhdlType = _typeConverter.ConvertType(type, context.TransformationContext);
                 var valueString = primitive.Value.ToString();
                 // Replacing decimal comma to decimal dot.
-                if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
+                if (vhdlType.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
                 // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
                 // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
-                if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                if (vhdlType == KnownDataTypes.Real && !valueString.Contains('.'))
                 {
                     valueString += ".0";
                 }
@@ -325,11 +337,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 
                 // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation 
                 // without these functions.
-                if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
+                if (vhdlType.Name == KnownDataTypes.Int8.Name || vhdlType.Name == KnownDataTypes.UInt8.Name)
                 {
                     var binaryLiteral = string.Empty;
 
-                    if (type.Name == KnownDataTypes.Int8.Name)
+                    if (vhdlType.Name == KnownDataTypes.Int8.Name)
                     {
                         var value = Convert.ToInt64(valueString);
                         if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
@@ -347,7 +359,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             " was out of the VHDL integer range it was substituted with a binary literal (" +
                             binaryLiteral + ")."));
 
-                        var size = type.GetSize();
+                        var size = vhdlType.GetSize();
 
                         if (binaryLiteral.Length < size)
                         {
@@ -358,7 +370,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
-                return valueString.ToVhdlValue(type);
+                return valueString.ToVhdlValue(vhdlType);
             }
             else if (expression is BinaryOperatorExpression binaryExpression)
             {
@@ -394,15 +406,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is InvocationExpression invocationExpression)
             {
+                if (invocationExpression.IsTaskStart()) return Empty.Instance;
+
                 var transformedParameters = new List<ITransformedInvocationParameter>();
 
                 IEnumerable<Expression> arguments = invocationExpression.Arguments;
 
-                // When the SimpleMemory object is passed around it can be omitted since state machines access the memory
-                // directly.
+                // When the SimpleMemory object is passed around it can be omitted since state machines access the
+                // memory directly.
                 if (context.TransformationContext.UseSimpleMemory())
                 {
-                    arguments = arguments.Where(argument => !argument.GetActualTypeReference().IsSimpleMemory());
+                    arguments = arguments.Where(argument => !argument.GetActualType().IsSimpleMemory());
                 }
 
                 foreach (var argument in arguments)
@@ -410,7 +424,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     transformedParameters.Add(new TransformedInvocationParameter
                     {
                         Reference = Transform(argument, context),
-                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualTypeReference(), context.TransformationContext)
+                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
                     });
                 }
 
@@ -445,33 +459,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 var targetIdentifier = (memberReference.Target as IdentifierExpression)?.Identifier;
-                if (targetIdentifier != null)
+                if (targetIdentifier != null &&
+                    scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
                 {
-                    if (scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
-                    {
-                        // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
-                        if (memberReference.MemberName.EndsWith("__this"))
-                        {
-                            return Empty.Instance;
-                        }
-                        // Otherwise this is field access on the DisplayClass object (the field was created to pass variables
-                        // from the local scope to the method generated from the lambda expression). Can look something like:
-                        // <>c__DisplayClass9_.numbers = new uint[35];
-                        else
-                        {
-                            return context.TransformationContext.TypeDeclarationLookupTable
-                                .Lookup(displayClassName)
-                                .Members
-                                .Single(member => member
-                                    .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
-                                .GetFullName()
-                                .ToExtendedVhdlId()
-                                .ToVhdlVariableReference();
-                        }
-                    }
+                    // This is field access on the DisplayClass object (the field was created to pass variables from
+                    // the local scope to the method generated from the lambda expression). Can look something like:
+                    // <>c__DisplayClass9_.numbers = new uint[35];
+                    return context.TransformationContext.TypeDeclarationLookupTable
+                        .Lookup(displayClassName)
+                        .Members
+                        .Single(member => member
+                            .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
+                        .GetFullName()
+                        .ToExtendedVhdlId()
+                        .ToVhdlVariableReference();
                 }
 
-                // Is this reference to an enum's member?
+                // Is this a reference to an enum's member?
                 if (memberReference.Target is TypeReferenceExpression targetTypeReferenceExpression &&
                     context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
                 {
@@ -479,14 +483,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // Is this a Task result access like array[k].Result or task.Result?
-                var targetTypeReference = memberReference.Target.GetActualTypeReference();
-                if (targetTypeReference != null &&
-                    targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
+                var targetType = memberReference.Target.GetActualType();
+                if (targetType != null &&
+                    targetType.GetFullName().StartsWith("System.Threading.Tasks.Task") &&
                     memberReference.MemberName == "Result")
                 {
                     // If this is not an array then it doesn't need to be explicitly awaited, just access to its
                     // Result property should await it. So doing it here.
-                    if (memberReference.Target is IdentifierExpression && !targetTypeReference.IsArray)
+                    if (memberReference.Target is IdentifierExpression && !targetType.IsArray())
                     {
                         var targetMethod = scope
                             .TaskVariableNameToDisplayClassMethodMappings[((IdentifierExpression)memberReference.Target).Identifier];
@@ -520,9 +524,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 var expressionType = _typeConverter
-                    .ConvertTypeReference(
-                        unary.Expression is CastExpression ? unary.Expression.GetActualTypeReference(true) : unary.Expression.GetActualTypeReference(),
-                        context.TransformationContext);
+                    .ConvertType(unary.Expression.GetActualType(), context.TransformationContext);
                 var expressionSize = expressionType.GetSize();
                 var clockCyclesNeededForOperation = context.TransformationContext.DeviceDriver
                     .GetClockCyclesNeededForUnaryOperation(unary, expressionSize, expressionType.Name == "signed");
@@ -536,49 +538,54 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 switch (unary.Operator)
                 {
                     case UnaryOperatorType.Minus:
+                        transformedOperation = new Unary
+                        {
+                            Operator = UnaryOperator.Negation,
+                            Expression = transformedExpression
+                        };
+
                         // Casting if the result type is not what the parent expects.
-                        var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
-                            parentTypeInformation != null &&
-                            parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
-                            parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
-                        {
-                            var fromType = _typeConverter
-                                .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
-                            var toType = _typeConverter
-                                .ConvertTypeReference(parentTypeInformation.InferredType, context.TransformationContext);
+                        //var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
+                        //if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
+                        //    parentTypeInformation != null &&
+                        //    parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
+                        //    parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
+                        //{
+                        //    var fromType = _typeConverter
+                        //        .ConvertType(parentTypeInformation.ExpectedType, context.TransformationContext);
+                        //    var toType = _typeConverter
+                        //        .ConvertType(parentTypeInformation.InferredType, context.TransformationContext);
 
-                            if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
-                            {
-                                transformedOperation = _typeConversionTransformer.ImplementTypeConversion(
-                                    fromType,
-                                    toType,
-                                    new Binary
-                                    {
-                                        Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                        Operator = BinaryOperator.Subtract,
-                                        Right = transformedExpression
-                                    })
-                                    .ConvertedFromExpression;
-                            }
-                            else
-                            {
-                                transformedOperation = new Unary
-                                {
-                                    Operator = UnaryOperator.Negation,
-                                    Expression = transformedExpression
-                                };
-                            }
-                        }
-
-                        else
-                        {
-                            transformedOperation = new Unary
-                            {
-                                Operator = UnaryOperator.Negation,
-                                Expression = transformedExpression
-                            };
-                        }
+                        //    if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
+                        //    {
+                        //        transformedOperation = _typeConversionTransformer.ImplementTypeConversion(
+                        //            fromType,
+                        //            toType,
+                        //            new Binary
+                        //            {
+                        //                Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
+                        //                Operator = BinaryOperator.Subtract,
+                        //                Right = transformedExpression
+                        //            })
+                        //            .ConvertedFromExpression;
+                        //    }
+                        //    else
+                        //    {
+                        //        transformedOperation = new Unary
+                        //        {
+                        //            Operator = UnaryOperator.Negation,
+                        //            Expression = transformedExpression
+                        //        };
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    transformedOperation = new Unary
+                        //    {
+                        //        Operator = UnaryOperator.Negation,
+                        //        Expression = transformedExpression
+                        //    };
+                        //}
 
                         break;
                     case UnaryOperatorType.Not:
@@ -629,7 +636,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var type = ((TypeReferenceExpression)expression).Type;
                 var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
-                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier, expression);
+                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(type.GetFullName(), expression);
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
@@ -645,28 +652,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return innerExpressionResult;
                 }
 
-                var fromTypeReference = castExpression.Expression.GetActualTypeReference(true) ?? castExpression.GetActualTypeReference();
-                var fromType = _declarableTypeCreator
-                    .CreateDeclarableType(castExpression.Expression, fromTypeReference, context.TransformationContext);
-                var toType = _declarableTypeCreator
+                var fromType = castExpression.Expression.GetActualType();
+                var fromVhdlType = _declarableTypeCreator
+                    .CreateDeclarableType(castExpression.Expression, fromType, context.TransformationContext);
+                var toVhdlType = _declarableTypeCreator
                     .CreateDeclarableType(castExpression, castExpression.Type, context.TransformationContext);
 
                 // If the inner expression produced a data object then let's check the size of that: if it's the same
                 // size as the target type of the cast then no need to cast again.
                 var resultDataObject = innerExpressionResult as IDataObject;
-                var resultParentesized = innerExpressionResult as Parenthesized;
-                if (resultDataObject == null && resultParentesized != null)
+                if (resultDataObject == null && innerExpressionResult is Parenthesized resultParentesized)
                 {
                     resultDataObject = resultParentesized.Target as IDataObject;
                 }
 
                 var typeConversionResult = _typeConversionTransformer
-                    .ImplementTypeConversion(fromType, toType, innerExpressionResult);
+                    .ImplementTypeConversion(fromVhdlType, toVhdlType, innerExpressionResult);
                 if (typeConversionResult.IsLossy)
                 {
                     scope.Warnings.AddWarning(
                         "LossyCast",
-                        "A cast from " + fromType.ToVhdl() + " to " + toType.ToVhdl() +
+                        "A cast from " + fromVhdlType.ToVhdl() + " to " + toVhdlType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
@@ -702,7 +708,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     ArrayReference = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
-                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
+                            _typeConverter.ConvertType(indexExpression.GetActualType(), context.TransformationContext),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
                         .ConvertedFromExpression
@@ -793,9 +799,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
         {
-            // Objects are mimicked with records and those don't need instantiation. However it's useful to
-            // initialize all record fields to their default or initial values (otherwise if e.g. a class is
-            // instantiated in a loop in the second run the old values could be accessed in VHDL).
+            // Objects are mimicked with records and those don't need instantiation. However it's useful to initialize
+            // all record fields to their default or initial values (otherwise if e.g. a class is instantiated in a
+            // loop in the second run the old values could be accessed in VHDL).
 
             var typeDeclaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(recordAstType);
 
@@ -803,55 +809,79 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var record = _recordComposer.CreateRecordFromType(typeDeclaration, context.TransformationContext);
 
+            var result = new RecordInitializationResult { Record = record };
+
             if (record.Fields.Any())
             {
                 context.Scope.CurrentBlock.Add(new LineComment("Initializing record fields to their defaults."));
-            }
 
-            var result = new RecordInitializationResult { Record = record };
+                var parentAssignment = expression
+                    .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
-            var parentAssignment = expression
-                .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
+                // This will only work if the newly created object is assigned to a variable or something else. It
+                // won't work if the newly created object is directly passed to a method for example. However
+                // DirectlyAccessedNewObjectVariablesCreator takes care of that.
+                var recordInstanceAssignmentTarget = parentAssignment.Left;
+                result.RecordInstanceIdentifier =
+                    recordInstanceAssignmentTarget is IdentifierExpression ||
+                    recordInstanceAssignmentTarget is IndexerExpression ||
+                    recordInstanceAssignmentTarget is MemberReferenceExpression ?
+                        recordInstanceAssignmentTarget :
+                        recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+                result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
 
-            // This will only work if the newly created object is assigned to a variable or something else. It won't
-            // work if the newly created object is directly passed to a method for example. However
-            // DirectlyAccessedNewObjectVariablesCreator takes care of that.
-            var recordInstanceAssignmentTarget = parentAssignment.Left;
-            result.RecordInstanceIdentifier =
-                recordInstanceAssignmentTarget is IdentifierExpression ||
-                recordInstanceAssignmentTarget is IndexerExpression ||
-                recordInstanceAssignmentTarget is MemberReferenceExpression ?
-                    recordInstanceAssignmentTarget :
-                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
-            result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
-
-            foreach (var field in record.Fields)
-            {
-                var initializationValue = field.DataType.DefaultValue;
-
-                if (typeDeclaration.Members
-                    .SingleOrDefault(member =>
-                        member.Is<FieldDeclaration>(f =>
-                            f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) is FieldDeclaration fieldDeclaration)
+                foreach (var field in record.Fields)
                 {
-                    var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
-                    if (fieldInitializer != Expression.Null)
-                    {
-                        initializationValue = Transform(fieldInitializer, context) as Value;
-                    }
-                }
+                    var initializationValue = field.DataType.DefaultValue;
 
-                if (initializationValue != null)
-                {
-                    context.Scope.CurrentBlock.Add(new Assignment
+                    // Initializing fields with their explicit defaults.
+                    if (typeDeclaration.Members
+                        .SingleOrDefault(member =>
+                            member.Is<FieldDeclaration>(f =>
+                                f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) is FieldDeclaration fieldDeclaration)
                     {
-                        AssignTo = new RecordFieldAccess
+                        var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
+                        if (fieldInitializer != Expression.Null)
                         {
-                            Instance = result.RecordInstanceReference,
-                            FieldName = field.Name
-                        },
-                        Expression = initializationValue
-                    });
+                            initializationValue = Transform(fieldInitializer, context) as Value;
+                        }
+                    }
+                    // Initializing properties with their explicit defaults.
+                    else if (typeDeclaration.Members
+                        .SingleOrDefault(member =>
+                            member.Is<PropertyDeclaration>(p =>
+                                p.Name == field.Name.TrimExtendedVhdlIdDelimiters())) is PropertyDeclaration propertyDeclaration)
+                    {
+                        if (propertyDeclaration.Initializer != Expression.Null)
+                        {
+                            initializationValue = Transform(propertyDeclaration.Initializer, context) as Value;
+                        }
+                    }
+
+                    if (initializationValue != null)
+                    {
+                        IVhdlElement initializerExpression = initializationValue;
+
+                        // In C# the default value can be e.g. an integer literal for an ushort field. So we need to
+                        // take care of that.
+                        if (field.DataType != initializationValue.DataType)
+                        {
+                            initializerExpression = _typeConversionTransformer.ImplementTypeConversion(
+                                initializationValue.DataType,
+                                field.DataType,
+                                initializerExpression).ConvertedFromExpression;
+                        }
+
+                        context.Scope.CurrentBlock.Add(new Assignment
+                        {
+                            AssignTo = new RecordFieldAccess
+                            {
+                                Instance = result.RecordInstanceReference,
+                                FieldName = field.Name
+                            },
+                            Expression = initializerExpression
+                        });
+                    }
                 }
             }
 

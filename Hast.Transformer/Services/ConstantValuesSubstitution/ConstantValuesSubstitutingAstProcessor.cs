@@ -1,26 +1,18 @@
-﻿using System;
+﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
-using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     internal class ConstantValuesSubstitutingAstProcessor
     {
-        private ConstantValuesTable _constantValuesTable;
-        public ConstantValuesTable ConstantValuesTable { get { return _constantValuesTable; } }
-
-        private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
-        public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get { return _typeDeclarationLookupTable; } }
-
-        private readonly IArraySizeHolder _arraySizeHolder;
-        public IArraySizeHolder ArraySizeHolder { get { return _arraySizeHolder; } }
-
-        private readonly Dictionary<string, ConstructorReference> _objectHoldersToConstructorsMappings;
-        public Dictionary<string, ConstructorReference> ObjectHoldersToConstructorsMappings { get { return _objectHoldersToConstructorsMappings; } }
-
-        private readonly IAstExpressionEvaluator _astExpressionEvaluator;
-        public IAstExpressionEvaluator AstExpressionEvaluator { get { return _astExpressionEvaluator; } }
+        public ConstantValuesTable ConstantValuesTable { get; }
+        public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
+        public IArraySizeHolder ArraySizeHolder { get; }
+        public Dictionary<string, ConstructorReference> ObjectHoldersToConstructorsMappings { get; }
+        public IAstExpressionEvaluator AstExpressionEvaluator { get; }
+        public IKnownTypeLookupTable KnownTypeLookupTable { get; }
 
 
         public ConstantValuesSubstitutingAstProcessor(
@@ -28,13 +20,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             ITypeDeclarationLookupTable typeDeclarationLookupTable,
             IArraySizeHolder arraySizeHolder,
             Dictionary<string, ConstructorReference> objectHoldersToConstructorsMappings,
-            IAstExpressionEvaluator astExpressionEvaluator)
+            IAstExpressionEvaluator astExpressionEvaluator,
+            IKnownTypeLookupTable knownTypeLookupTable)
         {
-            _constantValuesTable = constantValuesTable;
-            _typeDeclarationLookupTable = typeDeclarationLookupTable;
-            _arraySizeHolder = arraySizeHolder;
-            _objectHoldersToConstructorsMappings = objectHoldersToConstructorsMappings;
-            _astExpressionEvaluator = astExpressionEvaluator;
+            ConstantValuesTable = constantValuesTable;
+            TypeDeclarationLookupTable = typeDeclarationLookupTable;
+            ArraySizeHolder = arraySizeHolder;
+            ObjectHoldersToConstructorsMappings = objectHoldersToConstructorsMappings;
+            AstExpressionEvaluator = astExpressionEvaluator;
+            KnownTypeLookupTable = knownTypeLookupTable;
         }
 
 
@@ -44,9 +38,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // running them until nothing changes.
 
             ConstantValuesTable originalConstantValuesTable = null;
-            if (reUseOriginalConstantValuesTable) originalConstantValuesTable = _constantValuesTable.Clone();
+            if (reUseOriginalConstantValuesTable) originalConstantValuesTable = ConstantValuesTable.Clone();
 
-            var constantValuesMarkingVisitor = new ConstantValuesMarkingVisitor(this, _astExpressionEvaluator);
+            var constantValuesMarkingVisitor = new ConstantValuesMarkingVisitor(this, AstExpressionEvaluator);
             var objectHoldersToSubstitutedConstructorsMappingVisitor =
                 new ObjectHoldersToSubstitutedConstructorsMappingVisitor(this);
             var globalValueHoldersHandlingVisitor = new GlobalValueHoldersHandlingVisitor(this, rootNode);
@@ -68,8 +62,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 rootNode.AcceptVisitor(globalValueHoldersHandlingVisitor);
                 rootNode.AcceptVisitor(constantValuesSubstitutingVisitor);
 
-                if (reUseOriginalConstantValuesTable) _constantValuesTable.OverWrite(originalConstantValuesTable.Clone());
-                else _constantValuesTable.Clear();
+                if (reUseOriginalConstantValuesTable) ConstantValuesTable.OverWrite(originalConstantValuesTable.Clone());
+                else ConstantValuesTable.Clear();
 
                 passCount++;
             } while ((codeOutput != rootNode.ToString() ||

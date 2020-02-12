@@ -1,46 +1,58 @@
-﻿using System;
+﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
-using Mono.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
     public class ImmutableArraysToStandardArraysConverter : IImmutableArraysToStandardArraysConverter
     {
-        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree)
+        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable)
         {
             // Note that ImmutableArrays can only be single-dimensional in themselves so the whole code here is built
             // around that assumption (though it's possible to create ImmutableArrays of ImmutableArrays, but this is
             // not supported yet).
 
-            // This implementation is partial, to the extent needed for Unum support. More value holders, like fields,
-            // could also be handled for example.
+            // This implementation is partial, to the extent needed for unum and posit support. More value holders,
+            // like fields, could also be handled for example.
 
-            syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor());
+            syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
         }
 
 
         private class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
         {
+            private readonly IKnownTypeLookupTable _knownTypeLookupTable;
+
+
+            public ImmutableArraysToStandardArraysConvertingVisitor(IKnownTypeLookupTable knownTypeLookupTable)
+            {
+                _knownTypeLookupTable = knownTypeLookupTable;
+            }
+
+
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {
                 base.VisitPropertyDeclaration(propertyDeclaration);
 
-                var propertyDefinition = propertyDeclaration.Annotation<PropertyDefinition>();
+                var type = propertyDeclaration.GetActualType();
 
-                if (!IsImmutableArrayName(propertyDefinition.PropertyType.FullName)) return;
+                if (!IsImmutableArray(type)) return;
 
+                var member = propertyDeclaration.GetMemberResolveResult().Member;
                 // Re-wiring types to use a standard array instead.
-                var arrayType = CreateArrayTypeFromImmutableArrayReference(propertyDefinition.PropertyType);
-                propertyDefinition.PropertyType = arrayType;
+                var arrayType = CreateArrayType(type.TypeArguments.Single(), member);
 
                 propertyDeclaration.ReturnType = CreateArrayAstTypeFromImmutableArrayAstType(propertyDeclaration.ReturnType, arrayType);
-                propertyDeclaration.RemoveAnnotations<TypeReference>();
-                propertyDeclaration.AddAnnotation(arrayType);
+                propertyDeclaration.RemoveAnnotations<ILVariableResolveResult>();
+                propertyDeclaration.AddAnnotation(new MemberResolveResult(
+                    propertyDeclaration.FindFirstParentTypeDeclaration().GetResolveResult(), member, arrayType));
 
                 ThrowIfMultipleMembersWithTheNameExist(propertyDeclaration);
             }
@@ -53,29 +65,44 @@ namespace Hast.Transformer.Services
 
                 var memberReference = invocationExpression.Target as MemberReferenceExpression;
 
-                var invocationTypeReference = invocationExpression.GetActualTypeReference();
+                var invocationType = invocationExpression.GetActualType();
 
-                Func<MemberReferenceExpression> createArrayLengthExpression = () =>
+                IEnumerable<IMember> getArrayMembers() => _knownTypeLookupTable.Lookup(KnownTypeCode.Array).GetMembers();
+
+                MemberReferenceExpression createArrayLengthExpression() =>
                     new MemberReferenceExpression(memberReference.Target.Clone(), "Length")
-                        .WithAnnotation(TypeHelper.CreateInt32TypeInformation());
+                        .WithAnnotation(new MemberResolveResult(
+                            memberReference.Target.GetResolveResult(),
+                            getArrayMembers().Single(member => member.Name == "Length")));
 
-                Func<Expression, MemberReferenceExpression, InvocationExpression> createArrayCopyExpression =
-                    (destinationValueHolder, arrayLengthExpression) =>
-                    // Just faking the name for InvocationExpressionTransformer.
-                    new InvocationExpression(
-                        new MemberReferenceExpression(new TypeReferenceExpression(new SimpleType("System.Array")), "Copy"),
+                InvocationExpression createArrayCopyExpression(Expression destinationValueHolder, MemberReferenceExpression arrayLengthExpression)
+                {
+                    var arrayType = _knownTypeLookupTable.Lookup(KnownTypeCode.Array);
+                    return new InvocationExpression(
+                        new MemberReferenceExpression(
+                            new TypeReferenceExpression(new SimpleType("System.Array").WithAnnotation(arrayType.ToResolveResult()))
+                                .WithAnnotation(new TypeResolveResult(arrayType)),
+                            "Copy"),
                         memberReference.Target.Clone(),
                         destinationValueHolder.Clone(),
                         arrayLengthExpression.Clone())
-                    .WithAnnotation(new DummyArrayCopyMemberDefinition());
+                    .WithAnnotation(new MemberResolveResult(
+                        memberReference.Target.GetResolveResult(),
+                            getArrayMembers().Single(member =>
+                            {
+                                var parameters = (member as IMethod)?.Parameters;
+                                return member.Name == "Copy" &&
+                                    parameters.Count == 3 && parameters[2].Type.FullName == "System.Int32";
+                            })));
+                }
 
-                if (!IsImmutableArrayName(invocationTypeReference?.FullName) || memberReference == null)
+                if (!IsImmutableArray(invocationType) || memberReference == null)
                 {
-                    var methodReference = invocationExpression.Annotation<MethodReference>();
+                    var invocationResolveResult = invocationExpression.GetResolveResult<InvocationResolveResult>();
 
-                    if (methodReference != null &&
-                        IsImmutableArrayName(methodReference.DeclaringType.FullName) &&
-                        methodReference.Name == "CopyTo")
+                    if (invocationResolveResult != null &&
+                        IsImmutableArray(invocationResolveResult.TargetResult.Type) &&
+                        invocationResolveResult.Member.Name == "CopyTo")
                     {
                         invocationExpression.ReplaceWith(createArrayCopyExpression(
                             invocationExpression.Arguments.Single(),
@@ -84,8 +111,6 @@ namespace Hast.Transformer.Services
                 }
                 else
                 {
-                    var arrayTypeInformation = CreateArrayTypeInformationFromImmutableArrayReference(invocationTypeReference);
-
                     if (memberReference.MemberName == "CreateRange")
                     {
                         // ImmutableArray.CreateRange() can be substituted with an array assignment. Since the array
@@ -101,21 +126,26 @@ namespace Hast.Transformer.Services
                     }
                     else if (memberReference.MemberName == "SetItem")
                     {
-                        // SetItem can be converted into a simple array element assignment to a newly created copy of the
-                        // array.
+                        // SetItem can be converted into a simple array element assignment to a newly created copy of
+                        // the array.
 
-                        var elementType = AstBuilder.ConvertType(((ArrayType)arrayTypeInformation.ExpectedType).ElementType);
+                        var elementType = invocationType.TypeArguments.Single();
+                        var elementAstType = TypeHelper.CreateAstType(elementType);
                         var parentStatement = invocationExpression.FindFirstParentStatement();
+                        var arrayType = CreateArrayType(elementType);
 
                         var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(
                             memberReference.Target,
-                            elementType,
-                            arrayTypeInformation.ExpectedType);
+                            elementAstType,
+                            arrayType);
                         var arrayLengthExpression = createArrayLengthExpression();
 
-                        var arrayCreate = new ArrayCreateExpression();
+                        var arrayCreate = new ArrayCreateExpression { Type = elementAstType };
                         arrayCreate.Arguments.Add(arrayLengthExpression);
-                        arrayCreate.Type = elementType;
+                        arrayCreate.AddAnnotation(new ArrayCreateResolveResult(
+                            arrayType,
+                            new[] { arrayLengthExpression.GetResolveResult() }.ToList(),
+                            Enumerable.Empty<ResolveResult>().ToList()));
                         var arrayCreateAssignment = new AssignmentExpression(
                             variableIdentifier,
                             arrayCreate);
@@ -129,8 +159,12 @@ namespace Hast.Transformer.Services
 
                         var assignment = new AssignmentExpression(
                             new IndexerExpression(variableIdentifier.Clone(), invocationExpression.Arguments.First().Clone()),
-                            valueArgument.Clone());
-                        assignment.AddAnnotation(valueArgument.Annotation<TypeInformation>());
+                            valueArgument.Clone())
+                            .WithAnnotation(new OperatorResolveResult(
+                                valueArgument.GetActualType(),
+                                System.Linq.Expressions.ExpressionType.Assign,
+                                memberReference.Target.GetResolveResult(),
+                                valueArgument.GetResolveResult()));
 
                         AstInsertionHelper.InsertStatementBefore(parentStatement, new ExpressionStatement(assignment));
 
@@ -139,14 +173,19 @@ namespace Hast.Transformer.Services
                     else if (memberReference.MemberName == "Create")
                     {
                         // ImmutableArray.Create() just creates an empty array.
-                        var arrayCreate = new ArrayCreateExpression
-                        {
-                            Type = memberReference.TypeArguments.Single().Clone(),
-                        };
+
+                        var elementAstType = memberReference.TypeArguments.Single();
+
+                        var arrayCreate = new ArrayCreateExpression { Type = elementAstType.Clone() };
                         var sizeExpression = new PrimitiveExpression(0)
-                            .WithAnnotation(TypeHelper.CreateInt32TypeInformation());
+                            .WithAnnotation(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32).ToResolveResult());
                         arrayCreate.Arguments.Add(sizeExpression);
-                        arrayCreate.AddAnnotation(arrayTypeInformation);
+
+                        arrayCreate.AddAnnotation(new ArrayCreateResolveResult(
+                            CreateArrayType(elementAstType.GetActualType()),
+                            new[] { sizeExpression.GetResolveResult() }.ToList(),
+                            Enumerable.Empty<ResolveResult>().ToList()));
+
                         invocationExpression.ReplaceWith(arrayCreate);
                     }
                     else
@@ -163,100 +202,94 @@ namespace Hast.Transformer.Services
             {
                 base.VisitParameterDeclaration(parameterDeclaration);
 
-                var parameterDefinition = parameterDeclaration.Annotation<ParameterDefinition>();
-
-                if (!IsImmutableArrayName(parameterDefinition.ParameterType.FullName)) return;
-
-                // Re-wiring types to use a standard array instead.
-                var arrayType = CreateArrayTypeFromImmutableArrayReference(parameterDefinition.ParameterType);
-                parameterDefinition.ParameterType = arrayType;
-
-                var arrayAstType = new ComposedType
+                ProcessIfIsImmutableArray(parameterDeclaration, arrayType =>
                 {
-                    BaseType = ((SimpleType)parameterDeclaration.Type).TypeArguments.Single().Clone()
-                };
-                arrayAstType.ArraySpecifiers.Add(new ArraySpecifier(1));
-                arrayAstType.AddAnnotation(arrayType);
+                    parameterDeclaration.Type = CreateArrayAstTypeFromImmutableArrayAstType(parameterDeclaration.Type, arrayType);
+                    parameterDeclaration.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
+                        VariableKind.Parameter,
+                        arrayType,
+                        parameterDeclaration.Name));
 
-                parameterDeclaration.Type = CreateArrayAstTypeFromImmutableArrayAstType(parameterDeclaration.Type, arrayType);
-
-                ThrowIfMultipleMembersWithTheNameExist(parameterDeclaration.FindFirstParentEntityDeclaration());
+                    ThrowIfMultipleMembersWithTheNameExist(parameterDeclaration.FindFirstParentEntityDeclaration());
+                });
             }
 
             public override void VisitConditionalExpression(ConditionalExpression conditionalExpression)
             {
                 base.VisitConditionalExpression(conditionalExpression);
-                ChangeTypeInformationIfImmutableArrayReferencingExpression(conditionalExpression);
+
+                ProcessIfIsImmutableArray(conditionalExpression, arrayType =>
+                    conditionalExpression.AddAnnotation(arrayType.ToResolveResult()));
             }
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {
                 base.VisitIdentifierExpression(identifierExpression);
 
-                var typeReference = ChangeTypeInformationIfImmutableArrayReferencingExpression(identifierExpression);
-                if (typeReference != null)
-                {
-                    identifierExpression.Annotation<ILVariable>().Type = typeReference;
-                }
+                ProcessIfIsImmutableArray(identifierExpression, arrayType =>
+                    identifierExpression.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
+                        VariableKind.Parameter,
+                        arrayType,
+                        identifierExpression.Identifier)));
             }
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
-                var typeReference = ChangeTypeInformationIfImmutableArrayReferencingExpression(memberReferenceExpression);
-                if (typeReference != null)
-                {
-                    var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-                    if (methodReference != null) methodReference.ReturnType = typeReference;
 
-                    var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
-                    if (propertyReference != null) propertyReference.PropertyType = typeReference;
-                }
+                var originalResolveResult = memberReferenceExpression.GetMemberResolveResult();
+
+                ProcessIfIsImmutableArray(memberReferenceExpression, arrayType =>
+                    memberReferenceExpression.AddAnnotation(new MemberResolveResult(
+                        originalResolveResult.TargetResult,
+                        originalResolveResult.Member,
+                        arrayType)));
             }
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {
                 base.VisitAssignmentExpression(assignmentExpression);
-                ChangeTypeInformationIfImmutableArrayReferencingExpression(assignmentExpression);
+
+                ProcessIfIsImmutableArray(assignmentExpression, arrayType =>
+                    assignmentExpression.AddAnnotation(new OperatorResolveResult(
+                        arrayType,
+                        System.Linq.Expressions.ExpressionType.Assign,
+                        assignmentExpression.Left.GetResolveResult(),
+                        assignmentExpression.Right.GetResolveResult())));
             }
 
             public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
             {
                 base.VisitVariableDeclarationStatement(variableDeclarationStatement);
 
-                var type = variableDeclarationStatement.Type;
-                if (IsImmutableArrayName(type.GetFullName()))
+                ProcessIfIsImmutableArray(variableDeclarationStatement, arrayType =>
                 {
-                    var ilVariable = variableDeclarationStatement.Variables.Single().Annotation<ILVariable>();
-                    ilVariable.Type = CreateArrayTypeFromImmutableArrayReference(ilVariable.Type);
-                    type.ReplaceWith(CreateArrayAstTypeFromImmutableArrayAstType(type, (ArrayType)ilVariable.Type));
-                }
+                    variableDeclarationStatement.Type = CreateArrayAstTypeFromImmutableArrayAstType(variableDeclarationStatement.Type, arrayType);
+
+                    var variable = variableDeclarationStatement.Variables.Single();
+                    variable.AddAnnotation(VariableHelper.CreateILVariableResolveResult(
+                        VariableKind.Parameter,
+                        arrayType,
+                        variable.Name));
+                });
             }
 
 
-            private TypeReference ChangeTypeInformationIfImmutableArrayReferencingExpression(AstNode node)
+            private static void ProcessIfIsImmutableArray<T>(T node, Action<ArrayType> processor) where T : AstNode
             {
-                var expressionTypeReference = node.GetActualTypeReference();
+                var type = node.GetActualType();
 
-                if (!IsImmutableArrayName(expressionTypeReference?.FullName)) return null;
+                if (!IsImmutableArray(type)) return;
 
-                node.RemoveAnnotations<TypeInformation>();
-                var typeInformation = CreateArrayTypeInformationFromImmutableArrayReference(expressionTypeReference);
-                node.AddAnnotation(typeInformation);
-
-                return typeInformation.ExpectedType;
+                node.RemoveAnnotations<ResolveResult>();
+                processor(CreateArrayType(type.TypeArguments.Single()));
             }
 
-            private static bool IsImmutableArrayName(string name) =>
-                !string.IsNullOrEmpty(name) && name.StartsWith("System.Collections.Immutable.ImmutableArray");
+            private static bool IsImmutableArray(IType type) =>
+                type?.GetFullName().StartsWith("System.Collections.Immutable.ImmutableArray") == true;
 
-            private static ArrayType CreateArrayTypeFromImmutableArrayReference(TypeReference typeReference) =>
-                new ArrayType(((GenericInstanceType)typeReference).GenericArguments.Single(), 1);
-
-            private static TypeInformation CreateArrayTypeInformationFromImmutableArrayReference(TypeReference typeReference)
-            {
-                return CreateArrayTypeFromImmutableArrayReference(typeReference).ToTypeInformation();
-            }
+            private static ArrayType CreateArrayType(IType elementType, ICompilationProvider compilationProvider = null) =>
+                new ArrayType(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType, 1);
 
             private static AstType GetClonedElementTypeFromImmutableArrayAstType(AstType astType) =>
                 ((SimpleType)astType).TypeArguments.Single().Clone();
@@ -268,7 +301,7 @@ namespace Hast.Transformer.Services
                     BaseType = GetClonedElementTypeFromImmutableArrayAstType(astType)
                 };
                 arrayAstType.ArraySpecifiers.Add(new ArraySpecifier(1));
-                arrayAstType.AddAnnotation(arrayType);
+                arrayAstType.AddAnnotation(arrayType.ToResolveResult());
                 return arrayAstType;
             }
 
@@ -282,93 +315,6 @@ namespace Hast.Transformer.Services
                         fullName +
                         " was created, tough a previously existing member has the same signature. Change the members so even after converting ImmutableArrays they will have unique signatures. The full declaration of the converted member: " +
                         Environment.NewLine + member.ToString());
-                }
-            }
-
-
-            private class DummyArrayCopyMemberDefinition : IMemberDefinition
-            {
-                public Collection<CustomAttribute> CustomAttributes
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public TypeDefinition DeclaringType
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    set
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public string FullName => "System.Void System.Array::Copy(System.Array,System.Array,System.Int64)";
-
-                public bool HasCustomAttributes
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public bool IsRuntimeSpecialName
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    set
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public bool IsSpecialName
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    set
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public MetadataToken MetadataToken
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    set
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-
-                public string Name
-                {
-                    get
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    set
-                    {
-                        throw new NotImplementedException();
-                    }
                 }
             }
         }

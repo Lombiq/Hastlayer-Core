@@ -1,38 +1,21 @@
-﻿using ICSharpCode.Decompiler.Ast;
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class InvocationExpressionExtensions
     {
-        /// <summary>
-        /// Retrieves the return type of the method that was invoked in an invocation expression.
-        /// </summary>
-        public static TypeReference GetReturnTypeReference(this InvocationExpression expression)
-        {
-            // Looking up the type information that will tell us what the return type of the invocation is. 
-            // This might be some nodes up if e.g. there is an immediate cast expression.
-            AstNode currentNode = expression;
-            while (currentNode.Annotation<TypeInformation>() == null)
-            {
-                currentNode = currentNode.Parent;
-            }
-
-            return currentNode.GetActualTypeReference();
-        }
-
         public static string GetTargetMemberFullName(this InvocationExpression expression) =>
             expression.GetReferencedMemberFullName();
 
-
         /// <summary>
-        /// Checks whether the invocation is a Task.Factory.StartNew call like:
-        /// array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
+        /// Checks whether the invocation is a Task.Factory.StartNew call like either of the following:
+        /// Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+        /// Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object)inputArgument);
         /// </summary>
-        public static bool IsShorthandTaskStart(this InvocationExpression expression) =>
+        public static bool IsTaskStart(this InvocationExpression expression) =>
             expression.Target.Is<MemberReferenceExpression>(memberReference => memberReference.IsTaskStartNew()) &&
-            expression.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
-                objectCreate.Type.GetFullName().Contains("Func"));
+            (expression.Arguments.First().Is<BinaryOperatorExpression>(binary => binary.GetActualType().IsFunc()) ||
+            expression.Arguments.First().Is<CastExpression>(binary => binary.GetActualType().IsFunc()));
     }
 }

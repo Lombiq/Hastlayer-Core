@@ -1,7 +1,6 @@
 ﻿using System;
-using Mono.Cecil;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class ParameterDeclarationExtensions
     {
@@ -14,9 +13,9 @@ namespace ICSharpCode.NRefactory.CSharp
         /// <returns></returns>
         public static bool IsOutFlowing(this ParameterDeclaration parameter) =>
             // If the parameter is a value type then still it needs to be out-flowing if this is a constructor.
-            (!parameter.Annotation<ParameterDefinition>().ParameterType.IsValueType || 
-                (parameter.FindFirstParentEntityDeclaration().GetFullName().IsConstructorName() && 
-                parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.Annotation<ParameterDefinition>().ParameterType.FullName)) ||
+            (parameter.GetActualType().IsReferenceType == true ||
+                (parameter.FindFirstParentEntityDeclaration().GetFullName().IsConstructorName() &&
+                parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.GetActualTypeFullName())) ||
             parameter.ParameterModifier.HasFlag(ParameterModifier.Out) ||
             parameter.ParameterModifier.HasFlag(ParameterModifier.Ref);
     }

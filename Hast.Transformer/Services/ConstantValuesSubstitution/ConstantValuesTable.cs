@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard.Validation;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -34,7 +34,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (valueHolder == null) return;
 
-            var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullNameWithUnifiedPropertyName());
+            var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullName());
 
             if (disallowDifferentValues && expression != null)
             {
@@ -57,12 +57,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             Argument.ThrowIfNull(scope, nameof(scope));
 
-            GetOrCreateValueDescriptors(valueHolder.GetFullNameWithUnifiedPropertyName())[scope] = null;
+            GetOrCreateValueDescriptors(valueHolder.GetFullName())[scope] = null;
         }
 
         public bool RetrieveAndDeleteConstantValue(AstNode valueHolder, out PrimitiveExpression valueExpression)
         {
-            if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullNameWithUnifiedPropertyName(), out var valueDescriptors) &&
+            if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullName(), out var valueDescriptors) &&
                 valueDescriptors.Any())
             {
                 // Finding the value defined for the scope which is closest.

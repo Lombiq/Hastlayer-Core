@@ -1,7 +1,9 @@
-﻿using System;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 
 namespace Hast.Transformer.Services
 {
@@ -35,20 +37,24 @@ namespace Hast.Transformer.Services
 
             private static void HandleExpression(Expression expression, AstType astType)
             {
+                var resolveResult = expression.GetResolveResult();
                 var typeName = astType.GetFullName();
                 if (expression.Parent is AssignmentExpression ||
                     typeName.IsDisplayOrClosureClassName() ||
                     // Omitting Funcs for now, as those are used in parallel code with Tasks and handled separately.
-                    typeName == "System.Func`2")
+                    resolveResult.Type.IsFunc())
                 {
                     return;
                 }
 
-                var variableIdentifier = VariableHelper
-                    .DeclareAndReferenceVariable("object", expression, astType);
 
+                var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType);
                 var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())
-                    .WithAnnotation(expression.Annotation<TypeInformation>());
+                    .WithAnnotation(new OperatorResolveResult(
+                        resolveResult.Type,
+                        System.Linq.Expressions.ExpressionType.Assign,
+                        resolveResult,
+                        resolveResult));
 
                 AstInsertionHelper.InsertStatementBefore(
                     expression.FindFirstParentStatement(),

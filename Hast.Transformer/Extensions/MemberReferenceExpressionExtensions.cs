@@ -1,9 +1,10 @@
 ﻿using Hast.Transformer.Models;
-using Mono.Cecil;
-using System;
+using ICSharpCode.Decompiler.CSharp.Resolver;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class MemberReferenceExpressionExtensions
     {
@@ -29,11 +30,13 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 if (findLeftmostMemberIfRecursive)
                 {
-                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true);
+                    return memberReferenceExpression.Target
+                        .As<MemberReferenceExpression>()
+                        .FindMemberDeclaration(typeDeclarationLookupTable, true);
                 }
                 else
                 {
-                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeFullName());
                 }
             }
             else
@@ -43,58 +46,25 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (type == null) return null;
 
-            // A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
-            // like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
-            var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-            if (methodReference != null)
-            {
-                var memberName = methodReference.FullName;
+            var fullName = memberReferenceExpression.GetReferencedMemberFullName();
 
-                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
-                // and a PropertyReference will be there, but the latter will contain the member name.
-                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
-                if (propertyReference != null) memberName = propertyReference.FullName;
+            if (string.IsNullOrEmpty(fullName)) return null;
 
-                return type.Members
-                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName);
-            }
-            else
-            {
-                // A FieldReference annotation is present if the expression is about accessing a field.
-                var fieldReference = memberReferenceExpression.Annotation<FieldReference>();
-                if (fieldReference != null)
+            var isPropertyReference = memberReferenceExpression.IsPropertyReference();
+            return type
+                .Members
+                .SingleOrDefault(member =>
                 {
-                    if (!fieldReference.FullName.IsBackingFieldName())
+                    if (member.GetFullName() == fullName) return true;
+
+                    if (isPropertyReference)
                     {
-                        return type.Members
-                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldReference.FullName);
-                    }
-                    else
-                    {
-                        return type.Members
-                            .SingleOrDefault(member => member.Name == memberReferenceExpression.MemberName && member is PropertyDeclaration);
-                    }
-                }
-                else
-                {
-                    var parent = memberReferenceExpression.Parent;
-                    MemberReference memberReference = null;
-                    while (memberReference == null && parent != null)
-                    {
-                        memberReference = parent.Annotation<MemberReference>();
-                        parent = parent.Parent;
+                        var property = member.GetMemberResolveResult()?.Member as IProperty;
+                        return property?.Getter?.GetFullName() == fullName || property?.Setter?.GetFullName() == fullName;
                     }
 
-                    var declaringType = typeDeclarationLookupTable.Lookup(memberReference.DeclaringType.FullName);
-
-                    if (declaringType == null) return null;
-
-                    return
-                        declaringType
-                        .Members
-                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);
-                }
-            }
+                    return false;
+                });
         }
 
         public static TypeDeclaration FindTargetTypeDeclaration(
@@ -103,10 +73,10 @@ namespace ICSharpCode.NRefactory.CSharp
         {
             var target = memberReferenceExpression.Target;
 
-            if (target is TypeReferenceExpression)
+            if (target is TypeReferenceExpression typeReferenceExpression)
             {
                 // The member is in a different class.
-                return typeDeclarationLookupTable.Lookup((TypeReferenceExpression)target);
+                return typeDeclarationLookupTable.Lookup(typeReferenceExpression);
             }
             else if (target is BaseReferenceExpression)
             {
@@ -117,12 +87,12 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (target is IdentifierExpression || target is IndexerExpression)
             {
-                var typeReference = target.GetActualTypeReference();
-                return typeReference == null ? null : typeDeclarationLookupTable.Lookup(typeReference.FullName);
+                var type = target.GetActualType();
+                return type == null ? null : typeDeclarationLookupTable.Lookup(type.GetFullName());
             }
             else if (target is MemberReferenceExpression)
             {
-                return ((MemberReferenceExpression)target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
+                return target.As<MemberReferenceExpression>().FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
             else if (target is ObjectCreateExpression)
             {
@@ -131,10 +101,10 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (target is InvocationExpression)
             {
-                var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-                if (methodReference != null)
+                var memberResolveResult = memberReferenceExpression.GetMemberResolveResult();
+                if (memberResolveResult != null)
                 {
-                    return typeDeclarationLookupTable.Lookup(methodReference.DeclaringType.FullName);
+                    return typeDeclarationLookupTable.Lookup(memberResolveResult.Member.DeclaringType.GetFullName());
                 }
             }
 
@@ -149,16 +119,25 @@ namespace ICSharpCode.NRefactory.CSharp
         /// Determines if the member reference is an access to an array's Length property.
         /// </summary>
         public static bool IsArrayLengthAccess(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualTypeReference().IsArray;
+            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualType().IsArray();
 
         public static bool IsTaskStartNew(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.MemberName == "StartNew" &&
-            memberReferenceExpression.Target.GetActualTypeReference().FullName == typeof(System.Threading.Tasks.TaskFactory).FullName;
+            memberReferenceExpression.Target.GetActualTypeFullName() == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.Annotation<MethodDefinition>() != null;
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IMethod ||
+            memberReferenceExpression.GetResolveResult<MethodGroupResolveResult>() != null;
 
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
-            memberReferenceExpression.Annotation<FieldDefinition>() != null;
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IField;
+
+        public static bool IsPropertyReference(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IProperty;
+
+
+        private static IMember GetMemberDirectlyOrFromParentInvocation(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.GetMemberResolveResult()?.Member ??
+                memberReferenceExpression.Parent.GetResolveResult<InvocationResolveResult>()?.Member;
     }
 }

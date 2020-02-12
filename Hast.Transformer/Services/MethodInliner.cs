@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Hast.Common.Helpers;
+using Hast.Layer;
+using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Common.Helpers;
-using Hast.Layer;
-using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
@@ -22,7 +19,7 @@ namespace Hast.Transformer.Services
 
             foreach (var method in syntaxTree.GetAllTypeDeclarations().SelectMany(type => type.Members.Where(member => member is MethodDeclaration)))
             {
-                var isInlinableMethod = 
+                var isInlinableMethod =
                     additionalInlinableMethodsFullNames.Contains(method.GetFullName()) ||
                     method.Attributes
                         .Any(attributeSection => attributeSection
@@ -30,7 +27,7 @@ namespace Hast.Transformer.Services
                             .Any(attribute => attribute
                                 .FindFirstChildOfType<MemberReferenceExpression>(expression => expression
                                     .Target
-                                    .Is<TypeReferenceExpression>(type => 
+                                    .Is<TypeReferenceExpression>(type =>
                                         type.GetFullName() == typeof(MethodImplOptions).FullName) &&
                                         expression.MemberName == nameof(MethodImplOptions.AggressiveInlining)) != null));
 
@@ -39,7 +36,7 @@ namespace Hast.Transformer.Services
                     if (method.ReturnType.Is<PrimitiveType>(type => type.KnownTypeCode == KnownTypeCode.Void))
                     {
                         throw new NotSupportedException(
-                            "The method " + method.GetFullName() + 
+                            "The method " + method.GetFullName() +
                             " can't be inlined, because that's only available for non-void methods.");
                     }
 
@@ -99,9 +96,9 @@ namespace Hast.Transformer.Services
 
                 var invocationParentStatement = invocationExpression.FindFirstParentStatement();
 
-                // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once inlined.
-                // Since the same method can be inlined multiple times in another method we also need to distinguish per
-                // invocation.
+                // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once
+                // inlined. Since the same method can be inlined multiple times in another method we also need to
+                // distinguish per invocation.
                 var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
@@ -114,7 +111,7 @@ namespace Hast.Transformer.Services
 
                     var variableReference = VariableHelper.DeclareAndReferenceVariable(
                         SuffixMethodIdentifier(parameter.Name, methodIdentifierNameSuffix),
-                        parameter.GetTypeInformationOrCreateFromActualTypeReference(),
+                        parameter.GetActualType(),
                         parameter.Type,
                         invocationParentStatement);
 
@@ -128,7 +125,7 @@ namespace Hast.Transformer.Services
                 // Creating variable for the method's return value.
                 var returnVariableReference = VariableHelper.DeclareAndReferenceVariable(
                     SuffixMethodIdentifier("return", methodIdentifierNameSuffix),
-                    method.GetTypeInformationOrCreateFromActualTypeReference(),
+                    method.GetActualType(),
                     method.ReturnType,
                     invocationParentStatement);
 
@@ -140,7 +137,7 @@ namespace Hast.Transformer.Services
                 {
                     AstInsertionHelper.InsertStatementBefore(
                         invocationParentStatement,
-                        statement.Clone()); 
+                        statement.Clone());
                 }
 
                 // The invocation now can be replaced with a reference to the return variable.
@@ -158,7 +155,7 @@ namespace Hast.Transformer.Services
 
 
             public MethodBodyAdaptingVisitor(
-                string methodIdentifierNameSuffix, 
+                string methodIdentifierNameSuffix,
                 IdentifierExpression returnVariableReferenc,
                 string methodFullName)
             {

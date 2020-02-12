@@ -1,5 +1,5 @@
 ﻿using System;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
@@ -68,7 +68,7 @@ namespace Hast.Transformer.Services
                     binaryOperator,
                     assignmentExpression.Right.Clone());
 
-                binary.AddAnnotation(assignmentExpression.GetActualTypeReference(true));
+                binary.AddAnnotation(assignmentExpression.GetActualType());
 
                 assignmentExpression.Operator = AssignmentOperatorType.Assign;
                 assignmentExpression.Right.ReplaceWith(binary);

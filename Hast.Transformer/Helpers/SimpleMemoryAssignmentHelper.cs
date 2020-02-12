@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Helpers
 {
     public static class SimpleMemoryAssignmentHelper
     {
         public static bool IsRead4BytesAssignment(AssignmentExpression assignmentExpression) =>
-            assignmentExpression.Left.GetActualTypeReference()?.IsArray == true &&
+            assignmentExpression.Left.GetActualType()?.IsArray() == true &&
             assignmentExpression.Right.Is<InvocationExpression>(invocation =>
                 invocation.IsSimpleMemoryInvocation() &&
                 invocation.Target.Is<MemberReferenceExpression>(memberReference => memberReference.MemberName == "Read4Bytes") &&
@@ -23,7 +20,7 @@ namespace Hast.Transformer.Helpers
             InvocationExpression readInvocation = null;
 
             var result =
-                assignmentExpression.Left.GetActualTypeReference()?.IsArray == true &&
+                assignmentExpression.Left.GetActualType()?.IsArray() == true &&
                 assignmentExpression.Right.Is(invocation =>
                     invocation.IsSimpleMemoryInvocation() &&
                     invocation.Arguments.Count == 2, out readInvocation);

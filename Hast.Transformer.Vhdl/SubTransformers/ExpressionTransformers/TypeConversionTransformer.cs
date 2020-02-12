@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Vhdl.Helpers;
+﻿using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
-using Orchard.Logging;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -30,13 +29,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             ISubTransformerContext context)
         {
             // If the type of an operand can't be determined the best guess is the expression's type.
-            var expressionTypeReference = binaryOperatorExpression.GetActualTypeReference();
-            var expressionType = expressionTypeReference != null ?
-                _typeConverter.ConvertTypeReference(expressionTypeReference, context.TransformationContext) :
+            var expressionType = binaryOperatorExpression.GetActualType();
+            var expressionVhdlType = expressionType != null ?
+                _typeConverter.ConvertType(expressionType, context.TransformationContext) :
                 null;
 
-            var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
-            var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
+            var leftType = binaryOperatorExpression.Left.GetActualType();
+            var rightType = binaryOperatorExpression.Right.GetActualType();
 
             // If this some null check then no need for any type conversion.
             if (binaryOperatorExpression.Left is NullReferenceExpression || binaryOperatorExpression.Right is NullReferenceExpression)
@@ -48,56 +47,56 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // assume that the type of the two sides is the same.
             if (binaryOperatorExpression.Left is PrimitiveExpression || binaryOperatorExpression.Right is PrimitiveExpression)
             {
-                if (leftTypeReference == null && binaryOperatorExpression.Left is PrimitiveExpression)
+                if (leftType == null && binaryOperatorExpression.Left is PrimitiveExpression)
                 {
-                    leftTypeReference = rightTypeReference;
+                    leftType = rightType;
                 }
                 else
                 {
-                    rightTypeReference = leftTypeReference;
+                    rightType = leftType;
                 }
             }
             // If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
             // Let's assume that then the correct type is that of the expression's.
             else if (binaryOperatorExpression.Left is PrimitiveExpression && binaryOperatorExpression.Right is PrimitiveExpression)
             {
-                leftTypeReference = expressionTypeReference;
+                leftType = expressionType;
             }
 
-            var leftType = leftTypeReference != null ?
-                _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext) :
-                expressionType;
+            var leftVhdlType = leftType != null ?
+                _typeConverter.ConvertType(leftType, context.TransformationContext) :
+                expressionVhdlType;
 
-            var rightType = rightTypeReference != null ?
-                _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext) :
-                expressionType;
+            var rightVhdlType = rightType != null ?
+                _typeConverter.ConvertType(rightType, context.TransformationContext) :
+                expressionVhdlType;
 
-            if (leftType == null || rightType == null)
+            if (leftVhdlType == null || rightVhdlType == null)
             {
                 throw new InvalidOperationException(
                     "The type of the operands of the following expression couldn't be determined: " +
                     binaryOperatorExpression.ToString().AddParentEntityName(binaryOperatorExpression));
             }
 
-            if (leftType == rightType) return variableReference;
+            if (leftVhdlType == rightVhdlType) return variableReference;
 
             bool convertToLeftType;
             // Is the result type of the expression equal to one of the operands? Then convert the other operand.
-            if (expressionTypeReference == leftTypeReference || expressionTypeReference == rightTypeReference)
+            if (expressionType == leftType || expressionType == rightType)
             {
-                convertToLeftType = expressionTypeReference == leftTypeReference;
+                convertToLeftType = expressionType == leftType;
             }
             // If the result type of the expression is something else (e.g. if the operation is inequality then for two
             // integer operands the result type will be boolean) then convert in a way that's lossless.
             else
             {
-                convertToLeftType = ImplementTypeConversion(leftType, rightType, Empty.Instance).IsLossy;
+                convertToLeftType = ImplementTypeConversion(leftVhdlType, rightVhdlType, Empty.Instance).IsLossy;
             }
 
-            var fromType = convertToLeftType ? rightType : leftType;
-            var toType = convertToLeftType ? leftType : rightType;
+            var fromType = convertToLeftType ? rightVhdlType : leftVhdlType;
+            var toType = convertToLeftType ? leftVhdlType : rightVhdlType;
 
-            if (isLeft && toType == leftType || !isLeft && toType == rightType)
+            if (isLeft && toType == leftVhdlType || !isLeft && toType == rightVhdlType)
             {
                 return variableReference;
             }

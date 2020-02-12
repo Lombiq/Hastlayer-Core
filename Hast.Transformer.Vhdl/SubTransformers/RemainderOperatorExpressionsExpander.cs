@@ -1,12 +1,5 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
-using Orchard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -29,10 +22,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Changing a % b to a – a / b * b.
                 // At this point the operands should have the same type, so it's safe just clone around.
 
-                if (binaryOperatorExpression.GetActualTypeReference() == null)
+                if (binaryOperatorExpression.GetActualType() == null)
                 {
                     binaryOperatorExpression
-                        .AddAnnotation(binaryOperatorExpression.Left.GetTypeInformationOrCreateFromActualTypeReference());
+                        .AddAnnotation(binaryOperatorExpression.Left.CreateResolveResultFromActualType());
                 }
 
                 // First assigning the operands to new variables so if method calls, casts or anything are in there
@@ -53,10 +46,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // so somehow we need to distinguish between them.
                         "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
                         operand,
-                        TypeHelper.CreateAstType(operand.GetActualTypeReference(true)));
+                        TypeHelper.CreateAstType(operand.GetActualType()));
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
-                        .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());
+                        .WithAnnotation(operand.CreateResolveResultFromActualType());
 
                     AstInsertionHelper.InsertStatementBefore(
                         binaryOperatorExpression.FindFirstParentStatement(),

@@ -1,7 +1,7 @@
 ﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +49,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitPrimitiveExpression(primitiveExpression);
 
             // Not bothering with the various assembly attributes.
-            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null) return;
+            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Syntax.Attribute>() != null) return;
 
             var primitiveExpressionParent = primitiveExpression.Parent;
 
@@ -66,7 +66,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpressionParent.Is<CastExpression>(out var castExpression))
             {
                 var newExpression = new PrimitiveExpression(_astExpressionEvaluator.EvaluateCastExpression(castExpression));
-                newExpression.AddAnnotation(primitiveExpressionParent.GetActualTypeReference(true));
+                newExpression.AddAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 primitiveExpressionParent.ReplaceWith(newExpression);
                 primitiveExpressionParent = newExpression.Parent;
@@ -99,9 +99,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 {
                     var newExpression = new PrimitiveExpression(
                         _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
-                    var resultType = binaryOperatorExpression.GetResultTypeReference();
-                    newExpression.AddAnnotation(resultType);
-                    if (!(newExpression.Value is bool) && resultType.FullName == typeof(bool).FullName)
+                    var resultType = binaryOperatorExpression.GetResultType();
+                    newExpression.AddAnnotation(resultType.ToResolveResult());
+                    if (!(newExpression.Value is bool) && resultType.GetFullName() == typeof(bool).FullName)
                     {
                         newExpression.Value = newExpression.Value.ToString() == 1.ToString();
                     }
@@ -119,7 +119,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // So we can also substitute the whole expression too.
                 var newExpression = new PrimitiveExpression(
                     _astExpressionEvaluator.EvaluateUnaryOperatorExpression((UnaryOperatorExpression)primitiveExpressionParent))
-                    .WithAnnotation(primitiveExpressionParent.GetTypeInformationOrCreateFromActualTypeReference());
+                    .WithAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 _constantValuesSubstitutingAstProcessor.ConstantValuesTable
                     .MarkAsPotentiallyConstant(primitiveExpressionParent, newExpression, primitiveExpressionParent.Parent);
@@ -138,7 +138,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            if (node.GetActualTypeReference()?.IsArray == false)
+            if (node.GetActualType()?.IsArray() == false)
             {
                 // Passing on constructor mappings.
 
