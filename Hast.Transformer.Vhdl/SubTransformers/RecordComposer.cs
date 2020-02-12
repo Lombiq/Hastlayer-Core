@@ -4,7 +4,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Orchard.Caching;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Linq;
 
@@ -14,12 +14,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         // Needs Lazy because unfortunately TypeConverter and RecordComposer depend on each other.
         private readonly Lazy<IDeclarableTypeCreator> _declarableTypeCreatorLazy;
-        private readonly ICacheManager _cacheManager;
+        private readonly IMemoryCache _memoryCache;
 
 
-        public RecordComposer(ICacheManager cacheManager, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
+        public RecordComposer(IMemoryCache memoryCache, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
         {
-            _cacheManager = cacheManager;
+            _memoryCache = memoryCache;
             _declarableTypeCreatorLazy = declarableTypeCreatorLazy;
         }
 
@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // result in the record being composed.
             var typeFullName = typeDeclaration.GetFullName();
 
-            return _cacheManager.Get("ComposedRecord." + typeFullName, true, ctx =>
+            return _memoryCache.GetOrCreate("ComposedRecord." + typeFullName, ctx =>
             {
                 var recordName = typeFullName.ToExtendedVhdlId();
 

@@ -1,6 +1,6 @@
 ﻿using System.IO;
+using Hast.Common.Interfaces;
 using Hast.Synthesis.Models;
-using Orchard;
 
 namespace Hast.Synthesis.Services
 {
@@ -18,10 +18,8 @@ namespace Hast.Synthesis.Services
     {
         public static ITimingReport Parse(this ITimingReportParser reportParser, string reportContent)
         {
-            using (var stringReader = new StringReader(reportContent))
-            {
-                return reportParser.Parse(stringReader);
-            }
+            using var stringReader = new StringReader(reportContent);
+            return reportParser.Parse(stringReader);
         }
     }
 }

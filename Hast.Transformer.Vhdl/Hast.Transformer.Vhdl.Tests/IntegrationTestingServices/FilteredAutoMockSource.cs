@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac.Core;
 using Moq;
-using Orchard.Tests.Utility;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {

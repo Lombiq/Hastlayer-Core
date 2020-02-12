@@ -14,8 +14,6 @@ using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using NUnit.Framework;
-using Orchard.Services;
-using Orchard.Tests.Utility;
 using Shouldly;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +36,9 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             var builder = new ContainerBuilder();
 
-
-            builder.RegisterAutoMocking(MockBehavior.Loose);
-
-            builder.RegisterType<DefaultJsonConverter>().As<IJsonConverter>();
+            throw new System.NotImplementedException();
+            //builder.RegisterAutoMocking(MockBehavior.Loose);
+            //builder.RegisterType<DefaultJsonConverter>().As<IJsonConverter>();
             builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
             builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
             builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
@@ -69,11 +66,6 @@ namespace Hast.Transformer.Vhdl.Tests
             _container = builder.Build();
 
             _transformer = _container.Resolve<ITransformer>();
-        }
-
-        [TestFixtureTearDown]
-        public void Clean()
-        {
         }
 
 

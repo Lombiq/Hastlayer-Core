@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Lombiq.OrchardAppHost;
-using Lombiq.OrchardAppHost.Configuration;
-using Lombiq.OrchardAppHost.Environment.Tasks;
+using Hast.Common.Interfaces;
 using NUnit.Framework;
-using Orchard.Events;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {

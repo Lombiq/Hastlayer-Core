@@ -1,5 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
-using Orchard.Validation;
+﻿using Hast.Common.Validation;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
 

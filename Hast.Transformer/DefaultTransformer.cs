@@ -1,4 +1,5 @@
 ﻿using Hast.Common.Helpers;
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
@@ -12,8 +13,6 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
-using Orchard.FileSystems.AppData;
-using Orchard.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -175,10 +174,10 @@ namespace Hast.Transformer
                     AnonymousTypes = false,
                     ArrayInitializers = false,
                     Discards = false,
-                    DoWhileStatement = false,
+                    //DoWhileStatement = false,
                     Dynamic = false,
                     ExpressionTrees = false,
-                    ForStatement = false,
+                    //ForStatement = false,
                     IntroduceReadonlyAndInModifiers = true,
                     IntroduceRefModifiersOnStructs = true,
                     // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
@@ -191,10 +190,10 @@ namespace Hast.Transformer
                     NullPropagation = false,
                     OptionalArguments = false,
                     OutVariables = false,
-                    PatternBasedFixedStatement = false,
-                    ReadOnlyMethods = true, // Can help const substitution.
+                    //PatternBasedFixedStatement = false,
+                    //ReadOnlyMethods = true, // Can help const substitution.
                     RefExtensionMethods = false,
-                    SeparateLocalVariableDeclarations = true,
+                    //SeparateLocalVariableDeclarations = true,
                     ShowXmlDocumentation = false,
                     StringInterpolation = false,
                     TupleComparisons = false,

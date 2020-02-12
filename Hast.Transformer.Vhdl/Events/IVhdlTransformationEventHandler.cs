@@ -1,5 +1,5 @@
-﻿using Hast.Transformer.Vhdl.Models;
-using Orchard.Events;
+﻿using Hast.Common.Interfaces;
+using Hast.Transformer.Vhdl.Models;
 
 namespace Hast.Transformer.Vhdl.Events
 {

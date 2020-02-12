@@ -1,6 +1,6 @@
 ﻿using Hast.Transformer.Vhdl.SubTransformers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Orchard;
+using Hast.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

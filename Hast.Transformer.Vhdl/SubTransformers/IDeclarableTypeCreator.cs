@@ -2,7 +2,7 @@
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Orchard;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {

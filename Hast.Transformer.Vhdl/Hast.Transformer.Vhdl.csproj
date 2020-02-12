@@ -19,17 +19,17 @@
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
+    <ProjectReference Include="..\..\OrchardCore\src\OrchardCore\OrchardCore.Abstractions\OrchardCore.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
     <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ICSharpCode.Decompiler">
-      <Version>2.3.1</Version>
+      <Version>5.0.2.5153</Version>
     </PackageReference>
     <PackageReference Include="JsonNet.PrivateSettersContractResolvers.Source">
       <Version>0.1.0</Version>
@@ -37,6 +37,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>

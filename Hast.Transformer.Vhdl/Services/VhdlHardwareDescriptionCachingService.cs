@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Hast.Common.Services;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
-using Orchard.FileSystems.AppData;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -22,18 +22,14 @@ namespace Hast.Transformer.Vhdl.Services
 
             if (!_appDataFolder.FileExists(filePath)) return null;
 
-            using (var fileStream = _appDataFolder.OpenFile(filePath))
-            {
-                return await VhdlHardwareDescription.Deserialize(fileStream);
-            }
+            using var fileStream = _appDataFolder.OpenFile(filePath);
+            return await VhdlHardwareDescription.Deserialize(fileStream);
         }
 
         public async Task SetHardwareDescription(string cacheKey, VhdlHardwareDescription hardwareDescription)
         {
-            using (var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey)))
-            {
-                await hardwareDescription.Serialize(fileStream);
-            }
+            using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
+            await hardwareDescription.Serialize(fileStream);
         }
 
         public string GetCacheKey(ITransformationContext transformationContext) =>

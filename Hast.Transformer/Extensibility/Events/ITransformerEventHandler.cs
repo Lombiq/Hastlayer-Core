@@ -1,5 +1,5 @@
-﻿using Hast.Transformer.Models;
-using Orchard.Events;
+﻿using Hast.Common.Interfaces;
+using Hast.Transformer.Models;
 
 namespace Hast.Transformer.Extensibility.Events
 {

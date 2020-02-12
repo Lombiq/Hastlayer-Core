@@ -29,12 +29,8 @@
     <ProjectReference Include="..\..\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj" />
     <ProjectReference Include="..\..\Hast.TestInputs.Various\Hast.TestInputs.Various.csproj" />
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
-    <ProjectReference Include="..\..\..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj" />
-    <ProjectReference Include="..\..\..\Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj" />
     <ProjectReference Include="..\..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj" />
-    <ProjectReference Include="..\..\..\Orchard\src\Orchard.Web\Core\Orchard.Core.csproj" />
-    <ProjectReference Include="..\..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
     <ProjectReference Include="..\..\Hast.Xilinx\Hast.Xilinx.csproj" />
     <ProjectReference Include="..\Hast.Transformer.Vhdl.csproj" />
@@ -49,29 +45,26 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">
-      <Version>3.5.2</Version>
+      <Version>5.1.0</Version>
     </PackageReference>
     <PackageReference Include="ICSharpCode.NRefactory">
       <Version>5.5.1</Version>
     </PackageReference>
     <PackageReference Include="Iesi.Collections">
-      <Version>4.0.1.4000</Version>
+      <Version>4.0.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Moq">
-      <Version>4.0.10827</Version>
+      <Version>4.13.1</Version>
     </PackageReference>
     <PackageReference Include="NHibernate">
-      <Version>4.0.1.4000</Version>
+      <Version>5.2.7</Version>
     </PackageReference>
     <PackageReference Include="NUnit">
-      <Version>2.5.10.11092</Version>
+      <Version>3.12.0</Version>
     </PackageReference>
     <PackageReference Include="Shouldly">
       <Version>3.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.5.0</Version>
     </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.3</Version>

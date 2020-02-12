@@ -7,7 +7,6 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Testing;
-using Lombiq.OrchardAppHost;
 using NUnit.Framework;
 using Shouldly;
 
