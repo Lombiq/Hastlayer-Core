@@ -2,7 +2,6 @@
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
-using Lombiq.OrchardAppHost;
 using NUnit.Framework;
 using Shouldly;
 using System;

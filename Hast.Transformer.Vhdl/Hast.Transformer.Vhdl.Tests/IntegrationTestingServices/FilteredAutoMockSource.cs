@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac.Core;
+using Hast.TestBase.Services;
 using Moq;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
     public class FilteredAutoMockSource : IRegistrationSource
     {
-        public ContainerExtensions.AutoMockSource AutoMockSource { get; } = new ContainerExtensions.AutoMockSource(MockBehavior.Loose);
-        public bool IsAdapterForIndividualComponents { get { return AutoMockSource.IsAdapterForIndividualComponents; } }
+        public AutoMockService AutoMockSource { get; } = new AutoMockService(MockBehavior.Loose);
+        public bool IsAdapterForIndividualComponents => false;
 
 
         public IEnumerable<IComponentRegistration> RegistrationsFor(

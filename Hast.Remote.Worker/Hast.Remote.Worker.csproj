@@ -19,7 +19,6 @@
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\..\Hast.Remote.Bridge\Hast.Remote.Bridge.csproj" />
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
     <ProjectReference Include="..\Hast.Catapult\Hast.Catapult.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
@@ -42,9 +41,6 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Diagnostics.Tracing.EventSource.Redist">
       <Version>1.1.28</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="WindowsAzure.Storage">

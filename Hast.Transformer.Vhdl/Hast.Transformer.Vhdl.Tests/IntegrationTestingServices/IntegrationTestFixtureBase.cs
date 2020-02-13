@@ -15,7 +15,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
         protected IOrchardAppHost _host;
 
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             var settings = new AppHostSettings
@@ -52,7 +52,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             _host = OrchardAppHostFactory.StartTransientHost(settings, registrations, null).Result;
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             _host.Dispose();

@@ -5,7 +5,6 @@ using Hast.TestInputs.ClassStructure2;
 using Hast.TestInputs.Various;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
-using Lombiq.OrchardAppHost;
 using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
