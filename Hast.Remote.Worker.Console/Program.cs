@@ -2,8 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Hast.Remote.Worker.Configuration;
-using Lombiq.OrchardAppHost;
-using Lombiq.OrchardAppHost.Configuration;
 
 namespace Hast.Remote.Worker.Console
 {

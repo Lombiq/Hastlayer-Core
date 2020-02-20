@@ -11,8 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Core\Hast.Remote.Worker\Hast.Remote.Worker.csproj" />
-    <ProjectReference Include="..\..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj" />
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

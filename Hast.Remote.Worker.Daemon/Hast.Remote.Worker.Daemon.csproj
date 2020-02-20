@@ -23,7 +23,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj" />
     <ProjectReference Include="..\Hast.Remote.Worker\Hast.Remote.Worker.csproj" />
   </ItemGroup>
   <ItemGroup>

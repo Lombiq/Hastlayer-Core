@@ -5,11 +5,6 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using Hast.Remote.Worker.Configuration;
-using Lombiq.OrchardAppHost;
-using Lombiq.OrchardAppHost.Configuration;
-using Orchard.Environment.Configuration;
-using Orchard.Exceptions;
-using Orchard.Logging;
 
 namespace Hast.Remote.Worker.Daemon
 {
