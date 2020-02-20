@@ -6,6 +6,11 @@
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Hast.Transformer.Vhdl.Tests\**" />
+    <EmbeddedResource Remove="Hast.Transformer.Vhdl.Tests\**" />
+    <None Remove="Hast.Transformer.Vhdl.Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -37,25 +42,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\BasicHardwareStructureTests.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\IntegrationTestingServices\FilteredAutoMockSource.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\Properties\AssemblyInfo.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\TransformationCheckTests.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VerificationTests\CatapultSamplesVerificationTests.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VerificationTests\SamplesVerificationTestsBase.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VerificationTests\ShouldMatchApprovedExtensions.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VerificationTests\TestInputAssembliesVerificationTests.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VerificationTests\VerificationTestFixtureBase.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VerificationTests\XilinxSamplesVerificationTests.cs" />
-    <Compile Remove="Hast.Transformer.Vhdl.Tests\VhdlTransformingTestFixtureBase.cs" />
   </ItemGroup>
 </Project>

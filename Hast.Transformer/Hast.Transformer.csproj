@@ -6,13 +6,18 @@
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Hast.Transformer.Tests\**" />
+    <EmbeddedResource Remove="Hast.Transformer.Tests\**" />
+    <None Remove="Hast.Transformer.Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
+    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -29,9 +34,5 @@
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Hast.Transformer.Tests\Properties\AssemblyInfo.cs" />
-    <Compile Remove="Hast.Transformer.Tests\TransformerTests.cs" />
   </ItemGroup>
 </Project>

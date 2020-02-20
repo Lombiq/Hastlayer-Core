@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
@@ -12,17 +14,17 @@ namespace Hast.Transformer.Vhdl.Services
     {
         private readonly IVhdlHardwareDescriptionCachingService _vhdlHardwareDescriptionCachingService;
         private readonly ITransformedVhdlManifestBuilder _transformedVhdlManifestBuilder;
-        private readonly IVhdlTransformationEventHandler _vhdlTransformationEventHandler;
+        private readonly IEnumerable<EventHandler> _eventHandlers;
 
 
         public VhdlTransformingEngine(
             IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService,
             ITransformedVhdlManifestBuilder transformedVhdlManifestBuilder,
-            IVhdlTransformationEventHandler vhdlTransformationEventHandler)
+            IEnumerable<EventHandler> eventHandlers)
         {
             _vhdlHardwareDescriptionCachingService = vhdlHardwareDescriptionCachingService;
             _transformedVhdlManifestBuilder = transformedVhdlManifestBuilder;
-            _vhdlTransformationEventHandler = vhdlTransformationEventHandler;
+            _eventHandlers = eventHandlers;
         }
 
 
@@ -38,7 +40,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
-            _vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
+            //_vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
 
             var vhdlGenerationConfiguration = transformationContext
                 .HardwareGenerationConfiguration

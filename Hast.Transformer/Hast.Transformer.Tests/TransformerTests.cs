@@ -1,5 +1,6 @@
-﻿using Autofac;
+﻿using Hast.Common.Services;
 using Hast.Layer;
+using Hast.Layer.Services;
 using Hast.Synthesis;
 using Hast.Synthesis.Services;
 using Hast.TestInputs.ClassStructure1;
@@ -9,12 +10,14 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
-using Hast.Xilinx;
 using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
+using OrchardCore.Modules;
 using Shouldly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,27 +27,18 @@ namespace Hast.Transformer.Vhdl.Tests
     [TestFixture]
     public class TransformerTests
     {
-        private IContainer _container;
+        private IServiceProvider _container;
 
         private ITransformer _transformer;
         private ITransformationContext _producedContext;
         private Mock<ITransformingEngine> _transformingEngineMock;
 
-
         [SetUp]
         public virtual void Init()
         {
-            var builder = new ContainerBuilder();
-
-            throw new System.NotImplementedException();
-            //builder.RegisterAutoMocking(MockBehavior.Loose);
-            //builder.RegisterType<DefaultJsonConverter>().As<IJsonConverter>();
-            builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
-            builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
-            builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
-            builder.RegisterType<DeviceDriverSelector>().As<IDeviceDriverSelector>();
-            builder.RegisterType<Nexys4DdrDriver>().As<IDeviceDriver>();
-            builder.RegisterType<MemberIdentifiersFixer>().As<IMemberIdentifiersFixer>();
+            var services = new ServiceCollection();
+            services.AddSingleton<IClock, Clock>();
+            services.AddIDependencyContainer(System.IO.Directory.GetFiles(".", "Hast.*.dll"));
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
 
@@ -58,14 +52,22 @@ namespace Hast.Transformer.Vhdl.Tests
                         return Task.FromResult<IHardwareDescription>(null);
                     })
                 .Verifiable();
-            builder.RegisterInstance(_transformingEngineMock.Object).As<ITransformingEngine>();
+            
+            foreach(var service in services.Where(service => service.ServiceType.Name == nameof(ITransformingEngine)).ToList())
+            {
+                services.Remove(service);
+            }
+            services.AddSingleton(_transformingEngineMock.Object);
+            
 
 
-            builder.RegisterType<DefaultTransformer>().As<ITransformer>();
+            _container = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
-            _container = builder.Build();
+            var config = _container.GetService<IHastlayerConfiguration>();
+            var dds = _container.GetService<IDeviceDriverSelector>();
+            var te = _container.GetService<ITransformingEngine>();
 
-            _transformer = _container.Resolve<ITransformer>();
+            _transformer = _container.GetRequiredService<IEnumerable<ITransformer>>().First(x => x.GetType().Name == nameof(DefaultTransformer));
         }
 
 
