@@ -52,16 +52,19 @@ namespace Hast.Transformer.Vhdl.Tests
                         return Task.FromResult<IHardwareDescription>(null);
                     })
                 .Verifiable();
-            
-            foreach(var service in services.Where(service => service.ServiceType.Name == nameof(ITransformingEngine)).ToList())
+
+            foreach (var service in services.Where(service => service.ServiceType.Name == nameof(ITransformingEngine)).ToList())
             {
                 services.Remove(service);
             }
             services.AddSingleton(_transformingEngineMock.Object);
-            
 
 
+#if DEBUG
+            var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.Name}:{x.ImplementationType?.Name ?? "NULL"}").OrderBy(x => x));
+#endif
             _container = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+
 
             var config = _container.GetService<IHastlayerConfiguration>();
             var dds = _container.GetService<IDeviceDriverSelector>();
