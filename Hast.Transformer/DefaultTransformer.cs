@@ -4,7 +4,6 @@ using Hast.Layer;
 using Hast.Layer.Services;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Services.ConstantValuesSubstitution;
@@ -14,12 +13,14 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
+
 
 namespace Hast.Transformer
 {
@@ -66,7 +67,7 @@ namespace Hast.Transformer
             ISyntaxTreeCleaner syntaxTreeCleaner,
             IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
-            ITransformingEngine engine,
+            IServiceProvider serviceProvider,
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
@@ -100,7 +101,7 @@ namespace Hast.Transformer
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
-            //_engine = engine;
+            _engine = serviceProvider.GetService<ITransformingEngine>();
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
