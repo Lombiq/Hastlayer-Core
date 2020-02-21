@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Hast.TestInputs.Various
+namespace Hast.TestInputs.Static
 {
     public class ParallelCases
     {

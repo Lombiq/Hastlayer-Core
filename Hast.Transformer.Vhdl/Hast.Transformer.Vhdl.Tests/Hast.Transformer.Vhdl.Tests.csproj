@@ -151,9 +151,9 @@
       <Project>{BB94F93A-F607-4A19-8127-7C8D333F8131}</Project>
       <Name>Hast.TestInputs.Invalid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.TestInputs.Various\Hast.TestInputs.Various.csproj">
+    <ProjectReference Include="..\..\Hast.TestInputs.Static\Hast.TestInputs.Static.csproj">
       <Project>{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}</Project>
-      <Name>Hast.TestInputs.Various</Name>
+      <Name>Hast.TestInputs.Static</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
       <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>

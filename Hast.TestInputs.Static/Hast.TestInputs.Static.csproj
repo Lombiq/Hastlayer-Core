@@ -7,8 +7,8 @@
     <ProjectGuid>{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.TestInputs.Various</RootNamespace>
-    <AssemblyName>Hast.TestInputs.Various</AssemblyName>
+    <RootNamespace>Hast.TestInputs.Static</RootNamespace>
+    <AssemblyName>Hast.TestInputs.Static</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

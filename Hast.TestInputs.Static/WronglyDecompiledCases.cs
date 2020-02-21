@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.TestInputs.Various
+namespace Hast.TestInputs.Static
 {
     /// <summary>
     /// Cases which ILSpy decompiles incorrectly, but Hastlayer works around the bugs.

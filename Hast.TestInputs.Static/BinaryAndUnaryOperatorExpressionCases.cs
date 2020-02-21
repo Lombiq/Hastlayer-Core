@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.TestInputs.Various
+namespace Hast.TestInputs.Static
 {
     /// <summary>
     /// Test class to use all binary and unary operator expression variations. Needed to check whether proper type 
