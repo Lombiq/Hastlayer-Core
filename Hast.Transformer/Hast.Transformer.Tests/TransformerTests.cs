@@ -1,7 +1,5 @@
 ﻿using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Layer.Services;
-using Hast.Synthesis;
 using Hast.Synthesis.Services;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure1.ComplexTypes;
@@ -9,7 +7,6 @@ using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
-using Hast.Transformer.Services;
 using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,11 +24,12 @@ namespace Hast.Transformer.Vhdl.Tests
     [TestFixture]
     public class TransformerTests
     {
-        private IServiceProvider _container;
-
-        private ITransformer _transformer;
         private ITransformationContext _producedContext;
         private Mock<ITransformingEngine> _transformingEngineMock;
+        private IServiceScope _scope;
+
+        private ITransformer GetTransformer() =>
+            _scope.ServiceProvider.GetRequiredService<IEnumerable<ITransformer>>().First(x => x.GetType().Name == nameof(DefaultTransformer));
 
         [SetUp]
         public virtual void Init()
@@ -39,6 +37,7 @@ namespace Hast.Transformer.Vhdl.Tests
             var services = new ServiceCollection();
             services.AddSingleton<IClock, Clock>();
             services.AddIDependencyContainer(System.IO.Directory.GetFiles(".", "Hast.*.dll"));
+            services.AddSingleton<IHastlayerConfiguration>(new HastlayerConfiguration());
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
 
@@ -61,16 +60,16 @@ namespace Hast.Transformer.Vhdl.Tests
 
 
 #if DEBUG
-            var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.Name}:{x.ImplementationType?.Name ?? "NULL"}").OrderBy(x => x));
+            var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.FullName}:{x.ImplementationType?.FullName ?? "NULL"}").OrderBy(x => x));
 #endif
-            _container = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+            var provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = true });
+            _scope = provider.CreateScope();
+        }
 
-
-            var config = _container.GetService<IHastlayerConfiguration>();
-            var dds = _container.GetService<IDeviceDriverSelector>();
-            var te = _container.GetService<ITransformingEngine>();
-
-            _transformer = _container.GetRequiredService<IEnumerable<ITransformer>>().First(x => x.GetType().Name == nameof(DefaultTransformer));
+        [TearDown]
+        public virtual void TearDown()
+        {
+            _scope.Dispose();
         }
 
 
@@ -78,8 +77,9 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task TransformEngineCallReceivesProperBasicContext()
         {
             var configuration = CreateConfig();
+            var transformer = GetTransformer();
 
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
 
             _transformingEngineMock.Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
 
@@ -93,9 +93,11 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task DifferentConfigurationsResultInDifferentIds()
         {
             var config = CreateConfig();
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            var transformer = GetTransformer();
+
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             var firstId = _producedContext.Id;
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
 
@@ -104,31 +106,32 @@ namespace Hast.Transformer.Vhdl.Tests
                 {
                     MaxDegreeOfParallelism = 5
                 });
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
             config.HardwareEntryPointMemberFullNames = new[] { "aaa" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberFullNames = new[] { "bbb" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
             config.HardwareEntryPointMemberNamePrefixes = new[] { "aaa" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberNamePrefixes = new[] { "bbb" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
         [Test]
         public async Task UnusedDeclarationsArentInTheSyntaxTree()
         {
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
+            var transformer = GetTransformer();
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
@@ -147,8 +150,9 @@ namespace Hast.Transformer.Vhdl.Tests
                 "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
                 "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()"
             };
+            var transformer = GetTransformer();
 
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
@@ -173,7 +177,9 @@ namespace Hast.Transformer.Vhdl.Tests
                 typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
                 typeof(ComplexTypeHierarchy).Namespace
             };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            var transformer = GetTransformer();
+
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");
