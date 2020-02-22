@@ -1,4 +1,5 @@
 ﻿using Hast.Layer;
+using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
 using System.Threading.Tasks;
@@ -9,11 +10,14 @@ namespace Hast.DynamicTests
     {
         static async Task Main(string[] args)
         {
+            // This all is just the beginning of dynamic testing. Once there will be more tests we'll need to shift to 
+            // a more scalable structure and eventually add the ability to run all tests automatically.
+
             using (var hastlayer = await Hastlayer.Create())
             {
                 var configuration = new HardwareGenerationConfiguration("Nexys A7");
 
-                //configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+                configuration.AddHardwareEntryPointType<BinaryAndUnaryOperatorExpressionCases>();
 
                 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
@@ -31,27 +35,21 @@ namespace Hast.DynamicTests
                 var hardwareRepresentation = await hastlayer.GenerateHardware(
                     new[]
                     {
-                        typeof(Program).Assembly
+                        typeof(BinaryAndUnaryOperatorExpressionCases).Assembly
                     },
                     configuration);
 
                 await hardwareRepresentation.HardwareDescription.WriteSource("Hast_IP.vhd");
 
-                Console.WriteLine("Hardware generated, starting software execution.");
+                Console.WriteLine("Hardware generated, starting hardware execution.");
                 var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };
-                //var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm(), proxyGenerationConfiguration);
+                var binaryAndUnaryOperatorExpressionCases = await hastlayer.GenerateProxy(
+                    hardwareRepresentation,
+                    new BinaryAndUnaryOperatorExpressionCases(),
+                    proxyGenerationConfiguration);
 
-                //Console.WriteLine();
-                //var sw = System.Diagnostics.Stopwatch.StartNew();
-                //var cpuOutput = new ParallelAlgorithm().Run(234234);
-                //sw.Stop();
-                //Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
-
-                //Console.WriteLine();
-                //Console.WriteLine("Starting hardware execution.");
-                //var output1 = parallelAlgorithm.Run(234234);
-                //var output2 = parallelAlgorithm.Run(123);
-                //var output3 = parallelAlgorithm.Run(9999);
+                binaryAndUnaryOperatorExpressionCases.AllBinaryOperatorExpressionVariations(123);
+                binaryAndUnaryOperatorExpressionCases.AllUnaryOperatorExpressionVariations(123);
             }
 
             Console.ReadKey();
