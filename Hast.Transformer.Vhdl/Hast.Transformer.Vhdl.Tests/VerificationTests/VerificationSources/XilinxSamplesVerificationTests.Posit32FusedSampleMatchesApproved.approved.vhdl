@@ -5684,7 +5684,7 @@ begin
         Variable \Quire::.ctor(UInt32,UInt16).0.firstSegment\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
@@ -5703,7 +5703,7 @@ begin
                 \Quire::.ctor(UInt32,UInt16).0.firstSegment\ := to_unsigned(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.size\ := to_unsigned(0, 16);
                 \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\ := to_signed(0, 32);
-                \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ := to_signed(0, 32);
+                \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
@@ -5746,26 +5746,26 @@ begin
                         -- int conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4;
+                        -- int remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 = (int)size;
+                        -- remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b = (int)size;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
+                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 - remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 / 32 * 32 != 0)) {
+                        -- if ((remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b - remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b / 32 * 32 != 0)) {
                         -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 1;
                         -- } else {
                         -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 0;
                         -- }
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ / to_signed(32, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ / to_signed(32, 32);
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := SmartResize(\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ * to_signed(32, 32), 32);
                         \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.861
                     when \Quire::.ctor(UInt32,UInt16).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:

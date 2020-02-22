@@ -1,4 +1,5 @@
-﻿using Hast.Transformer.Helpers;
+﻿using Hast.Common.Helpers;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -41,12 +42,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return;
                     }
 
+                    // Need to add ILRange because there can be multiple remainder operations for the same variable
+                    // so somehow we need to distinguish between them.
+                    var ilRangeName = operand.GetILRangeName();
+                    if (string.IsNullOrEmpty(ilRangeName))
+                    {
+                        ilRangeName = operand
+                            .FindFirstChildOfType<AstNode>(child => !string.IsNullOrEmpty(child.GetILRangeName()))
+                            ?.GetILRangeName();
+                    }
+
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-                        // Need to add ILRange because there can be multiple remainder operations for the same variable
-                        // so somehow we need to distinguish between them.
-                        "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
-                        operand,
-                        TypeHelper.CreateAstType(operand.GetActualType()));
+
+                        "remainderOperand" + Sha2456Helper.ComputeHash(operand.GetFullName() + ilRangeName),
+                        operand.GetActualType(),
+                        TypeHelper.CreateAstType(operand.GetActualType()),
+                        operand.FindFirstParentStatement());
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
                         .WithAnnotation(operand.CreateResolveResultFromActualType());
