@@ -37,7 +37,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(CastingCases).Assembly },
+                    new[] { typeof(ArrayUsingCases).Assembly },
                     configuration =>
                     {
                         configuration.TransformerConfiguration().UseSimpleMemory = false;
