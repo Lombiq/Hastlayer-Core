@@ -9,9 +9,9 @@ namespace Hast.DynamicTests
 {
     internal static class TestExecutor
     {
-        public static Task ExecuteTest<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
+        public static Task ExecuteSelectedTest<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
             where T : class, new() =>
-            ExecuteTest<T>(configuration => configuration.AddHardwareEntryPointMethod(caseSelector), testExecutor);
+            ExecuteTest(configuration => configuration.AddHardwareEntryPointMethod(caseSelector), testExecutor);
 
         public static async Task ExecuteTest<T>(Action<HardwareGenerationConfiguration> configurator, Action<T> testExecutor)
             where T : class, new()
@@ -45,9 +45,8 @@ namespace Hast.DynamicTests
                 var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
                 var methodNameStartIndex = folderName.IndexOf("::");
                 folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
-                await hardwareRepresentation.HardwareDescription.WriteSource(
-                    $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}\IPRepo\Hast_IP.vhd");
-                //await hardwareRepresentation.HardwareDescription.WriteSource("Hast_IP.vhd");
+                //await hardwareRepresentation.HardwareDescription.WriteSource($@"E:\ShortPath\BinaryAndUnaryTests\{folderName}\IPRepo\Hast_IP.vhd");
+                await hardwareRepresentation.HardwareDescription.WriteSource("Hast_IP.vhd");
 
                 Console.WriteLine("Hardware generated, starting hardware execution.");
                 var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };

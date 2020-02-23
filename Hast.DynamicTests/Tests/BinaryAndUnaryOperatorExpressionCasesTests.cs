@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hast.DynamicTests.Tests
 {
+    [TestFixture]
     public class BinaryAndUnaryOperatorExpressionCasesTests
     {
         // MinValue would cause a division by zero when the input is cast to smaller data types that's why MiValue + 1
@@ -139,6 +140,6 @@ namespace Hast.DynamicTests.Tests
         private static Task ExecuteTest(
             Expression<Action<BinaryAndUnaryOperatorExpressionCases>> caseSelector,
             Action<BinaryAndUnaryOperatorExpressionCases> testExecutor) =>
-            TestExecutor.ExecuteTest(caseSelector, testExecutor);
+            TestExecutor.ExecuteSelectedTest(caseSelector, testExecutor);
     }
 }

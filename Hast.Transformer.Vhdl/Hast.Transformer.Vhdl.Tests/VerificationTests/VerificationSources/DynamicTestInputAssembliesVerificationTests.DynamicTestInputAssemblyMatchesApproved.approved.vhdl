@@ -10,6 +10,7 @@
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+-- * System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 
 -- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
@@ -1328,6 +1329,166 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- State machine states:
+    type \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._States\ is (
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_0\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_1\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_2\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_3\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_4\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_5\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_6\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_7\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_8\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_9\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_10\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_11\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_12\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_13\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_14\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_15\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_16\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_17\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_18\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_19\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_20\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_21\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_22\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_23\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_24\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_25\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_26\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_27\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_28\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_29\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_30\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_31\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_32\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_33\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_34\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_35\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_36\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_37\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_38\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_39\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_40\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_41\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_42\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_43\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_44\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_45\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_46\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_47\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_48\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_49\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_50\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_51\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_52\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_53\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_54\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_55\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_56\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_57\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_58\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_59\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_60\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_61\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_62\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_63\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_64\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_65\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_66\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_67\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_68\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_69\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_70\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_71\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_72\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_73\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_74\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_75\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_76\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_77\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_78\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_79\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_80\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_81\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_82\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_83\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_84\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_85\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_86\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_87\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_88\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_89\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_90\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_91\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_92\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_93\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_94\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_95\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_96\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_97\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_98\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_99\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_100\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_101\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_102\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_103\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_104\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_105\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_106\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_107\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_108\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_109\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_110\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_111\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_112\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_113\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_114\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_115\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_116\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_117\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_118\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_119\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_120\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_121\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_122\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_123\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_124\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_125\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_126\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_127\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_128\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_129\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_130\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_131\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_132\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_133\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_134\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_135\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_136\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_137\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_138\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_139\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_140\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_141\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_142\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_143\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_144\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_145\, 
+        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_146\);
+    -- Signals:
+    Signal \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Finished\: boolean := false;
+    Signal \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -1342,6 +1503,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
@@ -1353,6 +1515,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -12366,6 +12529,1613 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\: \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._States\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_0\;
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Finished\ <= false;
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_0\;
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\ := to_signed(0, 64);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.1\ := (others => '0');
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 64);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.2\ := (others => '0');
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := to_unsigned(0, 64);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := to_signed(0, 64);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\ := to_unsigned(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\ := to_signed(0, 16);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\ := to_unsigned(0, 16);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.10\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\ := to_signed(0, 8);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\ := to_unsigned(0, 8);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
+                \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
+            else 
+                case \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ is 
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Started\ = true) then 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Started\ = true) then 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Finished\ <= true;
+                        else 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Finished\ <= false;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadInt32 (1);
+                        -- 
+                        -- Begin SimpleMemory read.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_3\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- long num2;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
+                            -- 
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_4\ => 
+                        -- Begin SimpleMemory read.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_5\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToInt32(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.1\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1071
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_6\ => 
+                        -- Begin SimpleMemory read.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_7\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.2\ := \DataIn\;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\ := (\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.0\) or signed(SmartResize((unsigned(ConvertStdLogicVectorToInt32(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.2\))), 64));
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\ := ((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\));
+                            -- The following section was transformed from the .NET statement below:
+                            -- ulong num3;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = (ulong)num2;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (0, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- Begin SimpleMemory write.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.2\));
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6188
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_8\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (1, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_9\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_10\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (2, (int)num2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_11\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_12\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (3, (uint)num2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_13\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_14\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_14\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (4, (short)num2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_15\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\, 16), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_16\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_16\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (5, (ushort)num2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_17\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(5, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\), 16), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_18\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_18\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (6, (sbyte)num2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_19\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_19\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(6, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\, 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_20\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_20\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (7, (byte)num2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_21\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_21\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(7, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\), 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_22\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_22\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- long num4;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = (long)num3;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (8, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_23\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_23\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(8, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.3\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_24\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_24\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (9, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_25\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_25\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(9, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_26\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_26\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (10, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_27\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_27\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(10, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_28\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_28\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (11, (uint)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_29\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_29\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(11, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_30\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_30\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (12, (short)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_31\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_31\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(12, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 16)), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_32\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_32\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (13, (ushort)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_33\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_33\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(13, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 16), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_34\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_34\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (14, (sbyte)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_35\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_35\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(14, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 8)), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_36\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_36\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (15, (byte)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_37\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_37\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(15, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_38\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_38\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (16, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.4\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_39\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_39\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(16, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.4\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_40\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_40\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (17, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_41\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_41\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(17, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_42\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_42\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = (ulong)num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (18, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.5\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_43\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_43\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(18, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.5\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_44\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_44\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (19, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_45\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_45\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(19, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_46\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_46\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (20, (uint)num);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_47\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_47\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(20, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_48\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_48\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (21, (short)num);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_49\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_49\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(21, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 16), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_50\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_50\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (22, (ushort)num);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_51\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_51\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(22, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\), 16), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_52\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_52\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (23, (sbyte)num);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_53\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_53\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(23, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_54\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_54\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (24, (byte)num);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_55\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_55\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(24, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\), 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_56\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_56\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num5;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = (uint)num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\ := unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = num5;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 64));
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (25, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_57\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_57\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(25, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.6\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_58\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_58\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (26, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_59\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_59\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(26, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_60\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_60\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num5;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (27, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.7\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_61\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_61\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(27, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.7\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_62\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_62\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (28, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_63\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_63\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(28, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_64\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_64\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (29, (int)num5);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_65\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_65\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(29, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_66\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_66\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (30, (short)num5);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_67\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_67\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(30, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 16)), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_68\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_68\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (31, (ushort)num5);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_69\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_69\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(31, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 16), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_70\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_70\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (32, (sbyte)num5);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_71\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_71\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(32, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 8)), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_72\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_72\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (33, (byte)num5);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_73\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_73\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(33, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_74\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_74\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- short num6;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = (short)num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = num6;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (34, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_75\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_75\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(34, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.8\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_76\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_76\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (35, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_77\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_77\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(35, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_78\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_78\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = (ulong)num6;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (36, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_79\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_79\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(36, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.9\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_80\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_80\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (37, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_81\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_81\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(37, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_82\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_82\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (38, num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_83\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_83\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(38, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_84\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_84\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (39, (uint)num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_85\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_85\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(39, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_86\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_86\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (40, (ushort)num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_87\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_87\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(40, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_88\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_88\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (41, (sbyte)num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_89\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_89\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(41, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_90\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_90\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (42, (byte)num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_91\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_91\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(42, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\), 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_92\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_92\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- ushort num7;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = (ushort)num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\ := SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = num7;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 64));
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (43, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.10\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_93\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_93\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(43, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.10\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_94\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_94\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (44, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_95\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_95\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(44, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_96\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_96\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num7;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (45, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.11\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_97\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_97\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(45, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.11\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_98\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_98\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (46, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_99\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_99\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(46, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_100\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_100\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (47, num7);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_101\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_101\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(47, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_102\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_102\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (48, num7);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_103\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_103\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(48, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_104\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_104\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (49, (short)num7);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_105\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_105\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(49, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_106\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_106\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (50, (sbyte)num7);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_107\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_107\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(50, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 8)), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_108\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_108\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (51, (byte)num7);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_109\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_109\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(51, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 8), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_110\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_110\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- sbyte b;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- b = (sbyte)num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 8);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = b;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (52, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_111\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_111\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(52, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.12\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_112\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_112\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (53, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_113\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_113\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(53, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_114\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_114\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = (ulong)b;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (54, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.13\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_115\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_115\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(54, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.13\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_116\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_116\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (55, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_117\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_117\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(55, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_118\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_118\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (56, b);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_119\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_119\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(56, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_120\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_120\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (57, (uint)b);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_121\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_121\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(57, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_122\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_122\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = b;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (58, num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_123\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_123\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(58, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_124\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_124\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (59, (ushort)b);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_125\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_125\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(59, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 16), 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_126\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_126\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (60, (byte)b);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_127\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_127\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(60, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_128\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_128\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- byte b2;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- b2 = (byte)num;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\ := SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\), 8);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = b2;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\ := signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 64));
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (61, (int)(num4 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.14\ := SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_129\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_129\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(61, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.14\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_130\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_130\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (62, (int)num4);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_131\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_131\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(62, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_132\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_132\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = b2;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (63, (int)(num3 >> 32));
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_133\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4454
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_133\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(63, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.15\));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_134\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_134\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (64, (int)num3);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_135\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_135\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(64, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_136\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_136\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (65, b2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_137\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_137\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(65, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 32)));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_138\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_138\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (66, b2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_139\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_139\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(66, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_140\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_140\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = b2;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\ := signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 16));
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (67, num6);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_141\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_141\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(67, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_142\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_142\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = b2;
+                            -- 
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\ := SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (68, num7);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_143\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_143\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(68, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_144\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_144\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (69, (sbyte)b2);
+                            -- 
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_145\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_145\ => 
+                        -- Begin SimpleMemory write.
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(69, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\), 32));
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_146\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_146\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -12385,6 +14155,7 @@ begin
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -12464,6 +14235,13 @@ begin
                                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 11 => 
+                            if (\Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -13402,11 +15180,18 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\ <= \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;

@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestExecutor.cs" />
     <Compile Include="Tests\BinaryAndUnaryOperatorExpressionCasesTests.cs" />
+    <Compile Include="Tests\CastExpressionCasesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
