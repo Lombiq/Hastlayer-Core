@@ -1,6 +1,4 @@
-﻿using Autofac;
-using Autofac.Core;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
@@ -34,6 +32,10 @@ namespace Hast.Transformer.Vhdl.Tests
                 typeof(Nexys4DdrDriver).Assembly
             });
 
+            if (UseStubMemberSuitabilityChecker)
+            {
+
+            }
             _shellRegistrationBuilder = builder =>
             {
                 if (UseStubMemberSuitabilityChecker)

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Autofac;
-using Hast.Common.Interfaces;
+using System.Threading.Tasks;
+using Hast.Layer;
 using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
@@ -11,13 +11,15 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
     public abstract class IntegrationTestFixtureBase
     {
         protected List<Assembly> _requiredExtension = new List<Assembly>();
-        protected Action<ContainerBuilder> _shellRegistrationBuilder;
-        protected IOrchardAppHost _host;
+        //protected Action<ContainerBuilder> _shellRegistrationBuilder;
+        protected IHastlayerConfiguration _hostConfiguration = HastlayerConfiguration.Default;
+        protected IHastlayer _host;
 
 
         [OneTimeSetUp]
-        public void TestFixtureSetUp()
+        public async Task TestFixtureSetUp()
         {
+            /*
             var settings = new AppHostSettings
             {
                 ImportedExtensions = _requiredExtension,
@@ -50,6 +52,13 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 
             // Can't use async in NUnit 2.x in TestFixtureSetUp (available in 3.x).
             _host = OrchardAppHostFactory.StartTransientHost(settings, registrations, null).Result;
+            
+            */
+
+            _host = await Hastlayer.Create(new HastlayerConfiguration
+            {
+                Extensions = _requiredExtension,
+            });
         }
 
         [OneTimeTearDown]

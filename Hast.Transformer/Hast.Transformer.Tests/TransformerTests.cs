@@ -26,6 +26,7 @@ namespace Hast.Transformer.Vhdl.Tests
     {
         private ITransformationContext _producedContext;
         private Mock<ITransformingEngine> _transformingEngineMock;
+        private ServiceProvider _provider;
         private IServiceScope _scope;
 
         private ITransformer GetTransformer() =>
@@ -62,14 +63,15 @@ namespace Hast.Transformer.Vhdl.Tests
 #if DEBUG
             var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.FullName}:{x.ImplementationType?.FullName ?? "NULL"}").OrderBy(x => x));
 #endif
-            var provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = true });
-            _scope = provider.CreateScope();
+            _provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = true });
+            _scope = _provider.CreateScope();
         }
 
         [TearDown]
         public virtual void TearDown()
         {
             _scope.Dispose();
+            _provider.Dispose();
         }
 
 
