@@ -8,7 +8,19 @@ namespace Hast.TestInputs.Dynamic
     /// </summary>
     /// <remarks>
     /// Note that all the cases for u/long won't fit on the Nexys A7 so we need to split them. Ideally all the cases
-    /// would fit into a single design though.
+    /// would fit into a single design though. Hardware resource usage for each of these tests is as following:
+    /// - ByteBinaryOperatorExpressionVariations: 52%
+    /// - SbyteBinaryOperatorExpressionVariations: 64%
+    /// - ShortBinaryOperatorExpressionVariations: 64%
+    /// - UshortBinaryOperatorExpressionVariations: 55%
+    /// - IntBinaryOperatorExpressionVariations: 63%
+    /// - UintBinaryOperatorExpressionVariations: 82%
+    /// - LongBinaryOperatorExpressionVariationsLow: 71%
+    /// - LongBinaryOperatorExpressionVariationsHigh: 53%
+    /// - UlongBinaryOperatorExpressionVariationsLow: 33%
+    /// - UlongBinaryOperatorExpressionVariationsHigh: 33%
+    /// - AllUnaryOperatorExpressionVariations: 33%
+    /// 
     /// While using the 8-number SaveResult() method actually slightly increases resource usage synthesis time is
     /// greatly reduced (as opposed to calling the single-number SaveResult() for every number).
     /// <see cref="BinaryAndUnaryOperatorExpressionCasesGenerator"/> can be used to generate these cases.
