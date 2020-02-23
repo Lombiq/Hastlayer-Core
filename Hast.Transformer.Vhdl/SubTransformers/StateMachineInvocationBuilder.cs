@@ -255,7 +255,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
                     // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
                     // the AST.
-                    if (parameterReference is IDataObject || parameterReference is Value)
+                    if (parameter.DataType != parameterSignalType)
                     {
                         IAssignmentTypeConversionResult conversionResult;
                         if (flowDirection == ParameterFlowDirection.Out)
