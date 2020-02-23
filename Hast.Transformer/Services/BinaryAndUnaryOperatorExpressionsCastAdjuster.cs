@@ -230,14 +230,6 @@ namespace Hast.Transformer.Services
                 void replace(IType newType)
                 {
                     unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
-
-                    // We should also put a cast around it if necessary so it produces the same type as before.
-                    if (!(unaryOperatorExpression.FindFirstNonParenthesizedExpressionParent() is CastExpression))
-                    {
-                        var castExpression = CreateCast(type, unaryOperatorExpression, out var clonedUnaryOperatorExpression);
-                        unaryOperatorExpression.ReplaceWith(castExpression);
-                        unaryOperatorExpression = clonedUnaryOperatorExpression;
-                    }
                 }
 
                 if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
