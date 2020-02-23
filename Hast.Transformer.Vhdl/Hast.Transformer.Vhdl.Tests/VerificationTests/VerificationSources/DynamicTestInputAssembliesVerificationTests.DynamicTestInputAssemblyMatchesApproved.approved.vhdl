@@ -7666,7 +7666,7 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\: \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._States\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_0\;
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -7822,7 +7822,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64,Int64,Int64,Int64,Int64,Int64,Int64,Int64).number7.parameter.Out.0\ <= to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64,Int64,Int64,Int64,Int64,Int64,Int64,Int64)._Started.0\ <= false;
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_0\;
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := to_unsigned(0, 8);
@@ -7976,10 +7976,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
+                        -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = memory.ReadInt32 (0);
+                        -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
@@ -7992,21 +7992,21 @@ begin
                             -- SimpleMemory read finished.
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.dataIn.0\);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = (uint)num;
+                            -- num2 = num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
                             -- byte b;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- b = (byte)num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 8);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8);
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 0, num2 << (int)b);
                             -- 
@@ -8123,7 +8123,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- b2 = (sbyte)num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8));
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 20, num2 << (int)b2);
                             -- 
@@ -8247,7 +8247,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = (short)num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16));
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 40, num2 << (int)num3);
                             -- 
@@ -8371,7 +8371,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num4 = (ushort)num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 16);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16);
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 60, num2 << (int)num4);
                             -- 
@@ -8486,9 +8486,9 @@ begin
                             -- int num5;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num5 = num;
+                            -- num5 = (int)num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := signed(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 80, num2 << num5);
                             -- 
@@ -8610,9 +8610,9 @@ begin
                             -- uint num6;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num6 = (uint)num;
+                            -- num6 = num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 100, num2 << (int)num6);
                             -- 
@@ -8722,7 +8722,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num7 = num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64));
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 120, num2 << (int)num7);
                             -- 
@@ -8837,9 +8837,9 @@ begin
                             -- ulong num8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num8 = (ulong)num;
+                            -- num8 = num;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
                             -- this.SaveResult (memory, 140, num2 << (int)num8);
                             -- 
