@@ -17,7 +17,7 @@ namespace Hast.DynamicTests
             {
                 var configuration = new HardwareGenerationConfiguration("Nexys A7");
 
-                configuration.AddHardwareEntryPointType<BinaryAndUnaryOperatorExpressionCases>();
+                configuration.AddHardwareEntryPointMethod<BinaryAndUnaryOperatorExpressionCases>(b => b.AllUnaryOperatorExpressionVariations(null));
 
                 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
@@ -48,7 +48,6 @@ namespace Hast.DynamicTests
                     new BinaryAndUnaryOperatorExpressionCases(),
                     proxyGenerationConfiguration);
 
-                binaryAndUnaryOperatorExpressionCases.AllBinaryOperatorExpressionVariations(123);
                 binaryAndUnaryOperatorExpressionCases.AllUnaryOperatorExpressionVariations(123);
             }
 

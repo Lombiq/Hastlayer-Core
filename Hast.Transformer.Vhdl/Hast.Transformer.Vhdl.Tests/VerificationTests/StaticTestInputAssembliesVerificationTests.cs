@@ -11,16 +11,33 @@ using System.Threading.Tasks;
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
     [TestFixture]
-    public class TestInputAssembliesVerificationTests : VerificationTestFixtureBase
+    public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtureBase
     {
         [Test]
-        public async Task TestInputAssembliesMatchApproved()
+        public async Task ClassStructureAssembliesMatchApproved()
         {
             await _host.Run<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly, typeof(CastingCases).Assembly },
+                    new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
+                    configuration =>
+                    {
+                        configuration.TransformerConfiguration().UseSimpleMemory = false;
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task StaticTestInputAssemblyMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(CastingCases).Assembly },
                     configuration =>
                     {
                         configuration.TransformerConfiguration().UseSimpleMemory = false;
