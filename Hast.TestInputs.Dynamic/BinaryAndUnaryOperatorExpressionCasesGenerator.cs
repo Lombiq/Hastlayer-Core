@@ -12,24 +12,24 @@ namespace Hast.TestInputs.Dynamic
             var codeBuilder = new StringBuilder();
 
             var memoryIndex = 0;
-            string AddMemoryWrite(string variableName)
+            string AddSaveResult(string code, bool addLongCast = true)
             {
                 var originalMemoryIndex = memoryIndex;
                 memoryIndex += 2;
                 // The long cast will be unnecessary most of the time but determining when it's needed is complex so
                 // good enough.
-                return $@"SaveResult(memory, {originalMemoryIndex}, (long)({variableName}));";
+                return $@"SaveResult(memory, {originalMemoryIndex}, {(addLongCast ? "(long)(" : string.Empty)}{code}{(addLongCast ? ")" : string.Empty)});";
             }
 
-            string Add8MemoryWrites(
-                string variableName0,
-                string variableName1,
-                string variableName2,
-                string variableName3,
-                string variableName4,
-                string variableName5,
-                string variableName6,
-                string variableName7)
+            string AddiSaveResults(
+                string code0,
+                string code1,
+                string code2,
+                string code3,
+                string code4,
+                string code5,
+                string code6,
+                string code7)
             {
                 var originalMemoryIndex = memoryIndex;
                 memoryIndex += 16;
@@ -39,14 +39,14 @@ namespace Hast.TestInputs.Dynamic
                 return $@"SaveResult(
     memory, 
     {originalMemoryIndex}, 
-    (long)({variableName0}), // {originalMemoryIndex}
-    (long)({variableName1}), // {originalMemoryIndex + 2}
-    (long)({variableName2}), // {originalMemoryIndex + 4}
-    (long)({variableName3}), // {originalMemoryIndex + 6}
-    (long)({variableName4}), // {originalMemoryIndex + 8}
-    (long)({variableName5}), // {originalMemoryIndex + 10}
-    (long)({variableName6}), // {originalMemoryIndex + 12}
-    (long)({variableName7})); // {originalMemoryIndex + 14}";
+    (long)({code0}), // {originalMemoryIndex}
+    (long)({code1}), // {originalMemoryIndex + 2}
+    (long)({code2}), // {originalMemoryIndex + 4}
+    (long)({code3}), // {originalMemoryIndex + 6}
+    (long)({code4}), // {originalMemoryIndex + 8}
+    (long)({code5}), // {originalMemoryIndex + 10}
+    (long)({code6}), // {originalMemoryIndex + 12}
+    (long)({code7})); // {originalMemoryIndex + 14}";
             }
 
             for (int i = 0; i < types.Length; i++)
@@ -103,8 +103,8 @@ namespace Hast.TestInputs.Dynamic
 
                     var shiftRightOperandCast = needsShiftCastTypes.Contains(rightType) ? "(int)" : string.Empty;
 
-                    codeBuilder.AppendLine(AddMemoryWrite($"{left} << {shiftRightOperandCast}{right}"));
-                    codeBuilder.AppendLine(AddMemoryWrite($"{left} >> {shiftRightOperandCast}{right}"));
+                    codeBuilder.AppendLine(AddSaveResult($"{left} << {shiftRightOperandCast}{right}"));
+                    codeBuilder.AppendLine(AddSaveResult($"{left} >> {shiftRightOperandCast}{right}"));
 
                     // These variations can't be applied to the operands directly except for shift (which has a cast). 
                     if (!(
@@ -117,7 +117,7 @@ namespace Hast.TestInputs.Dynamic
                         leftType == "ulong" && rightType == "int" ||
                         leftType == "ulong" && rightType == "long"))
                     {
-                        codeBuilder.AppendLine(Add8MemoryWrites(
+                        codeBuilder.AppendLine(AddiSaveResults(
                             $"{left} + {right}",
                             $"{left} - {right}",
                             $"{left} * {right}",
@@ -144,14 +144,14 @@ namespace Hast.TestInputs.Dynamic
                 var variableName = type + "Operand";
 
                 codeBuilder.AppendLine($@"
-                    var {variableName} = {(type != "int" ? $"({type})" : string.Empty)}input;");
+                    var {variableName} = {(type != "long" ? $"({type})" : string.Empty)}input;");
 
-                codeBuilder.AppendLine(AddMemoryWrite("~" + variableName));
-                codeBuilder.AppendLine(AddMemoryWrite("+" + variableName));
+                codeBuilder.AppendLine(AddSaveResult("~" + variableName, isUlong));
+                codeBuilder.AppendLine(AddSaveResult("+" + variableName, isUlong));
 
                 if (type != "ulong")
                 {
-                    codeBuilder.AppendLine(AddMemoryWrite("-" + variableName));
+                    codeBuilder.AppendLine(AddSaveResult("-" + variableName, isUlong));
                 }
             }
 

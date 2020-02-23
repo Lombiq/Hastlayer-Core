@@ -7,7 +7,6 @@ namespace Hast.TestInputs.Dynamic
     /// conversions are implemented.
     /// </summary>
     /// <remarks>
-    /// Find the code that can generate these below.
     /// Note that all the cases for u/long won't fit on the Nexys A7 so we need to split them. Ideally all the cases
     /// would fit into a single design though.
     /// While using the 8-number SaveResult() method actually slightly increases resource usage synthesis time is
@@ -954,42 +953,42 @@ namespace Hast.TestInputs.Dynamic
 
         public virtual void AllUnaryOperatorExpressionVariations(SimpleMemory memory)
         {
-            var input = memory.ReadInt32(0);
+            long input = ((long)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
 
             var byteOperand = (byte)input;
-            SaveResult(memory, 0, (long)(~byteOperand));
-            SaveResult(memory, 2, (long)(+byteOperand));
-            SaveResult(memory, 4, (long)(-byteOperand));
+            SaveResult(memory, 0, ~byteOperand);
+            SaveResult(memory, 2, +byteOperand);
+            SaveResult(memory, 4, -byteOperand);
 
             var sbyteOperand = (sbyte)input;
-            SaveResult(memory, 6, (long)(~sbyteOperand));
-            SaveResult(memory, 8, (long)(+sbyteOperand));
-            SaveResult(memory, 10, (long)(-sbyteOperand));
+            SaveResult(memory, 6, ~sbyteOperand);
+            SaveResult(memory, 8, +sbyteOperand);
+            SaveResult(memory, 10, -sbyteOperand);
 
             var shortOperand = (short)input;
-            SaveResult(memory, 12, (long)(~shortOperand));
-            SaveResult(memory, 14, (long)(+shortOperand));
-            SaveResult(memory, 16, (long)(-shortOperand));
+            SaveResult(memory, 12, ~shortOperand);
+            SaveResult(memory, 14, +shortOperand);
+            SaveResult(memory, 16, -shortOperand);
 
             var ushortOperand = (ushort)input;
-            SaveResult(memory, 18, (long)(~ushortOperand));
-            SaveResult(memory, 20, (long)(+ushortOperand));
-            SaveResult(memory, 22, (long)(-ushortOperand));
+            SaveResult(memory, 18, ~ushortOperand);
+            SaveResult(memory, 20, +ushortOperand);
+            SaveResult(memory, 22, -ushortOperand);
 
-            var intOperand = input;
-            SaveResult(memory, 24, (long)(~intOperand));
-            SaveResult(memory, 26, (long)(+intOperand));
-            SaveResult(memory, 28, (long)(-intOperand));
+            var intOperand = (int)input;
+            SaveResult(memory, 24, ~intOperand);
+            SaveResult(memory, 26, +intOperand);
+            SaveResult(memory, 28, -intOperand);
 
             var uintOperand = (uint)input;
-            SaveResult(memory, 30, (long)(~uintOperand));
-            SaveResult(memory, 32, (long)(+uintOperand));
-            SaveResult(memory, 34, (long)(-uintOperand));
+            SaveResult(memory, 30, ~uintOperand);
+            SaveResult(memory, 32, +uintOperand);
+            SaveResult(memory, 34, -uintOperand);
 
-            var longOperand = (long)input;
-            SaveResult(memory, 36, (long)(~longOperand));
-            SaveResult(memory, 38, (long)(+longOperand));
-            SaveResult(memory, 40, (long)(-longOperand));
+            var longOperand = input;
+            SaveResult(memory, 36, ~longOperand);
+            SaveResult(memory, 38, +longOperand);
+            SaveResult(memory, 40, -longOperand);
 
             var ulongOperand = (ulong)input;
             SaveResult(memory, 42, (long)(~ulongOperand));
@@ -1070,10 +1069,11 @@ namespace Hast.TestInputs.Dynamic
             UlongBinaryOperatorExpressionVariationsHigh(memory);
         }
 
-        public void AllUnaryOperatorExpressionVariations(int input)
+        public void AllUnaryOperatorExpressionVariations(long input)
         {
             var memory = new SimpleMemory(46);
-            memory.WriteInt32(0, input);
+            memory.WriteInt32(0, (int)(input >> 32));
+            memory.WriteInt32(1, (int)input);
             AllUnaryOperatorExpressionVariations(memory);
         }
 
