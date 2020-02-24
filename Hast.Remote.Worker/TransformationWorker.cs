@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using OrchardCore.Modules;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace Hast.Remote.Worker
 
         private IHastlayer _hastlayer;
         private CloudBlobContainer _container;
-        private ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
+        private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
         private int _restartCount = 0;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
@@ -56,7 +55,7 @@ namespace Hast.Remote.Worker
             Logger = NullLogger.Instance;
         }
 
-        
+
         private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
         {
             var segment = await container.ListBlobsSegmentedAsync(prefix, null);
@@ -204,11 +203,9 @@ namespace Hast.Remote.Worker
 
                                                 assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
-                                                using (var fileStream = _appDataFolder.CreateFile(path))
-                                                {
-                                                    await memoryStream.CopyToAsync(fileStream);
-                                                }
+                                                using MemoryStream memoryStream = new MemoryStream(assembly.FileContent);
+                                                using FileStream fileStream = _appDataFolder.CreateFile(path);
+                                                await memoryStream.CopyToAsync(fileStream);
                                             }
 
                                             cancellationToken.ThrowIfCancellationRequested();
@@ -251,11 +248,9 @@ namespace Hast.Remote.Worker
                                                         .ToList()
                                                 };
 
-                                                using (var memoryStream = new MemoryStream())
-                                                {
-                                                    await hardwareDescription.WriteSource(memoryStream);
-                                                    result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
-                                                }
+                                                using var memoryStream = new MemoryStream();
+                                                await hardwareDescription.WriteSource(memoryStream);
+                                                result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                             {

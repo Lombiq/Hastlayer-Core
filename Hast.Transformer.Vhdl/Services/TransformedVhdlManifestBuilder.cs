@@ -1,4 +1,5 @@
 ﻿using Hast.Common.Extensions;
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Transformer.Models;
@@ -15,7 +16,6 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using OrchardCore.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;

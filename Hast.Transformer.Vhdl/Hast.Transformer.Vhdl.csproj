@@ -24,7 +24,6 @@
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
-    <ProjectReference Include="..\..\OrchardCore\src\OrchardCore\OrchardCore.Abstractions\OrchardCore.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
     <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />

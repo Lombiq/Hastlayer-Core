@@ -12,7 +12,6 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
-using OrchardCore.Modules;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -36,7 +35,6 @@ namespace Hast.Transformer.Vhdl.Tests
         public virtual void Init()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IClock, Clock>();
             services.AddIDependencyContainer(System.IO.Directory.GetFiles(".", "Hast.*.dll"));
             services.AddSingleton<IHastlayerConfiguration>(new HastlayerConfiguration());
 
