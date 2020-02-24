@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using log4net;
+﻿using log4net;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
 using Microsoft.ApplicationInsights;
@@ -12,9 +7,9 @@ using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector;
 using Microsoft.ApplicationInsights.Log4NetAppender;
-using Microsoft.ApplicationInsights.WindowsServer;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
-using Microsoft.Diagnostics.Tracing;
+using System;
+using System.Reflection;
 
 namespace Hast.Remote.Worker.Services
 {
@@ -26,7 +21,8 @@ namespace Hast.Remote.Worker.Services
         {
             if (_wasSetup) return;
 
-            var hierarchyRoot = ((Hierarchy)LogManager.GetRepository()).Root;
+            // The no argument version of GetRepository is missing from netstandard but it just forwards to GetCallingAssembly.
+            var hierarchyRoot = ((Hierarchy)LogManager.GetRepository(Assembly.GetCallingAssembly())).Root;
 
             var patternLayout = new PatternLayout
             {
@@ -48,7 +44,7 @@ namespace Hast.Remote.Worker.Services
             // directory and be loaded. These are needed for AI.
             _wasSetup = 
                 typeof(DependencyTrackingTelemetryModule).Assembly.FullName != null &&
-                typeof(EventAttribute).Assembly.FullName != null &&
+                //typeof(EventAttribute).Assembly.FullName != null &&
                 typeof(PerformanceCollectorModule).Assembly.FullName != null &&
                 typeof(ServerTelemetryChannel).Assembly.FullName != null;
         }

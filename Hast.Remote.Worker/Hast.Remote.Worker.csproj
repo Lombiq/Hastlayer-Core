@@ -27,24 +27,21 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector">
-      <Version>2.4.1</Version>
+      <Version>2.13.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.ApplicationInsights.Log4NetAppender">
-      <Version>1.2.6</Version>
+      <Version>2.13.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector">
-      <Version>2.4.1</Version>
+      <Version>2.13.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel">
-      <Version>2.4.0</Version>
+      <Version>2.13.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Diagnostics.Tracing.EventSource.Redist">
-      <Version>1.1.28</Version>
-    </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="WindowsAzure.Storage">
-      <Version>8.1.4</Version>
+      <Version>9.3.3</Version>
     </PackageReference>
   </ItemGroup>
 </Project>

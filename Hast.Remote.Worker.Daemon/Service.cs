@@ -5,6 +5,7 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using Hast.Remote.Worker.Configuration;
+using OrchardCore.Modules;
 
 namespace Hast.Remote.Worker.Daemon
 {
@@ -21,10 +22,12 @@ namespace Hast.Remote.Worker.Daemon
 
         public Service()
         {
-            _eventLog = new EventLog();
-            _eventLog.Log = DisplayName;
-            // The EventLog source can't contain dots like the service's technical name.
-            _eventLog.Source = "HastRemoteWorkerDaemon";
+            _eventLog = new EventLog
+            {
+                Log = DisplayName,
+                // The EventLog source can't contain dots like the service's technical name.
+                Source = "HastRemoteWorkerDaemon"
+            };
 
             ServiceName = Name;
             CanStop = true;
@@ -65,51 +68,49 @@ namespace Hast.Remote.Worker.Daemon
                     }
                 };
 
-                using (var host = await OrchardAppHostFactory.StartTransientHost(settings, null, null))
+                using var host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
+                try
                 {
-                    try
+                    await host.Run<IAppConfigurationAccessor, ITransformationWorker>((configurationAccessor, worker) =>
                     {
-                        await host.Run<IAppConfigurationAccessor, ITransformationWorker>((configurationAccessor, worker) =>
+                        var configuration = new TransformationWorkerConfiguration
                         {
-                            var configuration = new TransformationWorkerConfiguration
-                            {
-                                StorageConnectionString = configurationAccessor
-                                    .GetConfiguration(ConfigurationKeys.StorageConnectionStringKey)
-                            };
+                            StorageConnectionString = configurationAccessor
+                                .GetConfiguration(ConfigurationKeys.StorageConnectionStringKey)
+                        };
 
                             // Only counting startup crashes.
                             _restartCount = 0;
 
-                            return worker.Work(configuration, _cancellationTokenSource.Token);
-                        });
-                    }
-                    catch (Exception ex) when (!ex.IsFatal())
+                        return worker.Work(configuration, _cancellationTokenSource.Token);
+                    });
+                }
+                catch (Exception ex) when (!ex.IsFatal())
+                {
+                    await host.Run<ILoggerService>(logger =>
                     {
-                        await host.Run<ILoggerService>(logger =>
-                        {
-                            logger.Error(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
+                        logger.Error(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
 
-                            if (_restartCount < 10)
-                            {
-                                _restartCount++;
+                        if (_restartCount < 10)
+                        {
+                            _restartCount++;
 
                                 // Not exactly the nicest way to restart the worker, and increases memory usage with each
                                 // restart. But such restarts should be extremely rare, this should be just a last resort.
                                 _workerTask = null;
-                                RunStopTasks();
-                                RunStartTasks(); 
-                            }
-                            else
-                            {
-                                logger.Fatal(
-                                    ex, 
-                                    DisplayName + " crashed with an unhandled exception and was restarted " + 
-                                    _restartCount + " times. It won't be restarted again.");
-                            }
+                            RunStopTasks();
+                            RunStartTasks();
+                        }
+                        else
+                        {
+                            logger.Fatal(
+                                ex,
+                                DisplayName + " crashed with an unhandled exception and was restarted " +
+                                _restartCount + " times. It won't be restarted again.");
+                        }
 
-                            return Task.CompletedTask;
-                        });
-                    }
+                        return Task.CompletedTask;
+                    });
                 }
             });
 

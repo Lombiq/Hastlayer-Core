@@ -1,5 +1,7 @@
 ﻿using Hast.Catapult;
+using Hast.Common.Services;
 using Hast.Layer;
+using Hast.Layer.Services;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Services;
@@ -7,12 +9,11 @@ using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Hast.Transformer.Vhdl.Services;
 using Hast.Xilinx;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Orchard.Exceptions;
-using Orchard.FileSystems.AppData;
-using Orchard.Logging;
-using Orchard.Services;
+using OrchardCore.Modules;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -119,7 +120,7 @@ namespace Hast.Remote.Worker
                         catch (Exception ex) when (!ex.IsFatal())
                         {
                             // If an exception escapes here it'll take down the whole process, so need to handle them.
-                            Logger.Error(ex, "Error during cleaning up old result blobs.");
+                            Logger.LogError(ex, "Error during cleaning up old result blobs.");
                         }
                     };
                     _oldResultBlobsCleanerTimer.Enabled = true;
@@ -333,7 +334,7 @@ namespace Hast.Remote.Worker
                             }
                             catch (Exception ex) when (!ex.IsFatal())
                             {
-                                Logger.Error(ex, "Processing the job blob {0} failed.", blob.Name);
+                                Logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
                             }
 
                             telemetry.FinishTimeUtc = _clock.UtcNow;
@@ -362,7 +363,7 @@ namespace Hast.Remote.Worker
             {
                 if (_restartCount < 100)
                 {
-                    Logger.Error(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
+                    Logger.LogError(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
 
                     Dispose();
                     _restartCount++;
@@ -374,7 +375,7 @@ namespace Hast.Remote.Worker
                 }
                 else
                 {
-                    Logger.Fatal(
+                    Logger.LogCritical(
                         ex,
                         "Transformation Worker crashed with an unhandled exception and was restarted " +
                         _restartCount + " times. It won't be restarted again.");
