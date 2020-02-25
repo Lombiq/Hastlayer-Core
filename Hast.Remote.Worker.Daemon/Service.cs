@@ -5,7 +5,6 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using Hast.Remote.Worker.Configuration;
-using OrchardCore.Modules;
 
 namespace Hast.Remote.Worker.Daemon
 {

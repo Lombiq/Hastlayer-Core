@@ -51,13 +51,10 @@ namespace Hast.Transformer.Vhdl.Tests
                         return Task.FromResult<IHardwareDescription>(null);
                     })
                 .Verifiable();
+            _transformingEngineMock.ForceMock(services);
 
-            foreach (var service in services.Where(service => service.ServiceType.Name == nameof(ITransformingEngine)).ToList())
-            {
-                services.Remove(service);
-            }
+            services.RemoveImplementations<ITransformingEngine>();
             services.AddSingleton(_transformingEngineMock.Object);
-
 
 #if DEBUG
             var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.FullName}:{x.ImplementationType?.FullName ?? "NULL"}").OrderBy(x => x));

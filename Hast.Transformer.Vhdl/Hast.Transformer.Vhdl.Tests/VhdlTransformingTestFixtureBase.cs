@@ -8,6 +8,7 @@ using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using Hast.Xilinx;
 using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,32 +33,13 @@ namespace Hast.Transformer.Vhdl.Tests
                 typeof(Nexys4DdrDriver).Assembly
             });
 
-            if (UseStubMemberSuitabilityChecker)
-            {
 
-            }
-            _shellRegistrationBuilder = builder =>
+            _hostConfiguration.OnServiceRegistration += (o, services) =>
             {
                 if (UseStubMemberSuitabilityChecker)
                 {
-                    // We need to override MemberSuitabilityChecker in Hast.Transformer. Since that registration happens
-                    // after this one we need to use this hackish way of circumventing that.
-                    builder.RegisterCallback(componentRegistry =>
-                    {
-                        var memberSuitabilityCheckerRegistration = componentRegistry
-                            .Registrations
-                            .Where(registration => registration
-                                .Services
-                                .Any(service => service is TypedService && ((TypedService)service).ServiceType == typeof(IMemberSuitabilityChecker)))
-                            .SingleOrDefault();
-
-                        if (memberSuitabilityCheckerRegistration == null) return;
-
-                        memberSuitabilityCheckerRegistration.Activating += (sender, activatingEventArgs) =>
-                        {
-                            activatingEventArgs.Instance = new StubMemberSuitabilityChecker();
-                        };
-                    });
+                    services.RemoveImplementations<IMemberSuitabilityChecker>();
+                    services.AddSingleton<IMemberSuitabilityChecker>(new StubMemberSuitabilityChecker());
                 }
             };
         }

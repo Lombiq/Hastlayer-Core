@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Layer;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
@@ -55,10 +56,8 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             
             */
 
-            _host = await Hastlayer.Create(new HastlayerConfiguration
-            {
-                Extensions = _requiredExtension,
-            });
+            _hostConfiguration.Extensions = _requiredExtension;
+            _host = await Hastlayer.Create(_hostConfiguration);
         }
 
         [OneTimeTearDown]
