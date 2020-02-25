@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Services;
 using Hast.Layer;
+using Hast.Synthesis;
 using Hast.Synthesis.Services;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure1.ComplexTypes;
@@ -63,6 +64,9 @@ namespace Hast.Transformer.Vhdl.Tests
 #endif
             _provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = true });
             _scope = _provider.CreateScope();
+
+            _scope.ServiceProvider.GetRequiredService<IDeviceDriver>();
+            _scope.ServiceProvider.GetRequiredService<IDeviceDriverSelector>();
         }
 
         [TearDown]
