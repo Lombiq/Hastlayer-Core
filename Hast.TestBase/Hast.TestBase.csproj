@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
+  </ItemGroup>
+
 </Project>
