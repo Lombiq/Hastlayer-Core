@@ -28,7 +28,7 @@
     <ProjectReference Include="..\..\Hast.TestInputs.ClassStructure1\Hast.TestInputs.ClassStructure1.csproj" />
     <ProjectReference Include="..\..\Hast.TestInputs.ClassStructure2\Hast.TestInputs.ClassStructure2.csproj" />
     <ProjectReference Include="..\..\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj" />
-    <ProjectReference Include="..\..\Hast.TestInputs.Various\Hast.TestInputs.Various.csproj" />
+    <ProjectReference Include="..\..\Hast.TestInputs.Static\Hast.TestInputs.Static.csproj" />
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
     <ProjectReference Include="..\..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj" />
