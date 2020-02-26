@@ -9868,7 +9868,7 @@ begin
         Variable \Posit::GetRegimeKValue().0.conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetRegimeKValue().0.return.0\: boolean := false;
         Variable \Posit::GetRegimeKValue().0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit::GetRegimeKValue().0.conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::GetRegimeKValue().0.return.2\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetRegimeKValue().0.return.3\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetRegimeKValue().0.return.4\: \Lombiq.Arithmetics.BitMask\;
@@ -9894,7 +9894,7 @@ begin
                 \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                 \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_0\;
                 \Posit::GetRegimeKValue().0.return.0\ := false;
-                \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\ := to_signed(0, 32);
+                \Posit::GetRegimeKValue().0.conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b\ := to_signed(0, 32);
                 \Posit::GetRegimeKValue().0.return.5\ := false;
                 \Posit::GetRegimeKValue().0.return.6\ := to_unsigned(0, 16);
                 \Posit::GetRegimeKValue().0.unaryOperationResult.0\ := to_signed(0, 32);
@@ -9964,13 +9964,13 @@ begin
                         -- 
                         \Posit::GetRegimeKValue().0.left\ := (\Posit::GetRegimeKValue().0.conditionalb336112c77a8e8ea3783762c4da872a5b2798e98bb65ed6451b07e572fc7f674\);
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f;
+                        -- int conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (BitMask.op_Equality (BitMask.op_BitwiseAnd (left, Lombiq.Arithmetics.Posit.get_FirstRegimeBitBitMask (@this)), Lombiq.Arithmetics.Posit.get_EmptyBitMask (@this))) {
-                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31))));
+                        -- 	conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b = (-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)));
                         -- } else {
-                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
+                        -- 	conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::get_FirstRegimeBitBitMask()
@@ -10078,20 +10078,20 @@ begin
                     when \Posit::GetRegimeKValue().0._State_12\ => 
                         -- State after the if-else which was started in state \Posit::GetRegimeKValue().0._State_11\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f;
+                        -- return conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b;
                         -- 
-                        \Posit::GetRegimeKValue().0.return\ <= \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\;
+                        \Posit::GetRegimeKValue().0.return\ <= \Posit::GetRegimeKValue().0.conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b\;
                         \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetRegimeKValue().0._State_13\ => 
                         -- True branch of the if-else started in state \Posit::GetRegimeKValue().0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31))));
+                        -- 	conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b = (-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((ushort)(-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31))));
+                        -- conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b = (-(int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.BitMask::LengthOfRunOfBits(System.UInt16)
                         \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).this.parameter.Out.0\ <= \Posit::GetRegimeKValue().0.left\;
@@ -10105,7 +10105,7 @@ begin
                             \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                             \Posit::GetRegimeKValue().0.return.6\ := \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
                             \Posit::GetRegimeKValue().0.unaryOperationResult.0\ := -signed(SmartResize((\Posit::GetRegimeKValue().0.return.6\), 32));
-                            \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\ := signed(SmartResize((SmartResize(unsigned((\Posit::GetRegimeKValue().0.unaryOperationResult.0\)), 16)), 32));
+                            \Posit::GetRegimeKValue().0.conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b\ := (\Posit::GetRegimeKValue().0.unaryOperationResult.0\);
                             -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_11\.
                             if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_14\) then 
                                 \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_12\;
@@ -10116,11 +10116,11 @@ begin
                         -- False branch of the if-else started in state \Posit::GetRegimeKValue().0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
+                        -- 	conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
+                        -- conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b = ((int)((int)(Lombiq.Arithmetics.BitMask.LengthOfRunOfBits (left, 31)) - 1));
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_16\;
@@ -10138,7 +10138,7 @@ begin
                             \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16)._Started.0\ <= false;
                             \Posit::GetRegimeKValue().0.return.7\ := \Posit::GetRegimeKValue().0.BitMask::LengthOfRunOfBits(UInt16).return.0\;
                             \Posit::GetRegimeKValue().0.binaryOperationResult.0\ := signed(SmartResize((\Posit::GetRegimeKValue().0.return.7\), 32)) - to_signed(1, 32);
-                            \Posit::GetRegimeKValue().0.conditionalc6954a326c728809abbf744dbdc78995d6fef7cb3dcc6ff9822231351954e79f\ := ((\Posit::GetRegimeKValue().0.binaryOperationResult.0\));
+                            \Posit::GetRegimeKValue().0.conditional8e5a07a0e379e38818d9828ff88648141c28f8e6ffa7b49f506a7953f414fd2b\ := ((\Posit::GetRegimeKValue().0.binaryOperationResult.0\));
                             -- Going to the state after the if-else which was started in state \Posit::GetRegimeKValue().0._State_11\.
                             if (\Posit::GetRegimeKValue().0._State\ = \Posit::GetRegimeKValue().0._State_17\) then 
                                 \Posit::GetRegimeKValue().0._State\ := \Posit::GetRegimeKValue().0._State_12\;
