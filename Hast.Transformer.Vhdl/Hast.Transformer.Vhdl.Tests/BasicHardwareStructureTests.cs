@@ -18,7 +18,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
 
@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task BasicVhdlStructureIsCorrect()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 var topModule = (Module)(await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.Modules.Last();
 

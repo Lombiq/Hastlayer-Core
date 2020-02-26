@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task InvalidExternalVariableAssignmentIsPrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task InvalidArrayUsageIsPrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task InvalidHardwareEntryPointsArePrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
@@ -69,7 +69,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task InvalidLanguageConstructsArePrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
@@ -84,7 +84,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task InvalidInvalidObjectUsingCasesArePrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),

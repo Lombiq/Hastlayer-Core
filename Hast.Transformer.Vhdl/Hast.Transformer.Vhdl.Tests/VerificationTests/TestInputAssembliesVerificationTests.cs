@@ -15,7 +15,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         [Test]
         public async Task TestInputAssembliesMatchApproved()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
