@@ -90,9 +90,9 @@ namespace System
         /// </summary>
         /// <remarks>
         /// Such a field's name looks like 
-        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases+ArrayHolder1::<ArrayLength>k__BackingField".
+        /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::<ArrayLength>k__BackingField".
         /// It will contain the name of the property. This needs to be converted into the corresponding full property name:
-        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases+ArrayHolder1::ArrayLength()"
+        /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::ArrayLength()"
         /// </remarks>
         public static string ConvertFullBackingFieldNameToPropertyName(this string name) =>
              name.ConvertSimpleBackingFieldNameToPropertyName() + "()";

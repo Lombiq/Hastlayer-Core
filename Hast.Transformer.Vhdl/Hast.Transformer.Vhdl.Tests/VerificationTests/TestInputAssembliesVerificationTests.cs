@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
-using Hast.TestInputs.Various;
+using Hast.TestInputs.Static;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using NUnit.Framework;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
