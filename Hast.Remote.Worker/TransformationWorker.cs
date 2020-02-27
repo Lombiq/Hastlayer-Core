@@ -203,9 +203,9 @@ namespace Hast.Remote.Worker
 
                                                 assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                                                using MemoryStream memoryStream = new MemoryStream(assembly.FileContent);
-                                                using FileStream fileStream = _appDataFolder.CreateFile(path);
-                                                await memoryStream.CopyToAsync(fileStream);
+                                                using (MemoryStream memoryStream = new MemoryStream(assembly.FileContent))
+                                                using (FileStream fileStream = _appDataFolder.CreateFile(path))
+                                                    await memoryStream.CopyToAsync(fileStream);
                                             }
 
                                             cancellationToken.ThrowIfCancellationRequested();
@@ -248,9 +248,11 @@ namespace Hast.Remote.Worker
                                                         .ToList()
                                                 };
 
-                                                using var memoryStream = new MemoryStream();
-                                                await hardwareDescription.WriteSource(memoryStream);
-                                                result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
+                                                using (var memoryStream = new MemoryStream())
+                                                {
+                                                    await hardwareDescription.WriteSource(memoryStream);
+                                                    result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
+                                                }
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                             {
