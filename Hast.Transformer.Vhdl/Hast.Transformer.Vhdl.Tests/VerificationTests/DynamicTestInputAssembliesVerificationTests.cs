@@ -1,6 +1,5 @@
 ﻿using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Abstractions;
-using Lombiq.OrchardAppHost;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
@@ -14,7 +13,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         [Test]
         public async Task DynamicTestInputAssemblyMatchesApproved()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await _host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
