@@ -36,8 +36,10 @@ namespace Hast.Transformer.Vhdl.Tests
         public virtual void Init()
         {
             var services = new ServiceCollection();
+            var configuration = new HastlayerConfiguration();
             services.AddIDependencyContainer(System.IO.Directory.GetFiles(".", "Hast.*.dll"));
-            services.AddSingleton<IHastlayerConfiguration>(new HastlayerConfiguration());
+            services.AddSingleton<IHastlayerConfiguration>(configuration);
+            services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
 

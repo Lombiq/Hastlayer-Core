@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj" />

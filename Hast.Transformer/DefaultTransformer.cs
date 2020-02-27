@@ -1,7 +1,6 @@
 ﻿using Hast.Common.Helpers;
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Layer.Services;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;

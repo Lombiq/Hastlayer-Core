@@ -1,7 +1,6 @@
 ﻿using Hast.Catapult;
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Layer.Services;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Services;
