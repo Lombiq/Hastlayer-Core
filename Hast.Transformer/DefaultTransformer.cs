@@ -3,6 +3,7 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Services.ConstantValuesSubstitution;
@@ -12,7 +13,6 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,12 +20,11 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 
-
 namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
-        private readonly IEnumerable<EventHandler> _eventHandlers;
+        private readonly IEnumerable<EventHandler<ITransformationContext>> _eventHandlers;
         private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
         private readonly IInvocationInstanceCountAdjuster _invocationInstanceCountAdjuster;
@@ -61,12 +60,12 @@ namespace Hast.Transformer
 
 
         public DefaultTransformer(
-            IEnumerable<EventHandler> eventHandlers,
+            IEnumerable<EventHandler<ITransformationContext>> eventHandlers,
             IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
             IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
-            IServiceProvider serviceProvider,
+            ITransformingEngine engine,
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
@@ -100,7 +99,7 @@ namespace Hast.Transformer
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
-            _engine = serviceProvider.GetService<ITransformingEngine>();
+            _engine = engine;
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
@@ -175,10 +174,10 @@ namespace Hast.Transformer
                     AnonymousTypes = false,
                     ArrayInitializers = false,
                     Discards = false,
-                    //DoWhileStatement = false,
+                    DoWhileStatement = false,
                     Dynamic = false,
                     ExpressionTrees = false,
-                    //ForStatement = false,
+                    ForStatement = false,
                     IntroduceReadonlyAndInModifiers = true,
                     IntroduceRefModifiersOnStructs = true,
                     // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
@@ -191,10 +190,10 @@ namespace Hast.Transformer
                     NullPropagation = false,
                     OptionalArguments = false,
                     OutVariables = false,
-                    //PatternBasedFixedStatement = false,
-                    //ReadOnlyMethods = true, // Can help const substitution.
+                    PatternBasedFixedStatement = false,
+                    ReadOnlyMethods = true, // Can help const substitution.
                     RefExtensionMethods = false,
-                    //SeparateLocalVariableDeclarations = true,
+                    SeparateLocalVariableDeclarations = true,
                     ShowXmlDocumentation = false,
                     StringInterpolation = false,
                     TupleComparisons = false,
@@ -286,7 +285,7 @@ namespace Hast.Transformer
                 var cachedTransformationContext = _transformationContextCacheService
                     .GetTransformationContext(assemblyPaths, transformationId);
 
-                if (cachedTransformationContext != null) return _engine?.Transform(cachedTransformationContext);
+                if (cachedTransformationContext != null) return _engine.Transform(cachedTransformationContext);
             }
 
             var decompilerTasks = decompilers
@@ -389,15 +388,14 @@ namespace Hast.Transformer
                 DeviceDriver = deviceDriver
             };
 
-            var eh = _eventHandlers?.ToList();
-            eh?.FirstOrDefault()?.Invoke(context, new EventArgs());
+            foreach(var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
 
             if (configuration.EnableCaching)
             {
                 _transformationContextCacheService.SetTransformationContext(context, assemblyPaths);
             }
 
-            return _engine?.Transform(context);
+            return _engine.Transform(context);
         }
     }
 }

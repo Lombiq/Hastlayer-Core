@@ -32,9 +32,6 @@
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ICSharpCode.Decompiler">
-      <Version>5.0.2.5153</Version>
-    </PackageReference>
     <PackageReference Include="JsonNet.PrivateSettersContractResolvers.Source">
       <Version>0.1.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

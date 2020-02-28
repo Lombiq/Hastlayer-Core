@@ -22,7 +22,6 @@
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ICSharpCode.Decompiler" Version="5.0.2.5153" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
