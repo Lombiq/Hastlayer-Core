@@ -597,11 +597,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         break;
                     case UnaryOperatorType.Plus:
-                        transformedOperation = new Unary
-                        {
-                            Operator = UnaryOperator.Identity,
-                            Expression = transformedExpression
-                        };
+                        // Unary plus is a noop.
+                        transformedOperation = transformedExpression;
 
                         break;
                     case UnaryOperatorType.Await:
