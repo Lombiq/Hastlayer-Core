@@ -9,6 +9,8 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
+using Hast.Transformer.Services.ConstantValuesSubstitution;
+using Hast.Xilinx;
 using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,19 +30,33 @@ namespace Hast.Transformer.Vhdl.Tests
         private ITransformationContext _producedContext;
         private Mock<ITransformingEngine> _transformingEngineMock;
         private ServiceProvider _provider;
-        private IServiceScope _scope;
 
-        private ITransformer GetTransformer() =>
-            _scope.ServiceProvider.GetRequiredService<IEnumerable<ITransformer>>().First(x => x.GetType().Name == nameof(DefaultTransformer));
+        private ITransformer GetTransformer()
+        {
+            using (var scope = _provider.CreateScope())
+            {
+                return scope.ServiceProvider.GetRequiredService<ITransformer>();
+            }
+        }
 
         [SetUp]
         public virtual void Init()
         {
             var services = new ServiceCollection();
             var configuration = new HastlayerConfiguration();
-            services.AddIDependencyContainer(System.IO.Directory.GetFiles(".", "Hast.*.dll"));
+
+            services.AddExternalHastlayerDependencies();
             services.AddSingleton<IHastlayerConfiguration>(configuration);
             services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
+
+            services.AddScoped<IJsonConverter, DefaultJsonConverter>();
+            services.AddScoped<ISyntaxTreeCleaner, SyntaxTreeCleaner>();
+            services.AddScoped<ITypeDeclarationLookupTableFactory, TypeDeclarationLookupTableFactory>();
+            services.AddScoped<IMemberSuitabilityChecker, MemberSuitabilityChecker>();
+            services.AddScoped<IDeviceDriverSelector, DeviceDriverSelector>();
+            services.AddScoped<IDeviceDriver, Nexys4DdrDriver>();
+            services.AddScoped<IMemberIdentifiersFixer, MemberIdentifiersFixer>();
+            services.AddScoped<ITransformer, DefaultTransformer>();
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
             _transformingEngineMock
@@ -55,23 +71,43 @@ namespace Hast.Transformer.Vhdl.Tests
                 .Verifiable();
             _transformingEngineMock.ForceMock(services);
 
-            new Mock<IInvocationInstanceCountAdjuster>().ForceMock(services);
-            
 
-#if DEBUG
-            var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.FullName}:{x.ImplementationType?.FullName ?? "NULL"}").OrderBy(x => x));
-#endif
-            _provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = true });
-            _scope = _provider.CreateScope();
+            // There is no automocking so the dependencies have to be listed here.
+            services
+                .AddMock<ITimingReportParser>()
+                .AddMock<IInvocationInstanceCountAdjuster>()
+                .AddMock<IGeneratedTaskArraysInliner>()
+                .AddMock<IObjectVariableTypesConverter>()
+                .AddMock<IInstanceMethodsToStaticConverter>()
+                .AddMock<IAutoPropertyInitializationFixer>()
+                .AddMock<IConstructorsToMethodsConverter>()
+                .AddMock<IConditionalExpressionsToIfElsesConverter>()
+                .AddMock<IConstantValuesSubstitutor>()
+                .AddMock<IOperatorsToMethodsConverter>()
+                .AddMock<IOperatorAssignmentsToSimpleAssignmentsConverter>()
+                .AddMock<ICustomPropertiesToMethodsConverter>()
+                .AddMock<IImmutableArraysToStandardArraysConverter>()
+                .AddMock<IDirectlyAccessedNewObjectVariablesCreator>()
+                .AddMock<IAppDataFolder>()
+                .AddMock<IEmbeddedAssignmentExpressionsExpander>()
+                .AddMock<IUnaryIncrementsDecrementsConverter>()
+                .AddMock<ITransformationContextCacheService>()
+                .AddMock<IMethodInliner>()
+                .AddMock<IObjectInitializerExpander>()
+                .AddMock<ITaskBodyInvocationInstanceCountsSetter>()
+                .AddMock<ISimpleMemoryUsageVerifier>()
+                .AddMock<IBinaryAndUnaryOperatorExpressionsCastAdjuster>()
+                .AddMock<IDecompilationErrorsFixer>()
+                .AddMock<IFSharpIdiosyncrasiesAdjuster>()
+                .AddMock<IKnownTypeLookupTableFactory>()
+                .AddMock<IUnneededReferenceVariablesRemover>();
 
-            _scope.ServiceProvider.GetRequiredService<IDeviceDriver>();
-            _scope.ServiceProvider.GetRequiredService<IDeviceDriverSelector>();
+            _provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
         [TearDown]
         public virtual void TearDown()
         {
-            _scope.Dispose();
             _provider.Dispose();
         }
 
