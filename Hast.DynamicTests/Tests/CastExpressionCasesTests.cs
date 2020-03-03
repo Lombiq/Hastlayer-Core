@@ -11,6 +11,7 @@ namespace Hast.DynamicTests.Tests
     [TestFixture]
     public class CastExpressionCasesTests
     {
+        [Ignore("Not ready.")]
         [Test]
         public Task AllNumberCastingVariations() =>
             TestExecutor.ExecuteSelectedTest<CastExpressionCases>(

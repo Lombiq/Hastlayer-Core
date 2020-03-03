@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
+    [Ignore("Not ready.")]
     [TestFixture]
     public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
     {
