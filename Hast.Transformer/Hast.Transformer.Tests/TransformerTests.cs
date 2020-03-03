@@ -8,6 +8,7 @@ using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
+using Hast.Transformer.Services;
 using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,7 +43,6 @@ namespace Hast.Transformer.Vhdl.Tests
             services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
-
             _transformingEngineMock
                 .Setup(engine => engine.Transform(It.IsAny<ITransformationContext>()))
                 .Returns<ITransformationContext>(context =>
@@ -55,8 +55,8 @@ namespace Hast.Transformer.Vhdl.Tests
                 .Verifiable();
             _transformingEngineMock.ForceMock(services);
 
-            services.RemoveImplementations<ITransformingEngine>();
-            services.AddSingleton(_transformingEngineMock.Object);
+            new Mock<IInvocationInstanceCountAdjuster>().ForceMock(services);
+            
 
 #if DEBUG
             var typeNames = new List<string>(services.Select(x => $"{x.ServiceType.FullName}:{x.ImplementationType?.FullName ?? "NULL"}").OrderBy(x => x));
