@@ -24,6 +24,15 @@ namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
+        // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
+        // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
+        private const bool SaveSyntaxTree = 
+#if DEBUG
+        true;
+#else
+        false;
+#endif
+
         private readonly IEnumerable<EventHandler<ITransformationContext>> _eventHandlers;
         private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
@@ -129,6 +138,19 @@ namespace Hast.Transformer
             _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
         }
 
+
+        private void WriteSyntaxTree(SyntaxTree syntaxTree, string fileName)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.WriteAllText(fileName, syntaxTree.ToString());
+                    return;
+                }
+                catch (IOException) { }
+            }
+        }
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
@@ -302,13 +324,8 @@ namespace Hast.Transformer
                 syntaxTree.Members.AddRange(decompilerTasks[i].Result.Members.Select(member => member.Detach()));
             }
 
-            // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
-            // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
-            var saveSyntaxTree = true;
-            if (saveSyntaxTree)
-            {
-                File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
-            }
+
+            if (SaveSyntaxTree) WriteSyntaxTree(syntaxTree, "UnprocessedSyntaxTree.cs");
 
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
@@ -356,10 +373,7 @@ namespace Hast.Transformer
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            if (saveSyntaxTree)
-            {
-                File.WriteAllText("ProcessedSyntaxTree.cs", syntaxTree.ToString());
-            }
+            if (SaveSyntaxTree) WriteSyntaxTree(syntaxTree, "ProcessedSyntaxTree.cs");
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
