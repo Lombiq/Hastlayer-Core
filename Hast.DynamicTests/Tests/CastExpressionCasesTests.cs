@@ -1,18 +1,12 @@
 ﻿using Hast.TestInputs.Dynamic;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.DynamicTests.Tests
 {
-    [TestFixture]
     public class CastExpressionCasesTests
     {
-        [Ignore("Not ready.")]
-        [Test]
+        [Fact(Skip = "Not ready.")]
         public Task AllNumberCastingVariations() =>
             TestExecutor.ExecuteSelectedTest<CastExpressionCases>(
                 c => c.AllNumberCastingVariations(null),

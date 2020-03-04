@@ -7,15 +7,14 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Testing;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
@@ -29,7 +28,7 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task BasicVhdlStructureIsCorrect()
         {
             await _host.RunAsync<ITransformer>(async transformer =>

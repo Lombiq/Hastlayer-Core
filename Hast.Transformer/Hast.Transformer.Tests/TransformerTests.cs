@@ -14,7 +14,7 @@ using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using Moq.AutoMock;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,6 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class TransformerTests
     {
         private ITransformationContext _producedContext;
@@ -31,8 +30,8 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
-        [SetUp]
-        public virtual void Init()
+        
+        public TransformerTests()
         {
             _mocker = new AutoMocker();
 
@@ -62,7 +61,7 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        [Test]
+        [Fact]
         public async Task TransformEngineCallReceivesProperBasicContext()
         {
             var configuration = CreateConfig();
@@ -80,7 +79,7 @@ namespace Hast.Transformer.Vhdl.Tests
             _producedContext.TypeDeclarationLookupTable.ShouldNotBeNull();
         }
 
-        [Test]
+        [Fact]
         public async Task DifferentConfigurationsResultInDifferentIds()
         {
             var config = CreateConfig();
@@ -118,7 +117,7 @@ namespace Hast.Transformer.Vhdl.Tests
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
-        [Test]
+        [Fact]
         public async Task UnusedDeclarationsArentInTheSyntaxTree()
         {
             var transformer = GetTransformer();
@@ -132,7 +131,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 "Unreferenced members of classes weren't removed from the syntax tree.");
         }
 
-        [Test]
+        [Fact]
         public async Task IncludedMembersAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
@@ -159,7 +158,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 .ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public async Task IncludedMembersPrefixedAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();

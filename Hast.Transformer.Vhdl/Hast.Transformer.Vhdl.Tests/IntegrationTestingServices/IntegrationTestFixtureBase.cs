@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
-    public abstract class IntegrationTestFixtureBase
+    public abstract class IntegrationTestFixtureBase : IDisposable
     {
         protected List<Assembly> _requiredExtension = new List<Assembly>();
         //protected Action<ContainerBuilder> _shellRegistrationBuilder;
@@ -17,8 +17,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
         protected IHastlayer _host;
 
 
-        [OneTimeSetUp]
-        public async Task TestFixtureSetUp()
+        public IntegrationTestFixtureBase()
         {
             /*
             var settings = new AppHostSettings
@@ -57,11 +56,10 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             */
 
             _hostConfiguration.Extensions = _requiredExtension;
-            _host = await Hastlayer.Create(_hostConfiguration);
+            _host = Hastlayer.Create(_hostConfiguration).Result;
         }
 
-        [OneTimeTearDown]
-        public void TestFixtureTearDown()
+        public void Dispose()
         {
             _host.Dispose();
         }

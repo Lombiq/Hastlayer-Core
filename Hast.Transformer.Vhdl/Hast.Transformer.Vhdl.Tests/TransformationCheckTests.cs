@@ -2,7 +2,7 @@
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using System;
 using System.Linq.Expressions;
@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class TransformationCheckTests : VhdlTransformingTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task InvalidExternalVariableAssignmentIsPrevented()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
@@ -24,7 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidArrayUsageIsPrevented()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
@@ -55,7 +54,7 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidHardwareEntryPointsArePrevented()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
@@ -66,7 +65,7 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidLanguageConstructsArePrevented()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
@@ -81,7 +80,7 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidInvalidObjectUsingCasesArePrevented()
         {
             await _host.RunAsync<ITransformer>(async transformer =>

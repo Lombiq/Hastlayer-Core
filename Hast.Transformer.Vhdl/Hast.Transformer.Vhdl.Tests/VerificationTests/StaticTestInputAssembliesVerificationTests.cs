@@ -4,15 +4,14 @@ using Hast.TestInputs.ClassStructure2;
 using Hast.TestInputs.Static;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
-using NUnit.Framework;
+using Xunit;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
-    [TestFixture]
     public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task ClassStructureAssembliesMatchApproved()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
@@ -29,7 +28,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task StaticTestInputAssemblyMatchesApproved()
         {
             await _host.RunAsync<ITransformer>(async transformer =>
