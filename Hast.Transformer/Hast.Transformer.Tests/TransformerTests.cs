@@ -9,12 +9,11 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
-using Hast.Transformer.Services.ConstantValuesSubstitution;
 using Hast.Xilinx;
 using Hast.Xilinx.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using Moq.AutoMock;
 using NUnit.Framework;
 using Shouldly;
 using System;
@@ -28,38 +27,26 @@ namespace Hast.Transformer.Vhdl.Tests
     public class TransformerTests
     {
         private ITransformationContext _producedContext;
-        private Mock<ITransformingEngine> _transformingEngineMock;
-        private ServiceProvider _provider;
+        private AutoMocker _mocker;
 
-        private ITransformer GetTransformer()
-        {
-            using (var scope = _provider.CreateScope())
-            {
-                return scope.ServiceProvider.GetRequiredService<ITransformer>();
-            }
-        }
+        private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
         [SetUp]
         public virtual void Init()
         {
-            var services = new ServiceCollection();
-            var configuration = new HastlayerConfiguration();
+            _mocker = new AutoMocker();
 
-            services.AddExternalHastlayerDependencies();
-            services.AddSingleton<IHastlayerConfiguration>(configuration);
-            services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
+            _mocker.Use<IJsonConverter>(_mocker.CreateInstance<DefaultJsonConverter>());
+            _mocker.Use<IMemberSuitabilityChecker>(_mocker.CreateInstance<MemberSuitabilityChecker>());
+            _mocker.Use<ITypeDeclarationLookupTableFactory>(_mocker.CreateInstance<TypeDeclarationLookupTableFactory>());
+            _mocker.Use<ISyntaxTreeCleaner>(_mocker.CreateInstance<SyntaxTreeCleaner>());
+            _mocker.Use<IMemberIdentifiersFixer>(_mocker.CreateInstance<MemberIdentifiersFixer>());
 
-            services.AddScoped<IJsonConverter, DefaultJsonConverter>();
-            services.AddScoped<ISyntaxTreeCleaner, SyntaxTreeCleaner>();
-            services.AddScoped<ITypeDeclarationLookupTableFactory, TypeDeclarationLookupTableFactory>();
-            services.AddScoped<IMemberSuitabilityChecker, MemberSuitabilityChecker>();
-            services.AddScoped<IDeviceDriverSelector, DeviceDriverSelector>();
-            services.AddScoped<IDeviceDriver, Nexys4DdrDriver>();
-            services.AddScoped<IMemberIdentifiersFixer, MemberIdentifiersFixer>();
-            services.AddScoped<ITransformer, DefaultTransformer>();
+            _mocker.Use<IEnumerable<EventHandler<ITransformationContext>>>(Array.Empty<EventHandler<ITransformationContext>>());
+            _mocker.Use<IDeviceDriverSelector>(new DeviceDriverSelector(new[] { _mocker.CreateInstance<Nexys4DdrDriver>() }));
 
-            _transformingEngineMock = new Mock<ITransformingEngine>();
-            _transformingEngineMock
+            _mocker
+                .GetMock<ITransformingEngine>()
                 .Setup(engine => engine.Transform(It.IsAny<ITransformationContext>()))
                 .Returns<ITransformationContext>(context =>
                     {
@@ -69,46 +56,11 @@ namespace Hast.Transformer.Vhdl.Tests
                         return Task.FromResult<IHardwareDescription>(null);
                     })
                 .Verifiable();
-            _transformingEngineMock.ForceMock(services);
-
-
-            // There is no automocking so the dependencies have to be listed here.
-            services
-                .AddMock<ITimingReportParser>()
-                .AddMock<IInvocationInstanceCountAdjuster>()
-                .AddMock<IGeneratedTaskArraysInliner>()
-                .AddMock<IObjectVariableTypesConverter>()
-                .AddMock<IInstanceMethodsToStaticConverter>()
-                .AddMock<IAutoPropertyInitializationFixer>()
-                .AddMock<IConstructorsToMethodsConverter>()
-                .AddMock<IConditionalExpressionsToIfElsesConverter>()
-                .AddMock<IConstantValuesSubstitutor>()
-                .AddMock<IOperatorsToMethodsConverter>()
-                .AddMock<IOperatorAssignmentsToSimpleAssignmentsConverter>()
-                .AddMock<ICustomPropertiesToMethodsConverter>()
-                .AddMock<IImmutableArraysToStandardArraysConverter>()
-                .AddMock<IDirectlyAccessedNewObjectVariablesCreator>()
-                .AddMock<IAppDataFolder>()
-                .AddMock<IEmbeddedAssignmentExpressionsExpander>()
-                .AddMock<IUnaryIncrementsDecrementsConverter>()
-                .AddMock<ITransformationContextCacheService>()
-                .AddMock<IMethodInliner>()
-                .AddMock<IObjectInitializerExpander>()
-                .AddMock<ITaskBodyInvocationInstanceCountsSetter>()
-                .AddMock<ISimpleMemoryUsageVerifier>()
-                .AddMock<IBinaryAndUnaryOperatorExpressionsCastAdjuster>()
-                .AddMock<IDecompilationErrorsFixer>()
-                .AddMock<IFSharpIdiosyncrasiesAdjuster>()
-                .AddMock<IKnownTypeLookupTableFactory>()
-                .AddMock<IUnneededReferenceVariablesRemover>();
-
-            _provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
         [TearDown]
         public virtual void TearDown()
         {
-            _provider.Dispose();
         }
 
 
@@ -120,7 +72,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
 
-            _transformingEngineMock.Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
+            _mocker
+                .GetMock<ITransformingEngine>()
+                .Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
 
             _producedContext.Id.ShouldNotBeNullOrEmpty();
             _producedContext.SyntaxTree.ShouldNotBeNull();
