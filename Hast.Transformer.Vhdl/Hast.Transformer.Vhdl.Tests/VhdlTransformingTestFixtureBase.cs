@@ -25,13 +25,14 @@ namespace Hast.Transformer.Vhdl.Tests
 
         protected VhdlTransformingTestFixtureBase()
         {
-            _requiredExtension.AddRange(new[]
-            {
-                typeof(DefaultTransformer).Assembly,
-                typeof(MemberIdTable).Assembly,
-                typeof(IDeviceDriverSelector).Assembly,
-                typeof(Nexys4DdrDriver).Assembly
-            });
+            _hostConfiguration.Extensions = _hostConfiguration.Extensions
+                .Union(new[]
+                    {
+                        typeof(DefaultTransformer).Assembly,
+                        typeof(MemberIdTable).Assembly,
+                        typeof(IDeviceDriverSelector).Assembly,
+                        typeof(Nexys4DdrDriver).Assembly
+                    });
 
 
             _hostConfiguration.OnServiceRegistration += (o, services) =>

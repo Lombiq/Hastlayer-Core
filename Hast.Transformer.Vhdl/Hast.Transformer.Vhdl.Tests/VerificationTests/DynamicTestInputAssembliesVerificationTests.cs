@@ -12,7 +12,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         [Fact]
         public async Task DynamicTestInputAssemblyMatchesApproved()
         {
-            await _host.RunAsync<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,

@@ -2,6 +2,7 @@
 using Hast.Catapult.Abstractions;
 using Xunit;
 using System.Threading.Tasks;
+using System.Linq;
 
 // Disable tests as they are currently not ready.
 using FactAttribute = System.Runtime.CompilerServices.CompilerGeneratedAttribute;
@@ -16,10 +17,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         public CatapultSamplesVerificationTests()
         {
-            _requiredExtension.AddRange(new[]
-            {
-                typeof(CatapultDriver).Assembly
-            });
+            _hostConfiguration.Extensions = _hostConfiguration.Extensions
+                .Union(new[] { typeof(CatapultDriver).Assembly });
         }
 
 

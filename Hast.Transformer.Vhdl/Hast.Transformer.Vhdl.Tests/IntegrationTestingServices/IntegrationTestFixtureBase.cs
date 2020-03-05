@@ -11,10 +11,10 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
     public abstract class IntegrationTestFixtureBase : IDisposable
     {
-        protected List<Assembly> _requiredExtension = new List<Assembly>();
-        //protected Action<ContainerBuilder> _shellRegistrationBuilder;
         protected IHastlayerConfiguration _hostConfiguration = HastlayerConfiguration.Default;
-        protected IHastlayer _host;
+
+        private Lazy<IHastlayer> _host;
+        protected IHastlayer Host => _host.Value;
 
 
         public IntegrationTestFixtureBase()
@@ -55,13 +55,13 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             
             */
 
-            _hostConfiguration.Extensions = _requiredExtension;
-            _host = Hastlayer.Create(_hostConfiguration).Result;
+            _hostConfiguration.Extensions = new List<Assembly>();
+            _host = new Lazy<IHastlayer>(() => Hastlayer.Create(_hostConfiguration).Result);
         }
 
         public void Dispose()
         {
-            _host.Dispose();
+            Host.Dispose();
         }
     }
 }
