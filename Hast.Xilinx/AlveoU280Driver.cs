@@ -646,6 +646,7 @@ div_by_4194304	unsigned64	unsigned64	sync	impl	0,388	-0,019
 div_by_4194304	signed32	signed32	sync	impl	2,150	-0,102
 div_by_4194304	signed64	signed64	sync	impl	2,492	-0,082
 dotnet_shift_left_by_23	unsigned64	unsigned64	sync	impl	0,514	-0,019
+dotnet_shift_left_by_23	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_23	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_23	signed64	signed64	sync	impl	0,752	-0,121
 dotnet_shift_left_by_23	unsigned32	unsigned32	sync	impl	0,382	-0,019

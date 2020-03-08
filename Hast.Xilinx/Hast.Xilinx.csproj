@@ -60,6 +60,9 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AwsF1Driver.cs" />
+    <Compile Include="AlveoU250Driver.cs" />
+    <Compile Include="AlveoU200Driver.cs" />
     <Compile Include="AlveoU280Driver.cs" />
     <Compile Include="Nexys4DdrDriver.cs" />
     <Compile Include="NexysA7Driver.cs" />
