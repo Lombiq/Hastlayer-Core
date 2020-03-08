@@ -14103,16 +14103,16 @@ begin
                         -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
                         -- 	uint num4;
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
                         -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	uint num5;
                         -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
                         -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
@@ -14133,16 +14133,16 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
                             -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	uint num5;
                             -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
                             -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
@@ -14158,15 +14158,15 @@ begin
                             -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
+                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\)), 32))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\);
                             -- The following section was transformed from the .NET statement below:
-                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
+                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_5\;
                         else 
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_4\;
@@ -14185,9 +14185,9 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
@@ -14205,9 +14205,9 @@ begin
                         -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.8776
                     when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_6\ => 
@@ -14215,15 +14215,15 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
@@ -14429,16 +14429,16 @@ begin
                         -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
                         -- 	uint num4;
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
                         -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	uint num5;
                         -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
                         -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
@@ -14459,16 +14459,16 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
                             -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	uint num5;
                             -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
                             -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
@@ -14484,15 +14484,15 @@ begin
                             -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
+                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\)), 32))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\);
                             -- The following section was transformed from the .NET statement below:
-                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
+                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_5\;
                         else 
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_4\;
@@ -14511,9 +14511,9 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
@@ -14531,9 +14531,9 @@ begin
                         -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.8776
                     when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_6\ => 
@@ -14541,15 +14541,15 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
@@ -14755,16 +14755,16 @@ begin
                         -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
                         -- 	uint num4;
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
                         -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	uint num5;
                         -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                        -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
                         -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
@@ -14785,16 +14785,16 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
                             -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	uint num5;
                             -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
-                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
+                            -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
                             -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
@@ -14810,15 +14810,15 @@ begin
                             -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
+                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\)), 32))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\);
                             -- The following section was transformed from the .NET statement below:
-                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
+                            -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_5\;
                         else 
                             \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_4\;
@@ -14837,9 +14837,9 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
@@ -14857,9 +14857,9 @@ begin
                         -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 7)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.8776
                     when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_6\ => 
@@ -14867,15 +14867,15 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State << 9)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)(randomXorshiftLfsr.State >> 13)));
+                        -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\, to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
