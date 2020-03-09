@@ -1985,7 +1985,8 @@ architecture Imp of Hast_IP is
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\);
+        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\, 
+        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\);
     -- Signals:
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -2007,6 +2008,8 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().this.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).this.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).increaseBy.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).originalNumber.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2031,6 +2034,9 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().this.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Finished.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Finished.0\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).this.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).increaseBy.parameter.In.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).originalNumber.parameter.In.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2167,6 +2173,28 @@ architecture Imp of Hast_IP is
     Signal \NumberContainer::set_NumberPlusFive(UInt32).0.this.parameter.In\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \NumberContainer::set_NumberPlusFive(UInt32).0.value.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32).0 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer).0 declarations start
+    -- State machine states:
+    type \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._States\ is (
+        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_0\, 
+        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_1\, 
+        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_2\, 
+        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_3\);
+    -- Signals:
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Finished\: boolean := false;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer.parameter.Out\: \Hast.Samples.SampleAssembly.NumberContainer\;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\: boolean := false;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Started\: boolean := false;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer.parameter.In\: \Hast.Samples.SampleAssembly.NumberContainer\;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\: boolean := false;
+    Signal \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer).0 declarations end
 
 
     -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -15256,20 +15284,21 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.increaseBy\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.originalNumber\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 0);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\: \Hast.Samples.SampleAssembly.NumberContainer\;
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\: boolean := false;
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -15288,6 +15317,7 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ <= false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).increaseBy.parameter.Out.0\ <= to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).originalNumber.parameter.Out.0\ <= to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= false;
@@ -15301,18 +15331,19 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.1\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\ := to_unsigned(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.increaseBy\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.originalNumber\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\ := to_unsigned(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := to_unsigned(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.return.8\ := to_unsigned(0, 32);
             else 
                 case \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ is 
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\ => 
@@ -15501,6 +15532,21 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
+                            -- NumberContainerExtensions.IncreaseNumberBy20 (array [2]);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer)
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32)));
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= true;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer)
+                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Finished.0\) then 
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
                             -- uint increaseBy;
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -15518,10 +15564,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.increaseBy\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).originalNumber.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.originalNumber\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberByParameterTimes10(System.UInt32&,System.UInt32&)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= false;
@@ -15536,14 +15582,14 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- NumberContainer[] array3;
@@ -15573,16 +15619,16 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.In.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (!numberContainer.WasIncreased) {
                             -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
@@ -15591,19 +15637,19 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := not(\ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\.
-                            --     * Execution after either branch will continue in the following state: \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                            --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\.
+                            --     * Execution after either branch will continue in the following state: \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
 
                             if (\ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1002
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
-                        -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
+                        -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- array3 [0] = numberContainer;
                         -- 
@@ -15622,10 +15668,10 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
-                        -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
+                        -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
@@ -15638,22 +15684,22 @@ begin
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
-                            -- Going to the state after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
-                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
+                            -- Going to the state after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\) then 
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\ => 
-                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
+                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
                         -- The while loop's condition:
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\) then 
@@ -15667,59 +15713,59 @@ begin
                             -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
                         else 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
-                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
+                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (0, this.SumNumberContainers (array));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberContainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).numberContainers.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\));
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))).\Number\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\)) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = num2 + 1;
                             -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ + to_signed(1, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\;
-                            -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
-                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
+                            -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ if the loop wasn't exited with a state change.
+                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\) then 
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberContainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.8\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).numberContainers.parameter.In.0\;
                             -- Begin SimpleMemory write.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\);
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.8\);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -16195,6 +16241,70 @@ begin
         end if;
     end process;
     -- System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32).0 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer).0 state machine start
+    \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._StateMachine\: process (\Clock\) 
+        Variable \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\: \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._States\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_0\;
+        Variable \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer\: \Hast.Samples.SampleAssembly.NumberContainer\;
+        Variable \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Finished\ <= false;
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return\ <= to_unsigned(0, 32);
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(0, 32);
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_0\;
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return.0\ := to_unsigned(0, 32);
+            else 
+                case \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\ is 
+                    when \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Started\ = true) then 
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Started\ = true) then 
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Finished\ <= true;
+                        else 
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Finished\ <= false;
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer.parameter.Out\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_2\ => 
+                        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 20u);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
+                        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer\;
+                        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(20, 32);
+                        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
+                        \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
+                        if (\NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return.0\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return.0\;
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State\ := \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer).0 state machine end
 
 
     -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -20607,6 +20717,8 @@ begin
         Variable \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainer::IncreaseNumberBy10().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -20617,9 +20729,12 @@ begin
                 \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainer::IncreaseNumberBy10().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningState.0\ := WaitingForStarted;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= false;
                 \NumberContainer::IncreaseNumberBy10().0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= false;
                 \NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= false;
+                \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
@@ -20714,6 +20829,37 @@ begin
                         end if;
                 end case;
 
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer).0
+                case \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\) then 
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningIndex.0\ := 0;
+                            \NumberContainer::IncreaseNumber(UInt32).0._Started\ <= true;
+                            \NumberContainer::IncreaseNumber(UInt32).0.this.parameter.In\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\;
+                            \NumberContainer::IncreaseNumber(UInt32).0.increaseBy.parameter.In\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\NumberContainer::IncreaseNumber(UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningState.0\ := AfterFinished;
+                                    \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= true;
+                                    \NumberContainer::IncreaseNumber(UInt32).0._Started\ <= false;
+                                    \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).return.0\ <= \NumberContainer::IncreaseNumber(UInt32).0.return\;
+                                    \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\ <= \NumberContainer::IncreaseNumber(UInt32).0.this.parameter.Out\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().NumberContainer::IncreaseNumber(UInt32).NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.runningState.0\ := WaitingForStarted;
+                            \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\ <= false;
+                        end if;
+                end case;
+
             end if;
         end if;
     end process;
@@ -20728,6 +20874,16 @@ begin
     \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().return.0\ <= \NumberContainer::IncreaseNumberBy10().0.return\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().this.parameter.In.0\ <= \NumberContainer::IncreaseNumberBy10().0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberBy10() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\;
+    \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.Out.0\;
+    \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Finished.0\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0._Finished\;
+    \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).return.0\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.return\;
+    \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.In.0\ <= \NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).0.numberContainer.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberByParameterTimes10(System.UInt32&,System.UInt32&) start
