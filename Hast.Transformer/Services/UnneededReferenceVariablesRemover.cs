@@ -23,8 +23,8 @@ namespace Hast.Transformer.Services
                 var leftType = left.GetActualType();
 
                 // Let's check whether the assignment is for a reference type and whether it's between two variables or
-                // a variable and a field/property (properties at these stage are only auto-properties, custom 
-                // properties are already converted to methods).
+                // a variable and a field/property/array item access (properties at these stage are only
+                // auto-properties, custom properties are already converted to methods).
                 if (assignmentExpression.IsPotentialAliasAssignment())
                 {
                     var parentEntity = assignmentExpression.FindFirstParentEntityDeclaration();

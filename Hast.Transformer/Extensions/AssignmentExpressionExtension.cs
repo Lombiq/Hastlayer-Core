@@ -23,7 +23,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 left is IdentifierExpression &&
                 (right is IdentifierExpression ||
                     right.Is<MemberReferenceExpression>(reference => reference.IsFieldReference()) ||
-                    right.Is<MemberReferenceExpression>(reference => reference.IsPropertyReference()));
+                    right.Is<MemberReferenceExpression>(reference => reference.IsPropertyReference()) ||
+                    right.Is<IndexerExpression>(indexer => indexer.Target.GetActualType().IsArray()));
         }
     }
 }
