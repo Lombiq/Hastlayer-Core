@@ -199,6 +199,8 @@ namespace Hast.Transformer
                     DoWhileStatement = false,
                     Dynamic = false,
                     ExpressionTrees = false,
+                    // Instead of extension methods there are simple static methods.
+                    ExtensionMethods = false,
                     ForStatement = false,
                     IntroduceReadonlyAndInModifiers = true,
                     IntroduceRefModifiersOnStructs = true,

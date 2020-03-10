@@ -3074,9 +3074,9 @@ begin
                     when \BitMask::.ctor(UInt32,UInt16).0._State_4\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32,UInt16).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = (ushort)((size >> 5) + (conditional4aa830d82ca06ab273c2320441b575ec863400b6a1b72cd9ca47763494e1e224));
+                        -- @this.SegmentCount = (ushort)(((int)(size) >> 5) + (conditional4aa830d82ca06ab273c2320441b575ec863400b6a1b72cd9ca47763494e1e224));
                         -- 
-                        \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ := signed(SmartResize(shift_right(\BitMask::.ctor(UInt32,UInt16).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ := shift_right(signed(SmartResize((\BitMask::.ctor(UInt32,UInt16).0.size\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.5\ := SmartResize(unsigned((\BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.4\) + (\BitMask::.ctor(UInt32,UInt16).0.conditional4aa830d82ca06ab273c2320441b575ec863400b6a1b72cd9ca47763494e1e224\)), 16);
                         \BitMask::.ctor(UInt32,UInt16).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
@@ -3150,7 +3150,7 @@ begin
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::.ctor(UInt32[],UInt16).0.conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::.ctor(UInt32[],UInt16).0.conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.5\: boolean := false;
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -3172,7 +3172,7 @@ begin
                 \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.4\ := false;
-                \BitMask::.ctor(UInt32[],UInt16).0.conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76\ := to_unsigned(0, 16);
+                \BitMask::.ctor(UInt32[],UInt16).0.conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2\ := to_unsigned(0, 16);
                 \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.5\ := false;
                 \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := to_signed(0, 32);
                 \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.7\ := to_unsigned(0, 16);
@@ -3310,13 +3310,13 @@ begin
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_7\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76;
+                        -- ushort conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (((int)(size) > 32)) {
-                        -- 	conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76 = ((ushort)((size >> 5) + (conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1)));
+                        -- 	conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2 = ((ushort)(((int)(size) >> 5) + (conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1)));
                         -- } else {
-                        -- 	conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76 = 1;
+                        -- 	conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2 = 1;
                         -- }
                         -- 
                         \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.5\ := signed(SmartResize((\BitMask::.ctor(UInt32[],UInt16).0.size\), 32)) > to_signed(32, 32);
@@ -3367,9 +3367,9 @@ begin
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_10\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = (conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76);
+                        -- @this.SegmentCount = (conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2);
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt32[],UInt16).0.conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76\);
+                        \BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt32[],UInt16).0.conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2\);
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = segments;
                         -- 
@@ -3380,15 +3380,15 @@ begin
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76 = ((ushort)((size >> 5) + (conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1)));
+                        -- 	conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2 = ((ushort)(((int)(size) >> 5) + (conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76 = ((ushort)((size >> 5) + (conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1)));
+                        -- conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2 = ((ushort)(((int)(size) >> 5) + (conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1)));
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := signed(SmartResize(shift_right(\BitMask::.ctor(UInt32[],UInt16).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := shift_right(signed(SmartResize((\BitMask::.ctor(UInt32[],UInt16).0.size\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.7\ := SmartResize(unsigned((\BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\) + (\BitMask::.ctor(UInt32[],UInt16).0.conditionald24d41cc2c41ebb08d47eeea76eef5f213346c5119e72f8c8d301bcfc422afb1\)), 16);
-                        \BitMask::.ctor(UInt32[],UInt16).0.conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76\ := ((\BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.7\));
+                        \BitMask::.ctor(UInt32[],UInt16).0.conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2\ := ((\BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.7\));
                         -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         if (\BitMask::.ctor(UInt32[],UInt16).0._State\ = \BitMask::.ctor(UInt32[],UInt16).0._State_11\) then 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_10\;
@@ -3398,13 +3398,13 @@ begin
                         -- False branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76 = 1;
+                        -- 	conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2 = 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76 = 1;
+                        -- conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2 = 1;
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.conditional8e248e1ff4748e3b527ed49ed80e3336ca27a862dc136989b0a7ef4aa05e9f76\ := to_unsigned(1, 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.conditional52348da1e36875eb536653162a55e58a5ecd0b320b464f7e3f2a310e2da5d8b2\ := to_unsigned(1, 16);
                         -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
                         if (\BitMask::.ctor(UInt32[],UInt16).0._State\ = \BitMask::.ctor(UInt32[],UInt16).0._State_12\) then 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_10\;
@@ -3523,9 +3523,9 @@ begin
                     when \BitMask::.ctor(UInt16,Boolean).0._State_4\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = (ushort)((size >> 5) + (conditional12ab3a392e2722209f37e19e27af37558ca1da7961b242e2943b2f6d8d6b195a));
+                        -- @this.SegmentCount = (ushort)(((int)(size) >> 5) + (conditional12ab3a392e2722209f37e19e27af37558ca1da7961b242e2943b2f6d8d6b195a));
                         -- 
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\ := signed(SmartResize(shift_right(\BitMask::.ctor(UInt16,Boolean).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\ := shift_right(signed(SmartResize((\BitMask::.ctor(UInt16,Boolean).0.size\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.5\ := SmartResize(unsigned((\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.4\) + (\BitMask::.ctor(UInt16,Boolean).0.conditional12ab3a392e2722209f37e19e27af37558ca1da7961b242e2943b2f6d8d6b195a\)), 16);
                         \BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
@@ -3904,10 +3904,10 @@ begin
                         -- int index2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- index2 = index >> 5;
+                        -- index2 = (int)((int)(index) >> 5);
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := signed(SmartResize(shift_right(\BitMask::SetOne(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::SetOne(UInt16).0.index2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.5\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := shift_right(signed(SmartResize((\BitMask::SetOne(UInt16).0.index\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
+                        \BitMask::SetOne(UInt16).0.index2\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- uint remainderOperand90f098ea58789c2d25dc5242eb7600b50f61e2bb7e01985b713cfc87863fc30e;
                         -- 
@@ -4211,10 +4211,10 @@ begin
                         -- int index2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- index2 = index >> 5;
+                        -- index2 = (int)((int)(index) >> 5);
                         -- 
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := signed(SmartResize(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
-                        \BitMask::SetZero(UInt16).0.index2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.5\;
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.5\ := shift_right(signed(SmartResize((\BitMask::SetZero(UInt16).0.index\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
+                        \BitMask::SetZero(UInt16).0.index2\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- uint remainderOperandb934671d9adc4356da14021168dfa0c30025f183132d14efdea3df9e26802b25;
                         -- 
@@ -5550,9 +5550,9 @@ begin
                         -- 		ref uint reference = ref array [num];
                         -- 		reference = (uint)((int)reference + (1 << (int)num2));
                         -- 	}
-                        -- 	flag = (b >> 1 == 1);
+                        -- 	flag = ((int)(b) >> 1 == 1);
                         -- 	num2 = (ushort)((int)(num2) + 1);
-                        -- 	if (num2 >> 5 == 1) {
+                        -- 	if ((int)(num2) >> 5 == 1) {
                         -- 		num2 = 0;
                         -- 		num = (ushort)((int)(num) + 1);
                         -- 	}
@@ -5635,9 +5635,9 @@ begin
                             -- 		ref uint reference = ref array [num];
                             -- 		reference = (uint)((int)reference + (1 << (int)num2));
                             -- 	}
-                            -- 	flag = (b >> 1 == 1);
+                            -- 	flag = ((int)(b) >> 1 == 1);
                             -- 	num2 = (ushort)((int)(num2) + 1);
-                            -- 	if (num2 >> 5 == 1) {
+                            -- 	if ((int)(num2) >> 5 == 1) {
                             -- 		num2 = 0;
                             -- 		num = (ushort)((int)(num) + 1);
                             -- 	}
@@ -5937,9 +5937,9 @@ begin
                     when \BitMask BitMask::op_Addition(BitMask,BitMask).0._State_24\ => 
                         -- State after the if-else which was started in state \BitMask BitMask::op_Addition(BitMask,BitMask).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (b >> 1 == 1);
+                        -- flag = ((int)(b) >> 1 == 1);
                         -- 
-                        \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := signed(SmartResize(shift_right(\BitMask BitMask::op_Addition(BitMask,BitMask).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
+                        \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := shift_right(signed(SmartResize((\BitMask BitMask::op_Addition(BitMask,BitMask).0.b\), 32)), to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                         \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.26\ := \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ = to_signed(1, 32);
                         \BitMask BitMask::op_Addition(BitMask,BitMask).0.flag\ := (\BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.26\);
                         -- The following section was transformed from the .NET statement below:
@@ -5948,13 +5948,13 @@ begin
                         \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.27\ := SmartResize(unsigned(signed(SmartResize((\BitMask BitMask::op_Addition(BitMask,BitMask).0.num2\), 32)) + to_signed(1, 32)), 16);
                         \BitMask BitMask::op_Addition(BitMask,BitMask).0.num2\ := (\BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.27\);
                         -- The following section was transformed from the .NET statement below:
-                        -- if (num2 >> 5 == 1) {
+                        -- if ((int)(num2) >> 5 == 1) {
                         -- 	num2 = 0;
                         -- 	num = (ushort)((int)(num) + 1);
                         -- }
                         -- 
                         \BitMask BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask BitMask::op_Addition(BitMask,BitMask).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8527
+                        -- Clock cycles needed to complete this state (approximation): 0.8515
                     when \BitMask BitMask::op_Addition(BitMask,BitMask).0._State_25\ => 
                         -- True branch of the if-else started in state \BitMask BitMask::op_Addition(BitMask,BitMask).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
@@ -5979,7 +5979,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8507
                     when \BitMask BitMask::op_Addition(BitMask,BitMask).0._State_26\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.28\ := signed(SmartResize(shift_right(\BitMask BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.28\ := shift_right(signed(SmartResize((\BitMask BitMask::op_Addition(BitMask,BitMask).0.num2\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.29\ := \BitMask BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.28\ = to_signed(1, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -6317,9 +6317,9 @@ begin
                         -- 		ref uint reference = ref array [num];
                         -- 		reference = (uint)((int)reference + (1 << (int)num2));
                         -- 	}
-                        -- 	flag = (b >> 1 == 0);
+                        -- 	flag = ((int)(b) >> 1 == 0);
                         -- 	num2 = (ushort)((int)(num2) + 1);
-                        -- 	if (num2 >> 5 == 1) {
+                        -- 	if ((int)(num2) >> 5 == 1) {
                         -- 		num2 = 0;
                         -- 		num = (ushort)((int)(num) + 1);
                         -- 	}
@@ -6402,9 +6402,9 @@ begin
                             -- 		ref uint reference = ref array [num];
                             -- 		reference = (uint)((int)reference + (1 << (int)num2));
                             -- 	}
-                            -- 	flag = (b >> 1 == 0);
+                            -- 	flag = ((int)(b) >> 1 == 0);
                             -- 	num2 = (ushort)((int)(num2) + 1);
-                            -- 	if (num2 >> 5 == 1) {
+                            -- 	if ((int)(num2) >> 5 == 1) {
                             -- 		num2 = 0;
                             -- 		num = (ushort)((int)(num) + 1);
                             -- 	}
@@ -6705,9 +6705,9 @@ begin
                     when \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State_24\ => 
                         -- State after the if-else which was started in state \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (b >> 1 == 0);
+                        -- flag = ((int)(b) >> 1 == 0);
                         -- 
-                        \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := signed(SmartResize(shift_right(\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
+                        \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := shift_right(signed(SmartResize((\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.b\), 32)), to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                         \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.27\ := \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ = to_signed(0, 32);
                         \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.flag\ := (\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.27\);
                         -- The following section was transformed from the .NET statement below:
@@ -6716,13 +6716,13 @@ begin
                         \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.28\ := SmartResize(unsigned(signed(SmartResize((\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.num2\), 32)) + to_signed(1, 32)), 16);
                         \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := (\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.28\);
                         -- The following section was transformed from the .NET statement below:
-                        -- if (num2 >> 5 == 1) {
+                        -- if ((int)(num2) >> 5 == 1) {
                         -- 	num2 = 0;
                         -- 	num = (ushort)((int)(num) + 1);
                         -- }
                         -- 
                         \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8527
+                        -- Clock cycles needed to complete this state (approximation): 0.8515
                     when \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State_25\ => 
                         -- True branch of the if-else started in state \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
@@ -6747,7 +6747,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8507
                     when \BitMask BitMask::op_Subtraction(BitMask,BitMask).0._State_26\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.29\ := signed(SmartResize(shift_right(\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))), 32));
+                        \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.29\ := shift_right(signed(SmartResize((\BitMask BitMask::op_Subtraction(BitMask,BitMask).0.num2\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.30\ := \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.29\ = to_signed(1, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
