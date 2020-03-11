@@ -6,6 +6,6 @@
         /// Configuration key for the Azure Blob Storage connection string where jobs for the Worker are saved and where
         /// the Worker uploads results.
         /// </summary>
-        public static string StorageConnectionStringKey = "Hast.Remote.Worker.Daemon.StorageConnectionString";
+        public const string StorageConnectionStringKey = "Hast.Remote.Worker.Daemon.StorageConnectionString";
     }
 }

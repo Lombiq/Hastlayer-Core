@@ -20,7 +20,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     // structure, not to have one giant TransformInvocationExpression method.
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
-        private static IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
+        private static readonly IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
             .GetMethods()
             .Where(method => method.Name == nameof(Array.Copy) && method.GetParameters().Count() == 3)
             .Select(method => method.GetFullName());

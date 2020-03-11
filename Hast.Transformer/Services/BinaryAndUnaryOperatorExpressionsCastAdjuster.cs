@@ -22,7 +22,7 @@ namespace Hast.Transformer.Services
             // (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
             // mentions that "When operands are of different integral types, their values are converted to the closest
             // containing integral type."
-            private static BinaryOperatorType[] _binaryOperatorsWithNumericPromotions = new[]
+            private static readonly BinaryOperatorType[] _binaryOperatorsWithNumericPromotions = new[]
             {
                 BinaryOperatorType.Add,
                 BinaryOperatorType.Subtract,
@@ -42,7 +42,7 @@ namespace Hast.Transformer.Services
                 BinaryOperatorType.ShiftRight
             };
 
-            private static BinaryOperatorType[] _binaryOperatorsProducingNumericResults = new[]
+            private static readonly BinaryOperatorType[] _binaryOperatorsProducingNumericResults = new[]
             {
                 BinaryOperatorType.Add,
                 BinaryOperatorType.Subtract,
@@ -56,7 +56,7 @@ namespace Hast.Transformer.Services
                 BinaryOperatorType.ShiftRight
             };
 
-            private static string[] _numericTypes = new[]
+            private static readonly string[] _numericTypes = new[]
             {
                 typeof(byte).FullName,
                 typeof(sbyte).FullName,
@@ -70,7 +70,7 @@ namespace Hast.Transformer.Services
 
             // Those types that have arithmetic, relational and bitwise operations defined for them, see: 
             // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#arithmetic-operators
-            private static string[] _numericTypesSupportingNumericPromotionOperations = new[]
+            private static readonly string[] _numericTypesSupportingNumericPromotionOperations = new[]
             {
                 typeof(int).FullName,
                 typeof(uint).FullName,
@@ -78,14 +78,14 @@ namespace Hast.Transformer.Services
                 typeof(ulong).FullName
             };
 
-            private static UnaryOperatorType[] _unaryOperatorsWithNumericPromotions = new[]
+            private static readonly UnaryOperatorType[] _unaryOperatorsWithNumericPromotions = new[]
             {
                 UnaryOperatorType.Plus,
                 UnaryOperatorType.Minus,
                 UnaryOperatorType.BitNot
             };
 
-            private static string[] _typesConvertedToIntInUnaryOperations = new[]
+            private static readonly string[] _typesConvertedToIntInUnaryOperations = new[]
             {
                 typeof(byte).FullName,
                 typeof(sbyte).FullName,

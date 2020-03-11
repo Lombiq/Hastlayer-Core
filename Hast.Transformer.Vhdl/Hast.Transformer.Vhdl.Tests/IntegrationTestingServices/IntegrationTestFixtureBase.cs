@@ -19,42 +19,6 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 
         public IntegrationTestFixtureBase()
         {
-            /*
-            var settings = new AppHostSettings
-            {
-                ImportedExtensions = _requiredExtension,
-                DefaultShellFeatureStates = new[]
-                {
-                    new DefaultShellFeatureState
-                    {
-                        EnabledFeatures = _requiredExtension.Select(extension => extension.ShortName())
-                    }
-                }
-            };
-
-            var autoMockSource = new FilteredAutoMockSource();
-            autoMockSource.AutoMockSource.Ignore<IEventHandler>();
-            autoMockSource.AutoMockSource.Ignore<IAsyncBackgroundTask>();
-
-            var registrations = new AppHostRegistrations
-            {
-                ShellRegistrations = builder =>
-                {
-                    builder.RegisterSource(autoMockSource);
-
-                    _shellRegistrationBuilder?.Invoke(builder);
-                },
-                HostRegistrations = builder =>
-                {
-                    builder.RegisterSource(autoMockSource);
-                }
-            };
-
-            // Can't use async in NUnit 2.x in TestFixtureSetUp (available in 3.x).
-            _host = OrchardAppHostFactory.StartTransientHost(settings, registrations, null).Result;
-            
-            */
-
             _hostConfiguration.Extensions = new List<Assembly>();
             _host = new Lazy<IHastlayer>(() => Hastlayer.Create(_hostConfiguration).Result);
         }
