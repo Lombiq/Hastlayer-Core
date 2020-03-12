@@ -4662,7 +4662,6 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.obj\: \Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
@@ -5064,15 +5063,13 @@ begin
                             -- 	num3 = num7 + 1;
                             -- 	num8 = memory.ReadUInt32 (1 + num7);
                             -- 	array [num4].Random1.State = (array [num4].Random1.State | ((ulong)num8 << 32));
-                            -- 	KpzKernelsTaskState obj;
-                            -- 	obj = array [num4];
                             -- 	RandomMwc64X randomMwc64X3;
                             -- 	randomMwc64X3 = new RandomMwc64X ();
                             -- 	int num9;
                             -- 	num9 = num3;
                             -- 	num3 = num9 + 1;
                             -- 	randomMwc64X3.State = memory.ReadUInt32 (1 + num9);
-                            -- 	obj.Random2 = randomMwc64X3;
+                            -- 	array [num4].Random2 = randomMwc64X3;
                             -- 	int num10;
                             -- 	num10 = num3;
                             -- 	num3 = num10 + 1;
@@ -5113,15 +5110,13 @@ begin
                             -- 	num3 = num7 + 1;
                             -- 	num8 = memory.ReadUInt32 (1 + num7);
                             -- 	array [num4].Random1.State = (array [num4].Random1.State | ((ulong)num8 << 32));
-                            -- 	KpzKernelsTaskState obj;
-                            -- 	obj = array [num4];
                             -- 	RandomMwc64X randomMwc64X3;
                             -- 	randomMwc64X3 = new RandomMwc64X ();
                             -- 	int num9;
                             -- 	num9 = num3;
                             -- 	num3 = num9 + 1;
                             -- 	randomMwc64X3.State = memory.ReadUInt32 (1 + num9);
-                            -- 	obj.Random2 = randomMwc64X3;
+                            -- 	array [num4].Random2 = randomMwc64X3;
                             -- 	int num10;
                             -- 	num10 = num3;
                             -- 	num3 = num10 + 1;
@@ -5268,13 +5263,6 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\.\State\ or (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\.\State\ := (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\);
                             -- The following section was transformed from the .NET statement below:
-                            -- KpzKernelsTaskState obj;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- obj = array [num4];
-                            -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.obj\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\));
-                            -- The following section was transformed from the .NET statement below:
                             -- RandomMwc64X randomMwc64X3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -5317,9 +5305,9 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- obj.Random2 = randomMwc64X3;
+                            -- array [num4].Random2 = randomMwc64X3;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.obj\.\Random2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\;
                             -- The following section was transformed from the .NET statement below:
                             -- int num10;
                             -- 
@@ -12568,7 +12556,6 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.obj\: \Hast.Samples.Kpz.Algorithms.KpzKernelsTaskState\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
@@ -12981,15 +12968,13 @@ begin
                             -- 	num3 = num7 + 1;
                             -- 	num8 = memory.ReadUInt32 (1 + num7);
                             -- 	array [num4].Random1.State = (array [num4].Random1.State | ((ulong)num8 << 32));
-                            -- 	KpzKernelsTaskState obj;
-                            -- 	obj = array [num4];
                             -- 	RandomMwc64X randomMwc64X3;
                             -- 	randomMwc64X3 = new RandomMwc64X ();
                             -- 	int num9;
                             -- 	num9 = num3;
                             -- 	num3 = num9 + 1;
                             -- 	randomMwc64X3.State = memory.ReadUInt32 (1 + num9);
-                            -- 	obj.Random2 = randomMwc64X3;
+                            -- 	array [num4].Random2 = randomMwc64X3;
                             -- 	int num10;
                             -- 	num10 = num3;
                             -- 	num3 = num10 + 1;
@@ -13030,15 +13015,13 @@ begin
                             -- 	num3 = num7 + 1;
                             -- 	num8 = memory.ReadUInt32 (1 + num7);
                             -- 	array [num4].Random1.State = (array [num4].Random1.State | ((ulong)num8 << 32));
-                            -- 	KpzKernelsTaskState obj;
-                            -- 	obj = array [num4];
                             -- 	RandomMwc64X randomMwc64X3;
                             -- 	randomMwc64X3 = new RandomMwc64X ();
                             -- 	int num9;
                             -- 	num9 = num3;
                             -- 	num3 = num9 + 1;
                             -- 	randomMwc64X3.State = memory.ReadUInt32 (1 + num9);
-                            -- 	obj.Random2 = randomMwc64X3;
+                            -- 	array [num4].Random2 = randomMwc64X3;
                             -- 	int num10;
                             -- 	num10 = num3;
                             -- 	num3 = num10 + 1;
@@ -13185,13 +13168,6 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\.\State\ or (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\.\State\ := (\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\);
                             -- The following section was transformed from the .NET statement below:
-                            -- KpzKernelsTaskState obj;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- obj = array [num4];
-                            -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.obj\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\));
-                            -- The following section was transformed from the .NET statement below:
                             -- RandomMwc64X randomMwc64X3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -13234,9 +13210,9 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- obj.Random2 = randomMwc64X3;
+                            -- array [num4].Random2 = randomMwc64X3;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.obj\.\Random2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.randomMwc64X3\;
                             -- The following section was transformed from the .NET statement below:
                             -- int num10;
                             -- 

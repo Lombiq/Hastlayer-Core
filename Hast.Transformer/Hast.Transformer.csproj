@@ -34,8 +34,8 @@
     <Reference Include="Humanizer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
       <HintPath>..\..\Orchard\src\packages\Humanizer.Core.2.5.16\lib\netstandard2.0\Humanizer.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.Decompiler, Version=6.0.0.5485, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.Decompiler.6.0.0.5485-preview1\lib\netstandard2.0\ICSharpCode.Decompiler.dll</HintPath>
+    <Reference Include="ICSharpCode.Decompiler, Version=6.0.0.5559, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\ICSharpCode.Decompiler.6.0.0.5559-preview2\lib\netstandard2.0\ICSharpCode.Decompiler.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -90,11 +90,9 @@
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Models\IKnownTypeLookupTable.cs" />
     <Compile Include="Services\BinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
-    <Compile Include="Services\DecompilationErrorsFixer.cs" />
     <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\FSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IBinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
-    <Compile Include="Services\IDecompilationErrorsFixer.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IFSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IMemberIdentifiersFixer.cs" />
@@ -105,7 +103,6 @@
     <Compile Include="Services\ISimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\ITaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\ITransformationContextCacheService.cs" />
-    <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\MemberIdentifiersFixer.cs" />
     <Compile Include="Services\MemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySize.cs" />
@@ -133,7 +130,6 @@
     <Compile Include="Services\DirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
-    <Compile Include="Services\IAutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IConstantValuesSubstitutor.cs" />
     <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
@@ -147,19 +143,15 @@
     <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\IObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\IOperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\IOperatorsToMethodsConverter.cs" />
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\MethodInliner.cs" />
     <Compile Include="Services\ObjectInitializerExpander.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
-    <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
     <Compile Include="Services\SimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\TransformationContextCacheService.cs" />
-    <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\UnneededReferenceVariablesRemover.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />

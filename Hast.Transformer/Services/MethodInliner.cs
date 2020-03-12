@@ -131,7 +131,26 @@ namespace Hast.Transformer.Services
 
                 // Preparing and adding the method's body inline.
                 var inlinedBody = (BlockStatement)method.Body.Clone();
-                inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, methodFullName));
+                // If there are multiple return statements then control flow will be mimicked with goto jumps.
+                var exitLabel = new LabelStatement { Label = SuffixMethodIdentifier("Exit", methodIdentifierNameSuffix) };
+                ReturnStatement lastReturn = null;
+                if (inlinedBody.Statements.Last() is ReturnStatement returnStatement)
+                {
+                    // Only add the exit label if there are more than one return statements.
+                    if (inlinedBody.FindFirstChildOfType<ReturnStatement>(statement => statement != returnStatement) != null)
+                    {
+                        AstInsertionHelper.InsertStatementAfter(returnStatement, exitLabel);
+                    }
+
+                    lastReturn = returnStatement;
+                }
+                else
+                {
+                    // If the last statement is not a return statement then there should be multiple returns in the
+                    // method.
+                    inlinedBody.Add(exitLabel);
+                }
+                inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, lastReturn));
 
                 foreach (var statement in inlinedBody.Statements)
                 {
@@ -149,19 +168,17 @@ namespace Hast.Transformer.Services
         {
             private readonly string _methodIdentifierNameSuffix;
             private readonly IdentifierExpression _returnVariableReference;
-            private readonly string _methodFullName;
-
-            private bool _aReturnStatementWasVisited;
+            private readonly ReturnStatement _lastReturn;
 
 
             public MethodBodyAdaptingVisitor(
                 string methodIdentifierNameSuffix,
                 IdentifierExpression returnVariableReferenc,
-                string methodFullName)
+                ReturnStatement lastReturn)
             {
                 _methodIdentifierNameSuffix = methodIdentifierNameSuffix;
                 _returnVariableReference = returnVariableReferenc;
-                _methodFullName = methodFullName;
+                _lastReturn = lastReturn;
             }
 
 
@@ -169,18 +186,16 @@ namespace Hast.Transformer.Services
             {
                 base.VisitReturnStatement(returnStatement);
 
-                if (_aReturnStatementWasVisited)
+                if (returnStatement != _lastReturn)
                 {
-                    throw new NotSupportedException(
-                        "Inlining methods with only a single return statement is supported. The method " +
-                        _methodFullName + " contains more than one return statement.");
+                    AstInsertionHelper.InsertStatementAfter(
+                        returnStatement,
+                        new GotoStatement(SuffixMethodIdentifier("Exit", _methodIdentifierNameSuffix)));
                 }
 
                 returnStatement.ReplaceWith(new ExpressionStatement(new AssignmentExpression(
                     _returnVariableReference.Clone(),
                     returnStatement.Expression.Clone())));
-
-                _aReturnStatementWasVisited = true;
             }
 
             public override void VisitVariableInitializer(VariableInitializer variableInitializer)

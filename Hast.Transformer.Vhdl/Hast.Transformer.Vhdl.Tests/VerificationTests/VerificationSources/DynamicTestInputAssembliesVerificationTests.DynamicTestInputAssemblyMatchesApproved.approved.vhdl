@@ -11,6 +11,7 @@
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+-- * System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 
 -- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
@@ -1489,6 +1490,28 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- State machine states:
+    type \InlinedCases::InlinedMultiReturn(SimpleMemory).0._States\ is (
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_1\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\);
+    -- Signals:
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\: boolean := false;
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -1504,6 +1527,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
@@ -1516,6 +1540,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -1878,12 +1903,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 0, b << (int)b2);
+                            -- this.SaveResult (memory, 0, (int)((int)(b) << (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(0, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_4\;
                         end if;
@@ -1893,13 +1918,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 2, b >> (int)b2);
+                            -- this.SaveResult (memory, 2, (int)((int)(b) >> (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_5\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_6\;
@@ -1907,7 +1932,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_6\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(2, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2002,12 +2027,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 20, b << (int)b3);
+                            -- this.SaveResult (memory, 20, (int)((int)(b) << (int)b3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(20, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_15\;
                         end if;
@@ -2017,13 +2042,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 22, b >> (int)b3);
+                            -- this.SaveResult (memory, 22, (int)((int)(b) >> (int)b3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_16\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_17\;
@@ -2031,7 +2056,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_17\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(22, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2126,12 +2151,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 40, b << (int)num2);
+                            -- this.SaveResult (memory, 40, (int)((int)(b) << (int)num2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(40, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_26\;
                         end if;
@@ -2141,13 +2166,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 42, b >> (int)num2);
+                            -- this.SaveResult (memory, 42, (int)((int)(b) >> (int)num2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_27\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_27\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_28\;
@@ -2155,7 +2180,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_28\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(42, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2250,12 +2275,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 60, b << (int)num3);
+                            -- this.SaveResult (memory, 60, (int)((int)(b) << (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(60, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_37\;
                         end if;
@@ -2265,13 +2290,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 62, b >> (int)num3);
+                            -- this.SaveResult (memory, 62, (int)((int)(b) >> (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_38\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_38\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_39\;
@@ -2279,7 +2304,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_39\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(62, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_40\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2374,12 +2399,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 80, b << num4);
+                            -- this.SaveResult (memory, 80, (int)((int)(b) << num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(80, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_48\;
                         end if;
@@ -2389,13 +2414,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 82, b >> num4);
+                            -- this.SaveResult (memory, 82, (int)((int)(b) >> num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_49\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_49\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_50\;
@@ -2403,7 +2428,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_50\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(82, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_51\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2491,12 +2516,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 100, b << (int)num5);
+                            -- this.SaveResult (memory, 100, (int)((int)(b) << (int)num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(100, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_59\;
                         end if;
@@ -2506,13 +2531,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 102, b >> (int)num5);
+                            -- this.SaveResult (memory, 102, (int)((int)(b) >> (int)num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_60\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_60\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_61\;
@@ -2520,7 +2545,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_61\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(102, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_62\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2608,12 +2633,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 120, b << (int)num6);
+                            -- this.SaveResult (memory, 120, (int)((int)(b) << (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(120, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_70\;
                         end if;
@@ -2623,13 +2648,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 122, b >> (int)num6);
+                            -- this.SaveResult (memory, 122, (int)((int)(b) >> (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_71\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_71\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_72\;
@@ -2637,7 +2662,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_72\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(122, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_73\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2725,12 +2750,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 140, b << (int)num7);
+                            -- this.SaveResult (memory, 140, (int)((int)(b) << (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(140, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_81\;
                         end if;
@@ -2740,13 +2765,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 142, b >> (int)num7);
+                            -- this.SaveResult (memory, 142, (int)((int)(b) >> (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_82\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_82\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_83\;
@@ -2754,7 +2779,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_83\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(142, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_84\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3171,12 +3196,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 0, b << (int)b2);
+                            -- this.SaveResult (memory, 0, (int)((int)(b) << (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(0, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_4\;
                         end if;
@@ -3186,9 +3211,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 2, b >> (int)b2);
+                            -- this.SaveResult (memory, 2, (int)((int)(b) >> (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_5\;
                         end if;
@@ -3200,7 +3225,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_6\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(2, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3295,12 +3320,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 20, b << (int)b3);
+                            -- this.SaveResult (memory, 20, (int)((int)(b) << (int)b3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(20, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_15\;
                         end if;
@@ -3310,9 +3335,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 22, b >> (int)b3);
+                            -- this.SaveResult (memory, 22, (int)((int)(b) >> (int)b3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_16\;
                         end if;
@@ -3324,7 +3349,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_17\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(22, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3419,12 +3444,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 40, b << (int)num2);
+                            -- this.SaveResult (memory, 40, (int)((int)(b) << (int)num2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(40, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_26\;
                         end if;
@@ -3434,9 +3459,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 42, b >> (int)num2);
+                            -- this.SaveResult (memory, 42, (int)((int)(b) >> (int)num2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_27\;
                         end if;
@@ -3448,7 +3473,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_28\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(42, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3543,12 +3568,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 60, b << (int)num3);
+                            -- this.SaveResult (memory, 60, (int)((int)(b) << (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(60, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_37\;
                         end if;
@@ -3558,9 +3583,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 62, b >> (int)num3);
+                            -- this.SaveResult (memory, 62, (int)((int)(b) >> (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_38\;
                         end if;
@@ -3572,7 +3597,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_39\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(62, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_40\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3667,12 +3692,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 80, b << num4);
+                            -- this.SaveResult (memory, 80, (int)((int)(b) << num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(80, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_48\;
                         end if;
@@ -3682,9 +3707,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 82, b >> num4);
+                            -- this.SaveResult (memory, 82, (int)((int)(b) >> num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_49\;
                         end if;
@@ -3696,7 +3721,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_50\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(82, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_51\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3791,12 +3816,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 100, b << (int)num5);
+                            -- this.SaveResult (memory, 100, (int)((int)(b) << (int)num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(100, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_59\;
                         end if;
@@ -3806,9 +3831,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 102, b >> (int)num5);
+                            -- this.SaveResult (memory, 102, (int)((int)(b) >> (int)num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_60\;
                         end if;
@@ -3820,7 +3845,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_61\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(102, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_62\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3915,12 +3940,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 120, b << (int)num6);
+                            -- this.SaveResult (memory, 120, (int)((int)(b) << (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(120, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_70\;
                         end if;
@@ -3930,9 +3955,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 122, b >> (int)num6);
+                            -- this.SaveResult (memory, 122, (int)((int)(b) >> (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_71\;
                         end if;
@@ -3944,7 +3969,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_72\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(122, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_73\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4032,12 +4057,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 140, b << (int)num7);
+                            -- this.SaveResult (memory, 140, (int)((int)(b) << (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(140, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_81\;
                         end if;
@@ -4047,9 +4072,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 142, b >> (int)num7);
+                            -- this.SaveResult (memory, 142, (int)((int)(b) >> (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_82\;
                         end if;
@@ -4061,7 +4086,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_83\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(142, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_84\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4406,12 +4431,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 0, num2 << (int)b);
+                            -- this.SaveResult (memory, 0, (int)((int)(num2) << (int)b));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(0, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_4\;
                         end if;
@@ -4421,9 +4446,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 2, num2 >> (int)b);
+                            -- this.SaveResult (memory, 2, (int)((int)(num2) >> (int)b));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_5\;
                         end if;
@@ -4435,7 +4460,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_6\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(2, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4530,12 +4555,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 20, num2 << (int)b2);
+                            -- this.SaveResult (memory, 20, (int)((int)(num2) << (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(20, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_15\;
                         end if;
@@ -4545,9 +4570,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 22, num2 >> (int)b2);
+                            -- this.SaveResult (memory, 22, (int)((int)(num2) >> (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_16\;
                         end if;
@@ -4559,7 +4584,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_17\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(22, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4654,12 +4679,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 40, num2 << (int)num3);
+                            -- this.SaveResult (memory, 40, (int)((int)(num2) << (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(40, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_26\;
                         end if;
@@ -4669,9 +4694,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 42, num2 >> (int)num3);
+                            -- this.SaveResult (memory, 42, (int)((int)(num2) >> (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_27\;
                         end if;
@@ -4683,7 +4708,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_28\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(42, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4778,12 +4803,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 60, num2 << (int)num4);
+                            -- this.SaveResult (memory, 60, (int)((int)(num2) << (int)num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(60, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_37\;
                         end if;
@@ -4793,9 +4818,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 62, num2 >> (int)num4);
+                            -- this.SaveResult (memory, 62, (int)((int)(num2) >> (int)num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_38\;
                         end if;
@@ -4807,7 +4832,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_39\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(62, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_40\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4902,12 +4927,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 80, num2 << num5);
+                            -- this.SaveResult (memory, 80, (int)((int)(num2) << num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(80, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_48\;
                         end if;
@@ -4917,9 +4942,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 82, num2 >> num5);
+                            -- this.SaveResult (memory, 82, (int)((int)(num2) >> num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_49\;
                         end if;
@@ -4931,7 +4956,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_50\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(82, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_51\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5026,12 +5051,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 100, num2 << (int)num6);
+                            -- this.SaveResult (memory, 100, (int)((int)(num2) << (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(100, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_59\;
                         end if;
@@ -5041,9 +5066,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 102, num2 >> (int)num6);
+                            -- this.SaveResult (memory, 102, (int)((int)(num2) >> (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_60\;
                         end if;
@@ -5055,7 +5080,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_61\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(102, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_62\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5150,12 +5175,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 120, num2 << (int)num7);
+                            -- this.SaveResult (memory, 120, (int)((int)(num2) << (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(120, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_70\;
                         end if;
@@ -5165,9 +5190,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 122, num2 >> (int)num7);
+                            -- this.SaveResult (memory, 122, (int)((int)(num2) >> (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_71\;
                         end if;
@@ -5179,7 +5204,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_72\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(122, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_73\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5267,12 +5292,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 140, num2 << (int)num8);
+                            -- this.SaveResult (memory, 140, (int)((int)(num2) << (int)num8));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := SmartResize(shift_left(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5)))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := shift_left(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(140, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_81\;
                         end if;
@@ -5282,9 +5307,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 142, num2 >> (int)num8);
+                            -- this.SaveResult (memory, 142, (int)((int)(num2) >> (int)num8));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := SmartResize(shift_right(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5) and "11111"))), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := shift_right(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_82\;
                         end if;
@@ -5296,7 +5321,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_83\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(142, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_84\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5663,12 +5688,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 0, num2 << (int)b);
+                            -- this.SaveResult (memory, 0, (int)((int)(num2) << (int)b));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(0, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_4\;
                         end if;
@@ -5678,13 +5703,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 2, num2 >> (int)b);
+                            -- this.SaveResult (memory, 2, (int)((int)(num2) >> (int)b));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_5\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_6\;
@@ -5692,7 +5717,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_6\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(2, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5787,12 +5812,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 20, num2 << (int)b2);
+                            -- this.SaveResult (memory, 20, (int)((int)(num2) << (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(20, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_15\;
                         end if;
@@ -5802,13 +5827,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 22, num2 >> (int)b2);
+                            -- this.SaveResult (memory, 22, (int)((int)(num2) >> (int)b2));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_16\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_17\;
@@ -5816,7 +5841,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_17\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(22, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5911,12 +5936,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 40, num2 << (int)num3);
+                            -- this.SaveResult (memory, 40, (int)((int)(num2) << (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(40, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_26\;
                         end if;
@@ -5926,13 +5951,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 42, num2 >> (int)num3);
+                            -- this.SaveResult (memory, 42, (int)((int)(num2) >> (int)num3));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_27\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_27\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_28\;
@@ -5940,7 +5965,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_28\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(42, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6035,12 +6060,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := SmartResize(unsigned(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 60, num2 << (int)num4);
+                            -- this.SaveResult (memory, 60, (int)((int)(num2) << (int)num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(60, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_37\;
                         end if;
@@ -6050,13 +6075,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 62, num2 >> (int)num4);
+                            -- this.SaveResult (memory, 62, (int)((int)(num2) >> (int)num4));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_38\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_38\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_39\;
@@ -6064,7 +6089,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_39\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(62, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_40\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6159,12 +6184,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 80, num2 << num5);
+                            -- this.SaveResult (memory, 80, (int)((int)(num2) << num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(80, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_48\;
                         end if;
@@ -6174,13 +6199,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 82, num2 >> num5);
+                            -- this.SaveResult (memory, 82, (int)((int)(num2) >> num5));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_49\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_49\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_50\;
@@ -6188,7 +6213,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_50\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(82, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_51\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6276,12 +6301,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := unsigned(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 100, num2 << (int)num6);
+                            -- this.SaveResult (memory, 100, (int)((int)(num2) << (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(100, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_59\;
                         end if;
@@ -6291,13 +6316,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 102, num2 >> (int)num6);
+                            -- this.SaveResult (memory, 102, (int)((int)(num2) >> (int)num6));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_60\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_60\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_61\;
@@ -6305,7 +6330,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_61\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(102, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_62\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6393,12 +6418,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 120, num2 << (int)num7);
+                            -- this.SaveResult (memory, 120, (int)((int)(num2) << (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(120, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_70\;
                         end if;
@@ -6408,13 +6433,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 122, num2 >> (int)num7);
+                            -- this.SaveResult (memory, 122, (int)((int)(num2) >> (int)num7));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 32), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_71\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_71\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_72\;
@@ -6422,7 +6447,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_72\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(122, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_73\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6510,12 +6535,12 @@ begin
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\ := ToUnsignedAndExpand(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 140, num2 << (int)num8);
+                            -- this.SaveResult (memory, 140, (int)((int)(num2) << (int)num8));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := signed(SmartResize(shift_left(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5)))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := shift_left(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5))));
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(140, 32);
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_81\;
                         end if;
@@ -6525,13 +6550,13 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 142, num2 >> (int)num8);
+                            -- this.SaveResult (memory, 142, (int)((int)(num2) >> (int)num8));
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := signed(SmartResize(shift_right(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5) and "11111"))), 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := shift_right(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)), to_integer(unsigned(SmartResize(signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 32)), 5) and "11111")));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_82\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6511
+                        -- Clock cycles needed to complete this state (approximation): 0.6479
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_82\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_83\;
@@ -6539,7 +6564,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_83\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(142, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_84\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14136,6 +14161,148 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \InlinedCases::InlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::InlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\ <= false;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
+            else 
+                case \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ is 
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\ = true) then 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\ = true) then 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\ <= true;
+                        else 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\ <= false;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = memory.ReadInt32 (0);
+                        -- 
+                        -- Begin SimpleMemory read.
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\ => 
+                        -- State for the label Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49.
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteInt32 (0, return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49);
+                        -- 
+                        -- Begin SimpleMemory write.
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := ConvertStdLogicVectorToInt32(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- int return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 > 0) {
+                            -- 	return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                            -- 	goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                            -- }
+                            -- 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ > to_signed(0, 32);
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\ and ends in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\.
+                            --     * Execution after either branch will continue in the following state: \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\.
+
+                            if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\) then 
+                                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\ => 
+                        -- State after the if-else which was started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 2;
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49:
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\ => 
+                        -- True branch of the if-else started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                        -- 	goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(1, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\ => 
+                        -- Going to the state after the if-else which was started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
+                        if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ = \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\) then 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -14156,6 +14323,7 @@ begin
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -14242,6 +14410,13 @@ begin
                                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 12 => 
+                            if (\Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -15187,11 +15362,18 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\ <= \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\) when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;

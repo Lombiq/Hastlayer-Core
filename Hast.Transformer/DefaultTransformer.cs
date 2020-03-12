@@ -34,18 +34,15 @@ namespace Hast.Transformer
         private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
         private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
         private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
-        private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
         private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
-        private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
         private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
         private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
-        private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
         private readonly ITransformationContextCacheService _transformationContextCacheService;
         private readonly IMethodInliner _methodInliner;
         private readonly IObjectInitializerExpander _objectInitializerExpander;
@@ -53,7 +50,6 @@ namespace Hast.Transformer
         private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
         private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
         private readonly IDeviceDriverSelector _deviceDriverSelector;
-        private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
         private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
         private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
@@ -70,18 +66,15 @@ namespace Hast.Transformer
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
-            IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
             IOperatorsToMethodsConverter operatorsToMethodsConverter,
-            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter,
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
             IAppDataFolder appDataFolder,
             IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
-            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
             ITransformationContextCacheService transformationContextCacheService,
             IMethodInliner methodInliner,
             IObjectInitializerExpander objectInitializerExpander,
@@ -89,7 +82,6 @@ namespace Hast.Transformer
             ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
             IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
             IDeviceDriverSelector deviceDriverSelector,
-            IDecompilationErrorsFixer decompilationErrorsFixer,
             IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
             IMemberIdentifiersFixer memberIdentifiersFixer,
@@ -104,18 +96,15 @@ namespace Hast.Transformer
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
-            _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
             _constantValuesSubstitutor = constantValuesSubstitutor;
             _operatorsToMethodsConverter = operatorsToMethodsConverter;
-            _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
             _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
             _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
-            _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
             _transformationContextCacheService = transformationContextCacheService;
             _methodInliner = methodInliner;
             _objectInitializerExpander = objectInitializerExpander;
@@ -123,7 +112,6 @@ namespace Hast.Transformer
             _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
             _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
             _deviceDriverSelector = deviceDriverSelector;
-            _decompilationErrorsFixer = decompilationErrorsFixer;
             _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
             _memberIdentifiersFixer = memberIdentifiersFixer;
@@ -178,6 +166,8 @@ namespace Hast.Transformer
                     DoWhileStatement = false,
                     Dynamic = false,
                     ExpressionTrees = false,
+                    // Instead of extension methods there are simple static methods.
+                    ExtensionMethods = false,
                     ForStatement = false,
                     IntroduceReadonlyAndInModifiers = true,
                     IntroduceRefModifiersOnStructs = true,
@@ -305,7 +295,10 @@ namespace Hast.Transformer
 
             // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
             // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
-            var saveSyntaxTree = true;
+            var saveSyntaxTree = false;
+#if DEBUG
+            saveSyntaxTree = true;
+#endif
             if (saveSyntaxTree)
             {
                 File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
@@ -314,7 +307,6 @@ namespace Hast.Transformer
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
 
-            _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
             _memberIdentifiersFixer.FixMemberIdentifiers(syntaxTree);
             _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasies(syntaxTree);
 
@@ -323,7 +315,6 @@ namespace Hast.Transformer
 
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
-            _decompilationErrorsFixer.FixDecompilationErrors(syntaxTree);
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree, knownTypeLookupTable);
             _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree, knownTypeLookupTable);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
@@ -333,10 +324,8 @@ namespace Hast.Transformer
             _customPropertiesToMethodsConverter.ConvertCustomPropertiesToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
-            _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
-            _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
             _unneededReferenceVariablesRemover.RemoveUnneededVariables(syntaxTree);

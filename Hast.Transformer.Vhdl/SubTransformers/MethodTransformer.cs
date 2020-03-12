@@ -191,6 +191,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
             };
 
+            var labels = method.Body.FindAllChildrenOfType<LabelStatement>();
+            foreach (var label in labels)
+            {
+                bodyContext.Scope.LabelsToStateIndicesMappings[label.Label] = stateMachine
+                    .AddState(new InlineBlock(new LineComment($"State for the label {label.Label}.")));
+            }
+
             var lastStatementIsReturn = false;
             foreach (var statement in method.Body.Statements)
             {
