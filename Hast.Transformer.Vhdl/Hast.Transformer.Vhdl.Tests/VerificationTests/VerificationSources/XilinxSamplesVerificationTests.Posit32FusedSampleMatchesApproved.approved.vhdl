@@ -818,10 +818,15 @@ architecture Imp of Hast_IP is
         \Quire Posit32::op_Explicit(Posit32).0._State_4\, 
         \Quire Posit32::op_Explicit(Posit32).0._State_5\, 
         \Quire Posit32::op_Explicit(Posit32).0._State_6\, 
-        \Quire Posit32::op_Explicit(Posit32).0._State_7\);
+        \Quire Posit32::op_Explicit(Posit32).0._State_7\, 
+        \Quire Posit32::op_Explicit(Posit32).0._State_8\);
     -- Signals:
     Signal \Quire Posit32::op_Explicit(Posit32).0._Finished\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.return\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.Quire\;
@@ -837,6 +842,8 @@ architecture Imp of Hast_IP is
     Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0._Started\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.x.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Finished.0\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\: \Lombiq.Arithmetics.Quire\;
@@ -1025,8 +1032,7 @@ architecture Imp of Hast_IP is
         \Quire Quire::op_RightShift(Quire,Int32).0._State_7\, 
         \Quire Quire::op_RightShift(Quire,Int32).0._State_8\, 
         \Quire Quire::op_RightShift(Quire,Int32).0._State_9\, 
-        \Quire Quire::op_RightShift(Quire,Int32).0._State_10\, 
-        \Quire Quire::op_RightShift(Quire,Int32).0._State_11\);
+        \Quire Quire::op_RightShift(Quire,Int32).0._State_10\);
     -- Signals:
     Signal \Quire Quire::op_RightShift(Quire,Int32).0._Finished\: boolean := false;
     Signal \Quire Quire::op_RightShift(Quire,Int32).0.return\: \Lombiq.Arithmetics.Quire\;
@@ -5404,6 +5410,7 @@ begin
     \Quire Posit32::op_Explicit(Posit32).0._StateMachine\: process (\Clock\) 
         Variable \Quire Posit32::op_Explicit(Posit32).0._State\: \Quire Posit32::op_Explicit(Posit32).0._States\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.x\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.left\: \Lombiq.Arithmetics.Quire\;
@@ -5412,12 +5419,15 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.3\: \Lombiq.Arithmetics.Quire\;
-        Alias \Quire Posit32::op_Explicit(Posit32).0.conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33\ : \Lombiq.Arithmetics.Quire\ is \Quire Posit32::op_Explicit(Posit32).0.left\;
+        Alias \Quire Posit32::op_Explicit(Posit32).0.conditional7d7af10aae740a7745e76e26bc25f248f174cae31cb85aafe5865cdd9682192a\ : \Lombiq.Arithmetics.Quire\ is \Quire Posit32::op_Explicit(Posit32).0.left\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Quire Posit32::op_Explicit(Posit32).0._Finished\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
                 \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= false;
                 \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= (others => to_unsigned(0, 64));
                 \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
@@ -5455,21 +5465,51 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_2\ => 
                         \Quire Posit32::op_Explicit(Posit32).0.x\ := \Quire Posit32::op_Explicit(Posit32).0.x.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- ulong[] array;
+                        -- Quire objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new ulong[8];
+                        -- objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7 = new Quire (0u, 512);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
-                        -- The following section was transformed from the .NET statement below:
-                        -- array [0] = Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
-                        \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
-                        \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= true;
+                        -- Initializing record fields to their defaults.
+                        \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\.\IsNull\ := false;
+                        \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\.\Size\ := to_unsigned(0, 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\.\Segments\ := (others => to_unsigned(0, 64));
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\;
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(512, 32)), 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
+                            \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7;
+                            -- 
+                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.objectaec0bc00ee63384c5adea3994b70782788af003ad1e19ec844b71e1c24298ee7\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- ulong[] array;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array = new ulong[8];
+                            -- 
+                            \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [0] = Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= true;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= false;
@@ -5492,10 +5532,10 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.array\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_4\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_4\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_5\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
@@ -5507,10 +5547,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ <= true;
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_5\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_5\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
                         if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ <= false;
@@ -5519,10 +5559,10 @@ begin
                             -- Starting state machine invocation for the following method: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor()
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= true;
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_6\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3898
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_6\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor()
                         if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= false;
@@ -5532,10 +5572,10 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3898
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_7\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
@@ -5543,16 +5583,16 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Quire conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33;
+                            -- Quire conditional7d7af10aae740a7745e76e26bc25f248f174cae31cb85aafe5865cdd9682192a;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33 = left;
+                            -- conditional7d7af10aae740a7745e76e26bc25f248f174cae31cb85aafe5865cdd9682192a = left;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33\ := \Quire Posit32::op_Explicit(Posit32).0.left\;
+                            \Quire Posit32::op_Explicit(Posit32).0.conditional7d7af10aae740a7745e76e26bc25f248f174cae31cb85aafe5865cdd9682192a\ := \Quire Posit32::op_Explicit(Posit32).0.left\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33;
+                            -- return conditional7d7af10aae740a7745e76e26bc25f248f174cae31cb85aafe5865cdd9682192a;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.conditionala361ba8443226d6d29c82f566acf17586981e75bde9fb1c15f6155b287917c33\;
+                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.conditional7d7af10aae740a7745e76e26bc25f248f174cae31cb85aafe5865cdd9682192a\;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5792,9 +5832,9 @@ begin
                         -- 
                         \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Segments [0] = 1u;
+                        -- @this.Segments [0] = firstSegment;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(to_unsigned(1, 32), 64);
+                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(\Quire::.ctor(UInt32,UInt16).0.firstSegment\, 64);
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -6907,26 +6947,25 @@ begin
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6940,25 +6979,24 @@ begin
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.num\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.array\ := (others => to_unsigned(0, 64));
                 \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.num4\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
             else 
                 case \Quire Quire::op_RightShift(Quire,Int32).0._State\ is 
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_0\ => 
@@ -6984,17 +7022,12 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.left\ := \Quire Quire::op_RightShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = (right & ((1 << (int)(left.SegmentCount) * 6) - 1));
+                        -- right = (right & ((int)(left.SegmentCount) * 64 - 1));
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(6, 32), 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\, 5))));
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9452
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\) - to_signed(1, 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(64, 32), 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ - to_signed(1, 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
                         -- ulong num;
                         -- 
@@ -7045,13 +7078,13 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4649
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5899
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag;
@@ -7106,37 +7139,37 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
-                        else 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
+                        else 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8;
+                        -- Quire object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8 = new Quire (array, 0);
+                        -- object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\IsNull\ := false;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\.\IsNull\ := false;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.array\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_11\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32)) <= to_signed(8, 32);
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\) then 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32)) <= to_signed(8, 32);
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	ushort num4;
@@ -7159,44 +7192,44 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num4 = (ushort)(8 - (int)(num3));
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32))), 16);
-                            \Quire Quire::op_RightShift(Quire,Int32).0.num4\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32))), 16);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.num4\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\);
                             -- The following section was transformed from the .NET statement below:
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- flag2 = ((array [num4] & 1uL) == 1uL);
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) and to_unsigned(1, 64);
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
-                        else 
+                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) and to_unsigned(1, 64);
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_7\;
+                        else 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.775
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (ushort)((int)(num2) + 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_7\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_6\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\) = to_unsigned(1, 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
                         -- ref ulong reference = ref array [num4];
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- reference = reference >> 1;
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	ref ulong reference2 = ref array [num4];
@@ -7205,18 +7238,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
+                        --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
 
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.flag\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5588
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag = flag2;
                         -- 
@@ -7224,15 +7257,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = (ushort)((int)(num3) + 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32)) + to_signed(1, 32)), 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_9\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num3\), 32)) + to_signed(1, 32)), 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_8\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	ref ulong reference2 = ref array [num4];
@@ -7245,23 +7278,23 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- reference2 = (reference2 | num);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\);
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_7\.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_9\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1734
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_RightShift(Quire,Int32).0.array\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8;
+                            -- return object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object157c924d312931f99624f9990346efe22383342001d9935b6c35c3ad8da224b8\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object32548237cb4b42c1f101f0e3b32e6d175d7167eff47820e9d9e232862f709c46\;
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7295,7 +7328,7 @@ begin
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7349,9 +7382,9 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.left\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = (right & 65535);
+                        -- right = (right & 511);
                         -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(65535, 32);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(511, 32);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- ulong num;
@@ -7473,19 +7506,19 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f;
+                        -- Quire object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f = new Quire (array, 0);
+                        -- object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\IsNull\ := false;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\.\IsNull\ := false;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.array\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -7601,12 +7634,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0.array\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f;
+                            -- return object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.objectc996901721b3380940539d5e2ccc153d36bc5159fbc7657e5cc431d1b5e93c1f\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object2ae11d3495c05b8fecbf84cc510861f06af94deda357949a6f1035deb131e8ec\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8485,6 +8518,8 @@ begin
     \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
@@ -8493,9 +8528,12 @@ begin
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningState.0\ := WaitingForStarted;
                 \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
             else 
 
@@ -8526,6 +8564,37 @@ begin
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\ := WaitingForStarted;
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0
+                case \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                            \Quire::.ctor(UInt32,UInt16).0._Started\ <= true;
+                            \Quire::.ctor(UInt32,UInt16).0.this.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\;
+                            \Quire::.ctor(UInt32,UInt16).0.firstSegment.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\;
+                            \Quire::.ctor(UInt32,UInt16).0.size.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Quire::.ctor(UInt32,UInt16).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= true;
+                                    \Quire::.ctor(UInt32,UInt16).0._Started\ <= false;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\ <= \Quire::.ctor(UInt32,UInt16).0.this.parameter.Out\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
