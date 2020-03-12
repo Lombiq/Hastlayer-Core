@@ -19,8 +19,8 @@ namespace Hast.Transformer.Vhdl.Tests
 {
     public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
     {
-        protected virtual bool UseStubMemberSuitabilityChecker { get; set; } = true;
-        protected virtual string DeviceName { get; set; } = Nexys4DdrManifestProvider.DeviceName;
+        protected virtual bool UseStubMemberSuitabilityChecker => true;
+        protected virtual string DeviceName => Nexys4DdrManifestProvider.DeviceName;
 
 
         protected VhdlTransformingTestFixtureBase()
