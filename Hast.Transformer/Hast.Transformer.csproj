@@ -103,7 +103,6 @@
     <Compile Include="Services\ISimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\ITaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\ITransformationContextCacheService.cs" />
-    <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\MemberIdentifiersFixer.cs" />
     <Compile Include="Services\MemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySize.cs" />
@@ -153,7 +152,6 @@
     <Compile Include="Services\SimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
     <Compile Include="Services\TransformationContextCacheService.cs" />
-    <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\UnneededReferenceVariablesRemover.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />

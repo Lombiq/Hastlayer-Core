@@ -43,7 +43,6 @@ namespace Hast.Transformer
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
         private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
-        private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
         private readonly ITransformationContextCacheService _transformationContextCacheService;
         private readonly IMethodInliner _methodInliner;
         private readonly IObjectInitializerExpander _objectInitializerExpander;
@@ -76,7 +75,6 @@ namespace Hast.Transformer
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
             IAppDataFolder appDataFolder,
             IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
-            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
             ITransformationContextCacheService transformationContextCacheService,
             IMethodInliner methodInliner,
             IObjectInitializerExpander objectInitializerExpander,
@@ -107,7 +105,6 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
             _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
-            _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
             _transformationContextCacheService = transformationContextCacheService;
             _methodInliner = methodInliner;
             _objectInitializerExpander = objectInitializerExpander;
@@ -326,7 +323,6 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
-            _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
             _unneededReferenceVariablesRemover.RemoveUnneededVariables(syntaxTree);
