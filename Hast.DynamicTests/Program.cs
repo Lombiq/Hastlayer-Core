@@ -14,7 +14,8 @@ namespace Hast.DynamicTests
             // executed as usual. However, for now (and also for more comfortable local testing) you can execute a
             // test simply like this too.
             //await new BinaryAndUnaryOperatorExpressionCasesTests().AllUnaryOperatorExpressionVariations();
-            await new CastExpressionCasesTests().AllNumberCastingVariations();
+            //await new CastExpressionCasesTests().AllNumberCastingVariations();
+            await new InlinedCasesTests().InlinedMultiReturn();
         }
     }
 }

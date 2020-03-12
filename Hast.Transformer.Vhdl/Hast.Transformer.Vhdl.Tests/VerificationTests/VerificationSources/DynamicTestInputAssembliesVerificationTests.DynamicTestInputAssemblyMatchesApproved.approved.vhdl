@@ -11,6 +11,7 @@
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+-- * System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 
 -- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
@@ -1489,6 +1490,28 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- State machine states:
+    type \InlinedCases::InlinedMultiReturn(SimpleMemory).0._States\ is (
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_1\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\, 
+        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\);
+    -- Signals:
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\: boolean := false;
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -1504,6 +1527,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
@@ -1516,6 +1540,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -14136,6 +14161,148 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \InlinedCases::InlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::InlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\ <= false;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
+            else 
+                case \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ is 
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\ = true) then 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\ = true) then 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\ <= true;
+                        else 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\ <= false;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = memory.ReadInt32 (0);
+                        -- 
+                        -- Begin SimpleMemory read.
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\ => 
+                        -- State for the label Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49.
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteInt32 (0, return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49);
+                        -- 
+                        -- Begin SimpleMemory write.
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := ConvertStdLogicVectorToInt32(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- int return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 > 0) {
+                            -- 	return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                            -- 	goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                            -- }
+                            -- 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ > to_signed(0, 32);
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\ and ends in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\.
+                            --     * Execution after either branch will continue in the following state: \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\.
+
+                            if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\) then 
+                                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\ => 
+                        -- State after the if-else which was started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 2;
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49:
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\ => 
+                        -- True branch of the if-else started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                        -- 	goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(1, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
+                        -- 
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\ => 
+                        -- Going to the state after the if-else which was started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
+                        if (\InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ = \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\) then 
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -14156,6 +14323,7 @@ begin
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -14242,6 +14410,13 @@ begin
                                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 12 => 
+                            if (\Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -15187,11 +15362,18 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\ <= \InlinedCases::InlinedMultiReturn(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\) when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;
