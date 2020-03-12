@@ -3,7 +3,6 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Services.ConstantValuesSubstitution;
