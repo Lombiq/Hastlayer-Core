@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
 namespace Hast.Transformer.Services
@@ -25,6 +20,10 @@ namespace Hast.Transformer.Services
     /// {
     ///     ...
     /// </example>
+    /// <remarks>
+    /// The MakeAssignmentExpressions configuration of <see cref="ICSharpCode.Decompiler.DecompilerSettings"/> serves
+    /// something similar but that also changes how a decompiled Task.Factory.StartNew() looks like.
+    /// </remarks>
     public interface IEmbeddedAssignmentExpressionsExpander : IDependency
     {
         void ExpandEmbeddedAssignmentExpressions(SyntaxTree syntaxTree);
