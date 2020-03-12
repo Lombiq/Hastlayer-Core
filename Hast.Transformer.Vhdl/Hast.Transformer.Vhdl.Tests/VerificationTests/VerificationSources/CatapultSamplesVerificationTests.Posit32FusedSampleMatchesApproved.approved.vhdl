@@ -5733,7 +5733,7 @@ begin
         Variable \Quire::.ctor(UInt32,UInt16).0.firstSegment\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
@@ -5752,7 +5752,7 @@ begin
                 \Quire::.ctor(UInt32,UInt16).0.firstSegment\ := to_unsigned(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.size\ := to_unsigned(0, 16);
                 \Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\ := to_signed(0, 32);
-                \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ := to_signed(0, 32);
+                \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
@@ -5795,26 +5795,26 @@ begin
                         -- int conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4;
+                        -- int remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 = (int)size;
+                        -- remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b = (int)size;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
+                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 - remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4 / 32 * 32 != 0)) {
+                        -- if ((remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b - remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b / 32 * 32 != 0)) {
                         -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 1;
                         -- } else {
                         -- 	conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517 = 0;
                         -- }
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ / to_signed(32, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ / to_signed(32, 32);
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := SmartResize(\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ * to_signed(32, 32), 32);
                         \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.70365
                     when \Quire::.ctor(UInt32,UInt16).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand56e0804e4e56ffcbe15bcbf9c0d292f0363b5a6b5fdc782dedbd3128fc63d1c4\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand0c439d9dfdc1e321f9179f8d0530a346aae5aa4d433af564a6e961f787b90b5b\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -5831,9 +5831,9 @@ begin
                     when \Quire::.ctor(UInt32,UInt16).0._State_4\ => 
                         -- State after the if-else which was started in state \Quire::.ctor(UInt32,UInt16).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = (ushort)((size >> 6) + (conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517));
+                        -- @this.SegmentCount = (ushort)(((int)(size) >> 6) + (conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517));
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ := signed(SmartResize(shift_right(\Quire::.ctor(UInt32,UInt16).0.size\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5) and "11111"))), 32));
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\ := shift_right(signed(SmartResize((\Quire::.ctor(UInt32,UInt16).0.size\), 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5) and "11111")));
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\ := SmartResize(unsigned((\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.4\) + (\Quire::.ctor(UInt32,UInt16).0.conditional508ca86de85a5da84bb49b246fc4b145e1352a0547a47e41f17ab54c68695517\)), 16);
                         \Quire::.ctor(UInt32,UInt16).0.this\.\SegmentCount\ := (\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
@@ -6097,7 +6097,7 @@ begin
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.num3\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num3) < (int)(left.SegmentCount << 6)) {
+                        -- while ((int)(num3) < (int)((int)(left.SegmentCount) << 6)) {
                         -- 	bool flag2;
                         -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
                         -- 	bool flag3;
@@ -6126,9 +6126,9 @@ begin
                         -- 		ref ulong reference = ref array [num];
                         -- 		reference = (ulong)((long)reference + (1L << (int)num2));
                         -- 	}
-                        -- 	flag = (b >> 1 == 1);
+                        -- 	flag = ((int)(b) >> 1 == 1);
                         -- 	num2 = (ushort)((int)(num2) + 1);
-                        -- 	if (num2 >> 6 == 1) {
+                        -- 	if ((int)(num2) >> 6 == 1) {
                         -- 		num2 = 0;
                         -- 		num = (ushort)((int)(num) + 1);
                         -- 	}
@@ -6158,7 +6158,7 @@ begin
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\ := SmartResize(shift_left(\Quire Quire::op_Addition(Quire,Quire).0.left\.\SegmentCount\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5)))), 32);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\ := shift_left(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.left\.\SegmentCount\), 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5))));
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num3\), 32)) < (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.3\);
                         if (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
@@ -6191,9 +6191,9 @@ begin
                             -- 		ref ulong reference = ref array [num];
                             -- 		reference = (ulong)((long)reference + (1L << (int)num2));
                             -- 	}
-                            -- 	flag = (b >> 1 == 1);
+                            -- 	flag = ((int)(b) >> 1 == 1);
                             -- 	num2 = (ushort)((int)(num2) + 1);
-                            -- 	if (num2 >> 6 == 1) {
+                            -- 	if ((int)(num2) >> 6 == 1) {
                             -- 		num2 = 0;
                             -- 		num = (ushort)((int)(num) + 1);
                             -- 	}
@@ -6464,9 +6464,9 @@ begin
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_21\ => 
                         -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (b >> 1 == 1);
+                        -- flag = ((int)(b) >> 1 == 1);
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := signed(SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.b\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111"))), 32));
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := shift_right(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)), to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ = to_signed(1, 32);
                         \Quire Quire::op_Addition(Quire,Quire).0.flag\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\);
                         -- The following section was transformed from the .NET statement below:
@@ -6505,12 +6505,12 @@ begin
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.19\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num2\), 32)) + to_signed(1, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.num2\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.19\);
                         -- The following section was transformed from the .NET statement below:
-                        -- if (num2 >> 6 == 1) {
+                        -- if ((int)(num2) >> 6 == 1) {
                         -- 	num2 = 0;
                         -- 	num = (ushort)((int)(num) + 1);
                         -- }
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.20\ := signed(SmartResize(shift_right(\Quire Quire::op_Addition(Quire,Quire).0.num2\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5) and "11111"))), 32));
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.20\ := shift_right(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.num2\), 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5) and "11111")));
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_25\;
                         -- Clock cycles needed to complete this state (approximation): 0.67425
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_25\ => 
@@ -6587,7 +6587,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,UInt32).0._State\: \Quire Quire::op_Addition(Quire,UInt32).0._States\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_0\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.right\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.return.0\: \Lombiq.Arithmetics.Quire\;
     begin 
@@ -6627,20 +6627,20 @@ begin
                         \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.left.parameter.In\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.right\ := \Quire Quire::op_Addition(Quire,UInt32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6;
+                        -- Quire object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6 = new Quire (1u, (ushort)(left.SegmentCount << 6));
+                        -- object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0 = new Quire (1u, (ushort)((int)(left.SegmentCount) << 6));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
-                        \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(\Quire Quire::op_Addition(Quire,UInt32).0.left\.\SegmentCount\, to_integer(unsigned(SmartResize(to_signed(6, 32), 5))))), 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(signed(SmartResize((\Quire Quire::op_Addition(Quire,UInt32).0.left\.\SegmentCount\), 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5))))), 16);
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(1, 32);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= (\Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
@@ -6650,13 +6650,13 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return Quire.op_Addition (left, objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6);
+                            -- return Quire.op_Addition (left, object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire)
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.left\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= true;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_4\;
                         end if;
@@ -6667,7 +6667,7 @@ begin
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= false;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return.0\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.In.0\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.objectc291d5a0b651f5e7f8fdd9bf118cce1f42baf8e6e3621ec961a9c5dd7bd426c6\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.object2b25f3fa9b50e7492d78b34e15a583b8300db89f75b5c7cb2910bbab85a19ff0\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return\ <= \Quire Quire::op_Addition(Quire,UInt32).0.return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_1\;
                         end if;
