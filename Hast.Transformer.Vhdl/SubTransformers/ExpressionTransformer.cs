@@ -512,16 +512,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     FieldName = memberReference.MemberName.ToExtendedVhdlId()
                 };
             }
-            else if (expression is UnaryOperatorExpression)
+            else if (expression is UnaryOperatorExpression unary)
             {
                 // Increment/decrement unary operators that are in their own statements are compiled into binary operators 
                 // (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
                 // Since unary operations can also take significant time (but they can't be multi-cycle) to complete 
                 // they're also assigned to result variables as with binary operator expressions.
-
-                var unary = expression as UnaryOperatorExpression;
-
 
                 var expressionType = _typeConverter
                     .ConvertType(unary.Expression.GetActualType(), context.TransformationContext);
@@ -628,9 +625,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return operationResultDataObjectReference;
             }
-            else if (expression is TypeReferenceExpression)
+            else if (expression is TypeReferenceExpression typeReferenceExpression)
             {
-                var type = ((TypeReferenceExpression)expression).Type;
+                var type = typeReferenceExpression.Type;
                 var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
                 if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(type.GetFullName(), expression);
@@ -676,14 +673,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return typeConversionResult.ConvertedFromExpression;
             }
-            else if (expression is ArrayCreateExpression)
+            else if (expression is ArrayCreateExpression arrayCreateExpression)
             {
-                return _arrayCreateExpressionTransformer.Transform((ArrayCreateExpression)expression, context);
+                return _arrayCreateExpressionTransformer.Transform(arrayCreateExpression, context);
             }
-            else if (expression is IndexerExpression)
+            else if (expression is IndexerExpression indexerExpression)
             {
-                var indexerExpression = expression as IndexerExpression;
-
                 var targetVariableReference = Transform(indexerExpression.Target, context) as IDataObject;
 
                 if (targetVariableReference == null)

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -45,10 +45,16 @@ namespace Hast.Transformer.Vhdl.Models
         ISet<string> TaskFactoryVariableNames { get; }
 
         /// <summary>
-        /// Keeps track of which invoked state machines were finished in which states. This is needed not to immediately
-        /// restart a component in the state it was finished.
+        /// Keeps track of which invoked state machines were finished in which states. This is needed not to
+        /// immediately restart a component in the state it was finished.
         /// </summary>
         IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; }
+
+        /// <summary>
+        /// Maps label statements to state machine state indices. This is necessary because each label should have its
+        /// own state (so it's possible to jump to it).
+        /// </summary>
+        IDictionary<string, int> LabelsToStateIndicesMappings { get; }
 
         /// <summary>
         /// Keeps track of any other custom values for the scope.
@@ -90,6 +96,7 @@ namespace Hast.Transformer.Vhdl.Models
         public IDictionary<string, MethodDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, MethodDeclaration>();
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
         public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
+        public IDictionary<string, int> LabelsToStateIndicesMappings { get; set; } = new Dictionary<string, int>();
         public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
         public IList<ITransformationWarning> Warnings { get; set; } = new List<ITransformationWarning>();
     }

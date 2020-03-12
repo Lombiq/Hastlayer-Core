@@ -42,8 +42,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private void TransformInner(Statement statement, ISubTransformerContext context)
         {
-            var stateMachine = context.Scope.StateMachine;
-            var currentBlock = context.Scope.CurrentBlock; ;
+            var scope = context.Scope;
+            var stateMachine = scope.StateMachine;
+            var currentBlock = scope.CurrentBlock;
 
             string stateNameGenerator(int index, IVhdlGenerationOptions vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
@@ -51,10 +52,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.Add(new LineComment("The following section was transformed from the .NET statement below:"));
             currentBlock.Add(new BlockComment(statement.ToString()));
 
-            if (statement is VariableDeclarationStatement)
+            if (statement is VariableDeclarationStatement variableStatement)
             {
-                var variableStatement = statement as VariableDeclarationStatement;
-
                 var variableType = variableStatement.Type;
                 var variableSimpleType = variableType as SimpleType;
                 var isTaskFactory = false;
@@ -86,13 +85,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else if (isTaskFactory)
                 {
-                    context.Scope.TaskFactoryVariableNames.Add(variableStatement.Variables.Single().Name);
+                    scope.TaskFactoryVariableNames.Add(variableStatement.Variables.Single().Name);
                 }
             }
-            else if (statement is ExpressionStatement)
+            else if (statement is ExpressionStatement expressionStatement)
             {
-                var expressionStatement = statement as ExpressionStatement;
-
                 var expressionElement = _expressionTransformer.Transform(expressionStatement.Expression, context);
 
                 // If the element is just a DataObjectReference (so e.g. a variable reference) alone then it needs to
@@ -103,11 +100,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(expressionElement.Terminate());
                 }
             }
-            else if (statement is ReturnStatement)
+            else if (statement is ReturnStatement returnStatement)
             {
-                var returnStatement = statement as ReturnStatement;
-
-                var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType, context.TransformationContext);
+                var returnType = _typeConverter.ConvertAstType(scope.Method.ReturnType, context.TransformationContext);
                 if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
                 {
                     IDataObject returnReference = stateMachine.CreateReturnSignalReference();
@@ -146,10 +141,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 currentBlock.Add(stateMachine.ChangeToFinalState());
             }
-            else if (statement is IfElseStatement)
+            else if (statement is IfElseStatement ifElse)
             {
-                var ifElse = statement as IfElseStatement;
-
                 // Is this a compiler-generated if statement to create a Func for a DisplayClass method? Like:
                 // if (arg_97_1 = <> c__DisplayClass9_.<> 9__0 == null) {
                 //     arg_97_1 = <> c__DisplayClass9_.<> 9__0 = new Func<object, bool>(<>c__DisplayClass9_.<ParallelizedArePrimeNumbers>b__0);
@@ -158,7 +151,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // if (arg_42_1 = HastlayerOptimizedAlgorithm.<>c.<>9__3_0 == null) {
                 //     arg_42_1 = HastlayerOptimizedAlgorithm.<>c.<> 9__3_0 = new Func<object, uint>(HastlayerOptimizedAlgorithm.<> c.<> 9.<Run>b__3_0);
                 // }
-                var scope = context.Scope;
                 var isDisplayClassMethodReferenceCreatingIf =
                     ifElse.Condition.Is<BinaryOperatorExpression>(binary =>
                         binary.Left.Is<AssignmentExpression>(assignment =>
@@ -268,19 +260,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
                 }
             }
-            else if (statement is BlockStatement)
+            else if (statement is BlockStatement blockStatement)
             {
-                var blockStatement = statement as BlockStatement;
-
                 foreach (var blockStatementStatement in blockStatement.Statements)
                 {
                     TransformInner(blockStatementStatement, context);
                 }
             }
-            else if (statement is WhileStatement)
+            else if (statement is WhileStatement whileStatement)
             {
-                var whileStatement = statement as WhileStatement;
-
                 var whileStartStateIndex = currentBlock.StateMachineStateIndex;
                 string whileStartStateIndexNameGenerator(IVhdlGenerationOptions vhdlGenerationOptions) =>
                     vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(whileStartStateIndex));
@@ -337,18 +325,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (statement is ThrowStatement)
             {
-                context.Scope.Warnings.AddWarning(
+                scope.Warnings.AddWarning(
                     "ThrowStatementOmitted",
                     "The exception throw statement \"" + statement.ToString() +
                     "\" was omitted during transformation to be able to transform the code. However this can cause issues for certain algorithms; if it is an issue for this one then this code can't be transformed.");
 
                 currentBlock.Add(new LineComment("A throw statement was here, which was omitted during transformation."));
             }
-            else if (statement is SwitchStatement)
+            else if (statement is SwitchStatement switchStatement)
             {
-                var switchStatement = statement as SwitchStatement;
-
-
                 var caseStatement = new Case
                 {
                     Expression = _expressionTransformer.Transform(switchStatement.Expression, context)
@@ -401,10 +386,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
             }
-            else if (statement is BreakStatement)
+            else if (statement is BreakStatement breakStatement)
             {
-                var breakStatement = statement as BreakStatement;
-
                 // If this is a break in a switch's section then nothing to do: these are not needed in VHDL.
                 if (statement.Parent is SwitchSection)
                 {
@@ -422,6 +405,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 throw new NotSupportedException(
                     "Break statements outside of switch statements and loops are not supported.".AddParentEntityName(statement));
+            }
+            else if (statement is GotoStatement gotoStatement)
+            {
+                currentBlock.Add(stateMachine.CreateStateChange(scope.LabelsToStateIndicesMappings[gotoStatement.Label]));
+
+                var newBlock = new InlineBlock();
+                scope.CurrentBlock.ChangeBlockToDifferentState(newBlock, stateMachine.AddState(newBlock));
+            }
+            else if (statement is LabelStatement labelStatement)
+            {
+                var labelStateIndex = scope.LabelsToStateIndicesMappings[labelStatement.Label];
+                scope.CurrentBlock.Add(stateMachine.CreateStateChange(labelStateIndex));
+                currentBlock.ChangeBlockToDifferentState(stateMachine.States[labelStateIndex].Body, labelStateIndex);
             }
             else throw new NotSupportedException(
                 "Statements of type " + statement.GetType() + " are not supported.".AddParentEntityName(statement));

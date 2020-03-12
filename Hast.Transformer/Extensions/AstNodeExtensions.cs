@@ -188,15 +188,27 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode =>
             node.FindFirstChildOfType<T>(n => true);
 
-        public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
+        public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
+            node.FindAllChildrenOfType<T>(predicate, true).SingleOrDefault();
+
+        public static IEnumerable<T> FindAllChildrenOfType<T>(
+            this AstNode node,
+            Predicate<T> predicate = null,
+            bool stopAfterFirst = false) where T : AstNode
         {
             var children = new Queue<AstNode>(node.Children);
+            var matchingChildren = new List<T>();
+            if (predicate == null) predicate = n => true;
 
             while (children.Count != 0)
             {
                 var currentChild = children.Dequeue();
 
-                if (currentChild is T castCurrentChild && predicate(castCurrentChild)) return castCurrentChild;
+                if (currentChild is T castCurrentChild && predicate(castCurrentChild))
+                {
+                    matchingChildren.Add(castCurrentChild);
+                    if (stopAfterFirst) return matchingChildren;
+                }
 
                 foreach (var child in currentChild.Children)
                 {
@@ -204,7 +216,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 }
             }
 
-            return null;
+            return matchingChildren;
         }
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
