@@ -90,11 +90,9 @@
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Models\IKnownTypeLookupTable.cs" />
     <Compile Include="Services\BinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
-    <Compile Include="Services\DecompilationErrorsFixer.cs" />
     <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\FSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IBinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
-    <Compile Include="Services\IDecompilationErrorsFixer.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IFSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IMemberIdentifiersFixer.cs" />

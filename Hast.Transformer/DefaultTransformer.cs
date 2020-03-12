@@ -53,7 +53,6 @@ namespace Hast.Transformer
         private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
         private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
         private readonly IDeviceDriverSelector _deviceDriverSelector;
-        private readonly IDecompilationErrorsFixer _decompilationErrorsFixer;
         private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
         private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
@@ -89,7 +88,6 @@ namespace Hast.Transformer
             ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
             IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
             IDeviceDriverSelector deviceDriverSelector,
-            IDecompilationErrorsFixer decompilationErrorsFixer,
             IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
             IMemberIdentifiersFixer memberIdentifiersFixer,
@@ -123,7 +121,6 @@ namespace Hast.Transformer
             _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
             _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
             _deviceDriverSelector = deviceDriverSelector;
-            _decompilationErrorsFixer = decompilationErrorsFixer;
             _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
             _memberIdentifiersFixer = memberIdentifiersFixer;
@@ -325,7 +322,6 @@ namespace Hast.Transformer
 
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
-            _decompilationErrorsFixer.FixDecompilationErrors(syntaxTree);
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree, knownTypeLookupTable);
             _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree, knownTypeLookupTable);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
