@@ -1,6 +1,6 @@
 ﻿using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers

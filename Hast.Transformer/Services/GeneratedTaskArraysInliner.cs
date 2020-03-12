@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services
 {
@@ -23,12 +23,12 @@ namespace Hast.Transformer.Services
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                // AssigmentExpression, Left = arg_*, Right.GetActualType().FullName.StartsWith("System.Threading.Tasks.Task`1<")
+                // AssigmentExpression, Left = arg_*, Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<")
 
                 var compilerGeneratedVariableName = string.Empty;
                 if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
                         (compilerGeneratedVariableName = identifier.Identifier).StartsWith("arg_")) &&
-                    assignmentExpression.Right.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
+                    assignmentExpression.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<"))
                 {
                     InlinableVariableMapping[compilerGeneratedVariableName] =
                         ((IdentifierExpression)assignmentExpression.Right).Identifier;
@@ -57,7 +57,7 @@ namespace Hast.Transformer.Services
                     // If this is in an arg_9C_0 = array; kind of assignment, then remove the whole assignment's statement.
                     if (parentAssignment != null &&
                         parentAssignment.Left == identifierExpression &&
-                        parentAssignment.Right.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
+                        parentAssignment.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<"))
                     {
                         parentAssignment.FindFirstParentOfType<ExpressionStatement>().Remove();
                     }

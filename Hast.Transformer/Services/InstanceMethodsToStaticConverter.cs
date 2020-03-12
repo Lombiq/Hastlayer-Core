@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 using System.Linq;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
@@ -43,17 +44,17 @@ namespace Hast.Transformer.Services
                     return;
                 }
 
-                var parentTypeDefinition = parentType.Annotation<TypeDefinition>();
+                var parentTypeResolveResult = parentType.GetResolveResult<TypeResolveResult>();
 
                 var parentAstType = AstType.Create(parentType.GetFullName());
-                parentAstType.AddAnnotation(parentTypeDefinition);
+                parentAstType.AddAnnotation(parentTypeResolveResult);
 
                 // Making the method static.
-                methodDeclaration.Modifiers = methodDeclaration.Modifiers | Modifiers.Static;
+                methodDeclaration.Modifiers |= Modifiers.Static;
 
                 // Adding a "@this" parameter and using that instead of the "this" reference.
                 var thisParameter = new ParameterDeclaration(parentAstType, "this")
-                    .WithAnnotation(new ParameterDefinition("this", ParameterAttributes.None, parentTypeDefinition));
+                    .WithAnnotation(VariableHelper.CreateILVariableResolveResult(VariableKind.Parameter, parentTypeResolveResult.Type, "this"));
                 if (!methodDeclaration.Parameters.Any())
                 {
                     methodDeclaration.Parameters.Add(thisParameter);
@@ -69,7 +70,7 @@ namespace Hast.Transformer.Services
                 _syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(
                     parentAstType,
                     parentType.GetFullName(),
-                    methodDeclaration.Name));
+                    methodDeclaration.GetFullName()));
             }
 
 
@@ -79,19 +80,9 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitThisReferenceExpression(thisReferenceExpression);
 
-                    var thisIdentifierExpression = new IdentifierExpression("this");
-                    var typeInformation = thisReferenceExpression.Annotation<TypeInformation>();
-
-                    if (typeInformation == null)
-                    {
-                        typeInformation = thisReferenceExpression
-                            .FindFirstParentTypeDeclaration()
-                            .Annotation<TypeDefinition>()
-                            .ToTypeInformation();
-                    }
-
-                    thisIdentifierExpression.AddAnnotation(typeInformation);
-                    thisIdentifierExpression.AddAnnotation(new ILVariable { Name = "this", Type = typeInformation.ExpectedType });
+                    var thisIdentifierExpression = new IdentifierExpression("this")
+                        .WithAnnotation(VariableHelper
+                            .CreateILVariableResolveResult(VariableKind.Parameter, thisReferenceExpression.GetActualType(), "this"));
                     thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
                 }
             }
@@ -100,14 +91,14 @@ namespace Hast.Transformer.Services
             {
                 private readonly AstType _parentAstType;
                 private readonly string _methodParentFullName;
-                private readonly string _methodName;
+                private readonly string _methodFullName;
 
 
-                public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodName)
+                public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodFullName)
                 {
                     _parentAstType = parentAstType;
                     _methodParentFullName = methodParentFullName;
-                    _methodName = methodName;
+                    _methodFullName = methodFullName;
                 }
 
 
@@ -119,18 +110,19 @@ namespace Hast.Transformer.Services
 
                     if (targetMemberReference == null) return;
 
-                    var targetTypeReference = targetMemberReference.Target.GetActualTypeReference();
+                    var targetType = targetMemberReference.Target.GetActualType();
                     var isAffectedMethodCall =
                         (targetMemberReference.Target is ThisReferenceExpression ||
-                            targetTypeReference != null &&
-                            targetTypeReference.FullName == _methodParentFullName)
+                            targetType != null &&
+                            targetType.GetFullName() == _methodParentFullName)
                         &&
-                        targetMemberReference.MemberName == _methodName;
+                        targetMemberReference.GetMemberFullName() == _methodFullName;
 
                     if (!isAffectedMethodCall) return;
 
                     var originalTarget = targetMemberReference.Target;
-                    targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone()));
+                    targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone())
+                        .WithAnnotation(new TypeResolveResult(_parentAstType.GetActualType())));
 
                     if (!invocationExpression.Arguments.Any())
                     {

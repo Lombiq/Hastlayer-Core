@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
@@ -12,11 +12,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
         {
             var compilerGeneratedClasses = syntaxTree
                 .GetAllTypeDeclarations()
-                .Where(type => type.ClassType == ClassType.Class && type.Name.Contains("__DisplayClass"))
-                .Where(type => type
-                    .Attributes
-                    .Any(attributeSection => attributeSection
-                        .Attributes.Any(attribute => attribute.Type.GetSimpleName() == "CompilerGeneratedAttribute")));
+                .Where(type => type.GetFullName().IsDisplayOrClosureClassName());
 
             foreach (var compilerGeneratedClass in compilerGeneratedClasses)
             {
@@ -33,12 +29,12 @@ namespace Hast.Transformer.Vhdl.Verifiers
 
                     Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
                     {
-                        var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
+                        if (!memberReferenceExpression.IsFieldReference()) return;
 
-                        if (fieldDefinition == null) return;
+                        var fullName = memberReferenceExpression.GetMemberResolveResult().GetFullName();
 
                         var field = fields.Values
-                            .SingleOrDefault(f => f.Annotation<FieldDefinition>().FullName == fieldDefinition.FullName);
+                            .SingleOrDefault(f => f.GetMemberResolveResult().GetFullName() == fullName);
 
                         // The field won't be on the compiler-generated class if the member reference accesses a
                         // user-defined type's field.

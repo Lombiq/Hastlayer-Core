@@ -2,21 +2,21 @@
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface ITypeConverter : IDependency
     {
-        DataType ConvertTypeReference(
-            TypeReference typeReference,
+        DataType ConvertType(
+            IType type,
             IVhdlTransformationContext context);
 
         DataType ConvertAstType(AstType type, IVhdlTransformationContext context);
         DataType ConvertAndDeclareAstType(
-            AstType type, 
+            AstType type,
             IDeclarableElement declarable,
             IVhdlTransformationContext context);
     }
@@ -25,25 +25,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public static class TypeConvertedExtensions
     {
         public static DataType ConvertParameterType(
-            this ITypeConverter typeConverter, 
+            this ITypeConverter typeConverter,
             ParameterDeclaration parameter,
             IVhdlTransformationContext context)
         {
-            var parameterType = parameter.Annotation<ParameterDefinition>().ParameterType;
+            var parameterType = parameter.GetActualType();
 
             // This is an out or ref parameter.
-            if (parameterType.IsByReference)
+            if (parameterType.IsByRefLike)
             {
                 parameterType = ((ByReferenceType)parameterType).ElementType;
             }
 
-            if (!parameterType.IsArray)
+            if (!parameterType.IsArray())
             {
-                return typeConverter.ConvertTypeReference(parameterType, context);
+                return typeConverter.ConvertType(parameterType, context);
             }
 
             return ArrayHelper.CreateArrayInstantiation(
-                typeConverter.ConvertTypeReference(parameterType.GetElementType(), context),
+                typeConverter.ConvertType(parameterType.GetElementType(), context),
                 context.ArraySizeHolder.GetSizeOrThrow(parameter).Length);
         }
     }

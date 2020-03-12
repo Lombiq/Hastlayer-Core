@@ -1,4 +1,5 @@
-﻿using ICSharpCode.NRefactory.CSharp;
+﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
 namespace Hast.Transformer.Services
@@ -10,6 +11,6 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface IImmutableArraysToStandardArraysConverter : IDependency
     {
-        void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree);
+        void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable);
     }
 }

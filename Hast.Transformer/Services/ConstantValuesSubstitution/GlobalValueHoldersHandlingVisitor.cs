@@ -1,6 +1,6 @@
-﻿using System;
-using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -68,6 +68,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     _constantValuesTable.MarkAsNonConstant(parameter, _rootNode);
                 }
             }
+        }
+
+        public override void VisitParameterDeclaration(ParameterDeclaration parameterDeclaration)
+        {
+            base.VisitParameterDeclaration(parameterDeclaration);
+
+            // Handling parameters with default values.
+            if (!(parameterDeclaration.DefaultExpression is PrimitiveExpression primitiveExpression)) return;
+            _constantValuesTable.MarkAsPotentiallyConstant(parameterDeclaration, primitiveExpression, _rootNode, true);
         }
 
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)

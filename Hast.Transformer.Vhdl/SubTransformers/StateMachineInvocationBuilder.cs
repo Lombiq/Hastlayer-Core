@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -10,7 +7,10 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -252,8 +252,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
                     var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
 
-                    // Only trying casting if the parameter is not a constant or something other than an IDataObject.
-                    if (parameterReference is IDataObject)
+                    // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
+                    // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
+                    // the AST.
+                    if (parameter.DataType != parameterSignalType)
                     {
                         IAssignmentTypeConversionResult conversionResult;
                         if (flowDirection == ParameterFlowDirection.Out)
@@ -320,7 +322,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvocationFinishedIfElse = InvocationHelper
                 .CreateWaitForInvocationFinished(stateMachine, targetMethodName, instanceCount, waitForAll);
 
-            var currentStateName = stateMachine.CreateStateName(currentBlock.StateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
                 new LineComment(
                     "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),

@@ -1,10 +1,12 @@
-﻿using ICSharpCode.Decompiler.ILAst;
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.CSharp.Resolver;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class AstNodeExtensions
     {
@@ -14,6 +16,18 @@ namespace ICSharpCode.NRefactory.CSharp
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
+            if (node is TypeDeclaration || node is AstType)
+            {
+                return node.GetActualTypeFullName();
+            }
+
+            if (node is EntityDeclaration entityDeclaration)
+            {
+                return node.GetMemberResolveResult()?.GetFullName() ??
+                    CreateParentEntityBasedName(node, entityDeclaration.Name);
+
+            }
+
             if (node is MemberReferenceExpression memberReferenceExpression)
             {
                 return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
@@ -32,8 +46,8 @@ namespace ICSharpCode.NRefactory.CSharp
             var referencedMemberFullName = node.GetReferencedMemberFullName();
             if (!string.IsNullOrEmpty(referencedMemberFullName)) return referencedMemberFullName;
 
-            var parameterReference = node.Annotation<ParameterReference>();
-            if (parameterReference != null) return CreateParentEntityBasedName(node, parameterReference.Name);
+            var iLVariableResolveResult = node.GetResolveResult<ILVariableResolveResult>();
+            if (iLVariableResolveResult != null) return CreateParentEntityBasedName(node, iLVariableResolveResult.Variable.Name);
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
@@ -108,102 +122,33 @@ namespace ICSharpCode.NRefactory.CSharp
                 return string.Empty;
             }
 
+            if (node is SimpleType)
+            {
+                return node.GetActualTypeFullName();
+            }
+
             return node.CreateNameForUnnamedNode();
         }
 
         public static string GetILRangeName(this AstNode node)
         {
-            // The node or parents should contain one or more ILRange objects which maybe correspond to the node's
-            // location in the original IL.
-            var ilRange = node.Annotation<List<ILRange>>();
-            if (ilRange == null)
-            {
-                ilRange = node
-                    .FindFirstParentOfType<AstNode>(parent => parent.Annotations.Any(annotation => annotation is List<ILRange>))
-                    ?.Annotation<List<ILRange>>();
-            }
-            return ilRange != null && ilRange.Any() ? ilRange.First().ToString() : string.Empty;
-        }
-
-        /// <summary>
-        /// Retrieves the node's full name (see <see cref="GetFullName(AstNode)"/>) and if it's a property, produces
-        /// a unified name for all of its forms (like backing field, compiler-generated get/set methods).
-        /// </summary>
-        public static string GetFullNameWithUnifiedPropertyName(this AstNode node)
-        {
-            var name = node.GetFullName();
-
-            // If this is a compiler-generated property getter or setter method then get the real property name.
-            var methodDefinition = node.Annotation<MethodDefinition>();
-            if (methodDefinition != null && (methodDefinition.IsGetter || methodDefinition.IsSetter))
-            {
-                name = methodDefinition.IsGetter ?
-                    name.Replace("::get_", "::") :
-                    name.Replace("::set_", "::");
-            }
-            else if (name.IsBackingFieldName())
-            {
-                name = name.ConvertFullBackingFieldNameToPropertyName();
-            }
-
-            return name;
+            var ilInstruction = node.Annotation<ILInstruction>();
+            return ilInstruction != null ? ilInstruction.ILRanges.First().ToString() : string.Empty;
         }
 
         /// <summary>
         /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
         /// name.
         /// </summary>
-        public static string GetSimpleName(this AstNode node)
-        {
-            string name = null;
-            TypeReference declaringType = null;
+        public static string GetSimpleName(this AstNode node) =>
+            // Unlike formerly with Cecil, the FullName property is in a simple format.
+            node.GetMemberResolveResult()?.Member.ReflectionName ?? node.GetActualType().FullName;
 
-            var memberDefinition = node.Annotation<IMemberDefinition>();
-            if (memberDefinition != null)
-            {
-                name = memberDefinition.Name;
-                declaringType = memberDefinition.DeclaringType;
-                if (declaringType == null) name = memberDefinition.FullName;
-            }
-            else
-            {
-                var memberReference = node.Annotation<MemberReference>();
-                if (memberReference != null)
-                {
-                    name = memberReference.Name;
-                    declaringType = memberReference.DeclaringType;
-                    if (declaringType == null) name = memberReference.FullName;
-                }
-            }
+        public static T GetResolveResult<T>(this AstNode node) where T : ResolveResult =>
+            node.GetResolveResult() as T;
 
-            // The name is already a full name, but for a different declaring type. This is the case for explicitly 
-            // implemented interface methods.
-            if (name.Contains('.'))
-            {
-                name = name.Substring(name.LastIndexOf('.') + 1);
-            }
-
-            var childIsNested = false;
-            while (declaringType != null)
-            {
-                // The delimiter between the name of an inner class and its parent needs to be a plus.
-                var delimiter = childIsNested ? "+" : ".";
-
-                if (declaringType.DeclaringType == null)
-                {
-                    name = declaringType.FullName + delimiter + name;
-                }
-                else
-                {
-                    name = declaringType.Name + delimiter + name;
-                }
-
-                childIsNested = declaringType.IsNested;
-                declaringType = declaringType.DeclaringType;
-            }
-
-            return name;
-        }
+        public static MemberResolveResult GetMemberResolveResult(this AstNode node) =>
+            node.GetResolveResult<MemberResolveResult>();
 
         public static bool IsIn<T>(this AstNode node) where T : AstNode =>
             node.FindFirstParentOfType<T>() != null;
@@ -224,7 +169,7 @@ namespace ICSharpCode.NRefactory.CSharp
             node.FindFirstParentOfType<T>(n => true);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
-            node.FindFirstParentOfType(predicate, out int height);
+            node.FindFirstParentOfType(predicate, out _);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate, out int height) where T : AstNode
         {
@@ -243,15 +188,27 @@ namespace ICSharpCode.NRefactory.CSharp
         public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode =>
             node.FindFirstChildOfType<T>(n => true);
 
-        public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
+        public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
+            node.FindAllChildrenOfType<T>(predicate, true).SingleOrDefault();
+
+        public static IEnumerable<T> FindAllChildrenOfType<T>(
+            this AstNode node,
+            Predicate<T> predicate = null,
+            bool stopAfterFirst = false) where T : AstNode
         {
             var children = new Queue<AstNode>(node.Children);
+            var matchingChildren = new List<T>();
+            if (predicate == null) predicate = n => true;
 
             while (children.Count != 0)
             {
                 var currentChild = children.Dequeue();
 
-                if (currentChild is T castCurrentChild && predicate(castCurrentChild)) return castCurrentChild;
+                if (currentChild is T castCurrentChild && predicate(castCurrentChild))
+                {
+                    matchingChildren.Add(castCurrentChild);
+                    if (stopAfterFirst) return matchingChildren;
+                }
 
                 foreach (var child in currentChild.Children)
                 {
@@ -259,7 +216,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 }
             }
 
-            return null;
+            return matchingChildren;
         }
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
@@ -275,6 +232,8 @@ namespace ICSharpCode.NRefactory.CSharp
             return predicate(castNode);
         }
 
+        public static T As<T>(this AstNode node) where T : AstNode => node as T;
+
         public static AstNode FindFirstNonParenthesizedExpressionParent(this AstNode node)
         {
             var parent = node.Parent;
@@ -287,38 +246,99 @@ namespace ICSharpCode.NRefactory.CSharp
             return parent;
         }
 
-        public static T WithAnnotation<T>(this T node, object annotation) where T : AstNode
+        public static IType GetActualType(this AstNode node)
         {
-            node.AddAnnotation(annotation);
-            return node;
+            if (node is ParenthesizedExpression parenthesizedExpression)
+            {
+                return parenthesizedExpression.Expression.GetActualType();
+            }
+
+            if (node is IndexerExpression indexerExpression)
+            {
+                return indexerExpression.Target.GetActualType().GetElementType();
+            }
+
+            if (node is AssignmentExpression assignmentExpression)
+            {
+                return assignmentExpression.Left.GetActualType();
+            }
+
+            if (node is UnaryOperatorExpression unaryOperatorExpression)
+            {
+                return unaryOperatorExpression.Expression.GetActualType();
+            }
+
+            if (node is DefaultValueExpression defaultValueExpression)
+            {
+                return defaultValueExpression.Type.GetActualType();
+            }
+
+            var type = node.GetResolveResult().Type;
+            return type == SpecialType.UnknownType ? null : type;
         }
 
-        /// <summary>
-        /// Replaces all annotations with the type of the given new annotation with the supplied instance of the new
-        /// annotation.
-        /// </summary>
-        public static TNode ReplaceAnnotations<TNode, TAnnotation>(this TNode node, TAnnotation annotation)
-            where TNode : AstNode
-            where TAnnotation : class
-        {
-            node.RemoveAnnotations<TAnnotation>();
-            node.AddAnnotation(annotation);
+        public static string GetActualTypeFullName(this AstNode node) => node.GetActualType().GetFullName();
 
-            return node;
-        }
+        public static ResolveResult CreateResolveResultFromActualType(this AstNode node) =>
+            node.GetActualType().ToResolveResult();
 
 
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
-            var memberDefinition = node.Annotation<IMemberDefinition>();
-            if (memberDefinition != null) return memberDefinition.FullName;
+            var memberResolveResult = node.GetMemberResolveResult();
 
-            var memberReference = node.Annotation<MemberReference>();
-            if (memberReference != null) return memberReference.FullName;
+            if (node is MemberReferenceExpression memberReferenceExpression)
+            {
+                var property = memberResolveResult?.Member as IProperty;
+                var isCustomProperty =
+                    memberReferenceExpression.IsPropertyReference() &&
+                    !property.Getter.IsCompilerGenerated() &&
+                    !property.Setter.IsCompilerGenerated();
 
-            return null;
+                // For certain members only their parent invocation will contain usable ResolveResult (see:
+                // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since
+                // from the IMember of the property we can't see whether the getter or setter is invoked, only from the
+                // parent invocation (this is only true for custom properties, not for auto-properties).
+                if (node.Parent is InvocationExpression invocationExpression &&
+                    (memberResolveResult == null || isCustomProperty))
+                {
+                    if (invocationExpression.Target == node)
+                    {
+                        return node.Parent.GetResolveResult<InvocationResolveResult>()?.GetFullName();
+                    }
+                    else if (memberReferenceExpression.IsPropertyReference())
+                    {
+                        // This is not necessarily true in all cases but seems to be OK for now: If the property is not
+                        // the target but an argument of an invocation then the property reference is most possibly a
+                        // getter.
+                        return property.Getter.GetFullName();
+                    }
+                }
+
+                // Heuristics on when a property is used as a getter or setter.
+                if (isCustomProperty)
+                {
+                    if (node.Parent is AssignmentExpression parentAssignment)
+                    {
+                        // Can't use if-else because theoretically the node can't just be in these two properties.
+                        if (parentAssignment.Left == node) return property.Setter.GetFullName();
+                        if (parentAssignment.Right == node) return property.Getter.GetFullName();
+                    }
+                    else return property.Getter.GetFullName();
+                }
+
+                // This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0
+                // method here:
+                // Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
+                MethodGroupResolveResult methodGroupResolveResult;
+                if ((methodGroupResolveResult = node.GetResolveResult<MethodGroupResolveResult>()) != null)
+                {
+                    return methodGroupResolveResult.Methods.Single().GetFullName();
+                }
+            }
+
+            return memberResolveResult?.GetFullName();
         }
-
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>
             // The node doesn't really have a name so give it one that is suitably unique.

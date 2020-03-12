@@ -1,12 +1,6 @@
-﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
-using Orchard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hast.Common.Helpers;
+using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -29,10 +23,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Changing a % b to a – a / b * b.
                 // At this point the operands should have the same type, so it's safe just clone around.
 
-                if (binaryOperatorExpression.GetActualTypeReference() == null)
+                if (binaryOperatorExpression.GetActualType() == null)
                 {
                     binaryOperatorExpression
-                        .AddAnnotation(binaryOperatorExpression.Left.GetTypeInformationOrCreateFromActualTypeReference());
+                        .AddAnnotation(binaryOperatorExpression.Left.CreateResolveResultFromActualType());
                 }
 
                 // First assigning the operands to new variables so if method calls, casts or anything are in there
@@ -48,15 +42,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return;
                     }
 
+                    // Need to add ILRange because there can be multiple remainder operations for the same variable
+                    // so somehow we need to distinguish between them.
+                    var ilRangeName = operand.GetILRangeName();
+                    if (string.IsNullOrEmpty(ilRangeName))
+                    {
+                        ilRangeName = operand
+                            .FindFirstChildOfType<AstNode>(child => !string.IsNullOrEmpty(child.GetILRangeName()))
+                            ?.GetILRangeName();
+                    }
+
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-                        // Need to add ILRange because there can be multiple remainder operations for the same variable
-                        // so somehow we need to distinguish between them.
-                        "remainderOperand" + operand.GetILRangeName().Replace('-', '_'),
-                        operand,
-                        TypeHelper.CreateAstType(operand.GetActualTypeReference(true)));
+
+                        "remainderOperand" + Sha2456Helper.ComputeHash(operand.GetFullName() + ilRangeName),
+                        operand.GetActualType(),
+                        TypeHelper.CreateAstType(operand.GetActualType()),
+                        operand.FindFirstParentStatement());
 
                     var assignment = new AssignmentExpression(variableIdentifier, operand.Clone())
-                        .WithAnnotation(operand.GetTypeInformationOrCreateFromActualTypeReference());
+                        .WithAnnotation(operand.CreateResolveResultFromActualType());
 
                     AstInsertionHelper.InsertStatementBefore(
                         binaryOperatorExpression.FindFirstParentStatement(),

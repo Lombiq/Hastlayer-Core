@@ -1,5 +1,5 @@
 ﻿using Hast.Synthesis.Abstractions;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Synthesis
 {

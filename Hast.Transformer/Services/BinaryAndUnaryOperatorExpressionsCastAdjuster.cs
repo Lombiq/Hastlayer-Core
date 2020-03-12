@@ -1,27 +1,27 @@
 ﻿using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
-using Mono.Cecil;
-using Orchard;
-using System;
-using System.Collections.Generic;
+using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.Transformer.Services
 {
     public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IBinaryAndUnaryOperatorExpressionsCastAdjuster
     {
-        public void AdjustBinaryAndUnaryOperatorExpressions(SyntaxTree syntaxTree)
+        public void AdjustBinaryAndUnaryOperatorExpressions(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable)
         {
-            syntaxTree.AcceptVisitor(new BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor());
+            syntaxTree.AcceptVisitor(new BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(knownTypeLookupTable));
         }
 
 
         private class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
         {
+            // Note that while shifts are missing from the list under 
+            // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions they still get
+            // kind of a numeric promotion. See the page about bitwise and shift operators
+            // (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
+            // mentions that "When operands are of different integral types, their values are converted to the closest
+            // containing integral type."
             private static BinaryOperatorType[] _binaryOperatorsWithNumericPromotions = new[]
             {
                 BinaryOperatorType.Add,
@@ -37,7 +37,9 @@ namespace Hast.Transformer.Services
                 BinaryOperatorType.GreaterThan,
                 BinaryOperatorType.LessThan,
                 BinaryOperatorType.GreaterThanOrEqual,
-                BinaryOperatorType.LessThanOrEqual
+                BinaryOperatorType.LessThanOrEqual,
+                BinaryOperatorType.ShiftLeft,
+                BinaryOperatorType.ShiftRight
             };
 
             private static BinaryOperatorType[] _binaryOperatorsProducingNumericResults = new[]
@@ -49,7 +51,9 @@ namespace Hast.Transformer.Services
                 BinaryOperatorType.Modulus,
                 BinaryOperatorType.BitwiseAnd,
                 BinaryOperatorType.BitwiseOr,
-                BinaryOperatorType.ExclusiveOr
+                BinaryOperatorType.ExclusiveOr,
+                BinaryOperatorType.ShiftLeft,
+                BinaryOperatorType.ShiftRight
             };
 
             private static string[] _numericTypes = new[]
@@ -61,7 +65,7 @@ namespace Hast.Transformer.Services
                 typeof(int).FullName,
                 typeof(uint).FullName,
                 typeof(long).FullName,
-                typeof(ulong).FullName,
+                typeof(ulong).FullName
             };
 
             // Those types that have arithmetic, relational and bitwise operations defined for them, see: 
@@ -71,7 +75,7 @@ namespace Hast.Transformer.Services
                 typeof(int).FullName,
                 typeof(uint).FullName,
                 typeof(long).FullName,
-                typeof(ulong).FullName,
+                typeof(ulong).FullName
             };
 
             private static UnaryOperatorType[] _unaryOperatorsWithNumericPromotions = new[]
@@ -90,8 +94,19 @@ namespace Hast.Transformer.Services
                 typeof(char).FullName
             };
 
+            private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
-            // Adding implicit casts as explained here: https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions
+
+            public BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(IKnownTypeLookupTable knownTypeLookupTable)
+            {
+                _knownTypeLookupTable = knownTypeLookupTable;
+            }
+
+
+            // Adding implicit casts as explained here: 
+            // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions
+            // Also handling shifts where the left operand needs to be u/int or u/long, see: 
+            // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators
 
             public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
             {
@@ -99,49 +114,49 @@ namespace Hast.Transformer.Services
 
                 if (!_binaryOperatorsWithNumericPromotions.Contains(binaryOperatorExpression.Operator)) return;
 
-                var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
+                var leftType = binaryOperatorExpression.Left.GetActualType();
                 if (binaryOperatorExpression.Left is CastExpression)
                 {
-                    leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference(true);
+                    leftType = binaryOperatorExpression.Left.GetActualType();
                 }
 
-                var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
+                var rightType = binaryOperatorExpression.Right.GetActualType();
                 if (binaryOperatorExpression.Right is CastExpression)
                 {
-                    rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference(true);
+                    rightType = binaryOperatorExpression.Right.GetActualType();
                 }
 
 
-                // If no type reference can be determined then nothing to do.
-                if (leftTypeReference == null && rightTypeReference == null) return;
+                // If no type can be determined then nothing to do.
+                if (leftType == null && rightType == null) return;
 
-                if (leftTypeReference == null) leftTypeReference = rightTypeReference;
-                if (rightTypeReference == null) rightTypeReference = leftTypeReference;
+                if (leftType == null) leftType = rightType;
+                if (rightType == null) rightType = leftType;
 
-                var leftTypeFullName = leftTypeReference.FullName;
-                var rightTypeFullName = rightTypeReference.FullName;
+                var leftTypeFullName = leftType.GetFullName();
+                var rightTypeFullName = rightType.GetFullName();
 
 
                 if (!_numericTypes.Contains(leftTypeFullName) || !_numericTypes.Contains(rightTypeFullName)) return;
 
-                void castLeftToRight() => replaceLeft(rightTypeReference);
+                void castLeftToRight() => replaceLeft(rightType);
 
-                void castRightToLeft() => replaceRight(leftTypeReference);
+                void castRightToLeft() => replaceRight(leftType);
 
-                void replaceLeft(TypeReference typeReference)
+                void replaceLeft(IType type)
                 {
-                    binaryOperatorExpression.Left.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Left, out var _));
-                    setResultTypeReference(typeReference);
+                    binaryOperatorExpression.Left.ReplaceWith(CreateCast(type, binaryOperatorExpression.Left, out var _));
+                    setResultTypeReference(type);
                 }
 
-                void replaceRight(TypeReference typeReference)
+                void replaceRight(IType type)
                 {
-                    binaryOperatorExpression.Right.ReplaceWith(CreateCast(typeReference, binaryOperatorExpression.Right, out var _));
-                    setResultTypeReference(typeReference);
+                    binaryOperatorExpression.Right.ReplaceWith(CreateCast(type, binaryOperatorExpression.Right, out var _));
+                    setResultTypeReference(type);
                 }
 
                 var resultTypeReferenceIsSet = false;
-                void setResultTypeReference(TypeReference typeReference)
+                void setResultTypeReference(IType type)
                 {
                     if (resultTypeReferenceIsSet) return;
                     resultTypeReferenceIsSet = true;
@@ -157,61 +172,76 @@ namespace Hast.Transformer.Services
                     // if this binary operator expression is not also in another binary operator expression, when it 
                     // will be cast again.
                     var firstNonParenthesizedExpressionParent = binaryOperatorExpression.FindFirstNonParenthesizedExpressionParent();
-                    if (!(firstNonParenthesizedExpressionParent is CastExpression) && 
+                    if (!(firstNonParenthesizedExpressionParent is CastExpression) &&
                         !(firstNonParenthesizedExpressionParent is BinaryOperatorExpression))
                     {
                         var castExpression = CreateCast(
-                            binaryOperatorExpression.GetResultTypeReference(), 
+                            binaryOperatorExpression.GetResultType(),
                             binaryOperatorExpression,
                             out var clonedBinaryOperatorExpression);
                         binaryOperatorExpression.ReplaceWith(castExpression);
                         binaryOperatorExpression = clonedBinaryOperatorExpression;
                     }
 
-                    binaryOperatorExpression.ReplaceAnnotations(typeReference.ToTypeInformation());
+                    binaryOperatorExpression.ReplaceAnnotations(type.ToResolveResult());
                 }
 
 
                 var longFullName = typeof(long).FullName;
                 var ulongFullName = typeof(ulong).FullName;
+                var intFullName = typeof(int).FullName;
                 var uintFullName = typeof(uint).FullName;
-                var typesConvertedToLongForUint = new[] { typeof(sbyte).FullName, typeof(short).FullName, typeof(int).FullName };
+                var typesConvertedToLongForUint = new[] { typeof(sbyte).FullName, typeof(short).FullName, intFullName };
 
-                // Omitting decimal, double, float rules as those are not supported any way.
-                if (leftTypeFullName == ulongFullName && rightTypeFullName != ulongFullName ||
-                    leftTypeFullName != ulongFullName && rightTypeFullName == ulongFullName)
+                // First handling shifts which are different from other affected binary operators because only the 
+                // left operand is promoted, and only everything below int to int.
+                if (binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft || 
+                    binaryOperatorExpression.Operator == BinaryOperatorType.ShiftRight)
                 {
-                    if (leftTypeFullName == ulongFullName) castRightToLeft();
-                    else castLeftToRight();
+
+                    if (!new[] { longFullName, ulongFullName, intFullName, uintFullName }.Contains(leftTypeFullName))
+                    {
+                        replaceLeft(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
+                    }
                 }
-                else if (leftTypeFullName == longFullName && rightTypeFullName != longFullName ||
-                    leftTypeFullName != longFullName && rightTypeFullName == longFullName)
+                else
                 {
-                    if (leftTypeFullName == longFullName) castRightToLeft();
-                    else castLeftToRight();
-                }
-                else if (leftTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(rightTypeFullName) ||
-                    rightTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(leftTypeFullName))
-                {
-                    var longTypeReference = TypeHelper.CreateInt64TypeReference();
-                    replaceLeft(longTypeReference);
-                    replaceRight(longTypeReference);
-                }
-                else if (leftTypeFullName == uintFullName && rightTypeFullName != uintFullName ||
-                    leftTypeFullName != uintFullName && rightTypeFullName == uintFullName)
-                {
-                    if (leftTypeFullName == uintFullName) castRightToLeft();
-                    else castLeftToRight();
-                }
-                // While not specified under the numeric promotions language reference section, this condition cares 
-                // about types that define all operators in questions. E.g. an equality check between two uints 
-                // shouldn't force an int cast.
-                else if (leftTypeFullName != rightTypeFullName ||
-                    !_numericTypesSupportingNumericPromotionOperations.Contains(leftTypeFullName))
-                {
-                    var intTypeReference = TypeHelper.CreateInt32TypeReference();
-                    replaceLeft(intTypeReference);
-                    replaceRight(intTypeReference);
+                    // Omitting decimal, double, float rules as those are not supported any way.
+                    if (leftTypeFullName == ulongFullName && rightTypeFullName != ulongFullName ||
+                        leftTypeFullName != ulongFullName && rightTypeFullName == ulongFullName)
+                    {
+                        if (leftTypeFullName == ulongFullName) castRightToLeft();
+                        else castLeftToRight();
+                    }
+                    else if (leftTypeFullName == longFullName && rightTypeFullName != longFullName ||
+                        leftTypeFullName != longFullName && rightTypeFullName == longFullName)
+                    {
+                        if (leftTypeFullName == longFullName) castRightToLeft();
+                        else castLeftToRight();
+                    }
+                    else if (leftTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(rightTypeFullName) ||
+                        rightTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(leftTypeFullName))
+                    {
+                        var longType = _knownTypeLookupTable.Lookup(KnownTypeCode.Int64);
+                        replaceLeft(longType);
+                        replaceRight(longType);
+                    }
+                    else if (leftTypeFullName == uintFullName && rightTypeFullName != uintFullName ||
+                        leftTypeFullName != uintFullName && rightTypeFullName == uintFullName)
+                    {
+                        if (leftTypeFullName == uintFullName) castRightToLeft();
+                        else castLeftToRight();
+                    }
+                    // While not specified under the numeric promotions language reference section, this condition cares 
+                    // about types that define all operators in questions. E.g. an equality check between two uints 
+                    // shouldn't force an int cast.
+                    else if (leftTypeFullName != rightTypeFullName ||
+                        !_numericTypesSupportingNumericPromotionOperations.Contains(leftTypeFullName))
+                    {
+                        var intType = _knownTypeLookupTable.Lookup(KnownTypeCode.Int32);
+                        replaceLeft(intType);
+                        replaceRight(intType);
+                    } 
                 }
             }
 
@@ -221,33 +251,25 @@ namespace Hast.Transformer.Services
 
                 if (!_unaryOperatorsWithNumericPromotions.Contains(unaryOperatorExpression.Operator)) return;
 
-                var typeReference = unaryOperatorExpression.Expression.GetActualTypeReference();
+                var type = unaryOperatorExpression.Expression.GetActualType();
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
-                var expectedTypeReference = unaryOperatorExpression.Expression.GetActualTypeReference(true);
+                var expectedType = unaryOperatorExpression.Expression.GetActualType();
 
-                void replace(TypeReference newTypeReference)
+                void replace(IType newType)
                 {
-                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newTypeReference, unaryOperatorExpression.Expression, out var _));
-
-                    // We should also put a cast around it if necessary so it produces the same type as before.
-                    if (!(unaryOperatorExpression.FindFirstNonParenthesizedExpressionParent() is CastExpression))
-                    {
-                        var castExpression = CreateCast(typeReference, unaryOperatorExpression, out var clonedUnaryOperatorExpression);
-                        unaryOperatorExpression.ReplaceWith(castExpression);
-                        unaryOperatorExpression = clonedUnaryOperatorExpression;
-                    }
+                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
                 }
 
-                if (_typesConvertedToIntInUnaryOperations.Contains(typeReference.FullName) &&
-                    (!isCast || expectedTypeReference.FullName != typeof(int).FullName))
+                if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
+                    (!isCast || expectedType.GetFullName() != typeof(int).FullName))
                 {
-                    replace(TypeHelper.CreateInt32TypeReference());
+                    replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
-                    typeReference.FullName == typeof(uint).FullName &&
-                    (!isCast || expectedTypeReference.FullName != typeof(long).FullName))
+                    type.GetFullName() == typeof(uint).FullName &&
+                    (!isCast || expectedType.GetFullName() != typeof(long).FullName))
                 {
-                    replace(TypeHelper.CreateInt64TypeReference());
+                    replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int64));
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
                     ((unaryOperatorExpression.Expression as CastExpression)?.Type as PrimitiveType)?.KnownTypeCode == KnownTypeCode.UInt32)
@@ -259,16 +281,15 @@ namespace Hast.Transformer.Services
             }
 
 
-            private static CastExpression CreateCast<T>(TypeReference toTypeReference, T expression, out T clonedExpression)
+            private static CastExpression CreateCast<T>(IType toType, T expression, out T clonedExpression)
                 where T : Expression
             {
-                var castExpression = new CastExpression { Type = TypeHelper.CreateAstType(toTypeReference) };
+                var castExpression = new CastExpression { Type = TypeHelper.CreateAstType(toType) };
 
                 clonedExpression = (T)expression.Clone();
                 castExpression.Expression = new ParenthesizedExpression(clonedExpression);
-                var expressionTypeInformation = expression.GetTypeInformationOrCreateFromActualTypeReference();
-                if (expressionTypeInformation != null) castExpression.Expression.AddAnnotation(expressionTypeInformation);
-                castExpression.AddAnnotation(toTypeReference.ToTypeInformation());
+                castExpression.Expression.AddAnnotation(expression.CreateResolveResultFromActualType());
+                castExpression.AddAnnotation(toType.ToResolveResult());
 
                 return castExpression;
             }

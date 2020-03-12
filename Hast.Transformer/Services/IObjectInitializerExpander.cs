@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Orchard;
 
 namespace Hast.Transformer.Services
@@ -21,6 +16,12 @@ namespace Hast.Transformer.Services
     /// x.Property1 = value1;
     /// x.Property2 = value2;
     /// </example>
+    /// <remarks>
+    /// There is the ObjectOrCollectionInitializers decompiler option with a similar aim. However, that would unpack
+    /// initializations for compiler-generated methods created from closures and processing that would be painful. 
+    /// Also, with that option a new variable is created for every instantiation even if the new object is immediately
+    /// assigned to an array element. So it would make the resulting code a bit messier.
+    /// </remarks>
     public interface IObjectInitializerExpander : IDependency
     {
         void ExpandObjectInitializers(SyntaxTree syntaxTree);

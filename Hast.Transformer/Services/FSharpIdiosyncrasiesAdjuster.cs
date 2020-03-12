@@ -1,5 +1,5 @@
 ﻿using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Linq;
 
@@ -16,7 +16,7 @@ namespace Hast.Transformer.Services
         }
 
 
-        public void AdjustFSharpIdiosyncrasie(SyntaxTree syntaxTree)
+        public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree)
         {
             syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
         }
@@ -86,39 +86,43 @@ namespace Hast.Transformer.Services
                         invocationExpression.ReplaceWith(assignment);
                     }
                 }
-                else if (invocationExpression.IsShorthandTaskStart())
+                else if (invocationExpression.IsTaskStart())
                 {
                     // The expression is something like if it was created from F# code, and this is what we need to handle:
-                    // Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke), i)
+                    // Task.Factory.StartNew ((Func<object, OutputType>)new NameOfTaskStartingMethod@35 (input).Invoke, (object)inputArgument);
                     // Such shorthand expression when created from C# look like this:
-                    // Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
+                    // Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object)inputArgument);
                     // The F# closure receives the current value of local variables, not the latest one if in a loop.
-                    // Thus to mimic how this works we'll add the parameters of the compiler-generated class' ctor
-                    // as further parameters like:
-                    // Task.Factory.StartNew<int> (new Func<object, int> (new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke), i, other, parameters)
+                    // Thus to mimic how this works we'll add the parameters of the compiler-generated class' ctor as
+                    // further parameters like:
+                    // Task.Factory.StartNew ((Func<object, OutputType>)new Run@35 (input).Invoke, (object)inputArgument, other, arguments);
                     // This won't be correct C# but the rest of the Transformer will be tricked into passing them on.
 
-                    // Getting the member reference like: new FSharpParallelAlgorithmContainer.Run@30 (input).Invoke
-                    if (((ObjectCreateExpression)invocationExpression.Arguments.First()).Arguments.First()
-                            .Is<MemberReferenceExpression>(
-                                memberReference => memberReference.MemberName == "Invoke" && memberReference.Target.GetFullName().IsClosureClassName(),
-                                out var invokeReference))
+                    // Getting the member reference like: new NameOfTaskStartingMethod@35 (input).Invoke
+                    MemberReferenceExpression invocationMemberReference;
+                    if ((invocationMemberReference = invocationExpression.Arguments.First().FindFirstChildOfType<MemberReferenceExpression>()) != null &&
+                        invocationMemberReference.MemberName == "Invoke" &&
+                        invocationMemberReference.Target.GetFullName().IsClosureClassName())
                     {
                         invocationExpression.Arguments
-                            .AddRange(((ObjectCreateExpression)invokeReference.Target).Arguments.Select(argument => argument.Clone()));
+                            .AddRange(((ObjectCreateExpression)invocationMemberReference.Target).Arguments.Select(argument => argument.Clone()));
 
                         // Now that the parameters are added we need to add corresponding parameters to the Invoke()
                         // method as well by taking them from the ctor of the compiler-generated class.
 
-                        var invokeMethod = (MethodDeclaration)invokeReference.FindMemberDeclaration(_typeDeclarationLookupTable);
+                        var invokeMethod = (MethodDeclaration)invocationMemberReference.FindMemberDeclaration(_typeDeclarationLookupTable);
                         var ctor = (ConstructorDeclaration)invokeMethod
                             .FindFirstParentTypeDeclaration()
                             .Members.Single(member => member is ConstructorDeclaration);
 
                         invokeMethod.Parameters.AddRange(ctor.Parameters.Select(parameter => parameter.Clone()));
 
-                        // Finally, change all the references to the fields in Invoke() to the parameters.
+                        // Change all the references to the fields in Invoke() to the parameters.
                         invokeMethod.Body.AcceptVisitor(new ClosureClassMethodFieldReferencesChangingVisitor());
+
+                        // Remove the now unneeded ctor and its references.
+                        ctor.Remove();
+                        ((ObjectCreateExpression)invocationMemberReference.Target).Arguments.Clear();
                     }
                 }
             }

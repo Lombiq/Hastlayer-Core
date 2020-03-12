@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Vhdl.Helpers;
+﻿using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard.Caching;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -24,10 +24,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public bool IsSupportedRecordMember(AstNode node)
-        {
-            return node is PropertyDeclaration || node is FieldDeclaration;
-        }
+        public bool IsSupportedRecordMember(AstNode node) => node is PropertyDeclaration || node is FieldDeclaration;
 
         public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
@@ -45,7 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .Where(member =>
                         (member is PropertyDeclaration ||
                         member.Is<FieldDeclaration>(field => !field.GetFullName().IsBackingFieldName())) &&
-                        !member.GetActualTypeReference().IsSimpleMemory())
+                        !member.GetActualType().IsSimpleMemory())
                     .Select(member =>
                     {
                         var name = member.Name;

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Numerics;
+﻿using Hast.Common.Numerics;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -21,7 +20,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
         public SpecialOperationInvocationTransformer(
-            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer, 
+            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             ITypeConverter typeConverter)
         {
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
@@ -83,24 +82,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
-            var resultElementTypeInformation = expression
-                .Annotation<TypeInformation>()
-                .ExpectedType
-                .GetElementType()
-                .ToTypeInformation();
+            var resultElementResolveResult = expression.GetActualType().GetElementType().ToResolveResult();
+            var intType = context.TransformationContext.KnownTypeLookupTable.Lookup(KnownTypeCode.Int32);
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
                 var binaryOperatorExpression = new BinaryOperatorExpression(
                         new IndexerExpression(
-                            expression.Arguments.First().Clone(), // The first array's reference.
-                            new PrimitiveExpression(i)), // The expression object can't be re-used below.
+                            // The first array's reference.
+                            expression.Arguments.First().Clone(),
+                            // The expression object can't be re-used below.
+                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())),
                         simdBinaryOperator,
                         new IndexerExpression(
-                            expression.Arguments.Skip(1).First().Clone(), // The second array's reference.
-                            new PrimitiveExpression(i)));
+                            // The second array's reference.
+                            expression.Arguments.Skip(1).First().Clone(),
+                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())));
 
-                binaryOperatorExpression.AddAnnotation(resultElementTypeInformation);
+                binaryOperatorExpression.AddAnnotation(resultElementResolveResult);
 
                 var indexValue = Value.UnrangedInt(i);
 
@@ -135,8 +134,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Returning the results as an array initialization value (i.e.: array := (result1, result2);)
             return new Value
             {
-                DataType = _typeConverter.ConvertTypeReference(
-                    expression.GetActualTypeReference(), 
+                DataType = _typeConverter.ConvertType(
+                    expression.GetActualType(),
                     context.TransformationContext),
                 EvaluatedContent = new InlineBlock(resultReferences)
             };

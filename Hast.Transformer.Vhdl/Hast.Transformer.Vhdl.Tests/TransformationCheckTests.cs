@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
 using Lombiq.OrchardAppHost;
 using NUnit.Framework;
 using Shouldly;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {

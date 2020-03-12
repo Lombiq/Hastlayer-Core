@@ -8,7 +8,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +28,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly ITypeConverter _typeConverter;
         private readonly ISpecialOperationInvocationTransformer _specialOperationInvocationTransformer;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public InvocationExpressionTransformer(
             IStateMachineInvocationBuilder stateMachineInvocationBuilder,
             ITypeConverter typeConverter,
-            ISpecialOperationInvocationTransformer specialOperationInvocationTransformer)
+            ISpecialOperationInvocationTransformer specialOperationInvocationTransformer,
+            ITypeConversionTransformer typeConversionTransformer)
         {
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _typeConverter = typeConverter;
             _specialOperationInvocationTransformer = specialOperationInvocationTransformer;
+            _typeConversionTransformer = typeConversionTransformer;
         }
 
 
@@ -101,7 +104,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.Add(new LineComment("Begin SimpleMemory read."));
             }
 
-            // Setting CellIndex
+            // Setting CellIndex.
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
@@ -121,24 +124,40 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             });
 
             var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes");
-            var operationDataType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
+            var operationDataTypeName = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
 
             IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
             {
                 // Using the built-in conversion functions to handle known data types.
-                if (operationDataType == "UInt32" ||
-                    operationDataType == "Int32" ||
-                    operationDataType == "Boolean" ||
-                    operationDataType == "Char")
+                if (operationDataTypeName == "UInt32" ||
+                    operationDataTypeName == "Int32" ||
+                    operationDataTypeName == "Boolean" ||
+                    operationDataTypeName == "Char")
                 {
                     string dataConversionInvocationTarget;
                     if (directionIsLogicVectorToType)
                     {
-                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operationDataType;
+                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operationDataTypeName;
                     }
                     else
                     {
-                        dataConversionInvocationTarget = "Convert" + operationDataType + "ToStdLogicVector";
+                        dataConversionInvocationTarget = "Convert" + operationDataTypeName + "ToStdLogicVector";
+
+                        DataType operationDataType = KnownDataTypes.Int32;
+                        if (operationDataTypeName == "UInt32") operationDataType = KnownDataTypes.UInt32;
+                        else if (operationDataTypeName == "Boolean") operationDataType = KnownDataTypes.Boolean;
+                        else if (operationDataTypeName == "Char") operationDataType = KnownDataTypes.Character;
+
+                        var invocationDataType = invocationParameters[1].DataType;
+                        // The two data types should be the case almost all the time but sometimes a type conversion is
+                        // needed.
+                        if (invocationDataType != operationDataType)
+                        {
+                            var conversionResult = _typeConversionTransformer
+                                .ImplementTypeConversion(invocationDataType, operationDataType, variableToConvert);
+
+                            variableToConvert = conversionResult.ConvertedFromExpression;
+                        }
                     }
 
                     return new Invocation(dataConversionInvocationTarget, variableToConvert);

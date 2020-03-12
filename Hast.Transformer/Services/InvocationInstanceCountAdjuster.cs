@@ -2,7 +2,8 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 
@@ -48,13 +49,13 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                if (memberReferenceExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null)
+                if (memberReferenceExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Syntax.Attribute>() != null)
                 {
                     return;
                 }
 
                 AdjustInstanceCount(
-                    memberReferenceExpression, 
+                    memberReferenceExpression,
                     memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable));
             }
 
@@ -63,7 +64,7 @@ namespace Hast.Transformer.Services
                 base.VisitObjectCreateExpression(objectCreateExpression);
 
                 // Funcs are only needed for Task-based parallelism, omitting them for now.
-                if (objectCreateExpression.Type.GetFullName().StartsWith("System.Func"))
+                if (objectCreateExpression.Type.GetActualType().IsFunc())
                 {
                     return;
                 }
@@ -99,7 +100,7 @@ namespace Hast.Transformer.Services
                         referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
                     }
                 }
-                else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 && 
+                else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 &&
                     !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);

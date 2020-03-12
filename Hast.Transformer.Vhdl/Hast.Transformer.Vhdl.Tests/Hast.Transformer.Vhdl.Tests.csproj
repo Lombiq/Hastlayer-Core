@@ -39,43 +39,17 @@
       <HintPath>..\..\..\Orchard\src\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Hast.Samples.FSharpSampleAssembly">
-      <HintPath>..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\bin\Debug\netstandard2.0\Hast.Samples.FSharpSampleAssembly.dll</HintPath>
+    <Reference Include="FSharp.Core, Version=4.7.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Orchard\src\packages\FSharp.Core.4.7.0\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Humanizer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Orchard\src\packages\Humanizer.Core.2.5.16\lib\netstandard2.0\Humanizer.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.NRefactory.Cecil, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory.Xml, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Xml.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ICSharpCode.Decompiler, Version=6.0.0.5559, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Orchard\src\packages\ICSharpCode.Decompiler.6.0.0.5559-preview2\lib\netstandard2.0\ICSharpCode.Decompiler.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\..\Orchard\src\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
@@ -103,12 +77,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Orchard\src\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Orchard\src\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Reflection.Metadata, Version=1.4.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Orchard\src\packages\System.Reflection.Metadata.1.6.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Orchard\src\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +123,10 @@
       <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
       <Name>Hast.Algorithms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj">
+      <Project>{a2d4c4bd-4c4a-4ed7-b74f-b2c79f31f2d0}</Project>
+      <Name>Hast.Samples.FSharpSampleAssembly</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj">
       <Project>{EE140765-5088-40AA-9621-D4B0A971EE2C}</Project>
       <Name>Hast.Samples.Kpz.Algorithms</Name>
@@ -162,13 +147,17 @@
       <Project>{F2D3C071-F051-414F-BAAB-DC750E61C3C9}</Project>
       <Name>Hast.TestInputs.ClassStructure2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj">
+      <Project>{E9AEADF8-3688-4637-85A4-C61B3F1F8AE0}</Project>
+      <Name>Hast.TestInputs.Dynamic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj">
       <Project>{BB94F93A-F607-4A19-8127-7C8D333F8131}</Project>
       <Name>Hast.TestInputs.Invalid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.TestInputs.Various\Hast.TestInputs.Various.csproj">
+    <ProjectReference Include="..\..\Hast.TestInputs.Static\Hast.TestInputs.Static.csproj">
       <Project>{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}</Project>
-      <Name>Hast.TestInputs.Various</Name>
+      <Name>Hast.TestInputs.Static</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
       <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
@@ -222,7 +211,8 @@
     <Compile Include="VerificationTests\CatapultSamplesVerificationTests.cs" />
     <Compile Include="VerificationTests\SamplesVerificationTestsBase.cs" />
     <Compile Include="VerificationTests\ShouldMatchApprovedExtensions.cs" />
-    <Compile Include="VerificationTests\TestInputAssembliesVerificationTests.cs" />
+    <Compile Include="VerificationTests\DynamicTestInputAssembliesVerificationTests.cs" />
+    <Compile Include="VerificationTests\StaticTestInputAssembliesVerificationTests.cs" />
     <Compile Include="VerificationTests\XilinxSamplesVerificationTests.cs" />
     <Compile Include="VhdlTransformingTestFixtureBase.cs" />
     <Compile Include="VerificationTests\VerificationTestFixtureBase.cs" />

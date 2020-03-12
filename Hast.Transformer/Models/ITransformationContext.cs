@@ -1,6 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {
@@ -28,6 +28,11 @@ namespace Hast.Transformer.Models
         /// Table to look up type declarations in the syntax tree.
         /// </summary>
         ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
+
+        /// <summary>
+        /// Table to look up known types.
+        /// </summary>
+        IKnownTypeLookupTable KnownTypeLookupTable { get; }
 
         /// <summary>
         /// Container for the sizes of statically sized arrays. 

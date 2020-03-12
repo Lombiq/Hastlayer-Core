@@ -13,8 +13,8 @@ using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using Orchard.Services;
 using System;
 using System.Collections.Generic;
@@ -348,6 +348,8 @@ namespace Hast.Transformer.Vhdl.Services
 
             var traverseTo = node.Children;
 
+            // If for debugging you want to make the below processing serial instead of it running in parallel then 
+            // add .Result to every transformation call and wrap them into Task.FromResult() methods.
             switch (node.NodeType)
             {
                 case NodeType.Expression:
@@ -384,7 +386,7 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         case ClassType.Class:
                         case ClassType.Struct:
-                            if (typeDeclaration.BaseTypes.Any(baseType => !baseType.Annotation<TypeDefinition>().IsInterface))
+                            if (typeDeclaration.BaseTypes.Any(baseType => baseType.GetActualType().Kind != TypeKind.Interface))
                             {
                                 throw new NotSupportedException(
                                     "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -22,11 +21,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public DataType ConvertTypeReference(
-            TypeReference typeReference, 
+        public DataType ConvertType(
+            IType type,
             IVhdlTransformationContext context)
         {
-            switch (typeReference.FullName)
+            switch (type.GetFullName())
             {
                 case "System.Boolean":
                     return ConvertPrimitive(KnownTypeCode.Boolean);
@@ -60,28 +59,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.Void);
             }
 
-            if (typeReference.IsArray)
+            if (type.IsArray())
             {
-                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType(), context));
+                return CreateArrayType(ConvertType(type.GetElementType(), context));
             }
 
-            if (IsTaskTypeReference(typeReference))
+            if (IsTaskType(type))
             {
-                if (typeReference is GenericInstanceType)
+                if (type is ParameterizedType parameterizedType)
                 {
-                    return ConvertTypeReference(((GenericInstanceType)typeReference).GenericArguments.Single(), context); 
+                    return ConvertType(parameterizedType.TypeArguments.Single(), context);
                 }
 
                 return SpecialTypes.Task;
             }
 
             // This type is a value type but was passed as reference explicitly.
-            if (typeReference is Mono.Cecil.ByReferenceType && typeReference.Name.EndsWith("&"))
+            if (type.IsByRefLike && type.Name.EndsWith("&"))
             {
-                return ConvertTypeReference(typeReference.GetElementType(), context);
+                return ConvertType(type.GetElementType(), context);
             }
 
-            return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, context);
+            return ConvertTypeInternal(type, context);
         }
 
         public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)
@@ -103,11 +102,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (type is SimpleType) return ConvertSimple((SimpleType)type, context);
 
-            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
+            return ConvertTypeInternal(type.GetActualType(), context);
         }
 
         public DataType ConvertAndDeclareAstType(
-            AstType type, 
+            AstType type,
             IDeclarableElement declarable,
             IVhdlTransformationContext context)
         {
@@ -136,6 +135,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.UInt8;
                 case KnownTypeCode.Char:
                     return KnownDataTypes.Character;
+                //case KnownTypeCode.ICriticalNotifyCompletion:
+                //    break;
                 case KnownTypeCode.DBNull:
                     break;
                 case KnownTypeCode.DateTime:
@@ -150,6 +151,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.Exception:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.FormattableString:
+                //    break;
+                //case KnownTypeCode.IAsyncDisposable:
+                //    break;
+                //case KnownTypeCode.IAsyncEnumerableOfT:
+                //    break;
+                //case KnownTypeCode.IAsyncEnumeratorOfT:
+                //    break;
                 case KnownTypeCode.ICollection:
                     break;
                 case KnownTypeCode.ICollectionOfT:
@@ -164,9 +174,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.IEnumeratorOfT:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.IFormattable:
+                //    break;
+                //case KnownTypeCode.INotifyCompletion:
+                //    break;
                 case KnownTypeCode.IList:
                     break;
                 case KnownTypeCode.IListOfT:
+                    break;
+                case KnownTypeCode.IReadOnlyCollectionOfT:
                     break;
                 case KnownTypeCode.IReadOnlyListOfT:
                     break;
@@ -178,6 +195,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.Int64;
                 case KnownTypeCode.IntPtr:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.MemoryOfT:
+                //    break;
                 case KnownTypeCode.MulticastDelegate:
                     break;
                 case KnownTypeCode.None:
@@ -186,10 +206,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.Object:
                     return KnownDataTypes.StdLogicVector32;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.ReadOnlySpanOfT:
+                //    break;
                 case KnownTypeCode.SByte:
                     return KnownDataTypes.Int8;
                 case KnownTypeCode.Single:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.SpanOfT:
+                //    break;
                 case KnownTypeCode.String:
                     return KnownDataTypes.UnrangedString;
                 case KnownTypeCode.Task:
@@ -198,6 +224,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
                 case KnownTypeCode.Type:
                     break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.TypedReference:
+                //    break;
                 case KnownTypeCode.UInt16:
                     return KnownDataTypes.UInt16;
                 case KnownTypeCode.UInt32:
@@ -206,6 +235,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.UInt64;
                 case KnownTypeCode.UIntPtr:
                     break;
+                case KnownTypeCode.Unsafe:
+                    break;
+                // Available in a later ILSpy release.
+                //case KnownTypeCode.ValueTask:
+                //    break;
+                //case KnownTypeCode.ValueTaskOfT:
+                //    break;
                 case KnownTypeCode.ValueType:
                     break;
                 case KnownTypeCode.Void:
@@ -241,12 +277,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type, IVhdlTransformationContext context)
         {
-            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskTypeReference(type.GetActualTypeReference()))
+            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskType(type.GetActualType()))
             {
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
                 {
-                    if (IsTaskTypeReference(type.Annotation<TypeReference>()))
+                    if (IsTaskType(type.GetActualType()))
                     {
                         if (type.TypeArguments.Single().IsArray())
                         {
@@ -270,34 +306,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return SpecialTypes.Task;
             }
 
-            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
+            return ConvertTypeInternal(type.GetActualType(), context);
         }
 
-        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, string typeFullName, IVhdlTransformationContext context)
+        private DataType ConvertTypeInternal(IType type, IVhdlTransformationContext context)
         {
-            if (typeDefinition == null)
+            if (type.IsEnum())
             {
-                typeDefinition = context.TypeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
+                return new VhdlBuilder.Representation.Declaration.Enum { Name = type.GetFullName().ToExtendedVhdlId() };
             }
 
-            if (typeDefinition == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeFullName);
-
-            if (typeDefinition.IsEnum)
+            if (type.IsClass() || type.IsStruct())
             {
-                return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
-            }
+                var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(type.GetFullName());
 
-            if (typeDefinition.IsClass)
-            {
-                var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName);
-
-                if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeDefinition.FullName);
+                if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(type.GetFullName());
 
                 return _recordComposer.CreateRecordFromType(typeDeclaration, context);
             }
 
             throw new NotSupportedException(
-                "The type " + typeDefinition.FullName + " is not supported for transforming.");
+                "The type " + type.GetFullName() + " is not supported for transforming.");
         }
 
 
@@ -308,7 +337,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 Name = ArrayHelper.CreateArrayTypeName(elementType)
             };
 
-        private static bool IsTaskTypeReference(TypeReference typeReference) =>
-            typeReference != null && typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
+        private static bool IsTaskType(IType type) =>
+            type != null && type.GetFullName().StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }

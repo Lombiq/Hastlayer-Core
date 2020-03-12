@@ -1,7 +1,10 @@
-﻿using System.Linq;
-using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -32,9 +35,7 @@ namespace Hast.Transformer.Services
                 // the setter is empty then it's an auto-property. If the getter is compiler-generated then it's also
                 // an auto-property (a read-only one).
                 if (!propertyDeclaration.Getter.Body.Any() && !propertyDeclaration.Setter.Body.Any() ||
-                    propertyDeclaration.Getter.Attributes.Any(attributeSection => 
-                        attributeSection.Attributes.Any(attribute => 
-                            attribute.Type.Is<SimpleType>(type => type.Identifier == "CompilerGenerated"))))
+                    (propertyDeclaration.GetMemberResolveResult().Member as IProperty).Getter.IsCompilerGenerated())
                 {
                     return;
                 }
@@ -46,34 +47,34 @@ namespace Hast.Transformer.Services
                 if (getter.Body.Any())
                 {
                     var getterMethod = MethodDeclarationFactory.CreateMethod(
-                        name: getter.Annotation<MethodDefinition>().Name,
+                        name: getter.GetMemberResolveResult().Member.Name,
                         annotations: getter.Annotations,
                         attributes: getter.Attributes,
                         parameters: Enumerable.Empty<ParameterDeclaration>(),
                         body: getter.Body,
                         returnType: propertyDeclaration.ReturnType);
-                    parentType.Members.Add(getterMethod); 
+                    parentType.Members.Add(getterMethod);
                 }
 
                 var setter = propertyDeclaration.Setter;
                 if (setter.Body.Any())
                 {
-                    var valueParameter = new ParameterDeclaration(propertyDeclaration.ReturnType.Clone(), "value");
-                    valueParameter.AddAnnotation(new ParameterDefinition(
-                        "value", ParameterAttributes.None, propertyDeclaration.Annotation<PropertyDefinition>().PropertyType));
+                    var valueParameter = new ParameterDeclaration(propertyDeclaration.ReturnType.Clone(), "value")
+                        .WithAnnotation(VariableHelper.CreateILVariableResolveResult(VariableKind.Parameter, getter.GetActualType(), "value"));
                     var setterMethod = MethodDeclarationFactory.CreateMethod(
-                        name: setter.Annotation<MethodDefinition>().Name,
+                        name: setter.GetMemberResolveResult().Member.Name,
                         annotations: setter.Annotations,
                         attributes: setter.Attributes,
                         parameters: new[] { valueParameter },
                         body: setter.Body,
-                        returnType: new PrimitiveType("void"));
-                    parentType.Members.Add(setterMethod); 
+                        returnType: new ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveType("void"));
+                    parentType.Members.Add(setterMethod);
                 }
 
                 // Changing consumer code of the property to use it as methods.
                 _syntaxTree.AcceptVisitor(new PropertyAccessChangingVisitor(
-                    propertyDeclaration.GetFullNameWithUnifiedPropertyName()));
+                    (getter.Body.Any() ? getter.GetFullName() : null),
+                    (setter.Body.Any() ? setter.GetFullName() : null))); ;
 
                 propertyDeclaration.Remove();
             }
@@ -81,12 +82,14 @@ namespace Hast.Transformer.Services
 
             private class PropertyAccessChangingVisitor : DepthFirstAstVisitor
             {
-                private readonly string _unifiedPropertyName;
+                private readonly string _getterName;
+                private readonly string _setterName;
 
 
-                public PropertyAccessChangingVisitor(string unifiedPropertyName)
+                public PropertyAccessChangingVisitor(string getterName, string setterName)
                 {
-                    _unifiedPropertyName = unifiedPropertyName;
+                    _getterName = getterName;
+                    _setterName = setterName;
                 }
 
 
@@ -94,25 +97,26 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                    if (memberReferenceExpression.GetMemberFullName() != _unifiedPropertyName) return;
-
-                    // On property accesses there is a PropertyDefinition and MethodDefinition, sometimes MethodReference
-                    // annotation. We need to use the latter to convert the property access into a method call.
-                    memberReferenceExpression.RemoveAnnotations<PropertyDefinition>();
-                    var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-                    memberReferenceExpression.MemberName = methodReference.Name;
-                    var invocation = new InvocationExpression(memberReferenceExpression.Clone());
-                    invocation.AddAnnotation(methodReference);
-                    if (methodReference.IsDefinition && ((MethodDefinition)methodReference).IsSetter ||
-                        !methodReference.IsDefinition && methodReference.Name.StartsWith("set_"))
+                    var memberFullName = memberReferenceExpression.GetMemberFullName();
+                    var memberResolveResult = memberReferenceExpression.GetMemberResolveResult();
+                    var property = memberResolveResult?.Member as IProperty;
+                    if (memberFullName == _getterName)
                     {
-                        var parentAssignment = (AssignmentExpression)memberReferenceExpression.Parent;
-                        invocation.Arguments.Add(parentAssignment.Right.Clone());
-                        parentAssignment.ReplaceWith(invocation);
-                    }
-                    else
-                    {
+                        memberReferenceExpression.MemberName = property.Getter.Name;
+                        var invocation = new InvocationExpression(memberReferenceExpression.Clone());
+                        invocation.AddAnnotation(new InvocationResolveResult(memberResolveResult.TargetResult, property.Getter));
                         memberReferenceExpression.ReplaceWith(invocation);
+                    }
+                    // The parent of a property setter should be an assignment normally but in attributes it won't be.
+                    else if (memberFullName == _setterName &&
+                        memberReferenceExpression.Parent is AssignmentExpression assignmentExpression)
+                    {
+                        // Note that the MemberName change needs to happen before creating the InvocationExpression.
+                        memberReferenceExpression.MemberName = property.Setter.Name;
+                        var invocation = new InvocationExpression(memberReferenceExpression.Clone());
+                        invocation.AddAnnotation(new InvocationResolveResult(memberResolveResult.TargetResult, property.Setter));
+                        invocation.Arguments.Add(assignmentExpression.Right.Clone());
+                        assignmentExpression.ReplaceWith(invocation);
                     }
                 }
             }

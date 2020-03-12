@@ -1,8 +1,9 @@
-﻿using System.Linq;
-using Hast.Common.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+﻿using Hast.Common.Helpers;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 
 namespace Hast.Transformer.Helpers
 {
@@ -11,11 +12,12 @@ namespace Hast.Transformer.Helpers
         public static IdentifierExpression DeclareAndReferenceArrayVariable(
             Expression valueHolder,
             AstType arrayElementAstType,
-            TypeReference arrayType)
+            IType arrayType)
         {
-            var declarationType = new ComposedType { BaseType = arrayElementAstType.Clone() };
+            var declarationType = new ComposedType { BaseType = arrayElementAstType.Clone() }
+                .WithAnnotation(arrayType.ToResolveResult());
             declarationType.ArraySpecifiers.Add(
-                new ArraySpecifier(((ArrayType)arrayType).Dimensions.Count));
+                new ArraySpecifier(((ArrayType)arrayType).Dimensions));
 
             return DeclareAndReferenceVariable("array", valueHolder, declarationType);
         }
@@ -23,27 +25,29 @@ namespace Hast.Transformer.Helpers
         public static IdentifierExpression DeclareAndReferenceVariable(
             string variableNamePrefix,
             Expression valueHolder,
-            AstType type)
-        {
-            var variableName = variableNamePrefix + Sha2456Helper.ComputeHash(valueHolder.GetFullName());
-            var parentStatement = valueHolder.FindFirstParentStatement();
-            var typeInformation = valueHolder.GetTypeInformationOrCreateFromActualTypeReference();
-
-            return DeclareAndReferenceVariable(variableName, typeInformation, type, parentStatement);
-        }
+            AstType astType) =>
+            DeclareAndReferenceVariable(
+                variableNamePrefix + Sha2456Helper.ComputeHash(valueHolder.GetFullName()),
+                valueHolder.GetActualType(),
+                astType,
+                valueHolder.FindFirstParentStatement());
 
         public static IdentifierExpression DeclareAndReferenceVariable(
             string variableName,
-            TypeInformation typeInformation,
-            AstType type,
+            IType type,
+            AstType astType,
             Statement parentStatement)
         {
-            var variableDeclaration = new VariableDeclarationStatement(type.Clone(), variableName)
-                .WithAnnotation(typeInformation);
-            variableDeclaration.Variables.Single().AddAnnotation(typeInformation);
+            var variableDeclaration = new VariableDeclarationStatement(astType.Clone(), variableName)
+                .WithAnnotation(CreateILVariableResolveResult(VariableKind.Local, type, variableName));
+            variableDeclaration.Variables.Single().AddAnnotation(type);
             AstInsertionHelper.InsertStatementBefore(parentStatement, variableDeclaration);
 
-            return new IdentifierExpression(variableName).WithAnnotation(typeInformation);
+            return new IdentifierExpression(variableName)
+                .WithAnnotation(CreateILVariableResolveResult(VariableKind.Local, type, variableName));
         }
+
+        public static ILVariableResolveResult CreateILVariableResolveResult(VariableKind variableKind, IType type, string name) =>
+            new ILVariableResolveResult(new ILVariable(variableKind, type) { Name = name });
     }
 }

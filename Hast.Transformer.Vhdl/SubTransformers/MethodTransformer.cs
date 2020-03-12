@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -46,8 +46,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
                     var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
 
-                    // Not much use to parallelize computation unless there are a lot of state machines to create or the 
-                    // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
+                    // Not much use to parallelize computation unless there are a lot of state machines to create or
+                    // the method is very complex. We'll need to examine when to parallelize here and determine it in
+                    // runtime.
                     if (stateMachineCount > 50)
                     {
                         var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
@@ -96,8 +97,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Handling the return type.
             var returnType = _declarableTypeCreator.CreateDeclarableType(method, method.ReturnType, context);
-            // If the return type is a Task then that means it's one of the supported simple TPL scenarios, corresponding
-            // to void in VHDL.
+            // If the return type is a Task then that means it's one of the supported simple TPL scenarios,
+            // corresponding to void in VHDL.
             if (returnType == SpecialTypes.Task) returnType = KnownDataTypes.Void;
             var isVoid = returnType.Name == "void";
             if (!isVoid)
@@ -113,9 +114,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var isFirstOutFlowingParameter = true;
             foreach (var parameter in method.GetNonSimpleMemoryParameters())
             {
-                // Since input parameters are assigned to from the outside but they could be attempted to be also assigned
-                // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
-                // we need to have intermediary input variables, then copy their values to local variables.
+                // Since input parameters are assigned to from the outside but they could be attempted to be also
+                // assigned to from the inside (since in .NET a method argument can also be assigned to from inside the
+                // method) we need to have intermediary input variables, then copy their values to local variables.
 
                 var parameterDataType = _declarableTypeCreator.CreateDeclarableType(parameter, parameter.Type, context);
                 var parameterSignalReference = stateMachine
@@ -123,7 +124,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var parameterLocalVariableReference = stateMachine.CreatePrefixedObjectName(parameter.Name).ToVhdlVariableReference();
 
                 stateMachine.ExternallyDrivenSignals.Add(new ParameterSignal(
-                    methodFullName, 
+                    methodFullName,
                     parameter.Name,
                     0,
                     true)
@@ -144,8 +145,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = parameterSignalReference
                 });
 
-                // If the parameter can be modified inside and those changes should be passed back then we need to write
-                // the local variables back to parameters.
+                // If the parameter can be modified inside and those changes should be passed back then we need to
+                // write the local variables back to parameters.
                 if (parameter.IsOutFlowing())
                 {
                     if (isFirstOutFlowingParameter)
@@ -189,6 +190,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock))
                 }
             };
+
+            var labels = method.Body.FindAllChildrenOfType<LabelStatement>();
+            foreach (var label in labels)
+            {
+                bodyContext.Scope.LabelsToStateIndicesMappings[label.Label] = stateMachine
+                    .AddState(new InlineBlock(new LineComment($"State for the label {label.Label}.")));
+            }
 
             var lastStatementIsReturn = false;
             foreach (var statement in method.Body.Statements)

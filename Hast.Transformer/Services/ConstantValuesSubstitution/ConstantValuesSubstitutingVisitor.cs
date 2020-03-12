@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -14,14 +15,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly ConstantValuesTable _constantValuesTable;
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly IArraySizeHolder _arraySizeHolder;
+        private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
 
-        public ConstantValuesSubstitutingVisitor(ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
+        public ConstantValuesSubstitutingVisitor(
+            ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
         {
             _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
             _constantValuesTable = constantValuesSubstitutingAstProcessor.ConstantValuesTable;
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
             _arraySizeHolder = constantValuesSubstitutingAstProcessor.ArraySizeHolder;
+            _knownTypeLookupTable = constantValuesSubstitutingAstProcessor.KnownTypeLookupTable;
         }
 
 
@@ -116,19 +120,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (arraySize != null)
                 {
-                    var newExpression = new PrimitiveExpression(arraySize.Length);
-                    var typeInformation = memberReferenceExpression.Annotation<TypeInformation>();
-                    if (typeInformation != null)
-                    {
-                        newExpression.AddAnnotation(typeInformation);
-                    }
+                    var newExpression = new PrimitiveExpression(arraySize.Length)
+                        .WithAnnotation(memberReferenceExpression.CreateResolveResultFromActualType());
                     memberReferenceExpression.ReplaceWith(newExpression);
                 }
 
                 return;
             }
 
-            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression); 
+            TrySubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
         }
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -223,7 +223,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // array size defined then just substitute the array length too.
             lengthArgument.ReplaceWith(
                 new PrimitiveExpression(existingSize.Length)
-                .WithAnnotation(TypeHelper.CreateInt32TypeInformation()));
+                .WithAnnotation(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32).ToResolveResult()));
         }
 
         protected override void VisitChildren(AstNode node)
@@ -234,7 +234,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
 
             if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
-                node.GetActualTypeReference()?.IsArray == false)
+                node.GetActualType()?.IsArray() == false)
             {
                 var fullName = node.GetFullName();
 
@@ -251,10 +251,23 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            // Attributes can slip in here but we don't care about those.
-            if (!(node is ICSharpCode.NRefactory.CSharp.Attribute))
+            // Is this a const? Then we can just substitute it directly.
+            var resolveResult = node.GetResolveResult();
+            IType type;
+            if (resolveResult?.IsCompileTimeConstant == true &&
+                resolveResult.ConstantValue != null &&
+                !(node is PrimitiveExpression) &&
+                !(type = node.GetActualType()).IsEnum() &&
+                !(node is NullReferenceExpression))
             {
-                base.VisitChildren(node); 
+                node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue, resolveResult.ConstantValue.ToString())
+                    .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
+            }
+
+            // Attributes can slip in here but we don't care about those.
+            if (!(node is Attribute))
+            {
+                base.VisitChildren(node);
             }
         }
 
@@ -262,9 +275,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
             // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
-            // statement then it can't be safely substituted (due to e.g. loop variables).
+            // statement then it can't be safely substituted (due to e.g. loop variables). Code with goto is hard to
+            // follow so we're not trying to do const substitution for those yet (except for constants that are handled
+            // separately in VisitChildren()).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
-                ConstantValueSubstitutionHelper.IsInWhile(expression))
+                ConstantValueSubstitutionHelper.IsInWhile(expression) ||
+                expression.FindFirstParentOfType<MethodDeclaration>()?.FindFirstChildOfType<GotoStatement>() != null)
             {
                 return false;
             }
