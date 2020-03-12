@@ -275,9 +275,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
             // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
-            // statement then it can't be safely substituted (due to e.g. loop variables).
+            // statement then it can't be safely substituted (due to e.g. loop variables). Code with goto is hard to
+            // follow so we're not trying to do const substitution for those yet (except for constants that are handled
+            // separately in VisitChildren()).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
-                ConstantValueSubstitutionHelper.IsInWhile(expression))
+                ConstantValueSubstitutionHelper.IsInWhile(expression) ||
+                expression.FindFirstParentOfType<MethodDeclaration>()?.FindFirstChildOfType<GotoStatement>() != null)
             {
                 return false;
             }
