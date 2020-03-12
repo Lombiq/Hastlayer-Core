@@ -144,13 +144,11 @@
     <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\IObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\IOperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\IOperatorsToMethodsConverter.cs" />
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\MethodInliner.cs" />
     <Compile Include="Services\ObjectInitializerExpander.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
     <Compile Include="Services\SimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
