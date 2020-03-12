@@ -34,7 +34,6 @@ namespace Hast.Transformer
         private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
         private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
         private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
-        private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
@@ -69,7 +68,6 @@ namespace Hast.Transformer
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
-            IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
@@ -102,7 +100,6 @@ namespace Hast.Transformer
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
-            _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
             _constantValuesSubstitutor = constantValuesSubstitutor;
@@ -313,7 +310,6 @@ namespace Hast.Transformer
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
 
-            _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
             _memberIdentifiersFixer.FixMemberIdentifiers(syntaxTree);
             _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasies(syntaxTree);
 

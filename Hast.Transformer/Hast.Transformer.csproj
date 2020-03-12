@@ -131,7 +131,6 @@
     <Compile Include="Services\DirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
-    <Compile Include="Services\IAutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IConstantValuesSubstitutor.cs" />
     <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
@@ -151,7 +150,6 @@
     <Compile Include="Services\MethodInliner.cs" />
     <Compile Include="Services\ObjectInitializerExpander.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
     <Compile Include="Services\SimpleMemoryUsageVerifier.cs" />
