@@ -27,22 +27,10 @@ namespace Hast.Transformer.Vhdl.Models
         IDictionary<string, string> VariableNameToDisplayClassNameMappings { get; }
 
         /// <summary>
-        /// Maps the names of variables that store object references to compiler-generated Func<TIn, TOut> objects that
-        /// are then populated with references to DisplayClasse methods.
-        /// </summary>
-        IDictionary<string, MethodDeclaration> FuncVariableNameToDisplayClassMethodMappings { get; }
-
-        /// <summary>
         /// Keeps track of the name of those variables that store references to Tasks and then later the Task results
         /// fetched from them via Task.Result.
         /// </summary>
         IDictionary<string, MethodDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; }
-
-        /// <summary>
-        /// Keeps track of the name of those variables that store references to 
-        /// <see cref="System.Threading.Tasks.TaskFactory"/> objects.
-        /// </summary>
-        ISet<string> TaskFactoryVariableNames { get; }
 
         /// <summary>
         /// Keeps track of which invoked state machines were finished in which states. This is needed not to
@@ -92,9 +80,7 @@ namespace Hast.Transformer.Vhdl.Models
         public IMemberStateMachine StateMachine { get; set; }
         public ICurrentBlock CurrentBlock { get; set; }
         public IDictionary<string, string> VariableNameToDisplayClassNameMappings { get; } = new Dictionary<string, string>();
-        public IDictionary<string, MethodDeclaration> FuncVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, MethodDeclaration>();
         public IDictionary<string, MethodDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, MethodDeclaration>();
-        public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
         public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
         public IDictionary<string, int> LabelsToStateIndicesMappings { get; set; } = new Dictionary<string, int>();
         public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
