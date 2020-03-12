@@ -541,49 +541,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Expression = transformedExpression
                         };
 
-                        // Casting if the result type is not what the parent expects.
-                        //var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
-                        //if (!(unary.FindFirstNonParenthesizedExpressionParent() is CastExpression) &&
-                        //    parentTypeInformation != null &&
-                        //    parentTypeInformation.ExpectedType != parentTypeInformation.InferredType &&
-                        //    parentTypeInformation.ExpectedType != null && parentTypeInformation.InferredType != null)
-                        //{
-                        //    var fromType = _typeConverter
-                        //        .ConvertType(parentTypeInformation.ExpectedType, context.TransformationContext);
-                        //    var toType = _typeConverter
-                        //        .ConvertType(parentTypeInformation.InferredType, context.TransformationContext);
-
-                        //    if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
-                        //    {
-                        //        transformedOperation = _typeConversionTransformer.ImplementTypeConversion(
-                        //            fromType,
-                        //            toType,
-                        //            new Binary
-                        //            {
-                        //                Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
-                        //                Operator = BinaryOperator.Subtract,
-                        //                Right = transformedExpression
-                        //            })
-                        //            .ConvertedFromExpression;
-                        //    }
-                        //    else
-                        //    {
-                        //        transformedOperation = new Unary
-                        //        {
-                        //            Operator = UnaryOperator.Negation,
-                        //            Expression = transformedExpression
-                        //        };
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    transformedOperation = new Unary
-                        //    {
-                        //        Operator = UnaryOperator.Negation,
-                        //        Expression = transformedExpression
-                        //    };
-                        //}
-
                         break;
                     case UnaryOperatorType.Not:
                     case UnaryOperatorType.BitNot:
