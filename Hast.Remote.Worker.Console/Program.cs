@@ -28,7 +28,7 @@ namespace Hast.Remote.Worker.Console
                 //    }
                 //};
 
-                var host = await Hastlayer.Create();
+                var host = (Hastlayer)await Hastlayer.Create();
                 await host.RunAsync<ITransformationWorker>(worker =>
                 {
                     var configuration = new TransformationWorkerConfiguration

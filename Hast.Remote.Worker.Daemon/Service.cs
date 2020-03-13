@@ -55,22 +55,7 @@ namespace Hast.Remote.Worker.Daemon
         {
             _workerTask = Task.Run(async () =>
             {
-                //var settings = new AppHostSettings
-                //{
-                //    ImportedExtensions = new[] { typeof(ITransformationWorker).Assembly },
-                //    DefaultShellFeatureStates = new[]
-                //    {
-                //            new DefaultShellFeatureState
-                //            {
-                //                EnabledFeatures = new[]
-                //                {
-                //                    typeof(ITransformationWorker).Assembly.ShortName()
-                //                }
-                //            }
-                //    }
-                //};
-
-                using (var host = await Hastlayer.Create())
+                using (var host = (Hastlayer) await Hastlayer.Create())
                 {
                     try
                     {
