@@ -6,8 +6,11 @@
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Events\**" />
     <Compile Remove="Hast.Transformer.Vhdl.Tests\**" />
+    <EmbeddedResource Remove="Events\**" />
     <EmbeddedResource Remove="Hast.Transformer.Vhdl.Tests\**" />
+    <None Remove="Events\**" />
     <None Remove="Hast.Transformer.Vhdl.Tests\**" />
   </ItemGroup>
   <ItemGroup>
@@ -43,8 +46,5 @@
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
   </ItemGroup>
 </Project>

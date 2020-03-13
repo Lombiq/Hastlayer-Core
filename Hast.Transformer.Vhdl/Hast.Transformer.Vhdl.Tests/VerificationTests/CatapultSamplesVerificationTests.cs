@@ -4,8 +4,6 @@ using Xunit;
 using System.Threading.Tasks;
 using System.Linq;
 
-// Disable tests as they are currently not ready.
-using FactAttribute = System.Runtime.CompilerServices.CompilerGeneratedAttribute;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
