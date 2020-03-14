@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using Hast.Common.ContractResolvers;
+﻿using Hast.Common.ContractResolvers;
 using Hast.Layer;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.Models
 
         public Task WriteSource(Stream stream)
         {
-            ThroIfVhdlSourceEmpty();
+            ThrowIfVhdlSourceEmpty();
 
             using (var streamWriter = new StreamWriter(stream))
             {
@@ -57,19 +57,19 @@ namespace Hast.Transformer.Vhdl.Models
 
         public async Task Serialize(Stream stream)
         {
-            ThroIfVhdlSourceEmpty();
+            ThrowIfVhdlSourceEmpty();
 
             using (var writer = new StreamWriter(stream))
             {
                 await writer.WriteAsync(JsonConvert.SerializeObject(
-                    this, 
+                    this,
                     Formatting.None,
                     GetJsonSerializerSettings()));
             }
         }
 
 
-        private void ThroIfVhdlSourceEmpty()
+        private void ThrowIfVhdlSourceEmpty()
         {
             if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
         }
