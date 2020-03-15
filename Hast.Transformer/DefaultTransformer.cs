@@ -300,7 +300,7 @@ namespace Hast.Transformer
             }
 
             var decompilerTasks = decompilers
-                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile()))
+                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true)))
                 .ToArray();
 
             Task.WaitAll(decompilerTasks);
