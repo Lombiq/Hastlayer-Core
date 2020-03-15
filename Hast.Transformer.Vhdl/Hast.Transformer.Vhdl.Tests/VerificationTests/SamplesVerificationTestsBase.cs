@@ -1,5 +1,6 @@
 ﻿using Hast.Algorithms;
 using Hast.Algorithms.Random;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.Kpz.Algorithms;
@@ -23,10 +24,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         protected override bool UseStubMemberSuitabilityChecker => false;
 
 
-        protected Task<string> CreateVhdlForBasicSamples() =>
-            _host.RunGet(async wc =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
+        protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples() =>
+            _host.RunGet(wc => TransformAssembliesToVhdl(
                     wc.Resolve<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
@@ -74,10 +73,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
+                    }));
 
         protected async Task<string> CreateVhdlForKpzSamples()
         {

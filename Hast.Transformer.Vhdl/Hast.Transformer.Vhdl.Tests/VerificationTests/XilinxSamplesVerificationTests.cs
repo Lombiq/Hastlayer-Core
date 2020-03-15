@@ -9,7 +9,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         [Test]
         public async Task BasicSamplesMatchApproved()
         {
-            (await CreateVhdlForBasicSamples()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateSourceForBasicSamples()).ShouldMatchApprovedWithVhdlConfiguration();
         }
 
         [Test]
