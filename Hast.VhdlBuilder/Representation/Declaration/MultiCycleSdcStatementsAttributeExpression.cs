@@ -35,7 +35,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             {
                 ParentName = parentName,
                 PathReference = pathReference,
-                ClockCycles = clockCycles,
+                ClockCycles = clockCycles - 1,
                 Type = "hold"
             });
         }
