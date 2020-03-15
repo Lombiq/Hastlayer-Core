@@ -61,6 +61,7 @@
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
     <Compile Include="Representation\Declaration\UnOmittableBlockComment.cs" />
     <Compile Include="Representation\Declaration\UnOmittableLineComment.cs" />
+    <Compile Include="Representation\Declaration\XdcFile.cs" />
     <Compile Include="Representation\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
     <Compile Include="Representation\Declaration\GeneratedComment.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="Representation\Expression\Parenthesized.cs" />
     <Compile Include="Representation\Expression\RecordFieldAccess.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
-    <Compile Include="Representation\Expression\MultiCycleSdcStatementsAttributeExpression.cs" />
+    <Compile Include="Representation\Declaration\MultiCycleSdcStatementsAttributeExpression.cs" />
     <Compile Include="Representation\Expression\Unary.cs" />
     <Compile Include="Representation\Expression\UnaryOperator.cs" />
     <Compile Include="Representation\Expression\VectorSlice.cs" />

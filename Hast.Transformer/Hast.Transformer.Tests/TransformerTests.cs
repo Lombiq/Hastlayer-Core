@@ -10,7 +10,7 @@ using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Xilinx;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using NUnit.Framework;
@@ -196,7 +196,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private static HardwareGenerationConfiguration CreateConfig()
         {
-            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName);
+            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName, null);
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }

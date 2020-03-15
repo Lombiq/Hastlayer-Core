@@ -1,6 +1,6 @@
 ﻿using Hast.Common.Extensions;
 using Hast.Layer;
-using Hast.Synthesis;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
@@ -13,6 +13,7 @@ using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using Orchard.Services;
@@ -166,11 +167,13 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
 
-            // Adding multi-cycle path constraints for Quartus.
-            if (transformationContext.DeviceDriver.ToolChainName == CommonToolChainNames.QuartusPrime)
+            XdcFile xdcFile = null;
+            if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.QuartusPrime)
             {
+                // Adding multi-cycle path constraints for Quartus.
+
                 var anyMultiCycleOperations = false;
-                var sdcExpression = new VhdlBuilder.Representation.Expression.MultiCycleSdcStatementsAttributeExpression();
+                var sdcExpression = new MultiCycleSdcStatementsAttributeExpression();
 
                 foreach (var architectureComponentResult in architectureComponentResults)
                 {
@@ -200,13 +203,27 @@ namespace Hast.Transformer.Vhdl.Services
                     hastIpArchitecture.Declarations.Add(new LogicalBlock(
                         new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
                         alteraAttribute,
-                        new VhdlBuilder.Representation.Expression.AttributeSpecification
+                        new AttributeSpecification
                         {
                             Attribute = alteraAttribute,
                             ItemName = hastIpArchitecture.Name,
                             ItemClass = "architecture",
                             Expression = sdcExpression
                         }));
+                }
+            }
+            else if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado)
+            {
+                // Adding multi-cycle path constraints for Vivado.
+
+                xdcFile = new XdcFile();
+
+                foreach (var architectureComponentResult in architectureComponentResults)
+                {
+                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
+                    {
+                        xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, true);
+                    }
                 }
             }
 
@@ -331,7 +348,8 @@ namespace Hast.Transformer.Vhdl.Services
             {
                 Manifest = manifest,
                 MemberIdTable = memberIdTable,
-                Warnings = warnings
+                Warnings = warnings,
+                XdcFile = xdcFile
             };
         }
 

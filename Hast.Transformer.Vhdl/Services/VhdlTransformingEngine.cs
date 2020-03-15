@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Hast.Transformer.Vhdl.Events;
-using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -34,7 +33,7 @@ namespace Hast.Transformer.Vhdl.Services
             {
                 var cachedHardwareDescription = await _vhdlHardwareDescriptionCachingService
                     .GetHardwareDescription(cacheKey);
-                if (cachedHardwareDescription != null) return cachedHardwareDescription; 
+                if (cachedHardwareDescription != null) return cachedHardwareDescription;
             }
 
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
@@ -55,12 +54,20 @@ namespace Hast.Transformer.Vhdl.Services
                 vhdlGenerationOptions.NameShortener = VhdlGenerationOptions.SimpleNameShortener;
             }
 
-            var vhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions);
-            var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
+            var xdcSource = transformedVhdlManifest.XdcFile != null ?
+                transformedVhdlManifest.XdcFile.ToVhdl(vhdlGenerationOptions) :
+                null;
+            var hardwareDescription = new VhdlHardwareDescription
+            {
+                HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings,
+                VhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions),
+                Warnings = transformedVhdlManifest.Warnings,
+                XdcSource = xdcSource
+            };
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {
-                await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(cacheKey, hardwareDescription); 
+                await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(cacheKey, hardwareDescription);
             }
 
             return hardwareDescription;

@@ -1,5 +1,5 @@
 ﻿using Hast.Synthesis.Services;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 
 namespace Hast.Xilinx
 {

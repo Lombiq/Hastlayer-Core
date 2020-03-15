@@ -64,7 +64,6 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CommonToolChainNames.cs" />
     <Compile Include="Helpers\DeviceDriverHelper.cs" />
     <Compile Include="IDeviceDriver.cs" />
     <Compile Include="Models\ITimingReport.cs" />

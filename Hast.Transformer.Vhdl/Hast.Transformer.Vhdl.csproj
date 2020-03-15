@@ -174,7 +174,6 @@
     <Compile Include="SubTransformers\ExpressionTransformers\TypeConversionTransformer.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
     <Compile Include="Models\VhdlTransformationContext.cs" />
-    <Compile Include="Models\VhdlHardwareDescription.cs" />
     <Compile Include="Services\VhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="Services\VhdlTransformingEngine.cs" />
     <Compile Include="Verifiers\IHardwareEntryPointsVerifier.cs" />
