@@ -18,7 +18,7 @@ namespace Hast.DynamicTests
         {
             using (var hastlayer = await Hastlayer.Create())
             {
-                var configuration = new HardwareGenerationConfiguration("Nexys A7");
+                var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
 
                 configurator(configuration);
 
@@ -45,8 +45,6 @@ namespace Hast.DynamicTests
                 var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
                 var methodNameStartIndex = folderName.IndexOf("::");
                 folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
-                //await hardwareRepresentation.HardwareDescription.WriteSource($@"E:\ShortPath\BinaryAndUnaryTests\{folderName}\IPRepo\Hast_IP.vhd");
-                await hardwareRepresentation.HardwareDescription.WriteSource("Hast_IP.vhd");
 
                 Console.WriteLine("Hardware generated, starting hardware execution.");
                 var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };

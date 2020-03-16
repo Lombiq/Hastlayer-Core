@@ -199,6 +199,10 @@ architecture Imp of Hast_IP is
     -- Enum declarations end
 
 
+    -- When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly.
+    attribute dont_touch: string;
+
+
     -- Custom inter-dependent type declarations start
     type \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\ is record 
         \IsNull\: boolean;
@@ -2965,6 +2969,9 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array2\: \unsigned8_Array\(0 to 2) := (others => to_unsigned(0, 8));
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3822,6 +3829,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4058,6 +4068,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4294,6 +4307,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4530,6 +4546,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4766,6 +4785,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5002,6 +5024,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5238,6 +5263,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5474,6 +5502,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5710,6 +5741,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5946,6 +5980,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6182,6 +6219,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6418,6 +6458,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6654,6 +6697,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6890,6 +6936,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7126,6 +7175,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7362,6 +7414,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7598,6 +7653,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7834,6 +7892,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -8070,6 +8131,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -8306,6 +8370,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -8542,6 +8609,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -8778,6 +8848,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9014,6 +9087,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9250,6 +9326,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9486,6 +9565,9 @@ begin
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.8\: boolean := false;
         Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4\: Variable is "true";
+        attribute dont_touch of \ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -14211,6 +14293,7 @@ begin
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16437,6 +16520,7 @@ begin
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16694,6 +16778,7 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17334,6 +17419,7 @@ begin
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.2\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17496,6 +17582,7 @@ begin
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.2\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -17658,6 +17745,7 @@ begin
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
         Variable \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.2\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -19516,6 +19604,26 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\: Signal is "true";
+        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\: Signal is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -21314,3 +21422,211 @@ begin
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).3.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).4.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).5.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).6.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).7.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).8.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).9.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).10.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).11.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).12.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).13.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).14.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).15.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).16.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).17.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).18.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).19.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).20.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).21.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).22.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).23.binaryOperationResult.7*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.1*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.2*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.2*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.2*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.2*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.2*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.2*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88*}]
+set_multicycle_path 10 -setup -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89*}]
+set_multicycle_path 9 -hold -to [get_cells -hierarchical {*SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89*}]

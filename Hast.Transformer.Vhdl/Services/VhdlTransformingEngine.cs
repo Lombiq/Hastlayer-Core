@@ -1,8 +1,9 @@
-﻿using Hast.Layer;
+﻿using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -58,8 +59,16 @@ namespace Hast.Transformer.Vhdl.Services
                 vhdlGenerationOptions.NameShortener = VhdlGenerationOptions.SimpleNameShortener;
             }
 
-            var vhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions);
-            var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
+            var xdcSource = transformedVhdlManifest.XdcFile != null ?
+                transformedVhdlManifest.XdcFile.ToVhdl(vhdlGenerationOptions) :
+                null;
+            var hardwareDescription = new VhdlHardwareDescription
+            {
+                HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings,
+                VhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions),
+                Warnings = transformedVhdlManifest.Warnings,
+                XdcSource = xdcSource
+            };
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {

@@ -2,7 +2,7 @@
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Xilinx
@@ -1067,8 +1067,6 @@ mul_by_0	unsigned64	unsigned64	sync	synth	0	0
                 }
             }
         }
-
-        public string ToolChainName { get; } = CommonToolChainNames.Vivado;
 
 
         public AlveoU280Driver(ITimingReportParser timingReportParser)

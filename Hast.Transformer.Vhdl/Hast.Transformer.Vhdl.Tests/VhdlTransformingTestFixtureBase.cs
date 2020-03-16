@@ -1,4 +1,5 @@
-﻿using Hast.Layer;
+﻿using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
@@ -6,7 +7,7 @@ using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using Hast.Xilinx;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -51,7 +52,7 @@ namespace Hast.Transformer.Vhdl.Tests
             IEnumerable<Assembly> assemblies,
             Action<HardwareGenerationConfiguration> configurationModifier = null)
         {
-            var configuration = new HardwareGenerationConfiguration(DeviceName) { EnableCaching = false };
+            var configuration = new HardwareGenerationConfiguration(DeviceName, null) { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
         }

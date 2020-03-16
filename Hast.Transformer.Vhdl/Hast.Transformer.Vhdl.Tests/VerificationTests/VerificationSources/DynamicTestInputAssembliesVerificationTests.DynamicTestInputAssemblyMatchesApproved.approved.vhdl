@@ -188,6 +188,10 @@ architecture Imp of Hast_IP is
     -- * The ExternalInvocationProxy process dispatches invocations that were started from the outside to the state machines.
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
+    -- When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly.
+    attribute dont_touch: string;
+
+
     -- System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._States\ is (
@@ -1692,6 +1696,22 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.89\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2996,6 +3016,20 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4231,6 +4265,20 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5477,6 +5525,22 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.89\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6777,6 +6841,20 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7989,6 +8067,22 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.89\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9223,6 +9317,14 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.47\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.48\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.49\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.19\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.31\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.32\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.43\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.44\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9916,6 +10018,12 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.38\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.39\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.19\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.20\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.31\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.32\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10504,6 +10612,10 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.27\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.28\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.23\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.24\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11030,6 +11142,10 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.27\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.28\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.9\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.10\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.23\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.24\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 

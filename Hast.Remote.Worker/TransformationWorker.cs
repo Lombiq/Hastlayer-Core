@@ -220,7 +220,7 @@ namespace Hast.Remote.Worker
                                             {
                                                 hardwareRepresentation = await _hastlayer.GenerateHardware(
                                                     assemblyPaths,
-                                                    new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName)
+                                                    new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
                                                     {
                                                         CustomConfiguration = job.Configuration.CustomConfiguration,
                                                         EnableCaching = true,
@@ -230,27 +230,14 @@ namespace Hast.Remote.Worker
 
                                                 cancellationToken.ThrowIfCancellationRequested();
 
-                                                var hardwareDescription = hardwareRepresentation.HardwareDescription;
-
-                                                result.HardwareDescription = new HardwareDescription
-                                                {
-                                                    HardwareEntryPointNamesToMemberIdMappings = hardwareDescription
-                                                        .HardwareEntryPointNamesToMemberIdMappings
-                                                        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                                                    Language = hardwareDescription.Language,
-                                                    Warnings = hardwareDescription.Warnings
-                                                        .Select(warning => new TransformationWarning
-                                                        {
-                                                            Code = warning.Code,
-                                                            Message = warning.Message
-                                                        })
-                                                        .ToList()
-                                                };
-
                                                 using (var memoryStream = new MemoryStream())
                                                 {
-                                                    await hardwareDescription.WriteSource(memoryStream);
-                                                    result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
+                                                    await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
+                                                    result.HardwareDescription = new HardwareDescription
+                                                    {
+                                                        Language = hardwareRepresentation.HardwareDescription.Language,
+                                                        SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray())
+                                                    };
                                                 }
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))

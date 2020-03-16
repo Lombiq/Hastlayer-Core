@@ -56,7 +56,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// double quotes.
         /// </summary>
         public virtual bool IsLiteralArrayType() =>
-            this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector";
+            this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector" || Name == "string";
 
         public override bool Equals(object obj)
         {

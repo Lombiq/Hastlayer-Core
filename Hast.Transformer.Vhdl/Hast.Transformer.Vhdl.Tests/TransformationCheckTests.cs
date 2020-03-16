@@ -1,4 +1,5 @@
-﻿using Hast.Layer;
+﻿using Hast.Common.Models;
+using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
