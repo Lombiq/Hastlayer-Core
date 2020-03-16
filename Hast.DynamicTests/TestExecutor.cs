@@ -24,6 +24,11 @@ namespace Hast.DynamicTests
 
                 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
+                var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
+                var methodNameStartIndex = folderName.IndexOf("::");
+                folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
+                configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
+
                 hastlayer.ExecutedOnHardware += (sender, e) =>
                 {
                     Console.WriteLine(
@@ -42,9 +47,7 @@ namespace Hast.DynamicTests
                     },
                     configuration);
 
-                var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
-                var methodNameStartIndex = folderName.IndexOf("::");
-                folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
+
 
                 Console.WriteLine("Hardware generated, starting hardware execution.");
                 var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };
