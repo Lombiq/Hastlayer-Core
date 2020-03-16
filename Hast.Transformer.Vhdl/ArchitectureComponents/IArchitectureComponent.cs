@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 
@@ -29,6 +30,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// Aliases local to the component.
         /// </summary>
         IList<Alias> LocalAliases { get; }
+
+        /// <summary>
+        /// Attribute specifications local to the component.
+        /// </summary>
+        IList<AttributeSpecification> LocalAttributeSpecifications { get; }
 
         /// <summary>
         /// Variables corresponding to the component that are in the global namespace.

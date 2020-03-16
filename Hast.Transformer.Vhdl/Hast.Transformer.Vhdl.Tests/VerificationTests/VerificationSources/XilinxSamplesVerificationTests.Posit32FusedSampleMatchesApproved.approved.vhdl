@@ -176,6 +176,10 @@ architecture Imp of Hast_IP is
     -- * The ExternalInvocationProxy process dispatches invocations that were started from the outside to the state machines.
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
+    -- When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly.
+    attribute dont_touch: string;
+
+
     -- Custom inter-dependent type declarations start
     type \Lombiq.Arithmetics.Posit32\ is record 
         \IsNull\: boolean;
@@ -1155,6 +1159,8 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\: \Lombiq.Arithmetics.Posit32\;
+        attribute dont_touch of \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.0\: Variable is "true";
+        attribute dont_touch of \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.1\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 

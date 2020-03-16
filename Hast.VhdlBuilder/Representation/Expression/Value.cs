@@ -55,18 +55,18 @@ namespace Hast.VhdlBuilder.Representation.Expression
             {
                 if (content.Contains("others =>"))
                 {
-                    return "(" + content + ")";
+                    return $"({content})";
                 }
                 else if (DataType.IsLiteralArrayType())
                 {
-                    return "\"" + content + "\"";
+                    return $"\"{content}\"";
                 }
                 else if (EvaluatedContent is IBlockElement)
                 {
                     content = ((IBlockElement)EvaluatedContent).Body.ToVhdl(vhdlGenerationOptions, ", ", string.Empty);
                 }
 
-                return "(" + content + ")";
+                return $"({content})";
             }
 
             if (DataType.TypeCategory == DataTypeCategory.Character) return "'" + content + "'";
