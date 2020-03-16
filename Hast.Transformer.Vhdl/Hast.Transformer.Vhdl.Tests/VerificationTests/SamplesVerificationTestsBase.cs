@@ -25,7 +25,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
 
         protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples() =>
-            _host.RunGet(wc => TransformAssembliesToVhdl(
+            Host.RunGetAsync(wc => TransformAssembliesToVhdl(
                     wc.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>

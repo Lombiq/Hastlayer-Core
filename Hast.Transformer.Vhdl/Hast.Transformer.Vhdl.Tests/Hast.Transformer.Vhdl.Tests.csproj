@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj" />
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj" />
     <ProjectReference Include="..\..\Hast.Catapult\Hast.Catapult.csproj" />
     <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj" />
