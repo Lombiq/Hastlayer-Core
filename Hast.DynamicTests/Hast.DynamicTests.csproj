@@ -45,4 +45,9 @@
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
