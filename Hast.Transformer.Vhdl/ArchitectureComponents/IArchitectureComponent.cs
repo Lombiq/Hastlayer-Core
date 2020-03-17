@@ -52,6 +52,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IList<Signal> ExternallyDrivenSignals { get; }
 
         /// <summary>
+        /// Attribute specifications corresponding to the component that are in the global namespace.
+        /// </summary>
+        IList<AttributeSpecification> GlobalAttributeSpecifications { get; }
+
+        /// <summary>
         /// Track which other members are called from this component and in how many instances at a given time. I.e.
         /// if this FSM starts another FSM (which was originally e.g. a method call) then it will be visible here. If
         /// parallelization happens then the call instance count will be greater than 1 (i.e. the other member is called

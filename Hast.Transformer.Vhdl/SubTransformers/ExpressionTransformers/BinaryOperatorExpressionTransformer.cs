@@ -392,7 +392,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // We need to add an attribute like the one below so Vivado won't merge this variable/signal with
                 // others, thus allowing us to create XDC timing constraints for it.
                 // attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
-                stateMachine.LocalAttributeSpecifications.Add(new AttributeSpecification
+
+                var attributes = operationResultDataObjectIsVariable ? 
+                    stateMachine.LocalAttributeSpecifications : 
+                    stateMachine.GlobalAttributeSpecifications;
+                attributes.Add(new AttributeSpecification
                 {
                     Attribute = KnownDataTypes.DontTouchAttribute,
                     Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },

@@ -2847,6 +2847,26 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\: signed(31 downto 0) := to_signed(0, 32);
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._Started\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation.parameter.In\: \Hast.Samples.SampleAssembly.SimdOperation\;
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\: Signal is "true";
+    attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\: Signal is "true";
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
 
 
@@ -19604,26 +19624,6 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\: signed(31 downto 0) := to_signed(0, 32);
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\: Signal is "true";
-        attribute dont_touch of \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\: Signal is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
