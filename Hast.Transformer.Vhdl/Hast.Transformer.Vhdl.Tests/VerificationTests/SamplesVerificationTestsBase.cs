@@ -197,8 +197,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 return hardwareDescription.VhdlSource;
             });
 
-        protected Task<string> CreateVhdlForPosit32FusedSample() =>
-            Host.RunGetAsync(async wc =>
+        protected async Task<string> CreateVhdlForPosit32FusedSample()
+        {
+            var notInlinedSource = await Host.RunGetAsync(async wc =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     wc.GetService<ITransformer>(),
@@ -214,6 +215,25 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                 return hardwareDescription.VhdlSource;
             });
+
+            var inlinedSource = await Host.RunGetAsync(async wc =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    wc.GetService<ITransformer>(),
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<Posit32FusedCalculator>();
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            Posit32.QuireSize >> 6,
+                            Posit32FusedCalculatorExtensions.ManuallySizedArrays);
+                    });
+
+                return hardwareDescription.VhdlSource;
+            });
+
+            return notInlinedSource + inlinedSource;
+        }
 
         protected Task<string> CreateVhdlForFix64Samples() =>
             Host.RunGetAsync(async wc =>

@@ -282,6 +282,22 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static ResolveResult CreateResolveResultFromActualType(this AstNode node) =>
             node.GetActualType().ToResolveResult();
 
+        /// <summary>
+        /// Remove the node from the syntax tree and mark it as such so later it can be determined that it was removed.
+        /// </summary>
+        /// <remarks>
+        /// While a node being orphaned in the syntax tree can be determined by checking whether its Parent,
+        /// PrevSibling, and NextSibling are all null but that's only useful if such dangling nodes can't normally be
+        /// created otherwise (like it is the case during const substitution).
+        /// </remarks>
+        public static void RemoveAndMark(this AstNode node)
+        {
+            node.AddAnnotation(new WasRemoved());
+            node.Remove();
+        }
+
+        public static bool IsMarkedAsRemoved(this AstNode node) => node.Annotation<WasRemoved>() != null;
+
 
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
@@ -346,5 +362,10 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
+
+
+        private class WasRemoved
+        {
+        }
     }
 }

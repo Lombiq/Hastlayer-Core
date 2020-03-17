@@ -155,6 +155,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (!(ifElseStatement.Condition is PrimitiveExpression primitiveCondition)) return;
 
+            ReturnStatement replacingReturnStatement = null;
+
             void replaceIfElse(Statement branchStatement)
             {
                 // Moving all statements from the block up.
@@ -162,16 +164,39 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 {
                     foreach (var statement in branchStatement.Children)
                     {
-                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, (Statement)statement.Clone());
+                        var clone = statement.Clone();
+                        // There should be at most a single return statement in this block.
+                        if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
+                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, (Statement)clone);
                     }
                 }
-                else ifElseStatement.ReplaceWith(branchStatement.Clone());
+                else
+                {
+                    var clone = branchStatement.Clone();
+                    if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
+                    ifElseStatement.ReplaceWith(clone);
+                }
             }
 
             if (primitiveCondition.Value.Equals(true)) replaceIfElse(ifElseStatement.TrueStatement);
             else if (ifElseStatement.FalseStatement != Statement.Null) replaceIfElse(ifElseStatement.FalseStatement);
 
-            ifElseStatement.Remove();
+            ifElseStatement.RemoveAndMark();
+
+            // Is this a return statement in the root level of a method or something similar? Because then any other
+            // statement after it should be removed too.
+            if (replacingReturnStatement != null &&
+                (replacingReturnStatement.Parent is EntityDeclaration ||
+                    replacingReturnStatement.Parent.Is<BlockStatement>(block => block.Parent is EntityDeclaration)))
+            {
+                var currentStatement = replacingReturnStatement.GetNextStatement();
+                while (currentStatement != null)
+                {
+                    var nextStatement = currentStatement.GetNextStatement();
+                    currentStatement.RemoveAndMark();
+                    currentStatement = nextStatement;
+                }
+            }
         }
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
@@ -264,8 +289,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
             }
 
-            // Attributes can slip in here but we don't care about those.
-            if (!(node is Attribute))
+            // Attributes can slip in here but we don't care about those. Also, due to eliminating branches nodes can
+            // be removed on the fly.
+            if (!(node is Attribute) && !node.IsMarkedAsRemoved())
             {
                 base.VisitChildren(node);
             }

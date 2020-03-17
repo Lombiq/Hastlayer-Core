@@ -20,6 +20,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IList<Variable> GlobalVariables { get; private set; } = new List<Variable>();
         public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
         public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
+        public IList<AttributeSpecification> GlobalAttributeSpecifications { get; set; } = new List<AttributeSpecification>();
         public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } =
             new Dictionary<EntityDeclaration, int>();
         public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
@@ -66,6 +67,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 declarationsBlock.Add(new LineComment("Shared (global) variables:"));
             }
             declarationsBlock.Body.AddRange(GlobalVariables);
+
+            declarationsBlock.Body.AddRange(GlobalAttributeSpecifications);
 
             if (endWith != null)
             {
