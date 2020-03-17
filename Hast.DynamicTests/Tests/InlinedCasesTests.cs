@@ -6,6 +6,7 @@ namespace Hast.DynamicTests.Tests
 {
     public class InlinedCasesTests
     {
+        [Fact]
         public Task InlinedMultiReturn() =>
             TestExecutor.ExecuteSelectedTest<InlinedCases>(
                 g => g.InlinedMultiReturn(null),

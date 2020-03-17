@@ -6,6 +6,7 @@ namespace Hast.DynamicTests.Tests
 {
     public class CastExpressionCasesTests
     {
+        [Fact]
         public Task AllNumberCastingVariations() =>
             TestExecutor.ExecuteSelectedTest<CastExpressionCases>(
                 c => c.AllNumberCastingVariations(null),
