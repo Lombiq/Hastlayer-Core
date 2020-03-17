@@ -12,22 +12,6 @@ namespace Hast.Remote.Worker.Console
         {
             Task.Run(async () =>
             {
-                //var settings = new AppHostSettings
-                //{
-                //    ImportedExtensions = new[] { typeof(Program).Assembly, typeof(ITransformationWorker).Assembly },
-                //    DefaultShellFeatureStates = new[]
-                //    {
-                //            new DefaultShellFeatureState
-                //            {
-                //                EnabledFeatures = new[]
-                //                {
-                //                    typeof(Program).Assembly.ShortName(),
-                //                    typeof(ITransformationWorker).Assembly.ShortName()
-                //                }
-                //            }
-                //    }
-                //};
-
                 var host = (Hastlayer)await Hastlayer.Create();
                 await host.RunAsync<ITransformationWorker>(worker =>
                 {

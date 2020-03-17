@@ -4,8 +4,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
-// Disable tests as they are currently not ready.
-using FactAttribute = System.Runtime.CompilerServices.CompilerGeneratedAttribute;
 
 namespace Hast.DynamicTests.Tests
 {

@@ -6,7 +6,6 @@ namespace Hast.DynamicTests.Tests
 {
     public class InlinedCasesTests
     {
-        [Fact(Skip = "Not ready.")]
         public Task InlinedMultiReturn() =>
             TestExecutor.ExecuteSelectedTest<InlinedCases>(
                 g => g.InlinedMultiReturn(null),

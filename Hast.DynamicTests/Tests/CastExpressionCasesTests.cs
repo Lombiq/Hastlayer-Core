@@ -6,7 +6,6 @@ namespace Hast.DynamicTests.Tests
 {
     public class CastExpressionCasesTests
     {
-        [Fact(Skip = "Not ready.")]
         public Task AllNumberCastingVariations() =>
             TestExecutor.ExecuteSelectedTest<CastExpressionCases>(
                 c => c.AllNumberCastingVariations(null),
