@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.Tests
     public class TransformerTests
     {
         private ITransformationContext _producedContext;
-        private AutoMocker _mocker;
+        private readonly AutoMocker _mocker;
 
         private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 

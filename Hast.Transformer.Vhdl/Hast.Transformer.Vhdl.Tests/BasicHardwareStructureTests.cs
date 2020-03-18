@@ -29,6 +29,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Fact]
         public async Task BasicVhdlStructureIsCorrect()
         {
+            await Task.FromResult(true);
             //await Host.RunAsync<ITransformer>(async transformer =>
             //{
             //    var topModule = (Module)(await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.Modules.Last();

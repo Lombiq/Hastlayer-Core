@@ -33,7 +33,9 @@ namespace Hast.Remote.Worker.Services
             var aiAppender = new ApplicationInsightsAppender
             {
                 Name = "ai-appender",
+#pragma warning disable CS0618 // Type or member is obsolete
                 InstrumentationKey = TelemetryConfiguration.Active.InstrumentationKey,
+#pragma warning restore CS0618 // Type or member is obsolete
                 Layout = patternLayout
             };
             aiAppender.ActivateOptions();
@@ -62,7 +64,9 @@ namespace Hast.Remote.Worker.Services
 
             requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString();
 
+#pragma warning disable CS0618 // Type or member is obsolete
             new TelemetryClient(TelemetryConfiguration.Active).TrackRequest(requestTelemetry);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }
