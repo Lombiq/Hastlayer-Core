@@ -55,19 +55,6 @@ namespace Hast.Remote.Worker
         }
 
 
-        private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
-        {
-            var segment = await container.ListBlobsSegmentedAsync(prefix, null);
-            var list = new List<IListBlobItem>();
-            list.AddRange(segment.Results);
-            while (segment.ContinuationToken != null)
-            {
-                segment = await container.ListBlobsSegmentedAsync(prefix, segment.ContinuationToken);
-                list.AddRange(segment.Results);
-            }
-            return list;
-        }
-
         public async Task Work(ITransformationWorkerConfiguration configuration, CancellationToken cancellationToken)
         {
             try
@@ -375,6 +362,19 @@ namespace Hast.Remote.Worker
             _oldResultBlobsCleanerTimer.Stop();
             _oldResultBlobsCleanerTimer.Dispose();
             _transformationTasks.Clear();
+        }
+
+        private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
+        {
+            var segment = await container.ListBlobsSegmentedAsync(prefix, null);
+            var list = new List<IListBlobItem>();
+            list.AddRange(segment.Results);
+            while (segment.ContinuationToken != null)
+            {
+                segment = await container.ListBlobsSegmentedAsync(prefix, segment.ContinuationToken);
+                list.AddRange(segment.Results);
+            }
+            return list;
         }
 
 
