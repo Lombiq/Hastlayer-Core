@@ -9,6 +9,7 @@
 -- * System.Void Hast.TestInputs.Static.ObjectUsingCases::NullUsage()
 -- * System.Void Hast.TestInputs.Static.ObjectUsingCases::VoidReturn(System.Int32)
 -- * System.Void Hast.TestInputs.Static.ObjectUsingCases::ReferenceAssignment(System.Int32)
+-- * System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32)
 -- * System.Void Hast.TestInputs.Static.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Static.ParallelCases::ObjectUsingTasks(System.UInt32)
 -- * System.Void Hast.TestInputs.Static.UnaryCases::IncrementDecrement(System.Int32)
@@ -132,6 +133,10 @@ architecture Imp of Hast_IP is
     type \Hast.TestInputs.Static.ObjectUsingCases+MyClass\ is record 
         \IsNull\: boolean;
         \MyProperty\: signed(31 downto 0);
+    end record;
+    type \Hast.TestInputs.Static.OptionaParametersCases+MyClass\ is record 
+        \IsNull\: boolean;
+        \_state\: signed(31 downto 0);
     end record;
     type \Hast.TestInputs.Static.ParallelCases+Calculator\ is record 
         \IsNull\: boolean;
@@ -479,6 +484,65 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Static.ObjectUsingCases::VoidMethod(Hast.TestInputs.Static.ObjectUsingCases+MyClass).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32).0 declarations start
+    -- State machine states:
+    type \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._States\ is (
+        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_0\, 
+        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_1\, 
+        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_2\);
+    -- Signals:
+    Signal \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Finished\: boolean := false;
+    Signal \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this.parameter.Out\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Started\: boolean := false;
+    Signal \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this.parameter.In\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.add.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32).0 declarations start
+    -- State machine states:
+    type \OptionaParametersCases+MyClass::Method(Int32,Int32).0._States\ is (
+        \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_0\, 
+        \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_1\, 
+        \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_2\);
+    -- Signals:
+    Signal \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Finished\: boolean := false;
+    Signal \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this.parameter.Out\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Started\: boolean := false;
+    Signal \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this.parameter.In\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases+MyClass::Method(Int32,Int32).0.add.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32).0 declarations start
+    -- State machine states:
+    type \OptionaParametersCases::OmittedOptionalParameters(Int32).0._States\ is (
+        \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_0\, 
+        \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_1\, 
+        \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_2\, 
+        \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_3\, 
+        \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_4\);
+    -- Signals:
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Finished\: boolean := false;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).this.parameter.Out.0\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).input.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).add.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Started.0\: boolean := false;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).this.parameter.Out.0\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).input.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).add.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Started.0\: boolean := false;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Started\: boolean := false;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).this.parameter.In.0\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Finished.0\: boolean := false;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).this.parameter.In.0\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    Signal \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Finished.0\: boolean := false;
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32).0 declarations end
+
+
     -- System.Boolean Hast.TestInputs.Static.ParallelCases+Calculator::IsEven().0 declarations start
     -- State machine states:
     type \ParallelCases+Calculator::IsEven().0._States\ is (
@@ -726,6 +790,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\: boolean := false;
@@ -739,6 +804,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\: boolean := false;
@@ -2746,6 +2812,203 @@ begin
     -- System.Void Hast.TestInputs.Static.ObjectUsingCases::VoidMethod(Hast.TestInputs.Static.ObjectUsingCases+MyClass).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32).0 state machine start
+    \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._StateMachine\: process (\Clock\) 
+        Variable \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State\: \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._States\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_0\;
+        Variable \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+        Variable \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.add\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Finished\ <= false;
+                \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_0\;
+                \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input\ := to_signed(0, 32);
+                \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.add\ := to_signed(0, 32);
+                \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+            else 
+                case \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State\ is 
+                    when \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Started\ = true) then 
+                            \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Started\ = true) then 
+                            \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Finished\ <= true;
+                        else 
+                            \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Finished\ <= false;
+                            \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this.parameter.Out\ <= \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_2\ => 
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this.parameter.In\;
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input.parameter.In\;
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.add\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.add.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this._state = input + 10;
+                        -- 
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.binaryOperationResult.0\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input\ + to_signed(10, 32);
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this\.\_state\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.binaryOperationResult.0\;
+                        \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32).0 state machine start
+    \OptionaParametersCases+MyClass::Method(Int32,Int32).0._StateMachine\: process (\Clock\) 
+        Variable \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State\: \OptionaParametersCases+MyClass::Method(Int32,Int32).0._States\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_0\;
+        Variable \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+        Variable \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \OptionaParametersCases+MyClass::Method(Int32,Int32).0.add\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \OptionaParametersCases+MyClass::Method(Int32,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Finished\ <= false;
+                \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_0\;
+                \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input\ := to_signed(0, 32);
+                \OptionaParametersCases+MyClass::Method(Int32,Int32).0.add\ := to_signed(0, 32);
+                \OptionaParametersCases+MyClass::Method(Int32,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+            else 
+                case \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State\ is 
+                    when \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\OptionaParametersCases+MyClass::Method(Int32,Int32).0._Started\ = true) then 
+                            \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\OptionaParametersCases+MyClass::Method(Int32,Int32).0._Started\ = true) then 
+                            \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Finished\ <= true;
+                        else 
+                            \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Finished\ <= false;
+                            \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this.parameter.Out\ <= \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_2\ => 
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this.parameter.In\;
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input.parameter.In\;
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0.add\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0.add.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this._state = input + 11;
+                        -- 
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0.binaryOperationResult.0\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input\ + to_signed(11, 32);
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this\.\_state\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0.binaryOperationResult.0\;
+                        \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State\ := \OptionaParametersCases+MyClass::Method(Int32,Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32).0 state machine start
+    \OptionaParametersCases::OmittedOptionalParameters(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\: \OptionaParametersCases::OmittedOptionalParameters(Int32).0._States\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_0\;
+        Variable \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\: \Hast.TestInputs.Static.OptionaParametersCases+MyClass\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Finished\ <= false;
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).input.parameter.Out.0\ <= to_signed(0, 32);
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).add.parameter.Out.0\ <= to_signed(0, 32);
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Started.0\ <= false;
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).input.parameter.Out.0\ <= to_signed(0, 32);
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).add.parameter.Out.0\ <= to_signed(0, 32);
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Started.0\ <= false;
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_0\;
+                \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input\ := to_signed(0, 32);
+            else 
+                case \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ is 
+                    when \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\OptionaParametersCases::OmittedOptionalParameters(Int32).0._Started\ = true) then 
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\OptionaParametersCases::OmittedOptionalParameters(Int32).0._Started\ = true) then 
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Finished\ <= true;
+                        else 
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Finished\ <= false;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_2\ => 
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- MyClass myClass;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = new MyClass (input, 10);
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\.\IsNull\ := false;
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\.\_state\ := to_signed(0, 32);
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32)
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).this.parameter.Out.0\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\;
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).input.parameter.Out.0\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input\;
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).add.parameter.Out.0\ <= to_signed(10, 32);
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Started.0\ <= true;
+                        \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32)
+                        if (\OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Started.0\ = \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Finished.0\) then 
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Started.0\ <= false;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.TestInputs.Static.OptionaParametersCases+MyClass.Method (myClass, input, 11);
+                            -- 
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32)
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).this.parameter.Out.0\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).input.parameter.Out.0\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.input\;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).add.parameter.Out.0\ <= to_signed(11, 32);
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Started.0\ <= true;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_4\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32)
+                        if (\OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Started.0\ = \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Finished.0\) then 
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Started.0\ <= false;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0.myClass\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).this.parameter.In.0\;
+                            \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State\ := \OptionaParametersCases::OmittedOptionalParameters(Int32).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32).0 state machine end
+
+
     -- System.Boolean Hast.TestInputs.Static.ParallelCases+Calculator::IsEven().0 state machine start
     \ParallelCases+Calculator::IsEven().0._StateMachine\: process (\Clock\) 
         Variable \ParallelCases+Calculator::IsEven().0._State\: \ParallelCases+Calculator::IsEven().0._States\ := \ParallelCases+Calculator::IsEven().0._State_0\;
@@ -3950,6 +4213,7 @@ begin
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
@@ -4028,20 +4292,27 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 10 => 
+                            if (\Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 11 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 11 => 
+                        when 12 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 12 => 
+                        when 13 => 
                             if (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\) then 
@@ -4218,6 +4489,28 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.ObjectUsingCases::VoidMethod(Hast.TestInputs.Static.ObjectUsingCases+MyClass) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32) start
+    -- Signal connections for System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32).0 (#0):
+    \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Started\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Started.0\;
+    \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this.parameter.In\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).this.parameter.Out.0\;
+    \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.input.parameter.In\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).input.parameter.Out.0\;
+    \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.add.parameter.In\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).add.parameter.Out.0\;
+    \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32)._Finished.0\ <= \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0._Finished\;
+    \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::.ctor(Int32,Int32).this.parameter.In.0\ <= \OptionaParametersCases+MyClass::.ctor(Int32,Int32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::.ctor(System.Int32,System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32) start
+    -- Signal connections for System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32).0 (#0):
+    \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Started\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Started.0\;
+    \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this.parameter.In\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).this.parameter.Out.0\;
+    \OptionaParametersCases+MyClass::Method(Int32,Int32).0.input.parameter.In\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).input.parameter.Out.0\;
+    \OptionaParametersCases+MyClass::Method(Int32,Int32).0.add.parameter.In\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).add.parameter.Out.0\;
+    \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32)._Finished.0\ <= \OptionaParametersCases+MyClass::Method(Int32,Int32).0._Finished\;
+    \OptionaParametersCases::OmittedOptionalParameters(Int32).0.OptionaParametersCases+MyClass::Method(Int32,Int32).this.parameter.In.0\ <= \OptionaParametersCases+MyClass::Method(Int32,Int32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.OptionaParametersCases+MyClass::Method(System.Int32,System.Int32) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Static.ParallelCases+Calculator::IsEven() start
     -- Signal connections for System.Boolean Hast.TestInputs.Static.ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(System.Object).0 (#0):
     \ParallelCases+Calculator::IsEven().0._Started\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven()._Started.0\;
@@ -4346,6 +4639,13 @@ begin
     \ObjectUsingCases::ReferenceAssignment(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Started.0\;
     \Hast::ExternalInvocationProxy().ObjectUsingCases::ReferenceAssignment(Int32)._Finished.0\ <= \ObjectUsingCases::ReferenceAssignment(Int32).0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.ObjectUsingCases::ReferenceAssignment(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().OptionaParametersCases::OmittedOptionalParameters(Int32)._Finished.0\ <= \OptionaParametersCases::OmittedOptionalParameters(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.OptionaParametersCases::OmittedOptionalParameters(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Static.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start

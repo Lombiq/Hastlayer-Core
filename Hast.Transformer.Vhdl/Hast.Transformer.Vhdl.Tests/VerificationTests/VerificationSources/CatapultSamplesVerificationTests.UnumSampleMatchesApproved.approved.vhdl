@@ -783,6 +783,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.return\: \Lombiq.Arithmetics.BitMask\;
     Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
@@ -816,6 +817,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.return\: \Lombiq.Arithmetics.BitMask\;
     Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
@@ -1189,8 +1191,8 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.Out.0\: \Lombiq.Arithmetics.UnumEnvironment\;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
-    Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).negative.parameter.Out.0\: boolean := false;
+    Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0._Started\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.this.parameter.In\: \Lombiq.Arithmetics.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.environment.parameter.In\: \Lombiq.Arithmetics.UnumEnvironment\;
@@ -1986,6 +1988,7 @@ architecture Imp of Hast_IP is
     Signal \Unum::AddExactUnums(Unum,Unum).0.return\: \Lombiq.Arithmetics.Unum\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsNan().this.parameter.Out.0\: \Lombiq.Arithmetics.Unum\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsNan()._Started.0\: boolean := false;
@@ -2206,6 +2209,7 @@ architecture Imp of Hast_IP is
     Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.return\: \Lombiq.Arithmetics.BitMask\;
     Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
@@ -2533,6 +2537,7 @@ architecture Imp of Hast_IP is
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\: boolean := false;
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -6856,6 +6861,7 @@ begin
                 -- Synchronous reset
                 \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0._Finished\ <= false;
                 \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                 \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                 \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\ <= (others => to_unsigned(0, 32));
                 \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
@@ -6892,7 +6898,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(left.SegmentCount) != (int)(right.SegmentCount)) {
                         -- 	BitMask objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c;
-                        -- 	objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c = new BitMask (left.Size);
+                        -- 	objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c = new BitMask (left.Size, false);
                         -- 	return objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c;
                         -- }
                         -- 
@@ -6939,7 +6945,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	BitMask objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c;
-                        -- 	objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c = new BitMask (left.Size);
+                        -- 	objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c = new BitMask (left.Size, false);
                         -- 	return objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c;
                         -- }
                         -- 
@@ -6947,7 +6953,7 @@ begin
                         -- BitMask objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c = new BitMask (left.Size);
+                        -- objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c = new BitMask (left.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c\.\IsNull\ := false;
@@ -6958,6 +6964,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.objecte1090b6a65b27680c2747f510297338e2b446c29e5085388e766957a7c433e9c\;
                         \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.left\.\Size\;
+                        \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7062,6 +7069,7 @@ begin
                 -- Synchronous reset
                 \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0._Finished\ <= false;
                 \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                 \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                 \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\ <= (others => to_unsigned(0, 32));
                 \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
@@ -7098,7 +7106,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(left.SegmentCount) != (int)(right.SegmentCount)) {
                         -- 	BitMask objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2;
-                        -- 	objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2 = new BitMask (left.Size);
+                        -- 	objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2 = new BitMask (left.Size, false);
                         -- 	return objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2;
                         -- }
                         -- 
@@ -7145,7 +7153,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	BitMask objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2;
-                        -- 	objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2 = new BitMask (left.Size);
+                        -- 	objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2 = new BitMask (left.Size, false);
                         -- 	return objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2;
                         -- }
                         -- 
@@ -7153,7 +7161,7 @@ begin
                         -- BitMask objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2 = new BitMask (left.Size);
+                        -- objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2 = new BitMask (left.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2\.\IsNull\ := false;
@@ -7164,6 +7172,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2\;
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.left\.\Size\;
+                        \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10008,8 +10017,8 @@ begin
                 -- Synchronous reset
                 \Unum::.ctor(UnumEnvironment,Int32).0._Finished\ <= false;
                 \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\ <= (others => to_unsigned(0, 32));
-                \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ <= false;
                 \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).negative.parameter.Out.0\ <= false;
+                \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ <= false;
                 \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_0\;
                 \Unum::.ctor(UnumEnvironment,Int32).0.value\ := to_signed(0, 32);
                 \Unum::.ctor(UnumEnvironment,Int32).0.array\ := (others => to_unsigned(0, 32));
@@ -10056,7 +10065,7 @@ begin
                         -- if (value >= 0) {
                         -- 	array [0] = (uint)value;
                         -- 	Unum object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903;
-                        -- 	object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903 = new Unum (environment, array);
+                        -- 	object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903 = new Unum (environment, array, false);
                         -- 	@this.UnumBits = object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903.UnumBits;
                         -- } else {
                         -- 	array [0] = (uint)(-value);
@@ -10088,7 +10097,7 @@ begin
                         -- {
                         -- 	array [0] = (uint)value;
                         -- 	Unum object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903;
-                        -- 	object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903 = new Unum (environment, array);
+                        -- 	object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903 = new Unum (environment, array, false);
                         -- 	@this.UnumBits = object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903.UnumBits;
                         -- }
                         -- 
@@ -10100,7 +10109,7 @@ begin
                         -- Unum object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903 = new Unum (environment, array);
+                        -- object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903 = new Unum (environment, array, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Unum::.ctor(UnumEnvironment,Int32).0.object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903\.\IsNull\ := false;
@@ -10109,6 +10118,7 @@ begin
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.object2e30ae7663522e6923bab284d9ab62284a316280cc40d83f1bc908eb8af3c903\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.environment\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.array\;
+                        \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).negative.parameter.Out.0\ <= False;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ <= true;
                         \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12600,6 +12610,7 @@ begin
                 -- Synchronous reset
                 \Unum::AddExactUnums(Unum,Unum).0._Finished\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::IsNan()._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::get_QuietNotANumber()._Started.0\ <= false;
@@ -12782,7 +12793,7 @@ begin
                         -- BitMask bitMask;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bitMask = new BitMask (left._environment.Size);
+                        -- bitMask = new BitMask (left._environment.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Unum::AddExactUnums(Unum,Unum).0.bitMask\.\IsNull\ := false;
@@ -12793,6 +12804,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\.\Size\;
+                        \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14428,7 +14440,7 @@ begin
                             -- BitMask objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf = new BitMask (left._environment.Size);
+                            -- objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf = new BitMask (left._environment.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\.\IsNull\ := false;
@@ -14439,6 +14451,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\.\Size\;
+                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_124\;
                         end if;
@@ -15446,6 +15459,7 @@ begin
                 -- Synchronous reset
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0._Finished\ <= false;
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.Boolean BitMask::op_GreaterThan(BitMask,BitMask)._Started.0\ <= false;
@@ -15480,7 +15494,7 @@ begin
                         -- BitMask bitMask;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bitMask = new BitMask (left.Size);
+                        -- bitMask = new BitMask (left.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.bitMask\.\IsNull\ := false;
@@ -15491,6 +15505,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.bitMask\;
                         \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.left\.\Size\;
+                        \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0._State\ := \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16527,6 +16542,7 @@ begin
                 \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\ <= to_unsigned(0, 8);
                 \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\ <= false;
                 \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                 \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                 \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(0, 16);
                 \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -16637,7 +16653,7 @@ begin
                         \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\ := SmartResize(unsigned((\UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.1\) + to_signed(7, 32)), 16);
                         \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\ := (\UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.EmptyBitMask = new BitMask (@this.Size);
+                        -- @this.EmptyBitMask = new BitMask (@this.Size, false);
                         -- 
                         -- Initializing record fields to their defaults.
                         \UnumEnvironment::.ctor(Byte,Byte).0.this\.\EmptyBitMask\.\IsNull\ := false;
@@ -16648,6 +16664,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\EmptyBitMask\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -16660,7 +16677,7 @@ begin
                             -- BitMask object6685776ae9dcfe881241f46cc6a464fe3c5788c90bb27bb835cca3d054f1de11;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object6685776ae9dcfe881241f46cc6a464fe3c5788c90bb27bb835cca3d054f1de11 = new BitMask (@this.Size);
+                            -- object6685776ae9dcfe881241f46cc6a464fe3c5788c90bb27bb835cca3d054f1de11 = new BitMask (@this.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \UnumEnvironment::.ctor(Byte,Byte).0.object6685776ae9dcfe881241f46cc6a464fe3c5788c90bb27bb835cca3d054f1de11\.\IsNull\ := false;
@@ -16680,6 +16697,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object6685776ae9dcfe881241f46cc6a464fe3c5788c90bb27bb835cca3d054f1de11\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16708,7 +16726,7 @@ begin
                             -- BitMask object47f5801b18e1f71c277983b8d68965b00279b4642593f49f31a8bb0537f184cf;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object47f5801b18e1f71c277983b8d68965b00279b4642593f49f31a8bb0537f184cf = new BitMask (@this.Size);
+                            -- object47f5801b18e1f71c277983b8d68965b00279b4642593f49f31a8bb0537f184cf = new BitMask (@this.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \UnumEnvironment::.ctor(Byte,Byte).0.object47f5801b18e1f71c277983b8d68965b00279b4642593f49f31a8bb0537f184cf\.\IsNull\ := false;
@@ -16724,6 +16742,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object47f5801b18e1f71c277983b8d68965b00279b4642593f49f31a8bb0537f184cf\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16832,7 +16851,7 @@ begin
                             -- BitMask objectd430e72ee5159e4bc03161eab6e2c270c9626bcead3c303095f5a727a678db0d;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectd430e72ee5159e4bc03161eab6e2c270c9626bcead3c303095f5a727a678db0d = new BitMask (@this.Size);
+                            -- objectd430e72ee5159e4bc03161eab6e2c270c9626bcead3c303095f5a727a678db0d = new BitMask (@this.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \UnumEnvironment::.ctor(Byte,Byte).0.objectd430e72ee5159e4bc03161eab6e2c270c9626bcead3c303095f5a727a678db0d\.\IsNull\ := false;
@@ -16843,6 +16862,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objectd430e72ee5159e4bc03161eab6e2c270c9626bcead3c303095f5a727a678db0d\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_23\;
                         end if;
@@ -16873,7 +16893,7 @@ begin
                             -- BitMask objectd26af33483228c45f84f5796f0df5856dbfab13a1837e720ff4dae768934a3dd;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectd26af33483228c45f84f5796f0df5856dbfab13a1837e720ff4dae768934a3dd = new BitMask (@this.Size);
+                            -- objectd26af33483228c45f84f5796f0df5856dbfab13a1837e720ff4dae768934a3dd = new BitMask (@this.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \UnumEnvironment::.ctor(Byte,Byte).0.objectd26af33483228c45f84f5796f0df5856dbfab13a1837e720ff4dae768934a3dd\.\IsNull\ := false;
@@ -16889,6 +16909,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objectd26af33483228c45f84f5796f0df5856dbfab13a1837e720ff4dae768934a3dd\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16917,7 +16938,7 @@ begin
                             -- BitMask object17355964d81812488dea868a7179836a7e95746ec2f2fa8a71ac3b8923dca767;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object17355964d81812488dea868a7179836a7e95746ec2f2fa8a71ac3b8923dca767 = new BitMask (@this.Size);
+                            -- object17355964d81812488dea868a7179836a7e95746ec2f2fa8a71ac3b8923dca767 = new BitMask (@this.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \UnumEnvironment::.ctor(Byte,Byte).0.object17355964d81812488dea868a7179836a7e95746ec2f2fa8a71ac3b8923dca767\.\IsNull\ := false;
@@ -16933,6 +16954,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object17355964d81812488dea868a7179836a7e95746ec2f2fa8a71ac3b8923dca767\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16986,7 +17008,7 @@ begin
                             -- BitMask object37c53dfa5aeeb1b943b02fa132f62e14079686f08851cd44e378705da20dc0d8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object37c53dfa5aeeb1b943b02fa132f62e14079686f08851cd44e378705da20dc0d8 = new BitMask (@this.Size);
+                            -- object37c53dfa5aeeb1b943b02fa132f62e14079686f08851cd44e378705da20dc0d8 = new BitMask (@this.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
                             \UnumEnvironment::.ctor(Byte,Byte).0.object37c53dfa5aeeb1b943b02fa132f62e14079686f08851cd44e378705da20dc0d8\.\IsNull\ := false;
@@ -16997,6 +17019,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object37c53dfa5aeeb1b943b02fa132f62e14079686f08851cd44e378705da20dc0d8\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_33\;
                         end if;
@@ -18905,6 +18928,7 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
                             \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
                             \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
                         case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask BitMask::op_BitwiseOr(BitMask,BitMask).0.runningIndex.0\ is 
@@ -18935,6 +18959,7 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
                             \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
                             \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
                         case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.runningIndex.0\ is 
@@ -18965,6 +18990,7 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
                             \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
                             \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
                         case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ is 
@@ -18995,6 +19021,7 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
                             \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
                             \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
                         case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.runningIndex.0\ is 
@@ -19025,6 +19052,7 @@ begin
                             \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
                             \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
                             \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
                         case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 

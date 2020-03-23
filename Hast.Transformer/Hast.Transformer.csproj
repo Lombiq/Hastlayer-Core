@@ -96,6 +96,7 @@
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IFSharpIdiosyncrasiesAdjuster.cs" />
     <Compile Include="Services\IMemberIdentifiersFixer.cs" />
+    <Compile Include="Services\IOptionalParameterFiller.cs" />
     <Compile Include="Services\IRefLocalVariablesRemover.cs" />
     <Compile Include="Services\IUnneededReferenceVariablesRemover.cs" />
     <Compile Include="Services\KnownTypeLookupTableFactory.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Services\ObjectInitializerExpander.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
+    <Compile Include="Services\OptionalParameterFiller.cs" />
     <Compile Include="Services\RefLocalVariablesRemover.cs" />
     <Compile Include="Services\SimpleMemoryUsageVerifier.cs" />
     <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />

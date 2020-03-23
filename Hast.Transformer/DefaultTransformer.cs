@@ -55,6 +55,7 @@ namespace Hast.Transformer
         private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
         private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
         private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
+        private readonly IOptionalParameterFiller _optionalParameterFiller;
 
 
         public DefaultTransformer(
@@ -87,7 +88,8 @@ namespace Hast.Transformer
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
             IMemberIdentifiersFixer memberIdentifiersFixer,
             IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
-            IRefLocalVariablesRemover refLocalVariablesRemover)
+            IRefLocalVariablesRemover refLocalVariablesRemover,
+            IOptionalParameterFiller optionalParameterFiller)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -119,6 +121,7 @@ namespace Hast.Transformer
             _memberIdentifiersFixer = memberIdentifiersFixer;
             _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
             _refLocalVariablesRemover = refLocalVariablesRemover;
+            _optionalParameterFiller = optionalParameterFiller;
         }
 
 
@@ -331,6 +334,9 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
+            // Needs to run before method inlining but after anything that otherwise modified method signatures or
+            // invocations.
+            _optionalParameterFiller.FillOptionalParamters(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
             // This needs to run before UnneededReferenceVariablesRemover.
             _refLocalVariablesRemover.RemoveRefLocalVariables(syntaxTree);
