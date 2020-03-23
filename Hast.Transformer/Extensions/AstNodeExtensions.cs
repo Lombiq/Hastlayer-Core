@@ -282,6 +282,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static ResolveResult CreateResolveResultFromActualType(this AstNode node) =>
             node.GetActualType().ToResolveResult();
 
+        public static T Clone<T>(this AstNode node) where T : AstNode => (T)node.Clone();
+
         /// <summary>
         /// Remove the node from the syntax tree and mark it as such so later it can be determined that it was removed.
         /// </summary>

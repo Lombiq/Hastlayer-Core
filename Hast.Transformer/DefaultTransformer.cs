@@ -54,6 +54,7 @@ namespace Hast.Transformer
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
         private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
         private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
+        private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
 
 
         public DefaultTransformer(
@@ -85,7 +86,8 @@ namespace Hast.Transformer
             IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
             IMemberIdentifiersFixer memberIdentifiersFixer,
-            IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover)
+            IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
+            IRefLocalVariablesRemover refLocalVariablesRemover)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -116,6 +118,7 @@ namespace Hast.Transformer
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
             _memberIdentifiersFixer = memberIdentifiersFixer;
             _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
+            _refLocalVariablesRemover = refLocalVariablesRemover;
         }
 
 
@@ -179,6 +182,7 @@ namespace Hast.Transformer
                     NamedArguments = false,
                     NonTrailingNamedArguments = false,
                     NullPropagation = false,
+                    NullableReferenceTypes = false,
                     OptionalArguments = false,
                     OutVariables = false,
                     PatternBasedFixedStatement = false,
@@ -328,6 +332,8 @@ namespace Hast.Transformer
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
+            // This needs to run before UnneededReferenceVariablesRemover.
+            _refLocalVariablesRemover.RemoveRefLocalVariables(syntaxTree);
             _unneededReferenceVariablesRemover.RemoveUnneededVariables(syntaxTree);
 
             var preConfiguredArrayLengths = configuration

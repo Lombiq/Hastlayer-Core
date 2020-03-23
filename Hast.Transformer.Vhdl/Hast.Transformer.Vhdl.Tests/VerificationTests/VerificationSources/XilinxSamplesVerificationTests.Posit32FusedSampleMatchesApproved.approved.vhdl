@@ -5907,7 +5907,6 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
@@ -5953,7 +5952,6 @@ begin
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := to_unsigned(0, 8);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_signed(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := to_signed(0, 32);
@@ -6072,8 +6070,7 @@ begin
                         -- 	}
                         -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                         -- 	if (((int)(b) & 1) == 1) {
-                        -- 		ref ulong reference = ref array [num];
-                        -- 		reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- 	}
                         -- 	flag = ((int)(b) >> 1 == 1);
                         -- 	num2 = (ushort)((int)(num2) + 1);
@@ -6137,8 +6134,7 @@ begin
                             -- 	}
                             -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                             -- 	if (((int)(b) & 1) == 1) {
-                            -- 		ref ulong reference = ref array [num];
-                            -- 		reference = (ulong)((long)reference + (1L << (int)num2));
+                            -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                             -- 	}
                             -- 	flag = ((int)(b) >> 1 == 1);
                             -- 	num2 = (ushort)((int)(num2) + 1);
@@ -6356,8 +6352,7 @@ begin
                         \Quire Quire::op_Addition(Quire,Quire).0.b\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (((int)(b) & 1) == 1) {
-                        -- 	ref ulong reference = ref array [num];
-                        -- 	reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- }
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)) and to_signed(1, 32);
@@ -6435,19 +6430,15 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	ref ulong reference = ref array [num];
-                        -- 	reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference = ref array [num];
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6)))), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.reference\) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.reference\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\))) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_22\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
@@ -6918,9 +6909,7 @@ begin
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -6951,9 +6940,7 @@ begin
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
@@ -7030,11 +7017,9 @@ begin
                         -- 		num4 = (ushort)(8 - (int)(num3));
                         -- 		bool flag2;
                         -- 		flag2 = ((array [num4] & 1uL) == 1uL);
-                        -- 		ref ulong reference = ref array [num4];
-                        -- 		reference = reference >> 1;
+                        -- 		array [num4] = array [num4] >> 1;
                         -- 		if (flag) {
-                        -- 			ref ulong reference2 = ref array [num4];
-                        -- 			reference2 = (reference2 | num);
+                        -- 			array [num4] = (array [num4] | num);
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num3 = (ushort)((int)(num3) + 1);
@@ -7061,11 +7046,9 @@ begin
                             -- 		num4 = (ushort)(8 - (int)(num3));
                             -- 		bool flag2;
                             -- 		flag2 = ((array [num4] & 1uL) == 1uL);
-                            -- 		ref ulong reference = ref array [num4];
-                            -- 		reference = reference >> 1;
+                            -- 		array [num4] = array [num4] >> 1;
                             -- 		if (flag) {
-                            -- 			ref ulong reference2 = ref array [num4];
-                            -- 			reference2 = (reference2 | num);
+                            -- 			array [num4] = (array [num4] | num);
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num3 = (ushort)((int)(num3) + 1);
@@ -7093,11 +7076,9 @@ begin
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & 1uL) == 1uL);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference >> 1;
+                            -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = (reference2 | num);
+                            -- 		array [num4] = (array [num4] | num);
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -7141,11 +7122,9 @@ begin
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & 1uL) == 1uL);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference >> 1;
+                            -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = (reference2 | num);
+                            -- 		array [num4] = (array [num4] | num);
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -7188,17 +7167,13 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
                         \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\);
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference = ref array [num4];
+                        -- array [num4] = array [num4] >> 1;
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference = reference >> 1;
-                        -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	ref ulong reference2 = ref array [num4];
-                        -- 	reference2 = (reference2 | num);
+                        -- 	array [num4] = (array [num4] | num);
                         -- }
                         -- 
 
@@ -7233,18 +7208,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	ref ulong reference2 = ref array [num4];
-                        -- 	reference2 = (reference2 | num);
+                        -- 	array [num4] = (array [num4] | num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference2 = ref array [num4];
+                        -- array [num4] = (array [num4] | num);
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference2 = (reference2 | num);
-                        -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
                         if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
@@ -7287,9 +7258,7 @@ begin
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\: boolean := false;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -7316,9 +7285,7 @@ begin
                 \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := false;
-                \Quire Quire::op_LeftShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 64);
-                \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 16);
@@ -7393,11 +7360,9 @@ begin
                         -- 	while ((int)(num4) < 8) {
                         -- 		bool flag2;
                         -- 		flag2 = ((array [num4] & num) == num);
-                        -- 		ref ulong reference = ref array [num4];
-                        -- 		reference = reference << 1;
+                        -- 		array [num4] = array [num4] << 1;
                         -- 		if (flag) {
-                        -- 			ref ulong reference2 = ref array [num4];
-                        -- 			reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                        -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num4 = (ushort)((int)(num4) + 1);
@@ -7422,11 +7387,9 @@ begin
                             -- 	while ((int)(num4) < 8) {
                             -- 		bool flag2;
                             -- 		flag2 = ((array [num4] & num) == num);
-                            -- 		ref ulong reference = ref array [num4];
-                            -- 		reference = reference << 1;
+                            -- 		array [num4] = array [num4] << 1;
                             -- 		if (flag) {
-                            -- 			ref ulong reference2 = ref array [num4];
-                            -- 			reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num4 = (ushort)((int)(num4) + 1);
@@ -7452,11 +7415,9 @@ begin
                             -- while ((int)(num4) < 8) {
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & num) == num);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference << 1;
+                            -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -7498,11 +7459,9 @@ begin
                             -- {
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & num) == num);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference << 1;
+                            -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -7518,17 +7477,13 @@ begin
                             \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\) = \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\);
                             -- The following section was transformed from the .NET statement below:
-                            -- ref ulong reference = ref array [num4];
+                            -- array [num4] = array [num4] << 1;
                             -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- reference = reference << 1;
-                            -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(shift_left(\Quire Quire::op_LeftShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.reference\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(shift_left(\Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
-                            -- 	ref ulong reference2 = ref array [num4];
-                            -- 	reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- }
                             -- 
 
@@ -7578,18 +7533,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	ref ulong reference2 = ref array [num4];
-                        -- 	reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                        -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference2 = ref array [num4];
+                        -- array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference2 = ((ulong)(reference2 | (ulong)(num2)));
-                        -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\.
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0._State\ = \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\;
@@ -16388,7 +16339,6 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
@@ -16434,7 +16384,6 @@ begin
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := to_unsigned(0, 8);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_signed(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := to_signed(0, 32);
@@ -16553,8 +16502,7 @@ begin
                         -- 	}
                         -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                         -- 	if (((int)(b) & 1) == 1) {
-                        -- 		ref ulong reference = ref array [num];
-                        -- 		reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- 	}
                         -- 	flag = ((int)(b) >> 1 == 1);
                         -- 	num2 = (ushort)((int)(num2) + 1);
@@ -16618,8 +16566,7 @@ begin
                             -- 	}
                             -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                             -- 	if (((int)(b) & 1) == 1) {
-                            -- 		ref ulong reference = ref array [num];
-                            -- 		reference = (ulong)((long)reference + (1L << (int)num2));
+                            -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                             -- 	}
                             -- 	flag = ((int)(b) >> 1 == 1);
                             -- 	num2 = (ushort)((int)(num2) + 1);
@@ -16837,8 +16784,7 @@ begin
                         \Quire Quire::op_Addition(Quire,Quire).0.b\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (((int)(b) & 1) == 1) {
-                        -- 	ref ulong reference = ref array [num];
-                        -- 	reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- }
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)) and to_signed(1, 32);
@@ -16916,19 +16862,15 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	ref ulong reference = ref array [num];
-                        -- 	reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference = ref array [num];
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference = (ulong)((long)reference + (1L << (int)num2));
+                        -- array [num] = (ulong)((long)array [num] + (1L << (int)num2));
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6)))), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.reference\) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.reference\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\))) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_22\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
@@ -17399,9 +17341,7 @@ begin
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -17432,9 +17372,7 @@ begin
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
@@ -17511,11 +17449,9 @@ begin
                         -- 		num4 = (ushort)(8 - (int)(num3));
                         -- 		bool flag2;
                         -- 		flag2 = ((array [num4] & 1uL) == 1uL);
-                        -- 		ref ulong reference = ref array [num4];
-                        -- 		reference = reference >> 1;
+                        -- 		array [num4] = array [num4] >> 1;
                         -- 		if (flag) {
-                        -- 			ref ulong reference2 = ref array [num4];
-                        -- 			reference2 = (reference2 | num);
+                        -- 			array [num4] = (array [num4] | num);
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num3 = (ushort)((int)(num3) + 1);
@@ -17542,11 +17478,9 @@ begin
                             -- 		num4 = (ushort)(8 - (int)(num3));
                             -- 		bool flag2;
                             -- 		flag2 = ((array [num4] & 1uL) == 1uL);
-                            -- 		ref ulong reference = ref array [num4];
-                            -- 		reference = reference >> 1;
+                            -- 		array [num4] = array [num4] >> 1;
                             -- 		if (flag) {
-                            -- 			ref ulong reference2 = ref array [num4];
-                            -- 			reference2 = (reference2 | num);
+                            -- 			array [num4] = (array [num4] | num);
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num3 = (ushort)((int)(num3) + 1);
@@ -17574,11 +17508,9 @@ begin
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & 1uL) == 1uL);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference >> 1;
+                            -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = (reference2 | num);
+                            -- 		array [num4] = (array [num4] | num);
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -17622,11 +17554,9 @@ begin
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & 1uL) == 1uL);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference >> 1;
+                            -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = (reference2 | num);
+                            -- 		array [num4] = (array [num4] | num);
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -17669,17 +17599,13 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
                         \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\);
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference = ref array [num4];
+                        -- array [num4] = array [num4] >> 1;
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference = reference >> 1;
-                        -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.reference\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	ref ulong reference2 = ref array [num4];
-                        -- 	reference2 = (reference2 | num);
+                        -- 	array [num4] = (array [num4] | num);
                         -- }
                         -- 
 
@@ -17714,18 +17640,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	ref ulong reference2 = ref array [num4];
-                        -- 	reference2 = (reference2 | num);
+                        -- 	array [num4] = (array [num4] | num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference2 = ref array [num4];
+                        -- array [num4] = (array [num4] | num);
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference2 = (reference2 | num);
-                        -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.reference2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
                         if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
@@ -17768,9 +17690,7 @@ begin
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\: boolean := false;
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.reference\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -17797,9 +17717,7 @@ begin
                 \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := false;
-                \Quire Quire::op_LeftShift(Quire,Int32).0.reference\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 64);
-                \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 64);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 16);
@@ -17874,11 +17792,9 @@ begin
                         -- 	while ((int)(num4) < 8) {
                         -- 		bool flag2;
                         -- 		flag2 = ((array [num4] & num) == num);
-                        -- 		ref ulong reference = ref array [num4];
-                        -- 		reference = reference << 1;
+                        -- 		array [num4] = array [num4] << 1;
                         -- 		if (flag) {
-                        -- 			ref ulong reference2 = ref array [num4];
-                        -- 			reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                        -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num4 = (ushort)((int)(num4) + 1);
@@ -17903,11 +17819,9 @@ begin
                             -- 	while ((int)(num4) < 8) {
                             -- 		bool flag2;
                             -- 		flag2 = ((array [num4] & num) == num);
-                            -- 		ref ulong reference = ref array [num4];
-                            -- 		reference = reference << 1;
+                            -- 		array [num4] = array [num4] << 1;
                             -- 		if (flag) {
-                            -- 			ref ulong reference2 = ref array [num4];
-                            -- 			reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num4 = (ushort)((int)(num4) + 1);
@@ -17933,11 +17847,9 @@ begin
                             -- while ((int)(num4) < 8) {
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & num) == num);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference << 1;
+                            -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -17979,11 +17891,9 @@ begin
                             -- {
                             -- 	bool flag2;
                             -- 	flag2 = ((array [num4] & num) == num);
-                            -- 	ref ulong reference = ref array [num4];
-                            -- 	reference = reference << 1;
+                            -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		ref ulong reference2 = ref array [num4];
-                            -- 		reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -17999,17 +17909,13 @@ begin
                             \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\) = \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\);
                             -- The following section was transformed from the .NET statement below:
-                            -- ref ulong reference = ref array [num4];
+                            -- array [num4] = array [num4] << 1;
                             -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- reference = reference << 1;
-                            -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(shift_left(\Quire Quire::op_LeftShift(Quire,Int32).0.reference\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.reference\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(shift_left(\Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag) {
-                            -- 	ref ulong reference2 = ref array [num4];
-                            -- 	reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                            -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                             -- }
                             -- 
 
@@ -18059,18 +17965,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	ref ulong reference2 = ref array [num4];
-                        -- 	reference2 = ((ulong)(reference2 | (ulong)(num2)));
+                        -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ref ulong reference2 = ref array [num4];
+                        -- array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- reference2 = ((ulong)(reference2 | (ulong)(num2)));
-                        -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.reference2\ := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_5\.
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0._State\ = \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\;
