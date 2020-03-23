@@ -130,7 +130,7 @@ namespace Hast.Transformer.Services
                     invocationParentStatement);
 
                 // Preparing and adding the method's body inline.
-                var inlinedBody = (BlockStatement)method.Body.Clone();
+                var inlinedBody = method.Body.Clone<BlockStatement>();
                 // If there are multiple return statements then control flow will be mimicked with goto jumps.
                 var exitLabel = new LabelStatement { Label = SuffixMethodIdentifier("Exit", methodIdentifierNameSuffix) };
                 ReturnStatement lastReturn = null;

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Helpers
@@ -24,11 +24,11 @@ namespace Hast.Transformer.Helpers
                 method.AddAnnotation(annotation);
             }
 
-            method.Attributes.AddRange(attributes.Select(attribute => (AttributeSection)attribute.Clone()));
+            method.Attributes.AddRange(attributes.Select(attribute => attribute.Clone<AttributeSection>()));
 
             method.Parameters.AddRange(parameters.Select(parameter => parameter.Clone()));
 
-            method.Body = (BlockStatement)body.Clone();
+            method.Body = body.Clone<BlockStatement>();
             method.ReturnType = returnType.Clone();
 
             return method;
